@@ -1,0 +1,109 @@
+@use './../../assets/styles/_variables' as vars;
+
+
+.skills {
+    margin-top: 200px;
+    
+}
+
+
+.skillsContainer {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    padding: 100px;
+
+    position: relative;
+
+    max-width: fit-content;
+
+    border: 1px solid #0077FF;
+}
+
+
+.skill {
+    display: flex;
+    column-gap: 10px;
+
+}
+
+
+.skillScore {
+    align-self: flex-end;
+}
+
+
+.skillContaiiner {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+
+.progressBar {
+    display: flex;
+    column-gap: 5px;
+}
+
+
+.progressBarElement {
+    background: vars.$gray;
+    border-radius: 2px;
+
+    width: 30px;
+    height: 10px;
+}
+
+
+.progressBarElement--fill {
+    background: vars.$secondary;
+}
+
+
+.angleSquare {
+    background: vars.$white;
+    border: 1px solid #0077FF;
+
+    width: 10px;
+    height: 10px;
+
+    position: absolute;
+}
+
+.angleSquare--selected {
+    border: 3px solid #0077FF;
+    width: 15px;
+    height: 15px;
+}
+
+
+.angleSquare--lt {
+    top: -5px;
+    left: -5px;
+}
+
+.angleSquare--rt {
+    top: -10px;
+    right: -10px;
+}
+
+.angleSquare--lb {
+    bottom: -5px;
+    left: -5px;
+}
+
+.angleSquare--rb {
+    bottom: -5px;
+    right: -5px;
+}
+
+
+.cursor {
+    width: 60px;
+    height: 60px;
+
+    position: absolute;
+
+    top: 0;
+    right: -50px;
+}
