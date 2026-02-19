@@ -1,0 +1,54 @@
+@use './../../assets/styles/_variables' as vars;
+
+
+.header {
+    margin-top: 100px;
+
+
+
+    font-family: 'Montserrat';
+    font-weight: vars.$regular;
+    color: vars.$gray;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.logo {
+    position: relative;
+    font-weight: vars.$semi_bold;
+
+    cursor: pointer;
+}
+
+
+.logoText {
+    position: absolute;
+    top: 25px;
+    left: 40px;
+
+    color: vars.$white;
+}
+
+.navBar {
+    display: flex;
+    column-gap: 30px;
+    align-items: center;
+
+    li {
+        cursor: pointer;
+    }
+}
+
+.navLanguage {
+    position: relative;
+    color: vars.$white;
+}
+
+.navLanguageText {
+    position: absolute;
+    top: 17px;
+    left: 15px;
+}

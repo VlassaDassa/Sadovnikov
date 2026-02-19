@@ -1,0 +1,70 @@
+@use './../../assets/styles/__variables' as vars;
+
+
+
+.preview {
+    margin-top: 100px;
+}
+
+.specialization {
+    font-size: vars.$fzBigLabelOne;
+    color: vars.$white;
+    text-align: center;
+
+    width: 100%;
+
+    transform: rotate(-3deg);
+}
+
+
+.specHand {
+    position: absolute;
+    right: 200px;
+    top: 270px;
+
+    mask-image: linear-gradient(to right, black 70%, transparent 100%);
+  
+    filter: blur(1px);
+}
+
+
+.photoContainer {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    width: 100%;
+
+    margin-top: 50px;
+}
+
+
+.photo {
+    position: absolute;
+}
+
+
+.dotted-hand-line {
+    width: 100%;
+    height: 100px;
+    position: absolute;
+    left: 0;
+    bottom: -400px;    
+
+    path {
+        stroke-dasharray: 8 12;
+        animation: drawLine 3s infinite;
+    }
+}
+
+@keyframes drawLine {
+    0% {
+        stroke-dashoffset: 0;
+    }
+
+    100% {
+        stroke-dashoffset: 100;
+    }
+}

@@ -1,7 +1,18 @@
+import Header from './components/Header';
+import Preview from './components/Preview';
+
+
+
 function App() {
 
   	return (
-    	<>Hello world!</>
+		<>	
+			<Header />
+			<main className="main">
+				<Preview />
+			</main>
+		</>
+    	
   	)
 }
 
