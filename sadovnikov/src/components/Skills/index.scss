@@ -3,6 +3,8 @@
 
 .skills {
     margin-top: 200px;
+
+    position: relative;
     
 }
 
@@ -106,4 +108,148 @@
 
     top: 0;
     right: -50px;
+}
+
+
+.characterContainer {
+    position: absolute;
+
+    top: 0;
+    right: -400px;
+
+    transform: rotate(-15deg);
+
+    animation: gentleSway 3s ease-in-out infinite;
+
+    @keyframes gentleSway {
+        0% {
+            transform: rotate(-15deg);
+        }
+        50% {
+            transform: rotate(-10deg);
+        }
+        100% {
+            transform: rotate(-15deg); 
+        }
+    }
+}
+
+
+.skillCharacter {
+    width: 310px;
+    height: 465px;
+}
+
+
+.skillJaw {
+    position: absolute;
+
+    width: 77px;
+    height: 64px;
+
+    top: 265px;
+    left: 115px;
+
+    animation: jawMove 0.3s ease-in-out infinite alternate;
+
+    @keyframes jawMove {
+        0% {
+            top: 265px;   
+        }
+        100% {
+            top: 285px;   
+        }
+    }
+}
+
+
+.skillIndexFinger {
+    position: absolute;
+
+    width: 194px;
+    height: 216px;
+
+    left: -150px;
+    top: 250px;
+
+    transform-origin: 20% 80%;
+
+    animation: handAnim 0.3s ease-in-out infinite alternate;
+
+    @keyframes handAnim {
+        0% {
+            transform: rotate(18deg);  
+        }
+        100% {
+            transform: rotate(-18deg);   
+        }
+    }
+}
+
+
+.skillHand {
+    position: absolute;
+
+    width: 158px;
+    height: 224px;
+
+    transform: scaleX(-1);
+
+    top: 250px;
+    right: 150px;
+
+    animation: naturalSwing  2.5s ease-in-out infinite;
+    transform-origin: 20% 80%;
+
+    @keyframes naturalSwing {
+        0% {
+            transform: scaleX(-1) rotate(0deg);
+        }
+        20% {
+            transform: scaleX(-1) rotate(4deg);
+        }
+        40% {
+            transform: scaleX(-1) rotate(-2deg);
+        }
+        60% {
+            transform: scaleX(-1) rotate(3deg);
+        }
+        80% {
+            transform: scaleX(-1) rotate(-4deg);
+        }
+        100% {
+            transform: scaleX(-1) rotate(0deg);
+        }
+    }
+}
+
+
+.skillDialog {
+    position: relative;
+
+    top: -700px;
+    right: -50px;
+    
+    animation: continuousPop 2s ease-in-out infinite;
+    @keyframes continuousPop {
+        0%, 100% {
+            opacity: 0;
+            transform: rotate(30deg) translate(-50px, 50px);
+        }
+        20%, 80% {
+            opacity: 1;
+            transform: rotate(30deg) translate(0, 0);
+        }
+    }
+}
+
+
+.skillTextCloud {
+    position: absolute;
+
+    top: 330px;
+    left: 150px;
+
+    font-family: 'Montserrat';
+    color: vars.$darkTextColor;
 }

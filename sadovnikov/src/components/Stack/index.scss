@@ -1,0 +1,66 @@
+@use './../../assets/styles/__variables' as vars;
+
+
+
+.stack {
+    margin-top: 200px;
+
+    height: 800px;
+    
+    position: relative;
+}
+
+
+.stackBg {
+    position: absolute;
+
+    width: 1174px;
+    height: 1663px;
+
+    opacity: 0.5;
+    z-index: -3;
+    transform: scaleX(-1) rotate(-45deg); 
+
+    top: -200px;
+    left: -200px;
+
+    mask-image: linear-gradient(to right, black 90%, transparent 100%);
+}
+
+
+.stackElement {
+    background: vars.$bgSecondaryColor;
+    border-radius: 15px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 25%);
+
+    padding: 35px;
+
+    z-index: 3;
+
+    width: fit-content;
+
+    position: absolute;
+
+    text-transform: none;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    // Эффект при наведении
+    &:hover {
+        transform: translateY(-30px);
+        box-shadow: 0px 15px 20px 0px rgba(0, 0, 0, 30%);
+        filter: brightness(1.05);
+        cursor: pointer;
+    }
+}
+
+
+.stackContainer {
+    width: 100%;
+    height: 70%;
+
+    margin-top: 10%;
+
+    position: relative;
+}
+
+

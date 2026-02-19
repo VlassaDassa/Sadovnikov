@@ -1,10 +1,16 @@
 import React from 'react';
 
+import './index.scss';
+
 import skillList from '../../mockData/skills';
 
 import cursor from './../../assets/images/cursor.png';
+import jawPhoto from './../../assets/images/jawPhoto.png';
+import jaw from './../../assets/images/jaw.png';
+import indexFinger from './../../assets/images/indexFinger.png';
+import cloud from './../../assets/images/cloud.png';
+import hand from './../../assets/images/hand.png';
 
-import './index.scss';
 
 const Skills: React.FC = () => {
     
@@ -56,6 +62,18 @@ const Skills: React.FC = () => {
                         )
                     })
                 }
+            </div>
+
+            <div className="characterContainer">
+                <img className="skillCharacter" src={jawPhoto} alt="character" />
+                <img className="skillJaw" src={jaw} alt="character" />
+                <img className="skillIndexFinger" src={indexFinger} alt="character" />
+                <img className="skillHand" src={hand} alt="character" />
+
+                <div className="skillDialog">
+                    <img className="skillCloud" src={cloud} alt="character" />
+                    <p className="skillTextCloud">This is how I evaluate my skills...</p>
+                </div>
                 
             </div>
         </section>

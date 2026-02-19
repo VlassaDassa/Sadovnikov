@@ -2,6 +2,7 @@
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 
@@ -14,7 +15,7 @@ body {
     background-repeat: no-repeat;
     background-color: vars.$bgColor;
     
-    height: 100vw;
+    height: 4000px;
 
     font-family: "Magra", sans-serif;
     font-style: normal;
@@ -37,3 +38,14 @@ body {
     color: inherit;
 }
 
+
+
+.title {
+    width: 100%;
+    text-align: center;
+    align-items: center;
+
+    font-size: vars.$fzSubtitle;
+    color: vars.$white;
+    text-transform: uppercase;
+}

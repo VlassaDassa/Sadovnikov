@@ -7,6 +7,7 @@ import photo from './../../assets/images/photo.png';
 import hand from './../../assets/images/hand.png';
 
 
+
 const Preview: React.FC = () => {
     return (
         <section className="preview container">

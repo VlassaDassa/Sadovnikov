@@ -4,6 +4,8 @@
 
 .preview {
     margin-top: 100px;
+
+    position: relative;
 }
 
 .specialization {
@@ -19,12 +21,10 @@
 
 .specHand {
     position: absolute;
-    right: 200px;
-    top: 270px;
+    right: -200px;
+    top: 0px;
 
     mask-image: linear-gradient(to right, black 70%, transparent 100%);
-  
-    filter: blur(1px);
 }
 
 
@@ -47,11 +47,11 @@
 
 
 .dotted-hand-line {
-    width: 100%;
+    width: 95vw;
     height: 100px;
     position: absolute;
-    left: 0;
-    bottom: -400px;    
+    left: 50%;
+    transform: translateX(-50%);
 
     path {
         stroke-dasharray: 8 12;
