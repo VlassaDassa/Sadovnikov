@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 
 import './index.scss';
 
@@ -22,25 +22,30 @@ const About: React.FC = () => {
     const path1 = useRef<SVGPathElement>(null)
     const path2 = useRef<SVGPathElement>(null)
 
-    const buildCurve = (from: HTMLElement, to: HTMLElement, svg: SVGSVGElement) => {
+    const buildCurve = useCallback((from: HTMLElement, to: HTMLElement, svg: SVGSVGElement) => {
         const a = from.getBoundingClientRect()
         const b = to.getBoundingClientRect()
         
         const svgRect = svg.getBoundingClientRect()
         
-        const startX = a.left + a.width / 2 - svgRect.left - 150
-        const startY = a.top + a.height / 2 - svgRect.top - 100
+        // const startX = a.left + a.width / 2 - svgRect.left - 150
+        // const startY = a.top + a.height / 2 - svgRect.top - 100
+        const startX = a.left + a.width / 2 - svgRect.left 
+        const startY = a.top + a.height / 2 - svgRect.top
         
-        const endX = b.left + b.width / 2 - svgRect.left - 150
+        // const endX = b.left + b.width / 2 - svgRect.left - 150
+        const endX = b.left + b.width / 2 - svgRect.left
         const endY = b.top + b.height / 2 - svgRect.top
 
         const controlX = (startX + endX) / 2 + 350
         const controlY = Math.min(startY, endY) + 100
+        // const controlX = (startX + endX) / 2 
+        // const controlY = Math.min(startY, endY)
 
         return `M ${startX} ${startY}
                 Q ${controlX} ${controlY}
                 ${endX} ${endY}`
-    }
+    }, [])
 
 
     useEffect(() => {
@@ -61,7 +66,7 @@ const About: React.FC = () => {
         update()
         window.addEventListener("resize", update)
         return () => window.removeEventListener("resize", update)
-    }, [])
+    }, [buildCurve])
 
 
 
