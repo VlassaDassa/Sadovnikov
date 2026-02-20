@@ -1,0 +1,229 @@
+@use './../../assets/styles/__variables' as vars;
+
+
+
+.about {
+    margin-top: 250px;
+}
+
+
+.uzbContainer, .mskContainer, .kolledgeContainer {
+    position: relative;
+
+}
+
+
+.uzbFlag {
+    position: absolute;
+    top: -50px;
+    left: 200px;
+
+    z-index: -3;
+
+    transform: rotate(-5deg);
+}
+
+.uzbTextContainer {
+    position: absolute;
+    bottom: 50px;
+    left: 250px;
+}
+
+
+.uzbText {
+    display: flex;
+    margin-top: 10px;
+}
+
+
+.uzbWhite {
+    color: #FFF;
+}
+
+
+.uzbBlue {
+    margin-left: 10px;
+    color: #3081F7;
+}
+
+
+.uzbGreen {
+    color: #308738;
+}
+
+
+.mskFlag {
+    position: absolute;
+
+    top: -50px;
+    left: 200px;
+
+    transform: rotate(5deg);
+}
+
+
+.mskText {
+    display: flex;
+
+    position: absolute;
+    bottom: 50px;
+    left: -300px;
+}
+
+
+.ruBlue {
+    color: #0039A6;
+}
+
+
+.ruWhite {
+    color: #fff;
+    margin-left: 10px;
+}
+
+
+.ruRed {
+    color: #D52B1E;
+}
+
+
+.kolledgeText {
+    position: absolute;
+
+    left: 300px;
+    bottom: 50px;
+}
+
+
+.illustationContainer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.uzbContainer {
+    align-self: flex-start;
+    width: 600px;
+}
+
+
+.mskContainer {
+    align-self: flex-end;
+
+    top: -200px;
+}
+
+
+.kolledgeContainer {
+    align-self: flex-start;
+    width: 750px;
+
+    top: -300px;
+}
+
+
+.connections {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+
+    z-index: -3;
+}
+
+
+.curve {
+    fill: none;
+    stroke: #5b6cff;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-dasharray: 15 30;
+}
+
+.textContainer {
+    margin-top: -200px;
+}
+
+
+.workPar {
+    margin-bottom: 40px;
+}
+
+
+.aboutTitle {
+    text-align: left;
+
+    margin-bottom: 20px;
+}
+
+
+.aboutElementText {
+    color: vars.$white;
+}
+
+
+.workParElementTitle {
+    margin-bottom: 10px;
+}
+
+
+.aboutElementText {
+    margin-bottom: 30px;
+
+    line-height: 1.5;
+}
+
+.longStoryBtn {
+    position: relative;
+
+    margin-top: 60px;
+}
+
+
+.longStoryBg {
+    position: relative;
+    z-index: -3;
+}
+
+
+.longStoryText {
+    text-transform: uppercase;
+    font-size: vars.$fzBtnStory;
+    color: vars.$white;
+
+    position: absolute;
+
+    top: 45%;
+    left: 50%;
+    
+    transform: translate(-50%, -50%);
+
+    width: 100%;
+
+    text-align: center;
+}
+
+
+.longStoryBtn {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+
+     &:hover {
+        transform: scale(1.1);
+    }
+    
+    &:active {
+        transform: scale(0.95);
+    }
+}
+
+
+.tip {
+    width: 100%;
+    text-align: center;
+    position: relative;
+    top: -20px;
+}
+

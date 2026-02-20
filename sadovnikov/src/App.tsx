@@ -1,19 +1,12 @@
-import Header from './components/Header';
-import Preview from './components/Preview';
-import Skills from './components/Skills';
-import Stack from './components/Stack';
-
+import Index from "./pages/Index"
+import Header from "./components/Header"
 
 function App() {
 
   	return (
-		<>	
+		<>
 			<Header />
-			<main className="main">
-				<Preview />
-				<Skills />
-				<Stack />
-			</main>
+			<Index />
 		</>
     	
   	)
