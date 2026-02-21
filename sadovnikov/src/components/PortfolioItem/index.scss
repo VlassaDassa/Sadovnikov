@@ -58,7 +58,6 @@
 }
 
 
-
 .projectStack {
     padding: 20px;
 
@@ -77,4 +76,42 @@
 
     background: vars.$accent;
     border-radius: 10px;
+}
+
+
+
+// Save quality after scaling
+.projectElement {
+    position: absolute;
+    
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    
+    .projectContent {
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    .projectImg {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+        
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            image-rendering: auto;
+        }
+    }
+    
+    .projectType,
+    .projectName,
+    .projectDescription,
+    .projectStackItem {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+    }
 }

@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
-
 import "./index.scss";
 
 interface CanvasProps {
@@ -17,7 +16,9 @@ const Canvas: React.FC<CanvasProps> = ({
     className = "",
     onElementsChange,
 }) => {
+    const [manualShow, setManualShow] = useState<boolean>(true)
     const [scale, setScale] = useState<number>(1);
+    const [renderTrigger, setRenderTrigger] = useState<number>(0);
     const [position, setPosition] = useState<{ x: number; y: number }>({
         x: 0,
         y: 0,
@@ -31,6 +32,8 @@ const Canvas: React.FC<CanvasProps> = ({
 
     const canvasRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
+
+    const prevScaleRef = useRef<number>(1);
 
     useEffect(() => {
         const preventSpaceDefault = (e: KeyboardEvent) => {
@@ -135,9 +138,14 @@ const Canvas: React.FC<CanvasProps> = ({
                     y: mouseY - (mouseY - position.y) * (newScale / scale),
                 };
 
+                prevScaleRef.current = scale;
+                
                 setPosition(newPosition);
                 setScale(newScale);
-            } else {
+
+                setTimeout(() => {
+                    setRenderTrigger(prev => prev + 1);
+                }, 50);
             }
         },
         [scale, position],
@@ -148,6 +156,10 @@ const Canvas: React.FC<CanvasProps> = ({
             e.preventDefault();
         }
     };
+
+    const closeManual = () => {
+        setManualShow(false)
+    }
 
     return (
         <div
@@ -170,29 +182,35 @@ const Canvas: React.FC<CanvasProps> = ({
                     style={{
                         transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
                         transformOrigin: "0 0",
+                        backfaceVisibility: "hidden",
+                        WebkitBackfaceVisibility: "hidden",
                     }}
+                    data-render={renderTrigger}
                 >
                     {children}
                 </div>
 
                 <div className="zoomInfo">{Math.round(scale * 100)}%</div>
+                
+                {manualShow && (
+                    <div className="canvasManual">
+                        <div className="manualElement">
+                            <span className="manualKey">CTRL</span>
+                            <span className="manualText">+</span>
+                            <span className="manualKey">Wheel</span>
+                            <span className="manualText">- scaling</span>
+                        </div>
 
-                <div className="canvasManual">
-                    <div className="manualElement">
-                        <span className="manualKey">CTRL</span>
-                        <span className="manualText">+</span>
-                        <span className="manualKey">Wheel</span>
-                        <span className="manualText">- scaling</span>
+                        <div className="manualElement">
+                            <span className="manualKey">Space</span>
+                            <span className="manualText">+</span>
+                            <span className="manualKey">Drag</span>
+                            <span className="manualText">- moving across the canvas</span>
+                        </div>
+
+                        <span onClick={closeManual} className="closeManual">×</span>
                     </div>
-
-                    <div className="manualElement">
-                        <span className="manualKey">Space</span>
-                        <span className="manualText">+</span>
-                        <span className="manualKey">Drad</span>
-                        <span className="manualText">- moving across the canvas</span>
-                    </div>
-
-                </div>
+                )}
             </div>
         </div>
     );

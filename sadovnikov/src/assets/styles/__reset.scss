@@ -47,6 +47,9 @@ input, select, textarea {
   font-family: inherit;
   resize: none;
   background: transparent;
+  font-size: inherit;
+  color: inherit;
+  font-weight: inherit;
 
   :focus {
     border: none;
@@ -54,7 +57,7 @@ input, select, textarea {
   }
 }
 
-input {
+input, textarea {
   width: 100%;
   box-sizing: border-box;
   margin: 0;
@@ -66,6 +69,17 @@ input {
   all: unset; 
   width: 100%;
   box-sizing: border-box;
+}
+
+textarea {
+    white-space: pre-wrap;    
+    word-wrap: break-word;     
+    overflow-wrap: break-word; 
+    
+    resize: vertical;          
+    overflow-y: auto;           
+    
+    resize: none;             
 }
 
 textarea::-webkit-scrollbar { display: none; }

@@ -1,0 +1,87 @@
+@use './../../assets/styles/__variables' as vars;
+
+
+
+.contacts {
+    margin-top: 100px;
+}
+
+.contactsForm {
+     width: 600px;
+
+    margin: 0 auto;
+    margin-top: 80px;
+}
+
+
+.fieldsContainer {
+   
+
+    display: flex;
+    flex-direction: column;
+    row-gap: 60px;
+
+
+    input {
+        padding-bottom: 15px;
+    }
+}
+
+
+.contactsField {
+    border-bottom: 2px solid vars.$gray;
+}
+
+
+
+
+.contactsSubmitBtn {
+    position: relative;
+    float: right;
+    margin-top: 60px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    
+    &:hover {
+        transform: scale(1.05);
+        
+        img {
+            filter: brightness(1.2);
+            transform: scale(1.02);
+        }
+        
+        .contactsSubmitBtnText {
+            transform: translateY(-2px);
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+    }
+    
+    &:active {
+        transform: scale(0.95);
+        transition: transform 0.1s ease;
+        
+        img {
+            filter: brightness(0.9);
+        }
+        
+        .contactsSubmitBtnText {
+            transform: translateY(2px);
+        }
+    }
+    
+    img {
+        transition: all 0.3s ease;
+        display: block;
+    }
+}
+
+.contactsSubmitBtnText {
+    position: absolute;
+    top: 17px;
+    left: 80px;
+    font-size: vars.$fzTextSubtitle;
+    color: vars.$white;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    white-space: nowrap;
+} 

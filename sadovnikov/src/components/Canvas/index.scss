@@ -16,6 +16,15 @@
     user-select: none;
 }
 
+// .canvasContent {
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     min-width: 100%;
+//     min-height: 100%;
+//     will-change: transform; 
+// }
+
 .canvasContent {
     position: absolute;
     top: 0;
@@ -23,6 +32,11 @@
     min-width: 100%;
     min-height: 100%;
     will-change: transform;
+    
+    // Оптимизация для ретина дисплеев
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+        image-rendering: auto;
+    }
 }
 
 .zoomInfo {
@@ -94,4 +108,18 @@
     border-radius: 5px;
 
     padding: 10px 20px;
+}
+
+
+.closeManual {
+    position: absolute;
+
+    top: 15px;
+    right: 25px;
+
+    font-size: 48px;
+
+    font-weight: vars.$regular;
+
+    cursor: pointer;
 }

@@ -49,3 +49,18 @@ body {
     color: vars.$white;
     text-transform: uppercase;
 }
+
+
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+// Saving quality after scaling
+.canvasContent * {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+}
+
