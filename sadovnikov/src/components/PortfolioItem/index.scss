@@ -1,0 +1,80 @@
+@use './../../assets/styles/__variables.scss' as vars;
+
+
+
+.projectContent {
+    width: 600px;
+    height: 600px;
+
+    background: vars.$bgColor;
+
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+
+.projectImgWrapper {
+    width: 100%;
+    height: 340px;
+
+    border-radius: 25px;
+
+    overflow: hidden;
+}
+
+
+.projectImg {
+    width: 100%;
+}
+
+
+.projectType {
+    font-family: 'Montserrat';
+    font-weight: vars.$medium;
+    font-size: vars.$fzMedium;
+
+    margin-bottom: 10px;
+}
+
+
+.projectText {
+    padding: 20px;
+    font-weight: 'Magra';
+}
+
+
+.projectName {
+    font-weight: vars.$bold;
+    font-size: vars.$fzMedium;
+    color: vars.$white;
+
+    margin-bottom: 10px;
+}
+
+
+.projectDescription {
+    font-weight: vars.$regular;
+    font-size: vars.$fzSmall;
+}
+
+
+
+.projectStack {
+    padding: 20px;
+
+    display: flex;
+    column-gap: 10px;
+    row-gap: 10px;
+    flex-wrap: wrap;
+}
+
+
+.projectStackItem {
+    font-size: vars.$fzSmall;
+    color: vars.$white;
+
+    padding: 10px 15px;
+
+    background: vars.$accent;
+    border-radius: 10px;
+}

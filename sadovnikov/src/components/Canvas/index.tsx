@@ -1,76 +1,85 @@
-// Canvas.jsx
 import React, { useState, useRef, useEffect, useCallback } from "react";
-import "./index.css";
+
+import "./index.scss";
 
 interface CanvasProps {
-    children?: React.ReactNode,
-    width: string,
-    height: string,
-    className: string,
-} 
+    children?: React.ReactNode;
+    width?: number | string;
+    height?: number | string;
+    className?: string;
+    onElementsChange?: () => void;
+}
 
 const Canvas: React.FC<CanvasProps> = ({
     children,
     width = "100%",
     height = "100%",
     className = "",
+    onElementsChange,
 }) => {
-    const [scale, setScale] = useState(1);
-    const [position, setPosition] = useState({ x: 0, y: 0 });
-    const [isDragging, setIsDragging] = useState(false);
-    const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
-    const [spacePressed, setSpacePressed] = useState(false);
+    const [scale, setScale] = useState<number>(1);
+    const [position, setPosition] = useState<{ x: number; y: number }>({
+        x: 0,
+        y: 0,
+    });
+    const [isDragging, setIsDragging] = useState<boolean>(false);
+    const [dragStart, setDragStart] = useState<{ x: number; y: number }>({
+        x: 0,
+        y: 0,
+    });
+    const [spacePressed, setSpacePressed] = useState<boolean>(false);
 
-    const canvasRef = useRef(null);
-    const contentRef = useRef(null);
+    const canvasRef = useRef<HTMLDivElement>(null);
+    const contentRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const preventDefaultZoom = (e: WheelEvent) => {
-            if (e.ctrlKey || e.metaKey) {
-                e.preventDefault();
-            }
-        };
-
-        window.addEventListener("wheel", preventDefaultZoom, {
-            passive: false,
-        });
-
-        return () => {
-            window.removeEventListener("wheel", preventDefaultZoom);
-        };
-    }, []);
-
-    // Обработка нажатия пробела
-    useEffect(() => {
-        const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.code === "Space" && !e.repeat) {
-                e.preventDefault();
-                setSpacePressed(true);
-                canvasRef.current.style.cursor = "grab";
-            }
-        };
-
-        const handleKeyUp = (e: KeyboardEvent) => {
+        const preventSpaceDefault = (e: KeyboardEvent) => {
             if (e.code === "Space") {
                 e.preventDefault();
-                setSpacePressed(false);
-                canvasRef.current.style.cursor = "default";
+                
+                if (e.type === "keydown" && !e.repeat) {
+                    setSpacePressed(true);
+                    if (canvasRef.current) {
+                        canvasRef.current.style.cursor = "grab";
+                    }
+                }
+                
+                if (e.type === "keyup") {
+                    setSpacePressed(false);
+                    if (canvasRef.current) {
+                        canvasRef.current.style.cursor = "default";
+                    }
+                }
             }
         };
 
-        window.addEventListener("keydown", handleKeyDown);
-        window.addEventListener("keyup", handleKeyUp);
+        document.addEventListener("keydown", preventSpaceDefault);
+        document.addEventListener("keyup", preventSpaceDefault);
 
         return () => {
-            window.removeEventListener("keydown", handleKeyDown);
-            window.removeEventListener("keyup", handleKeyUp);
+            document.removeEventListener("keydown", preventSpaceDefault);
+            document.removeEventListener("keyup", preventSpaceDefault);
         };
     }, []);
 
-    // Перемещение по канвасу
-    const handleMouseDown = (e) => {
-        // Проверяем, не кликнули ли на перетаскиваемый элемент
-        if (e.target.closest(".canvas-element")) {
+    useEffect(() => {
+        const handleWheel = (e: WheelEvent) => {
+            const isTargetInsideCanvas = canvasRef.current?.contains(e.target as Node);
+            
+            if (isTargetInsideCanvas && (e.ctrlKey || e.metaKey)) {
+                e.preventDefault();
+            }
+        };
+
+        window.addEventListener("wheel", handleWheel, { passive: false });
+
+        return () => {
+            window.removeEventListener("wheel", handleWheel);
+        };
+    }, []);
+
+    const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (e.target instanceof Element && e.target.closest(".canvasElement")) {
             return;
         }
 
@@ -81,11 +90,14 @@ const Canvas: React.FC<CanvasProps> = ({
                 x: e.clientX - position.x,
                 y: e.clientY - position.y,
             });
-            canvasRef.current.style.cursor = "grabbing";
+
+            if (canvasRef.current) {
+                canvasRef.current.style.cursor = "grabbing";
+            }
         }
     };
 
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
         if (!isDragging) return;
 
         e.preventDefault();
@@ -98,25 +110,26 @@ const Canvas: React.FC<CanvasProps> = ({
 
     const handleMouseUp = () => {
         setIsDragging(false);
-        canvasRef.current.style.cursor = spacePressed ? "grab" : "default";
+
+        if (canvasRef.current) {
+            canvasRef.current.style.cursor = spacePressed ? "grab" : "default";
+        }
     };
 
-    // Собственная реализация масштабирования
     const handleWheel = useCallback(
-        (e) => {
-            e.preventDefault();
-
+        (e: React.WheelEvent<HTMLDivElement>) => {
             if (e.ctrlKey || e.metaKey) {
-                // Масштабирование с Ctrl
+                e.preventDefault();
+
                 const delta = e.deltaY > 0 ? 0.9 : 1.1;
                 const newScale = Math.min(Math.max(scale * delta, 0.1), 5);
 
-                // Получаем координаты мыши относительно канваса
-                const rect = canvasRef.current.getBoundingClientRect();
+                const rect = canvasRef.current?.getBoundingClientRect();
+                if (!rect) return;
+
                 const mouseX = e.clientX - rect.left;
                 const mouseY = e.clientY - rect.top;
 
-                // Вычисляем новую позицию для масштабирования относительно курсора
                 const newPosition = {
                     x: mouseX - (mouseX - position.x) * (newScale / scale),
                     y: mouseY - (mouseY - position.y) * (newScale / scale),
@@ -125,21 +138,12 @@ const Canvas: React.FC<CanvasProps> = ({
                 setPosition(newPosition);
                 setScale(newScale);
             } else {
-                // Перемещение по канвасу колесиком
-                const moveX = e.shiftKey ? e.deltaY * 2 : e.deltaX * 2;
-                const moveY = e.shiftKey ? 0 : e.deltaY * 2;
-
-                setPosition({
-                    x: position.x - moveX,
-                    y: position.y - moveY,
-                });
             }
         },
         [scale, position],
     );
 
-    // Предотвращаем контекстное меню
-    const handleContextMenu = (e) => {
+    const handleContextMenu = (e: React.MouseEvent<HTMLDivElement>) => {
         if (isDragging || spacePressed) {
             e.preventDefault();
         }
@@ -147,12 +151,12 @@ const Canvas: React.FC<CanvasProps> = ({
 
     return (
         <div
-            className={`canvas-wrapper ${className}`}
+            className={`canvasWrapper ${className}`}
             style={{ width, height }}
         >
             <div
                 ref={canvasRef}
-                className="canvas-container"
+                className="canvasContainer"
                 onMouseDown={handleMouseDown}
                 onMouseMove={handleMouseMove}
                 onMouseUp={handleMouseUp}
@@ -162,7 +166,7 @@ const Canvas: React.FC<CanvasProps> = ({
             >
                 <div
                     ref={contentRef}
-                    className="canvas-content"
+                    className="canvasContent"
                     style={{
                         transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
                         transformOrigin: "0 0",
@@ -171,7 +175,24 @@ const Canvas: React.FC<CanvasProps> = ({
                     {children}
                 </div>
 
-                <div className="zoom-info">{Math.round(scale * 100)}%</div>
+                <div className="zoomInfo">{Math.round(scale * 100)}%</div>
+
+                <div className="canvasManual">
+                    <div className="manualElement">
+                        <span className="manualKey">CTRL</span>
+                        <span className="manualText">+</span>
+                        <span className="manualKey">Wheel</span>
+                        <span className="manualText">- scaling</span>
+                    </div>
+
+                    <div className="manualElement">
+                        <span className="manualKey">Space</span>
+                        <span className="manualText">+</span>
+                        <span className="manualKey">Drad</span>
+                        <span className="manualText">- moving across the canvas</span>
+                    </div>
+
+                </div>
             </div>
         </div>
     );
