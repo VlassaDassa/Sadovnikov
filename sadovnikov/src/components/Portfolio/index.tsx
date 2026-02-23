@@ -22,7 +22,7 @@ const Portfolio: React.FC = () => {
     
 
     return (
-        <section className="portfolio">
+        <section id="portfolio" className="portfolio">
 			<h2 className="title portfolioTitle">PORTFOLIO</h2>
 			<div className="canvasBox">
 				<div className="canvasSection">

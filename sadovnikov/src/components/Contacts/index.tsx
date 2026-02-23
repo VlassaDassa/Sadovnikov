@@ -99,7 +99,7 @@ const Contacts: React.FC = () => {
     }
 
     return (
-        <section className="container contacts">
+        <section id="contacts" className="container contacts">
             <h2 className="title">Contacts</h2>
 
             <form className="contactsForm" action="#">
@@ -134,7 +134,7 @@ const Contacts: React.FC = () => {
                 </div>
             </form>
 
-            <div className="characterContainer">
+            <div className="characterContainer contactsCharacterContainer">
                 <img className="skillCharacter" src={jawPhoto} alt="character" />
                 <img className="skillJaw" src={jaw} alt="character" />
 

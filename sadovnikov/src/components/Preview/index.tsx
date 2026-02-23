@@ -25,9 +25,9 @@ const Preview: React.FC = () => {
             <path d="M0,50 Q150,30 300,70 T600,30 T900,70 T1200,10" 
                     fill="none" 
                     stroke="#6870FF" 
-                    stroke-width="4" 
-                    stroke-dasharray="10" 
-                    stroke-linecap="round"/>
+                    strokeWidth="4" 
+                    strokeDasharray="10" 
+                    strokeLinecap="round"/>
             </svg>
         </section>
     )

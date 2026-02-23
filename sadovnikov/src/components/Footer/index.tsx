@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
         <footer className="container footer">
             {Object.values(contactData).map((element, index) => {
                 return (
-                    <>
+                    <React.Fragment key={element.text}>
                         {
                             element.href ? 
                                 <a className="footerElement" href={element.href}>
@@ -24,7 +24,7 @@ const Footer: React.FC = () => {
                                     <p className="footerText">{element.text}</p>
                                 </div> 
                         }
-                    </>
+                    </React.Fragment>
                     
                 )
             })}

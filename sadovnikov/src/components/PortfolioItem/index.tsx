@@ -63,7 +63,7 @@ const PortfolioItem: React.FC<PortfolioItemProps> = ({
                         {
                             stack.map((element, index) => {
                                 return (
-                                    <div className="projectStackItem">
+                                    <div className="projectStackItem" key={element}>
                                         {element}
                                     </div>
                                 )

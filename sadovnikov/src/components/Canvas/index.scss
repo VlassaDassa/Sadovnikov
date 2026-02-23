@@ -16,14 +16,6 @@
     user-select: none;
 }
 
-// .canvasContent {
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     min-width: 100%;
-//     min-height: 100%;
-//     will-change: transform; 
-// }
 
 .canvasContent {
     position: absolute;
@@ -33,7 +25,6 @@
     min-height: 100%;
     will-change: transform;
     
-    // Оптимизация для ретина дисплеев
     @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
         image-rendering: auto;
     }

@@ -28,19 +28,14 @@ const About: React.FC = () => {
         
         const svgRect = svg.getBoundingClientRect()
         
-        // const startX = a.left + a.width / 2 - svgRect.left - 150
-        // const startY = a.top + a.height / 2 - svgRect.top - 100
         const startX = a.left + a.width / 2 - svgRect.left 
         const startY = a.top + a.height / 2 - svgRect.top
         
-        // const endX = b.left + b.width / 2 - svgRect.left - 150
         const endX = b.left + b.width / 2 - svgRect.left
         const endY = b.top + b.height / 2 - svgRect.top
 
         const controlX = (startX + endX) / 2 + 350
         const controlY = Math.min(startY, endY) + 100
-        // const controlX = (startX + endX) / 2 
-        // const controlY = Math.min(startY, endY)
 
         return `M ${startX} ${startY}
                 Q ${controlX} ${controlY}
@@ -71,7 +66,7 @@ const About: React.FC = () => {
 
 
     return (
-        <div className="container about">
+        <section id="about" className="container about">
             <h2 className="title">ABOUT ME</h2>
 
             <div className="illustationContainer">
@@ -110,7 +105,7 @@ const About: React.FC = () => {
                     {
                         workExperience.map((el, index) => {
                             return (
-                               <div className="workParElement">
+                               <div className="workParElement" key={el.id}>
                                     <h3 className="workParElementTitle">{el.title}</h3>
                                     <p className="aboutElementText">{el.text}</p>
                                 </div> 
@@ -130,7 +125,7 @@ const About: React.FC = () => {
                 <p className="longStoryText">MY LONG STORY, VERY VERY LONG, IF YOU INTERESTED</p>
                 <p className="tip">(click)</p>
             </div>
-        </div>
+        </section>
     )
 }
 

@@ -122,7 +122,6 @@ const Canvas: React.FC<CanvasProps> = ({
     const handleWheel = useCallback(
         (e: React.WheelEvent<HTMLDivElement>) => {
             if (e.ctrlKey || e.metaKey) {
-                e.preventDefault();
 
                 const delta = e.deltaY > 0 ? 0.9 : 1.1;
                 const newScale = Math.min(Math.max(scale * delta, 0.1), 5);

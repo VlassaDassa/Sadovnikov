@@ -17,8 +17,6 @@
 
 
 .fieldsContainer {
-   
-
     display: flex;
     flex-direction: column;
     row-gap: 60px;
@@ -96,6 +94,7 @@
 
 
     transform: rotate(-15deg);
+
 
     animation: gentleSway 3s ease-in-out infinite;
 
@@ -183,4 +182,9 @@
 
 .contactsSubmitBtnText--error {
     opacity: 0.5;
+}
+
+
+.contactsCharacterContainer {
+    position: absolute;
 }
