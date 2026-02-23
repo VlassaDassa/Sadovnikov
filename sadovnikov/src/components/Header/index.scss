@@ -36,19 +36,106 @@
     display: flex;
     column-gap: 30px;
     align-items: center;
-
-    li {
+    
+    
+    
+    li:not(.navLanguage) {
+        position: relative;
+        transition: transform 0.2s ease, opacity 0.3s ease;
+        
         cursor: pointer;
+
+        &:not(.navLanguage)::before {
+            content: '•';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        &:hover {
+            opacity: 0.8; 
+        
+        
+            &::before {
+                top: -25px;
+                opacity: 1;
+            }
+        }
     }
 }
 
+
 .navLanguage {
     position: relative;
+    cursor: pointer;
     color: vars.$white;
+    img {
+        transition: transform 0.3s ease;
+    }
+    
+    &:hover img {
+        transform: rotate(180deg);
+        opacity: 0.8;
+    }
 }
 
 .navLanguageText {
     position: absolute;
     top: 17px;
     left: 15px;
+}
+
+
+.languageDropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    width: 160px;
+    background: rgba(20, 20, 30, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 100;
+    
+    .navLanguage:hover & {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+}
+
+
+.languageOption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    
+    &:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+    
+    &.active {
+        background: rgba(78, 205, 196, 0.2);
+        border-left: 3px solid #4ecdc4;
+    }
+}
+
+
+.langCode {
+    font-size: 0.85em;
+    opacity: 0.7;
+    font-weight: 600;
 }

@@ -22,6 +22,17 @@ const Header: React.FC = () => {
                     <li className="navLanguage">
                         <img src={languageTextBox} alt="Change language" />
                         <span className="navLanguageText">RU/EN</span>
+
+                        <div className="languageDropdown">
+                            <div className="languageOption" data-lang="ru">
+                                <span>Русский</span>
+                                <span className="langCode">RU</span>
+                            </div>
+                            <div className="languageOption" data-lang="en">
+                                <span>English</span>
+                                <span className="langCode">EN</span>
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </nav>

@@ -15,16 +15,38 @@
 
     width: 100%;
 
-    transform: rotate(-3deg);
+
+    animation: tiltText 4s ease-in-out infinite;
+
+    @keyframes tiltText {
+        0%, 100% {
+            transform: rotate(-3deg);
+        }
+        50% {
+            transform: rotate(3deg);
+        }
+    }
 }
 
 
 .specHand {
     position: absolute;
     right: -200px;
-    top: 0px;
+    top: 50px;
 
     mask-image: linear-gradient(to right, black 70%, transparent 100%);
+    animation: moveHand 4s ease-in-out infinite;
+
+    @keyframes moveHand {
+        0%, 100% {
+            transform: rotate(3deg) translateY(-5px);
+            top: -5px;
+        }
+        50% {
+            transform: rotate(-3deg) translateY(0px);
+            top: 50px;
+        }
+    }
 }
 
 
