@@ -1,0 +1,33 @@
+.animated-section {
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    &.fade-up {
+        transform: translateY(60px);
+    }
+    
+    &.fade-down {
+        transform: translateY(-60px);
+    }
+    
+    &.fade-left {
+        transform: translateX(-60px);
+    }
+    
+    &.fade-right {
+        transform: translateX(60px);
+    }
+    
+    &.zoom {
+        transform: scale(0.8);
+    }
+   
+    &.visible {
+        opacity: 1;
+        transform: translate(0) scale(1) rotate(0);
+    }
+}
+
+
+
+

@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useDebounce } from 'use-debounce';
+import { useInView } from '../../hooks/useInView';
 
 import AutoResizeTextarea from '../AutoResizeTextarea';
 
@@ -31,6 +32,7 @@ const Contacts: React.FC = () => {
         name: '',
         message: ''
     });
+    const { ref, isInView } = useInView({ threshold: 0.3 });
 
     useEffect(() => {
         const getEmailError = (): string => {
@@ -134,7 +136,7 @@ const Contacts: React.FC = () => {
                 </div>
             </form>
 
-            <div className="characterContainer contactsCharacterContainer">
+            <div ref={ref} className={`${'characterContainer contactsCharacterContainer'} ${isInView ? 'animate' : ''}`}>
                 <img className="skillCharacter" src={jawPhoto} alt="character" />
                 <img className="skillJaw" src={jaw} alt="character" />
 

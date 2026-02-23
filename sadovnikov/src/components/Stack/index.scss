@@ -24,9 +24,42 @@
     top: -200px;
     left: -200px;
 
-    mask-image: linear-gradient(to right, black 90%, transparent 100%);
+
+    mask-image: linear-gradient(to right, transparent 0%, black 20%, black 90%, transparent 100%);
+    mask-size: 200% 100%;
+    mask-position: 100% 0;
 }
 
+
+.stackBg.animate {
+    animation: slideAndReveal 6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    
+    @keyframes slideAndReveal {
+        0% {
+            left: -1200px;
+            mask-position: 100% 0;
+            opacity: 0;
+        }
+        30% {
+            opacity: 0.3;
+            mask-position: 70% 0;
+        }
+        60% {
+            left: -400px;
+            opacity: 0.5;
+            mask-position: 40% 0;
+        }
+        80% {
+            left: -220px;
+            mask-position: 20% 0;
+        }
+        100% {
+            left: -200px;
+            mask-position: 0% 0;
+            opacity: 0.5;
+        }
+    }
+}
 
 .stackElement {
     background: vars.$bgSecondaryColor;
@@ -44,7 +77,6 @@
     text-transform: none;
     transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     
-    // Эффект при наведении
     &:hover {
         transform: translateY(-30px);
         box-shadow: 0px 15px 20px 0px rgba(0, 0, 0, 30%);

@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
+import { useInView } from "../../hooks/useInView";
 
 import hand from "./../../assets/images/hand.png";
 
@@ -18,8 +19,8 @@ const Stack: React.FC = () => {
     const [positions, setPositions] = useState<Position[]>([]);
     const [isAnimating, setIsAnimating] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
+    const { ref, isInView } = useInView({ threshold: 0.3 });
 
-    // Функция для генерации новых позиций
     const generateNewPositions = useCallback(() => {
         if (!containerRef.current) return;
 
@@ -128,7 +129,12 @@ const Stack: React.FC = () => {
     return (
         <section className="stack container">
             <h2 className="title">MY STACK</h2>
-            <img className="stackBg" src={hand} alt="hand" />
+            <img 
+                ref={ref as React.RefObject<HTMLImageElement>} 
+                className={`${'stackBg'} ${isInView ? 'animate' : ''}`} 
+                src={hand} 
+                alt="hand" 
+            />
 
             <div className="stackContainer" ref={containerRef}>
                 {stackList.map((el, index) => (

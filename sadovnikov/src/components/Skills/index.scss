@@ -4,9 +4,12 @@
 .skills {
     margin-top: 200px;
 
+    height: 400px;
+
     position: relative;
     
 }
+
 
 
 .skillsContainer {
@@ -14,13 +17,60 @@
     flex-direction: column;
     row-gap: 30px;
     padding: 100px;
-
     position: relative;
-
     max-width: fit-content;
-
     border: 1px solid #0077FF;
+    border-width: 0;
+    
+    width: 0;
+    padding: 0;
+    border-width: 0;
 }
+
+.skillsContainer.animate {
+    animation: growElastic 5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+
+@keyframes growElastic {
+    0% {
+        width: 0;
+        border-width: 0;
+        padding: 0;
+    }
+    20% { 
+        width: 200px; 
+        border-width: 1px; 
+        padding: 30px; 
+    }
+    40% { 
+        width: 400px; 
+        padding: 60px; 
+    }
+    60% { 
+        width: 550px; 
+        padding: 90px; 
+    }
+    80% { 
+        width: 620px; 
+        padding: 105px; 
+    } 
+    90% { 
+        width: 590px; 
+        padding: 95px; 
+    } 
+    95% { 
+        width: 605px; 
+        padding: 101px; 
+    } 
+    100% {
+        width: 603px;
+        opacity: 1;
+        border-width: 1px;
+        padding: 100px;
+    }
+}
+
 
 
 .skill {

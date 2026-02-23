@@ -1,4 +1,5 @@
 import React from 'react';
+import { useInView } from '../../hooks/useInView';
 
 import './index.scss';
 
@@ -13,13 +14,11 @@ import hand from './../../assets/images/hand.png';
 
 
 const Skills: React.FC = () => {
-    
-
-
+    const { ref, isInView } = useInView({ threshold: 0.3 });
 
     return (
         <section className="container skills">
-            <div className="skillsContainer">
+            <div ref={ref} className={`${'skillsContainer'} ${isInView ? 'animate' : ''}`}>
                 <div className="angleSquare angleSquare--lt"></div>
                 <div className="angleSquare angleSquare--selected angleSquare--rt"></div>
                 <div className="angleSquare angleSquare--lb"></div>
