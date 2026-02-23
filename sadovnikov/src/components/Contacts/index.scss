@@ -4,6 +4,8 @@
 
 .contacts {
     margin-top: 100px;
+
+    position: relative;
 }
 
 .contactsForm {
@@ -85,3 +87,100 @@
     pointer-events: none;
     white-space: nowrap;
 } 
+
+
+.characterContainer {
+    position: absolute;
+
+    right: -700px;
+
+
+    transform: rotate(-15deg);
+
+    animation: gentleSway 3s ease-in-out infinite;
+
+    @keyframes gentleSway {
+        0% {
+            transform: rotate(-15deg);
+        }
+        50% {
+            transform: rotate(-10deg);
+        }
+        100% {
+            transform: rotate(-15deg); 
+        }
+    }
+}
+
+
+.skillCharacter {
+    width: 310px;
+    height: 465px;
+}
+
+
+.skillJaw {
+    position: absolute;
+
+    width: 77px;
+    height: 64px;
+
+    top: 265px;
+    left: 115px;
+
+    animation: jawMove 0.3s ease-in-out infinite alternate;
+
+    @keyframes jawMove {
+        0% {
+            top: 265px;   
+        }
+        100% {
+            top: 285px;   
+        }
+    }
+}
+
+
+.skillIndexFinger {
+    position: absolute;
+
+    width: 194px;
+    height: 216px;
+
+    left: -150px;
+    top: 250px;
+
+    transform-origin: 20% 80%;
+
+    animation: handAnim 0.3s ease-in-out infinite alternate;
+
+    @keyframes handAnim {
+        0% {
+            transform: rotate(18deg);  
+        }
+        100% {
+            transform: rotate(-18deg);   
+        }
+    }
+}
+
+
+.skillTextCloud {
+    position: absolute;
+
+    top: 330px;
+    left: 150px;
+
+    font-family: 'Montserrat';
+    color: vars.$darkTextColor;
+}
+
+
+.contactsField--error {
+    border-bottom: 1px solid rgb(251, 109, 109);
+}
+
+
+.contactsSubmitBtnText--error {
+    opacity: 0.5;
+}

@@ -7,6 +7,7 @@ import Stack from '../components/Stack';
 import About from '../components/About';
 import Portfolio from '../components/Portfolio';
 import Contacts from '../components/Contacts';
+import Footer from '../components/Footer';
 
 import './index.scss';
 
@@ -20,6 +21,7 @@ const Index: React.FC = () => {
             <About />
             <Portfolio />
             <Contacts />
+            <Footer />
         </main>
 )
 } 

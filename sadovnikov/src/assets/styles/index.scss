@@ -14,9 +14,9 @@ body {
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-color: vars.$bgColor;
-    
-    height: 8000px;
 
+    overflow: hidden;
+    
     font-family: "Magra", sans-serif;
     font-style: normal;
     font-weight: vars.$bold;

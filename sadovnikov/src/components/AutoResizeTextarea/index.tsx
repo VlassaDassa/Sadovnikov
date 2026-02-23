@@ -5,12 +5,14 @@ interface AutoResizeTextareaProps {
     onChange: (value: string) => void;
     placeholder?: string;
     maxHeight?: number;
+    className: string;
 }
 
 const AutoResizeTextarea: React.FC<AutoResizeTextareaProps> = ({
     value,
     onChange,
     placeholder,
+    className,
     maxHeight = 300
 }) => {
     const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -34,7 +36,7 @@ const AutoResizeTextarea: React.FC<AutoResizeTextareaProps> = ({
         <textarea
             ref={textareaRef}
             value={value}
-            className="contactsField"
+            className={className}
             onChange={handleChange}
             placeholder={placeholder}
         />
