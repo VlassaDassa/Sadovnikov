@@ -1,0 +1,8 @@
+@import './../../assets/styles/tokens/typography';
+@import './../../assets/styles/tokens/colors';
+
+
+
+.test {
+    @include typography($text-128, $font-mont, $bold, $leading-loose)
+}
