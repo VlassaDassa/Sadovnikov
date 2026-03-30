@@ -1,8 +1,12 @@
-@import './../../assets/styles/tokens/typography';
-@import './../../assets/styles/tokens/colors';
+.testRectangle {
+    width: 500px;
+    height: 500px;
 
+    background: white;
+}
 
-
-.test {
-    @include typography($text-128, $font-mont, $bold, $leading-loose)
+.zzz {
+    position: absolute;
+    top: 0;
+    z-index: 10;
 }

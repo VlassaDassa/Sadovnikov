@@ -1,4 +1,4 @@
-@import './colors';
+@use './colors' as *;
 
 
 // Font families
@@ -6,18 +6,20 @@ $font-magra: "Magra", sans-serif;
 $font-mont: "Montserrat";
 
 
+
 // Font sizes
-$text-128: 8rem; // 128px
-$text-96: 6rem; // 96px
-$text-64: 4rem; // 64px
-$text-48: 3rem; // 48px
-$text-40: 2.5rem; // 40px
-$text-36: 2.25rem; // 36px
-$text-32: 2rem; // 32px
-$text-24: 1.5rem; // 24px
-$text-20: 1.25rem; // 20px
-$text-16: 1rem; // 16px
-$text-14: 0.875rem; // 14px
+$text-128: 8rem;        
+$text-96: 6rem;         
+$text-64: 4rem;         
+$text-48: 3rem;         
+$text-40: 2.5rem;       
+$text-36: 2.25rem;      
+$text-32: 2rem;         
+$text-24: 1.5rem;       
+$text-20: 1.25rem;      
+$text-16: 1rem;         
+$text-14: 0.875rem;     
+
 
 
 // Line heights
@@ -26,6 +28,7 @@ $leading-tight: 1.25;
 $leading-normal: 1.5;
 $leading-relaxed: 1.625;
 $leading-loose: 2;
+
 
 
 // Font weights
@@ -40,21 +43,94 @@ $exta_bold: 800;
 $black: 900;
 
 
-@mixin typography($size, $font, $weight, $line-height: $leading-none, $color: $neutral_900) {
-    font-family: $font;
-    font-weight: $weight;
-    font-size: $size;
-    line-height: $line-height;
-    
-    @if $color == black {
-        color: $neutral_900;
-    } 
 
-    @else if $color == white {
-        color: $white;
-    }
+// Generate typography classes
+$font-weights: (
+    'thin': 100,
+    'extra_ligth': 200,
+    'light': 300,
+    'regular': 400,
+    'medium': 500,
+    'semi_bold': 600,
+    'bold': 700,
+    'exta_bold': 800,
+    'black': 900
+);
 
-    @else {
-        color: $color
+
+$heading-sizes: (
+    '128': 8rem,
+    '96': 6rem,
+    '64': 4rem,
+    '48': 3rem,
+    '40': 2.5rem, 
+    '36': 2.25rem,
+    '32': 2rem,
+    '24': 1.5rem,
+    '20': 1.25
+);
+
+$body-sizes: (
+    '24': 1.5rem,
+    '20': 1.25rem,
+    '16': 1rem,
+    '14': 0.875rem
+);
+
+
+
+// Generate classes for headings
+@each $size-name, $size-value in $heading-sizes {
+    @each $weight-name, $weight-value in $font-weights {
+        .heading-#{$size-name}-magra-#{$weight-name} {
+            font-family: $font-magra;
+            font-size: $size-value;
+            font-weight: $weight-value;
+            color: $neutral_900;
+            line-height: $leading-none;
+        }
+
+        .heading-#{$size-name}-mont-#{$weight-name} {
+            font-family: $font-mont;
+            font-size: $size-value;
+            font-weight: $weight-value;
+            color: $neutral_900;
+            line-height: $leading-none;
+        }
     }
+}
+
+// Generate classes for body text
+@each $size-name, $size-value in $body-sizes {
+    @each $weight-name, $weight-value in $font-weights {
+        .body-#{$size-name}-magra-#{$weight-name} {
+            font-family: $font-magra;
+            font-size: $size-value;
+            font-weight: $weight-value;
+            color: $neutral_900;
+            line-height: $leading-none;
+        }
+
+        .body-#{$size-name}-mont-#{$weight-name} {
+            font-family: $font-mont;
+            font-size: $size-value;
+            font-weight: $weight-value;
+            color: $neutral_900;
+            line-height: $leading-none;
+        }
+    }
+}
+
+
+
+.darkText {
+    color: $neutral_900;
+}
+
+.lightText {
+    color: $neutral_300;
+}
+
+.whiteText {
+    color: $white;
 }

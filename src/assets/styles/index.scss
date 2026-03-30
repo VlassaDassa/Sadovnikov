@@ -1,4 +1,6 @@
-@use './_variables.scss' as vars;
+@use './tokens/colors' as *;
+@use './tokens/typography' as *;
+@use './tokens/effects' as *;
 
 
 
