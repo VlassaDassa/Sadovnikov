@@ -4,6 +4,7 @@ import './index.scss'
 
 import Header from '../../components/general/header';
 import Preview from '../../components/preview';
+import Skills from '../../components/skills';
 
 
 const Main: React.FC = () => {
@@ -11,6 +12,7 @@ const Main: React.FC = () => {
         <>
             <Header />
             <Preview />
+            <Skills />
         </>
        
     )
