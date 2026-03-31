@@ -6,20 +6,33 @@
 
 html {
     font-size: 16px;
-
-    @media (max-width: 768px) {
-        font-size: 12px;
-    }
-
-
-    @media (max-width: 360px) {
-        font-size: 10px;
-    }
 }
 
-
+body {
+    height: 100vh;
+}
 
 .container {
     width: calc(100% - 16px * 2);
     margin: 0 auto;
 }
+
+
+// ------------------------------------------ Button ----------------------------------- 
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+
+    background-image: url('./../images/button/bg_medium_btn.png');
+    background-size: cover;
+
+    width: 152px;
+    height: 40px;
+}
+
+
+.btnText {
+    padding-right: 20px;
+}
+// -----------------------------------------------------------------------------------------
