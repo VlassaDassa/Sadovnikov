@@ -1,4 +1,8 @@
 @use './../../assets/styles/tokens/colors' as *;
+@use './../../assets/styles/tokens/typography' as *;
+
+
+
 
 .skills {
     display: flex;
@@ -17,6 +21,11 @@
     display: flex;
     flex-direction: column;
     row-gap: 5px;
+}
+
+
+.skillItemName, .skillScore {
+    @extend .body-16-magra-bold;
 }
 
 
@@ -47,7 +56,8 @@
     background-color: $brand_600;
 }
 
-.vertex, .cursor {
+.vertex, 
+.cursor {
     display: none;
 }
 
@@ -104,3 +114,20 @@
         height: 40px;
     }
 }
+
+
+
+@media (min-width: 768px) {
+    .skillItemName, .skillScore {
+        font-size: 1.5rem;
+    }
+
+    .skillLevelItem {
+        width: 30px;
+        height: 10px;
+
+        border-radius: 2px;
+    }
+}
+
+

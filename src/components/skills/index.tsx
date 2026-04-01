@@ -6,10 +6,9 @@ import cursor from './../../assets/images/main/cursor.svg';
 
 import './index.scss';
 
+import TalkingAvatar from '../main/talkingAvatar';
 import { skills } from '../../mockData/skills';
 import type { Skill } from '../../mockData/skills';
-
-
 
 
 
@@ -18,7 +17,7 @@ const SkillItem: React.FC<Skill> = ({ name, score }) => {
     
     return (
         <div className="skillItem">
-            <p className="body-16-magra-bold lightText">{name}</p>
+            <p className="lightText skillItemName">{name}</p>
             <div className="skillLevel">
                 <div className="skillLevelWrapper">
                     {
@@ -32,7 +31,7 @@ const SkillItem: React.FC<Skill> = ({ name, score }) => {
                         })
                     }
                 </div>
-                <p className="skillScore body-16-magra-bold lightText">{score}/10</p>
+                <p className="skillScore lightText">{score}/10</p>
             </div>
         </div>
     )
@@ -58,7 +57,7 @@ const Skills: React.FC = () => {
             </div>
 
             <div className="avatarWrapper">
-
+                <TalkingAvatar hand={true} indexFinger={true} text="This is how I evaluate my skills..." />
             </div>
         </section>
     )
