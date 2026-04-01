@@ -6,11 +6,17 @@
 
 html {
     font-size: 16px;
+    overflow-x: hidden;
+    max-width: 100%;
 }
 
 body {
     height: 2000px;
+
     overflow-x: hidden;
+    max-width: 100%;
+    position: relative;
+    
 }
 
 .container {
@@ -37,3 +43,8 @@ body {
     padding-right: 20px;
 }
 // -----------------------------------------------------------------------------------------
+
+
+.sectionTitle {
+    text-align: center;
+}
