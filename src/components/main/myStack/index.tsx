@@ -16,7 +16,19 @@ const MyStack: React.FC = () => {
     useEffect(() => {
         itemRefs.current.forEach((ref, index) => {
             if (ref) {
-                console.log(ref.getBoundingClientRect())
+                console.log('Parent: ', ref.parentElement?.getBoundingClientRect().top, ref.parentElement?.getBoundingClientRect().left)
+                console.log('Child: ', ref.getBoundingClientRect().top, ref.getBoundingClientRect().left)
+
+                const child = ref.getBoundingClientRect()
+                const parent = ref.parentElement?.getBoundingClientRect()
+
+                if (parent) {
+                    const cord_child_y = child.top - parent.top
+                    const cord_child_x = child.left - parent.left
+                    console.log(child)
+                    console.log('Coord child: ', cord_child_y, cord_child_x)
+                }
+
             }
         })
     }, [])
