@@ -35,6 +35,8 @@
 
 .stackItem {
     @extend .heading-20-magra-bold;
+    position: absolute;
+
 
     background: $neutral_900;
 

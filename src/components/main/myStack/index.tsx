@@ -10,55 +10,90 @@ import { stack } from '../../../mockData/stack';
 
 
 const MyStack: React.FC = () => {
-    const itemRefs = useRef<(HTMLDivElement | null)[]>([])
+	const wrapperRef = useRef<HTMLDivElement>(null);
+	const itemsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+	useEffect(() => {
+		const wrapper = wrapperRef.current;
+		const items = itemsRef.current;
+
+		if (!items || !wrapper) return;
+
+		items.forEach((item, index) => {
+			if (item) {
+				const x = Math.random() * (wrapper.clientWidth - item.offsetWidth)
+				const y = Math.random() * (wrapper.clientHeight - item.offsetHeight)
+
+				item.style.left = `${x}px`;
+				item.style.top = `${y}px`;
+
+				var attempts = 0
+				const maxAttempts = 200
+				var placed = false
+				while (!placed && attempts < maxAttempts) {
+					if (attempts > 50) {
+						placed = true
+					}
+
+					// Определение пересечения
+					items.forEach((otherItem, index) => {
+						const rect1 = item.getBoundingClientRect()
+						const rect2 = otherItem?.getBoundingClientRect()
+
+						if (rect2) {
+							var collision = false
+
+							rect1.left < rect2.right &&
+							rect1.right > rect2.left &&
+							rect1.top < rect2.bottom &&
+							rect1.bottom > rect2.top
+
+							if (
+								rect1.left < rect2.right
+								rect2.right > rect
+							) {
+
+							}
+						}
+							
+						
+
+						
+					})
+
+					
 
 
-    useEffect(() => {
-        itemRefs.current.forEach((ref, index) => {
-            if (ref) {
-                console.log('Parent: ', ref.parentElement?.getBoundingClientRect().top, ref.parentElement?.getBoundingClientRect().left)
-                console.log('Child: ', ref.getBoundingClientRect().top, ref.getBoundingClientRect().left)
+					attempts++;
+				}
+			}
 
-                const child = ref.getBoundingClientRect()
-                const parent = ref.parentElement?.getBoundingClientRect()
+		});
 
-                if (parent) {
-                    const cord_child_y = child.top - parent.top
-                    const cord_child_x = child.left - parent.left
-                    console.log(child)
-                    console.log('Coord child: ', cord_child_y, cord_child_x)
-                }
-
-            }
-        })
-    }, [])
+	}, []);
 
 
-    return (
-        <section className="myStack container">
-            <h2 className="heading-24-magra-bold whiteText sectionTitle">MY STACK</h2>
 
-            <img className="stackHandBg" src={hand} alt="" aria-hidden="true" />
+	return (
+		<section className="myStack container">
+			<h2 className="heading-24-magra-bold whiteText sectionTitle">MY STACK</h2>
+			<img className="stackHandBg" src={hand} alt="" aria-hidden="true" />
 
-
-            <div className="stackWrapper">
-                {
-                    stack.map((item, index) => {
-                        return (
-                            <div 
-                                key={item.id} 
-                                className="stackItem whiteText shadow-xl"
-                                ref={(el) => {itemRefs.current[index] = el}}
-                            >
-                                {item.name}
-                            </div>
-                        )
-                    })
-                }
-            </div>
-            
-        </section>        
-    )
-}
+			<div className="stackWrapper" ref={wrapperRef}>
+				{stack.map((item, index) => (
+					<div
+						key={item.id}
+						className="stackItem whiteText shadow-xl"
+						ref={(el) => {
+							itemsRef.current[index] = el
+						}}
+					>
+						{item.name}
+					</div>
+				))}
+			</div>
+		</section> // Переписать самостоятельно
+	);
+};
 
 export default MyStack;
