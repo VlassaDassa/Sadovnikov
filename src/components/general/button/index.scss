@@ -1,0 +1,103 @@
+@use './../../../assets/styles/tokens/typography';
+
+
+.decorBtn {
+    position: relative;
+}
+
+.decorBtn--aboutMe {
+    margin-top: 30px;
+}
+
+.img_big {
+    width: 100%;
+};
+
+.img_medium {
+    width: 100%;
+};
+
+.img_small {
+    width: 100%;
+};
+
+
+
+.textDecorBtn {
+    width: 100%;
+
+    position: absolute;
+    text-align: center;
+
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+};
+
+.textDecorBtn_big {
+    @extend .heading-36-magra-bold;
+};
+
+.textDecorBtn_medium {
+    @extend .heading-24-magra-bold;
+};
+
+.textDecorBtn_small {
+   @extend .body-16-magra-bold;
+};
+
+    
+
+
+.decorBtnIcon {
+    position: absolute;
+}
+
+.decorBtnIcon_big {
+    width: 194px;
+}
+
+.decorBtnIcon_medium {
+    width: 120px;
+}
+
+.decorBtnIcon_small {
+    width: 54px;
+}
+
+.decorBtnIcon_withIcon {
+    display: block;
+}
+
+.decorBtn_noIcon,
+.decorBtnIconPosition_loading,
+.decorBtnIconPosition_disabled {
+    display: none;
+}
+
+.decorBtnIconPosition_loading {
+    bottom: 0; 
+    right: 0;
+}
+
+
+
+.decorBtnIconPosition_hover {
+    display: none;
+    
+    @media (min-width: 768px) {
+        top: -30px;
+        right: 40%;
+
+        transform: rotate(-90deg);
+    }
+}
+
+.decorBtnIconPosition_default {
+    display: none;
+
+    @media (min-width: 768px) {
+        bottom: 0;
+        right: 0;
+    }
+}

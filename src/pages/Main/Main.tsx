@@ -6,6 +6,7 @@ import Header from '../../components/general/header';
 import Preview from '../../components/preview';
 import Skills from '../../components/skills';
 import MyStack from '../../components/main/myStack';
+import AboutMe from '../../components/main/aboutMe';
 
 
 const Main: React.FC = () => {
@@ -15,6 +16,7 @@ const Main: React.FC = () => {
             <Preview />
             <Skills />
             <MyStack />
+            <AboutMe />
         </>
        
     )
