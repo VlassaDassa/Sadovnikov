@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import Button from '../../general/button';
 
@@ -11,18 +11,6 @@ import './index.scss';
 
 
 const AboutMe: React.FC<Breakpoint> = ({ breakpoint }) => {
-    const [btnText, setBtnText] = useState<string>('MY LONG STORY, VERY VERY LONG, IF YOU INTERESTED')
-    
-    useEffect(() => {
-        if (breakpoint === 'mobile') {
-            setBtnText('MY LONG STORY, IF YOU INTERESTED')
-        }
-        else {
-            setBtnText('MY LONG STORY, VERY VERY LONG, IF YOU INTERESTED')
-        }
-    }, [breakpoint])
-
-    
 
     return (
         <section className="aboutMe container">
@@ -56,12 +44,16 @@ const AboutMe: React.FC<Breakpoint> = ({ breakpoint }) => {
             </div>
 
             <Button 
-                decorativeVariant='big' 
-                text={btnText}
-                behaivor='disabled'
+                decorativeVariant='medium' 
+                behaivor='default'
                 iconPosition='withIcon'
-                size='small'
                 breakpoint={{ breakpoint }}
+                text='Button'
+                // decorativeBtnText={{
+                //     default: 'MY LONG STORY, VERY VERY LONG, IF YOU INTERESTED',
+                //     alter: 'MY LONG STORY, IF YOU INTERESTED'
+                // }}
+
             />
 
         </section>
