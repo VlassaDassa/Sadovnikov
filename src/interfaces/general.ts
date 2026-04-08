@@ -6,3 +6,10 @@ export interface DecorativeText {
     default: string,
     alter: string
 }
+
+export interface IconItem {
+    strokeColor: string,
+    fillColor: string,
+    iconClass?: string,
+    size?: number,
+}

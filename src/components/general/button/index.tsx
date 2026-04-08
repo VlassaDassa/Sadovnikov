@@ -14,15 +14,16 @@ import './index.scss';
 
 interface ButtonProps {
     size?: 'big' | 'medium' | 'small';
-    behaivor?: 'default' | 'loading' | 'disabled';
+    behaivor: 'default' | 'loading' | 'disabled';
     iconPosition?: 'noIcon' | 'leftIcon' | 'rightIcon' | 'only' | 'withIcon';
     
     variant?: 'primary' | 'secondary';
     decorativeVariant?: 'big' | 'medium' | 'small';
     decorativeBtnText?: DecorativeText,
+    additionalClass?: string,
 
     text?: string;
-    icon?: React.ReactNode;
+    icon?: string;
     onClick?: () => void;
     breakpoint: Breakpoint
 };
@@ -37,6 +38,7 @@ const Button: React.FC<ButtonProps> = ({
         
         text,
         decorativeVariant,
+        additionalClass,
         icon,
         onClick,
         
@@ -88,7 +90,7 @@ const Button: React.FC<ButtonProps> = ({
     // Декоративная кнопка
     if (decorativeVariant) {
         return (
-            <div className={`decorBtn decorBtn-aboutMe decorBtn_${behaivor} decorBtn-${decorativeVariant}`}>
+            <div className={`decorBtn decorBtn-aboutMe decorBtn_${behaivor} decorBtn-${decorativeVariant} ${additionalClass}`}>
                 <img 
                     role='button' 
                     className={
@@ -106,7 +108,6 @@ const Button: React.FC<ButtonProps> = ({
                     :
                         <p className={`whiteText textDecorBtn textDecorBtn-${decorativeVariant} textDecorBtn-${decorativeVariant}-${currentSize}`}>{curText}</p>
                 }
-
                 {
                     decorativeVariant === 'big' ?
                         <>
@@ -127,7 +128,6 @@ const Button: React.FC<ButtonProps> = ({
                         </>
                     :
                         null 
-
                 }
             </div>
         )
@@ -136,7 +136,31 @@ const Button: React.FC<ButtonProps> = ({
 
     // Обычная кнопка
     return (
-        <button className="button">Button</button>
+        <button 
+            className={`
+                button 
+                button-${currentSize} 
+                button-${behaivor} 
+                button-${variant} 
+                radius-10
+            `}
+        >
+            <p 
+                className={`
+                    buttonText 
+                    buttonText-${currentSize} 
+                    buttonText-${variant}
+                `}
+            >
+                {text}
+            </p>
+            <img 
+                src={icon} 
+                alt=""
+                aria-hidden="true"
+                className={``}
+            />
+        </button>
     )
 
     

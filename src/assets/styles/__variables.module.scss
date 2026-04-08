@@ -1,0 +1,41 @@
+@use './../../assets/styles/tokens/colors' as color;
+
+
+:export {
+    white: color.$white;
+    black: color.$black;
+
+    neutral_900: color.$neutral_900;
+    neutral_800: color.$neutral_800;
+    neutral_700: color.$neutral_700;
+    neutral_600: color.$neutral_600;
+    neutral_500: color.$neutral_500;
+    neutral_400: color.$neutral_400;
+    neutral_300: color.$neutral_300;
+    neutral_200: color.$neutral_200;
+    neutral_100: color.$neutral_100;
+    neutral_50: color.$neutral_50;
+
+    brand_900: color.$brand_900;
+    brand_800: color.$brand_800;
+    brand_700: color.$brand_700;
+    brand_600: color.$brand_600;
+    brand_500: color.$brand_500;
+    brand_400: color.$brand_400;
+    brand_300: color.$brand_300;
+    brand_200: color.$brand_200;
+    brand_100: color.$brand_100;
+    brand_50: color.$brand_50;
+
+    error_600: color.$error_600;
+    error_400: color.$error_400;
+    error_50: color.$error_50;
+
+    warning_600:color.$warning_600;
+    warning_400:color.$warning_400;
+    warning_50:color.$warning_50;
+
+    info_600: color.$info_600;
+    info_400: color.$info_400;
+    info_50: color.$info_50;
+}
