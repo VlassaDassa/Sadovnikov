@@ -20,7 +20,8 @@
 
     &:hover {
         .decorBgBtn-big-default,
-        .decorBgBtn-medium-default {
+        .decorBgBtn-medium-default,
+        .decorBgBtn-small-default {
             @media (min-width: 768px) {
                 transition: filter ease-in-out .2s;
                 filter: brightness(3);
@@ -105,6 +106,23 @@
 
 
 
+.decorBgBtn-small-big {
+    width: 105px;
+    height: 57px;
+};
+
+.decorBgBtn-small-medium {
+    width: 73px;
+    height: 40px;
+};
+
+.decorBgBtn-small-small {
+    width: 55px;
+    height: 30px;
+};
+
+
+
 .textDecorBtn {
     width: 100%;
 
@@ -150,6 +168,21 @@
 .textDecorBtn-medium-small {
    @extend .body-20-magra-bold;
 };
+
+
+
+.textDecorBtn-small-big {
+    @extend .body-20-mont-regular;
+};
+
+.textDecorBtn-small-medium {
+    @extend .body-16-mont-regular;
+};
+
+.textDecorBtn-small-small {
+   @extend .body-14-mont-regular;
+};
+
 
     
 
@@ -237,8 +270,7 @@
 
 
 .decorBtn-medium {
-    .btnLoader_big, 
-    .btnLoader_medium {
+    .btnLoader_big {
         width: 44px;
         height: 44px;
     }
@@ -250,9 +282,20 @@
 }
 
 
+.decorBtn-small {
+    .btnLoader_big, 
+    .btnLoader_medium,
+    .btnLoader_small {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+
 
 .decorBgBtn-big-loading,
-.decorBgBtn-medium-loading {
+.decorBgBtn-medium-loading,
+.decorBgBtn-small-loading {
     filter: brightness(3);
 }
 
