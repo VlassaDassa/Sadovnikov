@@ -331,7 +331,33 @@
 .button {
     border-radius: 10px;
 
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+    
+    @media (min-width: 768px) {
+        column-gap: 10px;
+    }
+
+    &.button-rightIcon {
+        .icon-btn {
+            order: 2;
+        }
+    
+        .buttonText {
+            order: 1;
+        }
+    }
+
+    &.button-leftIcon {
+        .icon-btn {
+            order: 1;
+        }
+    
+        .buttonText {
+            order: 2;
+        }
+    }
 }
 
 

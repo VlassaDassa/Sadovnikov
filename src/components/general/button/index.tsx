@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import Icon from '../../icons/Icon';
+
 import bigBgBtn from './../../../assets/images/button/bg_big_btn.png';
 import mediumBgBtn from './../../../assets/images/button/bg_medium_btn.png';
 import smallBgBtn from './../../../assets/images/button/bg_small_btn.png';
@@ -9,7 +11,7 @@ import loader from './../../../assets/images/icons/loader.svg';
 import type { Breakpoint, DecorativeText } from '../../../interfaces/general';
 
 import './index.scss';
-
+import cssVars from './../../../assets/styles/__variables.module.scss';
 
 
 interface ButtonProps {
@@ -142,24 +144,37 @@ const Button: React.FC<ButtonProps> = ({
                 button-${currentSize} 
                 button-${behaivor} 
                 button-${variant} 
+                button-${iconPosition}
                 radius-10
             `}
         >
-            <p 
-                className={`
-                    buttonText 
-                    buttonText-${currentSize} 
-                    buttonText-${variant}
-                `}
-            >
-                {text}
-            </p>
-            <img 
-                src={icon} 
-                alt=""
-                aria-hidden="true"
-                className={``}
-            />
+            {
+                iconPosition != 'only' ?
+                <p 
+                    className={`
+                        buttonText 
+                        buttonText-${currentSize} 
+                        buttonText-${variant}
+                    `}
+                >
+                    {text}
+                </p>
+                : null
+            }
+
+            {
+                iconPosition != 'noIcon' ?
+                <Icon 
+                    name='trash'
+                    strokeColor={cssVars.white}
+                    fillColor='none'
+                    size={24}
+                    iconClass='icon-btn'
+                />
+                : null
+
+            }
+            
         </button>
     )
 

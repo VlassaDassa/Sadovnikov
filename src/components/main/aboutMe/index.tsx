@@ -1,14 +1,12 @@
 import React from 'react';
 
 import Button from '../../general/button';
-import Icon from '../../icons/Icon';
 
 import { aboutMe } from '../../../mockData/aboutMe';
 
 import type { Breakpoint } from '../../../interfaces/general';
 
 import './index.scss';
-import cssVars from './../../../assets/styles/__variables.module.scss';
 
 
 
@@ -59,19 +57,13 @@ const AboutMe: React.FC<Breakpoint> = ({ breakpoint }) => {
 
             <Button 
                 behaivor='default'
-                iconPosition='withIcon'
+                iconPosition='only'
                 variant='primary'
-                text='button'
+                text='Delete'
                 breakpoint={{ breakpoint }}
             />
             
-            <Icon 
-                name='trash'
-                strokeColor={cssVars.white}
-                fillColor='none'
-                size={24}
-                iconClass='icon'
-            />
+            
 
         </section>
     )
