@@ -88,7 +88,7 @@ const Button: React.FC<ButtonProps> = ({
     // Декоративная кнопка
     if (decorativeVariant) {
         return (
-            <div className={`decorBtn decorBtn-aboutMe decorBtn_${behaivor}`}>
+            <div className={`decorBtn decorBtn-aboutMe decorBtn_${behaivor} decorBtn-${decorativeVariant}`}>
                 <img 
                     role='button' 
                     className={
@@ -104,7 +104,7 @@ const Button: React.FC<ButtonProps> = ({
                     behaivor == 'loading' ? 
                         <img src={loader} alt="Loading..." className={`btnLoader btnLoader_${currentSize}`} />
                     :
-                        <p className={`whiteText textDecorBtn textDecorBtn-${decorativeVariant}-${currentSize}`}>{curText}</p>
+                        <p className={`whiteText textDecorBtn textDecorBtn-${decorativeVariant} textDecorBtn-${decorativeVariant}-${currentSize}`}>{curText}</p>
                 }
 
                 {

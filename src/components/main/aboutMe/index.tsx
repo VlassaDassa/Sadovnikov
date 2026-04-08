@@ -44,8 +44,8 @@ const AboutMe: React.FC<Breakpoint> = ({ breakpoint }) => {
             </div>
 
             <Button 
-                decorativeVariant='medium' 
-                behaivor='default'
+                decorativeVariant='small' 
+                behaivor='loading'
                 iconPosition='withIcon'
                 breakpoint={{ breakpoint }}
                 text='Button'
