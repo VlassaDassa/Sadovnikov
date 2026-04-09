@@ -8,8 +8,8 @@ export interface DecorativeText {
 }
 
 export interface IconItem {
-    strokeColor: string,
-    fillColor: string,
+    strokeColor?: string,
+    fillColor?: string,
     iconClass?: string,
     size?: number,
 }

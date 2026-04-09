@@ -49,6 +49,9 @@ const Button: React.FC<ButtonProps> = ({
     const [currentSize, setCurrentSize] = useState<string>(size)
     const [btnBg, setBtnBg] = useState<string>(bigBgBtn)
     const [curText, setCurText] = useState<string>()
+    const [curSizeIcon, setCurSizeIcon] = useState<number>()
+    const [iconColor, setIconColor] = useState<string>(cssVars.white)
+    const [decSizeLoader, setDecSizeLoader] = useState<number>(24)
     
     // Определение текста
     const defineTextBtn = () => {
@@ -82,11 +85,69 @@ const Button: React.FC<ButtonProps> = ({
         else setCurrentSize('small');  
     };
 
+    // Определение размера иконки
+    const defineSizeIcon = () => {
+        if (iconPosition == 'only') {
+            if (breakpoint.breakpoint === 'desktop') {
+                setCurSizeIcon(32)
+                return
+            }
+        }
+        setCurSizeIcon(24)
+    }
+
+    // Определение размера декоративного Loader
+    const defineDecorSizeLoader = () => {
+        if (decorativeVariant === 'big') {
+            // Размер для большого варианта
+            if (currentSize === 'big') {
+                setDecSizeLoader(64)
+            }
+            else if (currentSize === 'medium') {
+                setDecSizeLoader(44)
+            }
+            else {
+                setDecSizeLoader(24)
+            }
+        }
+
+        else if (decorativeVariant === 'medium') {
+            // Размер для среднего варианта
+            if (currentSize === 'big') {
+                setDecSizeLoader(44)
+            }
+            else {
+                setDecSizeLoader(24)
+            }
+        }
+
+        else {
+            setCurSizeIcon(24)
+        }
+    }
+
+    // Определение цвета иконки
+    const defineIconColor = () => {
+        if (variant == 'primary') {
+            setIconColor(cssVars.white)
+        }
+        else {
+            setIconColor(cssVars.neutral_900)
+        }
+    }
+
     useEffect(() => {
         defineSize(breakpoint)
         defineBgImg()
         defineTextBtn()
+        defineSizeIcon()
+        defineIconColor()
     }, [breakpoint])
+
+    
+    useEffect(() => {
+        defineDecorSizeLoader()
+    }, [currentSize, decorativeVariant])
 
     
     // Декоративная кнопка
@@ -106,7 +167,12 @@ const Button: React.FC<ButtonProps> = ({
                 />
                 {
                     behaivor == 'loading' ? 
-                        <img src={loader} alt="Loading..." className={`btnLoader btnLoader_${currentSize}`} />
+                        <Icon 
+                            name='loader'
+                            strokeColor={iconColor}
+                            iconClass='btnLoader'
+                            size={decSizeLoader}
+                        />
                     :
                         <p className={`whiteText textDecorBtn textDecorBtn-${decorativeVariant} textDecorBtn-${decorativeVariant}-${currentSize}`}>{curText}</p>
                 }
@@ -144,12 +210,13 @@ const Button: React.FC<ButtonProps> = ({
                 button-${currentSize} 
                 button-${behaivor} 
                 button-${variant} 
-                button-${iconPosition}
-                radius-10
+                button-${iconPosition}-${currentSize} 
+                button-${iconPosition} 
+                radius-10 
             `}
         >
             {
-                iconPosition != 'only' ?
+                iconPosition != 'only' && behaivor != 'loading' ? 
                 <p 
                     className={`
                         buttonText 
@@ -163,13 +230,25 @@ const Button: React.FC<ButtonProps> = ({
             }
 
             {
-                iconPosition != 'noIcon' ?
+                iconPosition != 'noIcon' && behaivor != 'loading' ?
                 <Icon 
                     name='trash'
-                    strokeColor={cssVars.white}
+                    strokeColor={iconColor}
                     fillColor='none'
-                    size={24}
                     iconClass='icon-btn'
+                    size={curSizeIcon}
+                />
+                : null
+
+            }
+
+            {
+                behaivor == 'loading' ?
+                <Icon 
+                    name='loader'
+                    strokeColor={iconColor}
+                    iconClass='icon-btn icon-btn-loader'
+                    size={curSizeIcon}
                 />
                 : null
 

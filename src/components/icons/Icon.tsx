@@ -2,27 +2,29 @@ import React from "react";
 
 import IconBell from "./IconBell";
 import IconTrash from "./IconTrash";
+import IconLoader from "./IconLoader";
 
 
 const icons = {
     bell: IconBell,
     trash: IconTrash,
+    loader: IconLoader,
 }
 
 
 interface IconProps {
     name: keyof typeof icons;
-    strokeColor: string;
-    fillColor: string;
+    strokeColor?: string;
+    fillColor?: string;
     iconClass: string;
-    size: number;
+    size?: number;
 }
 
 
 const Icon: React.FC<IconProps> = ({ name, strokeColor, fillColor, iconClass, size=24 }) => {
     const Component = icons[name]
     return <Component
-         strokeColor={strokeColor} 
+        strokeColor={strokeColor} 
         fillColor={fillColor}
         iconClass={iconClass} 
         size={size} 

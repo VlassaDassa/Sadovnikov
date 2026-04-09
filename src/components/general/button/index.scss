@@ -254,44 +254,6 @@
     }
 }
 
-.btnLoader_big {
-    width: 64px;
-    height: 64px;
-}
-
-.btnLoader_medium {
-    width: 44px;
-    height: 44px;
-}
-
-.btnLoader_small {
-    width: 24px;
-    height: 24px;
-}
-
-
-.decorBtn-medium {
-    .btnLoader_big {
-        width: 44px;
-        height: 44px;
-    }
-
-    .btnLoader_medium {
-        width: 24px;
-        height: 24px;
-    }
-}
-
-
-.decorBtn-small {
-    .btnLoader_big, 
-    .btnLoader_medium,
-    .btnLoader_small {
-        width: 24px;
-        height: 24px;
-    }
-}
-
 
 
 .decorBgBtn-big-loading,
@@ -334,10 +296,6 @@
     display: flex;
     align-items: center;
     column-gap: 5px;
-    
-    @media (min-width: 768px) {
-        column-gap: 10px;
-    }
 
     &.button-rightIcon {
         .icon-btn {
@@ -358,6 +316,17 @@
             order: 2;
         }
     }
+
+     @media (min-width: 768px) {
+        column-gap: 10px;
+    }
+}
+
+
+.button-disabled {
+    pointer-events: none;
+    opacity: 0.7;
+    cursor: not-allowed;
 }
 
 
@@ -373,6 +342,17 @@
 .button-small {
     padding: 10px 30px;
 }
+
+.button-only-big {
+    padding: 10px;
+}
+
+.button-only-medium,
+.button-only-small {
+    padding: 5px;
+}
+
+
 
 
 .buttonText-big {
@@ -399,7 +379,53 @@
 
 .button-primary {
     background-color: $brand_900;
+    transition: all ease-in-out 0.3s, transform ease 0.3s;
+
+    @media (min-width: 768px) {
+        &:hover {
+            background-color: $brand_600;
+        }
+    }
+
+    &:active {
+        transform: scale(0.95);
+        background-color: $brand_400;
+    }
 }
+
+
+.button-secondary {
+    background-color: $neutral_50;
+    transition: all ease-in-out 0.3s, transform ease 0.3s;
+
+    @media (min-width: 768px) {
+        &:hover {
+            background-color: $neutral_200;
+        }
+    }
+
+    &:active {
+        transform: scale(0.95);
+        background-color: $neutral_400;
+    }
+}
+
+
+.icon-btn-loader {
+    animation: default_spin 0.6s ease-in-out infinite;
+
+    @keyframes default_spin {
+        from {
+            transform: rotate(0);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
+    }
+}
+
+
 
 
 

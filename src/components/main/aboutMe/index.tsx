@@ -53,18 +53,6 @@ const AboutMe: React.FC<Breakpoint> = ({ breakpoint }) => {
                     alter: 'MY LONG STORY, IF YOU INTERESTED'
                 }}
             />
-
-
-            <Button 
-                behaivor='default'
-                iconPosition='only'
-                variant='primary'
-                text='Delete'
-                breakpoint={{ breakpoint }}
-            />
-            
-            
-
         </section>
     )
 }
