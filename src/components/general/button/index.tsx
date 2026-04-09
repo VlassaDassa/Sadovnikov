@@ -6,7 +6,6 @@ import bigBgBtn from './../../../assets/images/button/bg_big_btn.png';
 import mediumBgBtn from './../../../assets/images/button/bg_medium_btn.png';
 import smallBgBtn from './../../../assets/images/button/bg_small_btn.png';
 import indexFinger from './../../../assets/images/main/index_finger.png';
-import loader from './../../../assets/images/icons/loader.svg';
 
 import type { Breakpoint, DecorativeText } from '../../../interfaces/general';
 
@@ -21,13 +20,14 @@ interface ButtonProps {
     
     variant?: 'primary' | 'secondary';
     decorativeVariant?: 'big' | 'medium' | 'small';
-    decorativeBtnText?: DecorativeText,
-    additionalClass?: string,
+    decorativeBtnText?: DecorativeText;
+    additionalClass?: string;
 
     text?: string;
+    tooltipText?: string;
     icon?: string;
     onClick?: () => void;
-    breakpoint: Breakpoint
+    breakpoint: Breakpoint;
 };
 
 
@@ -41,7 +41,8 @@ const Button: React.FC<ButtonProps> = ({
         text,
         decorativeVariant,
         additionalClass,
-        icon,
+        icon='loader',
+        tooltipText,
         onClick,
         
         breakpoint
@@ -232,7 +233,7 @@ const Button: React.FC<ButtonProps> = ({
             {
                 iconPosition != 'noIcon' && behaivor != 'loading' ?
                 <Icon 
-                    name='trash'
+                    name={icon}
                     strokeColor={iconColor}
                     fillColor='none'
                     iconClass='icon-btn'
@@ -253,11 +254,16 @@ const Button: React.FC<ButtonProps> = ({
                 : null
 
             }
-            
+
+            {
+                iconPosition == 'only' && tooltipText ?
+                    <p className="shadow-xl radius-4 tooltip whiteText">{tooltipText}</p>
+                :
+                    null
+            }
         </button>
     )
-
-    
 }
+
 
 export default Button;

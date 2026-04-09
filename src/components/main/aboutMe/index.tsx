@@ -53,6 +53,18 @@ const AboutMe: React.FC<Breakpoint> = ({ breakpoint }) => {
                     alter: 'MY LONG STORY, IF YOU INTERESTED'
                 }}
             />
+
+            <Button 
+                behaivor='default'
+                iconPosition='only'
+                variant='primary'
+                text='Delete'
+                icon='bell'
+                tooltipText='Tooltip'
+                breakpoint={{ breakpoint }}
+            /> 
+            
+            {/* Разнести Button по файлам */}
         </section>
     )
 }

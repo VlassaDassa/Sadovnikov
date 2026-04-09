@@ -13,7 +13,7 @@ const icons = {
 
 
 interface IconProps {
-    name: keyof typeof icons;
+    name: string;
     strokeColor?: string;
     fillColor?: string;
     iconClass: string;
@@ -22,11 +22,11 @@ interface IconProps {
 
 
 const Icon: React.FC<IconProps> = ({ name, strokeColor, fillColor, iconClass, size=24 }) => {
-    const Component = icons[name]
+    const Component = icons[name as keyof typeof icons]
     return <Component
         strokeColor={strokeColor} 
         fillColor={fillColor}
-        iconClass={iconClass} 
+        iconClass={`${iconClass} ${name == 'loader' ? 'icon-btn-loader' : null}`} 
         size={size} 
     />
 } 
