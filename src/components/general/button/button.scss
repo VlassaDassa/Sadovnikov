@@ -1,0 +1,171 @@
+@use './../../../assets/styles/tokens/typography' as *;
+@use './../../../assets/styles/tokens/effects' as *;
+@use './../../../assets/styles/tokens/colors' as *;
+
+
+// Default button
+.button {
+    position: relative;
+
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+
+    &.button-rightIcon {
+        .icon-btn {
+            order: 2;
+        }
+    
+        .buttonText {
+            order: 1;
+        }
+    }
+
+    &.button-leftIcon {
+        .icon-btn {
+            order: 1;
+        }
+    
+        .buttonText {
+            order: 2;
+        }
+    }
+
+     @media (min-width: 768px) {
+        column-gap: 10px;
+    }
+}
+
+
+.button-disabled {
+    pointer-events: none;
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+
+
+.button-big {
+    padding: 20px 50px;
+}
+
+.button-medium {
+    padding: 13px 40px;
+}
+
+.button-small {
+    padding: 10px 30px;
+}
+
+.button-only-big {
+    padding: 10px;
+}
+
+.button-only-medium,
+.button-only-small {
+    padding: 5px;
+}
+
+
+
+
+.buttonText-big {
+    @extend .heading-24-magra-bold;
+}
+
+.buttonText-medium {
+    @extend .heading-20-magra-bold;
+}
+
+.buttonText-small {
+    @extend .body-16-magra-bold;
+}
+
+
+.buttonText-primary {
+    color: $white;
+}
+
+.buttonText-secondary {
+    color: $neutral_900;
+}
+
+
+.button-primary {
+    background-color: $brand_900;
+    transition: all ease-in-out 0.3s, transform ease 0.3s;
+
+    @media (min-width: 768px) {
+        &:hover {
+            background-color: $brand_600;
+        }
+    }
+
+    &:active {
+        transform: scale(0.95);
+        background-color: $brand_400;
+    }
+}
+
+
+.button-secondary {
+    background-color: $neutral_50;
+    transition: all ease-in-out 0.3s, transform ease 0.3s;
+
+    @media (min-width: 768px) {
+        &:hover {
+            background-color: $neutral_200;
+        }
+    }
+
+    &:active {
+        transform: scale(0.95);
+        background-color: $neutral_400;
+    }
+}
+
+
+.icon-btn-loader {
+    animation: default_spin 0.6s ease-in-out infinite;
+
+    @keyframes default_spin {
+        from {
+            transform: rotate(0);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
+    }
+}
+
+
+.tooltip {
+    position: absolute;
+    bottom: -30px;
+    right: -70px;
+    
+    padding: 10px;
+    
+    background-color: $neutral_900;
+
+    @extend .body-16-mont-regular;
+
+    pointer-events: none;
+
+    opacity: 0;
+            transition: opacity 0.1s ease-in-out;
+}
+
+
+.button-only {
+    @media (min-width: 768px) {
+        &:hover {
+            .tooltip {
+                opacity: 1;
+            }
+        }
+    }
+}

@@ -14,7 +14,7 @@ import './index.scss'
 
 
 const Main: React.FC = () => {
-    const { breakpoint } = useBreakpoint()
+    const breakpoint = useBreakpoint()
 
     return (
         <>

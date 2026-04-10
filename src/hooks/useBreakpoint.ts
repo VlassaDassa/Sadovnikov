@@ -5,7 +5,7 @@ import type { Breakpoint } from '../interfaces/general';
 
 
 export const useBreakpoint = (): Breakpoint => {
-    const [breakpoint, setBreakpoint] = useState<Breakpoint['breakpoint']>('mobile');
+    const [breakpoint, setBreakpoint] = useState<Breakpoint>('mobile');
 
     useEffect(() => {
         const updateBreakpoint = () => {
@@ -25,5 +25,5 @@ export const useBreakpoint = (): Breakpoint => {
         return () => window.removeEventListener('resize', updateBreakpoint)
     }, [])
 
-    return { breakpoint }
+    return breakpoint
 }

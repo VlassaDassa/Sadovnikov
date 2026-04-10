@@ -26,7 +26,7 @@ const Icon: React.FC<IconProps> = ({ name, strokeColor, fillColor, iconClass, si
     return <Component
         strokeColor={strokeColor} 
         fillColor={fillColor}
-        iconClass={`${iconClass} ${name == 'loader' ? 'icon-btn-loader' : null}`} 
+        iconClass={`${iconClass} ${name === 'loader' ? 'icon-btn-loader' : null}`} 
         size={size} 
     />
 } 
