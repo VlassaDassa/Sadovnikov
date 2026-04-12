@@ -1,8 +1,8 @@
 import React from 'react';
 
-import avatarFrame from './../../assets/images/main/avatar_frame.png';
-import avatar from './../../assets/images/main/avatar.png';
-import bgAvatar from './../../assets/images/main/bg_avatar.png';
+import avatarFrame from './../../../assets/images/main/avatar_frame.png';
+import avatar from './../../../assets/images/main/avatar.png';
+import bgAvatar from './../../../assets/images/main/bg_avatar.png';
 
 
 import './index.scss';

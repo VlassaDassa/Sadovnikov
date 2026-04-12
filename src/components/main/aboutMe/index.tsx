@@ -52,23 +52,12 @@ const AboutMe: React.FC<AboutMeProps> = ({ breakpoint }) => {
                 behavior='default'
                 variant='big'
                 text={{
-                    default: 'Button',
-                    alter: 'btn',
+                    default: 'MY LONG STORY, VERY VERY LONG, IF YOU INTERESTED',
+                    alter: 'MY LONG STORY, IF YOU INTERESTED',
                 }}
                 additionalClass='aboutMe'
                 breakpoint={breakpoint}
             />
-
-            <Button 
-                behavior='default'
-                iconPosition='only'
-                variant='primary'
-                text='Sadovnikov'
-                icon='trash'
-                tooltipText='Trash'
-                breakpoint={breakpoint}
-            />
-
             
         </section>
     )

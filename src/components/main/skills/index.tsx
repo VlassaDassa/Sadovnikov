@@ -1,14 +1,14 @@
 import React from 'react';
 
-import vertex from './../../assets/images/main/vertex.svg';
-import vertexSelected from './../../assets/images/main/vertex_selected.svg';
-import cursor from './../../assets/images/main/cursor.svg';
+import vertex from './../../../assets/images/main/vertex.svg';
+import vertexSelected from './../../../assets/images/main/vertex_selected.svg';
+import cursor from './../../../assets/images/main/cursor.svg';
 
 import './index.scss';
 
-import TalkingAvatar from '../main/talkingAvatar';
-import { skills } from '../../mockData/skills';
-import type { Skill } from '../../mockData/skills';
+import TalkingAvatar from './../../main/talkingAvatar';
+import { skills } from './../.././../mockData/skills';
+import type { Skill } from './../../../mockData/skills';
 
 
 
