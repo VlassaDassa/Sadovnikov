@@ -2,8 +2,11 @@ import React from 'react';
 
 import Canvas from '../canvas';
 import Slider from '../slider';
+import ProjectItem from '../projectItem';
 
 import type { Breakpoint } from '../../../interfaces/general';
+
+import { projects } from '../../../mockData/projects';
 
 import './index.scss';
 
@@ -16,9 +19,15 @@ const Portfolio: React.FC<PortfolioProps> = ({ breakpoint }) => {
 
     const portfolioContent = (
         breakpoint === 'mobile' ? 
-            <Slider /> 
+            <Slider projects={projects} /> 
             :
-            <Canvas />
+            <Canvas>
+                {
+                    projects.map((project, index) => (
+                        <ProjectItem key={project.id} project={project} />
+                    ))
+                }
+            </Canvas>
     )
 
     return (
@@ -30,5 +39,9 @@ const Portfolio: React.FC<PortfolioProps> = ({ breakpoint }) => {
         </section>
     )
 }
+
+// Сделать ProjectItem нормальным размеров и нормально их разбросать
+// Зарефакторить код, добавив свои токены
+// Поработать над адаптацией
 
 export default Portfolio;

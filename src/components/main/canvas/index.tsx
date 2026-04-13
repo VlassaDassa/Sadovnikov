@@ -2,6 +2,9 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 
 import './index.scss';
 
+
+    
+
 interface CanvasProps {
     children?: React.ReactNode;
     width?: string;
@@ -14,18 +17,17 @@ interface Coord {
     y: number
 }
 
-
 const Canvas: React.FC<CanvasProps> = ({
     children,
     width='100%',
-    height='100%',
+    height='1200px',
     className=''
 }) => {
 
     const [manualShow, setManualShow] = useState<boolean>(true)
     const [scale, setScale] = useState<number>(1)
-    const [renderTrigger, setRenderTrigger] = useState<Coord>(0)
-    const [position, setPostion] = useState<{x: number, y: number}>({
+    const [renderTrigger, setRenderTrigger] = useState<number>(0)
+    const [position, setPosition] = useState<Coord>({
         x: 0,
         y: 0
     })
@@ -82,15 +84,13 @@ const Canvas: React.FC<CanvasProps> = ({
             if (isTargetInsideCanvas && (e.ctrlKey || e.metaKey)) { // <- e.metaKey - это поведение для Mac, где вместо ctrl другая клавиша
                 e.preventDefault();
             }
-
-            window.addEventListener('wheel', handleWheel, { passive: false })
-
-            return () => {
-                window.removeEventListener('wheel', handleWheel)
-            }
         }
 
+        window.addEventListener('wheel', handleWheel, { passive: false })
 
+        return () => {
+            window.removeEventListener('wheel', handleWheel)
+        }
     }, [])
 
 
@@ -117,12 +117,127 @@ const Canvas: React.FC<CanvasProps> = ({
     }
 
 
-    const 
+    // Перемещение canvas
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (!isDragging) return;
+
+        e.preventDefault();
+
+        setPosition({
+            x: e.clientX - dragStart.x,
+            y: e.clientY - dragStart.y
+        })
+    }
+
+
+    // Отмена перемещения
+    const handleMouseUp = () => {
+        setIsDragging(false)
+
+        if (canvasRef.current) {
+            canvasRef.current.style.cursor = spacePressed ? 'grab' : 'default'
+        }
+    }
+
+
+    // Масштабирование, с учётом местоположения курсора
+    const handleWheel = useCallback(
+        (e: React.WheelEvent<HTMLDivElement>) => {
+            if (e.ctrlKey || e.metaKey) {
+                const delta = e.deltaY > 0 ? 0.9 : 1.1 // <- 0.9 и 1.1 <- шаг 
+                const newScale = Math.min(Math.max(scale * delta, 0.1), 5) // <- 0.1 и 0.5 - ограничение(10% и 500%)
+            
+                const rect = canvasRef.current?.getBoundingClientRect();
+                if (!rect) return
+
+                const mouseX = e.clientX - rect.left;
+                const mouseY = e.clientY - rect.top;
+
+                const newPosition = {
+                    x: mouseX - (mouseX - position.x) * (newScale / scale),
+                    y: mouseY - (mouseY - position.y) * (newScale / scale),
+                }
+
+                prevScaleRef.current = scale;
+
+                setPosition(newPosition);
+                setScale(newScale)
+
+
+                // Страховка от артефактов
+                setTimeout(() => {
+                    setRenderTrigger(prev => prev + 1)
+                }, 50)
+            }
+        },
+    [scale, position]
+    )
+
+
+    // Запрет на открытие контекстного меню, при перемещении
+    const handleContextMenu = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (isDragging || spacePressed) {
+            e.preventDefault()
+        }
+    } 
+
+
+    const closeManual = () => {
+        setManualShow(false)
+    }
 
 
     return (
-        <div className="canvas">
-            {children}
+        <div 
+            className={`canvasWrapper ${className}`}
+            style={{ width, height }}
+        >
+            <div
+                ref={canvasRef}
+                className="canvasContainer"
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseUp}
+                onWheel={handleWheel}
+                onContextMenu={handleContextMenu}
+            >
+                <div 
+                    ref={contentRef}
+                    className="canvasContent"
+                    style={{
+                        transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
+                        transformOrigin: '0 0',
+                        backfaceVisibility: 'hidden',
+                        WebkitBackfaceVisibility: 'hidden',
+                    }}
+                    data-render={renderTrigger}
+                >
+                    {children}
+                </div>    
+
+                <div className="zoomInfo">{Math.round(scale * 100)}%</div>
+
+                {manualShow && (
+                    <div className="canvasManual">
+                        <div className="manualElement">
+                            <span className="manualKey">CTRL</span>
+                            <span className="manualText">+</span>
+                            <span className="manualKey">Wheel</span>
+                            <span className="manualText">- scaling</span>
+                        </div>
+
+                        <div className="manualElement">
+                            <span className="manualKey">Space</span>
+                            <span className="manualText">+</span>
+                            <span className="manualKey">Drag</span>
+                            <span className="manualText">- moving across the canvas</span>
+                        </div>
+
+                        <span onClick={closeManual} className="closeManual">×</span>
+                    </div>
+                )}
+            </div>
         </div>
     )
 }

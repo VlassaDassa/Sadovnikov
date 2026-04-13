@@ -11,6 +11,12 @@
     overflow: hidden;
 
     position: relative;
+
+    @media (min-width: 768px) {
+        aspect-ratio: none;
+        width: 500px;
+        height: 650px;
+    }
 }
 
 

@@ -3,15 +3,21 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Pagination } from 'swiper/modules';
 
 import ProjectItem from '../projectItem';
-
-import { projects } from '../../../mockData/projects';
+import type { Project } from '../../../interfaces/general';
 
 import 'swiper/css/effect-coverflow';
 import 'swiper/css';
 import './index.scss';
 
 
-const Slider: React.FC = () => {
+
+interface SliderProps {
+    projects: Project[]
+}
+
+
+
+const Slider: React.FC<SliderProps> = ({ projects }) => {
     const [curIndex, setCurIndex] = useState<number>(1)
     const totalCountItems = projects.length
 
@@ -50,6 +56,7 @@ const Slider: React.FC = () => {
                 {
                     Array.from({ length: totalCountItems }).map((item, index) => (
                         <div 
+                            key={index}
                             className={`
                                 sliderPgnItem 
                                 radius-full 
@@ -63,9 +70,6 @@ const Slider: React.FC = () => {
 
             
         </Swiper>
-
-        
-
     )
 }
 
