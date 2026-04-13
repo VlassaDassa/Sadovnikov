@@ -7,8 +7,6 @@ import './index.scss';
 
 interface CanvasProps {
     children?: React.ReactNode;
-    width?: string;
-    height?: string;
     className?: string;
 }
 
@@ -19,8 +17,6 @@ interface Coord {
 
 const Canvas: React.FC<CanvasProps> = ({
     children,
-    width='100%',
-    height='1200px',
     className=''
 }) => {
 
@@ -190,7 +186,6 @@ const Canvas: React.FC<CanvasProps> = ({
     return (
         <div 
             className={`canvasWrapper ${className}`}
-            style={{ width, height }}
         >
             <div
                 ref={canvasRef}

@@ -6,6 +6,11 @@
     margin-top: 40px;
 }
 
+.swiper-slide-active {
+    transform: unset !important;; 
+
+}
+
 
 .sliderItem {
     width: 240px;

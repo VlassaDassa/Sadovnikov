@@ -1,5 +1,6 @@
 @use './../../../assets/styles/tokens/colors' as *;
 @use './../../../assets/styles/tokens/typography' as *;
+@use './../../../assets/styles/tokens/effects' as *;
 
 
 
@@ -10,9 +11,23 @@
     overflow: hidden;
     border-radius: 4px;
 
-	box-shadow: inset 0px 0px 40px 30px rgba(0, 0, 0, 0.5);
+    @extend .shadow-inner;
 
     margin-top: 100px;
+
+    height: 800px;
+    
+    @media (min-width: 768px) {
+        height: 800px;
+    }
+
+    @media (min-width: 1200px) {
+        height: 1000px;
+    }
+
+    @media (min-width: 1440px) {
+        height: 1200px;
+    }
 }
 
 .canvasContainer {
@@ -21,6 +36,8 @@
     overflow: hidden;
     position: relative;
     user-select: none;
+
+    display: flex;
 }
 
 
@@ -30,31 +47,22 @@
     left: 0;
     min-width: 100%;
     min-height: 100%;
-    will-change: transform;
-    
-    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-        image-rendering: auto;
-    }
 }
 
 .zoomInfo {
     position: absolute;
     bottom: 20px;
     right: 20px;
-    background: linear-gradient(
-        135deg,
-        rgba(46, 46, 46, 0.2) 0%,
-        rgba(255, 255, 255, 0.05) 100%
-    );
-    backdrop-filter: blur(2px);
-    color: white;
+   
     padding: 6px 12px;
-    font-weight: $medium;
-    border-radius: 4px;
-    font-size: 14px;
-    font-family: 'Montserrat';
     pointer-events: none;
-    z-index: 1000;
+
+    @extend .glass;
+    @extend .body-14-mont-medium;
+    @extend .whiteText;
+    @extend .radius-4;
+
+    z-index: 10;
 }
 
 
@@ -67,29 +75,17 @@
     width: 600px;
     height: 200px;
     
-    border-top-right-radius: 25px;
-
-    background: linear-gradient(
-        135deg,
-        rgba(46, 46, 46, 0.2) 0%,
-        rgba(255, 255, 255, 0.05) 100%
-    );
-    
-    backdrop-filter: blur(2px);
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-
-    font-size: 16px;
-    color: white;
-    font-family: 'Montserrat';
-    font-weight: $medium;
+    border-top-right-radius: 24px;
+    @extend .glass;
+    @extend .shadow-lg;
+    @extend .body-16-mont-medium;
+    @extend .whiteText;
 
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
 
     padding-left: 50px;
-
 }
 
 
@@ -97,7 +93,6 @@
     display: flex;
     align-items: center;
     column-gap: 15px;
-
 }
 
 
@@ -121,3 +116,4 @@
 
     cursor: pointer;
 }
+

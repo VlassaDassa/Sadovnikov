@@ -24,7 +24,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ breakpoint }) => {
             <Canvas>
                 {
                     projects.map((project, index) => (
-                        <ProjectItem key={project.id} project={project} />
+                        <ProjectItem key={project.id} project={project} index={index} />
                     ))
                 }
             </Canvas>
@@ -40,8 +40,5 @@ const Portfolio: React.FC<PortfolioProps> = ({ breakpoint }) => {
     )
 }
 
-// Сделать ProjectItem нормальным размеров и нормально их разбросать
-// Зарефакторить код, добавив свои токены
-// Поработать над адаптацией
 
 export default Portfolio;

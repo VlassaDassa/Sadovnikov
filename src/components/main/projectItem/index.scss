@@ -10,12 +10,18 @@
 
     overflow: hidden;
 
-    position: relative;
+    
+    @extend .radius-12;
+
 
     @media (min-width: 768px) {
-        aspect-ratio: none;
-        width: 500px;
-        height: 650px;
+        position: absolute;
+
+        aspect-ratio: none; 
+        width: 500px; 
+        height: 650px; 
+
+        cursor: pointer; 
     }
 }
 
@@ -65,11 +71,16 @@
     }
 }
 
+
 .projectName {
     @extend .body-16-magra-bold;
 
     @media (min-width: 600px)  {
         font-size: 20px;
+    }
+    
+    @media (min-width: 768px) {
+        font-size: 24px;
     }
 }
 
@@ -94,6 +105,7 @@
     background-color: $brand_900;
     
     @extend .body-14-magra-regular;
+    @extend .radius-4;
 
     display: inline-block;
 
@@ -102,8 +114,13 @@
     @media (min-width: 600px)  {
         font-size: 20px;
         padding: 10px;
+    }
 
-        border-radius: 50%;
+     @media (min-width: 768px)  {
+        padding: 20px;
+        border-radius: 10px;
+
+        font-weight: $bold;
     }
 }
 

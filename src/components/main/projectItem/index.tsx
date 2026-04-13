@@ -7,14 +7,15 @@ import './index.scss';
 
 interface ProjectItemProps {
     project: Project,
+    index?: number,
 }
 
 
 
-const ProjectItem: React.FC<ProjectItemProps> = ({ project }) => {
+const ProjectItem: React.FC<ProjectItemProps> = ({ project, index=1 }) => {
 
     return (
-        <div className={`shadow-xl projectItem radius-12`}>
+        <div className={`shadow-xl projectItem`} style={{top: '200px', left: `${600 * index}px` }}>
             <img src={project.img} alt={project.name} className={'projectImg radius-12'} />
             <p className="whiteText projectCategory glass radius-6">{project.category}</p>
 
@@ -27,7 +28,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({ project }) => {
                 <div className="projectStack">
                     {
                         project.stack.map((item, index) => (
-                            <p key={item} className="projectStackItem whiteText radius-4">
+                            <p key={item} className="projectStackItem whiteText">
                                 {item}
                             </p>
                         ))
