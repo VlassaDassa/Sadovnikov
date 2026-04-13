@@ -12,7 +12,6 @@ interface ProjectItemProps {
 
 
 const ProjectItem: React.FC<ProjectItemProps> = ({ project }) => {
-  
 
     return (
         <div className={`shadow-xl projectItem radius-12`}>
@@ -37,12 +36,10 @@ const ProjectItem: React.FC<ProjectItemProps> = ({ project }) => {
                 </div>
             </div>
 
-            
+
         </div>
     )
 } 
-// Статус бар пагинации по слайдеру;
-// Canvas
-// 
+
 
 export default ProjectItem;
