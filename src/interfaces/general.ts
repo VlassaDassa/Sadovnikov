@@ -9,3 +9,13 @@ export interface IconItem {
     iconClass?: string,
     size?: number,
 }
+
+
+export interface Project {
+    id: number,
+    category: string,
+    img: string,
+    name: string,
+    shortDescrition: string,
+    stack: string[]
+}

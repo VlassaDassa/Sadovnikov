@@ -1,7 +1,6 @@
 import React from 'react';
 
 import DecorButton from '../../general/button/DecorButton';
-import Button from '../../general/button/Button';
 
 import { aboutMe } from '../../../mockData/aboutMe';
 

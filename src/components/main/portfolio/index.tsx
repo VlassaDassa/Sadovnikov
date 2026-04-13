@@ -22,7 +22,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ breakpoint }) => {
     )
 
     return (
-        <section className="container portfolio">
+        <section className="portfolio">
             <h2 className="heading-32-magra-bold whiteText sectionTitle">PORTFOLIO</h2>
 
             {portfolioContent}
