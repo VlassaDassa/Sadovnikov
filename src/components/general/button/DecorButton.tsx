@@ -122,7 +122,8 @@ const DecorButton: React.FC<DecorButtonProps> = ({
                 className={
                     `decorBgBtnBig 
                     decorBgBtn-${variant}-${size} 
-                    decorBgBtn-${variant}-${behavior}`
+                    decorBgBtn-${variant}-${behavior}
+                    `
                 } 
                 src={bgBtn} 
                 alt="" 

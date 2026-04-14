@@ -9,7 +9,6 @@
 }
 
 
-
 .input {
     border-bottom: $neutral_600 3px solid;
 
@@ -24,14 +23,17 @@
         color: $neutral_600;
     }
 
-    &:hover {
-        border-bottom: $neutral_400 3px solid;
-        color: $neutral_400;
+    @media (min-width: 1280px) {
+        &:hover {
+            border-bottom: $neutral_400 3px solid;
+            color: $neutral_400;
 
-        .inputIcon {
-            opacity: 1;
+            .inputIcon {
+                opacity: 1;
+            }
         }
     }
+    
 
     &:focus {
         border-bottom: $neutral_200 3px solid;
@@ -54,7 +56,11 @@
 
 
 .inputWithIcon {
-    padding: 0 50px;
+    padding: 0 40px;
+
+    @media (min-width: 1280px) {
+        padding: 0 50px;
+    }
 }
 
 
@@ -82,8 +88,13 @@
 }
 
 .inputErrorText {
-    @extend .body-16-mont-regular;
+    @extend .body-14-mont-regular;
+    margin-top: 5px;
 
+    @media (min-width: 1280px) {
+        font-size: 16px;
+        margin-top: 15px;
+    }
+    
     color: $error_600;
-    margin-top: 15px;
 }
