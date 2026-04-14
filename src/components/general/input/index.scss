@@ -1,0 +1,89 @@
+@use './../../../assets/styles/tokens/typography' as *;
+@use './../../../assets/styles/tokens/colors' as *;
+
+
+
+
+.inputWrapper {
+    position: relative;
+}
+
+
+
+.input {
+    border-bottom: $neutral_600 3px solid;
+
+    @extend .body-16-magra-bold;
+
+    color: $neutral_200;
+    line-height: $leading-loose;
+
+    transition: all ease-in-out .2s;
+
+    &:placeholder-shown {
+        color: $neutral_600;
+    }
+
+    &:hover {
+        border-bottom: $neutral_400 3px solid;
+        color: $neutral_400;
+
+        .inputIcon {
+            opacity: 1;
+        }
+    }
+
+    &:focus {
+        border-bottom: $neutral_200 3px solid;
+        color: $neutral_200;
+
+
+        .inputIcon {
+            opacity: 1;
+        }
+    }
+
+        @media (min-width: 768px) {
+            font-size: 20px;
+        }
+}
+
+.inputError {
+    border-bottom: $error_600 3px solid;
+}
+
+
+.inputWithIcon {
+    padding: 0 50px;
+}
+
+
+
+.inputIcon {
+    position: absolute;
+
+    top: 5px;
+}
+
+
+.inputIconLeft {
+    left: 10px;
+}
+
+
+.inputIconRight {
+    right: 10px;
+}
+
+.inputIcon {
+    path {
+        transition: stroke 0.3s ease, fill 0.3s ease;
+    }
+}
+
+.inputErrorText {
+    @extend .body-16-mont-regular;
+
+    color: $error_600;
+    margin-top: 15px;
+}

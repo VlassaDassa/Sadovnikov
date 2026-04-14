@@ -8,6 +8,7 @@ import Skills from '../../components/main/skills';
 import MyStack from '../../components/main/myStack';
 import AboutMe from '../../components/main/aboutMe';
 import Portfolio from '../../components/main/portfolio';
+import Contacts from '../../components/main/contacts';
 
 import './index.scss'
 
@@ -25,6 +26,7 @@ const Main: React.FC = () => {
             <MyStack />
             <AboutMe breakpoint={breakpoint} />
             <Portfolio breakpoint={breakpoint} />
+            <Contacts breakpoint={breakpoint} />
         </>
        
     )
