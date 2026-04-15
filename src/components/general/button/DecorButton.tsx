@@ -27,7 +27,7 @@ interface DecorButtonProps {
     text: DecorativeText;
     additionalClass?: string;
 
-    onClick?: () => void;
+    onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
     breakpoint: Breakpoint;
 };
 
@@ -116,7 +116,15 @@ const DecorButton: React.FC<DecorButtonProps> = ({
     )
 
     return (
-        <div tabIndex={0} role='button' className={`decorBtn decorBtn-${additionalClass} decorBtn_${behavior} decorBtn-${variant}`}>
+        <div 
+            tabIndex={0}
+            role='button' 
+            className={`decorBtn 
+                decorBtn-${additionalClass} 
+                decorBtn_${behavior} 
+                decorBtn-${variant}`}
+            onClick={onClick}
+        >
             <img 
                  
                 className={

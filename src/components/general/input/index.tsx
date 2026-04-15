@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import Icon from '../../icons/Icon';
 
@@ -19,14 +19,14 @@ interface InputProps {
     placeholder?: string,
     additionalClass?: string,
     icon?: Icon,
-    type?: string,
+    type?: 'text' | 'textarea' | 'email' | 'password',
     iconPosition: 'noIcon' | 'iconLeft' | 'iconRight' | 'iconBoth',
     value?: string,
     breakpoint: Breakpoint,
 
     error?: string,
 
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    onChange?: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void,
 }
 
 
@@ -44,6 +44,14 @@ const Input: React.FC<InputProps> = ({
     onChange,
 }) => {
     const [isHovered, setIsHovered] = useState<boolean>(false)
+    const textAreaRef = useRef<HTMLTextAreaElement>(null)
+
+    useEffect(() => {
+        if (type === 'textarea' && textAreaRef.current) {
+            textAreaRef.current.style.height = 'auto'
+            textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`
+        }
+    }, [value])
 
 
     const iconColor = {
@@ -102,7 +110,8 @@ const Input: React.FC<InputProps> = ({
         `input 
         ${additionalClass} 
         ${iconPosition !== 'noIcon' ? 'inputWithIcon' : ''}  
-        ${error ? 'inputError' : ''}
+        ${error ? 'inputError' : ''} 
+        ${type === 'textarea' ? 'input-textarea' : ''} 
         `
     )
 
@@ -115,14 +124,28 @@ const Input: React.FC<InputProps> = ({
         >
             {iconFirst}
 
-            <input 
-                type={type} 
-                className={inputClass}
-                placeholder={placeholder}
-                value={value}
-                name={name}
-                onChange={onChange}  
-            />
+            {
+                type !== 'textarea' ?
+                    <input 
+                        type={type} 
+                        className={inputClass}
+                        placeholder={placeholder}
+                        value={value}
+                        name={name}
+                        onChange={onChange}  
+                    />
+                :
+                    <textarea 
+                        className={inputClass}
+                        placeholder={placeholder}
+                        value={value}
+                        name={name}
+                        onChange={onChange}  
+                        ref={textAreaRef}
+                    /> 
+
+            }
+            
 
             {errorEl}
             {iconBoth}
@@ -133,3 +156,9 @@ const Input: React.FC<InputProps> = ({
 }
 
 export default Input;
+
+
+// Сделать расширение поля Message
+
+// Ревью contacts
+// Ревью input

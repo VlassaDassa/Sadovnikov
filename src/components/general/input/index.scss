@@ -6,6 +6,12 @@
 
 .inputWrapper {
     position: relative;
+    height: 80px;
+
+    &--textarea {
+        height: auto;
+        min-height: 80px;
+    }
 }
 
 
@@ -98,3 +104,8 @@
     
     color: $error_600;
 }
+
+
+.input-textarea {
+}
+
