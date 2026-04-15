@@ -27,6 +27,7 @@ const Main: React.FC = () => {
             <AboutMe breakpoint={breakpoint} />
             <Portfolio breakpoint={breakpoint} />
             <Contacts breakpoint={breakpoint} />
+            <input type="text" />
         </>
        
     )

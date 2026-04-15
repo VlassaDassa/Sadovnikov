@@ -42,7 +42,11 @@ const Canvas: React.FC<CanvasProps> = ({
     // Поведение при пробеле
     useEffect(() => {
         const preventSpaceDefault = (e: KeyboardEvent) => {
-            if (e.code === 'Space') {
+            // Если курсор в canvas отключаем дефоолтное поведеение пробела
+            const canvasElement = canvasRef.current;
+            const isHoveringCanvas = canvasElement?.matches(':hover');
+
+            if (e.code === 'Space' && isHoveringCanvas) {
                 e.preventDefault(); // <- отключение стандартного поведения
 
                 if (e.type === 'keydown' && !e.repeat) {// <- !e.repeat, сработает при первом нажатии(зажатии). Без этого, код бы исполнялся множество раз 

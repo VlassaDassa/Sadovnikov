@@ -72,8 +72,8 @@ const Contacts: React.FC<ContactsProps> = ({ breakpoint }) => {
         }
         
         // Проверка сообщения
-        if (message.length < 10 || message.length >= 100) {
-            newErrors.message = 'Сообщение должно быть от 10 до 100 символов'
+        if (message.length < 100 || message.length > 300) {
+            newErrors.message = 'Сообщение должно быть от 100 до 300 символов'
             isValid = false
         }
 
@@ -174,6 +174,7 @@ const Contacts: React.FC<ContactsProps> = ({ breakpoint }) => {
                         error={error.message}
                         onChange={handleMessageChange}
                         breakpoint={breakpoint}
+                        maxLen={300}
                     />
 
                     <DecorButton 

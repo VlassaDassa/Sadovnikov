@@ -23,6 +23,7 @@ interface InputProps {
     iconPosition: 'noIcon' | 'iconLeft' | 'iconRight' | 'iconBoth',
     value?: string,
     breakpoint: Breakpoint,
+    maxLen?: number,
 
     error?: string,
 
@@ -39,6 +40,7 @@ const Input: React.FC<InputProps> = ({
     icon,
     iconPosition,
     breakpoint,
+    maxLen,
 
     error,
     onChange,
@@ -53,7 +55,7 @@ const Input: React.FC<InputProps> = ({
         }
     }, [value])
 
-
+    
     const iconColor = {
         strokeColor: (isHovered ? cssVars.neutral_400 :
             value?.length === 0 ? cssVars.neutral_600 :
@@ -118,7 +120,7 @@ const Input: React.FC<InputProps> = ({
 
     return (
         <div 
-            className="inputWrapper"
+            className={`inputWrapper inputWrapper-${type}`}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
@@ -142,11 +144,10 @@ const Input: React.FC<InputProps> = ({
                         name={name}
                         onChange={onChange}  
                         ref={textAreaRef}
+                        maxLength={maxLen}
                     /> 
-
             }
             
-
             {errorEl}
             {iconBoth}
             {iconRight}
@@ -157,8 +158,3 @@ const Input: React.FC<InputProps> = ({
 
 export default Input;
 
-
-// Сделать расширение поля Message
-
-// Ревью contacts
-// Ревью input
