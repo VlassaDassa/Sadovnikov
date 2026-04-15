@@ -86,6 +86,7 @@ const Input: React.FC<InputProps> = ({
                 name={icon.second}
                 strokeColor={iconColor.strokeColor}
                 fillColor={iconColor.fillColor}
+                aria-label={placeholder || name}
                 iconClass='inputIcon inputIconRight'
                 size={
                     breakpoint === 'desktop' ? 24 : 20
@@ -133,6 +134,7 @@ const Input: React.FC<InputProps> = ({
                         className={inputClass}
                         placeholder={placeholder}
                         value={value}
+                        aria-label={placeholder || name}
                         name={name}
                         onChange={onChange}  
                     />
@@ -142,6 +144,7 @@ const Input: React.FC<InputProps> = ({
                         placeholder={placeholder}
                         value={value}
                         name={name}
+                        aria-label={placeholder || name}
                         onChange={onChange}  
                         ref={textAreaRef}
                         maxLength={maxLen}

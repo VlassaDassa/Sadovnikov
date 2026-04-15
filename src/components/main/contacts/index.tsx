@@ -145,7 +145,6 @@ const Contacts: React.FC<ContactsProps> = ({ breakpoint }) => {
                         name='name'
                         placeholder='Name...'
                         value={name}
-                        icon={ {first: 'trash', second: 'bell'} }
                         iconPosition='noIcon'
                         error={error.name}
                         onChange={handleNameChange}
@@ -157,7 +156,6 @@ const Contacts: React.FC<ContactsProps> = ({ breakpoint }) => {
                         placeholder='Email...'
                         type='email'
                         value={email}
-                        icon={ {first: 'trash', second: 'bell'} }
                         iconPosition='noIcon'
                         error={error.email}
                         onChange={handleEmailChange}
@@ -169,7 +167,6 @@ const Contacts: React.FC<ContactsProps> = ({ breakpoint }) => {
                         placeholder='Message...'
                         value={message}
                         type='textarea'
-                        icon={ {first: 'trash', second: 'bell'} }
                         iconPosition='noIcon'
                         error={error.message}
                         onChange={handleMessageChange}
