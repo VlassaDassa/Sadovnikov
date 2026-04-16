@@ -25,6 +25,8 @@
     flex-direction: column;
     row-gap: 5px;
 
+    transition: all ease-in-out .2s;
+
 
     span {
         height: 3px;
@@ -35,6 +37,14 @@
 
     @media (min-width: 1280px) {
         display: none;
+    }
+
+    &:hover {
+        background-color: $brand_600;
+    }
+
+    &:active {
+        transform: translateY(3px);
     }
 }
 
