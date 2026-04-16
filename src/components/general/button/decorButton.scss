@@ -17,8 +17,18 @@
         bottom: -100px;
         right: -50px;
         transform: rotate(0);
+        
 
         pointer-events: none;
+    }
+    
+    .decorBgBtn-big-default,
+    .decorBgBtn-medium-default,
+    .decorBgBtn-small-default {
+        @media (min-width: 768px) {
+            filter: brightness(1);
+            transition: filter ease-in-out .2s;
+        }
     }
 
     &:hover {
@@ -26,7 +36,7 @@
         .decorBgBtn-medium-default,
         .decorBgBtn-small-default {
             @media (min-width: 768px) {
-                transition: filter ease-in-out .2s;
+                
                 filter: brightness(3);
             }
         }

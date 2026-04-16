@@ -18,9 +18,16 @@ body {
 
 .container {
     width: calc(100% - 16px * 2);
-    // width: 1041px;
     margin-left: auto;
     margin-right: auto;
+
+    @media (min-width: 768px) {
+        width: calc(100% - 32px * 2);
+    }
+
+    @media (min-width: 1280px) {
+        width: 1041px;
+    }
 }
 
 

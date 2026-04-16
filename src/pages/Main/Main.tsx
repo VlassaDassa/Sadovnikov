@@ -21,7 +21,7 @@ const Main: React.FC = () => {
 
     return (
         <>
-            <Header />
+            <Header breakpoint={breakpoint} />
             <Preview />
             <Skills />
             <MyStack />
