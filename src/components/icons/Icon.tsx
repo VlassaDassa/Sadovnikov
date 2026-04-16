@@ -3,12 +3,18 @@ import React from "react";
 import IconBell from "./IconBell";
 import IconTrash from "./IconTrash";
 import IconLoader from "./IconLoader";
+import IconTelegram from "./IconTelegram";
+import IconPhone from "./IconPhone";
+import IconEmail from "./IconEmail";
 
 
 const icons = {
     bell: IconBell,
     trash: IconTrash,
     loader: IconLoader,
+    telegram: IconTelegram,
+    phone: IconPhone,
+    email: IconEmail
 }
 
 
