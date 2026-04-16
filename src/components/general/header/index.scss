@@ -1,4 +1,6 @@
 @use './../../../assets/styles/tokens/colors' as *;
+@use './../../../assets/styles/tokens/typography' as *;
+
 
 
 
@@ -28,5 +30,45 @@
         width: 25px;
 
         background-color: $white;
+    }
+}
+
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+
+    background-image: url('./../../../assets/images/button/bg_medium_btn.png');
+    background-size: cover;
+
+    width: 152px;
+    height: 40px;
+
+
+    @media (min-width: 768px) {
+        width: 190px;
+        height: 50px;
+    }
+
+    @media (min-width: 768px) {
+        width: 265px;
+        height: 70px;
+    }
+}
+
+
+.logoText {
+    padding-right: 20px;
+
+    @extend .body-16-magra-bold;
+    @extend .whiteText;
+
+    @media (min-width: 768px) {
+        font-size: 20px;
+    }
+
+    @media (min-width: 1280px) {
+        font-size: 24px;
     }
 }

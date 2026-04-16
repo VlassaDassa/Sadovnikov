@@ -7,8 +7,8 @@ import './index.scss';
 const Header: React.FC = () => {
     return (
         <header className="header container">
-            <a className="btn logo" href="#" aria-label="Логотип">
-                <p className="btnText body-16-magra-bold whiteText">
+            <a className="logo" href="#" aria-label="Логотип">
+                <p className="logoText">
                     SADOVNIKOV
                 </p>
             </a>
