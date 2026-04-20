@@ -1,0 +1,41 @@
+@use './../../../styles/tokens/typography' as *;
+
+
+.aboutMe {
+    margin-top: 80px;
+}
+
+
+.aboutMeData,
+.workExperienceWrapper, 
+.workExperienceItem,
+.shortBio {
+    display: flex;
+    flex-direction: column;
+}
+
+.aboutMeData {
+    margin-top: 30px;
+    margin-bottom: 40px;
+
+    row-gap: 5px;
+}
+
+
+.workExperience {
+    margin-bottom: 50px;
+}
+
+
+.workExperienceWrapper {
+    margin-top: 10px;
+ 
+    row-gap: 40px;
+}
+
+
+.workExperienceItem,
+.shortBio {
+    row-gap: 10px;
+}
+

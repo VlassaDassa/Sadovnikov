@@ -4,9 +4,10 @@ import Icon from "../../icons/Icon";
 
 import type { Breakpoint } from "../../../interfaces/general";
 
-import cssVars from './../../../assets/styles/__variables.module.scss';
+import cssVars from './../../../styles/__variables.module.scss';
 
-import './index.scss';
+import style from './index.module.scss';
+
 
 
 interface FooterProps {
@@ -21,14 +22,13 @@ const Footer: React.FC<FooterProps> = ({ breakpoint }) => {
     }
 
 
-
     return (
-        <footer className="footer">
-            <div className="container footerWrapper">
-                <a href="#" className="footerItemWrapper">
-                    <div className="footerIconWrapper">
+        <footer className={style.footer}>
+            <div className={`container ${style.footerWrapper}`}>
+                <a href="#" className={style.footerItemWrapper}>
+                    <div className={style.footerIconWrapper}>
                         <Icon 
-                            iconClass='footerIcon'
+                            iconClass={style.footerIcon}
                             name='email' 
                             strokeColor={'none'}
                             size={iconSize()}
@@ -36,33 +36,33 @@ const Footer: React.FC<FooterProps> = ({ breakpoint }) => {
                         />
                     </div>
 
-                    <p className="footerText">vlad.sad28@yandex.ru</p>
+                    <p className={style.footerText}>vlad.sad28@yandex.ru</p>
                 </a>
 
-                <a href="#" className="footerItemWrapper">
-                    <div className="footerIconWrapper">
+                <a href="#" className={style.footerItemWrapper}>
+                    <div className={style.footerIconWrapper}>
                         <Icon 
-                            iconClass='footerIcon'
+                            iconClass={style.footerIcon}
                             name='phone' 
                             fillColor="none"
                             size={iconSize()}
                             strokeColor={cssVars.neutral_300}
                         />
                     </div>
-                    <p className="footerText">+7 (900) 015-81-16</p>
+                    <p className={style.footerText}>+7 (900) 015-81-16</p>
                 </a>
 
-                <a href="#" className="footerItemWrapper">
-                    <div className="footerIconWrapper">
+                <a href="#" className={style.footerItemWrapper}>
+                    <div className={style.footerIconWrapper}>
                         <Icon 
-                            iconClass='footerIcon'
+                            iconClass={style.footerIcon}
                             name='telegram' 
                             strokeColor={'none'}
                             size={iconSize()}
                             fillColor={cssVars.neutral_300}
                         />
                     </div>
-                    <p className="footerText">@VlassaDassa</p>
+                    <p className={style.footerText}>@VlassaDassa</p>
                 </a>
             </div>
         </footer>

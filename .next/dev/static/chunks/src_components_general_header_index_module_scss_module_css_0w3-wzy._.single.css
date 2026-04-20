@@ -1,0 +1,2168 @@
+/* [project]/src/components/general/header/index.module.scss.module.css [app-client] (css) */
+.index-module-scss-module___WcdWG__heading-128-magra-thin {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 8rem;
+  font-weight: 100;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-128-mont-thin {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 8rem;
+  font-weight: 100;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-128-magra-extra_ligth {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 8rem;
+  font-weight: 200;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-128-mont-extra_ligth {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 8rem;
+  font-weight: 200;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-128-magra-light {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 8rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-128-mont-light {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 8rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-128-magra-regular {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 8rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-128-mont-regular {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 8rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-128-magra-medium {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 8rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-128-mont-medium {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 8rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-128-magra-semi_bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 8rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-128-mont-semi_bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 8rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-128-magra-bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 8rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-128-mont-bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 8rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-128-magra-exta_bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 8rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-128-mont-exta_bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 8rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-128-magra-black {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 8rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-128-mont-black {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 8rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-96-magra-thin {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 6rem;
+  font-weight: 100;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-96-mont-thin {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 6rem;
+  font-weight: 100;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-96-magra-extra_ligth {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 6rem;
+  font-weight: 200;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-96-mont-extra_ligth {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 6rem;
+  font-weight: 200;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-96-magra-light {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 6rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-96-mont-light {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 6rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-96-magra-regular {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 6rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-96-mont-regular {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 6rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-96-magra-medium {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 6rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-96-mont-medium {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 6rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-96-magra-semi_bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 6rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-96-mont-semi_bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 6rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-96-magra-bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 6rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-96-mont-bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 6rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-96-magra-exta_bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 6rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-96-mont-exta_bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 6rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-96-magra-black {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 6rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-96-mont-black {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 6rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-64-magra-thin {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 4rem;
+  font-weight: 100;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-64-mont-thin {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 4rem;
+  font-weight: 100;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-64-magra-extra_ligth {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 4rem;
+  font-weight: 200;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-64-mont-extra_ligth {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 4rem;
+  font-weight: 200;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-64-magra-light {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 4rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-64-mont-light {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 4rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-64-magra-regular {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 4rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-64-mont-regular {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 4rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-64-magra-medium {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 4rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-64-mont-medium {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 4rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-64-magra-semi_bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 4rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-64-mont-semi_bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 4rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-64-magra-bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-64-mont-bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-64-magra-exta_bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 4rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-64-mont-exta_bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 4rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-64-magra-black {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 4rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-64-mont-black {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 4rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-48-magra-thin {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 3rem;
+  font-weight: 100;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-48-mont-thin {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 3rem;
+  font-weight: 100;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-48-magra-extra_ligth {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 3rem;
+  font-weight: 200;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-48-mont-extra_ligth {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 3rem;
+  font-weight: 200;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-48-magra-light {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 3rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-48-mont-light {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 3rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-48-magra-regular {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 3rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-48-mont-regular {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 3rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-48-magra-medium {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 3rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-48-mont-medium {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 3rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-48-magra-semi_bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 3rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-48-mont-semi_bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 3rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-48-magra-bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-48-mont-bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-48-magra-exta_bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-48-mont-exta_bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-48-magra-black {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-48-mont-black {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-40-magra-thin {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 2.5rem;
+  font-weight: 100;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-40-mont-thin {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 2.5rem;
+  font-weight: 100;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-40-magra-extra_ligth {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 2.5rem;
+  font-weight: 200;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-40-mont-extra_ligth {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 2.5rem;
+  font-weight: 200;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-40-magra-light {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 2.5rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-40-mont-light {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 2.5rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-40-magra-regular {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 2.5rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-40-mont-regular {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 2.5rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-40-magra-medium {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 2.5rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-40-mont-medium {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 2.5rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-40-magra-semi_bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 2.5rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-40-mont-semi_bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 2.5rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-40-magra-bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-40-mont-bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-40-magra-exta_bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-40-mont-exta_bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-40-magra-black {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 2.5rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-40-mont-black {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 2.5rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-36-magra-thin {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 2.25rem;
+  font-weight: 100;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-36-mont-thin {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 2.25rem;
+  font-weight: 100;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-36-magra-extra_ligth {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 2.25rem;
+  font-weight: 200;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-36-mont-extra_ligth {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 2.25rem;
+  font-weight: 200;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-36-magra-light {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 2.25rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-36-mont-light {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 2.25rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-36-magra-regular {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 2.25rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-36-mont-regular {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 2.25rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-36-magra-medium {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 2.25rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-36-mont-medium {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 2.25rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-36-magra-semi_bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 2.25rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-36-mont-semi_bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 2.25rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-36-magra-bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-36-mont-bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-36-magra-exta_bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-36-mont-exta_bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-36-magra-black {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 2.25rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-36-mont-black {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 2.25rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-32-magra-thin {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 2rem;
+  font-weight: 100;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-32-mont-thin {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 2rem;
+  font-weight: 100;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-32-magra-extra_ligth {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 2rem;
+  font-weight: 200;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-32-mont-extra_ligth {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 2rem;
+  font-weight: 200;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-32-magra-light {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-32-mont-light {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-32-magra-regular {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-32-mont-regular {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-32-magra-medium {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-32-mont-medium {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-32-magra-semi_bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-32-mont-semi_bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-32-magra-bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-32-mont-bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-32-magra-exta_bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-32-mont-exta_bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-32-magra-black {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-32-mont-black {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-24-magra-thin {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 100;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-24-mont-thin {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1.5rem;
+  font-weight: 100;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-24-magra-extra_ligth {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 200;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-24-mont-extra_ligth {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1.5rem;
+  font-weight: 200;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-24-magra-light {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-24-mont-light {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-24-magra-regular {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-24-mont-regular {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-24-magra-medium {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-24-mont-medium {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-24-magra-semi_bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-24-mont-semi_bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-24-magra-bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-24-mont-bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-24-magra-exta_bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-24-mont-exta_bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-24-magra-black {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-24-mont-black {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1.5rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-20-magra-thin {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 100;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-20-mont-thin {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1.25rem;
+  font-weight: 100;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-20-magra-extra_ligth {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 200;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-20-mont-extra_ligth {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1.25rem;
+  font-weight: 200;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-20-magra-light {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-20-mont-light {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1.25rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-20-magra-regular {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-20-mont-regular, .index-module-scss-module___WcdWG__headerNavItemLink {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-20-magra-medium {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-20-mont-medium {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-20-magra-semi_bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-20-mont-semi_bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-20-magra-bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-20-mont-bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-20-magra-exta_bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-20-mont-exta_bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-20-magra-black {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__heading-20-mont-black {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1.25rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-24-magra-thin {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 100;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-24-mont-thin {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1.5rem;
+  font-weight: 100;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-24-magra-extra_ligth {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 200;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-24-mont-extra_ligth {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1.5rem;
+  font-weight: 200;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-24-magra-light {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-24-mont-light {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-24-magra-regular {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-24-mont-regular {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-24-magra-medium {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-24-mont-medium {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-24-magra-semi_bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-24-mont-semi_bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-24-magra-bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-24-mont-bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-24-magra-exta_bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-24-mont-exta_bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-24-magra-black {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-24-mont-black {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1.5rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-20-magra-thin {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 100;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-20-mont-thin {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1.25rem;
+  font-weight: 100;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-20-magra-extra_ligth {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 200;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-20-mont-extra_ligth {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1.25rem;
+  font-weight: 200;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-20-magra-light {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-20-mont-light {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1.25rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-20-magra-regular {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-20-mont-regular, .index-module-scss-module___WcdWG__selectLangItem {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-20-magra-medium {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-20-mont-medium {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-20-magra-semi_bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-20-mont-semi_bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-20-magra-bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-20-mont-bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-20-magra-exta_bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-20-mont-exta_bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-20-magra-black {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-20-mont-black {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1.25rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-16-magra-thin {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1rem;
+  font-weight: 100;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-16-mont-thin {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1rem;
+  font-weight: 100;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-16-magra-extra_ligth {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1rem;
+  font-weight: 200;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-16-mont-extra_ligth {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1rem;
+  font-weight: 200;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-16-magra-light {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-16-mont-light {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-16-magra-regular {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-16-mont-regular {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-16-magra-medium {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-16-mont-medium {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-16-magra-semi_bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-16-mont-semi_bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-16-magra-bold, .index-module-scss-module___WcdWG__logoText {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-16-mont-bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-16-magra-exta_bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-16-mont-exta_bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-16-magra-black {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-16-mont-black {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-14-magra-thin {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: .875rem;
+  font-weight: 100;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-14-mont-thin {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: .875rem;
+  font-weight: 100;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-14-magra-extra_ligth {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: .875rem;
+  font-weight: 200;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-14-mont-extra_ligth {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: .875rem;
+  font-weight: 200;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-14-magra-light {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: .875rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-14-mont-light {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: .875rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-14-magra-regular {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: .875rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-14-mont-regular {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: .875rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-14-magra-medium {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: .875rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-14-mont-medium {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: .875rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-14-magra-semi_bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: .875rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-14-mont-semi_bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: .875rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-14-magra-bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: .875rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-14-mont-bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: .875rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-14-magra-exta_bold {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: .875rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-14-mont-exta_bold {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: .875rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-14-magra-black {
+  color: #3a3a3a;
+  font-family: Magra, sans-serif;
+  font-size: .875rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__body-14-mont-black {
+  color: #3a3a3a;
+  font-family: Montserrat;
+  font-size: .875rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.index-module-scss-module___WcdWG__darkText {
+  color: #3a3a3a;
+}
+
+.index-module-scss-module___WcdWG__lightText {
+  color: #c2c2c2;
+}
+
+.index-module-scss-module___WcdWG__whiteText, .index-module-scss-module___WcdWG__logoText, .index-module-scss-module___WcdWG__selectLangItem {
+  color: #fff;
+}
+
+.index-module-scss-module___WcdWG__line-height-1_5x {
+  line-height: 1.5;
+}
+
+body {
+  background-image: url("/images/general/noize.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.index-module-scss-module___WcdWG__noize {
+  position: relative;
+}
+
+.index-module-scss-module___WcdWG__noize:before {
+  content: "";
+  opacity: 1;
+  mix-blend-mode: hard-light;
+  pointer-events: none;
+  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 300 300\"%3E%3Cfilter id=\"a\"%3E%3CfeTurbulence baseFrequency=\"0.65\" stitchTiles=\"stitch\"/%3E%3C/filter%3E%3Crect width=\"100%25\" height=\"100%25\" filter=\"url(%23a)\" opacity=\"0.5\"/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 150px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.index-module-scss-module___WcdWG__radius-2 {
+  border-radius: 2px;
+}
+
+.index-module-scss-module___WcdWG__radius-4 {
+  border-radius: 4px;
+}
+
+.index-module-scss-module___WcdWG__radius-6, .index-module-scss-module___WcdWG__selectLang, .index-module-scss-module___WcdWG__selectLangItem {
+  border-radius: 6px;
+}
+
+.index-module-scss-module___WcdWG__radius-8 {
+  border-radius: 8px;
+}
+
+.index-module-scss-module___WcdWG__radius-12 {
+  border-radius: 12px;
+}
+
+.index-module-scss-module___WcdWG__radius-16 {
+  border-radius: 16px;
+}
+
+.index-module-scss-module___WcdWG__radius-24 {
+  border-radius: 24px;
+}
+
+.index-module-scss-module___WcdWG__radius-full {
+  border-radius: 50%;
+}
+
+.index-module-scss-module___WcdWG__shadow-2xl {
+  box-shadow: 0 24px 12px #00000040;
+}
+
+.index-module-scss-module___WcdWG__shadow-xl, .index-module-scss-module___WcdWG__selectLang {
+  box-shadow: 0 4px 14px #00000040;
+}
+
+.index-module-scss-module___WcdWG__shadow-lg {
+  box-shadow: 0 4px 4px #00000040;
+}
+
+.index-module-scss-module___WcdWG__shadow-inner {
+  box-shadow: inset 0 4px 55px 3px #000;
+}
+
+.index-module-scss-module___WcdWG__glass, .index-module-scss-module___WcdWG__selectLang {
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  background: linear-gradient(135deg, #2e2e2e33 0%, #ffffff0d 100%);
+}
+
+.index-module-scss-module___WcdWG__overlay {
+  background-color: #000000b3;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.index-module-scss-module___WcdWG__header {
+  justify-content: space-between;
+  padding: 50px 0;
+  display: flex;
+}
+
+.index-module-scss-module___WcdWG__btnBurger {
+  background-color: #3f1cdf;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 5px;
+  width: 44px;
+  height: 44px;
+  transition: all .2s ease-in-out;
+  display: flex;
+}
+
+.index-module-scss-module___WcdWG__btnBurger span {
+  background-color: #fff;
+  width: 25px;
+  height: 3px;
+}
+
+@media (min-width: 1280px) {
+  .index-module-scss-module___WcdWG__btnBurger {
+    display: none;
+  }
+}
+
+.index-module-scss-module___WcdWG__btnBurger:hover {
+  background-color: #886eff;
+}
+
+.index-module-scss-module___WcdWG__btnBurger:active {
+  transform: translateY(3px);
+}
+
+.index-module-scss-module___WcdWG__logo {
+  filter: brightness();
+  background-image: url("/images/button/bg_medium_btn.png");
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+  width: 152px;
+  height: 40px;
+  transition: all .2s ease-in-out;
+  display: flex;
+}
+
+@media (min-width: 768px) {
+  .index-module-scss-module___WcdWG__logo {
+    width: 265px;
+    height: 70px;
+  }
+
+  .index-module-scss-module___WcdWG__logo:hover {
+    filter: brightness(3);
+  }
+}
+
+.index-module-scss-module___WcdWG__logo:active {
+  transform: translateY(3px);
+}
+
+.index-module-scss-module___WcdWG__logo:active .index-module-scss-module___WcdWG__decorBgBtnBig {
+  opacity: .9;
+  transition: all .2s;
+}
+
+.index-module-scss-module___WcdWG__logoText {
+  padding-right: 20px;
+}
+
+@media (min-width: 768px) {
+  .index-module-scss-module___WcdWG__logoText {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .index-module-scss-module___WcdWG__logoText {
+    font-size: 24px;
+  }
+}
+
+.index-module-scss-module___WcdWG__headerNav {
+  display: none;
+}
+
+@media (min-width: 1280px) {
+  .index-module-scss-module___WcdWG__headerNav {
+    display: flex;
+  }
+}
+
+.index-module-scss-module___WcdWG__headerNavList {
+  align-items: center;
+  column-gap: 30px;
+  display: flex;
+}
+
+.index-module-scss-module___WcdWG__headerNavItemLink {
+  color: #949494;
+  text-transform: uppercase;
+  z-index: 1;
+  transition: all .2s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.index-module-scss-module___WcdWG__headerNavItemLink:before {
+  content: "";
+  z-index: -1;
+  opacity: 0;
+  background-color: #676767;
+  border-radius: 50%;
+  width: 3px;
+  height: 3px;
+  transition: all .3s ease-out;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.index-module-scss-module___WcdWG__headerNavItemLink:hover {
+  color: #676767;
+}
+
+.index-module-scss-module___WcdWG__headerNavItemLink:hover:before {
+  opacity: 1;
+  bottom: 30px;
+}
+
+.index-module-scss-module___WcdWG__decorBtn-changeLang {
+  z-index: 1;
+}
+
+.index-module-scss-module___WcdWG__selectLang {
+  z-index: 3;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  flex-direction: column;
+  row-gap: 5px;
+  width: 200px;
+  padding: 10px;
+  transition: opacity .25s, transform .25s, visibility .25s;
+  position: absolute;
+  transform: translateY(-20px);
+}
+
+.index-module-scss-module___WcdWG__selectLangItem {
+  background-color: unset;
+  cursor: pointer;
+  justify-content: space-between;
+  align-items: center;
+  height: 24px;
+  padding: 8px 10px;
+  transition: all .1s;
+  display: flex;
+  position: relative;
+}
+
+.index-module-scss-module___WcdWG__selectLangItem:hover {
+  background-color: #676767;
+}
+
+.index-module-scss-module___WcdWG__selectLangItem {
+  transition: all .1s ease-in-out;
+}
+
+.index-module-scss-module___WcdWG__selectLangItem:active {
+  opacity: .9;
+  transform: translateY(3px);
+}
+
+.index-module-scss-module___WcdWG__spanLang {
+  color: #acacac;
+}
+
+.index-module-scss-module___WcdWG__selectLang-show {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/*# sourceMappingURL=src_components_general_header_index_module_scss_module_css_0w3-wzy._.single.css.map*/

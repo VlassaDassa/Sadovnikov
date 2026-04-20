@@ -1,0 +1,35 @@
+/* [project]/src/components/main/preview/index.module.scss.module.css [app-client] (css) */
+.index-module-scss-module__015_wW__preview {
+  justify-content: center;
+  height: 350px;
+  display: flex;
+  position: relative;
+}
+
+.index-module-scss-module__015_wW__bgAvatar, .index-module-scss-module__015_wW__previewAvatar, .index-module-scss-module__015_wW__avatarFrame, .index-module-scss-module__015_wW__frameName {
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.index-module-scss-module__015_wW__bgAvatar {
+  width: 273px;
+  height: 278px;
+}
+
+.index-module-scss-module__015_wW__previewAvatar {
+  width: 147px;
+  height: 221px;
+}
+
+.index-module-scss-module__015_wW__avatarFrame {
+  width: 153px;
+  height: 272px;
+}
+
+.index-module-scss-module__015_wW__frameName {
+  top: 270px;
+}
+
+/*# sourceMappingURL=src_components_main_preview_index_module_scss_module_css_0w3-wzy._.single.css.map*/

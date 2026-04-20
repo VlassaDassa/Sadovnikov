@@ -4,9 +4,9 @@ import Icon from '../../icons/Icon';
 
 import type { Breakpoint } from '../../../interfaces/general';
 
-import cssVars from './../../../assets/styles/__variables.module.scss';
+import cssVars from './../../../styles/__variables.module.scss';
 
-import './index.scss';
+import style from './index.module.scss';
 
 
 interface Icon {
@@ -68,7 +68,7 @@ const Input: React.FC<InputProps> = ({
         (iconPosition === 'iconLeft' || iconPosition === 'iconBoth') && icon?.first ?
             <Icon 
                 name={icon.first}
-                iconClass={`inputIcon inputIconLeft`}
+                iconClass={`${style.inputIcon} ${style.inputIconLeft}`}
                 strokeColor={iconColor.strokeColor}
                 fillColor={iconColor.fillColor}
                 size={
@@ -78,7 +78,7 @@ const Input: React.FC<InputProps> = ({
         : null
     )
 
-    const errorEl = error ? <p className="inputErrorText">{error}</p> : null
+    const errorEl = error ? <p className={style.inputErrorText}>{error}</p> : null
 
     const iconBoth = (
         iconPosition === 'iconBoth' && icon?.second  ?
@@ -87,7 +87,7 @@ const Input: React.FC<InputProps> = ({
                 strokeColor={iconColor.strokeColor}
                 fillColor={iconColor.fillColor}
                 aria-label={placeholder || name}
-                iconClass='inputIcon inputIconRight'
+                iconClass={`${style.inputIcon} ${style.inputIconRight}`}
                 size={
                     breakpoint === 'desktop' ? 24 : 20
                 }
@@ -101,7 +101,7 @@ const Input: React.FC<InputProps> = ({
                 name={icon.first}
                 strokeColor={iconColor.strokeColor}
                 fillColor={iconColor.fillColor}
-                iconClass='inputIcon inputIconRight'
+                iconClass={`${style.inputIcon} ${style.inputIconRight}`}
                 size={
                     breakpoint === 'desktop' ? 24 : 20
                 }
@@ -110,18 +110,18 @@ const Input: React.FC<InputProps> = ({
     )
 
     const inputClass = (
-        `input 
-        ${additionalClass} 
-        ${iconPosition !== 'noIcon' ? 'inputWithIcon' : ''}  
-        ${error ? 'inputError' : ''} 
-        ${type === 'textarea' ? 'input-textarea' : ''} 
+        `${style.input} 
+        ${style.additionalClass} 
+        ${iconPosition !== style.noIcon ? style.inputWithIcon : ''}  
+        ${error ? style.inputError : ''} 
+        ${type === 'textarea' ? style['input-textarea'] : ''} 
         `
     )
 
 
     return (
         <div 
-            className={`inputWrapper inputWrapper-${type}`}
+            className={`${style.inputWrapper} ${style[`inputWrapper-${type}`]}`}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >

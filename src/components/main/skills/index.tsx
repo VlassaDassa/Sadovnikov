@@ -1,8 +1,9 @@
 import React from 'react';
+// import Image from 'next/image';
 
-import vertex from './../../../assets/images/main/vertex.svg';
-import vertexSelected from './../../../assets/images/main/vertex_selected.svg';
-import cursor from './../../../assets/images/main/cursor.svg';
+// import vertex from './../../../assets/images/main/vertex.svg';
+// import vertexSelected from './../../../assets/images/main/vertex_selected.svg';
+// import cursor from './../../../assets/images/main/cursor.svg';
 
 import './index.scss';
 
@@ -11,6 +12,10 @@ import { skills } from './../.././../mockData/skills';
 import type { Skill } from './../../../mockData/skills';
 
 
+
+const vertex = '/images/main/vertex.svg';
+const vertexSelected = '/images/main/vertex_selected.svg';
+const cursor = '/images/main/cursor.svg';
 
 
 const SkillItem: React.FC<Skill> = ({ name, score }) => {

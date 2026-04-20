@@ -1,10 +1,11 @@
 import React from 'react';
+import Image from 'next/image';
 
-import avatarPic from './../../../assets/images/main/avatar_without_jaw.png';
-import jawPic from './../../../assets/images/main/jaw.png';
-import indexFingerPic from './../../../assets/images/main/index_finger.png';
-import handPic from './../../../assets/images/main/hand.png';
-import cloudPic from './../../../assets/images/main/cloud.png';
+// import avatarPic from './../../../assets/images/main/avatar_without_jaw.png';
+// import jawPic from './../../../assets/images/main/jaw.png';
+// import indexFingerPic from './../../../assets/images/main/index_finger.png';
+// import handPic from './../../../assets/images/main/hand.png';
+// import cloudPic from './../../../assets/images/main/cloud.png';
 
 import './index.scss';
 
@@ -13,6 +14,13 @@ interface TalkingAvatarProps {
     indexFinger: boolean,
     text: string,
 }
+
+const avatarPic = '/images/main/avatar_without_jaw.png';
+const jawPic = '/images/main/jaw.png';
+const indexFingerPic = '/images/main/index_finger.png';
+const handPic = '/images/main/hand.png';
+const cloudPic = '/images/main/cloud.png';
+
 
 
 const TalkingAvatar: React.FC<TalkingAvatarProps> = (props) => {

@@ -1,25 +1,25 @@
 import React from 'react';
 
-import avatarFrame from './../../../assets/images/main/avatar_frame.png';
-import avatar from './../../../assets/images/main/avatar.png';
-import bgAvatar from './../../../assets/images/main/bg_avatar.png';
+import style from './index.module.scss';
 
+const avatarFrame = '/images/main/avatar_frame.png'
+const avatar = '/images/main/avatar.png'
+const bgAvatar = '/images/main/bg_avatar.png'
 
-import './index.scss';
 
 
 
 const Preview: React.FC = () => {
     return (
-        <section className="preview container">
+        <section className={`${style.preview} container`}>
             <h1 className="heading-32-magra-bold whiteText">FRONTEND DEVELOPER</h1>
 
-            <div className="avatarWrapper">
-                <img className="bgAvatar" src={bgAvatar} alt="Photo of developer" />
-                <img className="previewAvatar" src={avatar} alt="Photo of developer" />
-                <img className="avatarFrame" src={avatarFrame} alt="Photo of developer" />
+            <div className={style.avatarWrapper}>
+                <img className={style.bgAvatar} src={bgAvatar} alt="Photo of developer" />
+                <img className={style.previewAvatar} src={avatar} alt="Photo of developer" />
+                <img className={style.avatarFrame} src={avatarFrame} alt="Photo of developer" />
 
-                <p className="frameName body-20-magra-regular blackText">SADOVNIKOV<br />VLAD</p>
+                <p className={`${style.frameName} body-20-magra-regular blackText`}>SADOVNIKOV<br />VLAD</p>
             </div>
         </section>
     )

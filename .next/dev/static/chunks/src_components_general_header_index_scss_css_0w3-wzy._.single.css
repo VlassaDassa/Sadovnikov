@@ -1888,7 +1888,7 @@
 }
 
 body {
-  background-image: url("../media/noize.0ixjvuscnd7.d.jpg");
+  background-image: url("/images/general/noize.jpg");
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
@@ -2016,7 +2016,7 @@ body {
 
 .logo {
   filter: brightness();
-  background-image: url("../media/bg_medium_btn.0nxl9n6lk45p8.png");
+  background-image: url("/images/button/bg_medium_btn.png");
   background-size: cover;
   justify-content: center;
   align-items: center;

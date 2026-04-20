@@ -2,17 +2,16 @@ import React from 'react';
 
 import Icon from '../../icons/Icon';
 
-import bigBgBtn from './../../../assets/images/button/bg_big_btn.png';
-import mediumBgBtn from './../../../assets/images/button/bg_medium_btn.png';
-import smallBgBtn from './../../../assets/images/button/bg_small_btn.png';
-import indexFinger from './../../../assets/images/main/index_finger.png';
-
 import type { Breakpoint } from '../../../interfaces/general';
 
-import cssVars from './../../../assets/styles/__variables.module.scss';
-import './decorButton.scss';
+import cssVars from './../../../styles/__variables.module.scss';
+import style from './decorButton.module.scss';
 
 
+const bigBgBtn = '/images/button/bg_big_btn.png';
+const mediumBgBtn = '/images/button/bg_medium_btn.png';
+const smallBgBtn = '/images/button/bg_small_btn.png';
+const indexFinger = '/images/button/index_finger.png';
 
 interface DecorativeText {
     default: string,
@@ -90,7 +89,15 @@ const DecorButton: React.FC<DecorButtonProps> = ({
                         size={defineSizeLoader()}
                     />
                 :
-                    <p className={`whiteText textDecorBtn textDecorBtn-${variant} textDecorBtn-${variant}-${size}`}>{curText}</p>
+                    <p 
+                        className={`whiteText 
+                            ${style.textDecorBtn} 
+                            ${style[`textDecorBtn-${variant}`]} 
+                            ${style[`textDecorBtn-${variant}-${size}`]} 
+                        `}
+                    >
+                        {curText}
+                    </p>
     )
 
     // Если вариант кнопки "big", показывать характерные элементы
@@ -98,18 +105,25 @@ const DecorButton: React.FC<DecorButtonProps> = ({
         variant === 'big' ?
                     <>
                         <img 
-                            src={indexFinger} 
+                            src={indexFinger}
                             alt="" 
                             aria-hidden='true'
                             className={
-                                `decorBtnIcon 
-                                decorBtnIconPosition_${behavior} 
-                                decorBtnIcon_${size}
+                                `${style.decorBtnIcon} 
+                                ${style[`decorBtnIconPosition_${behavior}`]} 
+                                ${style[`decorBtnIcon_${size}`]} 
                                 ` 
                             }
                         />
 
-                        <p className={`decorBtnLabel lightText decorBtnLabel_${size}`}>(click)</p>
+                        <p 
+                            className={`${style.decorBtnLabel} 
+                                lightText 
+                                ${style[`decorBtnLabel_${size}`]} 
+                            `}
+                        >
+                            (click)
+                        </p>
                     </>
                 :
                     null 
@@ -119,18 +133,19 @@ const DecorButton: React.FC<DecorButtonProps> = ({
         <div 
             tabIndex={0}
             role='button' 
-            className={`decorBtn 
-                decorBtn-${additionalClass} 
-                decorBtn_${behavior} 
-                decorBtn-${variant}`}
+            className={`${style.decorBtn} 
+                ${style[`decorBtn-${additionalClass}`]} 
+                ${style[`decorBtn_${behavior}`]} 
+                ${style[`decorBtn_${variant}`]} 
+            `}
             onClick={onClick}
         >
             <img 
                  
                 className={
-                    `decorBgBtnBig 
-                    decorBgBtn-${variant}-${size} 
-                    decorBgBtn-${variant}-${behavior}
+                    `${style.decorBgBtnBig} 
+                    ${style[`decorBgBtn-${variant}-${size}`]} 
+                    ${style[`decorBgBtn-${variant}-${behavior}`]} 
                     `
                 } 
                 src={bgBtn} 

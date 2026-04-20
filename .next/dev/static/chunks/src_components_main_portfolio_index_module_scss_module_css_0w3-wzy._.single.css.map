@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///C:/Users/Мой ПК/Desktop/Sadovnikov/src/components/main/portfolio/index.module.scss"],"sourcesContent":[".portfolio {\r\n    margin-top: 50px;\r\n}"],"names":[],"mappings":"AAAA"}}]
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './index.scss';
+import style from './index.module.scss';
 
 
 interface StatusMessageProps {
@@ -10,7 +10,10 @@ interface StatusMessageProps {
 }
 
 const StatusMessage: React.FC<StatusMessageProps> = ({ type, text, isShow }) => (
-    <p className={`statusMessage statusMessage-${isShow ? 'show' : ''} statusMessage-${type}`}>{text}</p>
+    <p className={`${style.statusMessage} 
+        ${style[`statusMessage-${isShow ? 'show' : ''}`]} 
+        ${style[`statusMessage-${type}`]}
+    `}>{text}</p>
 );
 
 export default StatusMessage;

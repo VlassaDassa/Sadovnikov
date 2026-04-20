@@ -2,7 +2,7 @@ import React from 'react';
 
 import type { Project } from '../../../interfaces/general';
 
-import './index.scss';
+import style from './index.module.scss';
 
 
 interface ProjectItemProps {

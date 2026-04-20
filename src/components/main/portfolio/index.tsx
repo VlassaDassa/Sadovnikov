@@ -8,7 +8,7 @@ import type { Breakpoint } from '../../../interfaces/general';
 
 import { projects } from '../../../mockData/projects';
 
-import './index.scss';
+import style from './index.module.scss';
 
 interface PortfolioProps {
     breakpoint: Breakpoint;
@@ -31,7 +31,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ breakpoint }) => {
     )
 
     return (
-        <section className="portfolio">
+        <section className={style.portfolio}>
             <h2 className="heading-32-magra-bold whiteText sectionTitle">PORTFOLIO</h2>
 
             {portfolioContent}

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import DecorButton from '../button/DecorButton';
 import type { Breakpoint } from '../../../interfaces/general';
 
-import './index.scss';
+import style from './index.module.scss';
 
 
 
@@ -19,23 +19,25 @@ interface SelectLangProps {
 
 const SelectLang: React.FC<SelectLangProps> = ({ show, onClick }) => {
     return (
-        <div className={`selectLang selectLang-${show ? 'show' : ''}`}>
+        <div className={`${style.selectLang} 
+            ${style.selectLang}-${show ? 'show' : ''} `
+        }>
             <p 
                 data-lang='RU' 
-                className="selectLangItem"
+                className={style.selectLangItem}
                 onClick={onClick}
             >
                 
                     Русский 
-                <span className="spanLang">RU</span>
+                <span className={style.spanLang}>RU</span>
             </p>
             <p 
                 data-lang='EN' 
-                className="selectLangItem"
+                className={style.selectLangItem}
                 onClick={onClick}
             >
                     Английский 
-                <span className="spanLang">EN</span>
+                <span className={style.spanLang}>EN</span>
             </p>
         </div>
     )
@@ -57,15 +59,15 @@ const Header: React.FC<HeaderProps> = ({ breakpoint }) => {
     }
 
     return (
-        <header className="header container">
-            <a className="logo" href="#" aria-label="Логотип">
-                <p className="logoText">
+        <header className={`${style.header} container`}>
+            <a className={style.logo} href="#" aria-label="Логотип">
+                <p className={style.logoText}>
                     SADOVNIKOV
                 </p>
             </a>
 
             <button 
-                className="btnBurger radius-full"
+                className={`${style.btnBurger} radius-full`}
                 aria-label="Открыть меню"
             >
                 <span className="radius-12"></span>
@@ -73,25 +75,25 @@ const Header: React.FC<HeaderProps> = ({ breakpoint }) => {
                 <span className="radius-12"></span>
             </button>
 
-            <nav className="headerNav">
-                <ul className="headerNavList" >
-                    <li className="headerNavItem">
-                        <a className="headerNavItemLink" href="#">Contacts</a>
+            <nav className={style.headerNav}>
+                <ul className={style.headerNavList}>
+                    <li className={style.headerNavItem}>
+                        <a className={style.headerNavItemLink} href="#">Contacts</a>
                     </li>
 
-                    <li className="headerNavItem">
-                        <a className="headerNavItemLink" href="#">About</a>
+                    <li className={style.headerNavItem}>
+                        <a className={style.headerNavItemLink} href="#">About</a>
                     </li>
 
-                    <li className="headerNavItem">
-                        <a className="headerNavItemLink" href="#">Blog</a>
+                    <li className={style.headerNavItem}>
+                        <a className={style.headerNavItemLink} href="#">Blog</a>
                     </li>
 
-                    <li className="headerNavItem">
-                        <a className="headerNavItemLink" href="#">Portfolio</a>
+                    <li className={style.headerNavItem}>
+                        <a className={style.headerNavItemLink} href="#">Portfolio</a>
                     </li>
                     
-                    <li className="headerNavItem">
+                    <li className={style.headerNavItem}>
                         <DecorButton
                             behavior='default'
                             variant='small'

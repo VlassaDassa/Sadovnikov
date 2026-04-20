@@ -1,0 +1,98 @@
+@use './../../../styles/tokens/colors' as *;
+@use './../../../styles/tokens/typography' as *;
+@use './../../../styles/tokens/effects' as *;
+
+
+.footer {
+    @extend .radius-24;
+    @extend .noize;
+    background-color: $neutral_900;
+
+    padding: 30px 0;
+    margin-top: 100px;
+
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
+    @media (min-width: 768px) {
+        padding: 70px 0;
+    }
+
+    @media (min-width: 1280px) {
+        padding: 50px 0;
+
+        // Убрать noize
+        &::before {
+            display: none;
+        }
+
+        background-color: unset;
+    }
+}
+
+
+.footerWrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+
+    @media (min-width: 768px) {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+
+.footerIconWrapper {
+    @extend .radius-full;
+
+    background-color: $neutral_700;
+    display: inline-block;
+
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media (min-width: 768px) {
+        width: 80px;
+        height: 80px;
+    }
+
+    @media (min-width: 1280px) {
+        background-color: unset;
+        width: auto;
+        height: auto;
+    }
+}
+
+
+.footerItemWrapper {
+    display: flex;
+    align-items: center;
+
+    column-gap: 10px;
+
+    @media (min-width: 768px) {
+        flex-direction: column;
+
+        row-gap: 10px;
+    }
+
+    @media (min-width: 1280px) {
+        flex-direction: row;
+        column-gap: 15px;
+    }
+}
+
+
+.footerText {
+    @extend .body-16-magra-bold;
+    @extend .lightText;
+
+    @media (min-width: 1280px) {
+        font-size: 20px;
+    }
+}

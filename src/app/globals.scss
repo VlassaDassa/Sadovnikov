@@ -1,6 +1,8 @@
-@use './../assets/styles/tokens/colors';
-@use './../assets/styles/tokens/typography';
-@use './../assets/styles/tokens/effects';
+@use './_reset';
+
+@use './../styles/tokens/colors';
+@use './../styles/tokens/typography';
+@use './../styles/tokens/effects';
 
 html {
     font-size: 16px;

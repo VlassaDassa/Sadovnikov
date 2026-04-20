@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 
-import './index.scss';
+import style from './index.module.scss';
 
 
     
@@ -189,11 +189,11 @@ const Canvas: React.FC<CanvasProps> = ({
 
     return (
         <div 
-            className={`canvasWrapper ${className}`}
+            className={`${style.canvasWrapper} ${className}`}
         >
             <div
                 ref={canvasRef}
-                className="canvasContainer"
+                className={style.canvasContainer}
                 onMouseDown={handleMouseDown}
                 onMouseMove={handleMouseMove}
                 onMouseUp={handleMouseUp}
@@ -203,7 +203,7 @@ const Canvas: React.FC<CanvasProps> = ({
             >
                 <div 
                     ref={contentRef}
-                    className="canvasContent"
+                    className={style.canvasContent}
                     style={{
                         transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
                         transformOrigin: '0 0',
@@ -215,25 +215,25 @@ const Canvas: React.FC<CanvasProps> = ({
                     {children}
                 </div>    
 
-                <div className="zoomInfo">{Math.round(scale * 100)}%</div>
+                <div className={style.zoomInfo}>{Math.round(scale * 100)}%</div>
 
                 {manualShow && (
-                    <div className="canvasManual">
-                        <div className="manualElement">
-                            <span className="manualKey">CTRL</span>
-                            <span className="manualText">+</span>
-                            <span className="manualKey">Wheel</span>
-                            <span className="manualText">- scaling</span>
+                    <div className={style.canvasManual}>
+                        <div className={style.manualElement}>
+                            <span className={style.manualKey}>CTRL</span>
+                            <span className={style.manualText}>+</span>
+                            <span className={style.manualKey}>Wheel</span>
+                            <span className={style.manualText}>- scaling</span>
                         </div>
 
-                        <div className="manualElement">
-                            <span className="manualKey">Space</span>
-                            <span className="manualText">+</span>
-                            <span className="manualKey">Drag</span>
-                            <span className="manualText">- moving across the canvas</span>
+                        <div className={style.manualElement}>
+                            <span className={style.manualKey}>Space</span>
+                            <span className={style.manualText}>+</span>
+                            <span className={style.manualKey}>Drag</span>
+                            <span className={style.manualText}>- moving across the canvas</span>
                         </div>
 
-                        <span onClick={closeManual} className="closeManual">×</span>
+                        <span onClick={closeManual} className={style.closeManual}>×</span>
                     </div>
                 )}
             </div>

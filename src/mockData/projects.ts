@@ -1,8 +1,7 @@
-import specTechno from './../assets/images/mockImages/specTecno.png';
 import type { Project } from '../interfaces/general';
 
 
-
+const specTechno = '/images/mockImages/specTecno.png'
 
 export const projects: Project[] = [
     {

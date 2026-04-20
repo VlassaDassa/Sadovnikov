@@ -4,8 +4,8 @@ import Icon from '../../icons/Icon';
 
 import type { Breakpoint } from '../../../interfaces/general';
 
-import cssVars from './../../../assets/styles/__variables.module.scss';
-import './button.scss';
+import cssVars from './../../../styles/__variables.module.scss';
+import style from './button.module.scss';
 
 
 interface ButtonProps {
@@ -51,9 +51,9 @@ const Button: React.FC<ButtonProps> = ({
         iconPosition !== 'only' && behavior !== 'loading' ? 
                 <p 
                     className={`
-                        buttonText 
-                        buttonText-${size} 
-                        buttonText-${variant}
+                        ${style.buttonText} 
+                        ${style[`buttonText-${size}`]} 
+                        ${style[`buttonText-${variant}`]} 
                     `}
                 >
                     {text}
@@ -86,7 +86,7 @@ const Button: React.FC<ButtonProps> = ({
 
     const toolTip = (
         iconPosition === 'only' && tooltipText ?
-            <p role="tooltip" className="shadow-xl radius-4 tooltip whiteText">{tooltipText}</p>
+            <p role="tooltip" className={`shadow-xl radius-4 ${style.tooltip} whiteText`}>{tooltipText}</p>
         :
             null
     )
@@ -96,13 +96,13 @@ const Button: React.FC<ButtonProps> = ({
         <button 
             disabled={behavior === 'disabled'}
             className={`
-                button 
-                button-${size} 
-                button-${behavior} 
-                button-${variant} 
-                button-${iconPosition}-${size} 
-                button-${iconPosition} 
-                button-${additionalClass} 
+                ${style.button} 
+                ${style[`button-${size}`]} 
+                ${style[`button-${behavior}`]} 
+                ${style[`button-${variant}`]} 
+                ${style[`button-${iconPosition}-${size}`]} 
+                ${style[`button-${iconPosition}`]} 
+                ${style[`button-${additionalClass}`]} 
                 radius-10 
             `}
         >
