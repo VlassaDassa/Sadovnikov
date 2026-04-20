@@ -1,0 +1,14 @@
+/* [project]/src/pages/Main/index.scss.css [app-client] (css) */
+.testRectangle {
+  background: #fff;
+  width: 500px;
+  height: 500px;
+}
+
+.zzz {
+  z-index: 10;
+  position: absolute;
+  top: 0;
+}
+
+/*# sourceMappingURL=src_pages_Main_index_scss_css_0w3-wzy._.single.css.map*/

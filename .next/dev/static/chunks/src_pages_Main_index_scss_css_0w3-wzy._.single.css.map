@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///C:/Users/Мой ПК/Desktop/Sadovnikov/src/pages/Main/index.scss"],"sourcesContent":[".testRectangle {\r\n    width: 500px;\r\n    height: 500px;\r\n\r\n    background: white;\r\n}\r\n\r\n.zzz {\r\n    position: absolute;\r\n    top: 0;\r\n    z-index: 10;\r\n}"],"names":[],"mappings":"AAAA;;;;;;AAOA"}}]
+}

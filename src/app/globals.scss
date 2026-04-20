@@ -1,0 +1,34 @@
+@use './../assets/styles/tokens/colors';
+@use './../assets/styles/tokens/typography';
+@use './../assets/styles/tokens/effects';
+
+html {
+    font-size: 16px;
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
+body {
+    overflow-x: hidden;
+    max-width: 100%;
+    position: relative;
+}
+
+.container {
+    width: calc(100% - 16px * 2);
+    margin-left: auto;
+    margin-right: auto;
+
+    @media (min-width: 768px) {
+        width: calc(100% - 32px * 2);
+    }
+
+    @media (min-width: 1280px) {
+        width: 1041px;
+    }
+}
+
+
+.sectionTitle {
+    text-align: center;
+}

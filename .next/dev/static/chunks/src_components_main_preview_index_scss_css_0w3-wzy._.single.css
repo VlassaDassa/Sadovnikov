@@ -1,0 +1,35 @@
+/* [project]/src/components/main/preview/index.scss.css [app-client] (css) */
+.preview {
+  justify-content: center;
+  height: 350px;
+  display: flex;
+  position: relative;
+}
+
+.bgAvatar, .previewAvatar, .avatarFrame, .frameName {
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bgAvatar {
+  width: 273px;
+  height: 278px;
+}
+
+.previewAvatar {
+  width: 147px;
+  height: 221px;
+}
+
+.avatarFrame {
+  width: 153px;
+  height: 272px;
+}
+
+.frameName {
+  top: 270px;
+}
+
+/*# sourceMappingURL=src_components_main_preview_index_scss_css_0w3-wzy._.single.css.map*/

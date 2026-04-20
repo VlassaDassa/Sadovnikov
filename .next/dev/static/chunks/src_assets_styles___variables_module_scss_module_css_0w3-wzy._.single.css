@@ -1,0 +1,36 @@
+/* [project]/src/assets/styles/__variables.module.scss.module.css [app-client] (css) */
+:export {
+  white: #fff;
+  black: #000;
+  neutral_900: #3a3a3a;
+  neutral_800: #515151;
+  neutral_700: #676767;
+  neutral_600: #7e7e7e;
+  neutral_500: #949494;
+  neutral_400: #acacac;
+  neutral_300: #c2c2c2;
+  neutral_200: #dfdfdf;
+  neutral_100: #eaeaea;
+  neutral_50: #fafafa;
+  brand_900: #3f1cdf;
+  brand_800: #5330ef;
+  brand_700: #6d4dff;
+  brand_600: #886eff;
+  brand_500: #a693ff;
+  brand_400: #bbadff;
+  brand_300: #d0c7ff;
+  brand_200: #e3ddff;
+  brand_100: #f1eeff;
+  brand_50: #f7f5ff;
+  error_600: #f4468c;
+  error_400: #ff8fbc;
+  error_50: #ffd2e4;
+  warning_600: #ff652d;
+  warning_400: #ff956e;
+  warning_50: #ffc5b0;
+  info_600: #43a4ff;
+  info_400: #8fc9ff;
+  info_50: #d9edff;
+}
+
+/*# sourceMappingURL=src_assets_styles___variables_module_scss_module_css_0w3-wzy._.single.css.map*/
