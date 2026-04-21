@@ -1,10 +1,16 @@
 @use './../../../styles/tokens/typography' as *;
 @use './../../../styles/tokens/colors' as *;
+@use './../../../styles/tokens/effects' as *;
 
 .myStack {
     position: relative;
 
     top: 50px;
+}
+
+.stackTitle {
+    @extend .heading-24-magra-bold;
+    @extend .whiteText;
 }
 
 .stackHandBg {
@@ -42,6 +48,9 @@
     border-radius: 5px;
 
     display: inline-block;
+
+    @extend .whiteText;
+    @extend .shadow-xl;
 }
 
 

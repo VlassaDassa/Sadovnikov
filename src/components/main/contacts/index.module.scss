@@ -6,6 +6,12 @@
     margin-top: 50px;
 }
 
+
+.contactsTitle {
+    @extend .body-24-magra-bold;
+    @extend .whiteText;
+}
+
 .formContent {
     display: flex;
     flex-direction: column;
@@ -22,12 +28,8 @@
     }
 
     @media (min-width: 1280px) {
-        width: 30%;
+        width: 40%;
     }
-}
-
-.formContent > .inputWrapper {
-    width: 100%;   
 }
 
 

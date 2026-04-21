@@ -1,6 +1,6 @@
 import React from 'react';
 
-import type { Project } from '../../../interfaces/general';
+import type { Project } from '@/interfaces/general';
 
 import style from './index.module.scss';
 
@@ -15,29 +15,26 @@ interface ProjectItemProps {
 const ProjectItem: React.FC<ProjectItemProps> = ({ project, index=1 }) => {
 
     return (
-        <div className={`shadow-xl projectItem`} style={{top: '200px', left: `${600 * index}px` }}>
-            <img src={project.img} alt={project.name} className={'projectImg radius-12'} />
-            <p className="whiteText projectCategory glass radius-6">{project.category}</p>
+        <div className={style.projectItem} style={{top: '200px', left: `${600 * index}px` }}>
+            <img src={project.img} alt={project.name} className={style.projectImg} />
+            <p className={style.projectCategory}>{project.category}</p>
 
-            <div className="projectContentContainer">
-                <div className="projectText">
-                    <p className="projectName whiteText">{project.name}</p>
-                    <p className="projectDescription lightText">{project.shortDescrition}</p>
+            <div className={style.projectContentContainer}>
+                <div className={style.projectText}>
+                    <p className={style.projectName}>{project.name}</p>
+                    <p className={style.projectDescription}>{project.shortDescrition}</p>
                 </div>
 
-                <div className="projectStack">
+                <div className={style.projectStack}>
                     {
                         project.stack.map((item, index) => (
-                            <p key={item} className="projectStackItem whiteText">
+                            <p key={item} className={style.projectStackItem}>
                                 {item}
                             </p>
                         ))
                     }
-                    
                 </div>
             </div>
-
-
         </div>
     )
 } 

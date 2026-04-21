@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import type { Breakpoint } from '../interfaces/general';
+import type { Breakpoint } from '@/interfaces/general';
 
 
 

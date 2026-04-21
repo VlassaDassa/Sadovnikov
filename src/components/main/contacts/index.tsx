@@ -4,7 +4,7 @@ import Input from '../../general/input';
 import DecorButton from '../../general/button/DecorButton';
 import StatusMessage from '../../general/statusMessage';
 
-import type { Breakpoint } from '../../../interfaces/general';
+import type { Breakpoint } from '@/interfaces/general';
 
 import styles from './index.module.scss';
 
@@ -130,7 +130,7 @@ const Contacts: React.FC<ContactsProps> = ({ breakpoint }) => {
     return (
         <section className={`container ${styles.contacts}`}>
             
-            <h2 className="body-24-magra-bold sectionTitle whiteText">CONTACTS</h2>
+            <h2 className={`${styles.contactsTitle} sectionTitle`}>CONTACTS</h2>
 
             <StatusMessage 
                 text={statusMessageText}
@@ -139,7 +139,7 @@ const Contacts: React.FC<ContactsProps> = ({ breakpoint }) => {
             
             />
 
-            <form className={styles.contactForm}>
+            <form>
                 <div className={styles.formContent}>
                     <Input 
                         name='name'

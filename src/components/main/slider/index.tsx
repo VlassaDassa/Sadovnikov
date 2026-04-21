@@ -3,11 +3,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Pagination } from 'swiper/modules';
 
 import ProjectItem from '../projectItem';
-import type { Project } from '../../../interfaces/general';
+import type { Project } from '@/interfaces/general';
 
 import 'swiper/css/effect-coverflow';
 import 'swiper/css';
-import './index.scss';
+import style from './index.module.scss';
 
 
 
@@ -27,7 +27,7 @@ const Slider: React.FC<SliderProps> = ({ projects }) => {
             spaceBetween={-20}
             slidesPerView={1.5}
             centeredSlides={true}
-            className="slider"
+            className={style.slider}
 
             effect={'coverflow'}
             grabCursor={true}
@@ -47,28 +47,25 @@ const Slider: React.FC<SliderProps> = ({ projects }) => {
             
         >
             {projects.map(project => (
-                <SwiperSlide key={project.id} className={`sliderItem radius-12`}>
+                <SwiperSlide key={project.id} className={`${style.sliderItem}`}>
                     <ProjectItem project={project} />
                 </SwiperSlide>
             ))}
 
-            <div className="sliderPgnWrapper">
+            <div className={style.sliderPgnWrapper}>
                 {
                     Array.from({ length: totalCountItems }).map((item, index) => (
                         <div 
                             key={index}
                             className={`
-                                sliderPgnItem 
-                                radius-full 
-                                ${index+1 === curIndex ? 'sliderPgnItem-current' : ''} 
+                                ${style.sliderPgnItem} 
+                                ${index+1 === curIndex ? style['sliderPgnItem-current'] : ''} 
                             `}>
 
                         </div>
                     ))
                 }
             </div>  
-
-            
         </Swiper>
     )
 }

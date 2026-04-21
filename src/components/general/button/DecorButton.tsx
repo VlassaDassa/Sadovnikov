@@ -2,16 +2,16 @@ import React from 'react';
 
 import Icon from '../../icons/Icon';
 
-import type { Breakpoint } from '../../../interfaces/general';
+import type { Breakpoint } from '@/interfaces/general';
 
-import cssVars from './../../../styles/__variables.module.scss';
+import { cssVars } from "@/styles/cssVariables";
 import style from './decorButton.module.scss';
 
 
 const bigBgBtn = '/images/button/bg_big_btn.png';
 const mediumBgBtn = '/images/button/bg_medium_btn.png';
 const smallBgBtn = '/images/button/bg_small_btn.png';
-const indexFinger = '/images/button/index_finger.png';
+const indexFinger = '/images/main/index_finger.png';
 
 interface DecorativeText {
     default: string,
@@ -41,6 +41,7 @@ const DecorButton: React.FC<DecorButtonProps> = ({
     breakpoint
 }) => {
 
+
     const size = breakpoint === 'desktop' ? 'big' :
                                 breakpoint === 'tablet' ? 'medium' : 'small'
     
@@ -52,6 +53,7 @@ const DecorButton: React.FC<DecorButtonProps> = ({
 
     // Определение размера декоративного Loader
     const defineSizeLoader = () => {
+
         if (variant === 'big') {
             // Размер для большого варианта
             if (size === 'big') {
@@ -85,13 +87,12 @@ const DecorButton: React.FC<DecorButtonProps> = ({
                     <Icon 
                         name='loader'
                         strokeColor={cssVars.white}
-                        iconClass='btnLoader'
+                        iconClass={style.btnLoader}
                         size={defineSizeLoader()}
                     />
                 :
                     <p 
-                        className={`whiteText 
-                            ${style.textDecorBtn} 
+                        className={`${style.textDecorBtn} 
                             ${style[`textDecorBtn-${variant}`]} 
                             ${style[`textDecorBtn-${variant}-${size}`]} 
                         `}
@@ -118,7 +119,6 @@ const DecorButton: React.FC<DecorButtonProps> = ({
 
                         <p 
                             className={`${style.decorBtnLabel} 
-                                lightText 
                                 ${style[`decorBtnLabel_${size}`]} 
                             `}
                         >

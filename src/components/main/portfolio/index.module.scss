@@ -1,3 +1,13 @@
+@use './../../../styles/tokens/typography' as *;
+@use './../../../styles/tokens/effects' as *;
+
+
 .portfolio {
     margin-top: 50px;
+}
+
+
+.portfolioTitle {
+    @extend .heading-32-magra-bold;
+    @extend .whiteText;
 }

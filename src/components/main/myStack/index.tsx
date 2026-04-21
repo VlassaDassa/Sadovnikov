@@ -2,8 +2,8 @@ import React, { useRef, useEffect } from 'react';
 
 import style from './index.module.scss';
 
-import { randomPlacementItems } from '../../../services/stack';
-import { stack } from '../../../mockData/stack';
+import { randomPlacementItems } from '@/services/stack';
+import { stack } from '@/mockData/stack';
 
 
 const hand = '/images/main/hand.png'
@@ -20,14 +20,14 @@ const MyStack: React.FC = () => {
 
 	return (
 		<section className={`${style.myStack} container`}>
-			<h2 className="heading-24-magra-bold whiteText sectionTitle">MY STACK</h2>
+			<h2 className={`sectionTitle ${style.stackTitle}`}>MY STACK</h2>
 			<img className={style.stackHandBg} src={hand} alt="" aria-hidden="true" />
 
 			<div className={style.stackWrapper} ref={wrapperRef}>
 				{stack.map((item, index) => (
 					<div
 						key={item.id}
-						className={`${style.stackItem} whiteText shadow-xl`}
+						className={style.stackItem}
 						ref={(el) => {
 							itemsRef.current[index] = el
 						}}

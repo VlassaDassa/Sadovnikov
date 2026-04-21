@@ -39,3 +39,10 @@
     row-gap: 10px;
 }
 
+
+.aboutMeTitle {
+    @extend .heading-24-magra-bold;
+    @extend .whiteText;
+}
+
+

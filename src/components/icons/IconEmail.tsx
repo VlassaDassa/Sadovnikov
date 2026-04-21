@@ -1,6 +1,6 @@
 import React from 'react';
 
-import type { IconItem } from '../../interfaces/general';
+import type { IconItem } from '@/interfaces/general';
 
 
 const IconEmail: React.FC<IconItem> = ({ strokeColor, fillColor, iconClass, size }) => {

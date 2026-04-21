@@ -2,9 +2,9 @@ import React from 'react';
 
 import Icon from '../../icons/Icon';
 
-import type { Breakpoint } from '../../../interfaces/general';
+import type { Breakpoint } from '@/interfaces/general';
 
-import cssVars from './../../../styles/__variables.module.scss';
+import { cssVars } from '@/styles/cssVariables';
 import style from './button.module.scss';
 
 
@@ -86,7 +86,7 @@ const Button: React.FC<ButtonProps> = ({
 
     const toolTip = (
         iconPosition === 'only' && tooltipText ?
-            <p role="tooltip" className={`shadow-xl radius-4 ${style.tooltip} whiteText`}>{tooltipText}</p>
+            <p role="tooltip" className={style.tooltip}>{tooltipText}</p>
         :
             null
     )
@@ -103,7 +103,6 @@ const Button: React.FC<ButtonProps> = ({
                 ${style[`button-${iconPosition}-${size}`]} 
                 ${style[`button-${iconPosition}`]} 
                 ${style[`button-${additionalClass}`]} 
-                radius-10 
             `}
         >
             {contentButton}

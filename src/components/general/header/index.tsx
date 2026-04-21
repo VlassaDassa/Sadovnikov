@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import DecorButton from '../button/DecorButton';
-import type { Breakpoint } from '../../../interfaces/general';
+import type { Breakpoint } from '@/interfaces/general';
 
 import style from './index.module.scss';
 
@@ -27,7 +27,6 @@ const SelectLang: React.FC<SelectLangProps> = ({ show, onClick }) => {
                 className={style.selectLangItem}
                 onClick={onClick}
             >
-                
                     Русский 
                 <span className={style.spanLang}>RU</span>
             </p>
@@ -67,7 +66,7 @@ const Header: React.FC<HeaderProps> = ({ breakpoint }) => {
             </a>
 
             <button 
-                className={`${style.btnBurger} radius-full`}
+                className={style.btnBurger}
                 aria-label="Открыть меню"
             >
                 <span className="radius-12"></span>

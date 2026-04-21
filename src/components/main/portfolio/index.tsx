@@ -4,9 +4,9 @@ import Canvas from '../canvas';
 import Slider from '../slider';
 import ProjectItem from '../projectItem';
 
-import type { Breakpoint } from '../../../interfaces/general';
+import type { Breakpoint } from '@/interfaces/general';
 
-import { projects } from '../../../mockData/projects';
+import { projects } from '@/mockData/projects';
 
 import style from './index.module.scss';
 
@@ -32,10 +32,9 @@ const Portfolio: React.FC<PortfolioProps> = ({ breakpoint }) => {
 
     return (
         <section className={style.portfolio}>
-            <h2 className="heading-32-magra-bold whiteText sectionTitle">PORTFOLIO</h2>
+            <h2 className={`sectionTitle ${style.portfolioTitle}`}>PORTFOLIO</h2>
 
             {portfolioContent}
-
         </section>
     )
 }

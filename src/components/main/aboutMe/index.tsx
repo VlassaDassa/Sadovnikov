@@ -2,9 +2,9 @@ import React from 'react';
 
 import DecorButton from '../../general/button/DecorButton';
 
-import { aboutMe } from '../../../mockData/aboutMe';
+import { aboutMe } from '@/mockData/aboutMe';
 
-import type { Breakpoint } from '../../../interfaces/general';
+import type { Breakpoint } from '@/interfaces/general';
 
 import style from './index.module.scss';
 
@@ -18,7 +18,7 @@ const AboutMe: React.FC<AboutMeProps> = ({ breakpoint }) => {
     
     return (
         <section className={`${style.aboutMe} container`}>
-            <h2 className="heading-24-magra-bold whiteText sectionTitle">AboutMe</h2>
+            <h2 className={`${style.aboutMeTitle} sectionTitle`}>AboutMe</h2>
             <div className={style.aboutMeData}>
                 <p className="body-16-magra-bold lightText line-height-1_5x">Year of birth: {aboutMe['birth']}</p>
                 <p className="body-16-magra-bold lightText line-height-1_5x">Place of birth: {aboutMe['placeBirth']}</p>
@@ -31,7 +31,7 @@ const AboutMe: React.FC<AboutMeProps> = ({ breakpoint }) => {
 
                 <div className={style.workExperienceWrapper}>
                     {
-                        aboutMe['workExperience'].map((item, index) => (
+                        aboutMe.workExperience.map((item, index) => (
                             <div key={item.id} className={style.workExperienceItem}>
                                 <h4 className="body-16-magra-bold lightText line-height-1_5x">{item['workingPeriod']}</h4>
                                 <p className="body-16-magra-bold whiteText line-height-1_5x">{item['description']}</p>

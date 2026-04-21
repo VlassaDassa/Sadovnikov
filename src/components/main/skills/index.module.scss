@@ -1,0 +1,135 @@
+@use './../../../styles/tokens/colors' as *;
+@use './../../../styles/tokens/typography' as *;
+
+
+
+
+
+.skills {
+    display: flex;
+    justify-content: center;
+}
+
+
+.skillsWrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+
+}
+
+.skillItem {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+}
+
+
+.skillItemName, .skillScore {
+    @extend .body-16-magra-bold;
+    @extend .lightText;
+}
+
+
+.skillLevel {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+
+
+.skillLevelWrapper {
+    display: flex;
+    column-gap: 5px;
+}
+
+
+.skillLevelItem {
+    width: 20px;
+    height: 5px;
+
+    background-color: $neutral_300;
+
+    border-radius: 1px;
+}
+
+
+.skillLevelItem--filled {
+    background-color: $brand_600;
+}
+
+.vertex, 
+.cursor {
+    display: none;
+}
+
+
+@media (min-width: 430px) {
+    .skillsWrapper {
+        border: 1px #0077FF solid;
+        padding: 30px;
+
+        position: relative;
+    }
+
+
+    .vertex {
+        position: absolute;
+        display: block;
+
+        width: 10px;
+        height: 10px;
+    }
+
+
+    .vertex-1 {
+        top: -5px;
+        left: -5px;
+    }
+
+    .vertex-2 {
+        bottom: -5px;
+        right: -5px;
+    }
+
+    .vertex-3 {
+        bottom: -5px;
+        left: -5px;
+    }
+
+    .vertexSelected {
+        top: -10px;
+        right: -10px;
+
+        width: 15px;
+        height: 15px;
+    }
+
+    .cursor {
+        position: absolute;
+        display: block;
+
+        top: 0;
+        right: -35px;
+
+        width: 40px;
+        height: 40px;
+    }
+}
+
+
+
+@media (min-width: 768px) {
+    .skillItemName, .skillScore {
+        font-size: 1.5rem;
+    }
+
+    .skillLevelItem {
+        width: 30px;
+        height: 10px;
+
+        border-radius: 2px;
+    }
+}
+
+

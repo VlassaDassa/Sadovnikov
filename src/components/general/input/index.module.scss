@@ -7,6 +7,7 @@
 .inputWrapper {
     position: relative;
     height: 80px;
+    width: 100%;
 
     &--textarea {
         height: auto;
@@ -71,6 +72,8 @@
 
 
 
+
+
 .inputIcon {
     position: absolute;
 
@@ -95,6 +98,7 @@
 
 .inputErrorText {
     @extend .body-14-mont-regular;
+    @extend .line-height-1_5x;
     margin-top: 5px;
 
     @media (min-width: 1280px) {

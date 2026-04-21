@@ -2,9 +2,9 @@ import React from "react";
 
 import Icon from "../../icons/Icon";
 
-import type { Breakpoint } from "../../../interfaces/general";
+import type { Breakpoint } from "@/interfaces/general";
 
-import cssVars from './../../../styles/__variables.module.scss';
+import { cssVars } from "@/styles/cssVariables";
 
 import style from './index.module.scss';
 

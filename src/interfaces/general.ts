@@ -1,7 +1,3 @@
-    import { StaticImageData } from "next/image"
-
-
-
 export type Breakpoint = 'desktop' | 'tablet' | 'mobile'
 
 export interface IconItem {

@@ -1,4 +1,4 @@
-import type { Project } from '../interfaces/general';
+import type { Project } from '@/interfaces/general';
 
 
 const specTechno = '/images/mockImages/specTecno.png'

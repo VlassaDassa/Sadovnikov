@@ -1,4 +1,4 @@
-
+@use './../../../styles/tokens/typography' as *;
 
 
 
@@ -39,4 +39,16 @@
 
 .frameName {
     top: 270px;
+
+    @extend .body-20-magra-regular;
+    @extend .darkText;
+
+}
+
+
+.previewTitle {
+    @extend .heading-32-magra-bold;
+    @extend .whiteText;
+
+    font-size: 28px;
 }

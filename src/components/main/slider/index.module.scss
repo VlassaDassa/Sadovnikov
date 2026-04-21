@@ -1,0 +1,65 @@
+@use './../../../styles/tokens/colors' as *;
+@use './../../../styles/tokens/effects' as *;
+
+
+
+.slider {
+    margin-top: 40px;
+}
+
+.swiper-slide-active {
+    transform: unset !important;; 
+
+}
+
+
+.sliderItem {
+    width: 240px;
+    aspect-ratio: 3 / 4;
+
+    @extend .radius-12;
+}
+
+
+.sliderPgnWrapper {
+    display: flex;
+    column-gap: 5px;
+
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 20px;
+
+    @media (min-width: 600px) {
+        column-gap: 10px;
+    }
+}
+
+
+.sliderPgnItem {
+    width: 7px;
+    height: 7px;
+
+    background-color: $brand_300;
+    transition: all 0.3s ease;
+
+    @extend .radius-full;
+
+    @media (min-width: 600px) {
+        width: 15px;
+        height: 15px;
+    }
+} 
+
+
+.sliderPgnItem-current {
+    width: 10px;
+    height: 10px;
+    box-shadow: 0 0 8px rgba($brand_600, 0.6);
+    background-color: $brand_600;
+
+    @media (min-width: 600px) {
+        width: 20px;
+        height: 20px;
+    }
+}

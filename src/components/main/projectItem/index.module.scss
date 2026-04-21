@@ -12,6 +12,7 @@
 
     
     @extend .radius-12;
+    @extend .shadow-xl;
 
 
     @media (min-width: 768px) {
@@ -32,20 +33,25 @@
 
     object-fit: cover;
     object-position: left;
+
+    @extend .radius-12;
 }
 
 
 .projectCategory {
     position: absolute;
-
+    
     background-color: $neutral_900;
-
+    
     top: 10px;
     right: 10px;
-
+    
     padding: 5px 20px;
-
+    
     @extend .body-14-magra-bold;
+    @extend .whiteText;
+    @extend .radius-6;
+    @extend .glass;
 }
 
 
@@ -74,6 +80,7 @@
 
 .projectName {
     @extend .body-16-magra-bold;
+    @extend .whiteText;
 
     @media (min-width: 600px)  {
         font-size: 20px;
@@ -87,6 +94,7 @@
 
 .projectDescription {
     @extend .body-16-magra-regular;
+    @extend .lightText;
 
     @media (min-width: 600px)  {
         font-size: 20px;
@@ -106,6 +114,7 @@
     
     @extend .body-14-magra-regular;
     @extend .radius-4;
+    @extend .whiteText;
 
     display: inline-block;
 

@@ -2,9 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 
 import Icon from '../../icons/Icon';
 
-import type { Breakpoint } from '../../../interfaces/general';
+import type { Breakpoint } from '@/interfaces/general';
 
-import cssVars from './../../../styles/__variables.module.scss';
+import { cssVars } from "@/styles/cssVariables";
 
 import style from './index.module.scss';
 
@@ -112,7 +112,7 @@ const Input: React.FC<InputProps> = ({
     const inputClass = (
         `${style.input} 
         ${style.additionalClass} 
-        ${iconPosition !== style.noIcon ? style.inputWithIcon : ''}  
+        ${iconPosition !== 'noIcon' ? style.inputWithIcon : ''}  
         ${error ? style.inputError : ''} 
         ${type === 'textarea' ? style['input-textarea'] : ''} 
         `

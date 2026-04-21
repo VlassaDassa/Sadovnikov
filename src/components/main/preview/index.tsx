@@ -12,14 +12,14 @@ const bgAvatar = '/images/main/bg_avatar.png'
 const Preview: React.FC = () => {
     return (
         <section className={`${style.preview} container`}>
-            <h1 className="heading-32-magra-bold whiteText">FRONTEND DEVELOPER</h1>
+            <h1 className={style.previewTitle}>FRONTEND DEVELOPER</h1>
 
             <div className={style.avatarWrapper}>
                 <img className={style.bgAvatar} src={bgAvatar} alt="Photo of developer" />
                 <img className={style.previewAvatar} src={avatar} alt="Photo of developer" />
                 <img className={style.avatarFrame} src={avatarFrame} alt="Photo of developer" />
 
-                <p className={`${style.frameName} body-20-magra-regular blackText`}>SADOVNIKOV<br />VLAD</p>
+                <p className={style.frameName}>SADOVNIKOV<br />VLAD</p>
             </div>
         </section>
     )

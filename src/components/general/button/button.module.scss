@@ -13,6 +13,8 @@
     align-items: center;
     column-gap: 5px;
 
+    @extend .radius-10; 
+
     &.button-rightIcon {
         .icon-btn {
             order: 2;
@@ -152,6 +154,10 @@
     background-color: $neutral_900;
 
     @extend .body-16-mont-regular;
+    @extend .shadow-xl;
+    @extend .radius-4;
+    @extend .whiteText;
+    
 
     pointer-events: none;
 
