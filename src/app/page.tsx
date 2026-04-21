@@ -12,9 +12,6 @@ import Contacts from '@/components/main/contacts';
 import Footer from '@/components/general/footer';
 
 
-
-
-
 const Main: React.FC = () => {
     const breakpoint = useBreakpoint()
 
