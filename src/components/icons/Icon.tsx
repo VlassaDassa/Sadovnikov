@@ -6,6 +6,8 @@ import IconLoader from "./IconLoader";
 import IconTelegram from "./IconTelegram";
 import IconPhone from "./IconPhone";
 import IconEmail from "./IconEmail";
+import IconHome from "./IconHome";
+import IconLink from "./IconLink";
 
 
 const icons = {
@@ -14,7 +16,9 @@ const icons = {
     loader: IconLoader,
     telegram: IconTelegram,
     phone: IconPhone,
-    email: IconEmail
+    email: IconEmail,
+    home: IconHome,
+    link: IconLink,
 }
 
 
@@ -22,7 +26,7 @@ interface IconProps {
     name: string;
     strokeColor?: string;
     fillColor?: string;
-    iconClass: string;
+    iconClass?: string;
     size?: number;
 }
 

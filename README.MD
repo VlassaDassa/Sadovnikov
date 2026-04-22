@@ -46,3 +46,136 @@ ICONS
 
 
 
+
+```
+Sadovnikov
+├─ eslint.config.js
+├─ next-env.d.ts
+├─ package.json
+├─ pnpm-lock.yaml
+├─ public
+│  └─ images
+│     ├─ button
+│     │  ├─ bg_big_btn.png
+│     │  ├─ bg_medium_btn.png
+│     │  └─ bg_small_btn.png
+│     ├─ general
+│     │  └─ noize.jpg
+│     ├─ icons
+│     │  ├─ close.svg
+│     │  ├─ email.svg
+│     │  ├─ home.svg
+│     │  ├─ link_arrow.svg
+│     │  ├─ loader.svg
+│     │  ├─ menu_burger.svg
+│     │  ├─ phone.svg
+│     │  └─ telegram.svg
+│     ├─ main
+│     │  ├─ avatar.png
+│     │  ├─ avatar_frame.png
+│     │  ├─ avatar_without_jaw.png
+│     │  ├─ bg_avatar.png
+│     │  ├─ cloud.png
+│     │  ├─ cursor.svg
+│     │  ├─ hand.png
+│     │  ├─ index_finger.png
+│     │  ├─ jaw.png
+│     │  ├─ vertex.svg
+│     │  └─ vertex_selected.svg
+│     └─ mockImages
+│        └─ specTecno.png
+├─ README.MD
+├─ src
+│  ├─ app
+│  │  ├─ globals.scss
+│  │  ├─ layout.tsx
+│  │  ├─ page.tsx
+│  │  ├─ testPage
+│  │  │  └─ page.tsx
+│  │  └─ __reset.scss
+│  ├─ App.tsx
+│  ├─ components
+│  │  ├─ general
+│  │  │  ├─ BreakpointProvider
+│  │  │  │  └─ BreakpointProvider.tsx
+│  │  │  ├─ button
+│  │  │  │  ├─ button.module.scss
+│  │  │  │  ├─ Button.tsx
+│  │  │  │  ├─ decorButton.module.scss
+│  │  │  │  └─ DecorButton.tsx
+│  │  │  ├─ footer
+│  │  │  │  ├─ index.module.scss
+│  │  │  │  └─ index.tsx
+│  │  │  ├─ header
+│  │  │  │  ├─ index.module.scss
+│  │  │  │  └─ index.tsx
+│  │  │  ├─ input
+│  │  │  │  ├─ index.module.scss
+│  │  │  │  └─ index.tsx
+│  │  │  └─ statusMessage
+│  │  │     ├─ index.module.scss
+│  │  │     └─ index.tsx
+│  │  ├─ icons
+│  │  │  ├─ Icon.tsx
+│  │  │  ├─ IconBell.tsx
+│  │  │  ├─ IconEmail.tsx
+│  │  │  ├─ IconLoader.tsx
+│  │  │  ├─ IconPhone.tsx
+│  │  │  ├─ IconTelegram.tsx
+│  │  │  └─ IconTrash.tsx
+│  │  └─ main
+│  │     ├─ aboutMe
+│  │     │  ├─ index.module.scss
+│  │     │  └─ index.tsx
+│  │     ├─ canvas
+│  │     │  ├─ index.module.scss
+│  │     │  └─ index.tsx
+│  │     ├─ contacts
+│  │     │  ├─ index.module.scss
+│  │     │  └─ index.tsx
+│  │     ├─ myStack
+│  │     │  ├─ index.module.scss
+│  │     │  └─ index.tsx
+│  │     ├─ portfolio
+│  │     │  ├─ index.module.scss
+│  │     │  └─ index.tsx
+│  │     ├─ preview
+│  │     │  ├─ index.module.scss
+│  │     │  └─ index.tsx
+│  │     ├─ projectItem
+│  │     │  ├─ index.module.scss
+│  │     │  └─ index.tsx
+│  │     ├─ skills
+│  │     │  ├─ index.module.scss
+│  │     │  └─ index.tsx
+│  │     ├─ slider
+│  │     │  ├─ index.module.scss
+│  │     │  └─ index.tsx
+│  │     └─ talkingAvatar
+│  │        ├─ index.module.scss
+│  │        └─ index.tsx
+│  ├─ interfaces
+│  │  └─ general.ts
+│  ├─ mockData
+│  │  ├─ aboutMe.ts
+│  │  ├─ projects.ts
+│  │  ├─ skills.ts
+│  │  └─ stack.ts
+│  ├─ next.config.mjs
+│  ├─ services
+│  │  └─ stack.ts
+│  ├─ store
+│  │  ├─ index.ts
+│  │  ├─ Providers.tsx
+│  │  └─ slices
+│  │     └─ breakpointSlice.ts
+│  └─ styles
+│     ├─ cssVariables.ts
+│     └─ tokens
+│        ├─ _breakpoints.scss
+│        ├─ _colors.scss
+│        ├─ _effects.scss
+│        └─ _typography.scss
+└─ tsconfig.json
+
+```

@@ -1,8 +1,11 @@
 'use client'
 
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import DecorButton from '../button/DecorButton';
+
+import { toggleMenu, toggleIsOverlayVisible } from '@/store/slices/uiSlice'; 
 
 import style from './index.module.scss';
 
@@ -46,6 +49,8 @@ const Header: React.FC = () => {
     const [selectLangShow, setSelectLangShow] = useState<boolean>(false)
     const [curLang, setCurLang] = useState<string>('RU')
 
+    const dispatch = useDispatch()
+
     const toggleLang = () => {
         setSelectLangShow(prev => !prev);
     };
@@ -54,6 +59,11 @@ const Header: React.FC = () => {
         const newLang = String(e.currentTarget.getAttribute('data-lang')) 
         setCurLang(newLang)
         toggleLang()
+    }
+
+    const burgerClickHandler = () => {
+        dispatch(toggleMenu())
+        dispatch(toggleIsOverlayVisible())
     }
 
     return (
@@ -67,6 +77,7 @@ const Header: React.FC = () => {
             <button 
                 className={style.btnBurger}
                 aria-label="Открыть меню"
+                onClick={burgerClickHandler}
             >
                 <span className="radius-12"></span>
                 <span className="radius-12"></span>
