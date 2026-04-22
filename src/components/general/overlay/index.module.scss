@@ -1,0 +1,29 @@
+@use './../../../styles/tokens/effects' as *;
+@use './../../../styles/tokens/colors' as *;
+
+
+
+
+.overlay {
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    z-index: 8;
+
+    background-color: $black;
+    
+    @extend .glass;
+
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+    pointer-events: none;
+}
+
+
+.overlayShow {
+    opacity: 0.9;
+    pointer-events: all;
+    cursor: pointer;
+}

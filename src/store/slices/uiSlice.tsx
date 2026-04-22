@@ -23,8 +23,12 @@ const uiSlice = createSlice({
         toggleMenu: (state) => {
             state.isMenuOpen = !state.isMenuOpen
         },
+
+        closeMenu: (state) => {
+            state.isMenuOpen = false
+        },
     },
 })
 
-export const { toggleIsOverlayVisible, toggleMenu } = uiSlice.actions;
+export const { toggleIsOverlayVisible, toggleMenu, closeMenu } = uiSlice.actions;
 export default uiSlice.reducer;
