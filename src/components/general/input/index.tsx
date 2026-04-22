@@ -1,11 +1,11 @@
-"use client"
+'use client'
 
 import React, { useState, useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
 
 import Icon from '../../icons/Icon';
 
-import type { Breakpoint } from '@/interfaces/general';
-
+import { RootState } from '@/store';
 import { cssVars } from "@/styles/cssVariables";
 
 import style from './index.module.scss';
@@ -24,7 +24,6 @@ interface InputProps {
     type?: 'text' | 'textarea' | 'email' | 'password',
     iconPosition: 'noIcon' | 'iconLeft' | 'iconRight' | 'iconBoth',
     value?: string,
-    breakpoint: Breakpoint,
     maxLen?: number,
 
     error?: string,
@@ -41,7 +40,6 @@ const Input: React.FC<InputProps> = ({
     additionalClass='',
     icon,
     iconPosition,
-    breakpoint,
     maxLen,
 
     error,
@@ -49,6 +47,7 @@ const Input: React.FC<InputProps> = ({
 }) => {
     const [isHovered, setIsHovered] = useState<boolean>(false)
     const textAreaRef = useRef<HTMLTextAreaElement>(null)
+    const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
 
     useEffect(() => {
         if (type === 'textarea' && textAreaRef.current) {

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Providers } from "@/store/Providers";
 import './globals.scss';
 
 
@@ -16,7 +17,9 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body>
-                {children}
+                <Providers>
+                    {children}
+                </Providers>
             </body>
         </html>
     )

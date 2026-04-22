@@ -1,8 +1,11 @@
+'use client'
+
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import Icon from '../../icons/Icon';
 
-import type { Breakpoint } from '@/interfaces/general';
+import { RootState } from '@/store';
 
 import { cssVars } from "@/styles/cssVariables";
 import style from './decorButton.module.scss';
@@ -27,7 +30,6 @@ interface DecorButtonProps {
     additionalClass?: string;
 
     onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
-    breakpoint: Breakpoint;
 };
 
 
@@ -38,8 +40,9 @@ const DecorButton: React.FC<DecorButtonProps> = ({
 
     additionalClass,
     onClick,
-    breakpoint
 }) => {
+    const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
+
 
 
     const size = breakpoint === 'desktop' ? 'big' :

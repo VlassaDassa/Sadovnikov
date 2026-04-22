@@ -1,23 +1,22 @@
+'use client' // <- в футере нет ничего важного, для SEO некритично (?), а переделывать Icon накладно
+
 import React from "react";
+import { useSelector } from "react-redux";
 
 import Icon from "../../icons/Icon";
 
-import type { Breakpoint } from "@/interfaces/general";
-
+import { RootState } from "@/store";
 import { cssVars } from "@/styles/cssVariables";
 
 import style from './index.module.scss';
 
 
 
-interface FooterProps {
-    breakpoint: Breakpoint;
-}
 
-
-const Footer: React.FC<FooterProps> = ({ breakpoint }) => {
+const Footer: React.FC = () => {
 
     const iconSize = () => {
+        const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
         return breakpoint === 'mobile' ? 20 : 32
     }
 

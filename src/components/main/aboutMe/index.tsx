@@ -1,20 +1,16 @@
+'use client'
+
 import React from 'react';
 
 import DecorButton from '../../general/button/DecorButton';
 
 import { aboutMe } from '@/mockData/aboutMe';
 
-import type { Breakpoint } from '@/interfaces/general';
-
 import style from './index.module.scss';
 
 
-interface AboutMeProps {
-    breakpoint: Breakpoint,
-}
 
-
-const AboutMe: React.FC<AboutMeProps> = ({ breakpoint }) => {
+const AboutMe: React.FC = () => {
     
     return (
         <section className={`${style.aboutMe} container`}>
@@ -55,7 +51,6 @@ const AboutMe: React.FC<AboutMeProps> = ({ breakpoint }) => {
                     alter: 'MY LONG STORY, IF YOU INTERESTED',
                 }}
                 additionalClass='aboutMe'
-                breakpoint={breakpoint}
             />
             
         </section>

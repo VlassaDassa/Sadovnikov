@@ -1,4 +1,4 @@
-`use client`
+'use client'
 
 import React, { useState, useEffect, useRef } from 'react';
 
@@ -6,15 +6,9 @@ import Input from '../../general/input';
 import DecorButton from '../../general/button/DecorButton';
 import StatusMessage from '../../general/statusMessage';
 
-import type { Breakpoint } from '@/interfaces/general';
-
 import styles from './index.module.scss';
 
 
-
-interface ContactsProps {
-    breakpoint: Breakpoint
-}
 
 interface Errors {
     name: string,
@@ -23,7 +17,7 @@ interface Errors {
 }
 
 
-const Contacts: React.FC<ContactsProps> = ({ breakpoint }) => {
+const Contacts: React.FC= () => {
     const [name, setName] = useState<string>('')
     const [email, setEmail] = useState<string>('')
     const [message, setMessage] = useState<string>('')
@@ -124,8 +118,6 @@ const Contacts: React.FC<ContactsProps> = ({ breakpoint }) => {
                 setStatusMessageShow(false)
             }, 3000)
         }, 3000)
-        
-        
     }
 
 
@@ -150,7 +142,6 @@ const Contacts: React.FC<ContactsProps> = ({ breakpoint }) => {
                         iconPosition='noIcon'
                         error={error.name}
                         onChange={handleNameChange}
-                        breakpoint={breakpoint}
                     />
 
                     <Input 
@@ -161,7 +152,6 @@ const Contacts: React.FC<ContactsProps> = ({ breakpoint }) => {
                         iconPosition='noIcon'
                         error={error.email}
                         onChange={handleEmailChange}
-                        breakpoint={breakpoint}
                     />
 
                     <Input 
@@ -172,7 +162,6 @@ const Contacts: React.FC<ContactsProps> = ({ breakpoint }) => {
                         iconPosition='noIcon'
                         error={error.message}
                         onChange={handleMessageChange}
-                        breakpoint={breakpoint}
                         maxLen={300}
                     />
 
@@ -181,7 +170,6 @@ const Contacts: React.FC<ContactsProps> = ({ breakpoint }) => {
                         variant='medium'
                         text={ {default: 'Send', alter: 'Send'} }
                         additionalClass={styles.contactFormBtn}
-                        breakpoint={breakpoint}
                         onClick={submitForm}
                     />
                 </div>

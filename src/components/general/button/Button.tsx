@@ -1,8 +1,11 @@
+'use client'
+
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import Icon from '../../icons/Icon';
 
-import type { Breakpoint } from '@/interfaces/general';
+import { RootState } from '@/store';
 
 import { cssVars } from '@/styles/cssVariables';
 import style from './button.module.scss';
@@ -19,7 +22,6 @@ interface ButtonProps {
     tooltipText?: string;
     icon?: string;
     onClick?: () => void;
-    breakpoint: Breakpoint;
 };
 
 
@@ -33,9 +35,9 @@ const Button: React.FC<ButtonProps> = ({
         icon,
         tooltipText,
         onClick,
-        
-        breakpoint
     }) => {
+
+    const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
     
     const size = breakpoint === 'desktop' ? 'big' :
                             breakpoint === 'tablet' ? 'medium' : 'small'

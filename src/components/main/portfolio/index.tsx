@@ -1,21 +1,22 @@
+'use client'
+
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import Canvas from '../canvas';
 import Slider from '../slider';
 import ProjectItem from '../projectItem';
 
-import type { Breakpoint } from '@/interfaces/general';
-
+import { RootState } from '@/store';
 import { projects } from '@/mockData/projects';
 
 import style from './index.module.scss';
 
-interface PortfolioProps {
-    breakpoint: Breakpoint;
-}
 
 
-const Portfolio: React.FC<PortfolioProps> = ({ breakpoint }) => {
+const Portfolio: React.FC= () => {
+    const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
+
 
     const portfolioContent = (
         breakpoint === 'mobile' ? 

@@ -1,17 +1,14 @@
-`use client`
+'use client'
 
 import React, { useState } from 'react';
 
 import DecorButton from '../button/DecorButton';
-import type { Breakpoint } from '@/interfaces/general';
 
 import style from './index.module.scss';
 
 
 
-interface HeaderProps {
-    breakpoint: Breakpoint
-}
+
 
 interface SelectLangProps {
     show: boolean,
@@ -45,10 +42,10 @@ const SelectLang: React.FC<SelectLangProps> = ({ show, onClick }) => {
 }
 
 
-const Header: React.FC<HeaderProps> = ({ breakpoint }) => {
+const Header: React.FC = () => {
     const [selectLangShow, setSelectLangShow] = useState<boolean>(false)
     const [curLang, setCurLang] = useState<string>('RU')
-    
+
     const toggleLang = () => {
         setSelectLangShow(prev => !prev);
     };
@@ -103,9 +100,7 @@ const Header: React.FC<HeaderProps> = ({ breakpoint }) => {
                                 alter: curLang
                             }}
                             additionalClass='changeLang'
-                            breakpoint={breakpoint}
                             onClick={toggleLang}
-
                         />
 
                         <SelectLang show={selectLangShow} onClick={changeLang}  />
