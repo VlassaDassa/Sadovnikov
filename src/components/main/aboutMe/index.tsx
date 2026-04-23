@@ -3,6 +3,7 @@
 import React from 'react';
 
 import DecorButton from '../../general/button/DecorButton';
+import AboutIllustration from '../aboutIllustration';
 
 import { aboutMe } from '@/mockData/aboutMe';
 
@@ -11,26 +12,29 @@ import style from './index.module.scss';
 
 
 const AboutMe: React.FC = () => {
-    
+
     return (
         <section className={`${style.aboutMe} container`}>
             <h2 className={`${style.aboutMeTitle} sectionTitle`}>AboutMe</h2>
+
+            <AboutIllustration />
+
             <div className={style.aboutMeData}>
-                <p className="body-16-magra-bold lightText line-height-1_5x">Year of birth: {aboutMe['birth']}</p>
-                <p className="body-16-magra-bold lightText line-height-1_5x">Place of birth: {aboutMe['placeBirth']}</p>
-                <p className="body-16-magra-bold lightText line-height-1_5x">Education: {aboutMe['education']}</p>
-                <p className="body-16-magra-bold lightText line-height-1_5x">Location: {aboutMe['location']}</p>
+                <p className={style.text}>Year of birth: {aboutMe['birth']}</p>
+                <p className={style.text}>Place of birth: {aboutMe['placeBirth']}</p>
+                <p className={style.text}>Education: {aboutMe['education']}</p>
+                <p className={style.text}>Location: {aboutMe['location']}</p>
             </div>
 
             <div className={style.workExperience}>
-                <h3 className="heading-20-magra-bold whiteText">WORK EXPERIENCE</h3>
+                <h3 className={style.textTitle}>WORK EXPERIENCE</h3>
 
                 <div className={style.workExperienceWrapper}>
                     {
                         aboutMe.workExperience.map((item, index) => (
                             <div key={item.id} className={style.workExperienceItem}>
-                                <h4 className="body-16-magra-bold lightText line-height-1_5x">{item['workingPeriod']}</h4>
-                                <p className="body-16-magra-bold whiteText line-height-1_5x">{item['description']}</p>
+                                <h4 className={style.text}>{item['workingPeriod']}</h4>
+                                <p className={style.description}>{item['description']}</p>
                             </div>
                         ))
                     }
@@ -39,8 +43,8 @@ const AboutMe: React.FC = () => {
             </div>
 
             <div className={style.shortBio}>
-                <h3 className="heading-20-magra-bold whiteText">SHORT BIO</h3>
-                <p className="body-16-magra-bold whiteText line-height-1_5x">{aboutMe['shortBio']}</p>
+                <h3 className={style.textTitle}>SHORT BIO</h3>
+                <p className={style.text}>{aboutMe['shortBio']}</p>
             </div>
 
             <DecorButton 

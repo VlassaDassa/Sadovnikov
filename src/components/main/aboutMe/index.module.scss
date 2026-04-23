@@ -3,6 +3,20 @@
 
 .aboutMe {
     margin-top: 80px;
+
+    @media (min-width: 768px) {
+        margin-top: 120px;
+        margin-bottom: 200px;
+    }
+
+    @media (min-width: 1000px) {
+        margin-top: 200px;
+    }
+
+    @media (min-width: 1280px) {
+        margin-top: 0px;
+        margin-bottom: 300px;
+    }
 }
 
 
@@ -19,6 +33,46 @@
     margin-bottom: 40px;
 
     row-gap: 5px;
+
+    @media (min-width: 1280px) {
+        display: none;
+    }
+}
+
+.text, .description, .textTitle {
+    @extend .body-16-magra-bold;
+    @extend .lightText;
+    @extend .line-height-1_5x;
+}
+
+.description {
+    @extend .whiteText;
+}
+
+.textTitle {
+    @extend .whiteText;
+    font-size: 20px;
+}
+
+@media (min-width: 768px) {
+    .text, .description {
+        font-size: 20px;
+    }
+
+    .textTitle {
+        font-size: 24px;
+    }
+}
+
+
+@media (min-width: 1280px) {
+    .text, .description {
+        font-size: 24px;
+    }
+
+    .textTitle {
+        font-size: 32px;
+    }
 }
 
 
@@ -50,6 +104,8 @@
 
     @media (min-width: 1280px) {
         font-size: 40px;
+
+        margin-bottom: 80px;
     }
 }
 
