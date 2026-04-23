@@ -6,6 +6,7 @@ interface TalkingAvatarProps {
     hand: boolean,
     indexFinger: boolean,
     text: string,
+    additionalClass?: string,
 }
 
 const avatarPic = '/images/main/avatar_without_jaw.png';
@@ -17,10 +18,10 @@ const cloudPic = '/images/main/cloud.png';
 
 
 const TalkingAvatar: React.FC<TalkingAvatarProps> = (props) => {
-    const {hand, indexFinger, text} = props;
+    const {hand, indexFinger, text, additionalClass} = props;
     
     return (
-        <div className={style.talkingAvatarWrapper}>
+        <div className={`${style.talkingAvatarWrapper} ${additionalClass}`}>
             <img className={style.avatarPic} src={avatarPic} alt="Photo of developer" aria-hidden='true' />
             <img className={style.jawPic} src={jawPic} alt="" aria-hidden='true' />
 

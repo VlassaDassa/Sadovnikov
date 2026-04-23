@@ -57,7 +57,11 @@ const Skills: React.FC = () => {
             </div>
 
             <div className={style.avatarWrapper}>
-                <TalkingAvatar hand={true} indexFinger={true} text="This is how I evaluate my skills..." />
+                <TalkingAvatar
+                    hand={true} 
+                    indexFinger={true} 
+                    text="This is how I evaluate my skills..." 
+                />
             </div>
         </section>
     )
