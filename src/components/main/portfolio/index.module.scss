@@ -10,4 +10,12 @@
 .portfolioTitle {
     @extend .heading-32-magra-bold;
     @extend .whiteText;
+
+    @media (min-width: 768px) {
+        font-size: 64px;
+    }
+
+    @media (min-width: 1280px) {
+        font-size: 128px;
+    }
 }

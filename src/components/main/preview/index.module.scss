@@ -3,46 +3,115 @@
 
 
 .preview {
-    display: flex;
-    justify-content: center;
-
-    height: 350px;
-
     position: relative;
+
+    margin-top: 0px;
+
+    @media (min-width: 768px) {
+        margin-top: 25px; 
+    }
+    
+    @media (min-width: 1280px) {
+        margin-top: 100px;  
+    }
 }
 
+
+.avatarWrapper {
+    width: 273px;
+    height: 278px;
+
+    margin-top: 100px;
+
+    @media (min-width: 768px) {
+        width: 524px;
+        height: 535px;  
+    }
+    
+    @media (min-width: 1280px) {
+        width: 740px;
+        height: 756px;  
+    }
+}
 
 .bgAvatar, .previewAvatar, .avatarFrame, .frameName {
     position: absolute;
 
     left: 50%;
-    top: 50px;
+    top: 60px;
 
     transform: translateX(-50%);
+
+    @media (min-width: 768px) {
+        top: 150px;
+    }
+    
+    @media (min-width: 1280px) {
+        top: 150px;
+    }
 }
 
 .bgAvatar {
     width: 273px;
     height: 278px;
+
+    @media (min-width: 768px) {
+        width: 524px;
+        height: 535px;  
+    }
+    
+    @media (min-width: 1280px) {
+        width: 740px;
+        height: 756px;  
+    }
 }
 
 .previewAvatar {
     width: 147px;
     height: 221px;
+
+    @media (min-width: 768px) {
+        width: 282px;
+        height: 424px;  
+    }
+
+    @media (min-width: 1280px) {
+        width: 399px;
+        height: 600px;  
+    }
 }
 
 .avatarFrame {
     width: 153px;
     height: 272px;
+
+    @media (min-width: 768px) {
+        width: 294px;
+        height: 529px;  
+    }
+
+    @media (min-width: 1280px) {
+        width: 415px;
+        height: 741px;  
+    }
 }
 
 
 .frameName {
-    top: 270px;
-
     @extend .body-20-magra-regular;
     @extend .darkText;
+    top: unset;
+    bottom: 85px;
 
+    @media (min-width: 768px) {
+        font-size: 40px;
+        bottom: 30px;
+    }
+
+    @media (min-width: 1280px) {
+        font-size: 48px; 
+        bottom: 85px;
+    }
 }
 
 
@@ -50,5 +119,52 @@
     @extend .heading-32-magra-bold;
     @extend .whiteText;
 
+    transform: rotate(-3deg);
+
+    text-align: center;
+    margin-left: auto;
+
     font-size: 28px;
+
+    @media (min-width: 768px) {
+        font-size: 54px;
+    } 
+
+    @media (min-width: 850px) {
+        font-size: 64px;
+    } 
+
+    @media (min-width: 1280px) {
+        font-size: 86px;
+    } 
 }
+
+
+.hand {
+    position: absolute;
+
+    right: -400px;
+    top: -30px;
+
+    width: 456px;
+    height: 638px;
+
+
+    @media (min-width: 768px) {
+        right: 0px;
+        top: -5px;
+
+        width: 263px;
+        height: 369px
+    }
+
+    @media (min-width: 1280px) {
+        right: -400px;
+        top: -30px;
+
+        width: 456px;
+        height: 638px;
+    }
+}
+
+

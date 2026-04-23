@@ -28,6 +28,14 @@
 .skillItemName, .skillScore {
     @extend .body-16-magra-bold;
     @extend .lightText;
+
+    @media (min-width: 768px) {
+        font-size: 32px;
+    }
+
+    @media (min-width: 1280px) {
+        font-size: 40px;
+    }
 }
 
 

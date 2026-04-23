@@ -43,6 +43,14 @@
 .aboutMeTitle {
     @extend .heading-24-magra-bold;
     @extend .whiteText;
+
+    @media (min-width: 768px) {
+        font-size: 32px;
+    }
+
+    @media (min-width: 1280px) {
+        font-size: 40px;
+    }
 }
 
 

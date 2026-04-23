@@ -5,6 +5,7 @@ import style from './index.module.scss';
 const avatarFrame = '/images/main/avatar_frame.png'
 const avatar = '/images/main/avatar.png'
 const bgAvatar = '/images/main/bg_avatar.png'
+const hand = '/images/main/hand.png'
 
 
 
@@ -13,6 +14,7 @@ const Preview: React.FC = () => {
     return (
         <section className={`${style.preview} container`}>
             <h1 className={style.previewTitle}>FRONTEND DEVELOPER</h1>
+            <img className={style.hand} src={hand} alt="" aria-hidden='true' />
 
             <div className={style.avatarWrapper}>
                 <img className={style.bgAvatar} src={bgAvatar} alt="Photo of developer" />
