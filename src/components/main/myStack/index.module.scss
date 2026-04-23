@@ -2,10 +2,17 @@
 @use './../../../styles/tokens/colors' as *;
 @use './../../../styles/tokens/effects' as *;
 
+
+
 .myStack {
     position: relative;
 
     top: 50px;
+
+    @media (min-width: 1280px) {
+        top: 150px;
+        height: 1000px;
+    }
 }
 
 .stackTitle {
@@ -33,6 +40,33 @@
     opacity: 0.5;
 
     z-index: -1;
+
+    @media (min-width: 600px) {
+        left: -100px;
+    }
+
+    @media (min-width: 700px) {
+        left: 0px;
+    }
+
+    @media (min-width: 768px) {
+        width: 643px;
+
+        left: -100px;
+    }
+
+    @media (min-width: 1000px) {
+        width: 800px;
+
+        left: -50px;
+        top: -300px;
+    }
+
+    @media (min-width: 1280px) {
+        width: 1117px;
+        top: -400px;
+        left: -300px;
+    }
 }
 
 
@@ -42,6 +76,14 @@
     margin-top: 30px;
 
     height: 270px;
+
+    @media (min-width: 768px) {
+        height: 400px;
+    }
+
+    @media (min-width: 1280px) {
+        height: 600px;
+    }
 }
 
 
@@ -73,7 +115,7 @@
 }
 
 
-@media (min-width: 1440px) {
+@media (min-width: 1000px) {
     .stackItem {
         font-size: 40px;
 

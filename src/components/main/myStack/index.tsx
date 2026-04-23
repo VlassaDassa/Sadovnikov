@@ -19,8 +19,26 @@ const MyStack: React.FC = () => {
 	const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
 
 	useEffect(() => {
-		randomPlacementItems({itemsRef, wrapperRef})
-	}, [breakpoint]);
+		let timeout: NodeJS.Timeout;
+		
+		const updatePositions = () => {
+			randomPlacementItems({ itemsRef, wrapperRef });
+		};
+		
+		const debouncedUpdate = () => {
+			clearTimeout(timeout);
+			timeout = setTimeout(updatePositions, 150);
+		};
+		
+		updatePositions();
+		
+		window.addEventListener('resize', debouncedUpdate);
+		
+		return () => {
+			window.removeEventListener('resize', debouncedUpdate);
+			clearTimeout(timeout);
+		};
+	}, []);
 
 
 	return (
