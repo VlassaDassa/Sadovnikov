@@ -101,11 +101,15 @@
     @extend .body-20-magra-regular;
     @extend .darkText;
     top: unset;
-    bottom: 85px;
+    bottom: 75px;
+    
+    @media (min-width: 340px) {
+        bottom: 85px;
+    }   
 
     @media (min-width: 768px) {
         font-size: 40px;
-        bottom: 30px;
+        bottom: 40px;
     }
 
     @media (min-width: 1280px) {
@@ -119,15 +123,24 @@
     @extend .heading-32-magra-bold;
     @extend .whiteText;
 
-    transform: rotate(-3deg);
+    transform: rotate(0deg);
 
     text-align: center;
     margin-left: auto;
+    
+    font-size: 20px;
+    
+    @media (min-width: 340px) {
+        font-size: 24px;
+    }   
 
-    font-size: 28px;
+    @media (min-width: 400px) {
+        font-size: 28px;
+    } 
 
     @media (min-width: 768px) {
         font-size: 54px;
+        transform: rotate(-3deg);
     } 
 
     @media (min-width: 850px) {
@@ -142,20 +155,23 @@
 
 .hand {
     position: absolute;
-
-    right: -400px;
-    top: -30px;
-
-    width: 456px;
-    height: 638px;
-
+    display: none;
 
     @media (min-width: 768px) {
-        right: 0px;
+        display: block;
+        right: -20%;
         top: -5px;
 
         width: 263px;
         height: 369px
+    }
+
+    @media (min-width: 1000px) {
+        right: -10%;
+    }
+    
+    @media (min-width: 1150px) {
+        right: 0;
     }
 
     @media (min-width: 1280px) {
