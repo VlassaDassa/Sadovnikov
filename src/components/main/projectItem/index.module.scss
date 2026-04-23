@@ -10,10 +10,32 @@
 
     overflow: hidden;
 
-    
     @extend .radius-12;
     @extend .shadow-xl;
 
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    overflow: hidden;
+    
+    &:hover {
+        transform: translateY(-8px);
+    }
+    
+    .projectName {
+        transition: color 0.2s ease;
+    }
+    
+    &:hover .projectName {
+        color: $brand_600;
+    }
+    
+    .projectStackItem {
+        transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+    
+    &:hover .projectStackItem {
+        background-color: $brand_600;
+        transform: translateY(-2px);
+    }
 
     @media (min-width: 768px) {
         position: absolute;
@@ -132,6 +154,3 @@
         font-weight: $bold;
     }
 }
-
-
-
