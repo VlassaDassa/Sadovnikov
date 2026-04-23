@@ -6,6 +6,8 @@ import Input from '../../general/input';
 import DecorButton from '../../general/button/DecorButton';
 import StatusMessage from '../../general/statusMessage';
 
+import TalkingAvatar from '../talkingAvatar';
+
 import styles from './index.module.scss';
 
 
@@ -132,7 +134,6 @@ const Contacts: React.FC= () => {
                 isShow={statusMessageShow} 
             
             />
-
             <form>
                 <div className={styles.formContent}>
                     <Input 
@@ -174,6 +175,13 @@ const Contacts: React.FC= () => {
                     />
                 </div>
             </form>
+
+            <TalkingAvatar 
+                hand={false}
+                indexFinger={false}
+                text={"I'm waiting for your messages"}
+                additionalClass={styles.avatar}
+            />
         </section>
     )
 }
