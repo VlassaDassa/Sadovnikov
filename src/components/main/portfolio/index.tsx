@@ -19,7 +19,7 @@ const Portfolio: React.FC= () => {
 
 
     const portfolioContent = (
-        breakpoint === 'mobile' ? 
+        breakpoint === 'mobile' || breakpoint === 'tablet' ? 
             <Slider projects={projects} /> 
             :
             <Canvas>

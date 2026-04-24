@@ -3,6 +3,9 @@
 import React, { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Pagination } from 'swiper/modules';
+import { useSelector } from 'react-redux';
+
+import { RootState } from '@/store';
 
 import ProjectItem from '../projectItem';
 import type { Project } from '@/interfaces/general';
@@ -22,15 +25,17 @@ interface SliderProps {
 const Slider: React.FC<SliderProps> = ({ projects }) => {
     const [curIndex, setCurIndex] = useState<number>(1)
     const totalCountItems = projects.length
+    const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
 
 
     return (
         <Swiper
             spaceBetween={-20}
-            slidesPerView={1.5}
+            slidesPerView={
+                breakpoint === 'tablet' ? 'auto' : 1.5
+            } 
             centeredSlides={true}
             className={style.slider}
-
             effect={'coverflow'}
             grabCursor={true}
             coverflowEffect={{
@@ -40,7 +45,8 @@ const Slider: React.FC<SliderProps> = ({ projects }) => {
                 modifier: 1,
                 slideShadows: true,
             }}
-            speed={700}
+            style={{ overflow: 'visible' }} 
+            speed={700} 
             
             onRealIndexChange={(swiper) => setCurIndex(swiper.activeIndex + 1)}
             pagination={true}
@@ -49,7 +55,7 @@ const Slider: React.FC<SliderProps> = ({ projects }) => {
             
         >
             {projects.map(project => (
-                <SwiperSlide key={project.id} className={`${style.sliderItem}`}>
+                <SwiperSlide key={project.id} className={style.sliderItem}>
                     <ProjectItem project={project} />
                 </SwiperSlide>
             ))}

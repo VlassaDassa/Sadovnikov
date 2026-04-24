@@ -14,10 +14,11 @@
 
 
 .sliderItem {
-    width: 240px;
-    aspect-ratio: 3 / 4;
-
     @extend .radius-12;
+
+        @media (min-width: 768px) {
+            width: auto !important;
+        }
 }
 
 
