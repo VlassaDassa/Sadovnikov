@@ -41,6 +41,17 @@
 
         top: 260px;
         left: 103px;
+
+        animation: jawMove 0.3s ease-in-out infinite alternate;
+
+        @keyframes jawMove {
+            0% {
+                top: 265px;   
+            }
+            100% {
+                top: 285px;   
+            }
+        }
     }
 
     .indexFingerPic {
@@ -49,6 +60,18 @@
 
         top: 240px;
         right: 350px;
+        
+        transform-origin: 20% 80%;
+        animation: handAnim 0.3s ease-in-out infinite alternate;
+
+        @keyframes handAnim {
+            0% {
+                transform: rotate(18deg);  
+            }
+            100% {
+                transform: rotate(-18deg);   
+            }
+        }
     }
 
     .handPic {
@@ -60,12 +83,36 @@
 
         transform: scaleX(-1);
 
+        animation: naturalSwing  2.5s ease-in-out infinite;
+
+        @keyframes naturalSwing {
+            0% {
+                transform: scaleX(-1) rotate(0deg);
+            }
+            20% {
+                transform: scaleX(-1) rotate(4deg);
+            }
+            40% {
+                transform: scaleX(-1) rotate(-2deg);
+            }
+            60% {
+                transform: scaleX(-1) rotate(3deg);
+            }
+            80% {
+                transform: scaleX(-1) rotate(-4deg);
+            }
+            100% {
+                transform: scaleX(-1) rotate(0deg);
+            }
+        }
     }
 
     .cloudPic {
         width: 704px;
         height: 704px;
         z-index: -1;
+
+        
     }
 
 
@@ -77,7 +124,19 @@
         justify-content: center;
 
         z-index: 1;
+        top: 100px;
+        left: 200px;
 
-        left: 140px;
+        animation: continuousPop 2s ease-in-out infinite;
+        @keyframes continuousPop {
+            0%, 100% {
+                opacity: 0;
+                transform: rotate(30deg) translate(-24px, 100px);
+            }
+            20%, 80% {
+                opacity: 1;
+                transform: rotate(30deg) translate(0, 0);
+            }
+        }
     }
 }

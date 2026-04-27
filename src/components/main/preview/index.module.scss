@@ -141,6 +141,17 @@
     @media (min-width: 768px) {
         font-size: 54px;
         transform: rotate(-3deg);
+
+        animation: tiltText 4s ease-in-out infinite;
+
+        @keyframes tiltText {
+            0%, 100% {
+                transform: rotate(-3deg);
+            }
+            50% {
+                transform: rotate(3deg);
+            }
+        }
     } 
 
     @media (min-width: 850px) {
@@ -157,13 +168,29 @@
     position: absolute;
     display: none;
 
+    mask-image: linear-gradient(to right, black 20%, transparent 100%);
+    
+
     @media (min-width: 768px) {
         display: block;
         right: -20%;
         top: -5px;
 
         width: 263px;
-        height: 369px
+        height: 369px;
+
+        animation: moveHand 4s ease-in-out infinite;
+
+        @keyframes moveHand {
+            0%, 100% {
+                transform: rotate(3deg) translateY(-5px);
+                top: -5px;
+            }
+            50% {
+                transform: rotate(-3deg) translateY(0px);
+                top: 50px;
+            }
+        }
     }
 
     @media (min-width: 1000px) {
