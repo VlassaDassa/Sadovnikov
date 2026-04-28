@@ -65,33 +65,36 @@
     @media (min-width: 1280px) {
         width: 1117px;
         top: -400px;
+    }
+}
 
-        animation: slideAndReveal 6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+
+.stackHandBg-anim {
+    animation: slideAndReveal 6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     
-        @keyframes slideAndReveal {
-            0% {
-                left: -1200px;
-                mask-position: 100% 0;
-                opacity: 0;
-            }
-            30% {
-                opacity: 0.3;
-                mask-position: 70% 0;
-            }
-            60% {
-                left: -200px;
-                opacity: 0.5;
-                mask-position: 40% 0;
-            }
-            80% {
-                left: -220px;
-                mask-position: 20% 0;
-            }
-            100% {
-                left: -300px;
-                mask-position: 0% 0;
-                opacity: 0.5;
-            }
+    @keyframes slideAndReveal {
+        0% {
+            left: -1200px;
+            mask-position: 100% 0;
+            opacity: 0;
+        }
+        30% {
+            opacity: 0.3;
+            mask-position: 70% 0;
+        }
+        60% {
+            left: -200px;
+            opacity: 0.5;
+            mask-position: 40% 0;
+        }
+        80% {
+            left: -220px;
+            mask-position: 20% 0;
+        }
+        100% {
+            left: -300px;
+            mask-position: 0% 0;
+            opacity: 0.5;
         }
     }
 }

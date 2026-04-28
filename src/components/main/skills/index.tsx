@@ -1,12 +1,14 @@
+'use client'
+
 import React from 'react';
 
 import TalkingAvatar from './../../main/talkingAvatar';
 import { skills } from '@/mockData/skills';
 import type { Skill } from '@/mockData/skills';
 
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+
 import style from './index.module.scss';
-
-
 
 const vertex = '/images/main/vertex.svg';
 const vertexSelected = '/images/main/vertex_selected.svg';
@@ -14,7 +16,6 @@ const cursor = '/images/main/cursor.svg';
 
 
 const SkillItem: React.FC<Skill> = ({ name, score }) => {
-    
     return (
         <div className={style.skillItem}>
             <p className={style.skillItemName}>{name}</p>
@@ -39,9 +40,14 @@ const SkillItem: React.FC<Skill> = ({ name, score }) => {
 
 
 const Skills: React.FC = () => {
+    const { isVisible, elementRef } = useScrollAnimation<HTMLDivElement>({
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    })
+
     return (
         <section className={`${style.skills} container`}>
-            <div className={style.skillsWrapper}>
+            <div ref={elementRef} className={`${style.skillsWrapper} ${isVisible ? style['skillsWrapper-anim'] : ''}`}>
                 {
                     Array.from({ length: 3 }).map((_, index) => (
                         <img key={index} className={`${style.vertex} ${style[`vertex-${index+1}`]}`} src={vertex} alt="" aria-hidden="true" />

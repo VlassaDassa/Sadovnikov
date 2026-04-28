@@ -8,6 +8,8 @@ import StatusMessage from '../../general/statusMessage';
 
 import TalkingAvatar from '../talkingAvatar';
 
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+
 import styles from './index.module.scss';
 
 
@@ -33,6 +35,11 @@ const Contacts: React.FC= () => {
     const [statusMessageShow, setStatusMessageShow] = useState<boolean>(false)
     const [statusMessageType, setStatusMessageType] = useState<'info' | 'warning' | 'error'>('info')
     const [statusMessageText, setStatusMessageText] = useState<string>('Sent')
+
+    const { isVisible, elementRef } = useScrollAnimation<HTMLDivElement>({
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    })
 
 
 
@@ -177,10 +184,11 @@ const Contacts: React.FC= () => {
             </form>
 
             <TalkingAvatar 
+                ref={elementRef}
                 hand={false}
                 indexFinger={false}
                 text={"I'm waiting for your messages"}
-                additionalClass={styles.avatar}
+                additionalClass={`${styles.avatar} ${isVisible ? styles['avatar-anim'] : ''}`}
             />
         </section>
     )

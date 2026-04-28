@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import style from './index.module.scss';
 
@@ -17,11 +17,11 @@ const cloudPic = '/images/main/cloud.png';
 
 
 
-const TalkingAvatar: React.FC<TalkingAvatarProps> = (props) => {
-    const {hand, indexFinger, text, additionalClass} = props;
+const TalkingAvatar = forwardRef<HTMLDivElement, TalkingAvatarProps>(
+    ({ hand, indexFinger, text, additionalClass }, ref) => {
     
     return (
-        <div className={`${style.talkingAvatarWrapper} ${additionalClass}`}>
+        <div ref={ref} className={`${style.talkingAvatarWrapper} ${additionalClass}`}>
             <img className={style.avatarPic} src={avatarPic} alt="Photo of developer" aria-hidden='true' />
             <img className={style.jawPic} src={jawPic} alt="" aria-hidden='true' />
 
@@ -39,6 +39,6 @@ const TalkingAvatar: React.FC<TalkingAvatarProps> = (props) => {
             </div>
         </div>
     )
-} 
+})
 
 export default TalkingAvatar;
