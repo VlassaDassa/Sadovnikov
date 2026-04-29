@@ -19,6 +19,7 @@
     transition: opacity 0.3s ease;
 
     pointer-events: none;
+    will-change: opacity;
 }
 
 

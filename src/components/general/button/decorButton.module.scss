@@ -17,9 +17,9 @@
         bottom: -100px;
         right: -50px;
         transform: rotate(0);
-        
-
         pointer-events: none;
+
+        will-change: bottom, right, transform;
     }
     
     .decorBgBtn-big-default,
@@ -36,7 +36,6 @@
         .decorBgBtn-medium-default,
         .decorBgBtn-small-default {
             @media (min-width: 768px) {
-                
                 filter: brightness(3);
             }
         }

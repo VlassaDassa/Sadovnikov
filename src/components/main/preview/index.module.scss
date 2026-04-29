@@ -141,6 +141,7 @@
     @media (min-width: 768px) {
         font-size: 54px;
         transform: rotate(-3deg);
+        will-change: transform;
 
         animation: tiltText 4s ease-in-out infinite;
 
@@ -178,7 +179,8 @@
 
         width: 263px;
         height: 369px;
-
+        
+        will-change: transform, top;
         animation: moveHand 4s ease-in-out infinite;
 
         @keyframes moveHand {
@@ -221,6 +223,7 @@
 
     path {
         stroke-dasharray: 8 12;
+        will-change: stroke-dashoffset;
         animation: drawLine 3s infinite;
     }
 

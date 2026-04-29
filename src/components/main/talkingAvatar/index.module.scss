@@ -44,6 +44,7 @@
         left: 103px;
 
         animation: jawMove 0.3s ease-in-out infinite alternate;
+        will-change: top;
 
         @keyframes jawMove {
             0% {
@@ -64,6 +65,7 @@
         
         transform-origin: 20% 80%;
         animation: handAnim 0.3s ease-in-out infinite alternate;
+        will-change: transform;
 
         @keyframes handAnim {
             0% {
@@ -129,6 +131,7 @@
         left: 200px;
 
         animation: continuousPop 2s ease-in-out infinite;
+        will-change: opacity, transform;
         @keyframes continuousPop {
             0%, 100% {
                 opacity: 0;

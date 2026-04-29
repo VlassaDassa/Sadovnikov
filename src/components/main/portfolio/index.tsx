@@ -1,11 +1,12 @@
 'use client'
 
 import React from 'react';
+import dynamic from 'next/dynamic';
 import { useSelector } from 'react-redux';
 
-import Canvas from '../canvas';
-import Slider from '../slider';
-import ProjectItem from '../projectItem';
+const Canvas = dynamic(() => import('../canvas'), { ssr: false })
+const Slider = dynamic(() => import('../slider'), { ssr: false })
+const ProjectItem = dynamic(() => import('../projectItem'), { ssr: false })
 
 import { RootState } from '@/store';
 import { projects } from '@/mockData/projects';
