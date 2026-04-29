@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 
+import { DynImportLayout } from '@/components/general/DynImportLayout';
 import Header from "@/components/general/header";
 import Footer from "@/components/general/footer";
-import Menu from "@/components/general/menu";
-import Overlay from "@/components/general/overlay";
 import GlobalLoader from "@/components/general/GlobalLoader";
-import StatusMessage from "@/components/general/statusMessage";
 import NoiseBackground from "@/components/general/NoizeBg";
 
 import { Providers } from "@/store/Providers";
@@ -31,10 +29,8 @@ export default function RootLayout({
                 <Providers>
                     <NoiseBackground />
                     <GlobalLoader />
-                    <StatusMessage />
+                    <DynImportLayout />  {/* <- menu, overlay, statusMessage */}
                     <Header />
-                    <Menu />
-                    <Overlay />
                     {children}
                     <Footer />
                 </Providers>
