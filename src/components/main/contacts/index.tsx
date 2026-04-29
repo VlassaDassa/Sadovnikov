@@ -1,13 +1,14 @@
 'use client'
 
 import React, { useState, useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 
 import Input from '../../general/input';
 import DecorButton from '../../general/button/DecorButton';
-import StatusMessage from '../../general/statusMessage';
-
+    
 import TalkingAvatar from '../talkingAvatar';
 
+import { setTypeMessage, setTextMessage, toggleMessage } from '@/store/slices/messageSlice';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 import styles from './index.module.scss';
@@ -32,14 +33,13 @@ const Contacts: React.FC= () => {
         message: ''
     })
     const isFirstRender = useRef(true);
-    const [statusMessageShow, setStatusMessageShow] = useState<boolean>(false)
-    const [statusMessageType, setStatusMessageType] = useState<'info' | 'warning' | 'error'>('info')
-    const [statusMessageText, setStatusMessageText] = useState<string>('Sent')
 
     const { isVisible, elementRef } = useScrollAnimation<HTMLDivElement>({
         threshold: 0.1,
         rootMargin: '0px 0px -100px 0px'
     })
+
+    const dispatch = useDispatch()
 
 
 
@@ -112,19 +112,19 @@ const Contacts: React.FC= () => {
         setEmail('')
         setMessage('')
 
-        setStatusMessageText('Error on sending message')
+        dispatch(setTypeMessage('error'))
+        dispatch(setTextMessage('Error on sending message'))
         
-        setStatusMessageType('error')
 
         setBtnBehavior('loading')
         setTimeout(() => {
             setBtnBehavior('disabled')
 
-            setStatusMessageShow(true)
+            dispatch(toggleMessage())
 
 
             setTimeout(() => {
-                setStatusMessageShow(false)
+                dispatch(toggleMessage())
             }, 3000)
         }, 3000)
     }
@@ -135,12 +135,6 @@ const Contacts: React.FC= () => {
             
             <h2 className={`${styles.contactsTitle} sectionTitle`}>CONTACTS</h2>
 
-            <StatusMessage 
-                text={statusMessageText}
-                type={statusMessageType}
-                isShow={statusMessageShow} 
-            
-            />
             <form>
                 <div className={styles.formContent}>
                     <Input 

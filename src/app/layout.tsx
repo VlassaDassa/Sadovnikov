@@ -5,6 +5,7 @@ import Footer from "@/components/general/footer";
 import Menu from "@/components/general/menu";
 import Overlay from "@/components/general/overlay";
 import GlobalLoader from "@/components/general/GlobalLoader";
+import StatusMessage from "@/components/general/statusMessage";
 
 import { Providers } from "@/store/Providers";
 
@@ -28,6 +29,7 @@ export default function RootLayout({
             <body>
                 <Providers>
                     <GlobalLoader />
+                    <StatusMessage />
                     <Header />
                     <Menu />
                     <Overlay />

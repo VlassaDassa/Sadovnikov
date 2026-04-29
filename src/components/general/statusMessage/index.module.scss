@@ -6,13 +6,14 @@
 
 
 .statusMessage {
+    position: fixed;
     @extend .heading-20-magra-bold;
     @extend .radius-12;
     @extend .whiteText;
 
     display: inline-block;
     opacity: 0;
-    position: fixed;
+    
     width: calc(100% - 130px);
     text-align: center;
     z-index: 30;
