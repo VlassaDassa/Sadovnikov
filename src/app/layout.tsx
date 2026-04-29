@@ -6,6 +6,7 @@ import Menu from "@/components/general/menu";
 import Overlay from "@/components/general/overlay";
 import GlobalLoader from "@/components/general/GlobalLoader";
 import StatusMessage from "@/components/general/statusMessage";
+import NoiseBackground from "@/components/general/NoizeBg";
 
 import { Providers } from "@/store/Providers";
 
@@ -28,6 +29,7 @@ export default function RootLayout({
         <html lang="en">
             <body>
                 <Providers>
+                    <NoiseBackground />
                     <GlobalLoader />
                     <StatusMessage />
                     <Header />

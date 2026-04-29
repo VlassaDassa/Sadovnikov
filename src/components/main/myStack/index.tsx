@@ -2,6 +2,8 @@
 
 import React, { useRef, useEffect } from 'react';
 
+import AdaptiveImage from '@/components/general/AdaptiveImage';
+
 import { randomPlacementItems } from '@/services/stack';
 import { stack } from '@/mockData/stack';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
@@ -59,12 +61,10 @@ const MyStack: React.FC = () => {
 	return (
 		<section className={`${style.myStack} container`}>
 			<h2 className={`sectionTitle ${style.stackTitle}`}>MY STACK</h2>
-			<img 
-				className={`${style.stackHandBg} ${isVisible ? style['stackHandBg-anim'] : ''} `} 
+			<AdaptiveImage 
+				wrapClass={`${style.stackHandBg} ${isVisible ? style['stackHandBg-anim'] : ''} `} 
 				ref={elementRef}
 				src={hand} 
-				alt="" 
-				aria-hidden="true" 
 			/>
 
 			<div className={style.stackWrapper} ref={wrapperRef}>

@@ -28,43 +28,48 @@
     }
 }
 
+
 .stackHandBg {
     position: absolute;
 
     width: 513px;
+    height: 513px;
 
-    transform: rotate(60deg) scaleX(-1) ;
+    transform: rotate(45deg) scaleX(-1);
+    mask-image: linear-gradient(to left, transparent 20%, black 30%, black 100%);
 
     left: -200px;
-    top: -200px;
+    top: -75px;
     opacity: 0.5;
 
     z-index: -1;
 
     @media (min-width: 600px) {
-        left: -100px;
-    }
+        width: 700px;
+        height: 700px;
 
-    @media (min-width: 700px) {
-        left: 0px;
+        left: -200px;
+        top: -150px;
     }
 
     @media (min-width: 768px) {
-        width: 643px;
+        width: 800px;
+        height: 800px;
 
+        top: -150px;
         left: -100px;
     }
 
     @media (min-width: 1000px) {
-        width: 800px;
-
         left: -50px;
-        top: -300px;
+        top: -200px;
     }
 
     @media (min-width: 1280px) {
         width: 1117px;
-        top: -400px;
+        height: 1117px;
+        top: -200px;
+        left: -300px;
     }
 }
 
@@ -92,9 +97,16 @@
             mask-position: 20% 0;
         }
         100% {
-            left: -300px;
             mask-position: 0% 0;
             opacity: 0.5;
+
+            @media (min-width: 1280px) {
+                left: -300px;
+            }
+
+            @media (min-width: 1000px) {
+                left: 0px;
+            }
         }
     }
 }

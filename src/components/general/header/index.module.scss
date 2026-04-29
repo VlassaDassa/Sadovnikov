@@ -52,12 +52,11 @@
 
 
 .logo {
+    position: relative;
+
     display: flex;
     align-items: center;
     justify-content: center;    
-
-    background-image: url('/images/button/bg_medium_btn.png');
-    background-size: cover;
 
     width: 152px;
     height: 40px;
@@ -91,6 +90,10 @@
     }
 }
 
+.logoImg {
+    position: relative;
+    z-index: -1;
+}
 
 .logoText {
     padding-right: 20px;

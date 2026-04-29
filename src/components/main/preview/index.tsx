@@ -1,7 +1,8 @@
 import React from 'react';
 
-import style from './index.module.scss';
+import AdaptiveImage from '@/components/general/AdaptiveImage';
 
+import style from './index.module.scss';
 import { cssVars } from '@/styles/cssVariables';
 
 const avatarFrame = '/images/main/avatar_frame.png'
@@ -11,18 +12,33 @@ const hand = '/images/main/hand.png'
 
 
 
-
 const Preview: React.FC = () => {
     return (
         <section className={`${style.preview} container`}>
             <h1 className={style.previewTitle}>FRONTEND DEVELOPER</h1>
-            <img className={style.hand} src={hand} alt="" aria-hidden='true' />
+            <AdaptiveImage 
+                src={hand}
+                wrapClass={style.hand} 
+                loading='eager'
+            />
 
             <div className={style.avatarWrapper}>
-                <img className={style.bgAvatar} src={bgAvatar} alt="Photo of developer" />
-                <img className={style.previewAvatar} src={avatar} alt="Photo of developer" />
-                <img className={style.avatarFrame} src={avatarFrame} alt="Photo of developer" />
-
+                <AdaptiveImage 
+                    src={bgAvatar}
+                    loading='eager'
+                    wrapClass={style.bgAvatar} 
+                    alt='Photo of developer'
+                />
+                <AdaptiveImage 
+                    src={avatar}
+                    wrapClass={style.previewAvatar} 
+                    alt='Photo of developer'
+                />
+                <AdaptiveImage 
+                    src={avatarFrame}
+                    wrapClass={style.avatarFrame} 
+                    alt='Photo of developer'
+                />
                 <p className={style.frameName}>SADOVNIKOV<br />VLAD</p>
             </div>
 

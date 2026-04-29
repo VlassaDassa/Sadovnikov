@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 
+import NoiseBackground from "../NoizeBg";
 import Icon from "@/components/icons/Icon";
 
 import { RootState } from "@/store";
@@ -43,6 +44,8 @@ const Menu = () => {
 
     return (
         <div className={`${style.menu} ${isMenuOpen ? style.menuShow : ''}`}>
+            <NoiseBackground />
+
             <div onClick={homeClickHandler} className={style.iconWrapper}>
                 <Icon 
                     name='home'

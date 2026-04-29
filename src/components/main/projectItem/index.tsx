@@ -1,5 +1,7 @@
 import React from 'react';
 
+import AdaptiveImage from '@/components/general/AdaptiveImage';
+
 import type { Project } from '@/interfaces/general';
 
 import style from './index.module.scss';

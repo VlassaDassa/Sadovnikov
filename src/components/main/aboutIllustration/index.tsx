@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useCallback } from 'react';
 
-// import { aboutMe } from '@/mockData/aboutMe';
+import AdaptiveImage from '@/components/general/AdaptiveImage';
 
 import style from './index.module.scss';
 
@@ -67,8 +67,21 @@ const AboutIllustration: React.FC = () => {
     return (
         <div className={style.illustationContainer}>
             <div className={style.uzbContainer} ref={ref1}>
-                <img className={style.uzbIsland} src={uzbIsland} alt="Uzbekistan" />
-                <img className={style.uzbFlag} src={uzbFlag} alt="Uzbekistan" />
+                
+                <AdaptiveImage 
+                    wrapClass={style.uzbIsland}
+                    src={uzbIsland}
+                    alt="Uzbekistan"
+                    ariaHidden={false}
+                />
+
+                <AdaptiveImage 
+                    wrapClass={style.uzbFlag}
+                    src={uzbFlag}
+                    alt="Uzbekistan"
+                    ariaHidden={false}
+                />
+
                 <div className={style.uzbTextContainer}>
                     <p className={`${style.uzbText} ${style.text}`}>Year of birth: 2004</p>
                     <p className={`${style.uzbText} ${style.text}`}>
@@ -78,13 +91,28 @@ const AboutIllustration: React.FC = () => {
             </div>
 
             <div className={style.mskContainer} ref={ref2}>
-                <img className={style.moscowPhoto} src={moscowPhoto} alt="Moscow" />
-                <img className={style.mskFlag} src={russianFlag} alt="Moscow" />
+                <AdaptiveImage 
+                    wrapClass={style.moscowPhoto}
+                    src={moscowPhoto}
+                    alt="Moscow"
+                    ariaHidden={false}
+                />
+                <AdaptiveImage 
+                    wrapClass={style.mskFlag}
+                    src={russianFlag}
+                    alt="Moscow"
+                    ariaHidden={false}
+                />
                 <p className={`${style.mskText} ${style.text}`}>Location Moscow, <span className={style.ruWhite}>Ru</span><span className={style.ruBlue}>ss</span><span className={style.ruRed}>ia</span></p>
             </div>
 
             <div className={style.kollegeContainer} ref={ref3}>
-                <img className={style.kollegePhoto} src={kollegePhoto} alt="kollege" />
+                <AdaptiveImage 
+                    wrapClass={style.kollegePhoto}
+                    src={kollegePhoto}
+                    alt="kollege"
+                    ariaHidden={false}
+                />
                 <p className={`${style.text} ${style.kollegeText}`}>Education: Konakovo Energy College, 2025</p>
             </div>
 

@@ -3,6 +3,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
+import AdaptiveImage from '../AdaptiveImage';
 import Icon from '../../icons/Icon';
 
 import { RootState } from '@/store';
@@ -108,18 +109,17 @@ const DecorButton: React.FC<DecorButtonProps> = ({
     const variantElements = (
         variant === 'big' ?
                     <>
-                        <img 
+
+                        <AdaptiveImage 
                             src={indexFinger}
-                            alt="" 
-                            aria-hidden='true'
-                            className={
+                            wrapClass={
                                 `${style.decorBtnIcon} 
                                 ${style[`decorBtnIconPosition_${behavior}`]} 
                                 ${style[`decorBtnIcon_${size}`]} 
                                 ` 
                             }
                         />
-
+                        
                         <p 
                             className={`${style.decorBtnLabel} 
                                 ${style[`decorBtnLabel_${size}`]} 
@@ -143,17 +143,14 @@ const DecorButton: React.FC<DecorButtonProps> = ({
             `}
             onClick={onClick}
         >
-            <img 
-                 
-                className={
+            <AdaptiveImage 
+                src={bgBtn}
+                wrapClass={
                     `${style.decorBgBtnBig} 
                     ${style[`decorBgBtn-${variant}-${size}`]} 
                     ${style[`decorBgBtn-${variant}-${behavior}`]} 
                     `
-                } 
-                src={bgBtn} 
-                alt="" 
-                aria-hidden='true'
+                }
             />
             {buttonContent}
             {variantElements}

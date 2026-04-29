@@ -1,4 +1,6 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
+
+import AdaptiveImage from '@/components/general/AdaptiveImage';
 
 import style from './index.module.scss';
 
@@ -22,19 +24,27 @@ const TalkingAvatar = forwardRef<HTMLDivElement, TalkingAvatarProps>(
     
     return (
         <div ref={ref} className={`${style.talkingAvatarWrapper} ${additionalClass}`}>
-            <img className={style.avatarPic} src={avatarPic} alt="Photo of developer" aria-hidden='true' />
-            <img className={style.jawPic} src={jawPic} alt="" aria-hidden='true' />
+            <AdaptiveImage 
+                src={avatarPic}
+                wrapClass={style.avatarPic}
+                alt="Photo of developer"
+            />
+            <AdaptiveImage 
+                src={jawPic}
+                wrapClass={style.jawPic}
+                alt="Photo of developer"
+            />
 
             {
-                indexFinger ? <img className={style.indexFingerPic} src={indexFingerPic} alt="" aria-hidden='true' /> : null
+                indexFinger ? <AdaptiveImage src={indexFingerPic} wrapClass={style.indexFingerPic} alt="Photo of developer" /> : null
             }
             {
-                hand ? <img className={style.handPic} src={handPic} alt="" aria-hidden='true' /> : null
+                hand ? <AdaptiveImage src={handPic} wrapClass={style.handPic} alt="Photo of developer" /> : null 
             }
             
             
             <div className={style.cloudWrapper}>
-                <img className={style.cloudPic} src={cloudPic} alt="" aria-label={text} />
+                <AdaptiveImage src={cloudPic} wrapClass={style.cloudPic} alt="Photo of developer" aria-label={text} />
                 <p className={style.cloudText}>{text}</p>
             </div>
         </div>

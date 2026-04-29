@@ -6,7 +6,6 @@ import style from './index.module.scss';
 
 
     
-
 interface CanvasProps {
     children?: React.ReactNode;
     className?: string;

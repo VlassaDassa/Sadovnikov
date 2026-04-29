@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { useDispatch } from 'react-redux';
 
 import DecorButton from '../button/DecorButton';
@@ -9,7 +10,7 @@ import { toggleMenu, toggleIsOverlayVisible } from '@/store/slices/uiSlice';
 
 import style from './index.module.scss';
 
-
+const logoBg = '/images/button/bg_medium_btn.png'
 
 
 
@@ -69,6 +70,14 @@ const Header: React.FC = () => {
     return (
         <header className={`${style.header} container`}>
             <a className={style.logo} href="#" aria-label="Логотип">
+                <Image 
+                    src={logoBg}
+                    alt="Logo"
+                    fill
+                    loading='eager'
+                    className={style.logoImg}
+                    sizes='50vw'
+                />
                 <p className={style.logoText}>
                     SADOVNIKOV
                 </p>

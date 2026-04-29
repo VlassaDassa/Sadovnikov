@@ -3,9 +3,10 @@
 import React from 'react';
 
 import TalkingAvatar from './../../main/talkingAvatar';
+import AdaptiveImage from '@/components/general/AdaptiveImage';
+
 import { skills } from '@/mockData/skills';
 import type { Skill } from '@/mockData/skills';
-
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 import style from './index.module.scss';
@@ -50,11 +51,22 @@ const Skills: React.FC = () => {
             <div ref={elementRef} className={`${style.skillsWrapper} ${isVisible ? style['skillsWrapper-anim'] : ''}`}>
                 {
                     Array.from({ length: 3 }).map((_, index) => (
-                        <img key={index} className={`${style.vertex} ${style[`vertex-${index+1}`]}`} src={vertex} alt="" aria-hidden="true" />
+                        <AdaptiveImage 
+                            key={index}
+                            src={vertex}
+                            wrapClass={`${style.vertex} ${style[`vertex-${index+1}`]}`}
+                        />
                     ))
                 }
-                <img className={`${style.vertex} ${style.vertexSelected}`} src={vertexSelected} alt="" aria-hidden="true" />
-                <img className={style.cursor} src={cursor} alt="" aria-hidden="true" />
+
+                <AdaptiveImage 
+                    src={vertexSelected}
+                    wrapClass={`${style.vertex} ${style.vertexSelected}`}
+                />
+                <AdaptiveImage 
+                    src={cursor}
+                    wrapClass={style.cursor}
+                />
                 {
                     skills.map((skill, index) => (
                         <SkillItem key={index} {...skill} />
