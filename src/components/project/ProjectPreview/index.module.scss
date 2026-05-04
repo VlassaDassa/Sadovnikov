@@ -1,0 +1,78 @@
+@use './../../../styles/tokens/colors' as *;
+@use './../../../styles/tokens/effects' as *;
+@use './../../../styles/tokens/typography' as *;
+
+
+
+.textWrapper, 
+.siteNameWrapper,
+.textContent {
+    display: flex;
+    flex-direction: column;
+}
+
+.textContent {
+    gap: 10px;
+}
+    
+.metadata {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.metadataItem {
+    display: flex;
+    align-items: center;
+    gap: 5x;
+}
+
+.divider {
+    height: 15px;
+    width: 1px;
+
+    background-color: $neutral_700;
+}
+
+.metadataText {
+    @extend .lightText;
+    @extend .body-16-magra-regular;
+}
+
+
+
+
+
+.textWrapper {
+    gap: 15px;
+}
+
+.siteNameWrapper {
+    gap: 10px;
+}
+
+.name {
+    @extend .whiteText;
+    @extend .heading-40-magra-bold;
+}
+
+.shortDescription,
+.subname {
+    color: $neutral_400;
+}
+
+.subname {
+    @extend .heading-24-magra-bold;
+}
+
+
+.shortDescription {
+    @extend .body-16-magra-bold;
+    @extend .line-height-1_5x;
+}
+
+
+.btnWrapper {
+    display: flex;
+    justify-content: space-between;
+}

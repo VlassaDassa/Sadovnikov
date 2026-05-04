@@ -15,7 +15,7 @@ interface ButtonProps {
     behavior: 'default' | 'loading' | 'disabled';
     iconPosition: 'noIcon' | 'leftIcon' | 'rightIcon' | 'only';
     
-    variant: 'primary' | 'secondary';
+    variant: 'primary' | 'secondary' | 'dark';
     additionalClass?: string;
 
     text?: string;
@@ -46,7 +46,7 @@ const Button: React.FC<ButtonProps> = ({
                             breakpoint === 'desktop' ? 32 : 24
                         : 24
 
-    const iconColor = variant === 'primary' ? cssVars.white : cssVars.neutral_900
+    const iconColor = variant === 'primary' || variant === 'dark' ? cssVars.white : cssVars.neutral_900
 
     
     const contentButton = (

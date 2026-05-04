@@ -69,7 +69,15 @@ $border-radius: (
 }
 
 .shadow-inner {
-    box-shadow: inset 0px 4px 55px 3px black,
+    box-shadow: inset 0px 4px 55px 3px black;
+}
+
+.shadow-splash {
+    box-shadow: 0px 0px 15.199999809265137px 0px rgba(0, 0, 0, 35%);
+}
+
+.shadow-brand {
+    box-shadow: 0px 0px 8.199999809265137px 0px $brand_900;
 }
 
 

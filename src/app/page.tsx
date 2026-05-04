@@ -33,7 +33,6 @@ const Main: React.FC = () => {
                 <Contacts />
             </AnimatedSection>
         </>
-       
     )
 }
 

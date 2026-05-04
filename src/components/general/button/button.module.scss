@@ -7,13 +7,11 @@
 .button {
     position: relative;
 
-    border-radius: 10px;
+    border-radius: 35px;
 
     display: flex;
     align-items: center;
     column-gap: 5px;
-
-    @extend .radius-10; 
 
     &.button-rightIcon {
         .icon-btn {
@@ -85,7 +83,7 @@
     @extend .body-16-magra-bold;
 }
 
-
+.buttonText-dark,
 .buttonText-primary {
     color: $white;
 }
@@ -125,6 +123,23 @@
     &:active {
         transform: scale(0.95);
         background-color: $neutral_400;
+    }
+}
+
+
+.button-dark {
+    background-color: $neutral_900;
+    transition: all ease-in-out 0.3s, transform ease 0.3s;
+
+    @media (min-width: 768px) {
+        &:hover {
+            background-color: $neutral_700;
+        }
+    }
+
+    &:active {
+        transform: scale(0.95);
+        background-color: $neutral_500;
     }
 }
 

@@ -8,6 +8,11 @@ import IconPhone from "./IconPhone";
 import IconEmail from "./IconEmail";
 import IconHome from "./IconHome";
 import IconLink from "./IconLink";
+import IconCalendar from "./IconCalendar";
+import IconTime from "./IconTime";
+import IconPerson from "./IconPerson";
+import IconGitHub from "./IconGitHub";
+import IconInternet from "./IconInternet";
 
 
 const icons = {
@@ -19,6 +24,12 @@ const icons = {
     email: IconEmail,
     home: IconHome,
     link: IconLink,
+    person: IconPerson,
+    time: IconTime,
+    calendar: IconCalendar,
+    github: IconGitHub,
+    internet: IconInternet,
+
 }
 
 
