@@ -1,0 +1,72 @@
+@use './../../../styles/tokens/colors' as *;
+@use './../../../styles/tokens/effects' as *;
+@use './../../../styles/tokens/typography' as *;
+
+
+
+.keyFeatures {
+    display: flex;
+    flex-direction: column;
+    margin-top: 60px;
+}
+
+.title {
+    @extend .heading-24-magra-bold;
+    @extend .whiteText;
+
+    margin-bottom: 20px;
+}
+
+
+.feature {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    padding: 15px;
+
+    margin-bottom: 0px;
+
+    @extend .shadow-splash;
+    border-radius: 15px;
+    background-color: $neutral_900;    
+
+}
+
+.featureHeader {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+
+.featureIconWrapper {
+    background-color: $brand_900;
+    
+    width: 60px;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+}
+
+.featureTitle {
+    @extend .heading-20-magra-bold;
+    @extend .whiteText;
+}
+
+
+.featureText {
+    @extend .body-16-magra-bold;
+    @extend .line-height-1_5x;
+
+    color: $neutral_400;
+}
+
+.slider {
+    margin-right: unset !important;
+    margin-left: unset !important;
+}

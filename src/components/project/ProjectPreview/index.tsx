@@ -101,6 +101,7 @@ const ProjectPreview: React.FC = () => {
                         <AdaptiveImage 
                             src={projectImg1}
                             alt={'project'}
+                            loading='eager'
                             ariaHidden={false}
                             wrapClass={styles.projectWrapPhoto}
                             imgClass={styles.projectPhoto}

@@ -74,7 +74,7 @@ const ProjectStack: React.FC = () => {
 
             <div className={styles.stackWrapper}>
                 {stackItems.map((item) => (
-                    <StackItem item={item} />
+                    <StackItem key={item.id} item={item} />
                 ))}
             </div>
         </section>
