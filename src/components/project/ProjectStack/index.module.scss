@@ -1,0 +1,56 @@
+@use './../../../styles/tokens/colors' as *;
+@use './../../../styles/tokens/effects' as *;
+@use './../../../styles/tokens/typography' as *;
+
+
+.projectStack {
+    margin-top: 60px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.title {
+    @extend .heading-24-magra-bold;
+    @extend .whiteText;
+}
+
+.itemWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    gap: 5px;
+}
+
+.iconWrapper {
+    background-color: $brand_900;
+
+    @extend .radius-full;
+    @extend .shadow-splash;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 80px;
+    height: 80px;
+}
+
+.iconName {
+    @extend .body-16-mont-light;
+    @extend .whiteText;
+}
+
+
+.stackWrapper {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 30px;
+
+    @media (min-width: 600px) {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 50px;
+    }
+}
