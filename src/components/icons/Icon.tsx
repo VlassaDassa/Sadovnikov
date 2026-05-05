@@ -13,7 +13,11 @@ import IconTime from "./IconTime";
 import IconPerson from "./IconPerson";
 import IconGitHub from "./IconGitHub";
 import IconInternet from "./IconInternet";
-
+import IconFlag from "./IconFlag";
+import IconPuzzle from "./IconPuzzle";
+import IconRocket from "./IconRocket";
+import IconText from "./IconText";
+import IconArrow from "./IconArrow";
 
 const icons = {
     bell: IconBell,
@@ -29,7 +33,11 @@ const icons = {
     calendar: IconCalendar,
     github: IconGitHub,
     internet: IconInternet,
-
+    text: IconText,
+    rocket: IconRocket,
+    flag: IconFlag,
+    puzzle: IconPuzzle,
+    arrow: IconArrow,
 }
 
 

@@ -1,0 +1,112 @@
+@use './../../../styles/tokens/colors' as *;
+@use './../../../styles/tokens/effects' as *;
+@use './../../../styles/tokens/typography' as *;
+
+
+
+.title {
+    @extend .heading-24-magra-bold;
+    @extend .whiteText;
+
+    margin-top: 60px;
+}
+
+
+.descrWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.headerWrapper {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: calc(100% - 20px);
+}
+
+.iconWrapper {
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: $brand_900;
+    border-radius: 10px;
+}
+
+.itemTitle {
+    @extend .heading-20-magra-bold;
+    color: $neutral_400;
+    text-transform: uppercase;
+}
+
+.accordion {
+    width: 100%;
+    overflow: hidden;
+    margin-top: 20px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.accordionItem {
+    background-color: $neutral_900;
+    border-radius: 15px;
+    transition: all 0.1s ease;
+
+    @extend .shadow-splash;
+
+    @media (min-width: 1280px) {
+        &:hover {
+            background-color: $neutral_800;
+        }
+    }
+}
+
+.accordionHeader {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.accordionContent {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+    
+    &.open {
+        max-height: 500px;
+    }
+}
+
+.accordionInner {
+    @extend .body-16-magra-bold;
+    @extend .line-height-1_5x;
+    color: $neutral_200;
+
+    padding: 10px
+}
+
+.iconClose {
+    transition: all ease-in-out 0.3s;
+}
+
+.iconOpen {
+    transition: all ease-in-out 0.3s;
+    transform: rotate(180deg);
+}

@@ -19,7 +19,7 @@ const KeyFeatures: React.FC = () => {
 
     return (
         <section className={`${styles.keyFeatures} container`}>
-            <h1 className={`${styles.title} sectionTitle`}>KEY FEATURES</h1>
+            <h2 className={`${styles.title} sectionTitle`}>KEY FEATURES</h2>
 
             <Swiper
                 slidesPerView={1}

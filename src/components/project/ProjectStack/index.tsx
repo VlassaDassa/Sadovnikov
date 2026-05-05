@@ -70,7 +70,7 @@ const StackItem: React.FC<StackItemProps> = ({ item }) => {
 const ProjectStack: React.FC = () => {
     return (
         <section className={`${styles.projectStack} container`}>
-            <h1 className={`${styles.title} sectionTitle`}>STACK</h1>
+            <h2 className={`${styles.title} sectionTitle`}>STACK</h2>
 
             <div className={styles.stackWrapper}>
                 {stackItems.map((item) => (
