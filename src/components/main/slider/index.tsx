@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 
 import { RootState } from '@/store';
 
+import PaginationSlider from '@/components/general/paginationSlider';
 import ProjectItem from '../projectItem';
 import type { Project } from '@/interfaces/general';
 
@@ -19,7 +20,6 @@ import style from './index.module.scss';
 interface SliderProps {
     projects: Project[]
 }
-
 
 
 const Slider: React.FC<SliderProps> = ({ projects }) => {
@@ -60,20 +60,7 @@ const Slider: React.FC<SliderProps> = ({ projects }) => {
                 </SwiperSlide>
             ))}
 
-            <div className={style.sliderPgnWrapper}>
-                {
-                    Array.from({ length: totalCountItems }).map((item, index) => (
-                        <div 
-                            key={index}
-                            className={`
-                                ${style.sliderPgnItem} 
-                                ${index+1 === curIndex ? style['sliderPgnItem-current'] : ''} 
-                            `}>
-
-                        </div>
-                    ))
-                }
-            </div>  
+            <PaginationSlider totalCountItems={totalCountItems} curIndex={curIndex} /> 
         </Swiper>
     )
 }

@@ -1,14 +1,23 @@
-import React from 'react';
+'use client'
 
+import React, { useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+
+import PaginationSlider from '@/components/general/paginationSlider';
 import Button from '@/components/general/button/Button';
 import Icon from '@/components/icons/Icon';
+import AdaptiveImage from '@/components/general/AdaptiveImage';
 
 import styles from './index.module.scss';
 import { cssVars } from '@/styles/cssVariables';
 
 
+const projectImg1 = '/images/mockImages/specTecno.png'
 
 const ProjectPreview: React.FC = () => {
+    const [curIndex, setCurIndex] = useState<number>(1)
+
     return (
         <section className={`${styles.projectPreview} container`}>
 
@@ -81,7 +90,47 @@ const ProjectPreview: React.FC = () => {
                 </div>
             </div>
 
-            Preview
+            <div className={styles.photoContainer}>
+                <Swiper
+                    slidesPerView={1}
+                    spaceBetween={20}  
+                    onRealIndexChange={(swiper) => setCurIndex(swiper.activeIndex + 1)}
+                    pagination={true}      
+                >
+                    <SwiperSlide>
+                        <AdaptiveImage 
+                            src={projectImg1}
+                            alt={'project'}
+                            ariaHidden={false}
+                            wrapClass={styles.projectWrapPhoto}
+                            imgClass={styles.projectPhoto}
+                            ariaLabel={'photo'}
+                        />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <AdaptiveImage 
+                            src={projectImg1}
+                            alt={'project'}
+                            ariaHidden={false}
+                            wrapClass={styles.projectWrapPhoto}
+                            imgClass={styles.projectPhoto}
+                            ariaLabel={'photo'}
+                        />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <AdaptiveImage 
+                            src={projectImg1}
+                            alt={'project'}
+                            ariaHidden={false}
+                            wrapClass={styles.projectWrapPhoto}
+                            imgClass={styles.projectPhoto}
+                            ariaLabel={'photo'}
+                        />
+                    </SwiperSlide>
+
+                    <PaginationSlider totalCountItems={3} curIndex={curIndex} />
+                </Swiper>
+            </div>
             
         </section>
     )

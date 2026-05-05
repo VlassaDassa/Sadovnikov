@@ -3,12 +3,16 @@
 @use './../../../styles/tokens/typography' as *;
 
 
-
+.projectPreview,
 .textWrapper, 
 .siteNameWrapper,
 .textContent {
     display: flex;
     flex-direction: column;
+}
+
+.projectPreview {
+    gap: 30px;
 }
 
 .textContent {
@@ -75,4 +79,16 @@
 .btnWrapper {
     display: flex;
     justify-content: space-between;
+}
+
+
+.projectWrapPhoto {
+    border-radius: 20px;
+}
+
+.projectPhoto {
+    object-fit: cover;  
+    width: 100% !important;
+    height: auto !important;
+    position: relative !important;
 }

@@ -18,7 +18,7 @@ interface AdaptiveImageProps {
 
 
 const AdaptiveImage = forwardRef<HTMLDivElement, AdaptiveImageProps>(
-    ({ loading = 'lazy', src, alt = '', ariaHidden=true, wrapClass, imgClass, ariaLabel = '' }, ref) => {
+    ({ loading = 'lazy', src, alt='', ariaHidden=true, wrapClass, imgClass, ariaLabel='' }, ref) => {
 
     return (
         <div ref={ref} className={`${style.imgWrapper} ${wrapClass}`}>

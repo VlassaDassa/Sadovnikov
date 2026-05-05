@@ -1,7 +1,4 @@
-
-
 import ProjectPreview from "@/components/project/ProjectPreview"
-
 
 
 export const Project = () => {
