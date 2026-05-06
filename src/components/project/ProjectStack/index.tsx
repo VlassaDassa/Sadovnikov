@@ -1,4 +1,11 @@
+'use client'
+
 import React from 'react';
+
+import Button from '@/components/general/button/Button';
+
+import styles from './index.module.scss';
+
 
 const reactIcon = '/images/mockImages/React.svg';
 const mongoDbIcon = '/images/mockImages/MongoDB.svg';
@@ -6,8 +13,6 @@ const nextJSIcon = '/images/mockImages/NextJS.svg';
 const reduxIcon = '/images/mockImages/Redux.svg';
 const sassIcon = '/images/mockImages/SASS.svg';
 const typeScriptIcon = '/images/mockImages/TypeScript.svg';
-
-import styles from './index.module.scss';
 
 
 interface StackItem {
@@ -55,6 +60,8 @@ const stackItems: StackItem[] = [
 
 
 const StackItem: React.FC<StackItemProps> = ({ item }) => {
+    
+
     return (
         <div className={styles.itemWrapper}>
             <div className={styles.iconWrapper}>
@@ -68,9 +75,22 @@ const StackItem: React.FC<StackItemProps> = ({ item }) => {
 
 
 const ProjectStack: React.FC = () => {
+    
     return (
         <section className={`${styles.projectStack} container`}>
             <h2 className={`${styles.title} sectionTitle`}>STACK</h2>
+
+            <Button 
+                iconPosition='only'
+                behavior='default'
+                icon='bell'
+                variant='dark'
+                tooltip={{
+                    text: 'Кнопка',
+                    placement: 'bottom'
+                }}
+            />
+
 
             <div className={styles.stackWrapper}>
                 {stackItems.map((item) => (

@@ -6,9 +6,14 @@ import { useSelector } from 'react-redux';
 import Icon from '../../icons/Icon';
 
 import { RootState } from '@/store';
+import { useTooltip } from '@/hooks/useTooltip';
+import type { TooltipConfig } from '@/interfaces/general';
 
 import { cssVars } from '@/styles/cssVariables';
 import style from './button.module.scss';
+
+
+
 
 
 interface ButtonProps {
@@ -19,7 +24,7 @@ interface ButtonProps {
     additionalClass?: string;
 
     text?: string;
-    tooltipText?: string;
+    tooltip?: TooltipConfig;
     icon?: string;
     onClick?: () => void;
 };
@@ -33,9 +38,21 @@ const Button: React.FC<ButtonProps> = ({
         additionalClass,
         text,
         icon,
-        tooltipText,
+        tooltip,
         onClick,
     }) => {
+    
+    let tooltipRef = null
+        
+    if (tooltip) {
+        tooltipRef = useTooltip<HTMLButtonElement>({
+            text: tooltip?.text,
+            type: 'lvl1',
+            placement: tooltip?.placement,
+            delay: 300,
+        });
+    }
+    
 
     const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
     
@@ -86,16 +103,10 @@ const Button: React.FC<ButtonProps> = ({
                 : null
     )
 
-    const toolTip = (
-        iconPosition === 'only' && tooltipText ?
-            <p role="tooltip" className={style.tooltip}>{tooltipText}</p>
-        :
-            null
-    )
-
     
     return (
         <button 
+            ref={tooltipRef}
             disabled={behavior === 'disabled'}
             className={`
                 ${style.button} 
@@ -110,7 +121,6 @@ const Button: React.FC<ButtonProps> = ({
             {contentButton}
             {iconButton}
             {loader}
-            {toolTip}
 
         </button>
     )

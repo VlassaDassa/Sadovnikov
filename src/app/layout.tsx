@@ -5,6 +5,7 @@ import Header from "@/components/general/header";
 import Footer from "@/components/general/footer";
 import GlobalLoader from "@/components/general/GlobalLoader";
 import NoiseBackground from "@/components/general/NoizeBg";
+import GlobalTooltip from "@/components/general/GlobalTooltip";
 
 import { Providers } from "@/store/Providers";
 
@@ -35,6 +36,7 @@ export default function RootLayout({
                 <Providers>
                     <NoiseBackground />
                     <GlobalLoader />
+                    <GlobalTooltip />
                     <DynImportLayout />  {/* <- menu, overlay, statusMessage */}
                     <Header />
                     {children}

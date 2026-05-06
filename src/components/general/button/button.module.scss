@@ -8,6 +8,7 @@
     position: relative;
 
     border-radius: 35px;
+    width: fit-content;
 
     display: flex;
     align-items: center;
@@ -154,39 +155,6 @@
 
         to {
             transform: rotate(360deg);
-        }
-    }
-}
-
-
-.tooltip {
-    position: absolute;
-    bottom: -30px;
-    right: -70px;
-    
-    padding: 10px;
-    
-    background-color: $neutral_900;
-
-    @extend .body-16-mont-regular;
-    @extend .shadow-xl;
-    @extend .radius-4;
-    @extend .whiteText;
-    
-
-    pointer-events: none;
-
-    opacity: 0;
-            transition: opacity 0.1s ease-in-out;
-}
-
-
-.button-only {
-    @media (min-width: 768px) {
-        &:hover {
-            .tooltip {
-                opacity: 1;
-            }
         }
     }
 }

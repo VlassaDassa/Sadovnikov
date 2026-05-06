@@ -16,3 +16,14 @@ export interface Project {
     shortDescrition: string,
     stack: string[]
 }
+
+
+export interface TooltipConfig {
+    text: string,
+    title?: string,
+    date?: string,
+    type?: 'lvl1' | 'lvl2' | 'lvl3',
+    delay?: number,
+    offset?: number,
+    placement?: 'top' | 'bottom' | 'left' | 'right'; 
+}

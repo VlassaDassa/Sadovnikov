@@ -4,6 +4,7 @@ import breakpointReducer from './slices/breakpointSlice';
 import uiReducer from './slices/uiSlice';
 import loaderReducer from './slices/loaderSlice';
 import messageSlice from './slices/messageSlice';
+import tooltipReducer from './slices/tooltipSlice';
 
 
 
@@ -13,6 +14,7 @@ export const store = configureStore({
         uiState: uiReducer,
         loader: loaderReducer,
         message: messageSlice,
+        tooltip: tooltipReducer
     },
 });
 

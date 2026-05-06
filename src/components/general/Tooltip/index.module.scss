@@ -1,0 +1,41 @@
+@use './../../../styles/tokens/colors' as *;
+@use './../../../styles/tokens/effects' as *;
+@use './../../../styles/tokens/typography' as *;
+
+
+
+.tooltip {
+    position: absolute;
+    
+    padding: 10px;
+    
+    background-color: $neutral_900;
+
+    @extend .body-16-mont-regular;
+    @extend .shadow-xl;
+    @extend .radius-4;
+    @extend .whiteText;
+    
+    pointer-events: none;
+
+    transition: opacity 0.1s ease-in-out;
+}
+
+
+.title {
+    @extend .body-16-magra-bold;
+    @extend .whiteText;
+}
+
+.text {
+    @extend .body-16-mont-regular;
+    @extend .whiteText;
+}
+
+.date {
+    @extend .body-16-mont-bold;
+    color: $neutral_600;
+    margin-top: 5px;
+
+    margin-bottom: 20px;
+}
