@@ -4,6 +4,10 @@ import React from 'react';
 
 import Button from '@/components/general/button/Button';
 
+import type { TooltipConfig } from '@/interfaces/general';
+
+import { useTooltip } from '@/hooks/useTooltip';
+
 import styles from './index.module.scss';
 
 
@@ -18,7 +22,8 @@ const typeScriptIcon = '/images/mockImages/TypeScript.svg';
 interface StackItem {
     id: number,
     name: string,
-    icon: string
+    icon: string,
+    tooltip: TooltipConfig
 }
 
 interface StackItemProps {
@@ -29,41 +34,90 @@ const stackItems: StackItem[] = [
     {
         id: 1,
         name: 'React',
-        icon: reactIcon
+        icon: reactIcon,
+        tooltip: {
+            title: 'Why was this technology chosen?',
+            text: 'For building SPAs and convenient reactive  interactions. \
+                    I was tired of writing multi-line JavaScript and wanted to learn something more\
+                    in demand in the market. I decided to try React first, but it turned out that I liked \
+                    it for its reactivity, ease, and interesting component approach ',
+        }
     },
     {
         id: 2,
         name: 'MongoDB',
-        icon: mongoDbIcon
+        icon: mongoDbIcon,
+        tooltip: {
+            title: 'Why was this technology chosen?',
+            text: 'For building SPAs and convenient reactive  interactions. \
+                    I was tired of writing multi-line JavaScript and wanted to learn something more\
+                    in demand in the market. I decided to try React first, but it turned out that I liked \
+                    it for its reactivity, ease, and interesting component approach ',
+        }
     },
     {
         id: 3,
         name: 'NextJS',
-        icon: nextJSIcon
+        icon: nextJSIcon,
+        tooltip: {
+            title: 'Why was this technology chosen?',
+            text: 'For building SPAs and convenient reactive  interactions. \
+                    I was tired of writing multi-line JavaScript and wanted to learn something more\
+                    in demand in the market. I decided to try React first, but it turned out that I liked \
+                    it for its reactivity, ease, and interesting component approach ',
+        }
     },
     {
         id: 4,
         name: 'Redux',
-        icon: reduxIcon
+        icon: reduxIcon,
+        tooltip: {
+            title: 'Why was this technology chosen?',
+            text: 'For building SPAs and convenient reactive  interactions. \
+                    I was tired of writing multi-line JavaScript and wanted to learn something more\
+                    in demand in the market. I decided to try React first, but it turned out that I liked \
+                    it for its reactivity, ease, and interesting component approach ',
+        }
     },
     {
         id: 5,
         name: 'SASS',
-        icon: sassIcon
+        icon: sassIcon,
+        tooltip: {
+            title: 'Why was this technology chosen?',
+            text: 'For building SPAs and convenient reactive  interactions. \
+                    I was tired of writing multi-line JavaScript and wanted to learn something more\
+                    in demand in the market. I decided to try React first, but it turned out that I liked \
+                    it for its reactivity, ease, and interesting component approach ',
+        }
     },
     {
         id: 6,
         name: 'TypeScript',
-        icon: typeScriptIcon
+        icon: typeScriptIcon,
+        tooltip: {
+            title: 'Why was this technology chosen?',
+            text: 'For building SPAs and convenient reactive  interactions. \
+                    I was tired of writing multi-line JavaScript and wanted to learn something more\
+                    in demand in the market. I decided to try React first, but it turned out that I liked \
+                    it for its reactivity, ease, and interesting component approach ',
+        }
     },
 ]
 
 
 const StackItem: React.FC<StackItemProps> = ({ item }) => {
-    
+    const tooltipRef = useTooltip<HTMLDivElement>({
+                text: item.tooltip.text,
+                title: item.tooltip.title,
+                type: 'lvl2',
+                placement: 'bottom',
+                fakeWidth: 400,
+                delay: 400,
+            });
 
     return (
-        <div className={styles.itemWrapper}>
+        <div ref={tooltipRef} className={styles.itemWrapper}>
             <div className={styles.iconWrapper}>
                 <img src={item.icon} alt="" aria-hidden='true' />
             </div>

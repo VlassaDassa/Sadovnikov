@@ -1,7 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-
-
 interface TooltipState {
     isVisible: boolean,
     text: string,
@@ -9,7 +7,7 @@ interface TooltipState {
     date?: string,
     type: 'lvl1' | 'lvl2' | 'lvl3',
     position: { top: number, left: number }
-    targetId?: string
+    targetId?: string,
 }
 
 const initialState: TooltipState = {

@@ -7,13 +7,16 @@
 .tooltip {
     position: absolute;
     
-    padding: 10px;
+    padding: 20px;
     
     background-color: $neutral_900;
 
+    width: max-content;      // ← ширина по содержимому, но не меньше min-width
+    max-width: 400px;
+
     @extend .body-16-mont-regular;
     @extend .shadow-xl;
-    @extend .radius-4;
+    @extend .radius-12;
     @extend .whiteText;
     
     pointer-events: none;
@@ -23,13 +26,15 @@
 
 
 .title {
-    @extend .body-16-magra-bold;
+    @extend .body-20-magra-bold;
     @extend .whiteText;
+    margin-bottom: 10px;
 }
 
 .text {
     @extend .body-16-mont-regular;
     @extend .whiteText;
+    @extend .line-height-1_5x;
 }
 
 .date {

@@ -24,6 +24,7 @@ export interface TooltipConfig {
     date?: string,
     type?: 'lvl1' | 'lvl2' | 'lvl3',
     delay?: number,
+    fakeWidth?: number, // Предполагаемая ширина(приблизительная) для расчётов положения (чтобы не вылезало за края). Для мало текста +- 100, для большого +- 400
     offset?: number,
     placement?: 'top' | 'bottom' | 'left' | 'right'; 
 }
