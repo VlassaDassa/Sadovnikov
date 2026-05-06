@@ -1,6 +1,7 @@
 export const cssVars = {
     white: '#ffffff',
     black: '#000000',
+    green: '#00FF62',
 
     neutral_900: '#3A3A3A',
     neutral_800: '#515151',

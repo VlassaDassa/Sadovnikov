@@ -18,6 +18,12 @@ import IconPuzzle from "./IconPuzzle";
 import IconRocket from "./IconRocket";
 import IconText from "./IconText";
 import IconArrow from "./IconArrow";
+import IconAccessibility from "./IconAccessibility";
+import IconLoadTime from "./IconLoadTime";
+import IconSearch from "./IconSearch";
+import IconSpeed from "./IconSpeed";
+
+
 
 const icons = {
     bell: IconBell,
@@ -38,6 +44,10 @@ const icons = {
     flag: IconFlag,
     puzzle: IconPuzzle,
     arrow: IconArrow,
+    accessibility: IconAccessibility,
+    loadTime: IconLoadTime,
+    search: IconSearch,
+    speed: IconSpeed
 }
 
 
