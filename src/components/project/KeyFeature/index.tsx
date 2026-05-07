@@ -11,6 +11,52 @@ import styles from './index.module.scss';
 
 
 const featureIcon = '/images/mockImages/featureIcon.svg';
+const featurePhoto = '/images/mockImages/featurePhoto.png';
+
+
+
+interface IFeatureItem {
+    id: number,
+    title: string,
+    text: string,
+    icon: string,
+    photo: string
+}
+
+const featureItems: IFeatureItem[] = [
+    {
+        id: 1,
+        title: 'Full responsive design',
+        text: 'Initially, 3 versions were made for each project page \
+                            (desktop, tablet, mobile). And each page looks great on any screen \
+                            resolution. The Mobile First approach was used during \
+                            development for easy adaptation',
+        icon: featureIcon,
+        photo: featurePhoto
+    },
+    {
+        id: 2,
+        title: 'Full responsive design',
+        text: 'Initially, 3 versions were made for each project page \
+                            (desktop, tablet, mobile). And each page looks great on any screen \
+                            resolution. The Mobile First approach was used during \
+                            development for easy adaptation',
+        icon: featureIcon,
+        photo: featurePhoto
+    },
+    {
+        id: 3,
+        title: 'Full responsive design',
+        text: 'Initially, 3 versions were made for each project page \
+                            (desktop, tablet, mobile). And each page looks great on any screen \
+                            resolution. The Mobile First approach was used during \
+                            development for easy adaptation',
+        icon: featureIcon,
+        photo: featurePhoto
+    }
+]
+
+
 
 
 const KeyFeatures: React.FC = () => {
@@ -23,80 +69,40 @@ const KeyFeatures: React.FC = () => {
 
             <Swiper
                 slidesPerView={1}
-                spaceBetween={20}  
+                spaceBetween={0}  
                 onRealIndexChange={(swiper) => setCurIndex(swiper.activeIndex + 1)}
                 pagination={true}   
                 className={styles.slider}   
             >
-                <SwiperSlide className={styles.slide}>
-                    <div className={styles.feature}>
-                        <div className={styles.featureHeader}>
-                            <div className={styles.featureIconWrapper}>
-                                <AdaptiveImage 
-                                    src={featureIcon}
-                                    alt={''}
-                                    ariaHidden={true}
-                                    wrapClass={styles.projectWrapPhoto}
-                                />
+                {featureItems.map((item) => (
+                    <SwiperSlide key={item.id} className={styles.slide}>
+                        <div className={styles.feature}>
+                            <div className={styles.featureWrapper}>
+                                <div className={styles.featureHeader}>
+                                    <div className={styles.featureIconWrapper}>
+                                        <AdaptiveImage 
+                                            src={item.icon}
+                                            alt={''}
+                                            ariaHidden={true}
+                                            wrapClass={styles.projectWrapPhoto}
+                                        />
+                                    </div>
+
+                                    <h3 className={styles.featureTitle}>{item.title}</h3>
+                                </div>
+
+                                <p className={styles.featureText}>{item.text}</p>
                             </div>
 
-                            <h3 className={styles.featureTitle}>Full responsive design</h3>
+                            <AdaptiveImage
+                                src={item.photo}
+                                alt={item.title}
+                                imgClass={styles.featurePhoto}
+                                wrapClass={styles.featurePhotoWrapper}
+                            />
                         </div>
-
-                        <p className={styles.featureText}>
-                            Initially, 3 versions were made for each project page
-                            (desktop, tablet, mobile). And each page looks great on any screen
-                            resolution. The Mobile First approach was used during
-                            development for easy adaptation 
-                        </p>
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide className={styles.slide}>
-                    <div className={styles.feature}>
-                        <div className={styles.featureHeader}>
-                            <div className={styles.featureIconWrapper}>
-                                <AdaptiveImage 
-                                    src={featureIcon}
-                                    alt={''}
-                                    ariaHidden={true}
-                                    wrapClass={styles.projectWrapPhoto}
-                                />
-                            </div>
-
-                            <h3 className={styles.featureTitle}>Full responsive design</h3>
-                        </div>
-
-                        <p className={styles.featureText}>
-                            Initially, 3 versions were made for each project page
-                            (desktop, tablet, mobile). And each page looks great on any screen
-                            resolution. The Mobile First approach was used during
-                            development for easy adaptation 
-                        </p>
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide className={styles.slide}>
-                    <div className={styles.feature}>
-                        <div className={styles.featureHeader}>
-                            <div className={styles.featureIconWrapper}>
-                                <AdaptiveImage 
-                                    src={featureIcon}
-                                    alt={''}
-                                    ariaHidden={true}
-                                    wrapClass={styles.projectWrapPhoto}
-                                />
-                            </div>
-
-                            <h3 className={styles.featureTitle}>Full responsive design</h3>
-                        </div>
-
-                        <p className={styles.featureText}>
-                            Initially, 3 versions were made for each project page
-                            (desktop, tablet, mobile). And each page looks great on any screen
-                            resolution. The Mobile First approach was used during
-                            development for easy adaptation 
-                        </p>
-                    </div>
-                </SwiperSlide>
+                    </SwiperSlide>
+                ))}
             </Swiper>
 
             <PaginationSlider totalCountItems={3} curIndex={curIndex} />
