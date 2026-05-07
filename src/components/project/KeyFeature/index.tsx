@@ -57,8 +57,6 @@ const featureItems: IFeatureItem[] = [
 ]
 
 
-
-
 const KeyFeatures: React.FC = () => {
     const [curIndex, setCurIndex] = useState<number>(1)
 
