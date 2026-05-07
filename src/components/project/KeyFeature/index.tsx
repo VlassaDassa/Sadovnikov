@@ -69,7 +69,7 @@ const KeyFeatures: React.FC = () => {
 
             <Swiper
                 slidesPerView={1}
-                spaceBetween={0}  
+                spaceBetween={30}  
                 onRealIndexChange={(swiper) => setCurIndex(swiper.activeIndex + 1)}
                 pagination={true}   
                 className={styles.slider}   

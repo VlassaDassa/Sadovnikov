@@ -94,7 +94,7 @@ const ProjectPreview: React.FC = () => {
             <div className={styles.photoContainer}>
                 <Swiper
                     slidesPerView={1}
-                    spaceBetween={20}  
+                    spaceBetween={30}  
                     onRealIndexChange={(swiper) => setCurIndex(swiper.activeIndex + 1)}
                     pagination={true}   
                     className={styles.swiper}   

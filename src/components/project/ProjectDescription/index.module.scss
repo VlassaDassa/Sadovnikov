@@ -31,6 +31,10 @@
     align-items: center;
 
     width: calc(100% - 20px);
+
+    @media (min-width: 768px) {
+        width: calc(100% - 40px);
+    }
 }
 
 .iconWrapper {
@@ -43,12 +47,21 @@
 
     background-color: $brand_900;
     border-radius: 10px;
+
+    @media (min-width: 768px) {
+        width: 70px;
+        height: 70px;
+    }
 }
 
 .itemTitle {
     @extend .heading-20-magra-bold;
     color: $neutral_400;
     text-transform: uppercase;
+
+    @media (min-width: 768px) {
+        font-size: 24px;
+    }
 }
 
 .accordion {
@@ -82,9 +95,15 @@
     align-items: center;
     padding: 10px;
     cursor: pointer;
+
+    @media (min-width: 768px) {
+        padding: 20px;
+    }
 }
 
 .accordionContent {
+    overflow: hidden;
+
     transition: all 0.3s ease-in-out;
     max-height: 0;
     
@@ -94,14 +113,19 @@
 }
 
 
-
-
 .accordionInner {
     @extend .body-16-magra-bold;
     @extend .line-height-1_5x;
     color: $neutral_200;
 
-    padding: 10px
+    padding: 10px;
+
+    @media (min-width: 768px) {
+        font-size: 20px;
+
+        padding: 20px;
+        padding-top: 0px;
+    }
 }
 
 .iconClose {

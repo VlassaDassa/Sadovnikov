@@ -1,6 +1,8 @@
 'use client'
 
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
 
 import Icon from '@/components/icons/Icon';
 
@@ -24,7 +26,7 @@ const descItems = [
     {
         title: 'Site',
         icon: 'text',
-        content: 'React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.'
+        content: 'React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools. React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.'
     },
     {
         title: 'WHY I STARTED',
@@ -46,12 +48,13 @@ const descItems = [
         icon: 'time',
         content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.'
     }
-
 ];
 
 
 const Accordion: React.FC<AccordionProps> = ({ items, allowMultiple=true }) => {
     const [openIndexes, setOpenIndexes] = useState<number[]>([]);
+    const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
+    const iconSize = breakpoint === 'mobile' ?  25 : 44 
 
     const toggleItem = (index: number) => {
         if (allowMultiple) {
@@ -81,7 +84,7 @@ const Accordion: React.FC<AccordionProps> = ({ items, allowMultiple=true }) => {
                                 <div className={styles.iconWrapper}>
                                     <Icon 
                                         name={item.icon}
-                                        size={25}
+                                        size={iconSize}
                                         strokeColor={cssVars.white}
                                         fillColor='none'
                                     />
@@ -108,7 +111,6 @@ const Accordion: React.FC<AccordionProps> = ({ items, allowMultiple=true }) => {
         </div>
     );
 };
-
 
 
 const ProjectDescription: React.FC = () => {
