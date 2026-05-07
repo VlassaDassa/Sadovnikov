@@ -77,13 +77,18 @@
 
 .btnWrapper {
     display: flex;
-    justify-content: space-between;
+    gap: 10px;
+}
+
+.projectWrapPhoto {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9; 
+    border-radius: 20px;
+    overflow: hidden;
 }
 
 
 .projectPhoto {
-    width: 100% !important;
-    height: 100% !important;
-    position: relative !important;
-    border-radius: 20px;
+    object-fit: cover;  
 }

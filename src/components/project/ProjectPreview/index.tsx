@@ -96,7 +96,8 @@ const ProjectPreview: React.FC = () => {
                     slidesPerView={1}
                     spaceBetween={20}  
                     onRealIndexChange={(swiper) => setCurIndex(swiper.activeIndex + 1)}
-                    pagination={true}      
+                    pagination={true}   
+                    className={styles.swiper}   
                 >
                     <SwiperSlide>
                         <AdaptiveImage 

@@ -64,7 +64,7 @@
 .accordionItem {
     background-color: $neutral_900;
     border-radius: 15px;
-    transition: all 0.1s ease;
+    transition: all 0.2s ease;
 
     @extend .shadow-splash;
 
@@ -85,14 +85,16 @@
 }
 
 .accordionContent {
+    transition: all 0.3s ease-in-out;
     max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-in-out;
     
     &.open {
         max-height: 500px;
     }
 }
+
+
+
 
 .accordionInner {
     @extend .body-16-magra-bold;
