@@ -10,7 +10,13 @@
     justify-content: center;
     align-items: center;
 
-    margin-top: 20px;
+    margin-top: 10px;
+
+    height: 30px;
+
+    @media (min-width: 768px) {
+        height: 40px;
+    }
 
     @media (min-width: 600px) {
         column-gap: 10px;

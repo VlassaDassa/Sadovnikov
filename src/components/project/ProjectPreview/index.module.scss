@@ -46,7 +46,6 @@
 
 
 
-
 .textWrapper {
     gap: 15px;
 }
@@ -82,13 +81,9 @@
 }
 
 
-.projectWrapPhoto {
-    border-radius: 20px;
-}
-
 .projectPhoto {
-    object-fit: cover;  
     width: 100% !important;
-    height: auto !important;
+    height: 100% !important;
     position: relative !important;
+    border-radius: 20px;
 }

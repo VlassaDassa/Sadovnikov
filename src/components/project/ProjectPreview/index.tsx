@@ -14,6 +14,7 @@ import { cssVars } from '@/styles/cssVariables';
 
 
 const projectImg1 = '/images/mockImages/specTecno.png'
+const testPhoto = '/images/mockImages/testPhoto.png'
 
 const ProjectPreview: React.FC = () => {
     const [curIndex, setCurIndex] = useState<number>(1)
@@ -110,8 +111,9 @@ const ProjectPreview: React.FC = () => {
                     </SwiperSlide>
                     <SwiperSlide>
                         <AdaptiveImage 
-                            src={projectImg1}
+                            src={testPhoto}
                             alt={'project'}
+                            loading='eager'
                             ariaHidden={false}
                             wrapClass={styles.projectWrapPhoto}
                             imgClass={styles.projectPhoto}
@@ -122,6 +124,7 @@ const ProjectPreview: React.FC = () => {
                         <AdaptiveImage 
                             src={projectImg1}
                             alt={'project'}
+                            loading='eager'
                             ariaHidden={false}
                             wrapClass={styles.projectWrapPhoto}
                             imgClass={styles.projectPhoto}
