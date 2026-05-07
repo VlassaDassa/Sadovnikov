@@ -134,18 +134,6 @@ const ProjectStack: React.FC = () => {
         <section className={`${styles.projectStack} container`}>
             <h2 className={`${styles.title} sectionTitle`}>STACK</h2>
 
-            <Button 
-                iconPosition='only'
-                behavior='default'
-                icon='bell'
-                variant='dark'
-                tooltip={{
-                    text: 'Кнопка',
-                    placement: 'bottom'
-                }}
-            />
-
-
             <div className={styles.stackWrapper}>
                 {stackItems.map((item) => (
                     <StackItem key={item.id} item={item} />

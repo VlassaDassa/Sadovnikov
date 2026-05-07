@@ -57,6 +57,8 @@ export const useTooltip = <T extends HTMLElement = HTMLDivElement>(config: Toolt
             if (!ref.current) return; 
             const target = ref.current
             const position = calculatePosition(target)
+
+
             dispatch(showTooltip({
                 text,
                 title,
@@ -76,16 +78,24 @@ export const useTooltip = <T extends HTMLElement = HTMLDivElement>(config: Toolt
         dispatch(hideTooltip())
     }, [dispatch])
 
+    const hideTooltipOnScroll = useCallback(() => {
+        dispatch(hideTooltip());
+    }, [dispatch]);
+
     useEffect(() => {
         const element = ref.current
         if (!element) return
 
         element.addEventListener('mouseenter', handleMouseEnter)
         element.addEventListener('mouseleave', handleMouseLeave)
+        window.addEventListener('scroll', hideTooltipOnScroll, true);
+        window.addEventListener('touchmove', hideTooltipOnScroll, { passive: true });
 
         return () => {
             element.removeEventListener('mouseenter', handleMouseEnter)
             element.removeEventListener('mouseleave', handleMouseLeave)
+            window.removeEventListener('scroll', hideTooltipOnScroll, true);
+            window.removeEventListener('touchmove', hideTooltipOnScroll);
             if (timeoutRef.current) clearTimeout(timeoutRef.current)
         }
     }, [handleMouseEnter, handleMouseLeave])

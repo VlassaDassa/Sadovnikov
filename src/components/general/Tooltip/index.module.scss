@@ -11,8 +11,7 @@
     
     background-color: $neutral_900;
 
-    width: max-content;      // ← ширина по содержимому, но не меньше min-width
-    max-width: 400px;
+    width: calc(100% - 40px);
 
     @extend .body-16-mont-regular;
     @extend .shadow-xl;
@@ -22,6 +21,11 @@
     pointer-events: none;
 
     transition: opacity 0.1s ease-in-out;
+
+    @media (min-width: 768px) {
+        width: max-content; 
+        max-width: 400px;
+    }
 }
 
 

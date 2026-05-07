@@ -2,11 +2,15 @@
 
 import { useSelector } from "react-redux"
 import { RootState } from "@/store"
+
 import Tooltip from "../Tooltip"
+
 import styles from './index.module.scss';
 
 
 const GlobalTooltip = () => {
+    const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
+
     const { isVisible, text, title, date, type, position } = useSelector(
         (state: RootState) => state.tooltip
     )
@@ -19,7 +23,7 @@ const GlobalTooltip = () => {
             style={{
                 position: 'fixed',
                 top: position.top,
-                left: position.left,
+                left: breakpoint === 'mobile' ? 0 : position.left,
                 zIndex: 9
             }}
         >

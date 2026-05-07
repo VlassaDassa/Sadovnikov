@@ -48,6 +48,7 @@ const Button: React.FC<ButtonProps> = ({
         tooltipRef = useTooltip<HTMLButtonElement>({
             text: tooltip?.text,
             type: 'lvl1',
+            fakeWidth: tooltip?.fakeWidth,
             placement: tooltip?.placement,
             delay: 300,
         });

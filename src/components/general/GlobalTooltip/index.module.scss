@@ -1,6 +1,7 @@
 .globalTooltip {
     pointer-events: none;
     animation: fadeIn 0.15s ease;
+    width: 100%;
 }
 
 @keyframes fadeIn {
