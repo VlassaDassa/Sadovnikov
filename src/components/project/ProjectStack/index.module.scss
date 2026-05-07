@@ -36,7 +36,13 @@
             }
         }
     }
+
+    @media (min-width: 768px) {
+        position: absolute;
+    }
 }
+
+
 
 .iconWrapper {
     background-color: $brand_900;
@@ -51,7 +57,7 @@
     width: 80px;
     height: 80px;
 
-    transition: all 0.2s ease-in-out
+    transition: all 0.2s ease-in-out;
 }
 
 .iconName {
@@ -71,4 +77,30 @@
         grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 50px;
     }
+
+    @media (min-width: 700px) {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 50px;
+    }
+
+    @media (min-width: 768px) {
+        display: unset;
+        grid-template-columns: unset;
+        gap: unset;
+
+        position: relative;
+
+        height: 300px;
+        width: 100%;
+    }
+}
+
+
+
+.dynamicLine {
+    position: absolute;
+    height: 1px;
+    background-color: $white;
+    opacity: 0.25;
+    pointer-events: none;
 }
