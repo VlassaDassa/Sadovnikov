@@ -103,4 +103,9 @@
     background-color: $white;
     opacity: 0.25;
     pointer-events: none;
+    display: none;
+
+    @media (min-width: 768px) {
+        display: block;
+    }
 }

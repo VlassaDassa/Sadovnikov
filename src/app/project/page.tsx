@@ -5,6 +5,8 @@ import ProjectDescription from "@/components/project/ProjectDescription";
 import Metrics from "@/components/project/Metrics";
 import Evolution from "@/components/project/Evolution";
 
+import styles from './index.module.scss';
+
 
 export const Project = () => {
     return (
@@ -13,8 +15,11 @@ export const Project = () => {
 	        <ProjectStack />
 	        <KeyFeatures />
 	        <ProjectDescription />
-	        <Metrics />
-	        <Evolution />
+			<section className={`${styles.twoColumns} container`}>
+				<Metrics />
+	        	<Evolution />
+			</section>
+	        
 		</>
     )
 }

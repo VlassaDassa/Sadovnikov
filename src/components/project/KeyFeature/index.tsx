@@ -10,8 +10,11 @@ import AdaptiveImage from '@/components/general/AdaptiveImage';
 import styles from './index.module.scss';
 
 
+// Изображения должны быть в пропорции 11:9 (h:252px w:309px)
 const featureIcon = '/images/mockImages/featureIcon.svg';
 const featurePhoto = '/images/mockImages/featurePhoto.png';
+const featurePhoto1 = '/images/mockImages/featurePhoto_1.png';
+const spectechno = '/images/mockImages/specTecno.png';
 
 
 
@@ -42,7 +45,7 @@ const featureItems: IFeatureItem[] = [
                             resolution. The Mobile First approach was used during \
                             development for easy adaptation',
         icon: featureIcon,
-        photo: featurePhoto
+        photo: spectechno
     },
     {
         id: 3,
@@ -52,7 +55,7 @@ const featureItems: IFeatureItem[] = [
                             resolution. The Mobile First approach was used during \
                             development for easy adaptation',
         icon: featureIcon,
-        photo: featurePhoto
+        photo: featurePhoto1
     }
 ]
 
@@ -92,12 +95,15 @@ const KeyFeatures: React.FC = () => {
                                 <p className={styles.featureText}>{item.text}</p>
                             </div>
 
-                            <AdaptiveImage
-                                src={item.photo}
-                                alt={item.title}
-                                imgClass={styles.featurePhoto}
-                                wrapClass={styles.featurePhotoWrapper}
-                            />
+                            <div className={styles.photoWrapper}>
+                                <AdaptiveImage
+                                    src={item.photo}
+                                    alt={item.title}
+                                    imgClass={styles.featurePhoto}
+                                    wrapClass={styles.featurePhotoWrapper}
+                                />
+                            </div>
+                            
                         </div>
                     </SwiperSlide>
                 ))}

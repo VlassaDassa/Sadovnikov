@@ -55,7 +55,7 @@ const metrics: IMertics[] = [
 
 const Metrics: React.FC = () => {
     return ( 
-        <section className={`${styles.metrics} container`}>
+        <section className={`${styles.metrics}`}>
             <h2 className={`${styles.title} sectionTitle`}>METRICS</h2>
 
             <div className={styles.metricsWrapper}>

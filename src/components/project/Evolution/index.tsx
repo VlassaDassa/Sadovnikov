@@ -69,7 +69,7 @@ const Commit: React.FC<CommitProps> = ({ item }) => {
 
 const Evolution: React.FC = () => {
     return (
-        <section className={`${styles.evolution} container`}>
+        <section className={`${styles.evolution}`}>
             <h2 className={`${styles.title} sectionTitle`}>EVOLUTION</h2>
 
             <div className={styles.evolWrapper}>

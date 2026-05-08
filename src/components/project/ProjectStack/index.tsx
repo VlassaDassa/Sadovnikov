@@ -146,8 +146,13 @@ const ProjectStack: React.FC = () => {
                 return Math.floor(Math.random() * (max - min + 1)) + min;
             };
 
+
             let left = (getRandomInt(0, 100) + (index + 1) * 130) / 10;
             let top = 0;
+
+            if (index === 0) {
+                left = 10
+            }
 
             if ((index + 1) % 2 === 0) {
                 top += getRandomInt(0, 100) + 100;
