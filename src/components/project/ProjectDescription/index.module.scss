@@ -9,6 +9,14 @@
     @extend .whiteText;
 
     margin-top: 60px;
+
+    @media (min-width: 768px) {
+        font-size: 36px;
+    }
+
+    @media (min-width: 1280px) {
+        font-size: 40px;
+    }
 }
 
 
