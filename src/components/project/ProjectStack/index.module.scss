@@ -46,10 +46,37 @@
     }
 
     @media (min-width: 768px) {
+        animation: floatLikeFeather 4s ease-in-out infinite;
+        transform-origin: center;
+        will-change: transform, left, top;
+        transform: translateZ(0);
+        backface-visibility: hidden;
         position: absolute;
     }
 }
 
+
+@for $i from 1 through 50 {
+    .itemWrapper:nth-child(#{$i}) {
+        $duration: random(5) + 3;
+        $delay: random(5) - 2;
+        $y: random(15) + 5;
+        $rotate: random(10) - 5;
+        $scale: 1 + (random(5) / 100);
+        
+        animation: customFloat#{$i} $duration + s ease-in-out infinite;
+        animation-delay: $delay + s;
+        
+        @keyframes customFloat#{$i} {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg) scale(1);
+            }
+            50% {
+                transform: translateY(-#{$y}px) rotate(#{$rotate}deg) scale($scale);
+            }
+        }
+    }
+}
 
 
 .iconWrapper {
@@ -113,7 +140,12 @@
     pointer-events: none;
     display: none;
 
+
     @media (min-width: 768px) {
         display: block;
+        will-change: transform, width, left, top;
+
+        transform: translateZ(0);
+        backface-visibility: hidden;
     }
 }

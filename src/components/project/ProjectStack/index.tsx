@@ -140,6 +140,95 @@ const ProjectStack: React.FC = () => {
     const [positions, setPositions] = useState<Array<{ top: number; left: number }>>([]);
     const [renderTrigger, setRenderTrigger] = useState(0);
 
+    const linesRef = useRef<HTMLDivElement[]>([]);
+
+    const createLines = () => {
+        if (!wrapperRef.current) return;
+
+        const items = wrapperRef.current.querySelectorAll('.stack-item-wrapper');
+        if (items.length < 2) return;
+
+        linesRef.current.forEach(line => line.remove());
+        linesRef.current = [];
+
+        for (let i = 0; i < items.length - 1; i++) {
+            const line = document.createElement('div');
+            line.className = `${styles.dynamicLine} dynamic-line`;
+            line.style.position = 'absolute';
+            line.style.height = '1px';
+            line.style.backgroundColor = 'white';
+            line.style.opacity = '0.25';
+            line.style.pointerEvents = 'none';
+            line.style.zIndex = '-1';
+            wrapperRef.current.appendChild(line);
+            linesRef.current.push(line);
+        }
+    };
+
+    const updateLinesPosition = () => {
+        if (!wrapperRef.current || linesRef.current.length === 0) return;
+
+        const items = wrapperRef.current.querySelectorAll('.stack-item-wrapper');
+        if (items.length < 2) return;
+
+        const containerRect = wrapperRef.current.getBoundingClientRect();
+
+        for (let i = 0; i < items.length - 1; i++) {
+            const line = linesRef.current[i];
+            if (!line) continue;
+
+            const from = items[i].getBoundingClientRect();
+            const to = items[i + 1].getBoundingClientRect();
+
+            const startX = from.left + from.width / 2 - containerRect.left;
+            const startY = from.top + from.height / 2 - containerRect.top;
+            const endX = to.left + to.width / 2 - containerRect.left;
+            const endY = to.top + to.height / 2 - containerRect.top;
+
+            const length = Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
+            const angle = Math.atan2(endY - startY, endX - startX) * 180 / Math.PI;
+
+            line.style.left = `${startX}px`;
+            line.style.top = `${startY}px`;
+            line.style.width = `${length}px`;
+            line.style.transformOrigin = '0 0';
+            line.style.transform = `rotate(${angle}deg)`;
+        }
+    };
+
+    useEffect(() => {
+        const init = () => {
+            createLines();
+            updateLinesPosition();
+        };
+
+        const timer = setTimeout(init, 100);
+
+        const handleResize = () => {
+            updateLinesPosition();
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => {
+            clearTimeout(timer);
+            window.removeEventListener('resize', handleResize);
+        };
+    }, [positions]);
+
+    useEffect(() => {
+        let rafId: number;
+
+        const animate = () => {
+            updateLinesPosition();
+            rafId = requestAnimationFrame(animate);
+        };
+
+        rafId = requestAnimationFrame(animate);
+
+        return () => cancelAnimationFrame(rafId);
+    }, []);
+
+
     const generatePositions = () => {
         const newPositions = stackItems.map((_, index) => {
             const getRandomInt = (min: number, max: number) => {
@@ -165,60 +254,13 @@ const ProjectStack: React.FC = () => {
         
         setPositions(newPositions);
     };
-
-    const drawLines = () => {
-        if (!wrapperRef.current) return;
-
-        const oldLines = wrapperRef.current.querySelectorAll('.dynamic-line');
-        oldLines.forEach(line => line.remove());
-
-        const items = wrapperRef.current.querySelectorAll('.stack-item-wrapper');
-        if (items.length < 2) return;
-
-        const containerRect = wrapperRef.current.getBoundingClientRect();
-
-        for (let i = 0; i < items.length - 1; i++) {
-            const from = items[i].getBoundingClientRect();
-            const to = items[i + 1].getBoundingClientRect();
-
-            const startX = from.left + from.width / 2 - containerRect.left;
-            const startY = from.top + from.height / 2 - containerRect.top;
-            const endX = to.left + to.width / 2 - containerRect.left;
-            const endY = to.top + to.height / 2 - containerRect.top;
-
-            const length = Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
-            const angle = Math.atan2(endY - startY, endX - startX) * 180 / Math.PI;
-
-            const line = document.createElement('div');
-            line.className = `${styles.dynamicLine} dynamic-line`;
-            line.style.position = 'absolute';
-            line.style.left = `${startX}px`;
-            line.style.top = `${startY}px`;
-            line.style.width = `${length}px`;
-            line.style.height = '1px';
-            line.style.transformOrigin = '0 0';
-            line.style.transform = `rotate(${angle}deg)`;
-            line.style.pointerEvents = 'none';
-            line.style.zIndex = '-1';
-
-            wrapperRef.current.appendChild(line);
-        }
-    };
+   
 
     useEffect(() => {
         generatePositions();
     }, []);
 
-    useEffect(() => {
-        if (positions.length === 0) return;
-        
-        const timer = setTimeout(() => {
-            drawLines();
-        }, 50);
-
-        return () => clearTimeout(timer);
-    }, [positions, renderTrigger]);
-
+  
     useEffect(() => {
         const handleResize = () => {
             setRenderTrigger(prev => prev + 1);
