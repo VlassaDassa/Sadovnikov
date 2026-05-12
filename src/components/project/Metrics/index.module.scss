@@ -17,9 +17,8 @@
     align-items: center;
 
     margin-top: 40px;
-
-    
 }
+
 
 .metricsWrapper {
     background-color: $neutral_900;
@@ -35,6 +34,10 @@
 
     @media (min-width: 450px) {
         width: 330px;
+    }  
+    
+    @media (min-width: 1280px) {
+        width: 500px;
     }
 }
 
@@ -48,6 +51,11 @@
     &:last-child {
         border-bottom: none;
     }
+
+    @media (min-width: 1280px) {
+        align-items: center;
+    } 
+
 }
 
 .title {
@@ -91,4 +99,10 @@
 
 .contentWrapper {
     gap: 10px;
+    
+    @media (min-width: 1280px) {
+        flex-direction: row;
+        align-items: flex-end;
+        gap: 20px;
+    } 
 }
