@@ -131,7 +131,7 @@ const Contacts: React.FC= () => {
 
 
     return (
-        <section className={`container ${styles.contacts}`}>
+        <section id='contacts' className={`container ${styles.contacts}`}>
             
             <h2 className={`${styles.contactsTitle} sectionTitle`}>CONTACTS</h2>
 

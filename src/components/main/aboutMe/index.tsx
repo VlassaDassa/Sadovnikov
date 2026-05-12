@@ -14,7 +14,7 @@ import style from './index.module.scss';
 const AboutMe: React.FC = () => {
 
     return (
-        <section className={`${style.aboutMe} container`}>
+        <section id='about' className={`${style.aboutMe} container`}>
             <h2 className={`${style.aboutMeTitle} sectionTitle`}>AboutMe</h2>
 
             <AboutIllustration />

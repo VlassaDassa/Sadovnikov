@@ -9,6 +9,7 @@ html {
     font-size: 16px;
     overflow-x: hidden;
     max-width: 100%;
+    scroll-behavior: smooth;
 }
 
 
@@ -35,4 +36,17 @@ body {
 
 .sectionTitle {
     text-align: center;
+}
+
+
+.copyText {
+    position: absolute;
+    background-color: $info_600;
+    border-radius: 15px;
+    padding: 10px 20px;
+    color: $white;
+
+    @extend .body-16-mont-bold;
+    @extend .glass;
+    @extend .shadow-splash;
 }

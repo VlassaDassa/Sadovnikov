@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { useDispatch } from 'react-redux';
+import Link from 'next/link';
 
 import DecorButton from '../button/DecorButton';
 
@@ -69,7 +70,7 @@ const Header: React.FC = () => {
 
     return (
         <header className={`${style.header} container`}>
-            <a className={style.logo} href="#" aria-label="Логотип">
+            <Link className={style.logo} href='/' aria-label="Логотип">
                 <Image 
                     src={logoBg}
                     alt="Logo"
@@ -81,7 +82,7 @@ const Header: React.FC = () => {
                 <p className={style.logoText}>
                     SADOVNIKOV
                 </p>
-            </a>
+            </Link>
 
             <button 
                 className={style.btnBurger}
@@ -96,19 +97,15 @@ const Header: React.FC = () => {
             <nav className={style.headerNav}>
                 <ul className={style.headerNavList}>
                     <li className={style.headerNavItem}>
-                        <a className={style.headerNavItemLink} href="#">Contacts</a>
+                        <Link className={style.headerNavItemLink} href="/#contacts">Contacts</Link>
                     </li>
 
                     <li className={style.headerNavItem}>
-                        <a className={style.headerNavItemLink} href="#">About</a>
+                        <Link className={style.headerNavItemLink} href="/#about">About</Link>
                     </li>
 
                     <li className={style.headerNavItem}>
-                        <a className={style.headerNavItemLink} href="#">Blog</a>
-                    </li>
-
-                    <li className={style.headerNavItem}>
-                        <a className={style.headerNavItemLink} href="#">Portfolio</a>
+                        <Link className={style.headerNavItemLink} href="/#portfolio">Portfolio</Link>
                     </li>
                     
                     <li className={style.headerNavItem}>

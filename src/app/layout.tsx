@@ -25,7 +25,7 @@ export default function RootLayout({
 
 
     return (
-        <html lang="en">
+        <html data-scroll-behavior="smooth" lang="en">
             <head>
                 <link 
                     href="https://fonts.googleapis.com/css2?family=Magra:wght@400;700&family=Montserrat:wght@100..900&display=swap" 

@@ -1,6 +1,8 @@
 'use client'
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import { useRouter } from 'next/navigation';
 
 import { useSelector, useDispatch } from "react-redux";
 
@@ -14,9 +16,11 @@ import style from './index.module.scss';
 import { cssVars } from '@/styles/cssVariables';
 
 
+
 const Menu = () => {
     const isMenuOpen = useSelector((state: RootState) => state.uiState.isMenuOpen)
     const [curLang, setCurLang] = useState<'RU' | 'EN'>('EN')
+    const router = useRouter();
 
     useEffect(() => {
         if (isMenuOpen) {
@@ -36,6 +40,14 @@ const Menu = () => {
     const homeClickHandler = () => {
         dispatch(toggleMenu())
         dispatch(toggleIsOverlayVisible())
+    }
+
+    const linkClickHandler = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        e.preventDefault(); 
+        const href = e.currentTarget.getAttribute('href');
+        dispatch(toggleMenu());
+        dispatch(toggleIsOverlayVisible());
+        router.push(href || '/');
     }
 
     const langClickHandler = () => {
@@ -58,41 +70,38 @@ const Menu = () => {
 
             <nav className={style.menuNav}>
                 <ul className={style.menuList}>
-                    <li className={style.listItem}>
-                        <p className={style.listItemText}>CONTACTS</p>
-                        <Icon 
-                            name='link'
-                            strokeColor={cssVars.neutral_300}
-                            fillColor={cssVars.neutral_300}
-                            size={20}
-                        />
+                    <li>
+                        <Link className={style.listItem} href="/#contacts" onClick={linkClickHandler}>
+                            <p className={style.listItemText}>CONTACTS</p>
+                            <Icon 
+                                name='link'
+                                strokeColor={cssVars.neutral_300}
+                                fillColor={cssVars.neutral_300}
+                                size={20}
+                            />
+                        </Link>
                     </li>
-                    <li className={style.listItem}>
-                        <p className={style.listItemText}>ABOUT</p>
-                        <Icon 
-                            name='link'
-                            strokeColor={cssVars.neutral_300}
-                            fillColor={cssVars.neutral_300}
-                            size={20}
-                        />
+                    <li>
+                        <Link className={style.listItem} href="/#about" onClick={linkClickHandler}>
+                            <p className={style.listItemText}>ABOUT</p>
+                            <Icon 
+                                name='link'
+                                strokeColor={cssVars.neutral_300}
+                                fillColor={cssVars.neutral_300}
+                                size={20}
+                            />
+                        </Link>
                     </li>
-                    <li className={style.listItem}>
-                        <p className={style.listItemText}>BLOG</p>
-                        <Icon 
-                            name='link'
-                            strokeColor={cssVars.neutral_300}
-                            fillColor={cssVars.neutral_300}
-                            size={20}
-                        />
-                    </li>
-                    <li className={style.listItem}>
-                        <p className={style.listItemText}>PORTFOLIO</p>
-                        <Icon 
-                            name='link'
-                            strokeColor={cssVars.neutral_300}
-                            fillColor={cssVars.neutral_300}
-                            size={20}
-                        />
+                    <li>
+                        <Link className={style.listItem} href="/#portfolio" onClick={linkClickHandler}>
+                            <p className={style.listItemText}>PORTFOLIO</p>
+                            <Icon 
+                                name='link'
+                                strokeColor={cssVars.neutral_300}
+                                fillColor={cssVars.neutral_300}
+                                size={20}
+                            />
+                        </Link>
                     </li>
                 </ul>
             </nav>

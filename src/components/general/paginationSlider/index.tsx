@@ -6,7 +6,7 @@ import styles from './index.module.scss';
 interface PaginationSliderProps {
     totalCountItems: number,
     curIndex: number,
-    className: string,
+    className?: string,
 }
 
 

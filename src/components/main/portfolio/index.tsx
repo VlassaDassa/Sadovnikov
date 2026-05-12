@@ -33,7 +33,7 @@ const Portfolio: React.FC= () => {
     )
 
     return (
-        <section className={style.portfolio}>
+        <section id="portfolio" className={style.portfolio}>
             <h2 className={`sectionTitle ${style.portfolioTitle}`}>PORTFOLIO</h2>
 
             {portfolioContent}
