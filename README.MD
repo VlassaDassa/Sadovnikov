@@ -66,6 +66,8 @@ Tooltip
 
 
 
+
+
 ```
 Sadovnikov
 ├─ eslint.config.js
@@ -78,17 +80,6 @@ Sadovnikov
 │     │  ├─ bg_big_btn.png
 │     │  ├─ bg_medium_btn.png
 │     │  └─ bg_small_btn.png
-│     ├─ general
-│     │  └─ noize.jpg
-│     ├─ icons
-│     │  ├─ close.svg
-│     │  ├─ email.svg
-│     │  ├─ home.svg
-│     │  ├─ link_arrow.svg
-│     │  ├─ loader.svg
-│     │  ├─ menu_burger.svg
-│     │  ├─ phone.svg
-│     │  └─ telegram.svg
 │     ├─ main
 │     │  ├─ avatar.png
 │     │  ├─ avatar_frame.png
@@ -99,95 +90,202 @@ Sadovnikov
 │     │  ├─ hand.png
 │     │  ├─ index_finger.png
 │     │  ├─ jaw.png
+│     │  ├─ kolledge_photo.png
+│     │  ├─ moscow_photo.png
+│     │  ├─ russiaFlag.png
+│     │  ├─ uzbFlag.png
+│     │  ├─ uzbIsland.png
 │     │  ├─ vertex.svg
 │     │  └─ vertex_selected.svg
 │     └─ mockImages
-│        └─ specTecno.png
+│        ├─ featureIcon.svg
+│        ├─ featurePhoto.png
+│        ├─ featurePhoto_1.png
+│        ├─ MongoDB.svg
+│        ├─ NextJS.svg
+│        ├─ React.svg
+│        ├─ Redux.svg
+│        ├─ SASS.svg
+│        ├─ specTecno.png
+│        ├─ testPhoto.png
+│        └─ TypeScript.svg
 ├─ README.MD
+├─ sadovnikov
 ├─ src
 │  ├─ app
-│  │  ├─ globals.scss
-│  │  ├─ layout.tsx
-│  │  ├─ page.tsx
-│  │  ├─ testPage
+│  │  ├─ (admin)
+│  │  │  ├─ editProject
+│  │  │  │  └─ page.tsx
+│  │  │  ├─ layout.tsx
 │  │  │  └─ page.tsx
-│  │  └─ __reset.scss
-│  ├─ App.tsx
-│  ├─ components
-│  │  ├─ general
-│  │  │  ├─ BreakpointProvider
-│  │  │  │  └─ BreakpointProvider.tsx
-│  │  │  ├─ button
-│  │  │  │  ├─ button.module.scss
-│  │  │  │  ├─ Button.tsx
-│  │  │  │  ├─ decorButton.module.scss
-│  │  │  │  └─ DecorButton.tsx
-│  │  │  ├─ footer
-│  │  │  │  ├─ index.module.scss
-│  │  │  │  └─ index.tsx
-│  │  │  ├─ header
-│  │  │  │  ├─ index.module.scss
-│  │  │  │  └─ index.tsx
-│  │  │  ├─ input
-│  │  │  │  ├─ index.module.scss
-│  │  │  │  └─ index.tsx
-│  │  │  └─ statusMessage
+│  │  ├─ (public)
+│  │  │  ├─ layout.tsx
+│  │  │  ├─ page.tsx
+│  │  │  └─ project
 │  │  │     ├─ index.module.scss
-│  │  │     └─ index.tsx
-│  │  ├─ icons
-│  │  │  ├─ Icon.tsx
-│  │  │  ├─ IconBell.tsx
-│  │  │  ├─ IconEmail.tsx
-│  │  │  ├─ IconLoader.tsx
-│  │  │  ├─ IconPhone.tsx
-│  │  │  ├─ IconTelegram.tsx
-│  │  │  └─ IconTrash.tsx
-│  │  └─ main
-│  │     ├─ aboutMe
+│  │  │     └─ page.tsx
+│  │  ├─ globals.scss
+│  │  └─ __reset.scss
+│  ├─ components
+│  │  ├─ admin
+│  │  ├─ general
+│  │  ├─ public
+│  │  │  ├─ main
+│  │  │  │  ├─ aboutIllustration
+│  │  │  │  │  ├─ index.module.scss
+│  │  │  │  │  └─ index.tsx
+│  │  │  │  ├─ aboutMe
+│  │  │  │  │  ├─ index.module.scss
+│  │  │  │  │  └─ index.tsx
+│  │  │  │  ├─ canvas
+│  │  │  │  │  ├─ index.module.scss
+│  │  │  │  │  └─ index.tsx
+│  │  │  │  ├─ contacts
+│  │  │  │  │  ├─ index.module.scss
+│  │  │  │  │  └─ index.tsx
+│  │  │  │  ├─ myStack
+│  │  │  │  │  ├─ index.module.scss
+│  │  │  │  │  └─ index.tsx
+│  │  │  │  ├─ portfolio
+│  │  │  │  │  ├─ index.module.scss
+│  │  │  │  │  └─ index.tsx
+│  │  │  │  ├─ preview
+│  │  │  │  │  ├─ index.module.scss
+│  │  │  │  │  └─ index.tsx
+│  │  │  │  ├─ projectItem
+│  │  │  │  │  ├─ index.module.scss
+│  │  │  │  │  └─ index.tsx
+│  │  │  │  ├─ skills
+│  │  │  │  │  ├─ index.module.scss
+│  │  │  │  │  └─ index.tsx
+│  │  │  │  ├─ slider
+│  │  │  │  │  ├─ index.module.scss
+│  │  │  │  │  └─ index.tsx
+│  │  │  │  └─ talkingAvatar
+│  │  │  │     ├─ index.module.scss
+│  │  │  │     └─ index.tsx
+│  │  │  └─ project
+│  │  │     ├─ Evolution
+│  │  │     │  ├─ index.module.scss
+│  │  │     │  └─ index.tsx
+│  │  │     ├─ KeyFeature
+│  │  │     │  ├─ index.module.scss
+│  │  │     │  └─ index.tsx
+│  │  │     ├─ Metrics
+│  │  │     │  ├─ index.module.scss
+│  │  │     │  └─ index.tsx
+│  │  │     ├─ ProjectDescription
+│  │  │     │  ├─ index.module.scss
+│  │  │     │  └─ index.tsx
+│  │  │     ├─ ProjectPreview
+│  │  │     │  ├─ index.module.scss
+│  │  │     │  └─ index.tsx
+│  │  │     ├─ ProjectStack
+│  │  │     │  ├─ index.module.scss
+│  │  │     │  └─ index.tsx
+│  │  │     └─ Slider
+│  │  │        ├─ index.module.scss
+│  │  │        └─ index.tsx
+│  │  └─ shared
+│  │     ├─ AdaptiveImage
 │  │     │  ├─ index.module.scss
 │  │     │  └─ index.tsx
-│  │     ├─ canvas
+│  │     ├─ AnimatedScroll
 │  │     │  ├─ index.module.scss
 │  │     │  └─ index.tsx
-│  │     ├─ contacts
+│  │     ├─ BreakpointProvider
+│  │     │  └─ BreakpointProvider.tsx
+│  │     ├─ button
+│  │     │  ├─ button.module.scss
+│  │     │  ├─ Button.tsx
+│  │     │  ├─ decorButton.module.scss
+│  │     │  └─ DecorButton.tsx
+│  │     ├─ DynImportLayout
+│  │     │  └─ index.tsx
+│  │     ├─ footer
 │  │     │  ├─ index.module.scss
 │  │     │  └─ index.tsx
-│  │     ├─ myStack
+│  │     ├─ GlobalLoader
 │  │     │  ├─ index.module.scss
 │  │     │  └─ index.tsx
-│  │     ├─ portfolio
+│  │     ├─ GlobalTooltip
 │  │     │  ├─ index.module.scss
 │  │     │  └─ index.tsx
-│  │     ├─ preview
+│  │     ├─ header
 │  │     │  ├─ index.module.scss
 │  │     │  └─ index.tsx
-│  │     ├─ projectItem
+│  │     ├─ icons
+│  │     │  ├─ Icon.tsx
+│  │     │  ├─ IconAccessibility.tsx
+│  │     │  ├─ IconArrow.tsx
+│  │     │  ├─ IconBell.tsx
+│  │     │  ├─ IconCalendar.tsx
+│  │     │  ├─ IconEmail.tsx
+│  │     │  ├─ IconFlag.tsx
+│  │     │  ├─ IconGitHub.tsx
+│  │     │  ├─ IconHome.tsx
+│  │     │  ├─ IconInternet.tsx
+│  │     │  ├─ IconLink.tsx
+│  │     │  ├─ IconLoader.tsx
+│  │     │  ├─ IconLoadTime.tsx
+│  │     │  ├─ IconPerson.tsx
+│  │     │  ├─ IconPhone.tsx
+│  │     │  ├─ IconPuzzle.tsx
+│  │     │  ├─ IconRocket.tsx
+│  │     │  ├─ IconSearch.tsx
+│  │     │  ├─ IconSpeed.tsx
+│  │     │  ├─ IconTelegram.tsx
+│  │     │  ├─ IconText.tsx
+│  │     │  ├─ IconTime.tsx
+│  │     │  └─ IconTrash.tsx
+│  │     ├─ input
 │  │     │  ├─ index.module.scss
 │  │     │  └─ index.tsx
-│  │     ├─ skills
+│  │     ├─ menu
 │  │     │  ├─ index.module.scss
 │  │     │  └─ index.tsx
-│  │     ├─ slider
+│  │     ├─ NoizeBg
 │  │     │  ├─ index.module.scss
 │  │     │  └─ index.tsx
-│  │     └─ talkingAvatar
+│  │     ├─ overlay
+│  │     │  ├─ index.module.scss
+│  │     │  └─ index.tsx
+│  │     ├─ paginationSlider
+│  │     │  ├─ index.module.scss
+│  │     │  └─ index.tsx
+│  │     ├─ ProgressBar
+│  │     │  ├─ index.module.scss
+│  │     │  └─ index.tsx
+│  │     ├─ statusMessage
+│  │     │  ├─ index.module.scss
+│  │     │  └─ index.tsx
+│  │     └─ Tooltip
 │  │        ├─ index.module.scss
 │  │        └─ index.tsx
+│  ├─ hooks
+│  │  ├─ useCopy.ts
+│  │  ├─ usePageLoad.ts
+│  │  ├─ useScrollAnimation.ts
+│  │  └─ useTooltip.ts
 │  ├─ interfaces
 │  │  └─ general.ts
+│  ├─ lib
+│  │  └─ stack.ts
 │  ├─ mockData
 │  │  ├─ aboutMe.ts
 │  │  ├─ projects.ts
 │  │  ├─ skills.ts
 │  │  └─ stack.ts
 │  ├─ next.config.mjs
-│  ├─ services
-│  │  └─ stack.ts
 │  ├─ store
 │  │  ├─ index.ts
 │  │  ├─ Providers.tsx
 │  │  └─ slices
-│  │     └─ breakpointSlice.ts
+│  │     ├─ breakpointSlice.ts
+│  │     ├─ loaderSlice.tsx
+│  │     ├─ messageSlice.ts
+│  │     ├─ tooltipSlice.ts
+│  │     └─ uiSlice.tsx
 │  └─ styles
 │     ├─ cssVariables.ts
 │     └─ tokens
@@ -196,5 +294,4 @@ Sadovnikov
 │        ├─ _effects.scss
 │        └─ _typography.scss
 └─ tsconfig.json
-
 ```

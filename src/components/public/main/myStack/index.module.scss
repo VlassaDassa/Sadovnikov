@@ -1,0 +1,170 @@
+@use './../../../../styles/tokens/typography' as *;
+@use './../../../../styles/tokens/colors' as *;
+@use './../../../../styles/tokens/effects' as *;
+
+
+
+.myStack {
+    position: relative;
+
+    top: 50px;
+
+    @media (min-width: 1280px) {
+        top: 150px;
+        height: 1000px;
+    }
+}
+
+.stackTitle {
+    @extend .heading-24-magra-bold;
+    @extend .whiteText;
+
+    @media (min-width: 768px) {
+        font-size: 32px;
+    }
+
+    @media (min-width: 1280px) {
+        font-size: 40px;
+    }
+}
+
+
+.stackHandBg {
+    position: absolute;
+
+    width: 513px;
+    height: 513px;
+
+    transform: rotate(45deg) scaleX(-1);
+    mask-image: linear-gradient(to left, transparent 20%, black 30%, black 100%);
+
+    left: -200px;
+    top: -75px;
+    opacity: 0.5;
+
+    z-index: -1;
+
+    @media (min-width: 600px) {
+        width: 700px;
+        height: 700px;
+
+        left: -200px;
+        top: -150px;
+    }
+
+    @media (min-width: 768px) {
+        width: 800px;
+        height: 800px;
+
+        top: -150px;
+        left: -100px;
+    }
+
+    @media (min-width: 1000px) {
+        left: -50px;
+        top: -200px;
+    }
+
+    @media (min-width: 1280px) {
+        width: 1117px;
+        height: 1117px;
+        top: -200px;
+        left: -300px;
+    }
+}
+
+
+.stackHandBg-anim {
+    animation: slideAndReveal 6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+
+    will-change: left, mask-position, opacity;
+    
+    @keyframes slideAndReveal {
+        0% {
+            left: -1200px;
+            mask-position: 100% 0;
+            opacity: 0;
+        }
+        30% {
+            opacity: 0.3;
+            mask-position: 70% 0;
+        }
+        60% {
+            left: -200px;
+            opacity: 0.5;
+            mask-position: 40% 0;
+        }
+        80% {
+            left: -220px;
+            mask-position: 20% 0;
+        }
+        100% {
+            mask-position: 0% 0;
+            opacity: 0.5;
+
+            @media (min-width: 1280px) {
+                left: -300px;
+            }
+
+            @media (min-width: 1000px) {
+                left: 0px;
+            }
+        }
+    }
+}
+
+
+.stackWrapper {
+    position: relative;
+
+    margin-top: 30px;
+
+    height: 270px;
+
+    @media (min-width: 768px) {
+        height: 400px;
+    }
+
+    @media (min-width: 1280px) {
+        height: 600px;
+    }
+}
+
+
+.stackItem {
+    @extend .heading-20-magra-bold;
+    position: absolute;
+
+
+    background: $neutral_900;
+
+    padding: 15px;
+    border-radius: 5px;
+
+    display: inline-block;
+
+    @extend .whiteText;
+    @extend .shadow-xl;
+}
+
+
+@media (min-width: 768px) {
+    .stackItem {
+        font-size: 24px;
+
+        padding: 25px;
+
+        border-radius: 10px;
+    }
+}
+
+
+@media (min-width: 1000px) {
+    .stackItem {
+        font-size: 40px;
+
+        padding: 35px;
+
+        border-radius: 15px;
+    }
+}

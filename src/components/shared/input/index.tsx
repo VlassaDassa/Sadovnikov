@@ -1,0 +1,164 @@
+'use client'
+
+import React, { useState, useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
+
+import Icon from '../icons/Icon';
+
+import { RootState } from '@/store';
+import { cssVars } from "@/styles/cssVariables";
+
+import style from './index.module.scss';
+
+
+interface Icon {
+    first?: string,
+    second?: string
+}
+ 
+interface InputProps {
+    name: string,
+    placeholder?: string,
+    additionalClass?: string,
+    icon?: Icon,
+    type?: 'text' | 'textarea' | 'email' | 'password',
+    iconPosition: 'noIcon' | 'iconLeft' | 'iconRight' | 'iconBoth',
+    value?: string,
+    maxLen?: number,
+
+    error?: string,
+
+    onChange?: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void,
+}
+
+
+const Input: React.FC<InputProps> = ({
+    placeholder,
+    name,
+    value,
+    type='text',
+    additionalClass='',
+    icon,
+    iconPosition,
+    maxLen,
+
+    error,
+    onChange,
+}) => {
+    const [isHovered, setIsHovered] = useState<boolean>(false)
+    const textAreaRef = useRef<HTMLTextAreaElement>(null)
+    const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
+
+    useEffect(() => {
+        if (type === 'textarea' && textAreaRef.current) {
+            textAreaRef.current.style.height = 'auto'
+            textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`
+        }
+    }, [value])
+
+    
+    const iconColor = {
+        strokeColor: (isHovered ? cssVars.neutral_400 :
+            value?.length === 0 ? cssVars.neutral_600 :
+            cssVars.white), // <- Белый во всех случаях кроме empty и hover
+        fillColor: 'none'
+    }
+
+
+    const iconFirst = (
+        (iconPosition === 'iconLeft' || iconPosition === 'iconBoth') && icon?.first ?
+            <Icon 
+                name={icon.first}
+                iconClass={`${style.inputIcon} ${style.inputIconLeft}`}
+                strokeColor={iconColor.strokeColor}
+                fillColor={iconColor.fillColor}
+                size={
+                    breakpoint === 'desktop' ? 24 : 20
+                }
+            />
+        : null
+    )
+
+    const errorEl = error ? <p className={style.inputErrorText}>{error}</p> : null
+
+    const iconBoth = (
+        iconPosition === 'iconBoth' && icon?.second  ?
+            <Icon 
+                name={icon.second}
+                strokeColor={iconColor.strokeColor}
+                fillColor={iconColor.fillColor}
+                aria-label={placeholder || name}
+                iconClass={`${style.inputIcon} ${style.inputIconRight}`}
+                size={
+                    breakpoint === 'desktop' ? 24 : 20
+                }
+            />
+        : null
+    )
+
+    const iconRight = (
+        iconPosition === 'iconRight' && icon?.first ?
+            <Icon 
+                name={icon.first}
+                strokeColor={iconColor.strokeColor}
+                fillColor={iconColor.fillColor}
+                iconClass={`${style.inputIcon} ${style.inputIconRight}`}
+                size={
+                    breakpoint === 'desktop' ? 24 : 20
+                }
+            />
+        : null
+    )
+
+    const inputClass = (
+        `${style.input} 
+        ${style.additionalClass} 
+        ${iconPosition !== 'noIcon' ? style.inputWithIcon : ''}  
+        ${error ? style.inputError : ''} 
+        ${type === 'textarea' ? style['input-textarea'] : ''} 
+        `
+    )
+
+
+    return (
+        <div 
+            className={`${style.inputWrapper} ${style[`inputWrapper-${type}`]}`}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
+            {iconFirst}
+
+            {
+                type !== 'textarea' ?
+                    <input 
+                        type={type} 
+                        className={inputClass}
+                        placeholder={placeholder}
+                        value={value}
+                        aria-label={placeholder || name}
+                        name={name}
+                        onChange={onChange}  
+                    />
+                :
+                    <textarea 
+                        className={inputClass}
+                        placeholder={placeholder}
+                        value={value}
+                        name={name}
+                        aria-label={placeholder || name}
+                        onChange={onChange}  
+                        ref={textAreaRef}
+                        maxLength={maxLen}
+                    /> 
+            }
+            
+            {errorEl}
+            {iconBoth}
+            {iconRight}
+
+        </div>
+    )
+}
+
+export default Input;
+

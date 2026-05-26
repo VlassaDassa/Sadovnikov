@@ -1,0 +1,151 @@
+@use './../../../../styles/tokens/colors' as *;
+@use './../../../../styles/tokens/effects' as *;
+@use './../../../../styles/tokens/typography' as *;
+
+
+
+.keyFeatures {
+    display: flex;
+    flex-direction: column;
+    margin-top: 60px;
+}
+
+.title {
+    @extend .heading-24-magra-bold;
+    @extend .whiteText;
+
+    margin-bottom: 20px;
+
+    @media (min-width: 768px) {
+        font-size: 36px;
+    }
+
+    @media (min-width: 1280px) {
+        font-size: 40px;
+    }
+}
+
+
+.feature {
+    display: flex;
+    align-items: center;
+    
+    padding: 15px;
+
+    margin-bottom: 0px;
+    cursor: pointer;
+
+    @extend .shadow-splash;
+    border-radius: 15px;
+    background-color: $neutral_900;   
+    
+    @media (min-width: 768px) {
+        justify-content: space-around;
+        max-width: 600px;
+
+        margin: 0 auto;
+        gap: 30px;
+
+        padding: 15px 25px;
+    }
+
+    @media (min-width: 1280px) {
+        max-width: 1000px;
+        width: calc(100% - 50px);
+    }
+}
+
+.featureWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+
+    @media (min-width: 768px) {
+        width: 305px;
+    }
+
+    @media (min-width: 1280px) {
+        width: 400px;
+    }
+}
+
+.featureHeader {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+
+.featureIconWrapper {
+    background-color: $brand_900;
+    
+    width: 60px;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+}
+
+.featureTitle {
+    @extend .heading-20-magra-bold;
+    @extend .whiteText;
+
+    @media (min-width: 1280px) {
+        font-size: 24px;
+    }
+}
+
+
+.featureText {
+    @extend .body-16-magra-bold;
+    @extend .line-height-1_5x;
+
+    color: $neutral_400;
+
+    @media (min-width: 1280px) {
+        font-size: 20px;
+    }
+}
+
+.slider {
+    margin-right: unset !important;
+    margin-left: unset !important;
+}
+
+
+.featurePhoto {
+    object-fit: cover;
+
+    width: 100%;
+    height: 100%;
+
+    border-radius: 15px;
+}
+
+
+.photoWrapper {
+    height: 252px;
+    width: 309px;
+    padding: 20px 0;
+
+    
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    display: none;
+
+    @media (min-width: 768px) {
+        display: block;
+    }
+
+   
+}
+

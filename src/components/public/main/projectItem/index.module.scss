@@ -1,0 +1,162 @@
+@use './../../../../styles/tokens/colors' as *;
+@use './../../../../styles/tokens/effects' as *;
+@use './../../../../styles/tokens/typography' as *;
+
+
+
+.projectItem {
+    background-color: $neutral_900;
+    aspect-ratio: 3 / 4;
+
+    overflow: hidden;
+
+    @extend .radius-12;
+    @extend .shadow-xl;
+
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    overflow: hidden;
+
+    .projectName {
+        transition: color 0.2s ease;
+    }
+    
+    .projectStackItem {
+        transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    @media (min-width: 1280px) {
+        position: absolute;
+
+        aspect-ratio: none; 
+        width: 500px; 
+        height: 650px; 
+
+        cursor: pointer;
+
+        &:hover .projectStackItem {
+            background-color: $brand_600;
+            transform: translateY(-2px);
+        }
+
+        &:hover {
+            transform: translateY(-8px);
+        }
+
+        &:hover .projectName {
+            color: $brand_600;
+        }
+    }
+
+    @media (min-width: 768px) {
+        width: 520px;
+        height: auto;
+        aspect-ratio: 3 / 4;
+    }
+}
+
+
+.projectImg {
+    width: 100%;
+    aspect-ratio: 3/2.5;
+
+    object-fit: cover;
+    object-position: left;
+
+    @extend .radius-12;
+}
+
+
+.projectCategory {
+    position: absolute;
+    
+    background-color: $neutral_900;
+    
+    top: 10px;
+    right: 10px;
+    
+    padding: 5px 20px;
+    
+    @extend .body-14-magra-bold;
+    @extend .whiteText;
+    @extend .radius-6;
+    @extend .glass;
+}
+
+
+.projectContentContainer {
+    padding: 15px;
+
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+
+    @media (min-width: 600px)  {
+        row-gap: 20px;
+    }
+}
+
+.projectText {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;   
+
+    @media (min-width: 600px)  {
+        row-gap: 10px;
+    }
+}
+
+
+.projectName {
+    @extend .body-16-magra-bold;
+    @extend .whiteText;
+
+    @media (min-width: 600px)  {
+        font-size: 20px;
+    }
+    
+    @media (min-width: 768px) {
+        font-size: 24px;
+    }
+}
+
+
+.projectDescription {
+    @extend .body-16-magra-regular;
+    @extend .lightText;
+
+    @media (min-width: 600px)  {
+        font-size: 20px;
+    }
+}
+
+
+.projectStack { 
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+
+.projectStackItem {
+    background-color: $brand_900;
+    
+    @extend .body-14-magra-regular;
+    @extend .radius-4;
+    @extend .whiteText;
+
+    display: inline-block;
+
+    padding: 5px;
+
+    @media (min-width: 600px)  {
+        font-size: 20px;
+        padding: 10px;
+    }
+
+     @media (min-width: 768px)  {
+        padding: 20px;
+        border-radius: 10px;
+
+        font-weight: $bold;
+    }
+}

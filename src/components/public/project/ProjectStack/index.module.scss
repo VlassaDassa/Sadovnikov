@@ -1,0 +1,151 @@
+@use './../../../../styles/tokens/colors' as *;
+@use './../../../../styles/tokens/effects' as *;
+@use './../../../../styles/tokens/typography' as *;
+
+
+.projectStack {
+    margin-top: 60px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.title {
+    @extend .heading-24-magra-bold;
+    @extend .whiteText;
+
+    @media (min-width: 768px) {
+        font-size: 36px;
+    }
+
+    @media (min-width: 1280px) {
+        font-size: 40px;
+    }
+}
+
+.itemWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    
+    gap: 5px;
+
+    @media (min-width: 1280px) {
+        &:hover {
+            .iconWrapper {
+                transform: scale(1.1) translateY(-10px);
+                background-color: $brand_800;
+            }
+
+            .iconName {
+                color: $brand_300;
+            }
+        }
+    }
+
+    @media (min-width: 768px) {
+        animation: floatLikeFeather 4s ease-in-out infinite;
+        transform-origin: center;
+        will-change: transform, left, top;
+        transform: translateZ(0);
+        backface-visibility: hidden;
+        position: absolute;
+    }
+}
+
+
+@for $i from 1 through 50 {
+    .itemWrapper:nth-child(#{$i}) {
+        $duration: random(5) + 3;
+        $delay: random(5) - 2;
+        $y: random(15) + 5;
+        $rotate: random(10) - 5;
+        $scale: 1 + (random(5) / 100);
+        
+        animation: customFloat#{$i} $duration + s ease-in-out infinite;
+        animation-delay: $delay + s;
+        
+        @keyframes customFloat#{$i} {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg) scale(1);
+            }
+            50% {
+                transform: translateY(-#{$y}px) rotate(#{$rotate}deg) scale($scale);
+            }
+        }
+    }
+}
+
+
+.iconWrapper {
+    background-color: $brand_900;
+
+    @extend .radius-full;
+    @extend .shadow-splash;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 80px;
+    height: 80px;
+
+    transition: all 0.2s ease-in-out;
+}
+
+.iconName {
+    @extend .body-16-mont-light;
+    @extend .whiteText;
+
+    transition: all 0.2s ease-in-out
+}
+
+
+.stackWrapper {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 30px;
+
+    @media (min-width: 600px) {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 50px;
+    }
+
+    @media (min-width: 700px) {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 50px;
+    }
+
+    @media (min-width: 768px) {
+        display: unset;
+        grid-template-columns: unset;
+        gap: unset;
+
+        position: relative;
+
+        height: 300px;
+        width: 100%;
+    }
+}
+
+
+
+.dynamicLine {
+    position: absolute;
+    height: 1px;
+    background-color: $white;
+    opacity: 0.25;
+    pointer-events: none;
+    display: none;
+
+
+    @media (min-width: 768px) {
+        display: block;
+        will-change: transform, width, left, top;
+
+        transform: translateZ(0);
+        backface-visibility: hidden;
+    }
+}

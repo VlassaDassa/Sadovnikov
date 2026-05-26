@@ -1,0 +1,244 @@
+@use './../../../../styles/tokens/typography' as *;
+
+
+
+.preview {
+    position: relative;
+
+    margin-top: 0px;
+
+    @media (min-width: 768px) {
+        margin-top: 25px; 
+    }
+    
+    @media (min-width: 1280px) {
+        margin-top: 100px;  
+    }
+}
+
+
+.avatarWrapper {
+    width: 273px;
+    height: 278px;
+
+    margin-top: 100px;
+
+    @media (min-width: 768px) {
+        width: 524px;
+        height: 535px;  
+    }
+    
+    @media (min-width: 1280px) {
+        width: 740px;
+        height: 756px;  
+    }
+}
+
+.bgAvatar, .previewAvatar, .avatarFrame, .frameName {
+    position: absolute;
+
+    left: 50%;
+    top: 60px;
+
+    transform: translateX(-50%);
+
+    @media (min-width: 768px) {
+        top: 150px;
+    }
+    
+    @media (min-width: 1280px) {
+        top: 150px;
+    }
+}
+
+.bgAvatar {
+    width: 273px;
+    height: 278px;
+
+    @media (min-width: 768px) {
+        width: 524px;
+        height: 535px;  
+    }
+    
+    @media (min-width: 1280px) {
+        width: 740px;
+        height: 756px;  
+    }
+}
+
+.previewAvatar {
+    width: 147px;
+    height: 221px;
+
+    @media (min-width: 768px) {
+        width: 282px;
+        height: 424px;  
+    }
+
+    @media (min-width: 1280px) {
+        width: 399px;
+        height: 600px;  
+    }
+}
+
+.avatarFrame {
+    width: 153px;
+    height: 272px;
+
+    @media (min-width: 768px) {
+        width: 294px;
+        height: 529px;  
+    }
+
+    @media (min-width: 1280px) {
+        width: 415px;
+        height: 741px;  
+    }
+}
+
+
+.frameName {
+    @extend .body-20-magra-regular;
+    @extend .darkText;
+    top: unset;
+    bottom: 75px;
+    
+    @media (min-width: 340px) {
+        bottom: 85px;
+    }   
+
+    @media (min-width: 768px) {
+        font-size: 40px;
+        bottom: 40px;
+    }
+
+    @media (min-width: 1280px) {
+        font-size: 48px; 
+        bottom: 85px;
+    }
+}
+
+
+.previewTitle {
+    @extend .heading-32-magra-bold;
+    @extend .whiteText;
+
+    transform: rotate(0deg);
+
+    text-align: center;
+    margin-left: auto;
+    
+    font-size: 20px;
+    
+    @media (min-width: 340px) {
+        font-size: 24px;
+    }   
+
+    @media (min-width: 400px) {
+        font-size: 28px;
+    } 
+
+    @media (min-width: 768px) {
+        font-size: 54px;
+        transform: rotate(-3deg);
+        will-change: transform;
+
+        animation: tiltText 4s ease-in-out infinite;
+
+        @keyframes tiltText {
+            0%, 100% {
+                transform: rotate(-3deg);
+            }
+            50% {
+                transform: rotate(3deg);
+            }
+        }
+    } 
+
+    @media (min-width: 850px) {
+        font-size: 64px;
+    } 
+
+    @media (min-width: 1280px) {
+        font-size: 86px;
+    } 
+}
+
+
+.hand {
+    position: absolute;
+    display: none;
+
+    mask-image: linear-gradient(to right, black 20%, transparent 100%);
+    
+
+    @media (min-width: 768px) {
+        display: block;
+        right: -20%;
+        top: -5px;
+
+        width: 263px;
+        height: 369px;
+        
+        will-change: transform, top;
+        animation: moveHand 4s ease-in-out infinite;
+
+        @keyframes moveHand {
+            0%, 100% {
+                transform: rotate(3deg) translateY(-5px);
+                top: -5px;
+            }
+            50% {
+                transform: rotate(-3deg) translateY(0px);
+                top: 50px;
+            }
+        }
+    }
+
+    @media (min-width: 1000px) {
+        right: -10%;
+    }
+    
+    @media (min-width: 1150px) {
+        right: 0;
+    }
+
+    @media (min-width: 1280px) {
+        right: -400px;
+        top: -30px;
+
+        width: 456px;
+        height: 638px;
+    }
+}
+
+
+.dotted-hand-line {
+    width: 100vw;
+    height: 100px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+
+    path {
+        stroke-dasharray: 8 12;
+        will-change: stroke-dashoffset;
+        animation: drawLine 3s infinite;
+    }
+
+    @media (min-width: 768px) {
+        display: block;
+        bottom: -50px;
+    } 
+}
+
+@keyframes drawLine {
+    0% {
+        stroke-dashoffset: 0;
+    }
+
+    100% {
+        stroke-dashoffset: 100;
+    }
+}
