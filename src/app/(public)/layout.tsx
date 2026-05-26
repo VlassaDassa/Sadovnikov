@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 import { DynImportLayout } from '@/components/shared/DynImportLayout';
-import Header from "@/components/shared/header";
-import Footer from "@/components/shared/footer";
+import Header from "@/components/public/general/header";
+import Footer from "@/components/public/general/footer";
 import GlobalLoader from "@/components/shared/GlobalLoader";
 import NoiseBackground from "@/components/shared/NoizeBg";
 import GlobalTooltip from "@/components/shared/GlobalTooltip";

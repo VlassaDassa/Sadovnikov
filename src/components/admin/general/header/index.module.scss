@@ -1,0 +1,25 @@
+@use './../../../../styles/tokens/colors' as *;
+@use './../../../../styles/tokens/typography' as *;
+
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: 30px;
+}
+
+
+.welcomeText {
+    @extend .heading-20-mont-regular;
+    @extend .whiteText;
+
+    display: flex;
+}
+
+
+.brandColor {
+    color: $brand_600;
+}

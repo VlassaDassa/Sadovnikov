@@ -3,6 +3,9 @@ export const cssVars = {
     black: '#000000',
     green: '#00FF62',
 
+    
+    neutral_1000: '#121212',
+    neutral_950: '#1C1C1C',
     neutral_900: '#3A3A3A',
     neutral_800: '#515151',
     neutral_700: '#676767',
@@ -36,4 +39,14 @@ export const cssVars = {
     info_600: '#43A4FF',
     info_400: '#8FC9FF',
     info_50: '#D9EDFF',
+
+    thin: 100,
+    extra_ligth: 200,
+    light: 300,
+    regular: 400,
+    medium: 500,
+    semi_bold: 600,
+    bold: 700,
+    exta_bold: 800,
+    black_weight: 900
 }

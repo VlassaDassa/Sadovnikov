@@ -3,7 +3,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import Icon from "../icons/Icon";
+import Icon from "../../../shared/icons/Icon";
 
 import { RootState } from "@/store";
 import { cssVars } from "@/styles/cssVariables";

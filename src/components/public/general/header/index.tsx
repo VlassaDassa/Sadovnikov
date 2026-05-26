@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useDispatch } from 'react-redux';
 import Link from 'next/link';
 
-import DecorButton from '../button/DecorButton';
+import DecorButton from '@/components/shared/button/DecorButton';
 
 import { toggleMenu, toggleIsOverlayVisible } from '@/store/slices/uiSlice'; 
 
