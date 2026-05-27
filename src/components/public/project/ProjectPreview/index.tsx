@@ -3,14 +3,10 @@ import React from 'react';
 import Button from '@/components/shared/button/Button';
 import Icon from '@/components/shared/icons/Icon';
 import Slider from '../Slider';
-import AdaptiveImage from '@/components/shared/AdaptiveImage';
 
 import styles from './index.module.scss';
 import { cssVars } from '@/styles/cssVariables';
 
-
-const projectImg1 = '/images/mockImages/specTecno.png'
-const testPhoto = '/images/mockImages/testPhoto.png'
 
 
 const ProjectPreview: React.FC = () => {

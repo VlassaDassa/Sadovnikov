@@ -14,7 +14,8 @@ export interface Project {
     img: string,
     name: string,
     shortDescrition: string,
-    stack: string[]
+    stack: string[],
+    date: string
 }
 
 

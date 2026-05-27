@@ -8,76 +8,83 @@ export const projects: Project[] = [
         id: 1,
         category: 'Site',
         img: specTechno,
-        name: 'SpecTechnologia',
+        name: 'SpecTechnologia1',
         shortDescrition: 'Site-card + Admin panel',
         stack: [
             'MongoDB', 'TypeScript', 'React', 'Next.JS', 'Redux', 'SASS'
-        ]
+        ],
+        date: 'June 28, 2026'
     },
 
     {
         id: 2,
         category: 'Site',
         img: specTechno,
-        name: 'SpecTechnologia',
+        name: 'SpecTechnologia2',
         shortDescrition: 'Site-card + Admin panel',
         stack: [
             'MongoDB', 'TypeScript', 'React', 'Next.JS', 'Redux', 'SASS'
-        ]
+        ],
+        date: 'June 28, 2026'
     },
 
     {
         id: 3,
         category: 'Site',
         img: specTechno,
-        name: 'SpecTechnologia',
+        name: 'SpecTechnologia3',
         shortDescrition: 'Site-card + Admin panel',
         stack: [
             'MongoDB', 'TypeScript', 'React', 'Next.JS', 'Redux', 'SASS'
-        ]
+        ],
+        date: 'June 28, 2026'
     },
 
     {
         id: 4,
         category: 'Site',
         img: specTechno,
-        name: 'SpecTechnologia',
+        name: 'SpecTechnologia4',
         shortDescrition: 'Site-card + Admin panel',
         stack: [
             'MongoDB', 'TypeScript', 'React', 'Next.JS', 'Redux', 'SASS'
-        ]
+        ],
+        date: 'June 28, 2026'
     },
 
     {
         id: 5,
         category: 'Site',
         img: specTechno,
-        name: 'SpecTechnologia',
+        name: 'SpecTechnologia5',
         shortDescrition: 'Site-card + Admin panel',
         stack: [
             'MongoDB', 'TypeScript', 'React', 'Next.JS', 'Redux', 'SASS'
-        ]
+        ],
+        date: 'June 28, 2026'
     },
 
     {
         id: 6,
         category: 'Site',
         img: specTechno,
-        name: 'SpecTechnologia',
+        name: 'SpecTechnologia6',
         shortDescrition: 'Site-card + Admin panel',
         stack: [
             'MongoDB', 'TypeScript', 'React', 'Next.JS', 'Redux', 'SASS'
-        ]
+        ],
+        date: 'June 28, 2026'
     },
 
     {
         id: 7,
         category: 'Site',
         img: specTechno,
-        name: 'SpecTechnologia',
+        name: 'SpecTechnologia7',
         shortDescrition: 'Site-card + Admin panel',
         stack: [
             'MongoDB', 'TypeScript', 'React', 'Next.JS', 'Redux', 'SASS',
-        ]
+        ],
+        date: 'June 28, 2026'
     },
 ]

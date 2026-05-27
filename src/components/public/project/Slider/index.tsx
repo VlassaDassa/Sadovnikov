@@ -24,8 +24,6 @@ const Slider: React.FC = () => {
                 onRealIndexChange={(swiper) => setCurIndex(swiper.activeIndex + 1)}
                 pagination={true}   
                 className={styles.swiper}   
-
-
             >
                 <SwiperSlide>
                     <AdaptiveImage 

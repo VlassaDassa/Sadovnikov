@@ -4,6 +4,11 @@
 
 
 
+
+.section {
+    margin-top: 20px;
+}
+
 .title {
     display: flex;
     flex-direction: column;
@@ -24,4 +29,105 @@
 .textBtn {
     @extend .body-14-mont-regular;
     color: $brand_600 !important;
+}
+
+
+.projectBg {
+    display: flex;
+    gap: 5px;
+    align-items: flex-start;
+
+    padding: 5px;
+    width: calc(100% - 10px);
+
+    position: relative;
+
+    transition: all ease-in-out 0.1s;
+
+    &:active {
+        background-color: $neutral_950;
+        transform: scale(1.03);
+    }
+}
+
+
+.imageWrapper {
+    width: 55%;
+    position: relative;
+    aspect-ratio: 170 / 110;
+    flex-shrink: 0;
+}
+
+.projectImg {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.innerShadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 9px;
+    box-shadow: inset 0px 0px 20px 10px rgba(0, 0, 0, 0.9);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.projectContent {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.date {
+    @extend .body-14-mont-regular;
+    font-size: 10px;
+    color: $neutral_400;
+}
+
+.dateWrapper {
+    display: flex;
+    column-gap: 5px;
+    align-items: center;
+}
+
+.titleWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.title {
+   @extend .body-14-mont-regular;
+   font-size: 12px;
+   @extend .whiteText; 
+}
+
+.shortDescription {
+    @extend .body-14-mont-regular;
+    font-size: 10px;
+    color: $neutral_400; 
+}
+
+.btnText {
+    @extend .body-14-mont-medium;
+    font-size: 10px;
+    text-transform: uppercase;
+    color: $brand_600;
+
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.projectWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    margin-top: 15px;
 }

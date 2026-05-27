@@ -2,7 +2,7 @@
 
 import React from 'react';
 import {
-  AreaChart, Area, XAxis, YAxis, Tooltip,
+  AreaChart, Area, XAxis, YAxis,
   ResponsiveContainer, Brush,
 } from 'recharts';
 
