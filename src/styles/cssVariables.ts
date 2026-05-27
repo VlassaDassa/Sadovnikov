@@ -48,5 +48,10 @@ export const cssVars = {
     semi_bold: 600,
     bold: 700,
     exta_bold: 800,
-    black_weight: 900
+    black_weight: 900,
+
+}
+
+export const shadows = {
+    shadow_brand: `0px 0px 8.199999809265137px 0px ${cssVars.brand_900}`,
 }

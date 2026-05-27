@@ -66,3 +66,24 @@ body {
 .recharts-cartesian-axis-tick-line {
     display: none;
 }
+
+.recharts-wrapper:focus,
+    .recharts-surface:focus,
+    .recharts-area:focus,
+    .recharts-pie:focus,
+    .recharts-sector:focus {
+        outline: none !important;
+    }
+    
+    .recharts-sector,
+    .recharts-area {
+        outline: none !important;
+        &:focus {
+            outline: none !important;
+    }
+}
+
+svg:focus,
+svg *:focus {
+    outline: none !important;
+}

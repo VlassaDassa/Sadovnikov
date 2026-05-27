@@ -6,11 +6,12 @@ import styles from './index.module.scss';
 
 interface SectionBackgroundProps {
     children: React.ReactNode;
+    className?: string
 }
 
-const SectionBackground: React.FC<SectionBackgroundProps> = ({ children }) => {
+const SectionBackground: React.FC<SectionBackgroundProps> = ({ children, className='' }) => {
     return (
-        <div className={styles.background}>
+        <div className={`${styles.background} ${className}`}>
             <svg className={styles.noise} xmlns="http://www.w3.org/2000/svg">
                 <filter id="noiseFilter">
                     <feTurbulence

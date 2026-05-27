@@ -1,9 +1,15 @@
-
+import { cssVars } from "@/styles/cssVariables";
 
 
 interface IVisits {
     day: string,
     count: number
+}
+
+interface IDevices {
+    device: 'desktop' | 'mobile' | 'tablet',
+    percentage: number,
+    color: string
 }
 
 export const visits: IVisits[] = [
@@ -38,4 +44,10 @@ export const visits: IVisits[] = [
     { day: '29 March', count: 1920 },
     { day: '30 March', count: 670 },
     { day: '31 March', count: 1550 },
+];
+
+export const devices: IDevices[] = [
+    { device: 'desktop', percentage: 62, color: cssVars.brand_700 },
+    { device: 'mobile', percentage: 18, color: cssVars.brand_900 },
+    { device: 'tablet', percentage: 20, color: cssVars.brand_500 },
 ];

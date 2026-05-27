@@ -12,7 +12,7 @@ import AnimatedSection from '@/components/shared/AnimatedScroll';
 
 const Main: React.FC = () => {
     return (
-        <>
+        <main>
             <AnimatedSection animation='fade-down'>
                 <Preview />
             </AnimatedSection>
@@ -31,7 +31,7 @@ const Main: React.FC = () => {
             <AnimatedSection animation='zoom'>
                 <Contacts />
             </AnimatedSection>
-        </>
+        </main>
     )
 }
 

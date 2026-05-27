@@ -1,33 +1,4 @@
-@use './../../../styles/tokens/colors' as *;
-@use './../../../styles/tokens/effects' as *;
-@use './../../../styles/tokens/typography' as *;
-
-
-
-
 .section {
     margin-top: 30px;
 }
 
-.customTooltip {
-    padding: 10px;
-
-    background-color: $neutral_950;
-    stroke: 1px solid rgba($white, 0.15);
-    border-radius: 5px;
-    @extend .shadow-splash; 
-
-}
-
-.tooltipLabel {
-    @extend .body-14-mont-semi_bold;
-    @extend .lightText;
-    font-size: 10px;
-    margin-bottom: 10px;
-}
-
-.tooltipValue {
-    @extend .body-14-mont-regular;
-    @extend .lightText;
-    font-size: 8px;
-}

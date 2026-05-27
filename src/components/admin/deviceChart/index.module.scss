@@ -1,0 +1,49 @@
+@use './../../../styles/tokens/effects' as *;
+@use './../../../styles/tokens/colors' as *;
+@use './../../../styles/tokens/typography' as *;
+
+
+
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 40px;
+}
+
+.labelWrapper {
+    display: inline-flex;
+    flex-direction: column;
+    
+    
+    row-gap: 15px;   
+}
+
+.itemWrapper {
+    display: flex;
+    align-items: center;
+    column-gap: 15px;
+}
+
+.rectangle {
+    width: 25px;
+    height: 25px;
+
+    border-radius: 5px;
+}
+
+.label {
+    @extend .body-16-mont-regular;
+    @extend .whiteText;
+
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+}
+
+.name {
+    @extend .body-14-mont-regular;
+    color: $neutral_500;
+}
