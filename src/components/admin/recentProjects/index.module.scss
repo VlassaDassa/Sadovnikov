@@ -1,0 +1,27 @@
+@use './../../../styles/tokens/colors' as *;
+@use './../../../styles/tokens/effects' as *;
+@use './../../../styles/tokens/typography' as *;
+
+
+
+.title {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+}
+
+.titleText {
+    margin-bottom: 0;
+}
+
+.subtitle {
+    @extend .body-14-mont-regular;
+    color: $neutral_500;
+    line-height: $leading-tight;
+}
+
+
+.textBtn {
+    @extend .body-14-mont-regular;
+    color: $brand_600 !important;
+}
