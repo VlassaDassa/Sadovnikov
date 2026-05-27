@@ -20,7 +20,7 @@ interface ButtonProps {
     behavior: 'default' | 'loading' | 'disabled';
     iconPosition: 'noIcon' | 'leftIcon' | 'rightIcon' | 'only';
     
-    variant: 'primary' | 'secondary' | 'dark';
+    variant: 'primary' | 'secondary' | 'dark' | 'black';
     additionalClass?: string;
 
     text?: string;

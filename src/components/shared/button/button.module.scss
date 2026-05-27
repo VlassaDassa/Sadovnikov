@@ -145,6 +145,36 @@
 }
 
 
+.buttonText-black {
+    font-family: $font-mont;
+    font-weight: $regular;
+}
+
+.button-black {
+    background-color: $neutral_1000;
+    transition: all ease-in-out 0.1s, transform ease 0.1s;
+    border-radius: 10px;
+    color: $neutral_500;
+    border: 1px solid rgba($white, 0.08);
+    @extend .shadow-splash;
+
+    @media (min-width: 768px) {
+        &:hover {
+            background-color: $neutral_950;
+
+            .buttonText-black {
+                transition: all ease-in-out 0.1s, transform ease 0.3s;
+                color: $neutral_300;
+            }
+        }
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+}
+
+
 .icon-btn-loader {
     animation: default_spin 0.6s ease-in-out infinite;
 
