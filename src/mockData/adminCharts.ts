@@ -12,6 +12,11 @@ interface IDevices {
     color: string
 }
 
+interface ITrafficSource {
+    source: 'Desktop' | 'Search Engines' | 'Social Media' | 'Referrals',
+    percentage: number
+}
+
 export const visits: IVisits[] = [
     { day: '1 March', count: 245 },
     { day: '2 March', count: 89 },
@@ -51,3 +56,25 @@ export const devices: IDevices[] = [
     { device: 'mobile', percentage: 18, color: cssVars.brand_900 },
     { device: 'tablet', percentage: 20, color: cssVars.brand_500 },
 ];
+
+export const source: ITrafficSource[] = [
+    {
+        source: 'Desktop',
+        percentage: 50,
+    },
+
+    {
+        source: 'Search Engines',
+        percentage: 30,
+    },
+
+    {
+        source: 'Social Media',
+        percentage: 10,
+    },
+
+    {
+        source: 'Referrals',
+        percentage: 10,
+    }
+]

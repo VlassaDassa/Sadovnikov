@@ -1,0 +1,24 @@
+@use './../../../styles/tokens/colors' as *;
+@use './../../../styles/tokens/typography' as *;
+@use './../../../styles/tokens/effects' as *;
+
+
+.section  {
+    margin-top: 20px;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 30px;
+    align-items: center;
+}
+
+.item {
+    display: contents;  
+}
+
+.itemText {
+    @extend .body-14-mont-regular;
+    @extend .whiteText;
+}
