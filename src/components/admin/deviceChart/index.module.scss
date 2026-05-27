@@ -48,4 +48,8 @@
 .name {
     @extend .body-14-mont-regular;
     color: $neutral_500;
+
+    &::first-letter {
+        text-transform: uppercase;
+    }
 }

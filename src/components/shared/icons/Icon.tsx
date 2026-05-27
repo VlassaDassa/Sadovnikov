@@ -22,6 +22,7 @@ import IconAccessibility from "./IconAccessibility";
 import IconLoadTime from "./IconLoadTime";
 import IconSearch from "./IconSearch";
 import IconSpeed from "./IconSpeed";
+import IconPen from "./IconPen";
 
 
 
@@ -47,7 +48,8 @@ const icons = {
     accessibility: IconAccessibility,
     loadTime: IconLoadTime,
     search: IconSearch,
-    speed: IconSpeed
+    speed: IconSpeed,
+    pen: IconPen,
 }
 
 

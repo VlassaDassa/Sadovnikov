@@ -20,7 +20,7 @@ const TrafficSource: React.FC = () => {
 
                 <div className={styles.wrapper}>
                     {source.map((item, index) => (
-                        <div className={styles.item}>
+                        <div key={item.source} className={styles.item}>
                             <p className={styles.itemText}>{item.source}</p>
 
                             <ProgressBar
