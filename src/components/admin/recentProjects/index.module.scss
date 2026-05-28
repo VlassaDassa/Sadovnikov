@@ -48,6 +48,12 @@
         background-color: $neutral_950;
         transform: scale(1.03);
     }
+
+    @media (min-width: 600px) {
+        padding: 15px;
+        width: calc(100% - 30px);
+        gap: 20px;
+    }
 }
 
 
@@ -81,18 +87,27 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+
+    @media (min-width:500px) {
+        gap: 25px;
+    }
 }
 
 .date {
     @extend .body-14-mont-regular;
     font-size: 10px;
     color: $neutral_400;
+
+    @media (min-width:500px) {
+        font-size: 14px;
+    }
 }
 
 .dateWrapper {
     display: flex;
     column-gap: 5px;
     align-items: center;
+
 }
 
 .titleWrapper {
@@ -105,12 +120,20 @@
    @extend .body-14-mont-regular;
    font-size: 12px;
    @extend .whiteText; 
+
+    @media (min-width:500px) {
+        font-size: 16px;
+    }
 }
 
 .shortDescription {
     @extend .body-14-mont-regular;
     font-size: 10px;
     color: $neutral_400; 
+
+    @media (min-width:500px) {
+        font-size: 14px;
+    }
 }
 
 .btnText {
@@ -122,6 +145,15 @@
     position: absolute;
     bottom: 10px;
     right: 10px;
+
+    @media (min-width:500px) {
+        font-size: 14px;
+    }
+
+    @media (min-width: 600px) {
+        bottom: 15px;
+        right: 15px;
+    }
 }
 
 .projectWrapper {

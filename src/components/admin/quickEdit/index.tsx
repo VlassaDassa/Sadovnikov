@@ -13,7 +13,7 @@ const QuickEdit: React.FC = () => {
         <section className={`${styles.section} container`}>
             <SectionBackground>
                 <div className={styles.title}>
-                    <DashboardTitle text='QUICK EDIT'/>
+                    <DashboardTitle additionalClass={styles.titleText} text='QUICK EDIT'/>
                     <p className={styles.subTitle}>On Homepage</p>
                 </div>
 

@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react"
 import { useDispatch } from 'react-redux'
-import { setBreakpoint } from "@/store/slices/breakpointSlice"
+import { setBreakpoint, setWindowWidth } from "@/store/slices/breakpointSlice"
 import type { Breakpoint } from "@/interfaces/general"
 
 interface BreakpointProviderProps {
@@ -28,6 +28,7 @@ export const BreakpointProvider = ({ children }: BreakpointProviderProps ) => {
             }
 
             dispatch(setBreakpoint(breakpoint))
+            dispatch(setWindowWidth(width))
         }
 
         const debouncedUpdate = () => {

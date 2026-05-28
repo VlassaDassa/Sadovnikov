@@ -1,10 +1,10 @@
-'use client'
-
 import React from 'react';
 import {
   AreaChart, Area, XAxis, YAxis,
   ResponsiveContainer, Brush,
 } from 'recharts';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
 
 import SectionBackground from '../general/sectionBackground';
 import DashboardTitle from '../general/dashboardTitle';
@@ -19,6 +19,18 @@ import styles from './index.module.scss';
 
 
 const VisitChart: React.FC = () => {
+    const windowWidth = useSelector((state: RootState) => state.breakpoint.windowWidth)
+
+    const handleResize = () => {
+        if (windowWidth < 550) {
+            return 10;
+        } else if (windowWidth < 900) {
+            return 14;
+        } else {
+            return 16;
+        }
+    }
+
     const formatYAxis = (value: number) => {
         if (value === 0) return '0';
         if (value >= 1000) return `${(value / 1000)}k`;
@@ -42,7 +54,7 @@ const VisitChart: React.FC = () => {
                             dataKey="day" 
                             tick={{ 
                                 fill: cssVars.neutral_600,
-                                fontSize: 10,
+                                fontSize: handleResize(),
                                 fontFamily: 'Montserrat, sans-serif',
                                 fontWeight: cssVars.semi_bold
                             }}
@@ -57,7 +69,7 @@ const VisitChart: React.FC = () => {
                                 ticks={[0, 500, 1000, 1500, 2000, 2500]}
                             tick={{ 
                                 fill: cssVars.neutral_600,
-                                fontSize: 10,
+                                fontSize: handleResize(),
                                 fontFamily: 'Montserrat, sans-serif',
                                 fontWeight: cssVars.semi_bold
                             }}
@@ -92,8 +104,6 @@ const VisitChart: React.FC = () => {
                 </ResponsiveContainer>
             </SectionBackground>
         </section>
-
-        
     )
     
 }

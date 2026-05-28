@@ -12,21 +12,7 @@ interface SectionBackgroundProps {
 const SectionBackground: React.FC<SectionBackgroundProps> = ({ children, className='' }) => {
     return (
         <div className={`${styles.background} ${className}`}>
-            <svg className={styles.noise} xmlns="http://www.w3.org/2000/svg">
-                <filter id="noiseFilter">
-                    <feTurbulence
-                        type="fractalNoise"
-                        baseFrequency="3"
-                        numOctaves={4}
-                        stitchTiles="stitch"
-                    />
-                    <feColorMatrix 
-                        type="matrix" 
-                        values="1 0 0 0 0, 1 0 0 0 0, 1 0 0 0 0, 0 0 0 0.15 0" 
-                    />
-                </filter>
-                <rect width="100%" height="100%" filter="url(#noiseFilter)" />
-            </svg>
+            <div className={styles.noise} aria-hidden="true" />
             { children }
         </div>
     )

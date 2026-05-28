@@ -1,13 +1,15 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { Breakpoint } from '@/interfaces/general';
 
 interface BreakpointState {
     value: Breakpoint;
+    windowWidth: number;
 }
 
 const initialState: BreakpointState = {
-    value: 'mobile'
+    value: 'mobile',
+    windowWidth: window.innerWidth
 }
 
 const breakpointSlice = createSlice({
@@ -17,8 +19,11 @@ const breakpointSlice = createSlice({
         setBreakpoint: (state, action: PayloadAction<Breakpoint>) => {
             state.value = action.payload
         },
+        setWindowWidth: (state, action: PayloadAction<number>) => {
+            state.windowWidth = action.payload
+        }
     },
 })
 
-export const { setBreakpoint } = breakpointSlice.actions;
+export const { setBreakpoint, setWindowWidth } = breakpointSlice.actions;
 export default breakpointSlice.reducer;
