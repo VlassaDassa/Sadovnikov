@@ -3,6 +3,8 @@
 import React from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
 
 import DashboardTitle from "../general/dashboardTitle";
 import SectionBackground from "../general/sectionBackground";
@@ -25,6 +27,9 @@ interface EditProjectProps {
 }
 
 const EditProject: React.FC<EditProjectProps> = ({ name, img, shortDescrition, date }) => {
+    const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
+    const iconSize = breakpoint === 'mobile' ? 12 : 20
+
     return (
         <SectionBackground className={styles.projectBg}>
             <div className={styles.imageWrapper}>
@@ -43,7 +48,7 @@ const EditProject: React.FC<EditProjectProps> = ({ name, img, shortDescrition, d
                         name='calendar'
                         fillColor={cssVars.neutral_600}
                         strokeColor={'none'}
-                        size={12}
+                        size={iconSize}
                     />
                     <p className={styles.date}>{date}</p>
                 </div>
@@ -53,7 +58,19 @@ const EditProject: React.FC<EditProjectProps> = ({ name, img, shortDescrition, d
                     <p className={styles.shortDescription}>{shortDescrition}</p>
                 </div>
 
-                <p className={styles.btnText}>EDIT</p>
+                {
+                    breakpoint === 'mobile' ?
+                         <p className={styles.btnText}>EDIT</p>
+                    :
+                        <Button
+                            behavior="default"
+                            variant="dark"
+                            iconPosition="only"
+                            icon="pen"
+                            additionalClass={styles.btn}
+                        />
+                }
+                
             </div>
         </SectionBackground>
     )
@@ -63,6 +80,13 @@ const EditProject: React.FC<EditProjectProps> = ({ name, img, shortDescrition, d
 
 
 const RecentProjects: React.FC = () => {
+    const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
+    const countProjectView = {
+        mobile: 3,
+        desktop: 3,
+        tablet: 2,
+    }
+    
     return (
         <section className={`${styles.section} container`}>
             <SectionBackground>
@@ -75,9 +99,9 @@ const RecentProjects: React.FC = () => {
                     spaceBetween={10}  
                     className={styles.swiper}   
                 >
-                    {Array.from({ length: Math.ceil(projects.length / 3) }).map((_, i) => {
-                        const start = i * 3;
-                        const end = start + 3;
+                    {Array.from({ length: Math.ceil(projects.length / countProjectView[breakpoint]) }).map((_, i) => {
+                        const start = i * countProjectView[breakpoint];
+                        const end = start + countProjectView[breakpoint];
                         const projectsForSlide = projects.slice(start, end);
                         
                         return (
