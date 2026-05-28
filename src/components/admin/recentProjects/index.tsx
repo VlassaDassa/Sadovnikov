@@ -8,6 +8,7 @@ import DashboardTitle from "../general/dashboardTitle";
 import SectionBackground from "../general/sectionBackground";
 import AdaptiveImage from "@/components/shared/AdaptiveImage";
 import Icon from "@/components/shared/icons/Icon";
+import Button from "@/components/shared/button/Button";
 
 import { projects } from "@/mockData/projects";
 
@@ -97,7 +98,14 @@ const RecentProjects: React.FC = () => {
                     })}
                 </Swiper>
                 
-                
+                <Button 
+                    behavior="default"
+                    iconPosition="leftIcon"
+                    variant="black"
+                    text="Add New Project"
+                    icon="plus"
+                    additionalClass={styles.addButton}
+                />
             </SectionBackground>
         </section>
     )

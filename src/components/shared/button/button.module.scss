@@ -39,6 +39,10 @@
     }
 }
 
+.button-loading {
+    pointer-events: none;
+}
+
 
 .button-disabled {
     pointer-events: none;
@@ -148,6 +152,7 @@
 .buttonText-black {
     font-family: $font-mont;
     font-weight: $regular;
+    color: $neutral_500;
 }
 
 .button-black {
@@ -160,11 +165,10 @@
 
     @media (min-width: 768px) {
         &:hover {
-            background-color: $neutral_950;
+            background-color: $neutral_900;
 
             .buttonText-black {
                 transition: all ease-in-out 0.1s, transform ease 0.3s;
-                color: $neutral_300;
             }
         }
     }
@@ -188,3 +192,5 @@
         }
     }
 }
+
+

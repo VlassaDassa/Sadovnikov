@@ -17,14 +17,6 @@ const Admin: React.FC = () => {
             <TrafficSource />
             <QuickEdit />
             <RecentProjects />
-
-            <Button 
-                behavior="default"
-                iconPosition="leftIcon"
-                variant="black"
-                text="Button"
-                icon="telegram"
-            />
         </main>
     )
 }

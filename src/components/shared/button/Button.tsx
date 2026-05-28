@@ -64,7 +64,7 @@ const Button: React.FC<ButtonProps> = ({
                             breakpoint === 'desktop' ? 32 : 24
                         : 24
 
-    const iconColor = variant === 'primary' || variant === 'dark' ? cssVars.white : cssVars.neutral_900
+    const iconColor = variant === 'primary' || variant === 'dark' ? cssVars.white : variant === 'black' ?  cssVars.neutral_500 : cssVars.neutral_900 
 
     
     const contentButton = (
@@ -98,7 +98,7 @@ const Button: React.FC<ButtonProps> = ({
                 <Icon 
                     name='loader'
                     strokeColor={iconColor}
-                    iconClass='icon-btn icon-btn-loader'
+                    iconClass={`${style['icon-btn-loader']} ${style['icon-btn']}`}
                     size={sizeIcon}
                 />
                 : null
