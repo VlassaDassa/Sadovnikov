@@ -1,0 +1,18 @@
+@use './../../../../styles/tokens/colors.scss' as *;
+@use './../../../../styles/tokens/typography.scss' as *;
+@use './../../../../styles/tokens/effects.scss' as *;
+
+
+
+.closeButton {
+    @extend .radius-full;
+
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+
+.modalBackground {
+    padding-top: 70px;
+}

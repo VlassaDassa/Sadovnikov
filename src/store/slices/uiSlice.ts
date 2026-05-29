@@ -8,7 +8,7 @@ interface UIState {
 
 
 const initialState: UIState = {
-    isOverlayVisible: false,
+    isOverlayVisible: true,
     isMenuOpen: false
 }
 

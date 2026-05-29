@@ -1,0 +1,49 @@
+@use './../../../../styles/tokens/colors.scss' as *;
+@use './../../../../styles/tokens/effects.scss' as *;
+@use './../../../../styles/tokens/typography.scss' as *;
+
+
+
+.icon {
+    display: inline-flex;
+    align-items: center;
+    padding: 20px 10px;
+
+    background-color: $brand_900;
+    @extend .shadow-brand;
+
+    border-radius: 10px;
+}
+
+.iconArrowLeft {
+    transform: rotate(90deg);
+    margin-right: -5px;
+}
+
+.iconArrowRight {
+    transform: rotate(-90deg);
+}
+
+.modalHeader {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+.title {
+    @extend .heading-20-mont-bold;
+    @extend .whiteText;
+}
+
+.subTitle {
+    @extend .body-14-mont-regular;
+    color: rgba($white, 0.45);
+    line-height: $leading-tight;
+}

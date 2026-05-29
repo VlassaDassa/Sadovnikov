@@ -1,0 +1,23 @@
+@use './../../../../styles/tokens/colors' as *;
+@use './../../../../styles/tokens/effects' as *;
+
+
+
+.background {
+    width: calc(100% - 31px * 2);
+    padding: 15px;
+    min-height: 100px;
+
+    background-color: rgba($neutral_1000, 0.9);
+    border: 1px solid rgba($white, 0.08);
+    border-radius: 15px;
+
+    position: fixed;
+    top: 10%;
+    overflow: hidden;
+
+    @extend .shadow-splash; 
+
+    z-index: 9;
+}
+
