@@ -10,6 +10,7 @@ import DeviceChart from "@/components/admin/deviceChart";
 import TrafficSource from "@/components/admin/trafficSource";
 import QuickEdit from "@/components/admin/quickEdit";
 import RecentProjects from "@/components/admin/recentProjects";
+import AnimatedSection from '@/components/shared/AnimatedScroll';
 
 import styles from './index.module.scss';
 
@@ -20,23 +21,52 @@ const ClientPageWrapper: React.FC = () => {
     if (breakpoint === 'mobile') {
         return (
             <main className={styles.main}>
-                <VisitChart />
-                <DeviceChart />
-                <TrafficSource />
-                <QuickEdit />
-                <RecentProjects />
+                <AnimatedSection animation='fade-up'>
+                    <VisitChart />
+                </AnimatedSection>
+                
+                <AnimatedSection animation='fade-right'>
+                    <DeviceChart />
+                </AnimatedSection>
+                
+                <AnimatedSection animation='fade-left'>
+                    <TrafficSource />
+                </AnimatedSection>
+
+                <AnimatedSection animation='fade-up'>
+                    <QuickEdit />
+                </AnimatedSection>
+
+                <AnimatedSection animation='fade-down'>
+                    <RecentProjects />
+                </AnimatedSection>
             </main>
         )
     }
     else if (breakpoint === 'tablet') {
         return (
-            <main className={styles.main}>
-                <VisitChart />
-                <QuickEdit />
-                <RecentProjects />
+            <main className={`${styles.main} container`}>
+                <AnimatedSection animation='fade-up'>
+                    <VisitChart />
+                </AnimatedSection>
+
+                <AnimatedSection animation='fade-right'>
+                    <QuickEdit />
+                </AnimatedSection>
+
+                <AnimatedSection animation='fade-left'>
+                    <RecentProjects />
+                </AnimatedSection>
+
+
                 <div className={`${styles.deviceAndTrafficWrapper} container`}>
-                    <DeviceChart />
-                    <TrafficSource />
+                    <AnimatedSection animation='fade-left'>
+                        <DeviceChart />
+                    </AnimatedSection>
+
+                    <AnimatedSection animation='fade-right'>
+                        <TrafficSource />
+                    </AnimatedSection>
                 </div>
             </main>
         )
@@ -45,17 +75,24 @@ const ClientPageWrapper: React.FC = () => {
     else {
         return (
             <main className={styles.main}>
-                <div className={`container ${styles.visitAndDeviceWrapper}`}>
-                    <VisitChart />
-                    <DeviceChart />
-                </div>
+                <AnimatedSection animation='fade-right'>
+                    <div className={`container ${styles.visitAndDeviceWrapper}`}>
+                        <VisitChart />
+                        <DeviceChart />
+                    </div>
+                </AnimatedSection>
                 
-                <div className={`container ${styles.quickEditAndTrafficWrapper}`}>
-                    <QuickEdit />
-                    <TrafficSource />
-                </div>
                 
-                <RecentProjects />
+                <AnimatedSection animation='fade-left'>
+                    <div className={`container ${styles.quickEditAndTrafficWrapper}`}>
+                        <QuickEdit />
+                        <TrafficSource />
+                    </div>
+                </AnimatedSection>
+                
+                <AnimatedSection animation='fade-down'>
+                    <RecentProjects />
+                </AnimatedSection>
             </main>
         )
     }
