@@ -5,3 +5,11 @@
 .main {
     height: 3000px;
 }
+
+
+.deviceAndTrafficWrapper {
+    @media (min-width: 768px) {
+        display: flex;
+        gap: 20px;
+    }
+}

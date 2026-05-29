@@ -13,6 +13,8 @@ import RecentProjects from "@/components/admin/recentProjects";
 
 import styles from './index.module.scss';
 
+
+
 const ClientPageWrapper: React.FC = () => {
     const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
     if (breakpoint === 'mobile') {
@@ -25,16 +27,14 @@ const ClientPageWrapper: React.FC = () => {
                 <RecentProjects />
             </main>
         )
-        
     }
-
     else if (breakpoint === 'tablet') {
         return (
             <main className={styles.main}>
                 <VisitChart />
                 <QuickEdit />
                 <RecentProjects />
-                <div className={styles.deviceAndTrafficWrapper}>
+                <div className={`${styles.deviceAndTrafficWrapper} container`}>
                     <DeviceChart />
                     <TrafficSource />
                 </div>

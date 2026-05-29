@@ -9,7 +9,7 @@ interface BreakpointState {
 
 const initialState: BreakpointState = {
     value: 'mobile',
-    windowWidth: window.innerWidth
+    windowWidth: 0
 }
 
 const breakpointSlice = createSlice({
