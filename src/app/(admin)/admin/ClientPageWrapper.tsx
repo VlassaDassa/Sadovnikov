@@ -58,16 +58,12 @@ const ClientPageWrapper: React.FC = () => {
                     <RecentProjects />
                 </AnimatedSection>
 
-
-                <div className={`${styles.deviceAndTrafficWrapper} container`}>
-                    <AnimatedSection animation='fade-left'>
+                <AnimatedSection animation='fade-down'>
+                    <div className={`${styles.deviceAndTrafficWrapper} container`}>
                         <DeviceChart />
-                    </AnimatedSection>
-
-                    <AnimatedSection animation='fade-right'>
                         <TrafficSource />
-                    </AnimatedSection>
-                </div>
+                    </div>
+                </AnimatedSection>
             </main>
         )
         

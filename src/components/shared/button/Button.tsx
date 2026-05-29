@@ -116,7 +116,7 @@ const Button: React.FC<ButtonProps> = ({
                 ${style[`button-${variant}`]} 
                 ${style[`button-${iconPosition}-${size}`]} 
                 ${style[`button-${iconPosition}`]} 
-                ${style[`button-${additionalClass}`]}  
+                ${style[`button-${additionalClass}`]} 
                 ${additionalClass}
             `}
         >

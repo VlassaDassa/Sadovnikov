@@ -1,0 +1,29 @@
+@use './../../../../styles/tokens/colors.scss' as *;
+@use './../../../../styles/tokens/typography.scss' as *;
+@use './../../../../styles/tokens/effects.scss' as *;
+
+
+
+
+
+.tooltip {
+    border-radius: 10px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 15px;
+}
+
+.tooltipText {
+    @extend .body-14-mont-regular;
+    color: rgba($white, 0.45);
+}
+
+.tooltipCounter {
+    @extend .body-14-mont-regular;
+    color: $info_600;
+}
+
+

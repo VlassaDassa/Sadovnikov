@@ -201,7 +201,7 @@
 }
 
 .btn {
-    position: absolute; 
+    position: absolute !important; 
     @media (min-width: 768px) {
         bottom: 10px;
         right: 10px;
@@ -225,16 +225,16 @@
 
 
 .addButton {
-    width: calc(100% - 60px);
+    width: calc(100% - 60px) !important;
     justify-content: center;
     margin-top: 15px;
 
     @media (min-width: 768px) {
         margin-top: 30px;
-        width: calc(100% - 80px);
+        width: calc(100% - 80px) !important;
     }
 
     @media (min-width: 1280px) {
-        width: calc(100% - 100px);
+        width: calc(100% - 100px) !important;
     }
 }

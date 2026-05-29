@@ -25,6 +25,8 @@ import IconSpeed from "./IconSpeed";
 import IconPen from "./IconPen";
 import IconPlus from "./IconPlus";
 import IconClose from "./IconClose";
+import IconMathPlus from "./IconMathPlus";
+import IconMathMinus from "./IconMathMinus";
 
 
 
@@ -54,6 +56,8 @@ const icons = {
     pen: IconPen,
     plus: IconPlus,
     close: IconClose,
+    mathPlus: IconMathPlus,
+    mathMinus: IconMathMinus,
 }
 
 

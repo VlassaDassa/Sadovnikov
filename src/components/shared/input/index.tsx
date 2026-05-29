@@ -25,6 +25,7 @@ interface InputProps {
     iconPosition: 'noIcon' | 'iconLeft' | 'iconRight' | 'iconBoth',
     value?: string,
     maxLen?: number,
+    variant?: 'default' | 'admin',
 
     error?: string,
 
@@ -41,6 +42,7 @@ const Input: React.FC<InputProps> = ({
     icon,
     iconPosition,
     maxLen,
+    variant='default',
 
     error,
     onChange,
