@@ -5,6 +5,10 @@
 
 .section {
     margin-top: 20px;
+
+    @media (min-width: 1280px) {
+        margin-top: 0px;
+    }
 }
 
 .title {
@@ -28,6 +32,13 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+
+    @media (min-width: 768px) {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 30px;
+        column-gap: 50px;
+    }
 }
 
 .header {
@@ -58,6 +69,10 @@
 
 .btn {
     padding: 10px;
+
+    @media (min-width: 1280px) {
+        padding: 15px;
+    }
 }
 
 .content {
@@ -75,5 +90,11 @@
     &:last-child {
         border: none;
         padding-bottom: 0;
+    }
+
+    @media (min-width: 768px) {
+        border: 0;
+        padding-bottom: 0;
+        max-width: 380px;
     }
 }

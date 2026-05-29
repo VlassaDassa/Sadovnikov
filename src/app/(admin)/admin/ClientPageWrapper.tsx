@@ -45,12 +45,12 @@ const ClientPageWrapper: React.FC = () => {
     else {
         return (
             <main className={styles.main}>
-                <div className={styles.visitAndDeviceWrapper}>
+                <div className={`container ${styles.visitAndDeviceWrapper}`}>
                     <VisitChart />
                     <DeviceChart />
                 </div>
                 
-                <div className={styles.quickEditAndTrafficWrapper}>
+                <div className={`container ${styles.quickEditAndTrafficWrapper}`}>
                     <QuickEdit />
                     <TrafficSource />
                 </div>

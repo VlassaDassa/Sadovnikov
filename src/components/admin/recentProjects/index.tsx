@@ -95,7 +95,7 @@ const RecentProjects: React.FC = () => {
                     <p className={styles.subtitle}>Quick access to your projects management</p>
                 </div>
                 <Swiper
-                    slidesPerView={1.005}
+                    slidesPerView={1}
                     spaceBetween={10}  
                     className={styles.swiper}   
                 >
