@@ -4,6 +4,7 @@ import React from 'react';
 
 import TalkingAvatar from '../talkingAvatar';
 import AdaptiveImage from '@/components/shared/AdaptiveImage';
+import SkillLevel from '@/components/shared/SkillLevel';
 
 import { skills } from '@/mockData/skills';
 import type { Skill } from '@/mockData/skills';
@@ -21,18 +22,7 @@ const SkillItem: React.FC<Skill> = ({ name, score }) => {
         <div className={style.skillItem}>
             <p className={style.skillItemName}>{name}</p>
             <div className={style.skillLevel}>
-                <div className={style.skillLevelWrapper}>
-                    {
-                        Array.from({ length: 10 }).map((_, index) => {
-                            if (index < score) {
-                                return <div key={index} className={`${style.skillLevelItem} ${style['skillLevelItem--filled']}`}></div>
-                            }
-                            else {
-                                return <div key={index} className={style.skillLevelItem}></div>
-                            }
-                        })
-                    }
-                </div>
+                <SkillLevel score={score} />
                 <p className={style.skillScore}>{score}/10</p>
             </div>
         </div>

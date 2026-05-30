@@ -1,20 +1,27 @@
 @use './../../../styles/tokens/typography' as *;
 @use './../../../styles/tokens/colors' as *;
+@use './../../../styles/tokens/effects' as *;
 
 
 
 
 .inputWrapper {
     position: relative;
-    height: 80px;
     width: 100%;
-
+    
     &--textarea {
         height: auto;
         min-height: 80px;
     }
 }
 
+.inputWrapper-default {
+    height: 80px;
+}
+
+.inputWrapper-admin {
+    height: auto;
+}
 
 .input {
     border-bottom: $neutral_600 3px solid;
@@ -52,13 +59,58 @@
         }
     }
 
-        @media (min-width: 768px) {
-            font-size: 20px;
-        }
+    @media (min-width: 768px) {
+        font-size: 20px;
+    }
 }
+
+.inputAdmin {
+    background-color: $neutral_1000;
+    border: 1px solid rgba($white, 0.08);
+    border-radius: 10px;
+
+    @extend .body-16-mont-regular;
+    @extend .lightText;
+    @extend .shadow-splash;
+
+    padding: 20px;
+
+    transition: all ease-in-out .2s;
+
+    &:placeholder-shown {
+        color: $neutral_600;
+    }
+
+    @media (min-width: 1280px) {
+        &:hover {
+            background-color: $neutral_950;
+
+            &:placeholder-shown {
+                color: $neutral_400;
+            }   
+        }
+    }
+
+
+    &:focus {
+        border: 1px solid rgba($white, 0.3);
+        color: $neutral_200;
+    }
+
+    @media (min-width: 768px) {
+        font-size: 20px;
+    }
+}
+
+
 
 .inputError {
     border-bottom: $error_600 3px solid;
+}
+
+.inputAdminError {
+    border: $error_600 1px solid;
+    color: $error_600;
 }
 
 
@@ -71,7 +123,24 @@
 }
 
 
+.inputAdminWithIcon {
+    padding-left: 40px; 
+}
 
+.inputLabel {
+    display: block;
+    @extend .body-16-mont-regular;
+    color: $neutral_500;
+    margin-bottom: 15px;
+
+    @media (min-width: 768px) {
+        font-size: 20px;
+    }
+}
+
+.labelError {
+    color: $error_600;
+}
 
 
 .inputIcon {
@@ -80,9 +149,26 @@
     top: 5px;
 }
 
-
 .inputIconLeft {
     left: 10px;
+}
+
+
+.inputAdminIcon {
+    position: absolute;
+
+    top: 20px;
+}
+
+
+.inputAdminIconLabel {
+    position: absolute;
+
+    bottom: 10px;
+    
+    @media (min-width: 768px) {
+        bottom: 2px;
+    }
 }
 
 

@@ -8,6 +8,7 @@ import ModalHeader from '../../general/modalHeader';
 import ModalTooltip from '../modalTooltip';
 import DragHandler from '../dragHandler';
 import Input from '@/components/shared/input';
+import SkillLevel from '@/components/shared/SkillLevel';
 
 import { skills } from '@/mockData/skills';
 
@@ -40,43 +41,61 @@ const AdminModals: React.FC = () => {
                 
                 {skills.map(skill => (
                     <div key={skill.id} className={`${styles.skill} modalElementBg`}>
-                        <DragHandler
-                            variant="small"
-                        />
+                        
+                        <div className={styles.firstLineWrapper}>
+                            <div className={styles.inputWrapper}>
+                                <DragHandler
+                                    variant="small"
+                                />
 
-                        <Input
-                            name={`skill-${skill.id}`}
-                            iconPosition='noIcon'
-                            value={skill.name}
-                            additionalClass={styles.input}
-                        />
+                                <Input 
+                                    name='test'
+                                    placeholder='Text...'
+                                    value={skill.name}
+                                    variant='admin'
+                                    iconPosition='noIcon'
+                                    adminLabel='withoutLabel'
+                                />
+                            </div>
 
-                        <Button
-                            variant="black"
-                            behavior="default"
-                            iconPosition="only"
-                            icon="trash"
-                            additionalClass={styles.deleteBtn}
-                        />
+                            <Button
+                                variant="black"
+                                behavior="default"
+                                iconPosition="only"
+                                icon="trash"
+                                additionalClass={styles.deleteBtn}
+                            />
+                        </div>
 
-                        <Button
-                            variant="black"
-                            behavior="default"
-                            iconPosition="only"
-                            icon="mathMinus"
-                            additionalClass={styles.deleteBtn}
-                        />
+                        <div className={styles.secondLineWrapper}>
+                            <Button
+                                variant="black"
+                                behavior="default"
+                                iconPosition="only"
+                                icon="mathMinus"
+                                additionalClass={styles.deleteBtn}
+                            />
 
-                        <Button
-                            variant="black"
-                            behavior="default"
-                            iconPosition="only"
-                            icon="mathPlus"
-                            additionalClass={styles.deleteBtn}
-                        />
+                            <SkillLevel score={skill.score} classNameWrapper={styles.skillLevel} classNameItem={styles.skillLevelItem} />
 
+                            <Button
+                                variant="black"
+                                behavior="default"
+                                iconPosition="only"
+                                icon="mathPlus"
+                                additionalClass={styles.deleteBtn}
+                            />
+                        </div>
                     </div>
                 ))}
+
+                <Button
+                    variant="black"
+                    behavior="default"
+                    iconPosition="noIcon"
+                    text={'Add Skill'}
+                    additionalClass={styles.addBtn}
+                />
             </div>
 
 

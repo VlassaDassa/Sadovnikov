@@ -91,25 +91,13 @@
 }
 
 
-.skillLevelWrapper {
-    display: flex;
-    column-gap: 5px;
-}
 
 
-.skillLevelItem {
-    width: 20px;
-    height: 5px;
-
-    background-color: $neutral_300;
-
-    border-radius: 1px;
-}
 
 
-.skillLevelItem--filled {
-    background-color: $brand_600;
-}
+
+
+
 
 .vertex, 
 .cursor {
@@ -171,20 +159,11 @@
 }
 
 
-
 @media (min-width: 768px) {
     .skillItemName, .skillScore {
         font-size: 1.5rem;
     }
-
-    .skillLevelItem {
-        width: 30px;
-        height: 10px;
-
-        border-radius: 2px;
-    }
 }
-
 
 
 .avatarWrapper {

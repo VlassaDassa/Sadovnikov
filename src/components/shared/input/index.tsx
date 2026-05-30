@@ -26,6 +26,8 @@ interface InputProps {
     value?: string,
     maxLen?: number,
     variant?: 'default' | 'admin',
+    adminLabel?: 'withLabel' | 'withoutLabel',
+    label?: string,
 
     error?: string,
 
@@ -43,7 +45,8 @@ const Input: React.FC<InputProps> = ({
     iconPosition,
     maxLen,
     variant='default',
-
+    adminLabel='withoutPlaceholder',
+    label, 
     error,
     onChange,
 }) => {
@@ -58,22 +61,35 @@ const Input: React.FC<InputProps> = ({
         }
     }, [value])
 
-    
+
     const iconColor = {
-        strokeColor: (isHovered ? cssVars.neutral_400 :
-            value?.length === 0 ? cssVars.neutral_600 :
-            cssVars.white), // <- Белый во всех случаях кроме empty и hover
-        fillColor: 'none'
+        default: {
+            strokeColor: (isHovered && !error ? cssVars.neutral_400 :
+                value?.length === 0 ? cssVars.neutral_600 :
+                error ? cssVars.error_600 :
+                cssVars.white), // <- Белый во всех случаях кроме empty и hover
+            fillColor: 'none'
+        },
+        admin: {
+            strokeColor: (
+                isHovered && !error ? cssVars.neutral_400 :
+                value?.length === 0 ? cssVars.neutral_600 :
+                error ? cssVars.error_600 :
+                cssVars.neutral_300 
+            ),
+            fillColor: 'none',
+        }
     }
+   
 
 
-    const iconFirst = (
+    const iconOne = (
         (iconPosition === 'iconLeft' || iconPosition === 'iconBoth') && icon?.first ?
             <Icon 
                 name={icon.first}
-                iconClass={`${style.inputIcon} ${style.inputIconLeft}`}
-                strokeColor={iconColor.strokeColor}
-                fillColor={iconColor.fillColor}
+                iconClass={`${variant === 'default' ? style.inputIcon : adminLabel==='withLabel' ? style.inputAdminIconLabel : style.inputAdminIcon} ${style.inputIconLeft}`}
+                strokeColor={iconColor[variant].strokeColor}
+                fillColor={iconColor[variant].fillColor}
                 size={
                     breakpoint === 'desktop' ? 24 : 20
                 }
@@ -81,16 +97,16 @@ const Input: React.FC<InputProps> = ({
         : null
     )
 
-    const errorEl = error ? <p className={style.inputErrorText}>{error}</p> : null
+    const errorEl = error ? <p className={style.inputErrorText}>⚠ {error}</p> : null
 
     const iconBoth = (
         iconPosition === 'iconBoth' && icon?.second  ?
             <Icon 
                 name={icon.second}
-                strokeColor={iconColor.strokeColor}
-                fillColor={iconColor.fillColor}
+                strokeColor={iconColor[variant].strokeColor}
+                fillColor={iconColor[variant].fillColor}
                 aria-label={placeholder || name}
-                iconClass={`${style.inputIcon} ${style.inputIconRight}`}
+                iconClass={`${variant === 'default' ? style.inputIcon : adminLabel==='withLabel' ? style.inputAdminIconLabel : style.inputAdminIcon} ${style.inputIconRight}`}
                 size={
                     breakpoint === 'desktop' ? 24 : 20
                 }
@@ -102,9 +118,9 @@ const Input: React.FC<InputProps> = ({
         iconPosition === 'iconRight' && icon?.first ?
             <Icon 
                 name={icon.first}
-                strokeColor={iconColor.strokeColor}
-                fillColor={iconColor.fillColor}
-                iconClass={`${style.inputIcon} ${style.inputIconRight}`}
+                strokeColor={iconColor[variant].strokeColor}
+                fillColor={iconColor[variant].fillColor}
+                iconClass={`${variant === 'default' ? style.inputIcon : adminLabel==='withLabel' ? style.inputAdminIconLabel : style.inputAdminIcon} ${style.inputIconRight}`}
                 size={
                     breakpoint === 'desktop' ? 24 : 20
                 }
@@ -113,10 +129,13 @@ const Input: React.FC<InputProps> = ({
     )
 
     const inputClass = (
-        `${style.input} 
+        `${variant === 'admin' ? style.inputAdmin : style.input} 
         ${style.additionalClass} 
-        ${iconPosition !== 'noIcon' ? style.inputWithIcon : ''}  
-        ${error ? style.inputError : ''} 
+        ${
+            variant === 'default' && iconPosition !== 'noIcon' ? style.inputWithIcon :
+            variant === 'admin' && iconPosition !== 'noIcon' ? style.inputAdminWithIcon : '' 
+        }  
+        ${error && variant === 'default' ?  style.inputError : error && variant === 'admin' ? style.inputAdminError : ''} 
         ${type === 'textarea' ? style['input-textarea'] : ''} 
         `
     )
@@ -124,11 +143,17 @@ const Input: React.FC<InputProps> = ({
 
     return (
         <div 
-            className={`${style.inputWrapper} ${style[`inputWrapper-${type}`]}`}
+            className={`${style.inputWrapper} ${style[`inputWrapper-${type}`]} ${style[`inputWrapper-${variant}`]} ${additionalClass}`}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            {iconFirst}
+            {
+                label && adminLabel === 'withLabel' ?
+                    <label htmlFor={name} className={`${error ? style.labelError : ''} ${style.inputLabel}`}>{label}</label>
+                : null
+            }
+
+            {iconOne}
 
             {
                 type !== 'textarea' ?

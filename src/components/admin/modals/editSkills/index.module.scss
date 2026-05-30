@@ -17,6 +17,11 @@
     padding-top: 70px;
 }
 
+.skill {
+    padding: 15px;
+    border-radius: 15px;
+}
+
 .content {
     display: flex;
     flex-direction: column;
@@ -25,3 +30,47 @@
     margin-top: 15px;
 }
 
+
+.inputWrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.firstLineWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.secondLineWrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 25px;
+    margin-top: 20px;
+}
+
+
+.deleteBtn {
+    padding: 10px;
+}
+
+.skillLevel {
+    gap: 5px;
+}
+
+.skillLevelItem {
+    width: 10px;
+    height: 5px;
+}
+
+.addBtn {
+    width: calc(100% - 60px);
+
+    p {
+        width: 100%;
+        text-align: center;
+    }
+}
