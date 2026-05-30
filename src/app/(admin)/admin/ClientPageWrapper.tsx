@@ -11,6 +11,7 @@ import TrafficSource from "@/components/admin/trafficSource";
 import QuickEdit from "@/components/admin/quickEdit";
 import RecentProjects from "@/components/admin/recentProjects";
 import AnimatedSection from '@/components/shared/AnimatedScroll';
+import EditSkillsModal from '@/components/admin/modals/editSkills';
 
 import styles from './index.module.scss';
 
@@ -18,9 +19,19 @@ import styles from './index.module.scss';
 
 const ClientPageWrapper: React.FC = () => {
     const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
+    const isEditSkillsModalOpen = useSelector((state: RootState) => state.uiState.isEditSkillsModalOpen)
+    
+    const modals = (
+        <>
+            {isEditSkillsModalOpen && <EditSkillsModal />}
+        </>
+    )
+    
     if (breakpoint === 'mobile') {
         return (
             <main className={styles.main}>
+                {modals}
+
                 <AnimatedSection animation='fade-up'>
                     <VisitChart />
                 </AnimatedSection>
@@ -46,6 +57,8 @@ const ClientPageWrapper: React.FC = () => {
     else if (breakpoint === 'tablet') {
         return (
             <main className={`${styles.main} container`}>
+                {modals}
+
                 <AnimatedSection animation='fade-up'>
                     <VisitChart />
                 </AnimatedSection>
@@ -71,6 +84,8 @@ const ClientPageWrapper: React.FC = () => {
     else {
         return (
             <main className={styles.main}>
+                {modals}
+
                 <AnimatedSection animation='fade-right'>
                     <div className={`container ${styles.visitAndDeviceWrapper}`}>
                         <VisitChart />

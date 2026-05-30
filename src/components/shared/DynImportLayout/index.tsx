@@ -14,7 +14,6 @@ export const DynImportLayout = () => {
             <StatusMessage />
             <Menu />
             <Overlay />
-            <EditSkillsModal /> 
         </>
     );
 };

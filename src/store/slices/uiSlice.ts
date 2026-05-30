@@ -1,15 +1,19 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 
 interface UIState {
     isOverlayVisible: boolean,
-    isMenuOpen: boolean
+    isMenuOpen: boolean,
+    isEditSkillsModalOpen?: boolean,
+    bodyScroll: boolean,
 }
 
 
 const initialState: UIState = {
-    isOverlayVisible: true,
-    isMenuOpen: false
+    isOverlayVisible: false,
+    isMenuOpen: false,
+    isEditSkillsModalOpen: false,
+    bodyScroll: true,
 }
 
 const uiSlice = createSlice({
@@ -18,6 +22,8 @@ const uiSlice = createSlice({
     reducers: {
         toggleIsOverlayVisible: (state) => {
             state.isOverlayVisible = !state.isOverlayVisible
+            state.bodyScroll = !state.bodyScroll
+            document.documentElement.style.overflow = state.bodyScroll ? 'auto' : 'hidden';
         },
 
         toggleMenu: (state) => {
@@ -27,8 +33,18 @@ const uiSlice = createSlice({
         closeMenu: (state) => {
             state.isMenuOpen = false
         },
+
+        toggleEditSkillsModal: (state) => {
+            state.isEditSkillsModalOpen = !state.isEditSkillsModalOpen
+        }
     },
 })
 
-export const { toggleIsOverlayVisible, toggleMenu, closeMenu } = uiSlice.actions;
+export const { 
+        toggleIsOverlayVisible,
+        toggleMenu,
+        closeMenu,
+        toggleEditSkillsModal,
+    } 
+     = uiSlice.actions;
 export default uiSlice.reducer;

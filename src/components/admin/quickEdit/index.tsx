@@ -1,5 +1,10 @@
 import React from 'react';
 
+import { useDispatch } from "react-redux";
+
+import { toggleIsOverlayVisible, closeMenu, toggleEditSkillsModal } from '@/store/slices/uiSlice'; 
+
+
 import SectionBackground from '../general/sectionBackground';
 import DashboardTitle from '../general/dashboardTitle';
 import Button from '@/components/shared/button/Button';
@@ -9,6 +14,14 @@ import styles from './index.module.scss';
 
 
 const QuickEdit: React.FC = () => {
+    const dispatch = useDispatch()
+
+    const overlayClickHandler = () => {
+        dispatch(toggleEditSkillsModal())
+        dispatch(toggleIsOverlayVisible())
+    }
+
+
     return (
         <section className={`${styles.section} container`}>
             <SectionBackground>
@@ -29,6 +42,7 @@ const QuickEdit: React.FC = () => {
                                 iconPosition='only'
                                 variant='primary'
                                 icon='pen'
+                                onClick={overlayClickHandler}
                                 additionalClass={styles.btn}
                             />
                         </div>
@@ -82,9 +96,6 @@ const QuickEdit: React.FC = () => {
                         </div>
                     </div>
                 </div>
-                
-
-
             </SectionBackground>
         </section>
     )   

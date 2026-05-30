@@ -107,6 +107,7 @@ const Button: React.FC<ButtonProps> = ({
     
     return (
         <button 
+            onClick={onClick}
             ref={tooltipRef}
             disabled={behavior === 'disabled'}
             className={`

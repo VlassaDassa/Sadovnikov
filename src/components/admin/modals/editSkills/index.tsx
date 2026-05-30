@@ -1,6 +1,8 @@
 'use client'
 
 import React from 'react';
+import { useDispatch } from "react-redux";
+import { toggleIsOverlayVisible, toggleEditSkillsModal } from '@/store/slices/uiSlice';
 
 import ModalBackground from './../../general/modalBackground';
 import Button from '@/components/shared/button/Button';
@@ -16,6 +18,14 @@ import styles from './index.module.scss';
 
 
 const AdminModals: React.FC = () => {
+    const dispatch = useDispatch()
+
+    const overlayClickHandler = () => {
+        dispatch(toggleEditSkillsModal())
+        dispatch(toggleIsOverlayVisible())
+    }
+
+
     return (
         <ModalBackground className={styles.modalBackground}>
             <Button
@@ -23,6 +33,7 @@ const AdminModals: React.FC = () => {
                 behavior="default"
                 iconPosition="only"
                 icon="close"
+                onClick={overlayClickHandler}
                 additionalClass={styles.closeButton}
             />
 
@@ -55,6 +66,7 @@ const AdminModals: React.FC = () => {
                                     variant='admin'
                                     iconPosition='noIcon'
                                     adminLabel='withoutLabel'
+                                    onChange={() => {}}
                                 />
                             </div>
 
