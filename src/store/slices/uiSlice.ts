@@ -5,6 +5,7 @@ interface UIState {
     isOverlayVisible: boolean,
     isMenuOpen: boolean,
     isEditSkillsModalOpen?: boolean,
+    isEditFooterModalOpen?: boolean,
     bodyScroll: boolean,
 }
 
@@ -13,6 +14,7 @@ const initialState: UIState = {
     isOverlayVisible: false,
     isMenuOpen: false,
     isEditSkillsModalOpen: false,
+    isEditFooterModalOpen: false,
     bodyScroll: true,
 }
 
@@ -30,21 +32,37 @@ const uiSlice = createSlice({
             state.isMenuOpen = !state.isMenuOpen
         },
 
+        toggleEditSkillsModal: (state) => {
+            state.isEditSkillsModalOpen = !state.isEditSkillsModalOpen
+        },
+
+        toggleEditFooterModal: (state) => {
+            state.isEditFooterModalOpen = !state.isEditFooterModalOpen
+        },
+
         closeMenu: (state) => {
             state.isMenuOpen = false
         },
 
-        toggleEditSkillsModal: (state) => {
-            state.isEditSkillsModalOpen = !state.isEditSkillsModalOpen
-        }
+        closeEditSkillsModal: (state) => {
+            state.isEditSkillsModalOpen = false
+        },
+
+        closeEditFooterModal: (state) => {
+            state.isEditFooterModalOpen = false
+        },
     },
 })
 
 export const { 
         toggleIsOverlayVisible,
         toggleMenu,
-        closeMenu,
         toggleEditSkillsModal,
+        toggleEditFooterModal,
+        
+        closeEditSkillsModal,
+        closeEditFooterModal,
+        closeMenu,
     } 
      = uiSlice.actions;
 export default uiSlice.reducer;

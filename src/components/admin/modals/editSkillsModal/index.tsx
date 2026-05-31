@@ -18,7 +18,7 @@ import {
     verticalListSortingStrategy
 } from '@dnd-kit/sortable'
 
-import ModalBackground from './../../general/modalBackground';
+import ModalBackground from '@/components/admin/general/modalBackground';
 import Button from '@/components/shared/button/Button';
 import ModalHeader from '../../general/modalHeader';
 import ModalTooltip from '../modalTooltip';
@@ -88,7 +88,6 @@ const SkillItem: React.FC<SkillItemProps> = ({ skill, setSkills }) => {
             )
         }
     }
-
 
     return (
         <div 

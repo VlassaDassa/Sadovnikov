@@ -2,7 +2,12 @@ import React from 'react';
 
 import { useDispatch } from "react-redux";
 
-import { toggleIsOverlayVisible, closeMenu, toggleEditSkillsModal } from '@/store/slices/uiSlice'; 
+import { 
+    toggleIsOverlayVisible, 
+    toggleEditSkillsModal,
+    toggleEditFooterModal 
+
+} from '@/store/slices/uiSlice'; 
 
 
 import SectionBackground from '../general/sectionBackground';
@@ -16,8 +21,13 @@ import styles from './index.module.scss';
 const QuickEdit: React.FC = () => {
     const dispatch = useDispatch()
 
-    const overlayClickHandler = () => {
+    const openEditSkills = () => {
         dispatch(toggleEditSkillsModal())
+        dispatch(toggleIsOverlayVisible())
+    }
+
+    const openEditFooter = () => {
+        dispatch(toggleEditFooterModal())
         dispatch(toggleIsOverlayVisible())
     }
 
@@ -42,7 +52,7 @@ const QuickEdit: React.FC = () => {
                                 iconPosition='only'
                                 variant='primary'
                                 icon='pen'
-                                onClick={overlayClickHandler}
+                                onClick={openEditSkills}
                                 additionalClass={styles.btn}
                             />
                         </div>
@@ -76,6 +86,7 @@ const QuickEdit: React.FC = () => {
                                 variant='primary'
                                 icon='pen'
                                 additionalClass={styles.btn}
+                                onClick={openEditFooter}
                             />
                         </div>
                     </div>

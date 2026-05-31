@@ -23,12 +23,6 @@
     scrollbar-width: none;           
     -ms-overflow-style: none;   
 
-
-    &:active {
-    cursor: grabbing;
-    }
-
-       
     
     &::-webkit-scrollbar {
         display: none;              
@@ -40,6 +34,10 @@
 .skill {
     padding: 15px;
     border-radius: 15px;
+
+    &:active {
+        cursor: grabbing;
+    }
 }
 
 .content {

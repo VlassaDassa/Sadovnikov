@@ -1,42 +1,35 @@
 'use client' 
 
 import React from "react";
-import { useSelector } from "react-redux";
 
-import Icon from "../../../shared/icons/Icon";
+import AdaptiveImage from "@/components/shared/AdaptiveImage";
 
-import { RootState } from "@/store";
-import { cssVars } from "@/styles/cssVariables";
+import { footerItems } from "@/mockData/footer";
+import { useCopy } from "@/hooks/useCopy";
 
 import style from './index.module.scss';
-import { useCopy } from "@/hooks/useCopy";
 
 
 
 interface ContactItemProps {
-    type: 'link' | 'copyText',
-    iconSize?: number;
     link?: string,
-    name: string,
+    icon: string,
     text: string,
-    copyText?: string,
 }
 
 
-const ContactItem: React.FC<ContactItemProps> = ({ copyText='', type, iconSize, name, text, link }) => {
+const ContactItem: React.FC<ContactItemProps> = ({ icon, text, link }) => {
     const { copy, copied } = useCopy();
 
-    if (type === 'copyText') {
+    if (!link) {
         return (
-            <div className={style.footerItemWrapper} onClick={() => copy(copyText)}>
+            <div className={style.footerItemWrapper} onClick={() => copy(text)}>
                 <div className={style.footerIconWrapper}>
-                    <Icon 
-                        iconClass={style.footerIcon}
-                        name={name} 
-                        strokeColor={'none'}
-                        size={iconSize}
-                        fillColor={cssVars.neutral_300}
+                    <AdaptiveImage 
+                        src={icon}
+                        wrapClass={style.icon}
                     />
+
                 </div>
 
                 <p className={style.footerText}>{text}</p>
@@ -50,12 +43,9 @@ const ContactItem: React.FC<ContactItemProps> = ({ copyText='', type, iconSize, 
         return (
             <a href={link} target="_blank" className={style.footerItemWrapper}>
             <div className={style.footerIconWrapper}>
-                <Icon 
-                    iconClass={style.footerIcon}
-                    name={name}
-                    strokeColor={'none'}
-                    size={iconSize}
-                    fillColor={cssVars.neutral_300}
+                <AdaptiveImage 
+                    src={icon}
+                    wrapClass={style.icon}
                 />
             </div>
             <p className={style.footerText}>{text}</p>
@@ -67,38 +57,19 @@ const ContactItem: React.FC<ContactItemProps> = ({ copyText='', type, iconSize, 
 
 
 const Footer: React.FC = () => {
-    const iconSize = () => {
-        const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
-        return breakpoint === 'mobile' ? 20 : 32
-    }
-
-
     return (
         <footer className={style.footer}>
             <div className={`container ${style.footerWrapper}`}>
-                <ContactItem 
-                    type='copyText'
-                    text='vlad.sad28@yandex.ru'
-                    iconSize={iconSize()}
-                    name='email'
-                    copyText='vlad.sad28@yandex.ru'
-                />
-
-                <ContactItem 
-                    type='copyText'
-                    text='+7 (900) 015-81-16'
-                    iconSize={iconSize()}
-                    name='phone'
-                    copyText='+7 (900) 015-81-16'
-                />
-
-                <ContactItem 
-                    type='link'
-                    text='@VlassaDassa'
-                    iconSize={iconSize()}
-                    name='telegram'
-                    link='https://t.me/VlassaDassa'
-                />
+                {
+                    footerItems.map((item) => (
+                        <ContactItem
+                            key={item.id}
+                            text={item.text}
+                            link={item?.link}
+                            icon={item.icon}
+                        />
+                    ))
+                }
             </div>
         </footer>
     )
