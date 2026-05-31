@@ -29,3 +29,10 @@ export interface TooltipConfig {
     offset?: number,
     placement?: 'top' | 'bottom' | 'left' | 'right'; 
 }
+
+
+export interface Skill {
+    id: number,
+    name: string,
+    score: number
+}

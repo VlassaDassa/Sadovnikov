@@ -1,8 +1,4 @@
-export interface Skill {
-    id: number,
-    name: string,
-    score: number
-}
+import { Skill } from "@/interfaces/general"
 
 
 export const skills: Skill[] = [

@@ -21,7 +21,14 @@
     overflow-y: auto;
 
     scrollbar-width: none;           
-    -ms-overflow-style: none;      
+    -ms-overflow-style: none;   
+
+
+    &:active {
+    cursor: grabbing;
+    }
+
+       
     
     &::-webkit-scrollbar {
         display: none;              
