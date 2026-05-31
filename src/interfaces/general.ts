@@ -36,3 +36,11 @@ export interface Skill {
     name: string,
     score: number
 }
+
+
+export interface IFooterItem {
+    id: number,
+    text: string,
+    icon: string
+    link?: string,
+}

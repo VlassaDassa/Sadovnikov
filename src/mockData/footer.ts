@@ -1,9 +1,4 @@
-interface FooterItem {
-    id: number,
-    text: string,
-    icon: string
-    link?: string,
-}
+import { IFooterItem } from "@/interfaces/general";
 
 
 const mail = '/images/mockImages/footer/mail.svg';
@@ -11,7 +6,7 @@ const telegram = '/images/mockImages/footer/telegram.svg';
 const phone = '/images/mockImages/footer/phone.svg';
 
 
-export const footerItems: FooterItem[] = [
+export const footerItems: IFooterItem[] = [
     {
         id: 1,
         text: 'vlad.sad28@yandex.ru',

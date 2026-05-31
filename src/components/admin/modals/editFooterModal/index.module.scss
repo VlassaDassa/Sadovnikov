@@ -25,6 +25,10 @@
     scrollbar-width: none;           
     -ms-overflow-style: none;   
 
+    &:active {
+        cursor: grabbing;
+    }
+
     
     &::-webkit-scrollbar {
         display: none;              
@@ -42,6 +46,8 @@
 
     border-radius: 10px;
 
+    cursor: pointer;
+
     border: 1px solid rgba($white, 0.08);
     @extend .shadow-splash;
     transition: all ease-in-out 0.1s, transform ease 0.1s;
@@ -58,10 +64,6 @@
                 transition: all ease-in-out 0.1s, transform ease 0.3s;
             }
         }
-    }
-
-    @media (min-width: 1280px) {
-        cursor: pointer;
     }
 }
 
@@ -112,4 +114,11 @@
     margin-top: 20px;
 }
 
+.addBtn {
+    width: calc(100% - 60px);
 
+    p {
+        width: 100%;
+        text-align: center;
+    }
+}
