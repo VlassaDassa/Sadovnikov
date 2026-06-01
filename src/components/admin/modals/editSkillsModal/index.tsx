@@ -2,32 +2,19 @@
 
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { CSS } from '@dnd-kit/utilities';
-import { useDispatch } from 'react-redux';
-import {
-    DndContext,
-    closestCenter,
-    PointerSensor,
-    useSensor,
-    useSensors,
-    DragEndEvent
-} from '@dnd-kit/core';
+import { DragEndEvent } from '@dnd-kit/core';
 import {
     arrayMove,
-    SortableContext,
     useSortable,
-    verticalListSortingStrategy
 } from '@dnd-kit/sortable'
 
-import ModalBackground from '@/components/admin/general/modalBackground';
 import Button from '@/components/shared/button/Button';
-import ModalHeader from '../../general/modalHeader';
-import ModalTooltip from '../modalTooltip';
 import DragHandler from '../dragHandler';
 import Input from '@/components/shared/input';
 import SkillLevel from '@/components/shared/SkillLevel';
+import ModalWrapper from '../modalWrapper';
 
 import { skills as initialSkills } from '@/mockData/skills';
-import { closeModals } from '@/lib/modals';
 import { Skill } from '@/interfaces/general';
 
 import styles from './index.module.scss';
@@ -88,6 +75,7 @@ const SkillItem: React.FC<SkillItemProps> = ({ skill, setSkills }) => {
             )
         }
     }
+    
 
     return (
         <div 
@@ -151,27 +139,8 @@ const SkillItem: React.FC<SkillItemProps> = ({ skill, setSkills }) => {
 
 
 const EditSkillModal: React.FC = () => {
-    const dispatch = useDispatch()
     const [skills, setSkills] = useState(initialSkills)
     
-    const sensors = useSensors(
-        useSensor(PointerSensor, {
-            activationConstraint: {
-                distance: 8, 
-            },
-        })
-    );
-
-    const handleDragEnd = (event: DragEndEvent) => {
-        const { active, over } = event;
-
-        if (active.id !== over?.id) {
-            const oldIndex = skills.findIndex((item) => item.id === active.id)
-            const newIndex = skills.findIndex((item) => item.id === over?.id)
-            setSkills(arrayMove(skills, oldIndex, newIndex))
-        }
-    }
-
     const addItem = () => {
         const maxId = Math.max(...skills.map(s => s.id), 0);
         const newSkill: Skill = {
@@ -191,60 +160,32 @@ const EditSkillModal: React.FC = () => {
         return 'default'
     }
 
-
     return (
-        <ModalBackground className={styles.modalBackground}>
-            <Button
-                variant="black"
-                behavior="default"
-                iconPosition="only"
-                icon="close"
-                onClick={() => closeModals(dispatch, 'editSkills')}
-                additionalClass={styles.closeButton}
-            />
+        <ModalWrapper
+            drag={true}
+            tooltipVisible={true}
+            disableBtn={disableBtn}
+            addItem={addItem}
+            items={skills}
+            setItems={setSkills}
 
-            <ModalHeader 
-                title='Edit Skills'
-                subTitle='Manage your homepage skill section'
-                icon='arrow'
-            />
+            modalName='editSkills'
 
-            <div className={styles.content}>
-                <ModalTooltip 
-                    text='Maximum 4 skills allowed'
-                    counter={skills.length}
-                    max={4}
+            title='Edit Skills'
+            subTitle='Manage your homepage skill section'
+
+            tooltipMax={4}
+            tooltipText='Maximum 4 skills allowed'
+        >
+            {skills.map(skill => (
+                <SkillItem 
+                    key={skill.id} 
+                    skill={skill} 
+                    setSkills={setSkills} 
                 />
-
-                <DndContext 
-                    sensors={sensors}
-                    collisionDetection={closestCenter}
-                    onDragEnd={handleDragEnd}
-                >
-                    <SortableContext
-                        items={skills.map(s => s.id)}
-                        strategy={verticalListSortingStrategy}
-                    >
-                        {skills.map(skill => (
-                            <SkillItem 
-                                key={skill.id} 
-                                skill={skill} 
-                                setSkills={setSkills} 
-                            />
-                        ))}
-                    </SortableContext>
-                </DndContext>
-
-                <Button
-                    variant="black"
-                    behavior={disableBtn()}
-                    iconPosition="noIcon"
-                    text={'Add Skill'}
-                    additionalClass={styles.addBtn}
-                    onClick={addItem}
-                />
-            </div>
-        </ModalBackground>
+            ))}
+        </ModalWrapper>
+                 
     );
 }
 

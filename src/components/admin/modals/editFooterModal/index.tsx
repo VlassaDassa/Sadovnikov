@@ -1,30 +1,14 @@
 import React, { useState, Dispatch, SetStateAction } from 'react';
 import { CSS } from '@dnd-kit/utilities';
-import { useDispatch } from 'react-redux';
-import {
-    DndContext,
-    closestCenter,
-    PointerSensor,
-    useSensor,
-    useSensors,
-    DragEndEvent
-} from '@dnd-kit/core';
-import {
-    arrayMove,
-    SortableContext,
-    useSortable,
-    verticalListSortingStrategy
-} from '@dnd-kit/sortable'
+import { useSortable} from '@dnd-kit/sortable'
 
-import ModalBackground from '@/components/admin/general/modalBackground';
-import ModalHeader from '../../general/modalHeader';
-import Button from '@/components/shared/button/Button';
-import DragHandler from '../dragHandler';
 import Input from '@/components/shared/input';
 import IconUploader from '@/components/admin/general/iconUploader';
+import ModalWrapper from '@/components/admin/modals/modalWrapper';
+import DragHandler from '../dragHandler';
+import Button from '@/components/shared/button/Button';
 
 import { footerItems } from '@/mockData/footer';
-import { closeModals } from '@/lib/modals';
 import { IFooterItem } from '@/interfaces/general';
 
 import styles from './index.module.scss';
@@ -145,26 +129,8 @@ const FooterItem: React.FC<FooterItemProps> = ({ item, setItems }) => {
 
 
 const EditFooterModal: React.FC = () => {
-    const dispatch = useDispatch()
     const [items, setItems] = useState(footerItems)
-
-    const sensors = useSensors(
-        useSensor(PointerSensor, {
-            activationConstraint: {
-                distance: 8, 
-            },
-        })
-    );
-
-    const handleDragEnd = (event: DragEndEvent) => {
-        const { active, over } = event;
-
-        if (active.id !== over?.id) {
-            const oldIndex = items.findIndex((item) => item.id === active.id)
-            const newIndex = items.findIndex((item) => item.id === over?.id)
-            setItems(arrayMove(items, oldIndex, newIndex))
-        }
-    }
+    const defaultIcon = '/images/mockImages/footer/default.svg'
 
     const disableBtn = () => {
         if (items.length >= 3) {
@@ -179,7 +145,7 @@ const EditFooterModal: React.FC = () => {
         const newItems: IFooterItem = {
             id: maxId + 1,
             text: '',
-            icon: '/images/mockImages/footer/default.svg'
+            icon: defaultIcon
         }
 
         setItems(prev => [...prev, newItems])
@@ -187,59 +153,32 @@ const EditFooterModal: React.FC = () => {
 
 
     return (
-        <ModalBackground
-            className={styles.modalBackground}
+        <ModalWrapper
+            drag={true}
+            tooltipVisible={false}
+            disableBtn={disableBtn}
+            addItem={addItem}
+
+            modalName='editFooter'
+
+            title='Edit Footer'
+            subTitle='Customize the footer content and links'
+
+            items={items}
+            setItems={setItems}
         >
-            <Button
-                variant="black"
-                behavior="default"
-                iconPosition="only"
-                icon="close"
-                onClick={() => closeModals(dispatch, 'editFooter')}
-                additionalClass={styles.closeButton}
-            />
-
-            <ModalHeader 
-                title='Edit Footer'
-                subTitle='Customize the footer content and links'
-                icon='arrow'
-            />
-
-            <div className={styles.content}>
-                <DndContext 
-                    sensors={sensors}
-                    collisionDetection={closestCenter}
-                    onDragEnd={handleDragEnd}
-                >
-
-                    <SortableContext
-                        items={items.map(s => s.id)}
-                        strategy={verticalListSortingStrategy}
-                    >
-                        {
-                            items.map((item) => (
-                                <FooterItem 
-                                    key={item.id}
-                                    item={item}
-                                    setItems={setItems}
-                                />
-                            ))
-                        }
-                    </SortableContext>
-                </DndContext>
-
-                <Button
-                    variant="black"
-                    behavior={disableBtn()}
-                    iconPosition="noIcon"
-                    text={'Add Item'}
-                    additionalClass={styles.addBtn}
-                    onClick={addItem}
-                />
-            </div>
-
-            
-        </ModalBackground>
+            <>
+                {
+                    items.map((item) => (
+                        <FooterItem 
+                            key={item.id}
+                            item={item}
+                            setItems={setItems}
+                        />
+                    ))
+                }
+            </>
+        </ModalWrapper>
     )
 }
 

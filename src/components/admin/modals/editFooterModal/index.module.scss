@@ -67,13 +67,11 @@
     }
 }
 
-
 .dragHand {
     position: absolute;
     left: 15px;
     top: 30px;
 }
-
 
 .item {
     display: flex;
@@ -104,14 +102,6 @@
 
 .deleteBtn {
     height: fit-content;
-}
-
-.content {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-
-    margin-top: 20px;
 }
 
 .addBtn {

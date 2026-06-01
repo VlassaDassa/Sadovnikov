@@ -2,9 +2,9 @@ import { AppDispatch } from "@/store";
 import { toggleIsOverlayVisible, toggleEditSkillsModal, toggleEditFooterModal } from '@/store/slices/uiSlice';
 
 
-type closeModalsType = 'editSkills' | 'editFooter'
 
-export const closeModals = (dispatch: AppDispatch, modalName: closeModalsType) => {
+
+export const closeModals = (dispatch: AppDispatch, modalName: string) => {
     dispatch(toggleIsOverlayVisible())
 
     if (modalName === 'editSkills') {

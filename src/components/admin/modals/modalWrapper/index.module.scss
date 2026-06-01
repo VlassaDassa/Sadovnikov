@@ -1,0 +1,54 @@
+@use './../../../../styles/tokens/colors.scss' as *;
+@use './../../../../styles/tokens/typography.scss' as *;
+@use './../../../../styles/tokens/effects.scss' as *;
+
+
+
+
+.closeButton {
+    @extend .radius-full;
+
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+
+.modalBackground {
+    padding-top: 70px;
+
+    position: fixed;
+    max-height: 500px;
+    overflow-y: auto;
+
+    scrollbar-width: none;           
+    -ms-overflow-style: none;   
+
+    &:active {
+        cursor: grabbing;
+    }
+
+    
+    &::-webkit-scrollbar {
+        display: none;              
+        width: 0;
+        background: transparent;
+    }
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    margin-top: 20px;
+}
+
+.addBtn {
+    width: calc(100% - 60px);
+
+    p {
+        width: 100%;
+        text-align: center;
+    }
+}
