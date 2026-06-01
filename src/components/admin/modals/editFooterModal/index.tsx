@@ -21,14 +21,13 @@ import ModalHeader from '../../general/modalHeader';
 import Button from '@/components/shared/button/Button';
 import DragHandler from '../dragHandler';
 import Input from '@/components/shared/input';
-
+import IconUploader from '@/components/admin/general/iconUploader';
 
 import { footerItems } from '@/mockData/footer';
 import { closeModals } from '@/lib/modals';
 import { IFooterItem } from '@/interfaces/general';
 
 import styles from './index.module.scss';
-import AdaptiveImage from '@/components/shared/AdaptiveImage';
 
 
 interface FooterItemProps {
@@ -79,6 +78,12 @@ const FooterItem: React.FC<FooterItemProps> = ({ item, setItems }) => {
         )
     }
 
+    const handleIconUpload = (path: string, index: number) => {
+        setItems(prev => prev.map((item, i) => 
+            i === index ? {...item, icon: path} : item
+        ))
+    }
+
     return (
         <div 
             className={`${styles.item} modalElementBg`}
@@ -118,13 +123,11 @@ const FooterItem: React.FC<FooterItemProps> = ({ item, setItems }) => {
                     onChange={handleChangLink}
                 />
 
-
-                <div className={styles.iconBtnWrapper}>
-                    <AdaptiveImage 
-                        src={item.icon}
-                        wrapClass={styles.iconBtn}
-                    />
-                </div>
+                <IconUploader 
+                    additionalClass={styles.iconBtnWrapper}
+                    icon={item.icon}
+                    onIconUpload={(path: string) => handleIconUpload(path, item.id)}
+                />
             </div>
 
             <Button
