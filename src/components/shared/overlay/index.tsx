@@ -3,7 +3,7 @@
 import { useSelector, useDispatch } from "react-redux";
 
 import { RootState } from "@/store";
-import { closeMenu, closeEditFooterModal, closeEditSkillsModal, toggleIsOverlayVisible } from '@/store/slices/uiSlice'; 
+import { closeMenu, closeEditFooterModal, closeEditSkillsModal, closeEditMyStackModal, toggleIsOverlayVisible } from '@/store/slices/uiSlice'; 
 
 import style from './index.module.scss';
 
@@ -18,6 +18,7 @@ const Overlay = () => {
         dispatch(closeMenu())
         dispatch(closeEditSkillsModal())
         dispatch(closeEditFooterModal())
+        dispatch(closeEditMyStackModal())
         dispatch(toggleIsOverlayVisible())
     }
 

@@ -5,7 +5,8 @@ import { useDispatch } from "react-redux";
 import { 
     toggleIsOverlayVisible, 
     toggleEditSkillsModal,
-    toggleEditFooterModal 
+    toggleEditFooterModal,
+    toggleEditMyStackModal,
 
 } from '@/store/slices/uiSlice'; 
 
@@ -31,6 +32,10 @@ const QuickEdit: React.FC = () => {
         dispatch(toggleIsOverlayVisible())
     }
 
+    const openEditMyStack = () => {
+        dispatch(toggleEditMyStackModal())
+        dispatch(toggleIsOverlayVisible())
+    }
 
     return (
         <section className={`${styles.section} container`}>
@@ -69,6 +74,7 @@ const QuickEdit: React.FC = () => {
                                 iconPosition='only'
                                 variant='primary'
                                 icon='pen'
+                                onClick={openEditMyStack}
                                 additionalClass={styles.btn}
                             />
                         </div>

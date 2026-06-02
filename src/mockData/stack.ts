@@ -1,8 +1,4 @@
-interface Stack {
-    id: number,
-    name: string
-}
-
+import { Stack } from '@/interfaces/general';
 
 export const stack: Stack[] = [
     {

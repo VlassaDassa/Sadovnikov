@@ -4,9 +4,15 @@
 
 
 
-.skill {
+
+
+.stackItem {
     padding: 15px;
     border-radius: 15px;
+
+    display: flex;
+    align-items: center;
+    gap: 20px;
 
     &:active {
         cursor: grabbing;
@@ -55,4 +61,13 @@
 .skillLevelItem {
     width: 10px;
     height: 5px;
+}
+
+.addBtn {
+    width: calc(100% - 60px);
+
+    p {
+        width: 100%;
+        text-align: center;
+    }
 }

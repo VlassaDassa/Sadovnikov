@@ -44,3 +44,9 @@ export interface IFooterItem {
     icon: string
     link?: string,
 }
+
+
+export interface Stack {
+    id: number,
+    name: string
+}

@@ -13,6 +13,7 @@ import RecentProjects from "@/components/admin/recentProjects";
 import AnimatedSection from '@/components/shared/AnimatedScroll';
 import EditSkillsModal from '@/components/admin/modals/editSkillsModal';
 import EditFooterModal from "@/components/admin/modals/editFooterModal";
+import EditMyStackModal from "@/components/admin/modals/editMyStackModal";
 
 import styles from './index.module.scss';
 
@@ -22,11 +23,12 @@ const ClientPageWrapper: React.FC = () => {
     const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
     const isEditSkillsModalOpen = useSelector((state: RootState) => state.uiState.isEditSkillsModalOpen)
     const isEditFooterModalOpen = useSelector((state: RootState) => state.uiState.isEditFooterModalOpen)
-    
+    const isEditMyStackModalOpen = useSelector((state: RootState) => state.uiState.isEditMyStackModalOpen)
     const modals = (
         <>
             {isEditSkillsModalOpen && <EditSkillsModal />}
             {isEditFooterModalOpen && <EditFooterModal />}
+            {isEditMyStackModalOpen && <EditMyStackModal />}
         </>
     )
     

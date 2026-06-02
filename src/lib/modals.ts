@@ -1,5 +1,10 @@
 import { AppDispatch } from "@/store";
-import { toggleIsOverlayVisible, toggleEditSkillsModal, toggleEditFooterModal } from '@/store/slices/uiSlice';
+import { 
+    toggleIsOverlayVisible, 
+    toggleEditSkillsModal, 
+    toggleEditFooterModal, 
+    toggleEditMyStackModal 
+} from '@/store/slices/uiSlice';
 
 
 
@@ -13,6 +18,10 @@ export const closeModals = (dispatch: AppDispatch, modalName: string) => {
 
     if (modalName === 'editFooter') {
         dispatch(toggleEditFooterModal())
+    }
+
+    if (modalName === 'editMyStack') {
+        dispatch(toggleEditMyStackModal())
     }
 }
 

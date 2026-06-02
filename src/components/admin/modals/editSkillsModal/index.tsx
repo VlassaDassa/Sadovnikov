@@ -2,9 +2,7 @@
 
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { CSS } from '@dnd-kit/utilities';
-import { DragEndEvent } from '@dnd-kit/core';
 import {
-    arrayMove,
     useSortable,
 } from '@dnd-kit/sortable'
 
@@ -92,7 +90,7 @@ const SkillItem: React.FC<SkillItemProps> = ({ skill, setSkills }) => {
                     />
 
                     <Input 
-                        name='test'
+                        name={skill.name}
                         placeholder='Text...'
                         value={skill.name}
                         variant='admin'
