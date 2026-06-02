@@ -44,6 +44,10 @@
     @media (min-width: 768px) {
         font-size: 32px;
     }
+
+    @media (min-width: 1280px) {
+        font-size: 36px;
+    }
 }
 
 .subTitle {
@@ -53,5 +57,9 @@
 
     @media (min-width: 768px) {
         font-size: 16px;
+    }
+
+    @media (min-width: 1280px) {
+        font-size: 20px;
     }
 }
