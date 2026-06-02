@@ -1,0 +1,52 @@
+@use './../../../../styles/tokens/colors' as *;
+@use './../../../../styles/tokens/typography' as *;
+@use './../../../../styles/tokens/effects' as *;
+
+
+
+.titleWrapper {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+}
+
+.textWrapper {
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.btnBack {
+    @extend .body-14-mont-regular;
+    color: $brand_600;
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px;
+    border-radius: 10px;
+
+    background-color: $brand_900;
+}
+
+.title {
+    @extend .heading-20-mont-regular;
+    @extend .whiteText;
+}
+
+.text {
+    @extend .body-14-mont-regular;
+    color: $neutral_500;
+}

@@ -1,18 +1,4 @@
-interface WorkExperience {
-    id: number,
-    workingPeriod: string,
-    description: string
-}
-
-
-interface AboutMe {
-    birth: number,
-    placeBirth: string,
-    education: string,
-    location: string,
-    workExperience: WorkExperience[],
-    shortBio: string
-}
+import { AboutMe } from "@/interfaces/general"
 
 
 export const aboutMe: AboutMe = {

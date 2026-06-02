@@ -1,8 +1,6 @@
 import React from 'react';
-
-import AdaptiveImage from '@/components/shared/AdaptiveImage';
-
 import Link from 'next/link';
+
 import type { Project } from '@/interfaces/general';
 
 import style from './index.module.scss';

@@ -6,9 +6,9 @@ import {
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 
-import SectionBackground from '../general/sectionBackground';
-import DashboardTitle from '../general/dashboardTitle';
-import ChartTooltip from '../general/chartTooltip';
+import SectionBackground from '@/components/admin/general/sectionBackground';
+import DashboardTitle from '@/components/admin/general/dashboardTitle';
+import ChartTooltip from '@/components/admin/general/chartTooltip';
 
 import { visits } from '@/mockData/adminCharts';
 

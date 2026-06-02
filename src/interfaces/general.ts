@@ -50,3 +50,20 @@ export interface Stack {
     id: number,
     name: string
 }
+
+
+export interface WorkExperience {
+    id: number,
+    workingPeriod: string,
+    description: string
+}
+
+
+export interface AboutMe {
+    birth: number,
+    placeBirth: string,
+    education: string,
+    location: string,
+    workExperience: WorkExperience[],
+    shortBio: string
+}

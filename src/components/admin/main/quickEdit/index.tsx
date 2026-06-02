@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 import { useDispatch } from "react-redux";
 
@@ -11,8 +12,8 @@ import {
 } from '@/store/slices/uiSlice'; 
 
 
-import SectionBackground from '../general/sectionBackground';
-import DashboardTitle from '../general/dashboardTitle';
+import SectionBackground from '@/components/admin/general/sectionBackground';
+import DashboardTitle from '@/components/admin/general/dashboardTitle';
 import Button from '@/components/shared/button/Button';
 
 import styles from './index.module.scss';
@@ -103,13 +104,16 @@ const QuickEdit: React.FC = () => {
                                 <h3 className={styles.header}>Edit <span className={styles.sectionName}>'About Me'</span></h3>
                                 <p className={styles.description}>Edit your bio, story and experience</p>
                             </div>
-                            <Button 
-                                behavior='default'
-                                iconPosition='only'
-                                variant='primary'
-                                icon='pen'
-                                additionalClass={styles.btn}
-                            />
+                            <Link href="/editAboutMe">
+                                <Button 
+                                    behavior='default'
+                                    iconPosition='only'
+                                    variant='primary'
+                                    icon='pen'
+                                    additionalClass={styles.btn}
+                                />
+                            </Link>
+                            
                         </div>
                     </div>
                 </div>

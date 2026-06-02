@@ -3,9 +3,9 @@
 import React from "react";
 import { Cell, Pie, PieChart } from 'recharts';
 
-import SectionBackground from "../general/sectionBackground";
-import DashboardTitle from "../general/dashboardTitle";
-import ChartTooltip from "../general/chartTooltip";
+import SectionBackground from "../../general/sectionBackground";
+import DashboardTitle from "../../general/dashboardTitle";
+import ChartTooltip from "../../general/chartTooltip";
 
 import { devices } from "@/mockData/adminCharts";
 

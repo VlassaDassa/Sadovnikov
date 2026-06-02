@@ -23,7 +23,7 @@ interface InputProps {
     icon?: Icon,
     type?: 'text' | 'textarea' | 'email' | 'password',
     iconPosition: 'noIcon' | 'iconLeft' | 'iconRight' | 'iconBoth',
-    value?: string,
+    value?: string | number,
     maxLen?: number,
     variant?: 'default' | 'admin',
     adminLabel?: 'withLabel' | 'withoutLabel',

@@ -1,0 +1,34 @@
+@use './../../../../styles/tokens/colors' as *;
+@use './../../../../styles/tokens/typography' as *;
+@use './../../../../styles/tokens/effects' as *;
+
+
+.titleWrapper {
+    display: flex;
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+.textWrapper {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.title {
+    @extend .heading-20-mont-regular;
+    @extend .whiteText;
+}
+
+.text {
+    @extend .body-14-mont-regular;
+    color: $neutral_500;
+}
+
+.counter {
+    @extend .body-16-mont-semi_bold;
+    color: $brand_400;
+}
+

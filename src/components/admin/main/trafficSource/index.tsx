@@ -1,7 +1,7 @@
 import React from "react";
 
-import SectionBackground from "../general/sectionBackground";
-import DashboardTitle from "../general/dashboardTitle";
+import SectionBackground from "@/components/admin/general/sectionBackground";
+import DashboardTitle from "@/components/admin/general/dashboardTitle";
 import ProgressBar from "@/components/shared/ProgressBar";
 
 import { source } from "@/mockData/adminCharts";

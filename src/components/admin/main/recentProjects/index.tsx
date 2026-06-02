@@ -6,8 +6,8 @@ import 'swiper/css';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 
-import DashboardTitle from "../general/dashboardTitle";
-import SectionBackground from "../general/sectionBackground";
+import DashboardTitle from "../../general/dashboardTitle";
+import SectionBackground from "../../general/sectionBackground";
 import AdaptiveImage from "@/components/shared/AdaptiveImage";
 import Icon from "@/components/shared/icons/Icon";
 import Button from "@/components/shared/button/Button";
