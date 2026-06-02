@@ -17,6 +17,11 @@
     &:active {
         cursor: grabbing;
     }
+
+    @media (min-width: 768px) {
+        gap: 40px;
+        padding: 20px;
+    }
 }
 
 .content {
