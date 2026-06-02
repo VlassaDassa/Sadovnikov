@@ -11,6 +11,10 @@
     &:active {
         cursor: grabbing;
     }
+
+    @media (min-width: 768px) {
+        padding: 20px;
+    }
 }
 
 .content {
@@ -41,6 +45,15 @@
     gap: 10px;
     margin-left: 25px;
     margin-top: 20px;
+
+    @media (min-width: 768px) {
+        margin-left: 0px;
+        margin-top: 0px;
+    }
+
+    @media (min-width: 900px) {
+        gap: 20px;
+    }
 }
 
 

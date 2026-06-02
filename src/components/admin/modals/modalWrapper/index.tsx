@@ -14,8 +14,8 @@ import {
     verticalListSortingStrategy
 } from '@dnd-kit/sortable'
 
-import ModalBackground from '@/components/admin/general/modalBackground';
-import ModalHeader from '../../general/modalHeader';
+import ModalBackground from '@/components/admin/modals/modalBackground';
+import ModalHeader from '../modalHeader';
 import ModalTooltip from '../modalTooltip';
 import Button from '@/components/shared/button/Button';
 

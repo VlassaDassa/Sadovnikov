@@ -5,6 +5,8 @@ import { CSS } from '@dnd-kit/utilities';
 import {
     useSortable,
 } from '@dnd-kit/sortable'
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
 
 import Button from '@/components/shared/button/Button';
 import DragHandler from '../dragHandler';
@@ -25,6 +27,8 @@ interface SkillItemProps {
 }
 
 const SkillItem: React.FC<SkillItemProps> = ({ skill, setSkills }) => {
+    const windowWidth = useSelector((state: RootState) => state.breakpoint.windowWidth)
+
     const {
         attributes,
         listeners,
@@ -73,6 +77,31 @@ const SkillItem: React.FC<SkillItemProps> = ({ skill, setSkills }) => {
             )
         }
     }
+
+
+    const secondLine = (
+        <div className={styles.secondLineWrapper}>
+                <Button
+                    variant="black"
+                    behavior="default"
+                    iconPosition="only"
+                    icon="mathMinus"
+                    additionalClass={styles.deleteBtn}
+                    onClick={() => decrementScore(skill.id)}
+                />
+
+                <SkillLevel score={skill.score} classNameWrapper={styles.skillLevel} classNameItem={styles.skillLevelItem} />
+
+                <Button
+                    variant="black"
+                    behavior="default"
+                    iconPosition="only"
+                    icon="mathPlus"
+                    additionalClass={styles.deleteBtn}
+                    onClick={() => incrementScore(skill.id)}
+                />
+            </div>
+    )
     
 
     return (
@@ -100,6 +129,12 @@ const SkillItem: React.FC<SkillItemProps> = ({ skill, setSkills }) => {
                     />
                 </div>
 
+                {
+                    windowWidth >= 800 && (
+                        secondLine
+                    )
+                }
+
                 <Button
                     variant="black"
                     behavior="default"
@@ -110,27 +145,11 @@ const SkillItem: React.FC<SkillItemProps> = ({ skill, setSkills }) => {
                 />
             </div>
 
-            <div className={styles.secondLineWrapper}>
-                <Button
-                    variant="black"
-                    behavior="default"
-                    iconPosition="only"
-                    icon="mathMinus"
-                    additionalClass={styles.deleteBtn}
-                    onClick={() => decrementScore(skill.id)}
-                />
-
-                <SkillLevel score={skill.score} classNameWrapper={styles.skillLevel} classNameItem={styles.skillLevelItem} />
-
-                <Button
-                    variant="black"
-                    behavior="default"
-                    iconPosition="only"
-                    icon="mathPlus"
-                    additionalClass={styles.deleteBtn}
-                    onClick={() => incrementScore(skill.id)}
-                />
-            </div>
+                {
+                    windowWidth <= 800 && (
+                        secondLine
+                    )
+                }
         </div>
     )
 }

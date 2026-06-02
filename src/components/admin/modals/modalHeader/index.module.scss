@@ -40,10 +40,18 @@
 .title {
     @extend .heading-20-mont-bold;
     @extend .whiteText;
+
+    @media (min-width: 768px) {
+        font-size: 32px;
+    }
 }
 
 .subTitle {
     @extend .body-14-mont-regular;
     color: rgba($white, 0.45);
     line-height: $leading-tight;
+
+    @media (min-width: 768px) {
+        font-size: 16px;
+    }
 }

@@ -19,5 +19,11 @@
     @extend .shadow-splash; 
 
     z-index: 9;
+
+
+    @media (min-width: 768px) {
+        padding: 30px;
+        width: calc(100% - 95px * 2);
+    }
 }
 
