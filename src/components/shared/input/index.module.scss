@@ -164,10 +164,14 @@
 .inputAdminIconLabel {
     position: absolute;
 
-    bottom: 10px;
+    bottom: 19px;
     
     @media (min-width: 768px) {
-        bottom: 2px;
+        bottom: 21px;
+    }
+
+    @media (min-width: 1280px) {
+        bottom: 19px;
     }
 }
 
@@ -206,3 +210,21 @@
 }
 
 
+.counter {
+    position: absolute;
+    top: 5px;
+    right: 0px;
+
+    @extend .body-14-mont-regular;
+    color: $neutral_600;
+}
+
+
+.counterError {
+    color: $error_600;
+}
+
+
+.counterWithoutLabel {
+    top: -10px;
+}

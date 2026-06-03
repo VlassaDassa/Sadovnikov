@@ -28,6 +28,10 @@ interface InputProps {
     variant?: 'default' | 'admin',
     adminLabel?: 'withLabel' | 'withoutLabel',
     label?: string,
+    disabled?: boolean,
+
+    counter?: boolean,
+    maxCounter?: number,
 
     error?: string,
 
@@ -48,6 +52,10 @@ const Input: React.FC<InputProps> = ({
     adminLabel='withoutPlaceholder',
     label, 
     error,
+    disabled=false,
+    
+    counter,
+    maxCounter,
     onChange,
 }) => {
     const [isHovered, setIsHovered] = useState<boolean>(false)
@@ -65,7 +73,7 @@ const Input: React.FC<InputProps> = ({
     const iconColor = {
         default: {
             strokeColor: (isHovered && !error ? cssVars.neutral_400 :
-                value?.length === 0 ? cssVars.neutral_600 :
+                value?.toString()?.length === 0 ? cssVars.neutral_600 :
                 error ? cssVars.error_600 :
                 cssVars.white), // <- Белый во всех случаях кроме empty и hover
             fillColor: 'none'
@@ -73,7 +81,7 @@ const Input: React.FC<InputProps> = ({
         admin: {
             strokeColor: (
                 isHovered && !error ? cssVars.neutral_400 :
-                value?.length === 0 ? cssVars.neutral_600 :
+                value?.toString()?.length === 0 ? cssVars.neutral_600 :
                 error ? cssVars.error_600 :
                 cssVars.neutral_300 
             ),
@@ -137,7 +145,17 @@ const Input: React.FC<InputProps> = ({
         }  
         ${error && variant === 'default' ?  style.inputError : error && variant === 'admin' ? style.inputAdminError : ''} 
         ${type === 'textarea' ? style['input-textarea'] : ''} 
+        ${additionalClass}
         `
+    )
+
+
+    const counterLabel = (
+        counter && type === 'textarea' ?
+            <div className={`${style.counter} ${value && value.toString().length > maxCounter! ? style.counterError : ''} ${adminLabel === 'withoutLabel' ? style.counterWithoutLabel : null}`}>
+                {value ? value.toString().length : 0}/{maxCounter}
+            </div>
+        : null
     )
 
 
@@ -154,6 +172,7 @@ const Input: React.FC<InputProps> = ({
             }
 
             {iconOne}
+            {counterLabel}
 
             {
                 type !== 'textarea' ?
@@ -164,6 +183,7 @@ const Input: React.FC<InputProps> = ({
                         value={value}
                         aria-label={placeholder || name}
                         name={name}
+                        disabled={disabled}
                         onChange={onChange}  
                     />
                 :

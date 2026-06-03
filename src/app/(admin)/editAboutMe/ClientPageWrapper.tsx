@@ -1,10 +1,12 @@
 'use client'
 
 import React from "react";
+import dynamic from 'next/dynamic';
 
 import AdminPageTitle from "@/components/admin/general/adminPageTitle";
 import BasicInformation from "@/components/admin/editAboutMe/basicInformation";
-import WorkExperience from "@/components/admin/editAboutMe/workExperience";
+import ShortBio from "@/components/admin/editAboutMe/shortBio";
+const WorkExperience = dynamic(() => import('@/components/admin/editAboutMe/workExperience'), { ssr: false });
 
 import styles from './index.module.scss';
 
@@ -21,6 +23,7 @@ const ClientPageWrapper: React.FC = () => {
 
             <BasicInformation />
             <WorkExperience />
+            <ShortBio />
             
         </main>
     )    

@@ -55,6 +55,8 @@ export interface Stack {
 export interface WorkExperience {
     id: number,
     workingPeriod: string,
+    organization: string,
+    position: string,
     description: string
 }
 

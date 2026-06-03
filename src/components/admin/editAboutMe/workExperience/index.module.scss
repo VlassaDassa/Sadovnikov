@@ -1,3 +1,4 @@
+@use './../../../../styles/tokens/typography' as *;
 
 
 
@@ -10,3 +11,55 @@
     margin-top: 20px;
 }
 
+
+.assistantBtn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+
+.responsibilities {
+    min-height: 200px;
+    line-height: $leading-normal;
+}
+
+.periodInput {
+    cursor: pointer;
+}
+
+
+.item {
+    &:active {
+        cursor: grabbing;
+    }
+}
+
+.addBtn {
+    width: calc(100% - 60px);
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    margin-top: 10px;
+
+    @media (min-width: 768px) {
+        width: calc(100% - 80px);
+    }
+    
+    @media (min-width: 1280px) {
+        width: calc(100% - 100px);
+    }
+
+    
+}
