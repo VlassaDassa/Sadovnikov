@@ -13,6 +13,10 @@ import styles from './index.module.scss';
 const BasicInformation: React.FC = () => {
     const [data, setData] = useState<AboutMe>(initialData)
 
+    const handleChange = (field: keyof AboutMe, e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setData(prev => ({...prev, [field]: e.target.value}))
+    }
+
 
     return (
         <SectionBackground className={styles.section} section={true}>
@@ -30,6 +34,7 @@ const BasicInformation: React.FC = () => {
                         iconPosition='noIcon'
                         adminLabel='withLabel'
                         label="Year of birth"
+                        onChange={(e) => handleChange('birth', e)}
                     />
 
                     <Input 
@@ -40,6 +45,7 @@ const BasicInformation: React.FC = () => {
                         iconPosition='noIcon'
                         adminLabel='withLabel'
                         label="Place of birth"
+                        onChange={(e) => handleChange('placeBirth', e)}
                     />
 
                     <Input 
@@ -50,6 +56,7 @@ const BasicInformation: React.FC = () => {
                         iconPosition='noIcon'
                         adminLabel='withLabel'
                         label="Location"
+                        onChange={(e) => handleChange('location', e)}
                     />
 
                     <Input 
@@ -60,6 +67,7 @@ const BasicInformation: React.FC = () => {
                         iconPosition='noIcon'
                         adminLabel='withLabel'
                         label="Education"
+                        onChange={(e) => handleChange('education', e)}
                     />
                 </form>
         </SectionBackground>
