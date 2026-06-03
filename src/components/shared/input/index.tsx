@@ -36,6 +36,7 @@ interface InputProps {
     error?: string,
 
     onChange?: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void,
+    onClick?: (e: React.MouseEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
 
@@ -57,6 +58,7 @@ const Input: React.FC<InputProps> = ({
     counter,
     maxCounter,
     onChange,
+    onClick,
 }) => {
     const [isHovered, setIsHovered] = useState<boolean>(false)
     const textAreaRef = useRef<HTMLTextAreaElement>(null)
@@ -183,8 +185,8 @@ const Input: React.FC<InputProps> = ({
                         value={value}
                         aria-label={placeholder || name}
                         name={name}
-                        disabled={disabled}
                         onChange={onChange}  
+                        onClick={onClick}
                     />
                 :
                     <textarea 
@@ -196,6 +198,7 @@ const Input: React.FC<InputProps> = ({
                         onChange={onChange}  
                         ref={textAreaRef}
                         maxLength={maxLen}
+                        onClick={onClick}
                     /> 
             }
             

@@ -7,6 +7,7 @@ interface UIState {
     isEditSkillsModalOpen?: boolean,
     isEditFooterModalOpen?: boolean,
     isEditMyStackModalOpen?: boolean,
+    isSelectPeriodModalOpen?: boolean,
     bodyScroll: boolean,
 }
 
@@ -17,6 +18,7 @@ const initialState: UIState = {
     isEditSkillsModalOpen: false,
     isEditFooterModalOpen: false,
     isEditMyStackModalOpen: false,
+    isSelectPeriodModalOpen: false,
     bodyScroll: true,
 }
 
@@ -46,6 +48,10 @@ const uiSlice = createSlice({
             state.isEditMyStackModalOpen = !state.isEditMyStackModalOpen
         },
 
+        toggleSelectPeriodModal: (state) => {
+            state.isSelectPeriodModalOpen = !state.isSelectPeriodModalOpen
+        },
+
         closeMenu: (state) => {
             state.isMenuOpen = false
         },
@@ -60,6 +66,10 @@ const uiSlice = createSlice({
 
         closeEditMyStackModal: (state) => {
             state.isEditMyStackModalOpen = false
+        },
+
+        closeSelectPeriodModal: (state) => {
+            state.isSelectPeriodModalOpen = false
         }
     },
 })
@@ -70,10 +80,12 @@ export const {
         toggleEditSkillsModal,
         toggleEditFooterModal,
         toggleEditMyStackModal,
+        toggleSelectPeriodModal,
         
         closeEditSkillsModal,
         closeEditFooterModal,
         closeEditMyStackModal,
+        closeSelectPeriodModal,
         closeMenu,
     } 
      = uiSlice.actions;

@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react';
+import { useDispatch } from "react-redux";
 import { CSS } from '@dnd-kit/utilities';
 import {
     DndContext,
@@ -17,6 +18,15 @@ import {
     verticalListSortingStrategy
 } from '@dnd-kit/sortable'
 
+
+import { 
+    toggleIsOverlayVisible, 
+    toggleSelectPeriodModal,
+
+} from '@/store/slices/uiSlice'; 
+
+
+import AnimatedSection from '@/components/shared/AnimatedScroll';
 import SectionBackground from "@/components/admin/general/sectionBackground";
 import SectionTitle from '@/components/admin/general/sectionTitle';
 import DragHandler from '@/components/admin/modals/dragHandler';
@@ -38,8 +48,14 @@ interface ItemProps {
 }
 
 const Item: React.FC<ItemProps> = ({ item, onChange, deleteItem }) => {
+    const dispatch = useDispatch()
     const handleChange = (field: keyof WorkExperience) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         onChange(item.id, field, e.target.value);
+    }
+
+    const openSelectPeriod = () => {
+        dispatch(toggleSelectPeriodModal())
+        dispatch(toggleIsOverlayVisible())
     }
 
     const {
@@ -113,6 +129,7 @@ const Item: React.FC<ItemProps> = ({ item, onChange, deleteItem }) => {
                     adminLabel='withLabel'
                     label='Period'
                     additionalClass={styles.periodInput}
+                    onClick={openSelectPeriod}
                 />
 
                 <Input 
@@ -212,12 +229,15 @@ const WorkExperience: React.FC = () => {
                     strategy={verticalListSortingStrategy}
                 >
                     {data.map((item) => (
-                        <Item 
-                            key={item.id} 
-                            item={item}
-                            onChange={handleChange} 
-                            deleteItem={deleteItem}
-                        />
+                        <AnimatedSection animation='fade-up'>
+                            <Item 
+                                key={item.id} 
+                                item={item}
+                                onChange={handleChange} 
+                                deleteItem={deleteItem}
+                            />
+                        </AnimatedSection>
+                        
                     ))}
                 </SortableContext>
             </DndContext>
