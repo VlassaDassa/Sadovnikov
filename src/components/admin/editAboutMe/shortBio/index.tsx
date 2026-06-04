@@ -17,7 +17,7 @@ const ShortBio: React.FC = () => {
     }
 
     return (
-        <section className={styles.section}>
+        <section className={`${styles.section}`}>
             <SectionTitle 
                 title='SHORT BIO'
                 text='Write a short bio about yourself'

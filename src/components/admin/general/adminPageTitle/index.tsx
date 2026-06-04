@@ -9,15 +9,16 @@ import styles from './index.module.scss';
 
 interface AdminPageTitleProps {
     title: string,
-    text: string;
-    icon: string
+    text: string,
+    icon: string,
+    className?: string,
 }
 
 
-const AdminPageTitle: React.FC<AdminPageTitleProps> = ({title, text, icon}) => {
+const AdminPageTitle: React.FC<AdminPageTitleProps> = ({title, text, icon, className}) => {
     return (
-
-        <div className={styles.titleWrapper}>
+        
+        <div className={`${styles.titleWrapper} ${className}`}>
             <Link className={styles.btnBack} href='/admin'>
                 ← Back
             </Link>

@@ -19,7 +19,7 @@ const BasicInformation: React.FC = () => {
 
 
     return (
-        <SectionBackground className={styles.section} section={true}>
+        <SectionBackground className={`${styles.section}`} section={true}>
             <DashboardTitle 
                 text='Basic information'
                 additionalClass={styles.sectionTitle}

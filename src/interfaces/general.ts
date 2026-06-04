@@ -52,9 +52,13 @@ export interface Stack {
 }
 
 
+
 export interface WorkExperience {
     id: number,
-    workingPeriod: string,
+    workingPeriod: {
+        startDate: string,
+        endDate: string
+    },
     organization: string,
     position: string,
     description: string

@@ -1,6 +1,6 @@
 'use client'
 
-import React from "react";
+import React, { useState } from "react";
 import dynamic from 'next/dynamic';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
@@ -13,16 +13,21 @@ import AnimatedSection from '@/components/shared/AnimatedScroll';
 const SelectPeriod = dynamic(() => import('@/components/admin/modals/selectPeriod'), { ssr: false });
 const WorkExperience = dynamic(() => import('@/components/admin/editAboutMe/workExperience'), { ssr: false });
 
+import { aboutMe as initialData } from '@/mockData/aboutMe';
+import type { WorkExperience } from '@/interfaces/general';
+
 import styles from './index.module.scss';
 
 
 
 const ClientPageWrapper: React.FC = () => {
+    const [data, setData] = useState<WorkExperience[]>(initialData['workExperience'])
+
     const isSelectPeriodModalOpen = useSelector((state: RootState) => state.uiState.isSelectPeriodModalOpen)
 
     const modals = (
         <>
-            {isSelectPeriodModalOpen && <SelectPeriod />}
+            {isSelectPeriodModalOpen && <SelectPeriod data={data} setData={setData} />}
         </>
     )
 
@@ -43,18 +48,12 @@ const ClientPageWrapper: React.FC = () => {
             </AnimatedSection>
 
             <AnimatedSection animation='fade-right'>
-                <WorkExperience />
+                <WorkExperience data={data} setData={setData} />
             </AnimatedSection>
 
             <AnimatedSection animation='fade-down'>
                 <ShortBio />
             </AnimatedSection>
-            
-
-            
-            
-            
-            
         </main>
     )    
     

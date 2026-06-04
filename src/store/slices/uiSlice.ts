@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 
 interface UIState {
@@ -8,6 +8,7 @@ interface UIState {
     isEditFooterModalOpen?: boolean,
     isEditMyStackModalOpen?: boolean,
     isSelectPeriodModalOpen?: boolean,
+    currentId?: number,
     bodyScroll: boolean,
 }
 
@@ -19,6 +20,7 @@ const initialState: UIState = {
     isEditFooterModalOpen: false,
     isEditMyStackModalOpen: false,
     isSelectPeriodModalOpen: false,
+    currentId: 1,
     bodyScroll: true,
 }
 
@@ -70,6 +72,10 @@ const uiSlice = createSlice({
 
         closeSelectPeriodModal: (state) => {
             state.isSelectPeriodModalOpen = false
+        },
+
+        setCurrentId: (state, action: PayloadAction<number>) => {
+            state.currentId = action.payload
         }
     },
 })
@@ -87,6 +93,8 @@ export const {
         closeEditMyStackModal,
         closeSelectPeriodModal,
         closeMenu,
+
+        setCurrentId
     } 
      = uiSlice.actions;
 export default uiSlice.reducer;

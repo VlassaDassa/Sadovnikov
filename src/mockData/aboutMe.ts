@@ -11,21 +11,21 @@ export const aboutMe: AboutMe = {
             id: 1,
             organization: 'Spetstechnologiya (Moscow)',
             position: 'Server Maintenance Engineer',
-            workingPeriod: ' (July 2025 - Present)',
+            workingPeriod: {startDate: 'July 2025', endDate: 'Present'},
             description: 'Ensuring 24/7 uptime for dev environments; configuring servers & CI/CD; assisting with frontend deploys (Nginx); code review (Docker, Nginx).'
         },
         {
             id: 2,
             organization: 'Freelance / Konakovo Energy College',
             position: 'Full-stack Developer',
-            workingPeriod:'(June 2022 - Present)',
+            workingPeriod: {startDate: 'July 2025', endDate: 'July 2026'},
             description: 'Full-cycle web dev (Python, Django, React, JS/TS, SQL, REST API). Created portal for my college and a system for the local Education Department.'
         },
         {
             id: 3,
             organization: 'InfoTech (Moscow)',
             position: 'Assistant Engineer',
-            workingPeriod: '(Dec 2023 - June 2024)',
+            workingPeriod: {startDate: 'July 2025', endDate: 'July 2027'},
             description: 'Network setup (MikroTik), IP camera troubleshooting, diagnostics (Wireshark).'
         },
     ],

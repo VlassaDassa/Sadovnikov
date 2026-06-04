@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { useDispatch } from "react-redux";
 import { CSS } from '@dnd-kit/utilities';
 import {
@@ -22,6 +22,7 @@ import {
 import { 
     toggleIsOverlayVisible, 
     toggleSelectPeriodModal,
+    setCurrentId
 
 } from '@/store/slices/uiSlice'; 
 
@@ -33,7 +34,6 @@ import DragHandler from '@/components/admin/modals/dragHandler';
 import Button from '@/components/shared/button/Button';
 import Input from '@/components/shared/input';
 
-import { aboutMe as initialData } from '@/mockData/aboutMe';
 import type { WorkExperience } from '@/interfaces/general';
 
 import styles from './index.module.scss';
@@ -56,6 +56,7 @@ const Item: React.FC<ItemProps> = ({ item, onChange, deleteItem }) => {
     const openSelectPeriod = () => {
         dispatch(toggleSelectPeriodModal())
         dispatch(toggleIsOverlayVisible())
+        dispatch(setCurrentId(item.id))
     }
 
     const {
@@ -123,7 +124,7 @@ const Item: React.FC<ItemProps> = ({ item, onChange, deleteItem }) => {
                     placeholder='Choice period'
                     iconPosition='iconLeft'
                     icon={{first: 'calendar'}}
-                    value={item.workingPeriod}
+                    value={`${item.workingPeriod.startDate} - ${item.workingPeriod.endDate}`}
                     disabled={true}
                     variant='admin'
                     adminLabel='withLabel'
@@ -154,9 +155,13 @@ const Item: React.FC<ItemProps> = ({ item, onChange, deleteItem }) => {
 
 
 
-const WorkExperience: React.FC = () => {
-    const [data, setData] = useState<WorkExperience[]>(initialData['workExperience'])
+interface WorkExperienceProps {
+    data: WorkExperience[],
+    setData: Dispatch<SetStateAction<WorkExperience[]>>;
+}
 
+
+const WorkExperience: React.FC<WorkExperienceProps> = ({ data, setData }) => {
     const sensors = useSensors(
         useSensor(PointerSensor, {
             activationConstraint: {
@@ -191,7 +196,10 @@ const WorkExperience: React.FC = () => {
             id: maxId + 1,
             position: '',
             organization: '',
-            workingPeriod: '',
+            workingPeriod: {
+                startDate: '',
+                endDate: ''
+            },
             description: ''
         }
 
@@ -201,7 +209,8 @@ const WorkExperience: React.FC = () => {
 
     // DEBOUNCE
     const saveChanges = () => {
-        console.log('Updated Work Experience:', data);
+        return
+        // console.log('Updated Work Experience:', data);
     }
 
     const handleChange = (id: number, field: keyof WorkExperience, value: string) => {
@@ -210,14 +219,13 @@ const WorkExperience: React.FC = () => {
     }
 
     return (
-        <section className={styles.section}>
+        <section className={`${styles.section}`}>
             <SectionTitle 
                 text='Add, edit or reorder your work experience'
                 title='WORK EXPERIENCE'
                 counter={true}
                 count={data.length}
             />
-
 
             <DndContext 
                 sensors={sensors}
@@ -229,9 +237,8 @@ const WorkExperience: React.FC = () => {
                     strategy={verticalListSortingStrategy}
                 >
                     {data.map((item) => (
-                        <AnimatedSection animation='fade-up'>
+                        <AnimatedSection key={item.id}  animation='fade-up'>
                             <Item 
-                                key={item.id} 
                                 item={item}
                                 onChange={handleChange} 
                                 deleteItem={deleteItem}
