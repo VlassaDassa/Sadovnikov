@@ -61,7 +61,7 @@ const ClientPageWrapper: React.FC = () => {
     }
     else if (breakpoint === 'tablet') {
         return (
-            <main className={`${styles.main} container`}>
+            <main className={`${styles.main}`}>
                 {modals}
 
                 <AnimatedSection animation='fade-up'>

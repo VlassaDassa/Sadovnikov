@@ -32,28 +32,29 @@ const ClientPageWrapper: React.FC = () => {
     )
 
     return (
-        <main className={`${styles.main} container`}>
+        <main className={`${styles.main}`}>
             {modals}
+            <div className="container">
+                <AnimatedSection animation='fade-up'>
+                    <AdminPageTitle 
+                        title={'Edit section “About Me”'}
+                        text={'Update your information and experience'}
+                        icon={'person'}
+                    />
+                </AnimatedSection>
 
-            <AnimatedSection animation='fade-up'>
-                <AdminPageTitle 
-                    title={'Edit section “About Me”'}
-                    text={'Update your information and experience'}
-                    icon={'person'}
-                />
-            </AnimatedSection>
+                <AnimatedSection animation='fade-left'>
+                    <BasicInformation />
+                </AnimatedSection>
 
-            <AnimatedSection animation='fade-left'>
-                <BasicInformation />
-            </AnimatedSection>
+                <AnimatedSection animation='fade-right'>
+                    <WorkExperience data={data} setData={setData} />
+                </AnimatedSection>
 
-            <AnimatedSection animation='fade-right'>
-                <WorkExperience data={data} setData={setData} />
-            </AnimatedSection>
-
-            <AnimatedSection animation='fade-down'>
-                <ShortBio />
-            </AnimatedSection>
+                <AnimatedSection animation='fade-down'>
+                    <ShortBio />
+                </AnimatedSection>
+            </div>  
         </main>
     )    
     

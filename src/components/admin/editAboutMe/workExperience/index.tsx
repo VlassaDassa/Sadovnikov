@@ -36,6 +36,8 @@ import Input from '@/components/shared/input';
 
 import type { WorkExperience } from '@/interfaces/general';
 
+import { displayDate } from '@/lib/dates';
+
 import styles from './index.module.scss';
 
 
@@ -124,11 +126,12 @@ const Item: React.FC<ItemProps> = ({ item, onChange, deleteItem }) => {
                     placeholder='Choice period'
                     iconPosition='iconLeft'
                     icon={{first: 'calendar'}}
-                    value={`${item.workingPeriod.startDate} - ${item.workingPeriod.endDate}`}
+                    value={`${displayDate(item.workingPeriod.startDate)} - ${displayDate(item.workingPeriod.endDate)}`}
                     disabled={true}
                     variant='admin'
                     adminLabel='withLabel'
                     label='Period'
+                    readonly={true}
                     additionalClass={styles.periodInput}
                     onClick={openSelectPeriod}
                 />

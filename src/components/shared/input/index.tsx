@@ -29,6 +29,7 @@ interface InputProps {
     adminLabel?: 'withLabel' | 'withoutLabel',
     label?: string,
     disabled?: boolean,
+    readonly?: boolean,
 
     counter?: boolean,
     maxCounter?: number,
@@ -54,6 +55,7 @@ const Input: React.FC<InputProps> = ({
     label, 
     error,
     disabled=false,
+    readonly=false,
     
     counter,
     maxCounter,
@@ -187,6 +189,7 @@ const Input: React.FC<InputProps> = ({
                         name={name}
                         onChange={onChange}  
                         onClick={onClick}
+                        readOnly={readonly}
                     />
                 :
                     <textarea 
@@ -199,6 +202,7 @@ const Input: React.FC<InputProps> = ({
                         ref={textAreaRef}
                         maxLength={maxLen}
                         onClick={onClick}
+                        readOnly={readonly}
                     /> 
             }
             

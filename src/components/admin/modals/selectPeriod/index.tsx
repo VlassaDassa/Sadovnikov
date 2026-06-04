@@ -10,6 +10,8 @@ import Button from "@/components/shared/button/Button";
 
 import type { WorkExperience } from '@/interfaces/general';
 
+import { displayDate, parseDate } from "@/lib/dates";
+
 import styles from './index.module.scss';
 
 
@@ -23,15 +25,15 @@ const SelectPeriod: React.FC<SelectPeriodProps> = ({ data, setData }) => {
     const currentId = useSelector((state: RootState) => state.uiState.currentId)
     const currentItem = data.find((item) => item.id === currentId);
 
+
     const getStartDate = () => {
-        if (!currentItem?.workingPeriod?.startDate) return null;
-        return new Date(currentItem.workingPeriod.startDate);
+        return parseDate(currentItem?.workingPeriod?.startDate);
     };
 
     const getEndDate = () => {
         if (!currentItem?.workingPeriod?.endDate) return null;
-        if (currentItem.workingPeriod.endDate === 'Present') return new Date();
-        return new Date(currentItem.workingPeriod.endDate);
+        if (currentItem.workingPeriod.endDate.toUpperCase() === 'PRESENT') return new Date();
+        return parseDate(currentItem.workingPeriod.endDate);
     };
 
     const [startDate, setStartDate] = useState<Date | null>(getStartDate());
@@ -50,7 +52,7 @@ const SelectPeriod: React.FC<SelectPeriodProps> = ({ data, setData }) => {
                 ...currentItem,
                 workingPeriod: {
                     ...currentItem.workingPeriod,
-                    startDate: date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
+                    startDate: date.toISOString()
                 }
             };
             setData(prev => prev.map(item => item.id === currentId ? updatedItem : item));
@@ -66,7 +68,7 @@ const SelectPeriod: React.FC<SelectPeriodProps> = ({ data, setData }) => {
                 ...currentItem,
                 workingPeriod: {
                     ...currentItem.workingPeriod,
-                    endDate: date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
+                    endDate: date.toISOString()
                 }
             };
             setData(prev => prev.map(item => item.id === currentId ? updatedItem : item));
@@ -101,11 +103,12 @@ const SelectPeriod: React.FC<SelectPeriodProps> = ({ data, setData }) => {
                     <Input 
                         name='startDate'
                         placeholder='Start date'
-                        value={currentItem?.workingPeriod?.startDate || ''}
+                        value={displayDate(currentItem?.workingPeriod?.startDate)}
                         variant='admin'
                         iconPosition='iconLeft'
                         icon={{first: 'calendar'}}
                         adminLabel='withLabel'
+                        readonly={true}
                         label="START DATE"
                         onClick={() => setIsStartOpen(true)}
                     />
@@ -125,11 +128,12 @@ const SelectPeriod: React.FC<SelectPeriodProps> = ({ data, setData }) => {
                     <Input 
                         name='endDate'
                         placeholder='End date'
-                        value={currentItem?.workingPeriod?.endDate || ''}
+                        value={displayDate(currentItem?.workingPeriod?.endDate)}
                         variant='admin'
                         iconPosition='iconLeft'
                         icon={{first: 'calendar'}}
                         adminLabel='withLabel'
+                        readonly={true}
                         label="END DATE"
                         onClick={() => setIsEndOpen(true)}
                     />
