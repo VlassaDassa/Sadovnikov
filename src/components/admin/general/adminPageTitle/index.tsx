@@ -15,7 +15,7 @@ interface AdminPageTitleProps {
 }
 
 
-const AdminPageTitle: React.FC<AdminPageTitleProps> = ({title, text, icon, className}) => {
+const AdminPageTitle: React.FC<AdminPageTitleProps> = ({ title, text, icon, className }) => {
     return (
         
         <div className={`${styles.titleWrapper} ${className}`}>

@@ -20,12 +20,17 @@ export const parseDate = (dateString: string | undefined): Date | null => {
     };
 
 
-export const displayDate = (dateString: string | undefined): string => {
+export const displayDate = (dateString: string | undefined, day?: boolean): string => {
         if (!dateString) return '';
         if (dateString.toUpperCase() === 'PRESENT') return 'Present';
         
         const date = parseDate(dateString);
         if (!date) return '';
+        
+        if (day) {
+            return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
+        }
         
         return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
     };

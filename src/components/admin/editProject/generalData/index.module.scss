@@ -1,0 +1,15 @@
+@use './../../../../styles/tokens/colors' as *;
+@use './../../../../styles/tokens/typography' as *;
+@use './../../../../styles/tokens/effects' as *;
+
+
+
+.section {
+    margin-top: 20px;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

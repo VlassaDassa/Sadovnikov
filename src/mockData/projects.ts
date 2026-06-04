@@ -13,7 +13,7 @@ export const projects: Project[] = [
         stack: [
             'MongoDB', 'TypeScript', 'React', 'Next.JS', 'Redux', 'SASS'
         ],
-        date: 'June 28, 2026'
+        date: 'June 28, 2026 '
     },
 
     {

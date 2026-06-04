@@ -27,6 +27,7 @@ import IconPlus from "./IconPlus";
 import IconClose from "./IconClose";
 import IconMathPlus from "./IconMathPlus";
 import IconMathMinus from "./IconMathMinus";
+import IconSettings from "./IconSettings";
 
 
 
@@ -58,6 +59,7 @@ const icons = {
     close: IconClose,
     mathPlus: IconMathPlus,
     mathMinus: IconMathMinus,
+    settings: IconSettings,
 }
 
 

@@ -89,6 +89,10 @@ const SelectPeriod: React.FC<SelectPeriodProps> = ({ data, setData }) => {
         }
     };
 
+    const test = () => {
+        console.log('FFF')
+    }
+
     return (
         <ModalWrapper
             drag={false}
@@ -149,6 +153,21 @@ const SelectPeriod: React.FC<SelectPeriodProps> = ({ data, setData }) => {
                     )}
                 </div>
             </div>
+
+            <Input 
+                name='test'
+                placeholder='End date'
+                variant='admin'
+                iconPosition='iconLeft'
+                icon={{first: 'calendar'}}
+                adminLabel='withLabel'
+                readonly={true}
+                datePickerChange={test}
+                label="TEST"
+
+                datePicker={true}
+
+            />
 
             <Button
                 variant="black"

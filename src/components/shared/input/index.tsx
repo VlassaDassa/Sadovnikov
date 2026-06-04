@@ -2,11 +2,14 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 import Icon from '../icons/Icon';
 
 import { RootState } from '@/store';
 import { cssVars } from "@/styles/cssVariables";
+import { displayDate, parseDate } from '@/lib/dates';
 
 import style from './index.module.scss';
 
@@ -30,6 +33,10 @@ interface InputProps {
     label?: string,
     disabled?: boolean,
     readonly?: boolean,
+
+    datePickerDay?: boolean,
+    datePicker?: boolean,
+    datePickerChange?: () => void;
 
     counter?: boolean,
     maxCounter?: number,
@@ -56,6 +63,10 @@ const Input: React.FC<InputProps> = ({
     error,
     disabled=false,
     readonly=false,
+
+    datePicker=false,
+    datePickerChange,
+    datePickerDay=false,
     
     counter,
     maxCounter,
@@ -65,6 +76,7 @@ const Input: React.FC<InputProps> = ({
     const [isHovered, setIsHovered] = useState<boolean>(false)
     const textAreaRef = useRef<HTMLTextAreaElement>(null)
     const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
+    const [datePickerOpen, setDatePickerOpen] = useState<boolean>(false);
 
     useEffect(() => {
         if (type === 'textarea' && textAreaRef.current) {
@@ -72,6 +84,16 @@ const Input: React.FC<InputProps> = ({
             textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`
         }
     }, [value])
+
+
+
+    const handleDatePicker = (date: Date | null) => {
+        setDatePickerOpen(false);
+        console.log(displayDate(date?.toISOString(), true))
+        if (datePickerChange) {
+            datePickerChange()
+        }
+    };
 
 
     const iconColor = {
@@ -179,7 +201,7 @@ const Input: React.FC<InputProps> = ({
             {counterLabel}
 
             {
-                type !== 'textarea' ?
+                type !== 'textarea' && !datePicker ?
                     <input 
                         type={type} 
                         className={inputClass}
@@ -191,6 +213,29 @@ const Input: React.FC<InputProps> = ({
                         onClick={onClick}
                         readOnly={readonly}
                     />
+                : datePicker ?
+                    <div className={style.datePickerWrapper}>
+                        <input 
+                            type={type} 
+                            className={inputClass}
+                            placeholder={placeholder}
+                            value={value}
+                            aria-label={placeholder || name}
+                            name={name}
+                            onClick={() => setDatePickerOpen(true)}
+                            readOnly
+                        />
+
+                        {datePickerOpen && (
+                            <DatePicker
+                                onChange={handleDatePicker}
+                                onClickOutside={() => setDatePickerOpen(false)}
+                                open={datePickerOpen}
+                                inline
+                                className={style.datePicker}
+                            />
+                        )}
+                    </div>
                 :
                     <textarea 
                         className={inputClass}
