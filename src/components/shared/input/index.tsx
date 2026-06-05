@@ -9,7 +9,7 @@ import Icon from '../icons/Icon';
 
 import { RootState } from '@/store';
 import { cssVars } from "@/styles/cssVariables";
-import { displayDate, parseDate } from '@/lib/dates';
+import { displayDate } from '@/lib/dates';
 
 import style from './index.module.scss';
 
@@ -36,7 +36,7 @@ interface InputProps {
 
     datePickerDay?: boolean,
     datePicker?: boolean,
-    datePickerChange?: () => void;
+    datePickerChange?: (date: string) => void;
 
     counter?: boolean,
     maxCounter?: number,
@@ -89,9 +89,9 @@ const Input: React.FC<InputProps> = ({
 
     const handleDatePicker = (date: Date | null) => {
         setDatePickerOpen(false);
-        console.log(displayDate(date?.toISOString(), true))
         if (datePickerChange) {
-            datePickerChange()
+            const newDate = displayDate(date?.toISOString(), datePickerDay)
+            datePickerChange(newDate)
         }
     };
 
@@ -215,6 +215,8 @@ const Input: React.FC<InputProps> = ({
                     />
                 : datePicker ?
                     <div className={style.datePickerWrapper}>
+                        {iconOne}
+
                         <input 
                             type={type} 
                             className={inputClass}
