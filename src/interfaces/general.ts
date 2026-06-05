@@ -7,15 +7,67 @@ export interface IconItem {
     size?: number,
 }
 
+export interface IStackTooltip {
+    id: number,
+    title: string,
+    text: string
+}
 
-export interface Project {
+export interface IProjectStack {
+    id: number,
+    name: string,
+    icon: string,
+    tooltip: IStackTooltip
+}
+
+export interface IFeatureItem {
+    id: number,
+    title: string,
+    text: string,
+    icon: string,
+    photo: string
+}
+
+export interface IProjectDescription {
+    id: number,
+    title: string;
+    icon: string,
+    content: string;
+}
+
+interface IMertics {
+    id: number,
+    icon: string,
+    title: string,
+    text: string,
+    current: number,
+    max: number,
+    type: 'score' | 'time'
+}
+
+interface ICommit {
+    id: number,
+    name: string,
+    date: string,
+    text: string
+}
+
+
+export interface IProject {
     id: number,
     category: string,
-    img: string,
+    mainImg: string,
+    images: string[],
+    teamType: 'solo' | 'duo' | 'team',
     name: string,
     shortDescrition: string,
-    stack: string[],
-    date: string
+    stack: IProjectStack[],
+    keyFeatures: IFeatureItem[],
+    description: IProjectDescription[],
+    metrics: IMertics[],
+    commits: ICommit[],
+    developmentTime: string,
+    date: string,
 }
 
 
@@ -27,7 +79,7 @@ export interface TooltipConfig {
     delay?: number,
     fakeWidth?: number, // Предполагаемая ширина(приблизительная) для расчётов положения (чтобы не вылезало за края). Для мало текста +- 100, для большого +- 400
     offset?: number,
-    placement?: 'top' | 'bottom' | 'left' | 'right'; 
+    placement?: 'top' | 'bottom' | 'left' | 'right';
 }
 
 
@@ -50,7 +102,6 @@ export interface Stack {
     id: number,
     name: string
 }
-
 
 
 export interface WorkExperience {
