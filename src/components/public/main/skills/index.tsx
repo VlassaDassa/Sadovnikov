@@ -7,7 +7,7 @@ import AdaptiveImage from '@/components/shared/AdaptiveImage';
 import SkillLevel from '@/components/shared/SkillLevel';
 
 import { skills } from '@/mockData/skills';
-import type { Skill } from '@/mockData/skills';
+import type { Skill } from '@/interfaces/general';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 import style from './index.module.scss';

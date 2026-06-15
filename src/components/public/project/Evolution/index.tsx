@@ -4,47 +4,15 @@ import React from 'react';
 
 import { useTooltip } from '@/hooks/useTooltip';
 
+import { ICommit } from '@/interfaces/general';
+
 import styles from './index.module.scss';
 
 
-interface ICommit {
-    id: number,
-    name: string,
-    date: string,
-    text: string
-}
-
-
-const commits: ICommit[] = [
-    {
-        id: 1,
-        name: 'First commit',
-        date: '22.04.2026',
-        text: 'First initialization commit, start development project'
-    },
-    {
-        id: 2,
-        name: 'Added “Header”',
-        date: '22.04.2026',
-        text: 'First initialization commit, start development project'
-    },
-    {
-        id: 3,
-        name: 'Fix “Preview”',
-        date: '22.04.2026',
-        text: 'First initialization commit, start development project'
-    },
-    {
-        id: 4,
-        name: 'Added “Contacts”, fix errors, animations',
-        date: '22.04.2026',
-        text: 'First initialization commit, start development project'
-    },
-]
-
 interface CommitProps {
-    item: ICommit
+    item: ICommit,
 }
+
 
 
 const Commit: React.FC<CommitProps> = ({ item }) => {
@@ -66,15 +34,19 @@ const Commit: React.FC<CommitProps> = ({ item }) => {
     )
 }
 
+interface EvolutionProps {
+    data: ICommit[]
+}
 
-const Evolution: React.FC = () => {
+
+const Evolution: React.FC<EvolutionProps> = ({ data }) => {
     return (
         <section className={`${styles.evolution}`}>
             <h2 className={`${styles.title} sectionTitle`}>EVOLUTION</h2>
 
             <div className={styles.evolWrapper}>
                 <div className={styles.timeline}>
-                    {commits.map((item) => (
+                    {data.map((item) => (
                         <Commit key={item.id} item={item} />
                     ))}
                 </div>

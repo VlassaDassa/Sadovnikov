@@ -6,49 +6,20 @@ import { RootState } from '@/store';
 
 import Icon from '@/components/shared/icons/Icon';
 
+import type { IProjectDescription } from '@/interfaces/general';
+
 import styles from './index.module.scss';
 import { cssVars } from '@/styles/cssVariables';
 
 
 
-interface AccordionItem {
-    title: string;
-    icon: string,
-    content: string;
-}
+
 
 interface AccordionProps {
-    items: AccordionItem[];
+    items: IProjectDescription[];
     allowMultiple?: boolean;
 }
 
-const descItems = [
-    {
-        title: 'Site',
-        icon: 'text',
-        content: 'React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools. React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.'
-    },
-    {
-        title: 'WHY I STARTED',
-        icon: 'rocket',
-        content: 'The project was developed over several months, including design, architecture, and optimization.'
-    },
-    {
-        title: 'CHALLENGES & SOLUTIONS',
-        icon: 'puzzle',
-        content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.'
-    },
-    {
-        title: 'CONCLUSION',
-        icon: 'flag',
-        content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.'
-    },
-    {
-        title: 'FUTURE PLANS',
-        icon: 'time',
-        content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.'
-    }
-];
 
 
 const Accordion: React.FC<AccordionProps> = ({ items, allowMultiple=true }) => {
@@ -113,13 +84,17 @@ const Accordion: React.FC<AccordionProps> = ({ items, allowMultiple=true }) => {
 };
 
 
-const ProjectDescription: React.FC = () => {
+interface ProjectDescriptionProps {
+    data: IProjectDescription[]
+}
+
+const ProjectDescription: React.FC<ProjectDescriptionProps> = ({ data }) => {
     
     return (
         <section className={`${styles.description} container`}>
             <h2 className={`${styles.title} sectionTitle`}>DESCRIPTION</h2>
 
-            <Accordion items={descItems} />
+            <Accordion items={data} />
         </section>
     )
 }

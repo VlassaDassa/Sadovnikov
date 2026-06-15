@@ -3,11 +3,11 @@ import type { IProject } from '@/interfaces/general';
 
 const specTechno = '/images/mockImages/specTecno.png'
 const MongoDBImg = '/images/mockImages/MongoDB.svg'
-const typeScriptImg = '/images/mockImages/MongoDB.svg'
-const reactImg = '/images/mockImages/MongoDB.svg'
-const nextJSImg = '/images/mockImages/MongoDB.svg'
-const reduxImg = '/images/mockImages/MongoDB.svg'
-const sassImg = '/images/mockImages/MongoDB.svg'
+const typeScriptImg = '/images/mockImages/TypeScript.svg'
+const reactImg = '/images/mockImages/React.svg'
+const nextJSImg = '/images/mockImages/NextJS.svg'
+const reduxImg = '/images/mockImages/Redux.svg'
+const sassImg = '/images/mockImages/SASS.svg'
 
 // Изображения должны быть в пропорции 11:9 (h:252px w:309px)
 const featureIcon = '/images/mockImages/featureIcon.svg';
@@ -24,6 +24,7 @@ export const projects: IProject[] = [
         teamType: 'solo',
         name: 'SpecTechnologia1',
         shortDescrition: 'Site-card + Admin panel',
+        previewDescription: 'A modern corporate website for a technology company specializing in security systems and software solutions. Built with performance, accessibility and a clean user experience in mind',
         stack: [
             {
                 id: 1,
@@ -234,6 +235,8 @@ export const projects: IProject[] = [
         ],
         date: 'June 28, 2026',
         developmentTime: '3 week',
+        gitHubLink: 'https://github.com/VlassaDassa/Sadovnikov',
+        demoLink: 'https://vk.com/7b5l21ya',
     },
     {
         id: 2,
@@ -243,6 +246,7 @@ export const projects: IProject[] = [
         teamType: 'solo',
         name: 'SpecTechnologia1',
         shortDescrition: 'Site-card + Admin panel',
+        previewDescription: 'A modern corporate website for a technology company specializing in security systems and software solutions. Built with performance, accessibility and a clean user experience in mind',
         stack: [
             {
                 id: 1,
@@ -453,6 +457,8 @@ export const projects: IProject[] = [
         ],
         date: 'June 28, 2026',
         developmentTime: '3 week',
+        gitHubLink: 'https://github.com/VlassaDassa/Sadovnikov',
+        demoLink: 'https://vk.com/7b5l21ya',
     },
     {
         id: 3,
@@ -462,6 +468,7 @@ export const projects: IProject[] = [
         teamType: 'solo',
         name: 'SpecTechnologia1',
         shortDescrition: 'Site-card + Admin panel',
+        previewDescription: 'A modern corporate website for a technology company specializing in security systems and software solutions. Built with performance, accessibility and a clean user experience in mind',
         stack: [
             {
                 id: 1,
@@ -672,6 +679,8 @@ export const projects: IProject[] = [
         ],
         date: 'June 28, 2026',
         developmentTime: '3 week',
+        gitHubLink: 'https://github.com/VlassaDassa/Sadovnikov',
+        demoLink: 'https://vk.com/7b5l21ya',
     },
     {
         id: 4,
@@ -681,6 +690,7 @@ export const projects: IProject[] = [
         teamType: 'solo',
         name: 'SpecTechnologia1',
         shortDescrition: 'Site-card + Admin panel',
+        previewDescription: 'A modern corporate website for a technology company specializing in security systems and software solutions. Built with performance, accessibility and a clean user experience in mind',
         stack: [
             {
                 id: 1,
@@ -891,6 +901,8 @@ export const projects: IProject[] = [
         ],
         date: 'June 28, 2026',
         developmentTime: '3 week',
+        gitHubLink: 'https://github.com/VlassaDassa/Sadovnikov',
+        demoLink: 'https://vk.com/7b5l21ya',
     },
     {
         id: 5,
@@ -900,6 +912,7 @@ export const projects: IProject[] = [
         teamType: 'solo',
         name: 'SpecTechnologia1',
         shortDescrition: 'Site-card + Admin panel',
+        previewDescription: 'A modern corporate website for a technology company specializing in security systems and software solutions. Built with performance, accessibility and a clean user experience in mind',
         stack: [
             {
                 id: 1,
@@ -1110,6 +1123,8 @@ export const projects: IProject[] = [
         ],
         date: 'June 28, 2026',
         developmentTime: '3 week',
+        gitHubLink: 'https://github.com/VlassaDassa/Sadovnikov',
+        demoLink: 'https://vk.com/7b5l21ya',
     },
     {
         id: 6,
@@ -1119,6 +1134,7 @@ export const projects: IProject[] = [
         teamType: 'solo',
         name: 'SpecTechnologia1',
         shortDescrition: 'Site-card + Admin panel',
+        previewDescription: 'A modern corporate website for a technology company specializing in security systems and software solutions. Built with performance, accessibility and a clean user experience in mind',
         stack: [
             {
                 id: 1,
@@ -1329,6 +1345,8 @@ export const projects: IProject[] = [
         ],
         date: 'June 28, 2026',
         developmentTime: '3 week',
+        gitHubLink: 'https://github.com/VlassaDassa/Sadovnikov',
+        demoLink: 'https://vk.com/7b5l21ya',
     },
     {
         id: 7,
@@ -1338,6 +1356,7 @@ export const projects: IProject[] = [
         teamType: 'solo',
         name: 'SpecTechnologia1',
         shortDescrition: 'Site-card + Admin panel',
+        previewDescription: 'A modern corporate website for a technology company specializing in security systems and software solutions. Built with performance, accessibility and a clean user experience in mind',
         stack: [
             {
                 id: 1,
@@ -1548,5 +1567,7 @@ export const projects: IProject[] = [
         ],
         date: 'June 28, 2026',
         developmentTime: '3 week',
+        gitHubLink: 'https://github.com/VlassaDassa/Sadovnikov',
+        demoLink: 'https://vk.com/7b5l21ya',
     }
 ]

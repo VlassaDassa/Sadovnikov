@@ -12,8 +12,11 @@ import styles from './index.module.scss';
 const projectImg1 = '/images/mockImages/specTecno.png'
 const testPhoto = '/images/mockImages/testPhoto.png'
 
+interface SliderProps {
+    images: string[]
+}
 
-const Slider: React.FC = () => {
+const Slider: React.FC<SliderProps> = ({ images }) => {
     const [curIndex, setCurIndex] = useState<number>(1)
 
     return (
@@ -25,41 +28,21 @@ const Slider: React.FC = () => {
                 pagination={true}   
                 className={styles.swiper}   
             >
-                <SwiperSlide>
-                    <AdaptiveImage 
-                        src={projectImg1}
-                        alt={'project'}
-                        loading='eager'
-                        ariaHidden={false}
-                        wrapClass={styles.projectWrapPhoto}
-                        imgClass={styles.projectPhoto}
-                        ariaLabel={'photo'}
-                    />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <AdaptiveImage 
-                        src={testPhoto}
-                        alt={'project'}
-                        loading='eager'
-                        ariaHidden={false}
-                        wrapClass={styles.projectWrapPhoto}
-                        imgClass={styles.projectPhoto}
-                        ariaLabel={'photo'}
-                    />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <AdaptiveImage 
-                        src={projectImg1}
-                        alt={'project'}
-                        loading='eager'
-                        ariaHidden={false}
-                        wrapClass={styles.projectWrapPhoto}
-                        imgClass={styles.projectPhoto}
-                        ariaLabel={'photo'}
-                    />
-                </SwiperSlide>
+                {images.map((item) => (
+                    <SwiperSlide>
+                        <AdaptiveImage 
+                            src={item}
+                            alt={'project'}
+                            loading='eager'
+                            ariaHidden={false}
+                            wrapClass={styles.projectWrapPhoto}
+                            imgClass={styles.projectPhoto}
+                            ariaLabel={'photo'}
+                        />
+                    </SwiperSlide>
+                ))}
 
-                <PaginationSlider className={styles.pagination} totalCountItems={3} curIndex={curIndex} />
+                <PaginationSlider className={styles.pagination} totalCountItems={images.length} curIndex={curIndex} />
             </Swiper>
         </div>
     )

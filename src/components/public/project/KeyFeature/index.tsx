@@ -7,60 +7,19 @@ import 'swiper/css';
 import PaginationSlider from '@/components/shared/paginationSlider';
 import AdaptiveImage from '@/components/shared/AdaptiveImage';
 
+import type { IFeatureItem } from '@/interfaces/general';
+
 import styles from './index.module.scss';
 
 
-// Изображения должны быть в пропорции 11:9 (h:252px w:309px)
-const featureIcon = '/images/mockImages/featureIcon.svg';
-const featurePhoto = '/images/mockImages/featurePhoto.png';
-const featurePhoto1 = '/images/mockImages/featurePhoto_1.png';
-const spectechno = '/images/mockImages/specTecno.png';
 
 
-
-interface IFeatureItem {
-    id: number,
-    title: string,
-    text: string,
-    icon: string,
-    photo: string
+interface KeyFeaturesProps {
+    data: IFeatureItem[],
 }
 
-const featureItems: IFeatureItem[] = [
-    {
-        id: 1,
-        title: 'Full responsive design',
-        text: 'Initially, 3 versions were made for each project page \
-                            (desktop, tablet, mobile). And each page looks great on any screen \
-                            resolution. The Mobile First approach was used during \
-                            development for easy adaptation',
-        icon: featureIcon,
-        photo: featurePhoto
-    },
-    {
-        id: 2,
-        title: 'Full responsive design',
-        text: 'Initially, 3 versions were made for each project page \
-                            (desktop, tablet, mobile). And each page looks great on any screen \
-                            resolution. The Mobile First approach was used during \
-                            development for easy adaptation',
-        icon: featureIcon,
-        photo: spectechno
-    },
-    {
-        id: 3,
-        title: 'Full responsive design',
-        text: 'Initially, 3 versions were made for each project page \
-                            (desktop, tablet, mobile). And each page looks great on any screen \
-                            resolution. The Mobile First approach was used during \
-                            development for easy adaptation',
-        icon: featureIcon,
-        photo: featurePhoto1
-    }
-]
 
-
-const KeyFeatures: React.FC = () => {
+const KeyFeatures: React.FC<KeyFeaturesProps> = ({ data }) => {
     const [curIndex, setCurIndex] = useState<number>(1)
 
 
@@ -75,7 +34,7 @@ const KeyFeatures: React.FC = () => {
                 pagination={true}   
                 className={styles.slider}   
             >
-                {featureItems.map((item) => (
+                {data.map((item) => (
                     <SwiperSlide key={item.id} className={styles.slide}>
                         <div className={styles.feature}>
                             <div className={styles.featureWrapper}>

@@ -28,7 +28,8 @@ import IconClose from "./IconClose";
 import IconMathPlus from "./IconMathPlus";
 import IconMathMinus from "./IconMathMinus";
 import IconSettings from "./IconSettings";
-
+import IconTwoPerson from "./IconTwoPerson";
+import IconManyPerson from "./IconManyPerson";
 
 
 const icons = {
@@ -41,6 +42,8 @@ const icons = {
     home: IconHome,
     link: IconLink,
     person: IconPerson,
+    twoPerson: IconTwoPerson,
+    manyPerson: IconManyPerson,
     time: IconTime,
     calendar: IconCalendar,
     github: IconGitHub,

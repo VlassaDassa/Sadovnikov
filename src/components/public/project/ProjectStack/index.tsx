@@ -2,112 +2,23 @@
 
 import React, { useRef, useEffect, useState } from 'react';
 
-import type { TooltipConfig } from '@/interfaces/general';
+import type { IProjectStack } from '@/interfaces/general';
 
 import { useTooltip } from '@/hooks/useTooltip';
 
 import styles from './index.module.scss';
 
 
-const reactIcon = '/images/mockImages/React.svg';
-const mongoDbIcon = '/images/mockImages/MongoDB.svg';
-const nextJSIcon = '/images/mockImages/NextJS.svg';
-const reduxIcon = '/images/mockImages/Redux.svg';
-const sassIcon = '/images/mockImages/SASS.svg';
-const typeScriptIcon = '/images/mockImages/TypeScript.svg';
 
-
-interface StackItem {
-    id: number,
-    name: string,
-    icon: string,
-    tooltip: TooltipConfig
-}
-
-
-const stackItems: StackItem[] = [
-    {
-        id: 1,
-        name: 'React',
-        icon: reactIcon,
-        tooltip: {
-            title: 'Why was this technology chosen?',
-            text: 'For building SPAs and convenient reactive  interactions. \
-                    I was tired of writing multi-line JavaScript and wanted to learn something more\
-                    in demand in the market. I decided to try React first, but it turned out that I liked \
-                    it for its reactivity, ease, and interesting component approach ',
-        }
-    },
-    {
-        id: 2,
-        name: 'MongoDB',
-        icon: mongoDbIcon,
-        tooltip: {
-            title: 'Why was this technology chosen?',
-            text: 'For building SPAs and convenient reactive  interactions. \
-                    I was tired of writing multi-line JavaScript and wanted to learn something more\
-                    in demand in the market. I decided to try React first, but it turned out that I liked \
-                    it for its reactivity, ease, and interesting component approach ',
-        }
-    },
-    {
-        id: 3,
-        name: 'NextJS',
-        icon: nextJSIcon,
-        tooltip: {
-            title: 'Why was this technology chosen?',
-            text: 'For building SPAs and convenient reactive  interactions. \
-                    I was tired of writing multi-line JavaScript and wanted to learn something more\
-                    in demand in the market. I decided to try React first, but it turned out that I liked \
-                    it for its reactivity, ease, and interesting component approach ',
-        }
-    },
-    {
-        id: 4,
-        name: 'Redux',
-        icon: reduxIcon,
-        tooltip: {
-            title: 'Why was this technology chosen?',
-            text: 'For building SPAs and convenient reactive  interactions. \
-                    I was tired of writing multi-line JavaScript and wanted to learn something more\
-                    in demand in the market. I decided to try React first, but it turned out that I liked \
-                    it for its reactivity, ease, and interesting component approach ',
-        }
-    },
-    {
-        id: 5,
-        name: 'SASS',
-        icon: sassIcon,
-        tooltip: {
-            title: 'Why was this technology chosen?',
-            text: 'For building SPAs and convenient reactive  interactions. \
-                    I was tired of writing multi-line JavaScript and wanted to learn something more\
-                    in demand in the market. I decided to try React first, but it turned out that I liked \
-                    it for its reactivity, ease, and interesting component approach ',
-        }
-    },
-    {
-        id: 6,
-        name: 'TypeScript',
-        icon: typeScriptIcon,
-        tooltip: {
-            title: 'Why was this technology chosen?',
-            text: 'For building SPAs and convenient reactive  interactions. \
-                    I was tired of writing multi-line JavaScript and wanted to learn something more\
-                    in demand in the market. I decided to try React first, but it turned out that I liked \
-                    it for its reactivity, ease, and interesting component approach ',
-        }
-    },
-]
 
 interface StackItemProps {
-    item: StackItem;
+    item: IProjectStack;
     index: number;
     customTop?: number;
     customLeft?: number;
 }
 
-const StackItem: React.FC<StackItemProps> = ({ item, index, customTop, customLeft }) => {
+const StackItem: React.FC<StackItemProps> = ({ item, index, customLeft, customTop }) => {
     const tooltipRef = useTooltip<HTMLDivElement>({
         text: item.tooltip.text,
         title: item.tooltip.title,
@@ -135,7 +46,12 @@ const StackItem: React.FC<StackItemProps> = ({ item, index, customTop, customLef
     );
 };
 
-const ProjectStack: React.FC = () => {
+
+interface ProjectStackProps {
+    data: IProjectStack[],
+}
+
+const ProjectStack: React.FC<ProjectStackProps> = ({ data }) => {
     const wrapperRef = useRef<HTMLDivElement>(null);
     const [positions, setPositions] = useState<Array<{ top: number; left: number }>>([]);
     const [renderTrigger, setRenderTrigger] = useState(0);
@@ -230,7 +146,7 @@ const ProjectStack: React.FC = () => {
 
 
     const generatePositions = () => {
-        const newPositions = stackItems.map((_, index) => {
+        const newPositions = data.map((_, index) => {
             const getRandomInt = (min: number, max: number) => {
                 return Math.floor(Math.random() * (max - min + 1)) + min;
             };
@@ -275,7 +191,7 @@ const ProjectStack: React.FC = () => {
             <h2 className={`${styles.title} sectionTitle`}>STACK</h2>
 
             <div ref={wrapperRef} className={styles.stackWrapper}>
-                {stackItems.map((item, index) => (
+                {data.map((item, index) => (
                     <StackItem 
                         key={item.id} 
                         item={item} 

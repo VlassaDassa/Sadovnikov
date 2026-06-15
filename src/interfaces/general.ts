@@ -35,7 +35,7 @@ export interface IProjectDescription {
     content: string;
 }
 
-interface IMertics {
+export interface IMertics {
     id: number,
     icon: string,
     title: string,
@@ -45,7 +45,7 @@ interface IMertics {
     type: 'score' | 'time'
 }
 
-interface ICommit {
+export interface ICommit {
     id: number,
     name: string,
     date: string,
@@ -61,6 +61,7 @@ export interface IProject {
     teamType: 'solo' | 'duo' | 'team',
     name: string,
     shortDescrition: string,
+    previewDescription: string,
     stack: IProjectStack[],
     keyFeatures: IFeatureItem[],
     description: IProjectDescription[],
@@ -68,6 +69,8 @@ export interface IProject {
     commits: ICommit[],
     developmentTime: string,
     date: string,
+    gitHubLink: string,
+    demoLink: string,
 }
 
 
@@ -123,4 +126,17 @@ export interface AboutMe {
     location: string,
     workExperience: WorkExperience[],
     shortBio: string
+}
+
+
+export interface IProjectPreviewData {
+    date: string,
+    developmentTime: string,
+    teamType: string,
+    name: string,
+    category: string,
+    previewDescription: string,
+    images: string[],
+    gitHubLink: string,
+    demoLink: string,
 }
