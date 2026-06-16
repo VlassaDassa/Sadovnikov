@@ -41,6 +41,18 @@ const GeneralData: React.FC = () => {
                     counter={true}
                     maxCounter={500}
                 />
+                
+                <Input 
+                    name='projectPreviewDescription'
+                    type='textarea'
+                    placeholder='Text...'
+                    variant='admin'
+                    iconPosition='noIcon'
+                    adminLabel='withLabel'
+                    label='Preview description'
+                    counter={true}
+                    maxCounter={300}
+                />
 
                 <Input 
                     name='link(demo)'
@@ -67,6 +79,25 @@ const GeneralData: React.FC = () => {
                     iconPosition='noIcon'
                     adminLabel='withLabel'
                     label='Development time'
+                />
+
+                <Input 
+                    name='teamType'
+                    placeholder='Number...'
+                    variant='admin'
+                    type='number'
+                    iconPosition='noIcon'
+                    adminLabel='withLabel'
+                    label='Number of development'
+                />
+
+                <Input 
+                    name='category'
+                    placeholder='Text...'
+                    variant='admin'
+                    iconPosition='noIcon'
+                    adminLabel='withLabel'
+                    label='Category'
                 />
             </div>
 

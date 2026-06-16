@@ -24,7 +24,7 @@ interface InputProps {
     placeholder?: string,
     additionalClass?: string,
     icon?: Icon,
-    type?: 'text' | 'textarea' | 'email' | 'password',
+    type?: 'text' | 'textarea' | 'email' | 'password' | 'number',
     iconPosition: 'noIcon' | 'iconLeft' | 'iconRight' | 'iconBoth',
     value?: string | number,
     maxLen?: number,

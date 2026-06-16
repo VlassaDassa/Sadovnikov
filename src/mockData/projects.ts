@@ -40,7 +40,7 @@ export const projects: IProject[] = [
                 }
             },
             {
-                id: 1,
+                id: 2,
                 name: 'TypeScript',
                 icon: typeScriptImg,
                 tooltip: {
@@ -53,7 +53,7 @@ export const projects: IProject[] = [
                 }
             },
             {
-                id: 1,
+                id: 3,
                 name: 'React',
                 icon: reactImg,
                 tooltip: {
@@ -66,7 +66,7 @@ export const projects: IProject[] = [
                 }
             },
             {
-                id: 1,
+                id: 4,
                 name: 'NextJS',
                 icon: nextJSImg,
                 tooltip: {
@@ -79,7 +79,7 @@ export const projects: IProject[] = [
                 }
             },
             {
-                id: 1,
+                id: 5,
                 name: 'Redux',
                 icon: reduxImg,
                 tooltip: {
@@ -92,7 +92,7 @@ export const projects: IProject[] = [
                 }
             },
             {
-                id: 1,
+                id: 6,
                 name: 'SASS',
                 icon: sassImg,
                 tooltip: {
@@ -262,7 +262,7 @@ export const projects: IProject[] = [
                 }
             },
             {
-                id: 1,
+                id: 2,
                 name: 'TypeScript',
                 icon: typeScriptImg,
                 tooltip: {
@@ -275,7 +275,7 @@ export const projects: IProject[] = [
                 }
             },
             {
-                id: 1,
+                id: 3,
                 name: 'React',
                 icon: reactImg,
                 tooltip: {
@@ -288,7 +288,7 @@ export const projects: IProject[] = [
                 }
             },
             {
-                id: 1,
+                id: 4,
                 name: 'NextJS',
                 icon: nextJSImg,
                 tooltip: {
@@ -301,7 +301,7 @@ export const projects: IProject[] = [
                 }
             },
             {
-                id: 1,
+                id: 5,
                 name: 'Redux',
                 icon: reduxImg,
                 tooltip: {
@@ -314,7 +314,7 @@ export const projects: IProject[] = [
                 }
             },
             {
-                id: 1,
+                id: 6,
                 name: 'SASS',
                 icon: sassImg,
                 tooltip: {
@@ -484,7 +484,7 @@ export const projects: IProject[] = [
                 }
             },
             {
-                id: 1,
+                id: 2,
                 name: 'TypeScript',
                 icon: typeScriptImg,
                 tooltip: {
@@ -497,7 +497,7 @@ export const projects: IProject[] = [
                 }
             },
             {
-                id: 1,
+                id: 3,
                 name: 'React',
                 icon: reactImg,
                 tooltip: {
@@ -510,7 +510,7 @@ export const projects: IProject[] = [
                 }
             },
             {
-                id: 1,
+                id: 4,
                 name: 'NextJS',
                 icon: nextJSImg,
                 tooltip: {
@@ -523,7 +523,7 @@ export const projects: IProject[] = [
                 }
             },
             {
-                id: 1,
+                id: 5,
                 name: 'Redux',
                 icon: reduxImg,
                 tooltip: {
@@ -536,7 +536,7 @@ export const projects: IProject[] = [
                 }
             },
             {
-                id: 1,
+                id: 6,
                 name: 'SASS',
                 icon: sassImg,
                 tooltip: {
@@ -706,7 +706,7 @@ export const projects: IProject[] = [
                 }
             },
             {
-                id: 1,
+                id: 2,
                 name: 'TypeScript',
                 icon: typeScriptImg,
                 tooltip: {
@@ -719,7 +719,7 @@ export const projects: IProject[] = [
                 }
             },
             {
-                id: 1,
+                id: 3,
                 name: 'React',
                 icon: reactImg,
                 tooltip: {
@@ -732,7 +732,7 @@ export const projects: IProject[] = [
                 }
             },
             {
-                id: 1,
+                id: 4,
                 name: 'NextJS',
                 icon: nextJSImg,
                 tooltip: {
@@ -745,7 +745,7 @@ export const projects: IProject[] = [
                 }
             },
             {
-                id: 1,
+                id: 5,
                 name: 'Redux',
                 icon: reduxImg,
                 tooltip: {
@@ -758,7 +758,7 @@ export const projects: IProject[] = [
                 }
             },
             {
-                id: 1,
+                id: 6,
                 name: 'SASS',
                 icon: sassImg,
                 tooltip: {
@@ -928,7 +928,7 @@ export const projects: IProject[] = [
                 }
             },
             {
-                id: 1,
+                id: 2,
                 name: 'TypeScript',
                 icon: typeScriptImg,
                 tooltip: {
@@ -941,7 +941,7 @@ export const projects: IProject[] = [
                 }
             },
             {
-                id: 1,
+                id: 3,
                 name: 'React',
                 icon: reactImg,
                 tooltip: {
@@ -954,7 +954,7 @@ export const projects: IProject[] = [
                 }
             },
             {
-                id: 1,
+                id: 4,
                 name: 'NextJS',
                 icon: nextJSImg,
                 tooltip: {
@@ -967,7 +967,7 @@ export const projects: IProject[] = [
                 }
             },
             {
-                id: 1,
+                id: 5,
                 name: 'Redux',
                 icon: reduxImg,
                 tooltip: {
@@ -980,7 +980,7 @@ export const projects: IProject[] = [
                 }
             },
             {
-                id: 1,
+                id: 6,
                 name: 'SASS',
                 icon: sassImg,
                 tooltip: {
@@ -1150,7 +1150,7 @@ export const projects: IProject[] = [
                 }
             },
             {
-                id: 1,
+                id: 2,
                 name: 'TypeScript',
                 icon: typeScriptImg,
                 tooltip: {
@@ -1163,7 +1163,7 @@ export const projects: IProject[] = [
                 }
             },
             {
-                id: 1,
+                id: 3,
                 name: 'React',
                 icon: reactImg,
                 tooltip: {
@@ -1176,7 +1176,7 @@ export const projects: IProject[] = [
                 }
             },
             {
-                id: 1,
+                id: 4,
                 name: 'NextJS',
                 icon: nextJSImg,
                 tooltip: {
@@ -1189,7 +1189,7 @@ export const projects: IProject[] = [
                 }
             },
             {
-                id: 1,
+                id: 5,
                 name: 'Redux',
                 icon: reduxImg,
                 tooltip: {
@@ -1202,7 +1202,7 @@ export const projects: IProject[] = [
                 }
             },
             {
-                id: 1,
+                id: 6,
                 name: 'SASS',
                 icon: sassImg,
                 tooltip: {
@@ -1372,7 +1372,7 @@ export const projects: IProject[] = [
                 }
             },
             {
-                id: 1,
+                id: 2,
                 name: 'TypeScript',
                 icon: typeScriptImg,
                 tooltip: {
@@ -1385,7 +1385,7 @@ export const projects: IProject[] = [
                 }
             },
             {
-                id: 1,
+                id: 3,
                 name: 'React',
                 icon: reactImg,
                 tooltip: {
@@ -1398,7 +1398,7 @@ export const projects: IProject[] = [
                 }
             },
             {
-                id: 1,
+                id: 4,
                 name: 'NextJS',
                 icon: nextJSImg,
                 tooltip: {
@@ -1411,7 +1411,7 @@ export const projects: IProject[] = [
                 }
             },
             {
-                id: 1,
+                id: 5,
                 name: 'Redux',
                 icon: reduxImg,
                 tooltip: {
@@ -1424,7 +1424,7 @@ export const projects: IProject[] = [
                 }
             },
             {
-                id: 1,
+                id: 6,
                 name: 'SASS',
                 icon: sassImg,
                 tooltip: {

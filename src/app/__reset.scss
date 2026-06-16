@@ -108,3 +108,14 @@ button {
 
   cursor: pointer;
 }
+
+
+input[type="number"] {
+    -moz-appearance: textfield; // Firefox
+    
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}
