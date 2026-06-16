@@ -1,4 +1,4 @@
-import React, { useState, Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import DatePicker from 'react-datepicker';
@@ -10,9 +10,8 @@ import Button from "@/components/shared/button/Button";
 
 import type { WorkExperience } from '@/interfaces/general';
 
-import { displayDate, parseDate } from "@/lib/dates";
+import { displayDate } from "@/lib/dates";
 
-import styles from './index.module.scss';
 
 
 interface SelectPeriodProps {

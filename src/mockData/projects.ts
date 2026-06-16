@@ -237,6 +237,7 @@ export const projects: IProject[] = [
         developmentTime: '3 week',
         gitHubLink: 'https://github.com/VlassaDassa/Sadovnikov',
         demoLink: 'https://vk.com/7b5l21ya',
+        numberTeam: 1,
     },
     {
         id: 2,
@@ -459,6 +460,7 @@ export const projects: IProject[] = [
         developmentTime: '3 week',
         gitHubLink: 'https://github.com/VlassaDassa/Sadovnikov',
         demoLink: 'https://vk.com/7b5l21ya',
+        numberTeam: 1,
     },
     {
         id: 3,
@@ -681,6 +683,7 @@ export const projects: IProject[] = [
         developmentTime: '3 week',
         gitHubLink: 'https://github.com/VlassaDassa/Sadovnikov',
         demoLink: 'https://vk.com/7b5l21ya',
+        numberTeam: 1,
     },
     {
         id: 4,
@@ -903,6 +906,7 @@ export const projects: IProject[] = [
         developmentTime: '3 week',
         gitHubLink: 'https://github.com/VlassaDassa/Sadovnikov',
         demoLink: 'https://vk.com/7b5l21ya',
+        numberTeam: 1,
     },
     {
         id: 5,
@@ -1125,6 +1129,7 @@ export const projects: IProject[] = [
         developmentTime: '3 week',
         gitHubLink: 'https://github.com/VlassaDassa/Sadovnikov',
         demoLink: 'https://vk.com/7b5l21ya',
+        numberTeam: 1,
     },
     {
         id: 6,
@@ -1347,6 +1352,7 @@ export const projects: IProject[] = [
         developmentTime: '3 week',
         gitHubLink: 'https://github.com/VlassaDassa/Sadovnikov',
         demoLink: 'https://vk.com/7b5l21ya',
+        numberTeam: 1,
     },
     {
         id: 7,
@@ -1569,5 +1575,6 @@ export const projects: IProject[] = [
         developmentTime: '3 week',
         gitHubLink: 'https://github.com/VlassaDassa/Sadovnikov',
         demoLink: 'https://vk.com/7b5l21ya',
+        numberTeam: 1,
     }
 ]

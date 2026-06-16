@@ -26,7 +26,6 @@ export default async function Project({ params }: ProjectPageProps) {
     const projectId = Number(id);
 
     const project = projects.find(p => p.id === projectId);
-	console.log(project)
     
     if (!project) {
         notFound();

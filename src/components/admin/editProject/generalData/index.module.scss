@@ -13,3 +13,8 @@
     flex-direction: column;
     gap: 20px;
 }
+
+
+.textarea {
+    @extend .line-height-1_5x;
+}
