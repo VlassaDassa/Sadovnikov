@@ -111,7 +111,7 @@ const RecentProjects: React.FC = () => {
                                         <EditProject 
                                             key={project.id}
                                             name={project.name}
-                                            img={project.img}
+                                            img={project.mainImg}
                                             shortDescrition={project.shortDescrition}
                                             date={project.date}
                                         />

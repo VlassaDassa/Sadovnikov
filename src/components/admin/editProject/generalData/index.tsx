@@ -3,6 +3,7 @@ import React, { Dispatch, SetStateAction } from 'react';
 import SectionBackground from '@/components/admin/general/sectionBackground';
 import Input from '@/components/shared/input';
 import AdaptiveImage from '@/components/shared/AdaptiveImage';
+import Button from '@/components/shared/button/Button';
 
 import { IProject } from '@/interfaces/general';
 
@@ -223,28 +224,66 @@ const GeneralData: React.FC<GeneralDataProps> = ({ projects, setData, projectId 
                     datePickerChange={handleChangeDate}
                 />
             </div>
+            
 
             <div className={styles.images}>
                 <div className={styles.imagesHeader}>
                     <h3 className={styles.imagesTitle}>Main Preview Image</h3>
                     <p className={styles.imagesSubTitle}>(1440x1024 resolution)</p>
-                    
-                    {
-                        project &&
-                        <AdaptiveImage 
-                            src={project.mainImg}
-                            alt='Main image'
-                            ariaHidden={false}
-                            wrapClass={styles.mainImg}
-                        />
-                    }
                 </div>
 
+                {
+                    
+                    project &&
+                    <>
+                        <div className={styles.imageWrapper}>
+                            <AdaptiveImage 
+                                src={project.mainImg}
+                                alt='Main image'
+                                ariaHidden={false}
+                                wrapClass={styles.mainImgWrapper}
+                                imgClass={styles.mainImg}
+                            />
 
+                            <div className={styles.innerShadow}></div>
+                        </div>
+
+                        <div className={styles.pgnWrapper}>
+                            {
+                                project.images.map((img) => (
+                                    <div className={styles.pgnImageWrapper}>
+                                        <AdaptiveImage 
+                                            src={img}
+                                            alt='Project image'
+                                            ariaHidden={false}
+                                            wrapClass={styles.pgnImage}
+                                        />
+
+                                        <div className={styles.pgnInnerShadow}></div>
+                                    </div>
+                                ))
+                            }
+
+                            {project.images.length < 4 && (
+                                <Button 
+                                    behavior="default"
+                                    iconPosition="only"
+                                    variant="black"
+                                    additionalClass={styles.addImageBtn}
+                                    icon="plus"
+                                    tooltip={{
+                                        text: 'Add image',
+                                        type: 'lvl1',
+                                        fakeWidth: 100,
+                                        placement: 'bottom'
+                                    }}
+                                />
+                            )}
+                        </div>
+                    </>
+                }
             </div>
-
-
-        </SectionBackground>
+        </SectionBackground> 
     )
 }
 

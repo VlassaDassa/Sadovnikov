@@ -18,3 +18,131 @@
 .textarea {
     @extend .line-height-1_5x;
 }
+
+.images {
+    margin-top: 20px;
+}
+
+.imageWrapper {
+    width: 100%;
+    position: relative;
+    aspect-ratio: 16 / 10;
+    flex-shrink: 0;
+}
+
+.mainImg {
+    border-radius: 20px;
+
+    @media (min-width: 1280px) {
+        border-radius: 15px;
+    }
+}
+
+.mainImgWrapper {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    
+    @media (min-width: 1280px) {
+        border-radius: 15px;
+    }
+}
+
+.innerShadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    box-shadow: inset 0px 0px 100px 10px rgba(0, 0, 0, 0.9);
+    pointer-events: none;
+    z-index: 4;
+}
+
+.pgnInnerShadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 30px 10px rgba(0, 0, 0, 0.9);
+    pointer-events: none;
+    z-index: 4;
+}
+
+.imagesHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+
+    @media (min-width: 768px) {
+        flex-direction: row;
+        align-items: baseline;
+    }
+}
+
+.imagesTitle {
+    @extend .body-16-mont-regular;
+    color: $neutral_500;
+
+    @media (min-width: 768px) {
+        font-size: 20px;
+    }
+}
+
+.imagesSubTitle {
+    @extend .body-14-mont-regular;
+    color: $neutral_800;
+
+    @media (min-width: 768px) {
+        font-size: 16px;
+    }
+}
+
+
+.pgnWrapper {
+    display: grid;
+    gap: 12px;
+    margin-top: 20px;
+    
+    grid-template-columns: repeat(2, 1fr);
+    
+    @media (min-width: 768px) {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+    }
+    
+    @media (min-width: 1280px) {
+        gap: 20px;
+    }
+}
+
+.pgnImageWrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10; 
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.pgnImage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+}
+
+.addImageBtn {
+    width: calc(100% - 2px);
+    aspect-ratio: 16 / 10; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    
+    padding: 0;
+}

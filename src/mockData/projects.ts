@@ -20,7 +20,7 @@ export const projects: IProject[] = [
         id: 1,
         category: 'Site',
         mainImg: specTechno,
-        images: [specTechno, specTechno, specTechno, specTechno],
+        images: [specTechno, specTechno, specTechno],
         teamType: 'solo',
         name: 'SpecTechnologia1',
         shortDescrition: 'Site-card + Admin panel',
