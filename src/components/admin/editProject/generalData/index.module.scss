@@ -68,9 +68,11 @@
     width: 100%;
     height: 100%;
     border-radius: 10px;
-    box-shadow: inset 0px 0px 30px 10px rgba(0, 0, 0, 0.9);
+    box-shadow: inset 0px 0px 100px 10px rgba(0, 0, 0, 0.9);
     pointer-events: none;
     z-index: 4;
+
+    transition: all ease-in-out 0.2s;
 }
 
 .imagesHeader {
@@ -127,6 +129,23 @@
     aspect-ratio: 16 / 10; 
     overflow: hidden;
     border-radius: 12px;
+    cursor: pointer;
+    transition: all ease 0.1s;
+    
+
+    &:hover {
+        .pgnInnerShadow {
+            box-shadow: inset 0px 0px 50px 10px rgba(0, 0, 0, 0.9);
+        }
+
+        .pgnImage {
+            transform: scale(1.1);
+        }
+    }
+
+    &:active {
+        transform: scale(0.9);
+    }
 }
 
 .pgnImage {
@@ -134,6 +153,8 @@
     width: 100%;
     height: 100%;
     border-radius: 12px;
+
+    transition: all ease-in-out 0.2s;
 }
 
 .addImageBtn {
@@ -143,6 +164,39 @@
     align-items: center;
     justify-content: center;
     border-radius: 12px;
-    
+
     padding: 0;
+}
+
+
+.deleteImage {
+    position: absolute;
+
+    top: 10px;
+    right: 10px;
+
+    width: 25px;
+    height: 25px;
+
+    padding: 5px;
+
+    z-index: 5;
+}
+
+
+.mainImgBtn {
+    position: absolute;
+
+    top: 10px;
+    right: 50px;
+
+    height: 25px;
+
+    padding: 5px;
+
+    z-index: 5;
+
+    p {
+        font-size: 14px !important;
+    }
 }

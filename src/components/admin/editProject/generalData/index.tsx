@@ -250,8 +250,8 @@ const GeneralData: React.FC<GeneralDataProps> = ({ projects, setData, projectId 
 
                         <div className={styles.pgnWrapper}>
                             {
-                                project.images.map((img) => (
-                                    <div className={styles.pgnImageWrapper}>
+                                project.images.map((img, index) => (
+                                    <div className={styles.pgnImageWrapper} key={index}>
                                         <AdaptiveImage 
                                             src={img}
                                             alt='Project image'
@@ -260,6 +260,28 @@ const GeneralData: React.FC<GeneralDataProps> = ({ projects, setData, projectId 
                                         />
 
                                         <div className={styles.pgnInnerShadow}></div>
+
+                                        <Button 
+                                            behavior="default"
+                                            iconPosition="only"
+                                            variant="black"
+                                            additionalClass={styles.deleteImage}
+                                            icon="trash"
+                                            tooltip={{
+                                                text: 'Delete image',
+                                                type: 'lvl1',
+                                                fakeWidth: 100,
+                                                placement: 'bottom'
+                                            }}
+                                        />
+
+                                        <Button 
+                                            behavior="default"
+                                            iconPosition="noIcon"
+                                            variant="black"
+                                            text='Main'
+                                            additionalClass={styles.mainImgBtn}
+                                        />
                                     </div>
                                 ))
                             }
