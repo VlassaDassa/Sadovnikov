@@ -52,12 +52,17 @@ export interface ICommit {
     text: string
 }
 
+export interface IImages {
+    id: number,
+    image: string,
+    main: boolean
+}
+
 
 export interface IProject {
     id: number,
     category: string,
-    mainImg: string,
-    images: string[],
+    images: IImages[],
     teamType: string,
     numberTeam: number,
     name: string,
@@ -137,7 +142,7 @@ export interface IProjectPreviewData {
     name: string,
     category: string,
     previewDescription: string,
-    images: string[],
+    images: IImages[],
     gitHubLink: string,
     demoLink: string,
 }

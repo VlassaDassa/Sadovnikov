@@ -19,8 +19,28 @@ export const projects: IProject[] = [
     {
         id: 1,
         category: 'Site',
-        mainImg: specTechno,
-        images: [specTechno, specTechno, specTechno],
+        images: [
+            {
+                id: 1,
+                image: specTechno,
+                main: true
+            }, 
+            {
+                id: 2,
+                image: specTechno,
+                main: false
+            }, 
+            {
+                id: 3,
+                image: specTechno,
+                main: false
+            },  
+            {
+                id: 4,
+                image: specTechno,
+                main: false
+            },
+        ],
         teamType: 'solo',
         name: 'SpecTechnologia1',
         shortDescrition: 'Site-card + Admin panel',
@@ -242,8 +262,28 @@ export const projects: IProject[] = [
     {
         id: 2,
         category: 'Site',
-        mainImg: specTechno,
-        images: [specTechno, specTechno, specTechno, specTechno],
+        images: [
+            {
+                id: 1,
+                image: specTechno,
+                main: true
+            }, 
+            {
+                id: 2,
+                image: specTechno,
+                main: false
+            }, 
+            {
+                id: 3,
+                image: specTechno,
+                main: false
+            },  
+            {
+                id: 4,
+                image: specTechno,
+                main: false
+            },
+        ],
         teamType: 'solo',
         name: 'SpecTechnologia1',
         shortDescrition: 'Site-card + Admin panel',
@@ -465,8 +505,28 @@ export const projects: IProject[] = [
     {
         id: 3,
         category: 'Site',
-        mainImg: specTechno,
-        images: [specTechno, specTechno, specTechno, specTechno],
+        images: [
+            {
+                id: 1,
+                image: specTechno,
+                main: true
+            }, 
+            {
+                id: 2,
+                image: specTechno,
+                main: false
+            }, 
+            {
+                id: 3,
+                image: specTechno,
+                main: false
+            },  
+            {
+                id: 4,
+                image: specTechno,
+                main: false
+            },
+        ],
         teamType: 'solo',
         name: 'SpecTechnologia1',
         shortDescrition: 'Site-card + Admin panel',
@@ -688,8 +748,28 @@ export const projects: IProject[] = [
     {
         id: 4,
         category: 'Site',
-        mainImg: specTechno,
-        images: [specTechno, specTechno, specTechno, specTechno],
+        images: [
+            {
+                id: 1,
+                image: specTechno,
+                main: true
+            }, 
+            {
+                id: 2,
+                image: specTechno,
+                main: false
+            }, 
+            {
+                id: 3,
+                image: specTechno,
+                main: false
+            },  
+            {
+                id: 4,
+                image: specTechno,
+                main: false
+            },
+        ],
         teamType: 'solo',
         name: 'SpecTechnologia1',
         shortDescrition: 'Site-card + Admin panel',
@@ -911,8 +991,28 @@ export const projects: IProject[] = [
     {
         id: 5,
         category: 'Site',
-        mainImg: specTechno,
-        images: [specTechno, specTechno, specTechno, specTechno],
+        images: [
+            {
+                id: 1,
+                image: specTechno,
+                main: true
+            }, 
+            {
+                id: 2,
+                image: specTechno,
+                main: false
+            }, 
+            {
+                id: 3,
+                image: specTechno,
+                main: false
+            },  
+            {
+                id: 4,
+                image: specTechno,
+                main: false
+            },
+        ],
         teamType: 'solo',
         name: 'SpecTechnologia1',
         shortDescrition: 'Site-card + Admin panel',
@@ -1134,8 +1234,28 @@ export const projects: IProject[] = [
     {
         id: 6,
         category: 'Site',
-        mainImg: specTechno,
-        images: [specTechno, specTechno, specTechno, specTechno],
+        images: [
+            {
+                id: 1,
+                image: specTechno,
+                main: true
+            }, 
+            {
+                id: 2,
+                image: specTechno,
+                main: false
+            }, 
+            {
+                id: 3,
+                image: specTechno,
+                main: false
+            },  
+            {
+                id: 4,
+                image: specTechno,
+                main: false
+            },
+        ],
         teamType: 'solo',
         name: 'SpecTechnologia1',
         shortDescrition: 'Site-card + Admin panel',
@@ -1357,8 +1477,28 @@ export const projects: IProject[] = [
     {
         id: 7,
         category: 'Site',
-        mainImg: specTechno,
-        images: [specTechno, specTechno, specTechno, specTechno],
+        images: [
+            {
+                id: 1,
+                image: specTechno,
+                main: true
+            }, 
+            {
+                id: 2,
+                image: specTechno,
+                main: false
+            }, 
+            {
+                id: 3,
+                image: specTechno,
+                main: false
+            },  
+            {
+                id: 4,
+                image: specTechno,
+                main: false
+            },
+        ],
         teamType: 'solo',
         name: 'SpecTechnologia1',
         shortDescrition: 'Site-card + Admin panel',

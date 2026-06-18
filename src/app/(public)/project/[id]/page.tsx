@@ -38,7 +38,7 @@ export default async function Project({ params }: ProjectPageProps) {
 		name: project.name,
 		category: project.category,
 		previewDescription: project.previewDescription,
-		images: [project.mainImg, ...(project.images || [])],
+		images: project.images,
 		gitHubLink: project.gitHubLink,
 		demoLink: project.demoLink,
 	}

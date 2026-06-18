@@ -7,13 +7,13 @@ import 'swiper/css';
 import AdaptiveImage from '@/components/shared/AdaptiveImage';
 import PaginationSlider from '@/components/shared/paginationSlider';
 
+import { IImages } from '@/interfaces/general';
+
 import styles from './index.module.scss';
 
-const projectImg1 = '/images/mockImages/specTecno.png'
-const testPhoto = '/images/mockImages/testPhoto.png'
 
 interface SliderProps {
-    images: string[]
+    images: IImages[]
 }
 
 const Slider: React.FC<SliderProps> = ({ images }) => {
@@ -29,9 +29,9 @@ const Slider: React.FC<SliderProps> = ({ images }) => {
                 className={styles.swiper}   
             >
                 {images.map((item) => (
-                    <SwiperSlide>
+                    <SwiperSlide key={item.id}>
                         <AdaptiveImage 
-                            src={item}
+                            src={item.image}
                             alt={'project'}
                             loading='eager'
                             ariaHidden={false}

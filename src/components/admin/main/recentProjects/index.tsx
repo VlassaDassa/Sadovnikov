@@ -12,6 +12,7 @@ import AdaptiveImage from "@/components/shared/AdaptiveImage";
 import Icon from "@/components/shared/icons/Icon";
 import Button from "@/components/shared/button/Button";
 
+import { IImages } from "@/interfaces/general";
 import { projects } from "@/mockData/projects";
 
 import { cssVars } from "@/styles/cssVariables";
@@ -21,7 +22,7 @@ import styles from './index.module.scss';
 
 interface EditProjectProps {
     name: string,
-    img: string,
+    img: IImages,
     shortDescrition: string,
     date: string,
 }
@@ -34,7 +35,7 @@ const EditProject: React.FC<EditProjectProps> = ({ name, img, shortDescrition, d
         <SectionBackground className={styles.projectBg}>
             <div className={styles.imageWrapper}>
                 <AdaptiveImage 
-                    src={img}
+                    src={img.image}
                     alt="SpecTechno"
                     wrapClass={styles.projectImg}
                 />
@@ -111,7 +112,7 @@ const RecentProjects: React.FC = () => {
                                         <EditProject 
                                             key={project.id}
                                             name={project.name}
-                                            img={project.mainImg}
+                                            img={project.images.find((item) => item.main)!} // !!! 
                                             shortDescrition={project.shortDescrition}
                                             date={project.date}
                                         />

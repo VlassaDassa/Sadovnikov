@@ -93,7 +93,7 @@ const ProjectPreview: React.FC<ProjectPreviewProps> = ({ data }) => {
                     
                 </div>
             </div>
-
+            
             <Slider images={data.images} />
         </section>
     )
