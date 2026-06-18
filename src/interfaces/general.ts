@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export type Breakpoint = 'desktop' | 'tablet' | 'mobile'
 
 export interface IconItem {
@@ -145,4 +147,11 @@ export interface IProjectPreviewData {
     images: IImages[],
     gitHubLink: string,
     demoLink: string,
+}
+
+
+export interface GeneralDataProps {
+    projects: IProject[],
+    projectId: number,
+    setData: Dispatch<SetStateAction<IProject[]>>
 }
