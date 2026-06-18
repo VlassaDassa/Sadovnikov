@@ -9,7 +9,7 @@ interface IconUploaderProps {
     onIconUpload: (path: string) => void; 
 }
 
-const IconUploader: React.FC<IconUploaderProps> = ({ icon, additionalClass, onIconUpload }) => {
+const IconUploader: React.FC<IconUploaderProps> = ({ icon, additionalClass, onIconUpload}) => {
     const [error, setError] = useState<string | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [currentIcon, setCurrentIcon] = useState(icon);

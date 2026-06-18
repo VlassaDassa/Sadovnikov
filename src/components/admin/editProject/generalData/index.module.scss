@@ -32,6 +32,7 @@
 
 .mainImg {
     border-radius: 20px;
+    object-fit: cover;
 
     @media (min-width: 1280px) {
         border-radius: 15px;
@@ -67,12 +68,16 @@
     left: 0;
     width: 100%;
     height: 100%;
-    border-radius: 10px;
     box-shadow: inset 0px 0px 100px 10px rgba(0, 0, 0, 0.9);
     pointer-events: none;
     z-index: 4;
+    border-radius: 6px;
 
     transition: all ease-in-out 0.2s;
+
+    @media (min-width: 768px) {
+        border-radius: 10px;
+    }
 }
 
 .imagesHeader {
@@ -109,13 +114,14 @@
 .pgnWrapper {
     display: grid;
     gap: 12px;
-    margin-top: 20px;
+    margin-top: 10px;
     
     grid-template-columns: repeat(2, 1fr);
     
     @media (min-width: 768px) {
         grid-template-columns: repeat(4, 1fr);
         gap: 16px;
+        margin-top: 20px;
     }
     
     @media (min-width: 1280px) {
@@ -126,39 +132,53 @@
 .pgnImageWrapper {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 10; 
     overflow: hidden;
-    border-radius: 12px;
+    aspect-ratio: 16 / 10; 
+    border-radius: 10px;
     cursor: pointer;
     transition: all ease 0.1s;
     
-
-    &:hover {
-        .pgnInnerShadow {
-            box-shadow: inset 0px 0px 50px 10px rgba(0, 0, 0, 0.9);
-        }
-
-        .pgnImage {
-            transform: scale(1.1);
-        }
-    }
-
     &:active {
         transform: scale(0.9);
     }
+
+    @media (min-width: 768px) {
+        border-radius: 15px;
+    }
+
+    @media (min-width: 1280px) {
+        &:hover {
+            .pgnInnerShadow {
+                box-shadow: inset 0px 0px 50px 10px rgba(0, 0, 0, 0.9);
+            }
+
+            .wrapperPgnImage {
+                transform: scale(1.1);
+            }
+        }
+    }
 }
 
-.pgnImage {
+.wrapperPgnImage {
     position: relative;
+    border-radius: 10px;
     width: 100%;
     height: 100%;
-    border-radius: 12px;
+
+    @media (min-width: 768px) {
+        border-radius: 15px;
+    }
 
     transition: all ease-in-out 0.2s;
 }
 
+.pgnImage {
+    object-fit: cover;
+}
+
 .addImageBtn {
     width: calc(100% - 2px);
+    height: calc(100% - 2px);
     aspect-ratio: 16 / 10; 
     display: flex;
     align-items: center;
@@ -201,15 +221,6 @@
     }
 }
 
-.mainLabel {
-    position: absolute;
-    @extend .heading-20-mont-bold;
-    color: $brand_700;
-    z-index: 999;  
-    left: 50%;
-    top: 50%;  
-    transform: translate(-50%, -50%);
-}
 
 .curInnerShadow {
     box-shadow: inset 0px 0px 30px 10px rgba(0, 0, 0, 0.9);

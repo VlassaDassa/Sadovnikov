@@ -1,11 +1,16 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+'use client'
+
+import React, { Dispatch, SetStateAction, useEffect, useState, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 
 import SectionBackground from '@/components/admin/general/sectionBackground';
 import Input from '@/components/shared/input';
 import AdaptiveImage from '@/components/shared/AdaptiveImage';
 import Button from '@/components/shared/button/Button';
 
+import { IImages } from '@/interfaces/general';
 import { IProject } from '@/interfaces/general';
+import { setTypeMessage, setTextMessage, toggleMessage } from '@/store/slices/messageSlice';
 
 import styles from './index.module.scss';
 
@@ -227,6 +232,8 @@ const Inputs: React.FC<GeneralDataProps> = ({ projects, setData, projectId }) =>
 
 const GeneralData: React.FC<GeneralDataProps> = ({ projects, setData, projectId }) => {
     const project = projects.find(p => p.id === projectId);
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    const dispatch = useDispatch()
 
     const [curImage, setCurImage] = useState<number>(project?.images.find((item) => item.main)?.id || 1)
 
@@ -284,6 +291,90 @@ const GeneralData: React.FC<GeneralDataProps> = ({ projects, setData, projectId 
             })
         );
     };
+    
+    const handleAddImageClick = () => {
+        fileInputRef.current?.click();
+    };
+
+    const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const files = e.target.files;
+        if (!files || files.length === 0) return;
+        
+        const newImages: IImages[] = [];
+        let loadedCount = 0;
+        const validFiles: File[] = [];
+        
+        Array.from(files).forEach((file) => {
+            const img = new Image();
+            img.onload = () => {
+                const width = img.naturalWidth;
+                const height = img.naturalHeight;
+                const ratio = width / height;
+                
+                // Допустимые пропорции: от 1:1 до 2:1 (квадрат или широкий)
+                const isRatioValid = ratio >= 0.8 && ratio <= 2.0;
+                
+                if (isRatioValid) {
+                    validFiles.push(file);
+                } else {
+                    dispatch(setTypeMessage('error'))
+                    dispatch(setTextMessage(`Photo must be 1:1, 4:3 or 16:9`))
+                    dispatch(toggleMessage())
+            
+                    setTimeout(() => {
+                        dispatch(toggleMessage())
+                    }, 3000)
+                }
+                
+                loadedCount++;
+                
+                if (loadedCount === files.length) {
+                    if (validFiles.length === 0) {
+                        return;
+                    }
+                    
+                    validFiles.forEach((file, index) => {
+                        const reader = new FileReader();
+                        reader.onload = (event) => {
+                            const imageUrl = event.target?.result as string;
+                            
+                            newImages.push({
+                                id: Date.now() + index,
+                                image: imageUrl,
+                                main: project?.images.length === 0,
+                            });
+                            
+                            if (newImages.length === validFiles.length) {
+                                setData(prev =>
+                                    prev.map(project => {
+                                        if (project.id !== projectId) return project;
+                                        return {
+                                            ...project,
+                                            images: [...project.images, ...newImages],
+                                        };
+                                    })
+                                );
+                                
+                                if (fileInputRef.current) {
+                                    fileInputRef.current.value = '';
+                                }
+
+                                dispatch(setTypeMessage('info'))
+                                dispatch(setTextMessage(`Success!`))
+                                dispatch(toggleMessage())
+                        
+                                setTimeout(() => {
+                                    dispatch(toggleMessage())
+                                }, 3000)
+                            }
+                        };
+                        reader.readAsDataURL(file);
+                    });
+                }
+            };
+            img.src = URL.createObjectURL(file);
+        });
+    };
             
     const currentImage = project?.images.find(img => img.id === curImage);
 
@@ -302,7 +393,6 @@ const GeneralData: React.FC<GeneralDataProps> = ({ projects, setData, projectId 
                 </div>
 
                 {
-                    
                     project &&
                     <>
                         <div className={styles.imageWrapper}>
@@ -310,9 +400,9 @@ const GeneralData: React.FC<GeneralDataProps> = ({ projects, setData, projectId 
                                 <AdaptiveImage 
                                     src={currentImage.image}
                                     alt='Main image'
-                                ariaHidden={false}
-                                wrapClass={styles.mainImgWrapper}
-                                imgClass={styles.mainImg}
+                                    ariaHidden={false}
+                                    wrapClass={styles.mainImgWrapper}
+                                    imgClass={styles.mainImg}
                                 />
                             )}
 
@@ -327,16 +417,13 @@ const GeneralData: React.FC<GeneralDataProps> = ({ projects, setData, projectId 
                                             src={img.image}
                                             alt='Project image'
                                             ariaHidden={false}
-                                            wrapClass={styles.pgnImage}
+                                            wrapClass={styles.wrapperPgnImage}
+                                            imgClass={styles.pgnImage}
                                         />
 
                                         <div 
                                             className={`${styles.pgnInnerShadow} ${img.id === curImage && styles.curInnerShadow}`} 
                                         />
-
-                                        {
-                                            img.main && <p className={styles.mainLabel}>Main</p>
-                                        }
 
                                         <Button 
                                             behavior="default"
@@ -344,12 +431,6 @@ const GeneralData: React.FC<GeneralDataProps> = ({ projects, setData, projectId 
                                             variant="black"
                                             additionalClass={styles.deleteImage}
                                             icon="trash"
-                                            tooltip={{
-                                                text: 'Delete image',
-                                                type: 'lvl1',
-                                                fakeWidth: 100,
-                                                placement: 'bottom'
-                                            }}
                                             onClick={(e: React.MouseEvent) => {
                                                 e.stopPropagation();
                                                 handleDeleteImage(img.id);
@@ -357,7 +438,7 @@ const GeneralData: React.FC<GeneralDataProps> = ({ projects, setData, projectId 
                                         />
 
                                         <Button 
-                                            behavior="default"
+                                            behavior={img.main ? 'disabled' : 'default'}
                                             iconPosition="noIcon"
                                             variant="black"
                                             text='Main'
@@ -372,19 +453,26 @@ const GeneralData: React.FC<GeneralDataProps> = ({ projects, setData, projectId 
                             }
 
                             {project.images.length < 4 && (
-                                <Button 
-                                    behavior="default"
-                                    iconPosition="only"
-                                    variant="black"
-                                    additionalClass={styles.addImageBtn}
-                                    icon="plus"
-                                    tooltip={{
-                                        text: 'Add image',
-                                        type: 'lvl1',
-                                        fakeWidth: 100,
-                                        placement: 'bottom'
-                                    }}
-                                />
+                                <>  
+                                    <Button 
+                                        behavior="default"
+                                        iconPosition="only"
+                                        variant="black"
+                                        additionalClass={styles.addImageBtn}
+                                        icon="plus"
+                                        onClick={handleAddImageClick}
+                                    />
+
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        multiple
+                                        ref={fileInputRef}
+                                        style={{ display: 'none' }}
+                                        onChange={handleFileUpload}
+                                    />
+                                </>
+                                
                             )}
                         </div>
                     </>
