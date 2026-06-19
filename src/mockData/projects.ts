@@ -53,10 +53,7 @@ export const projects: IProject[] = [
                 tooltip: {
                     id: 1,
                     title: 'Why was this technology chosen?',
-                    text: 'For building SPAs and convenient reactive  interactions. \
-                            I was tired of writing multi-line JavaScript and wanted to learn something more\
-                            in demand in the market. I decided to try React first, but it turned out that I liked \
-                            it for its reactivity, ease, and interesting component approach '
+                    text: 'For building SPAs and convenient reactive  interactions. I was tired of writing multi-line JavaScript and wanted to learn something more in demand in the market. I decided to try React first, but it turned out that I liked it for its reactivity, ease, and interesting component approach'
                 }
             },
             {
@@ -66,10 +63,7 @@ export const projects: IProject[] = [
                 tooltip: {
                     id: 1,
                     title: 'Why was this technology chosen?',
-                    text: 'For building SPAs and convenient reactive  interactions. \
-                            I was tired of writing multi-line JavaScript and wanted to learn something more\
-                            in demand in the market. I decided to try React first, but it turned out that I liked \
-                            it for its reactivity, ease, and interesting component approach '
+                    text: 'For building SPAs and convenient reactive  interactions. I was tired of writing multi-line JavaScript and wanted to learn something more in demand in the market. I decided to try React first, but it turned out that I liked it for its reactivity, ease, and interesting component approach'
                 }
             },
             {
@@ -79,10 +73,7 @@ export const projects: IProject[] = [
                 tooltip: {
                     id: 1,
                     title: 'Why was this technology chosen?',
-                    text: 'For building SPAs and convenient reactive  interactions. \
-                            I was tired of writing multi-line JavaScript and wanted to learn something more\
-                            in demand in the market. I decided to try React first, but it turned out that I liked \
-                            it for its reactivity, ease, and interesting component approach '
+                    text: 'For building SPAs and convenient reactive  interactions. I was tired of writing multi-line JavaScript and wanted to learn something more in demand in the market. I decided to try React first, but it turned out that I liked it for its reactivity, ease, and interesting component approach'
                 }
             },
             {
@@ -92,10 +83,7 @@ export const projects: IProject[] = [
                 tooltip: {
                     id: 1,
                     title: 'Why was this technology chosen?',
-                    text: 'For building SPAs and convenient reactive  interactions. \
-                            I was tired of writing multi-line JavaScript and wanted to learn something more\
-                            in demand in the market. I decided to try React first, but it turned out that I liked \
-                            it for its reactivity, ease, and interesting component approach '
+                    text: 'For building SPAs and convenient reactive  interactions. I was tired of writing multi-line JavaScript and wanted to learn something more in demand in the market. I decided to try React first, but it turned out that I liked it for its reactivity, ease, and interesting component approach'
                 }
             },
             {
@@ -105,10 +93,7 @@ export const projects: IProject[] = [
                 tooltip: {
                     id: 1,
                     title: 'Why was this technology chosen?',
-                    text: 'For building SPAs and convenient reactive  interactions. \
-                            I was tired of writing multi-line JavaScript and wanted to learn something more\
-                            in demand in the market. I decided to try React first, but it turned out that I liked \
-                            it for its reactivity, ease, and interesting component approach '
+                    text: 'For building SPAs and convenient reactive  interactions. I was tired of writing multi-line JavaScript and wanted to learn something more in demand in the market. I decided to try React first, but it turned out that I liked it for its reactivity, ease, and interesting component approach'
                 }
             },
             {
@@ -129,30 +114,21 @@ export const projects: IProject[] = [
             {
                 id: 1,
                 title: 'Full responsive design',
-                text: 'Initially, 3 versions were made for each project page \
-                                    (desktop, tablet, mobile). And each page looks great on any screen \
-                                    resolution. The Mobile First approach was used during \
-                                    development for easy adaptation',
+                text: 'For building SPAs and convenient reactive  interactions. I was tired of writing multi-line JavaScript and wanted to learn something more in demand in the market. I decided to try React first, but it turned out that I liked it for its reactivity, ease, and interesting component approach',
                 icon: featureIcon,
                 photo: featurePhoto1
             },
             {
                 id: 2,
                 title: 'Full responsive design',
-                text: 'Initially, 3 versions were made for each project page \
-                                    (desktop, tablet, mobile). And each page looks great on any screen \
-                                    resolution. The Mobile First approach was used during \
-                                    development for easy adaptation',
+                text: 'For building SPAs and convenient reactive  interactions. I was tired of writing multi-line JavaScript and wanted to learn something more in demand in the market. I decided to try React first, but it turned out that I liked it for its reactivity, ease, and interesting component approach',
                 icon: featureIcon,
                 photo: specTechno
             },
             {
                 id: 3,
                 title: 'Full responsive design',
-                text: 'Initially, 3 versions were made for each project page \
-                                    (desktop, tablet, mobile). And each page looks great on any screen \
-                                    resolution. The Mobile First approach was used during \
-                                    development for easy adaptation',
+                text: 'For building SPAs and convenient reactive  interactions. I was tired of writing multi-line JavaScript and wanted to learn something more in demand in the market. I decided to try React first, but it turned out that I liked it for its reactivity, ease, and interesting component approach',
                 icon: featureIcon,
                 photo: featurePhoto2
             }

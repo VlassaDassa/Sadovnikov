@@ -9,7 +9,7 @@ import { RootState } from '@/store';
 
 import PaginationSlider from '@/components/shared/paginationSlider';
 import ProjectItem from '../projectItem';
-import type { Project } from '@/interfaces/general';
+import type { IProject } from '@/interfaces/general';
 
 import 'swiper/css/effect-coverflow';
 import 'swiper/css';
@@ -18,7 +18,7 @@ import style from './index.module.scss';
 
 
 interface SliderProps {
-    projects: Project[]
+    projects: IProject[]
 }
 
 
@@ -51,8 +51,6 @@ const Slider: React.FC<SliderProps> = ({ projects }) => {
             onRealIndexChange={(swiper) => setCurIndex(swiper.activeIndex + 1)}
             pagination={true}
             modules={[EffectCoverflow, Pagination]}
-            
-            
         >
             {projects.map(project => (
                 <SwiperSlide key={project.id} className={style.sliderItem}>
