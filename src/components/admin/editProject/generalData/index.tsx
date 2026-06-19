@@ -15,7 +15,6 @@ import styles from './index.module.scss';
 
 
 
-
 interface GeneralDataProps {
     projects: IProject[];
     projectId: number;

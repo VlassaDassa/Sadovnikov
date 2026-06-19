@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 
 import AdminPageTitle from "@/components/admin/general/adminPageTitle";
 import GeneralData from "@/components/admin/editProject/generalData";
+import Stack from '@/components/admin/editProject/stack';
 
 import { IProject } from "@/interfaces/general";
 import { projects } from '@/mockData/projects';
@@ -37,6 +38,7 @@ const ClientPageWrapper: React.FC<ClientPageWrapperProps> = ({ projectId }) => {
 
 
                 <GeneralData projects={data} projectId={projectId} setData={setData} />
+                <Stack projects={data} projectId={projectId} setData={setData} />
             </div>
         </main>
     )    
