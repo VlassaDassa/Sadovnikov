@@ -58,7 +58,7 @@ const Input: React.FC<InputProps> = ({
     iconPosition,
     maxLen,
     variant='default',
-    adminLabel='withoutPlaceholder',
+    adminLabel='withoutLabel',
     label, 
     error,
     disabled=false,

@@ -19,19 +19,12 @@
     }
 }
 
-
-.descrWrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-
 .headerWrapper {
     display: flex;
     align-items: center;
     column-gap: 10px;
 }
+
 
 .header {
     display: flex;
@@ -71,6 +64,7 @@
         font-size: 24px;
     }
 }
+
 
 .accordion {
     width: 100%;

@@ -26,6 +26,7 @@ const Accordion: React.FC<AccordionProps> = ({ items, allowMultiple=true }) => {
     const [openIndexes, setOpenIndexes] = useState<number[]>([]);
     const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
     const iconSize = breakpoint === 'mobile' ?  25 : 44 
+    
 
     const toggleItem = (index: number) => {
         if (allowMultiple) {

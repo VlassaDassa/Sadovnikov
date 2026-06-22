@@ -7,6 +7,7 @@ import AdminPageTitle from "@/components/admin/general/adminPageTitle";
 import GeneralData from "@/components/admin/editProject/generalData";
 import Stack from '@/components/admin/editProject/stack';
 import KeyFeatures from '@/components/admin/editProject/keyFeatures';
+import Description from '@/components/admin/editProject/description';
 
 import { IProject } from "@/interfaces/general";
 import { projects } from '@/mockData/projects';
@@ -41,6 +42,7 @@ const ClientPageWrapper: React.FC<ClientPageWrapperProps> = ({ projectId }) => {
                 <GeneralData projects={data} projectId={projectId} setData={setData} />
                 <Stack projects={data} projectId={projectId} setData={setData} />
                 <KeyFeatures projects={data} projectId={projectId} setData={setData} />
+                <Description projects={data} projectId={projectId} setData={setData} />
             </div>
         </main>
     )    
