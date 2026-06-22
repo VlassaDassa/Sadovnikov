@@ -209,6 +209,7 @@ const Input: React.FC<InputProps> = ({
                         value={value}
                         aria-label={placeholder || name}
                         name={name}
+                        maxLength={maxLen}
                         onChange={onChange}  
                         onClick={onClick}
                         readOnly={readonly}
@@ -224,6 +225,7 @@ const Input: React.FC<InputProps> = ({
                             value={value}
                             aria-label={placeholder || name}
                             name={name}
+                            maxLength={maxLen}
                             onClick={() => setDatePickerOpen(true)}
                             readOnly
                         />

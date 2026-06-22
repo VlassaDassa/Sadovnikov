@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { setTypeMessage, setTextMessage, toggleMessage } from '@/store/slices/messageSlice';
+import { showMessage } from '@/lib/showMessage';
+
 import { IImages, IProject } from '@/interfaces/general';
 
 
@@ -9,9 +10,9 @@ export const useImageUpload = (
     projectId: number,
     setData: React.Dispatch<React.SetStateAction<IProject[]>>
 ) => {
-    const dispatch = useDispatch();
     const fileInputRef = useRef<HTMLInputElement>(null)
     const [isLoading, setIsLoading] = useState(false)
+    const dispatch = useDispatch()
 
     const validateImage = (file: File): Promise<{valid: boolean, ratio?: number}> => {
         return new Promise((resolve) => {
@@ -23,15 +24,6 @@ export const useImageUpload = (
             }
             img.src = URL.createObjectURL(file)
         })
-    }
-
-    const showMessage = (type: 'error' | 'info', text: string) => {
-        dispatch(setTypeMessage(type))
-        dispatch(setTextMessage(text))
-        dispatch(toggleMessage())
-        setTimeout(() => {
-            dispatch(toggleMessage())
-        }, 3000);
     }
 
 
@@ -51,7 +43,7 @@ export const useImageUpload = (
                 validFiles.push(file)
             }
             else {
-                showMessage('error', 'Photo must be 1:1, 4:3 or 16:9')
+                showMessage('error', 'Photo must be 1:1, 4:3 or 16:9', dispatch)
             }
         }
 
@@ -86,7 +78,7 @@ export const useImageUpload = (
                     )
                 }
 
-                showMessage('info', 'Success!')
+                showMessage('info', 'Success!', dispatch)
                 if (fileInputRef.current) fileInputRef.current.value = ''
                 setIsLoading(false)
             }

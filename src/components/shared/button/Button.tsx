@@ -26,6 +26,7 @@ interface ButtonProps {
     text?: string;
     tooltip?: TooltipConfig;
     icon?: string;
+    colorIcon?: string,
     onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
@@ -38,6 +39,7 @@ const Button: React.FC<ButtonProps> = ({
         additionalClass,
         text,
         icon,
+        colorIcon,
         tooltip,
         onClick,
     }) => {
@@ -64,8 +66,12 @@ const Button: React.FC<ButtonProps> = ({
                             breakpoint === 'desktop' ? 32 : 24
                         : 24
 
-    const iconColor = variant === 'primary' || variant === 'dark' ? cssVars.white : variant === 'black' ?  cssVars.neutral_500 : cssVars.neutral_900 
+    
+    let iconColor = variant === 'primary' || variant === 'dark' ? cssVars.white : variant === 'black' ?  cssVars.neutral_500 : cssVars.neutral_900 
 
+    if (colorIcon) {
+        iconColor = colorIcon
+    }
     
     const contentButton = (
         iconPosition !== 'only' && behavior !== 'loading' ? 

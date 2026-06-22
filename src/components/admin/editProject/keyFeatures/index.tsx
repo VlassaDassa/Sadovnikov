@@ -1,22 +1,23 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
+import type { Swiper as SwiperType } from 'swiper';
 
 import SectionBackground from '@/components/admin/general/sectionBackground';
 import SectionTitle from '@/components/admin/general/sectionTitle';
-import AdaptiveImage from '@/components/shared/AdaptiveImage';
 import Button from '@/components/shared/button/Button';
 import PaginationSlider from '@/components/shared/paginationSlider';
 import Input from '@/components/shared/input';
-import Icon from '@/components/shared/icons/Icon';
+import KeyFeatureImageUpload from './KeyFeatureImageUpload';
 
 import type { IProject } from '@/interfaces/general';
 
-import styles from './index.module.scss';
 import { cssVars } from '@/styles/cssVariables';
+import styles from './index.module.scss';
 import 'swiper/css';
+
 
 
 
@@ -30,7 +31,84 @@ interface KeyFeaturesProps {
 const KeyFeatures: React.FC<KeyFeaturesProps> = ({ projects, projectId, setData }) => {
     const project = projects.find(proj => proj.id === projectId)
     const [curIndex, setCurIndex] = useState<number>(1)
+    const swiperRef = useRef<SwiperType | null>(null);
     const totalCountItems = project?.keyFeatures.length || 0
+
+
+    if (!project) {
+        return <div className={styles.notFound}>Проект не найден</div>;
+    }
+
+    const handleChangeFeature = <T extends keyof typeof project.keyFeatures[0]>(
+        featureId: number,
+        field: T,
+        value: string
+    ) => {
+        setData(prev =>
+            prev.map(project =>
+                project.id === projectId
+                    ? {
+                        ...project,
+                        keyFeatures: project.keyFeatures.map(feature =>
+                            feature.id === featureId
+                                ? { ...feature, [field]: value }
+                                : feature
+                        )
+                    }
+                    : project
+            )
+        );
+    };
+
+    const handleDeleteKeyFeature = (featureId: number) => {
+        setData(prev =>
+            prev.map(project => {
+                if (project.id !== projectId) return project;
+                
+                if (project.keyFeatures.length <= 1) {
+                    return project;
+                }
+                
+                return {
+                    ...project,
+                    keyFeatures: project.keyFeatures.filter(
+                        feature => feature.id !== featureId
+                    ),
+                };
+            })
+        );
+    };
+
+    const handleAddKeyFeature = () => {
+        if (project.keyFeatures.length >= 6) return;
+
+        setData(prev =>
+            prev.map(project => {
+                if (project.id !== projectId) return project;
+                
+                const newFeature = {
+                    id: Date.now() + project.keyFeatures.length + 1,
+                    title: '',
+                    text: '',
+                    icon: '/images/mockImages/featureIcon.svg',
+                    photo: '/images/mockImages/featureIcon.svg',
+                };
+                
+                const newLength = project.keyFeatures.length + 1;
+                setTimeout(() => {
+                    if (swiperRef.current) {
+                        swiperRef.current.slideTo(newLength - 1);
+                    }
+                    setCurIndex(newLength);
+                }, 50);
+                
+                return {
+                    ...project,
+                    keyFeatures: [...project.keyFeatures, newFeature],
+                };
+            })
+        );
+    };
 
     return (
         <section className={`${styles.section}`}>
@@ -46,6 +124,7 @@ const KeyFeatures: React.FC<KeyFeaturesProps> = ({ projects, projectId, setData 
                 className={`${styles.slider}`}
                 grabCursor={true}
                 speed={700} 
+                onSwiper={(swiper) => { swiperRef.current = swiper; }}
                 
                 onRealIndexChange={(swiper) => setCurIndex(swiper.activeIndex + 1)}
                 pagination={true}
@@ -64,6 +143,7 @@ const KeyFeatures: React.FC<KeyFeaturesProps> = ({ projects, projectId, setData 
                                 variant='admin'
                                 adminLabel='withLabel'
                                 label='Title'
+                                onChange={(e) => handleChangeFeature(feature.id, 'title', e.target.value)}
                             />
 
                             <Input 
@@ -79,65 +159,52 @@ const KeyFeatures: React.FC<KeyFeaturesProps> = ({ projects, projectId, setData 
                                 label='Description'
                                 counter={true}
                                 maxCounter={400}
+                                onChange={(e) => handleChangeFeature(feature.id, 'text', e.target.value)}
                             />
 
                             <div className={styles.imgContainer}>
-                                <div className={styles.loadImageWrapper}>
-                                    <p className={styles.inputLabel}>Image</p>
+                                <KeyFeatureImageUpload
+                                    projectId={projectId}
+                                    featureId={feature.id}
+                                    field="photo"
+                                    src={feature.photo}
+                                    label="Image"
+                                    sizeInfo="11:9 (309x252)"
+                                    setData={setData}
+                                />
 
-                                    <AdaptiveImage 
-                                        src={feature.photo}
-                                        alt={'Feature photo'}
-                                        wrapClass={styles.wrapImage}
-                                        imgClass={styles.image}
-                                    />
-
-                                    <Icon 
-                                        name='pen'
-                                        fillColor={cssVars.white}
-                                        iconClass={styles.pen}
-                                    />
-
-                                    <p className={styles.inputLabel}>11:9 (309x252)</p>
-                                </div>
-
-                                <div className={styles.loadImageWrapper}>
-                                    <p className={styles.inputLabel}>Icon</p>
-
-                                    <AdaptiveImage 
-                                        src={feature.icon}
-                                        alt={'Feature photo'}
-                                        wrapClass={styles.wrapIcon}
-                                        imgClass={styles.icon}
-                                    />
-
-                                    <Icon 
-                                        name='pen'
-                                        fillColor={cssVars.white}
-                                        iconClass={styles.pen}
-                                    />
-
-                                    <p className={styles.inputLabel}>*.svg</p>
-                                </div>
+                                <KeyFeatureImageUpload
+                                    projectId={projectId}
+                                    featureId={feature.id}
+                                    field="icon"
+                                    src={feature.icon}
+                                    label="Icon"
+                                    sizeInfo="*.svg"
+                                    setData={setData}
+                                />
                             </div>
                             
                             <div className={styles.btnWrapper}>
                                 <Button 
-                                    behavior='default'
+                                    behavior={project.keyFeatures.length >= 6 ? 'disabled' : 'default'}
                                     iconPosition='leftIcon'
                                     icon='plus'
                                     text='Add New Feature'
                                     variant='black'
                                     additionalClass={styles.addBtn}
+                                    onClick={handleAddKeyFeature}
+                                    
                                 />
 
                                 <Button 
-                                    behavior='default'
+                                    behavior={project.keyFeatures.length === 1 ? 'disabled' : 'default'}
                                     iconPosition='leftIcon'
                                     icon='trash'
                                     text='Delete'
                                     variant='black'
+                                    colorIcon={cssVars.error_600}
                                     additionalClass={styles.deleteBtn}
+                                    onClick={() => handleDeleteKeyFeature(feature.id)}
                                 />
                             </div>
                         </SectionBackground>

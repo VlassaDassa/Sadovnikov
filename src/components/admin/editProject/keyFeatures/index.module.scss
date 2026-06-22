@@ -4,7 +4,6 @@
 
 
 
-
 .section {
     margin-top: 40px;
 
@@ -21,6 +20,12 @@
 
 .textarea {
     @extend .line-height-1_5x;
+
+    cursor: text;
+}
+
+.input {
+    cursor: text;
 }
 
 .inputLabel {

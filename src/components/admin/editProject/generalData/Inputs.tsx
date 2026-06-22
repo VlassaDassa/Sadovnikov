@@ -10,79 +10,20 @@ import styles from './index.module.scss';
 const Inputs: React.FC<GeneralDataProps> = ({ projects, setData, projectId }) => {
     const project = projects.find(p => p.id === projectId);
 
-    const handleChangeName = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)  => {
-        const newName = e.target.value;
-        
-        if (newName.length <= 20) {
-            setData(
-                prev => prev.map((item) => item.id === projectId
-                    ? {...item, name: newName}
-                    : item
-                ) 
-            )
-        }
-    }
+    if (!project) return
 
-    const handleChangeCategory = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)  => {
-        const newCategory = e.target.value;
-        
-        if (newCategory.length <= 20) {
-            setData(
-                prev => prev.map((item) => item.id === projectId
-                    ? {...item, category: newCategory}
-                    : item
-                ) 
-            )
-        }
-    }
-
-    const handleChangePreviewDescription = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)  => {
-        const newPreviewDescription = e.target.value;
-        
-        if (newPreviewDescription.length <= 300) {
-            setData(
-                prev => prev.map((item) => item.id === projectId
-                    ? {...item, previewDescription: newPreviewDescription}
-                    : item
-                ) 
-            )
-        }
-    }
-
-    const handleChangeDemoLink = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)  => {
-        const newDemoLink = e.target.value;
-        
+    const handleChangeFeature = <T extends keyof typeof project>(
+        projectId: number,
+        field: T,
+        value: string
+    ) => {
         setData(
             prev => prev.map((item) => item.id === projectId
-                ? {...item, demoLink: newDemoLink}
+                ? {...item, [field]: value}
                 : item
             ) 
         )
-    }
-
-    const handleChangeGitHubLink = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)  => {
-        const newGitHubLink = e.target.value;
-        
-        setData(
-            prev => prev.map((item) => item.id === projectId
-                ? {...item, gitHubLink: newGitHubLink}
-                : item
-            ) 
-        )
-    }
-
-    const handleChangeDevelopmentTime = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)  => {
-        const newDevelopmentTime = e.target.value;
-        
-        if (newDevelopmentTime.length <= 20) {
-            setData(
-                prev => prev.map((item) => item.id === projectId
-                    ? {...item, developmentTime: newDevelopmentTime}
-                    : item
-                ) 
-            )
-        }
-    }
+    };
 
     const handleChangeTeamType = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)  => {
         const newNumberTeam = Number(e.target.value);
@@ -124,7 +65,8 @@ const Inputs: React.FC<GeneralDataProps> = ({ projects, setData, projectId }) =>
                 iconPosition='noIcon'
                 adminLabel='withLabel'
                 label='Project title'
-                onChange={handleChangeName}
+                maxLen={30}
+                onChange={(e) => handleChangeFeature(projectId, 'name', e.target.value)}
             />
 
             <Input 
@@ -135,7 +77,8 @@ const Inputs: React.FC<GeneralDataProps> = ({ projects, setData, projectId }) =>
                 iconPosition='noIcon'
                 adminLabel='withLabel'
                 label='Category'
-                onChange={handleChangeCategory}
+                maxLen={20}
+                onChange={(e) => handleChangeFeature(projectId, 'category', e.target.value)}
             />
 
             <Input 
@@ -150,7 +93,8 @@ const Inputs: React.FC<GeneralDataProps> = ({ projects, setData, projectId }) =>
                 label='Preview description'
                 counter={true}
                 maxCounter={300}
-                onChange={handleChangePreviewDescription}
+                maxLen={300}
+                onChange={(e) => handleChangeFeature(projectId, 'previewDescription', e.target.value)}
             />
 
             <Input 
@@ -161,7 +105,8 @@ const Inputs: React.FC<GeneralDataProps> = ({ projects, setData, projectId }) =>
                 iconPosition='noIcon'
                 adminLabel='withLabel'
                 label='Link (Demo)'
-                onChange={handleChangeDemoLink}
+                onChange={(e) => handleChangeFeature(projectId, 'demoLink', e.target.value)}
+                
             />
 
             <Input 
@@ -172,7 +117,7 @@ const Inputs: React.FC<GeneralDataProps> = ({ projects, setData, projectId }) =>
                 iconPosition='noIcon'
                 adminLabel='withLabel'
                 label='Link (GitHub)'
-                onChange={handleChangeGitHubLink}
+                onChange={(e) => handleChangeFeature(projectId, 'gitHubLink', e.target.value)}
             />
 
             <Input 
@@ -183,7 +128,8 @@ const Inputs: React.FC<GeneralDataProps> = ({ projects, setData, projectId }) =>
                 iconPosition='noIcon'
                 adminLabel='withLabel'
                 label='Development time'
-                onChange={handleChangeDevelopmentTime}
+                maxLen={20}
+                onChange={(e) => handleChangeFeature(projectId, 'developmentTime', e.target.value)}
             />
 
             <Input 
