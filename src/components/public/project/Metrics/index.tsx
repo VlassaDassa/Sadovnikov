@@ -2,6 +2,7 @@ import React from 'react';
 
 import Icon from '@/components/shared/icons/Icon';
 import ProgressBar from '@/components/shared/ProgressBar';
+import MetricItem from '@/components/shared/MetricItem';
 
 import type { IMertics } from '@/interfaces/general';
 
@@ -23,28 +24,15 @@ const Metrics: React.FC<MetricsProps> = ({ data }) => {
             <div className={styles.metricsWrapper}>
                 {
                     data.map((item) => (
-                        <div key={item.id} className={styles.metricItem}>
-                            <div className={styles.iconWrapper}>
-                                <Icon 
-                                    name={item.icon}
-                                    size={40}
-                                    strokeColor={cssVars.white}
-                                />
-                            </div>
-
-                            <div className={styles.contentWrapper}>
-                                <div className={styles.textWrapper}>
-                                    <h3 className={styles.metricTitle}>{item.title}</h3>
-                                    <p className={styles.metricText}>{item.text}</p>
-                                </div>
-
-                                <ProgressBar 
-                                    type={item.type} 
-                                    current={item.current}
-                                    max={item.max}
-                                />
-                            </div>
-                        </div>
+                        <MetricItem 
+                            id={item.id}
+                            icon={item.icon}
+                            title={item.title}
+                            text={item.text}
+                            type={item.type}
+                            current={item.current}
+                            max={item.max}
+                        />
                     ))
                 }
             </div>
