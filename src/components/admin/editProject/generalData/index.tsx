@@ -8,20 +8,16 @@ import Images from './Images';
 
 import { useImageUpload } from './hooks/useImageUpload';
 import { useImageManagement } from './hooks/useImageManagement';
-import { IProject } from '@/interfaces/general';
+import { EditProjectProps } from '@/interfaces/general';
 
 import styles from './index.module.scss';
 
 
 
 
-interface GeneralDataProps {
-    projects: IProject[];
-    projectId: number;
-    setData: React.Dispatch<React.SetStateAction<IProject[]>>;
-}
 
-const GeneralData: React.FC<GeneralDataProps> = ({ projects, setData, projectId }) => {
+
+const GeneralData: React.FC<EditProjectProps> = ({ projects, setData, projectId }) => {
     const project = projects.find(p => p.id === projectId);
     const { curImage, setCurImage, currentImage, handleMainClick, handleDeleteImage } =
         useImageManagement(projectId, projects, setData);

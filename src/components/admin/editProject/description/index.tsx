@@ -8,24 +8,21 @@ import Input from '@/components/shared/input';
 import Icon from '@/components/shared/icons/Icon';
 
 import { IProject } from '@/interfaces/general';
+import { EditProjectProps } from '@/interfaces/general';
 
 import { cssVars } from '@/styles/cssVariables';
 import styles from './index.module.scss';
 
 
-interface DescriptionProps {
-    projects: IProject[];
-    projectId: number;
-    setData: React.Dispatch<React.SetStateAction<IProject[]>>;
-}
 
-const Description: React.FC<DescriptionProps> = ({ projects, projectId, setData }) => {
+
+const Description: React.FC<EditProjectProps> = ({ projects, projectId, setData }) => {
     const project = projects.find(proj => proj.id === projectId)
 
     if (!project) return
 
     const handleChangeDescription= (
-        featureId: number,
+        descId: number,
         value: string
     ) => {
         setData(prev =>
@@ -34,7 +31,7 @@ const Description: React.FC<DescriptionProps> = ({ projects, projectId, setData 
                     ? {
                         ...project,
                         description: project.description.map(item =>
-                            item.id === featureId
+                            item.id === descId
                                 ? { ...item, content: value }
                                 : item
                         )
@@ -56,7 +53,7 @@ const Description: React.FC<DescriptionProps> = ({ projects, projectId, setData 
             <SectionBackground className={styles.itemWrapper}>
                 {
                     project.description.map((item) => (
-                        <div className={styles.item}>
+                        <div key={item.id} className={styles.item}>
                             <div className={styles.headerWrapper}>
                                 <div className={styles.iconWrapper}>
                                     <Icon 

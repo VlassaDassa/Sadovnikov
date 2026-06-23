@@ -70,6 +70,7 @@ const Input: React.FC<InputProps> = ({
     
     counter,
     maxCounter,
+
     onChange,
     onClick,
 }) => {

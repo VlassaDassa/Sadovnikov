@@ -5,20 +5,15 @@ import SectionTitle from '@/components/admin/general/sectionTitle';
 import AdaptiveImage from '@/components/shared/AdaptiveImage';
 import Button from '@/components/shared/button/Button';
 
-import type { IProject } from '@/interfaces/general';
+import { EditProjectProps } from '@/interfaces/general';
 
 import styles from './index.module.scss';
 
 
 
 
-interface StackProps {
-    projects: IProject[];
-    projectId: number;
-    setData: React.Dispatch<React.SetStateAction<IProject[]>>;
-}
 
-const Stack: React.FC<StackProps> = ({ projects, projectId, setData }) => {
+const Stack: React.FC<EditProjectProps> = ({ projects, projectId, setData }) => {
     const project = projects.find(proj => proj.id === projectId)
 
     return (

@@ -2,17 +2,17 @@ import React from 'react';
 
 import Input from '@/components/shared/input';
 
-import { GeneralDataProps } from '@/interfaces/general';
+import { EditProjectProps } from '@/interfaces/general';
 
 import styles from './index.module.scss';
 
 
-const Inputs: React.FC<GeneralDataProps> = ({ projects, setData, projectId }) => {
+const Inputs: React.FC<EditProjectProps> = ({ projects, setData, projectId }) => {
     const project = projects.find(p => p.id === projectId);
 
     if (!project) return
 
-    const handleChangeFeature = <T extends keyof typeof project>(
+    const handleChangeGeneralData = <T extends keyof typeof project>(
         projectId: number,
         field: T,
         value: string
@@ -66,7 +66,7 @@ const Inputs: React.FC<GeneralDataProps> = ({ projects, setData, projectId }) =>
                 adminLabel='withLabel'
                 label='Project title'
                 maxLen={30}
-                onChange={(e) => handleChangeFeature(projectId, 'name', e.target.value)}
+                onChange={(e) => handleChangeGeneralData(projectId, 'name', e.target.value)}
             />
 
             <Input 
@@ -78,7 +78,7 @@ const Inputs: React.FC<GeneralDataProps> = ({ projects, setData, projectId }) =>
                 adminLabel='withLabel'
                 label='Category'
                 maxLen={20}
-                onChange={(e) => handleChangeFeature(projectId, 'category', e.target.value)}
+                onChange={(e) => handleChangeGeneralData(projectId, 'category', e.target.value)}
             />
 
             <Input 
@@ -94,7 +94,7 @@ const Inputs: React.FC<GeneralDataProps> = ({ projects, setData, projectId }) =>
                 counter={true}
                 maxCounter={300}
                 maxLen={300}
-                onChange={(e) => handleChangeFeature(projectId, 'previewDescription', e.target.value)}
+                onChange={(e) => handleChangeGeneralData(projectId, 'previewDescription', e.target.value)}
             />
 
             <Input 
@@ -105,7 +105,7 @@ const Inputs: React.FC<GeneralDataProps> = ({ projects, setData, projectId }) =>
                 iconPosition='noIcon'
                 adminLabel='withLabel'
                 label='Link (Demo)'
-                onChange={(e) => handleChangeFeature(projectId, 'demoLink', e.target.value)}
+                onChange={(e) => handleChangeGeneralData(projectId, 'demoLink', e.target.value)}
                 
             />
 
@@ -117,7 +117,7 @@ const Inputs: React.FC<GeneralDataProps> = ({ projects, setData, projectId }) =>
                 iconPosition='noIcon'
                 adminLabel='withLabel'
                 label='Link (GitHub)'
-                onChange={(e) => handleChangeFeature(projectId, 'gitHubLink', e.target.value)}
+                onChange={(e) => handleChangeGeneralData(projectId, 'gitHubLink', e.target.value)}
             />
 
             <Input 
@@ -129,7 +129,7 @@ const Inputs: React.FC<GeneralDataProps> = ({ projects, setData, projectId }) =>
                 adminLabel='withLabel'
                 label='Development time'
                 maxLen={20}
-                onChange={(e) => handleChangeFeature(projectId, 'developmentTime', e.target.value)}
+                onChange={(e) => handleChangeGeneralData(projectId, 'developmentTime', e.target.value)}
             />
 
             <Input 

@@ -42,7 +42,7 @@ export interface IMertics {
     icon: string,
     title: string,
     text: string,
-    current: number,
+    current: string | number;
     max: number,
     type: 'score' | 'time'
 }
@@ -150,8 +150,9 @@ export interface IProjectPreviewData {
 }
 
 
-export interface GeneralDataProps {
+export interface EditProjectProps {
     projects: IProject[],
     projectId: number,
     setData: Dispatch<SetStateAction<IProject[]>>
 }
+

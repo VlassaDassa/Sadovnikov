@@ -1,6 +1,7 @@
 'use client'
 
 import React from "react";
+import Link from "next/link";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { useSelector } from 'react-redux';
@@ -21,13 +22,14 @@ import styles from './index.module.scss';
 
 
 interface EditProjectProps {
+    id: number,
     name: string,
     img: IImages,
     shortDescrition: string,
     date: string,
 }
 
-const EditProject: React.FC<EditProjectProps> = ({ name, img, shortDescrition, date }) => {
+const EditProject: React.FC<EditProjectProps> = ({ id, name, img, shortDescrition, date }) => {
     const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
     const iconSize = breakpoint === 'mobile' ? 12 : 20
 
@@ -61,16 +63,20 @@ const EditProject: React.FC<EditProjectProps> = ({ name, img, shortDescrition, d
 
                 {
                     breakpoint === 'mobile' ?
-                         <p className={styles.btnText}>EDIT</p>
+                        <Link className={styles.btnText} href={`editProject/${id}`}>
+                            EDIT
+                        </Link>
                     :
-                        <Button
-                            behavior="default"
-                            variant="dark"
-                            iconPosition="only"
-                            icon="pen"
-                            additionalClass={styles.btn}
-                        />
-                }
+                        <Link className={styles.btnLink} href={`editProject/${id}`}>
+                            <Button
+                                behavior="default"
+                                variant="dark"
+                                iconPosition="only"
+                                icon="pen"
+                                additionalClass={styles.btn}
+                            />
+                        </Link>
+                    }
                 
             </div>
         </SectionBackground>
@@ -111,6 +117,7 @@ const RecentProjects: React.FC = () => {
                                     {projectsForSlide.map(project => (
                                         <EditProject 
                                             key={project.id}
+                                            id={project.id}
                                             name={project.name}
                                             img={project.images.find((item) => item.main)!} // !!! 
                                             shortDescrition={project.shortDescrition}

@@ -1,12 +1,9 @@
 import React from 'react';
 
-import Icon from '@/components/shared/icons/Icon';
-import ProgressBar from '@/components/shared/ProgressBar';
 import MetricItem from '@/components/shared/MetricItem';
 
 import type { IMertics } from '@/interfaces/general';
 
-import { cssVars } from '@/styles/cssVariables';
 import styles from './index.module.scss';
 
 

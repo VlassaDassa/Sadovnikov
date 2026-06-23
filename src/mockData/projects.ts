@@ -261,7 +261,7 @@ export const projects: IProject[] = [
             },
         ],
         teamType: 'solo',
-        name: 'SpecTechnologia1',
+        name: 'SpecTechnologia2',
         shortDescrition: 'Site-card + Admin panel',
         previewDescription: 'A modern corporate website for a technology company specializing in security systems and software solutions. Built with performance, accessibility and a clean user experience in mind',
         stack: [
@@ -504,7 +504,7 @@ export const projects: IProject[] = [
             },
         ],
         teamType: 'solo',
-        name: 'SpecTechnologia1',
+        name: 'SpecTechnologia3',
         shortDescrition: 'Site-card + Admin panel',
         previewDescription: 'A modern corporate website for a technology company specializing in security systems and software solutions. Built with performance, accessibility and a clean user experience in mind',
         stack: [
@@ -747,7 +747,7 @@ export const projects: IProject[] = [
             },
         ],
         teamType: 'solo',
-        name: 'SpecTechnologia1',
+        name: 'SpecTechnologia4',
         shortDescrition: 'Site-card + Admin panel',
         previewDescription: 'A modern corporate website for a technology company specializing in security systems and software solutions. Built with performance, accessibility and a clean user experience in mind',
         stack: [
@@ -990,7 +990,7 @@ export const projects: IProject[] = [
             },
         ],
         teamType: 'solo',
-        name: 'SpecTechnologia1',
+        name: 'SpecTechnologia5',
         shortDescrition: 'Site-card + Admin panel',
         previewDescription: 'A modern corporate website for a technology company specializing in security systems and software solutions. Built with performance, accessibility and a clean user experience in mind',
         stack: [
@@ -1233,7 +1233,7 @@ export const projects: IProject[] = [
             },
         ],
         teamType: 'solo',
-        name: 'SpecTechnologia1',
+        name: 'SpecTechnologia6',
         shortDescrition: 'Site-card + Admin panel',
         previewDescription: 'A modern corporate website for a technology company specializing in security systems and software solutions. Built with performance, accessibility and a clean user experience in mind',
         stack: [
@@ -1476,7 +1476,7 @@ export const projects: IProject[] = [
             },
         ],
         teamType: 'solo',
-        name: 'SpecTechnologia1',
+        name: 'SpecTechnologia7',
         shortDescrition: 'Site-card + Admin panel',
         previewDescription: 'A modern corporate website for a technology company specializing in security systems and software solutions. Built with performance, accessibility and a clean user experience in mind',
         stack: [

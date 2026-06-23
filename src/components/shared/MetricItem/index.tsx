@@ -13,13 +13,25 @@ interface MetricItemProps {
     title: string,
     text: string,
     type: 'time' | 'score' | 'source',
-    current: number,
-    max: number
+    current: number | string,
+    max: number | string,
+    className?: string,
+    contentWrapperClass?: string,
 }
 
-const MetricItem: React.FC<MetricItemProps> = ({ id, icon, title, text, type, current, max }) => {
+const MetricItem: React.FC<MetricItemProps> = ({
+        id, 
+        icon, 
+        title, 
+        text, 
+        type, 
+        current, 
+        max, 
+        className, 
+        contentWrapperClass 
+    }) => {
     return (
-        <div key={id} className={styles.metricItem}>
+        <div className={`${styles.metricItem} ${className}`}>
             <div className={styles.iconWrapper}>
                 <Icon 
                     name={icon}
@@ -28,7 +40,7 @@ const MetricItem: React.FC<MetricItemProps> = ({ id, icon, title, text, type, cu
                 />
             </div>
 
-            <div className={styles.contentWrapper}>
+            <div className={`${styles.contentWrapper} ${contentWrapperClass}`}>
                 <div className={styles.textWrapper}>
                     <h3 className={styles.metricTitle}>{title}</h3>
                     <p className={styles.metricText}>{text}</p>

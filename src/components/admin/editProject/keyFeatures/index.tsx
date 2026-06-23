@@ -13,6 +13,7 @@ import Input from '@/components/shared/input';
 import KeyFeatureImageUpload from './KeyFeatureImageUpload';
 
 import type { IProject } from '@/interfaces/general';
+import { EditProjectProps } from '@/interfaces/general';
 
 import { cssVars } from '@/styles/cssVariables';
 import styles from './index.module.scss';
@@ -22,13 +23,9 @@ import 'swiper/css';
 
 
 
-interface KeyFeaturesProps {
-    projects: IProject[];
-    projectId: number;
-    setData: React.Dispatch<React.SetStateAction<IProject[]>>;
-}
 
-const KeyFeatures: React.FC<KeyFeaturesProps> = ({ projects, projectId, setData }) => {
+
+const KeyFeatures: React.FC<EditProjectProps> = ({ projects, projectId, setData }) => {
     const project = projects.find(proj => proj.id === projectId)
     const [curIndex, setCurIndex] = useState<number>(1)
     const swiperRef = useRef<SwiperType | null>(null);
