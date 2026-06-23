@@ -8,6 +8,7 @@ import { closeMenu,
         closeEditSkillsModal, 
         closeEditMyStackModal, 
         closeSelectPeriodModal,
+        closeEditProjectStackModalOpen,
         toggleIsOverlayVisible,
 } from '@/store/slices/uiSlice'; 
 
@@ -26,8 +27,9 @@ const Overlay = () => {
         dispatch(closeEditFooterModal())
         dispatch(closeEditMyStackModal())
         dispatch(closeEditMyStackModal())
-        dispatch(toggleIsOverlayVisible())
         dispatch(closeSelectPeriodModal())
+        dispatch(closeEditProjectStackModalOpen())
+        dispatch(toggleIsOverlayVisible())
     }
 
     return (

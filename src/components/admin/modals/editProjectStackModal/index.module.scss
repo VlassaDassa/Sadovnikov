@@ -1,0 +1,94 @@
+@use './../../../../styles/tokens/colors.scss' as *;
+@use './../../../../styles/tokens/typography.scss' as *;
+@use './../../../../styles/tokens/effects.scss' as *;
+
+
+.iconBtnWrapper {
+    height: 24px;
+    width: 24px;
+
+    padding: 5px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    border: 1px solid rgba($white, 0.08);
+    @extend .shadow-splash;
+    transition: all ease-in-out 0.1s, transform ease 0.1s;
+    
+    &:active {
+        transform: scale(0.95);
+    }
+
+    @media (min-width: 768px) {
+        &:hover {
+            background-color: $neutral_900;
+
+            .buttonText-black {
+                transition: all ease-in-out 0.1s, transform ease 0.3s;
+            }
+        }
+    }
+}
+
+.dragHand {
+    position: absolute;
+    left: 15px;
+    top: 30px;
+
+    @media (min-width: 768px) {
+        position: relative;
+        left: unset;
+        top: unset;
+    }
+}
+
+.item {
+    display: flex;
+    gap: 10px;
+
+    padding: 15px;
+    padding-left: 35px;
+
+    border-radius: 10px;
+
+    position: relative;
+
+    @media (min-width: 768px) {
+        padding: 20px;
+    }
+
+    @media (min-width: 600px) {
+        align-items: center;
+    }
+}
+
+.input {
+    width: 200px;
+
+    @media (min-width: 600px) {
+        width: auto;
+    }
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    @media (min-width: 600px) {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+.deleteBtn,
+.iconBtnWrapper {
+    padding: 15px;
+}
+
+.deleteBtn {
+    height: fit-content;
+}
+

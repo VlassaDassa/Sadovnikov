@@ -1,4 +1,13 @@
+'use client'
+
 import React from 'react';
+import { useDispatch } from "react-redux";
+
+import { 
+    toggleIsOverlayVisible, 
+    toggleEditProjectStackModalOpen
+
+} from '@/store/slices/uiSlice'; 
 
 import SectionBackground from '@/components/admin/general/sectionBackground';
 import SectionTitle from '@/components/admin/general/sectionTitle';
@@ -15,6 +24,13 @@ import styles from './index.module.scss';
 
 const Stack: React.FC<EditProjectProps> = ({ projects, projectId, setData }) => {
     const project = projects.find(proj => proj.id === projectId)
+
+    const dispatch = useDispatch()
+    
+    const openEditSkills = () => {
+        dispatch(toggleEditProjectStackModalOpen())
+        dispatch(toggleIsOverlayVisible())
+    }
 
     return (
         <section className={styles.section}>
@@ -45,6 +61,7 @@ const Stack: React.FC<EditProjectProps> = ({ projects, projectId, setData }) => 
                     icon='plus'
                     variant='black'
                     additionalClass={styles.addBtn}
+                    onClick={openEditSkills}
                 />
             </SectionBackground>
         </section>

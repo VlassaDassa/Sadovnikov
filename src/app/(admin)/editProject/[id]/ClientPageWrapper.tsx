@@ -2,6 +2,8 @@
 
 import { notFound } from 'next/navigation';
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
 
 import AdminPageTitle from "@/components/admin/general/adminPageTitle";
 import GeneralData from "@/components/admin/editProject/generalData";
@@ -9,6 +11,7 @@ import Stack from '@/components/admin/editProject/stack';
 import KeyFeatures from '@/components/admin/editProject/keyFeatures';
 import Description from '@/components/admin/editProject/description';
 import Metrics from '@/components/admin/editProject/metrics';
+import EditProjectStackModal from "@/components/admin/modals/editProjectStackModal";
 
 import { IProject } from "@/interfaces/general";
 import { projects } from '@/mockData/projects';
@@ -23,6 +26,7 @@ interface ClientPageWrapperProps {
 
 const ClientPageWrapper: React.FC<ClientPageWrapperProps> = ({ projectId }) => {
     const [data, setData] = useState<IProject[]>(projects)
+    const isEditProjectStackModalOpen = useSelector((state: RootState) => state.uiState.isEditProjectStackModalOpen)
 
     const project = projects.find(p => p.id === projectId);
         
@@ -30,8 +34,17 @@ const ClientPageWrapper: React.FC<ClientPageWrapperProps> = ({ projectId }) => {
         notFound();
     }
 
+
+    const modals = (
+        <>
+            {isEditProjectStackModalOpen && <EditProjectStackModal projects={data} projectId={projectId} setData={setData} />}
+        </>
+    )
+
     return (
         <main className={`${styles.main}`}>
+            { modals }
+
             <div className="container">
                 <AdminPageTitle 
                     title='Edit Project'

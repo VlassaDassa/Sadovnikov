@@ -24,6 +24,7 @@ const ClientPageWrapper: React.FC = () => {
     const isEditSkillsModalOpen = useSelector((state: RootState) => state.uiState.isEditSkillsModalOpen)
     const isEditFooterModalOpen = useSelector((state: RootState) => state.uiState.isEditFooterModalOpen)
     const isEditMyStackModalOpen = useSelector((state: RootState) => state.uiState.isEditMyStackModalOpen)
+    
     const modals = (
         <>
             {isEditSkillsModalOpen && <EditSkillsModal />}

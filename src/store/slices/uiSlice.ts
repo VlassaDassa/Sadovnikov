@@ -8,6 +8,7 @@ interface UIState {
     isEditFooterModalOpen?: boolean,
     isEditMyStackModalOpen?: boolean,
     isSelectPeriodModalOpen?: boolean,
+    isEditProjectStackModalOpen?: boolean,
     currentId?: number,
     bodyScroll: boolean,
 }
@@ -20,6 +21,7 @@ const initialState: UIState = {
     isEditFooterModalOpen: false,
     isEditMyStackModalOpen: false,
     isSelectPeriodModalOpen: false,
+    isEditProjectStackModalOpen: false,
     currentId: 1,
     bodyScroll: true,
 }
@@ -54,6 +56,10 @@ const uiSlice = createSlice({
             state.isSelectPeriodModalOpen = !state.isSelectPeriodModalOpen
         },
 
+        toggleEditProjectStackModalOpen: (state) => {
+            state.isEditProjectStackModalOpen = !state.isEditProjectStackModalOpen
+        },
+
         closeMenu: (state) => {
             state.isMenuOpen = false
         },
@@ -74,6 +80,10 @@ const uiSlice = createSlice({
             state.isSelectPeriodModalOpen = false
         },
 
+        closeEditProjectStackModalOpen: (state) => {
+            state.isEditProjectStackModalOpen = !state.isEditProjectStackModalOpen
+        },
+
         setCurrentId: (state, action: PayloadAction<number>) => {
             state.currentId = action.payload
         }
@@ -87,11 +97,13 @@ export const {
         toggleEditFooterModal,
         toggleEditMyStackModal,
         toggleSelectPeriodModal,
+        toggleEditProjectStackModalOpen,
         
         closeEditSkillsModal,
         closeEditFooterModal,
         closeEditMyStackModal,
         closeSelectPeriodModal,
+        closeEditProjectStackModalOpen,
         closeMenu,
 
         setCurrentId

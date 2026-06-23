@@ -4,7 +4,8 @@ import {
     toggleEditSkillsModal, 
     toggleEditFooterModal, 
     toggleEditMyStackModal,
-    toggleSelectPeriodModal
+    toggleSelectPeriodModal,
+    toggleEditProjectStackModalOpen
 } from '@/store/slices/uiSlice';
 
 
@@ -27,6 +28,10 @@ export const closeModals = (dispatch: AppDispatch, modalName: string) => {
 
     if (modalName === 'selectPeriod') {
         dispatch(toggleSelectPeriodModal())
+    }
+
+    if (modalName === 'editProjectStack') {
+        dispatch(toggleEditProjectStackModalOpen())
     }
 }
 

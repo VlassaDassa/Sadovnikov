@@ -36,6 +36,8 @@ interface ModalWrapperProps {
     title: string;
     subTitle: string;
 
+    button: boolean;
+
     disableBtn?: () => "default" | "loading" | "disabled";
     addItem?: () => void;
     items?: any[];
@@ -56,6 +58,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
     subTitle,
     tooltipText='Manage items',
 
+    button=false,
 
     children, 
     disableBtn = () => "default",
@@ -127,6 +130,20 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
         content = (
             <div className={styles.content}>
                 { children }
+                
+                {
+                    button &&
+
+                    <Button
+                        variant="black"
+                        behavior={disableBtn()}
+                        iconPosition="noIcon"
+                        text={'Add Item'}
+                        additionalClass={styles.addBtn}
+                        onClick={addItem}
+                    />
+                }
+                
             </div>
         )
     }
