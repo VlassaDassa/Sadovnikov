@@ -14,6 +14,7 @@ import KeyFeatures from '@/components/admin/editProject/keyFeatures';
 import Description from '@/components/admin/editProject/description';
 import Metrics from '@/components/admin/editProject/metrics';
 import EditProjectStackModal from "@/components/admin/modals/editProjectStackModal";
+import AnimatedSection from '@/components/shared/AnimatedScroll';
 import Button from '@/components/shared/button/Button';
 
 import { IProject } from "@/interfaces/general";
@@ -60,29 +61,46 @@ const ClientPageWrapper: React.FC<ClientPageWrapperProps> = ({ projectId }) => {
             { modals }
 
             <div className="container">
-                <AdminPageTitle 
-                    title='Edit Project'
-                    text='Edit and update all project content'
-                    icon='settings'
-                />
+                <AnimatedSection animation='fade-up'>
+                    <AdminPageTitle 
+                        title='Edit Project'
+                        text='Edit and update all project content'
+                        icon='settings'
+                    />
+                </AnimatedSection>
 
+                <AnimatedSection animation='fade-right'>
+                    <GeneralData projects={data} projectId={projectId} setData={setData} />
+                </AnimatedSection>
 
-                <GeneralData projects={data} projectId={projectId} setData={setData} />
-                <Stack projects={data} projectId={projectId} setData={setData} />
-                <KeyFeatures projects={data} projectId={projectId} setData={setData} />
-                <Description projects={data} projectId={projectId} setData={setData} />
-                <Metrics projects={data} projectId={projectId} setData={setData} />
+                <AnimatedSection animation='fade-left'>
+                    <Stack projects={data} projectId={projectId} setData={setData} />
+                </AnimatedSection>
 
-                <Button 
-                    iconPosition='leftIcon'
-                    behavior='default'
-                    variant='black'
-                    additionalClass={styles.deleteBtn}
-                    text='Delete Project'
-                    icon='trash'
-                    colorIcon={cssVars.error_600}
-                    onClick={deleteProject}
-                />
+                <AnimatedSection animation='fade-right'>
+                    <KeyFeatures projects={data} projectId={projectId} setData={setData} />
+                </AnimatedSection>
+
+                <AnimatedSection animation='fade-down'>
+                    <Description projects={data} projectId={projectId} setData={setData} />
+                </AnimatedSection>
+
+                <AnimatedSection animation='fade-left'>
+                    <Metrics projects={data} projectId={projectId} setData={setData} />
+                </AnimatedSection>
+
+                <AnimatedSection animation='fade-right'>
+                    <Button 
+                        iconPosition='leftIcon'
+                        behavior='default'
+                        variant='black'
+                        additionalClass={styles.deleteBtn}
+                        text='Delete Project'
+                        icon='trash'
+                        colorIcon={cssVars.error_600}
+                        onClick={deleteProject}
+                    />
+                </AnimatedSection>
             </div>
         </main>
     )    
