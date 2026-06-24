@@ -211,6 +211,10 @@ const EditProjectStackModal: React.FC<EditProjectProps> = ({ projectId, projects
         <ModalWrapper
             drag={false}
             tooltipVisible={true}
+            tooltipMax={6}
+            items={project.stack}
+            
+            tooltipText='Maximum 6 technologies allowed'
             disableBtn={disableBtn}
             addItem={() => addStackItem(projectId)}
 

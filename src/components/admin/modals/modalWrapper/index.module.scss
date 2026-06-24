@@ -75,4 +75,12 @@
         width: 100%;
         text-align: center;
     }
+
+    @media (min-width: 768px) {
+        width: calc(100% - 80px);
+    }
+
+    @media (min-width: 1280px) {
+        width: calc(100% - 100px);
+    }
 }

@@ -14,6 +14,8 @@ const featureIcon = '/images/mockImages/featureIcon.svg';
 const featurePhoto1 = '/images/mockImages/featurePhoto.png';
 const featurePhoto2 = '/images/mockImages/featurePhoto_1.png';
 
+export const defaultImage = '/images/mockImages/specTecno.png'
+
 
 export const projects: IProject[] = [
     {

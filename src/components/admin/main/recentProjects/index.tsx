@@ -1,6 +1,6 @@
 'use client'
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -13,8 +13,8 @@ import AdaptiveImage from "@/components/shared/AdaptiveImage";
 import Icon from "@/components/shared/icons/Icon";
 import Button from "@/components/shared/button/Button";
 
-import { IImages } from "@/interfaces/general";
-import { projects } from "@/mockData/projects";
+import { IImages, IProject } from "@/interfaces/general";
+import { projects, defaultImage } from "@/mockData/projects";
 
 import { cssVars } from "@/styles/cssVariables";
 import styles from './index.module.scss';
@@ -32,6 +32,8 @@ interface EditProjectProps {
 const EditProject: React.FC<EditProjectProps> = ({ id, name, img, shortDescrition, date }) => {
     const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
     const iconSize = breakpoint === 'mobile' ? 12 : 20
+
+    
 
     return (
         <SectionBackground className={styles.projectBg}>
@@ -77,7 +79,6 @@ const EditProject: React.FC<EditProjectProps> = ({ id, name, img, shortDescritio
                             />
                         </Link>
                     }
-                
             </div>
         </SectionBackground>
     )
@@ -88,11 +89,40 @@ const EditProject: React.FC<EditProjectProps> = ({ id, name, img, shortDescritio
 
 const RecentProjects: React.FC = () => {
     const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
+    const [data, setData] = useState<IProject[]>(projects)
     const countProjectView = {
         mobile: 3,
         desktop: 3,
         tablet: 2,
     }
+
+
+    const addProject = () => {
+        const newProject: IProject = {
+            id: Date.now(),
+            category: 'Site',
+            images: [{id: Date.now(), image: defaultImage, main: true}],
+            teamType: 'solo',
+            name: 'Новый проект',
+            shortDescrition: 'Краткое описание',
+            previewDescription: 'Описание для превью',
+            stack: [],
+            keyFeatures: [],
+            description: [],
+            metrics: [],
+            commits: [],
+            date: new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' }),
+            developmentTime: '1 week',
+            gitHubLink: '',
+            demoLink: '',
+            numberTeam: 1,
+        };
+        
+        setData(prev => [...prev, newProject]);
+        
+        // TODO Переход на страницу редактирования нового проекта
+    };
+
     
     return (
         <section className={`${styles.section} container`}>
@@ -106,10 +136,10 @@ const RecentProjects: React.FC = () => {
                     spaceBetween={10}  
                     className={styles.swiper}   
                 >
-                    {Array.from({ length: Math.ceil(projects.length / countProjectView[breakpoint]) }).map((_, i) => {
+                    {Array.from({ length: Math.ceil(data.length / countProjectView[breakpoint]) }).map((_, i) => {
                         const start = i * countProjectView[breakpoint];
                         const end = start + countProjectView[breakpoint];
-                        const projectsForSlide = projects.slice(start, end);
+                        const projectsForSlide = data.slice(start, end);
                         
                         return (
                             <SwiperSlide key={i}>
@@ -137,6 +167,7 @@ const RecentProjects: React.FC = () => {
                     text="Add New Project"
                     icon="plus"
                     additionalClass={styles.addButton}
+                    onClick={addProject}
                 />
             </SectionBackground>
         </section>

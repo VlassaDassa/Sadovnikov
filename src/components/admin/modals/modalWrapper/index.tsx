@@ -129,6 +129,15 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
     if (!drag) {
         content = (
             <div className={styles.content}>
+                {
+                    tooltipVisible &&
+                    <ModalTooltip 
+                        text={tooltipText}
+                        counter={items.length}
+                        max={tooltipMax}
+                    />
+                }
+
                 { children }
                 
                 {
