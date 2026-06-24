@@ -21,7 +21,7 @@
         transform: scale(0.95);
     }
 
-    @media (min-width: 768px) {
+    @media (min-width: 1280px) {
         &:hover {
             background-color: $neutral_900;
 
@@ -32,21 +32,12 @@
     }
 }
 
-.dragHand {
-    position: absolute;
-    left: 15px;
-    top: 30px;
-
-    @media (min-width: 768px) {
-        position: relative;
-        left: unset;
-        top: unset;
-    }
-}
 
 .item {
     display: flex;
-    gap: 10px;
+    align-items:flex-start;
+    justify-content: space-between;
+    gap: 20px;
 
     padding: 15px;
     padding-left: 35px;
@@ -57,30 +48,22 @@
 
     @media (min-width: 768px) {
         padding: 20px;
+        gap: 100px;
     }
 
-    @media (min-width: 600px) {
-        align-items: center;
-    }
 }
 
-.input {
-    width: 200px;
-
-    @media (min-width: 600px) {
-        width: auto;
-    }
+.textarea {
+    @extend .line-height-1_5x;
 }
+
 
 .inputs {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 30px;
 
-    @media (min-width: 600px) {
-        flex-direction: row;
-        align-items: center;
-    }
+    width: 100%;
 }
 
 .deleteBtn,
@@ -88,7 +71,5 @@
     padding: 15px;
 }
 
-.deleteBtn {
-    height: fit-content;
-}
+
 

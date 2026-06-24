@@ -33,29 +33,83 @@ const StackItem: React.FC<StackItemProps> = ({ projectId, item, setData }) => {
         );
     };
 
-    // const handleChangText = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)  => {
-    //     const newText = e.target.value;
-        
-    //     setItems(
-    //         prev => prev.map((el) => el.id === item.id 
-    //             ? {...el, text: newText}
-    //             : el
-    //         ) 
-    //     )
-    // }
+    const handleChangeStack = (
+        stackId: number,
+        field: string,
+        value: string
+    ) => {
+        setData(prev =>
+            prev.map(project =>
+                project.id === projectId
+                    ? {
+                        ...project,
+                        stack: project.stack.map(el =>
+                            el.id === stackId
+                                ? { ...el, [field]: value }
+                                : el
+                        )
+                    }
+                    : project
+            )
+        );
+    };
+
+    const handleChangeTooltip = (
+        stackId: number,
+        field: 'title' | 'text',
+        value: string
+    ) => {
+        setData(prev =>
+            prev.map(project => {
+                if (project.id !== projectId) return project;
+                
+                return {
+                    ...project,
+                    stack: project.stack.map(el =>
+                        el.id === stackId
+                            ? {
+                                ...el,
+                                tooltip: {
+                                    ...el.tooltip,
+                                    [field]: value
+                                }
+                            }
+                            : el
+                    )
+                };
+            })
+        );
+    };
 
 
-    const handleIconUpload = (path: string, index: number) => {
-        setData(prev => prev.map((item, i) => 
-            i === index ? {...item, icon: path} : item
-        ))
-    }
+    const handleIconUpload = (path: string, stackId: number) => {
+        setData(prev =>
+            prev.map(project => {
+                if (project.id !== projectId) return project;
+                
+                return {
+                    ...project,
+                    stack: project.stack.map(el =>
+                        el.id === stackId
+                            ? { ...el, icon: path }
+                            : el
+                    )
+                };
+            })
+        );
+    };
 
     return (
         <div 
             className={`${styles.item} modalElementBg`}
         >
             <div className={styles.inputs}>
+                <IconUploader 
+                    additionalClass={styles.iconBtnWrapper}
+                    icon={item.icon}
+                    onIconUpload={(path: string) => handleIconUpload(path, item.id)}
+                />
+
                 <Input 
                     name={item.name}
                     placeholder='Text...'
@@ -65,6 +119,7 @@ const StackItem: React.FC<StackItemProps> = ({ projectId, item, setData }) => {
                     value={item.name}
                     variant='admin'
                     adminLabel='withoutLabel'
+                    onChange={(e) => handleChangeStack(item.id, 'name', e.target.value)}
                 />
 
                 <Input 
@@ -77,6 +132,7 @@ const StackItem: React.FC<StackItemProps> = ({ projectId, item, setData }) => {
                     variant='admin'
                     adminLabel='withLabel'
                     label='Title'
+                    onChange={(e) => handleChangeTooltip(item.id, 'title', e.target.value)}
                 />
 
                 <Input 
@@ -89,13 +145,13 @@ const StackItem: React.FC<StackItemProps> = ({ projectId, item, setData }) => {
                     variant='admin'
                     adminLabel='withLabel'
                     label='Description'
+                    counter={true}
+                    maxCounter={400}
+                    maxLen={400}
+                    onChange={(e) => handleChangeTooltip(item.id, 'text', e.target.value)}
                 />
 
-                <IconUploader 
-                    additionalClass={styles.iconBtnWrapper}
-                    icon={item.icon}
-                    onIconUpload={(path: string) => handleIconUpload(path, item.id)}
-                />
+                
             </div>
 
             <Button

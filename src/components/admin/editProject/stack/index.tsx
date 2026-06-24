@@ -27,7 +27,7 @@ const Stack: React.FC<EditProjectProps> = ({ projects, projectId, setData }) => 
 
     const dispatch = useDispatch()
     
-    const openEditSkills = () => {
+    const openEditStack= () => {
         dispatch(toggleEditProjectStackModalOpen())
         dispatch(toggleIsOverlayVisible())
     }
@@ -61,7 +61,7 @@ const Stack: React.FC<EditProjectProps> = ({ projects, projectId, setData }) => 
                     icon='plus'
                     variant='black'
                     additionalClass={styles.addBtn}
-                    onClick={openEditSkills}
+                    onClick={openEditStack}
                 />
             </SectionBackground>
         </section>

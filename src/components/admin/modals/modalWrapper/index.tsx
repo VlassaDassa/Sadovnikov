@@ -36,7 +36,7 @@ interface ModalWrapperProps {
     title: string;
     subTitle: string;
 
-    button: boolean;
+    button?: boolean;
 
     disableBtn?: () => "default" | "loading" | "disabled";
     addItem?: () => void;
@@ -150,7 +150,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
 
     return (
         <ModalBackground
-            className={styles.modalBackground}
+            className={`${styles.modalBackground} ${!drag && styles.modalBackgroundNoDrag}`}
         >
             <Button
                 variant="black"

@@ -50,6 +50,12 @@
     }
 }
 
+.modalBackgroundNoDrag {
+    &:active {
+        cursor: unset;
+    }
+}
+
 .content {
     display: flex;
     flex-direction: column;
