@@ -22,6 +22,7 @@ const Metrics: React.FC<MetricsProps> = ({ data }) => {
                 {
                     data.map((item) => (
                         <MetricItem 
+                            key={item.id}
                             id={item.id}
                             icon={item.icon}
                             title={item.title}

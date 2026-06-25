@@ -1,6 +1,7 @@
 'use client'
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 
 import Input from '../../../shared/input';
@@ -32,7 +33,7 @@ const Contacts: React.FC= () => {
         email: '',
         message: ''
     })
-    const isFirstRender = useRef(true);
+    const [isFirstRender, setIsFirstRender] = useState(true);
 
     const { isVisible, elementRef } = useScrollAnimation<HTMLDivElement>({
         threshold: 0.1,
@@ -40,14 +41,20 @@ const Contacts: React.FC= () => {
     })
 
     const dispatch = useDispatch()
+    const pathname = usePathname();
+
+
+    useEffect(() => {
+        setIsFirstRender(true);
+    }, [pathname]);
 
 
 
     useEffect(() => {
         // Пропуск валидации при первом рендере
-        if (isFirstRender.current) {
-            isFirstRender.current = false;
-            return; 
+        if (isFirstRender) {
+            setIsFirstRender(false);
+            return;
         }
 
         if (btnBehavior === 'loading') {
