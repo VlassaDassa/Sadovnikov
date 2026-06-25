@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 
 import { 
     toggleIsOverlayVisible, 
-    toggleEditProjectStackModalOpen
+    toggleEditProjectStackModal
 
 } from '@/store/slices/uiSlice'; 
 
@@ -28,7 +28,7 @@ const Stack: React.FC<EditProjectProps> = ({ projects, projectId, setData }) => 
     const dispatch = useDispatch()
     
     const openEditStack= () => {
-        dispatch(toggleEditProjectStackModalOpen())
+        dispatch(toggleEditProjectStackModal())
         dispatch(toggleIsOverlayVisible())
     }
 

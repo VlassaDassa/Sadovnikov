@@ -5,7 +5,7 @@ import {
     toggleEditFooterModal, 
     toggleEditMyStackModal,
     toggleSelectPeriodModal,
-    toggleEditProjectStackModalOpen
+    toggleEditProjectStackModal
 } from '@/store/slices/uiSlice';
 
 
@@ -31,7 +31,7 @@ export const closeModals = (dispatch: AppDispatch, modalName: string) => {
     }
 
     if (modalName === 'editProjectStack') {
-        dispatch(toggleEditProjectStackModalOpen())
+        dispatch(toggleEditProjectStackModal())
     }
 }
 

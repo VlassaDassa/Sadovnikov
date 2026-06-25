@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { useDispatch } from 'react-redux';
 
+import Button from '@/components/shared/button/Button';
 import AdminPageTitle from "@/components/admin/general/adminPageTitle";
 import GeneralData from "@/components/admin/editProject/generalData";
 import Stack from '@/components/admin/editProject/stack';
@@ -15,7 +16,7 @@ import Description from '@/components/admin/editProject/description';
 import Metrics from '@/components/admin/editProject/metrics';
 import EditProjectStackModal from "@/components/admin/modals/editProjectStackModal";
 import AnimatedSection from '@/components/shared/AnimatedScroll';
-import Button from '@/components/shared/button/Button';
+
 
 import { IProject } from "@/interfaces/general";
 import { projects } from '@/mockData/projects';

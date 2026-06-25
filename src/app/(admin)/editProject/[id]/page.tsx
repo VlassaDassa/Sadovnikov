@@ -9,7 +9,6 @@ async function EditProject({ params }: EditProjectProps) {
     const { id } = await params;
     const projectId = Number(id);
 
-
     return (
         <ClientPageWrapper projectId={projectId} />   
     )

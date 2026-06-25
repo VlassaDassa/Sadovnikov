@@ -21,6 +21,10 @@ import styles from './index.module.scss';
 
 
 
+
+
+
+
 interface SkillItemProps {
     skill: Skill,
     setSkills: Dispatch<SetStateAction<Skill[]>>

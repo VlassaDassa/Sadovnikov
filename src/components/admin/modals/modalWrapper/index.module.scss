@@ -1,6 +1,6 @@
 @use './../../../../styles/tokens/colors.scss' as *;
-@use './../../../../styles/tokens/typography.scss' as *;
 @use './../../../../styles/tokens/effects.scss' as *;
+@use './../../../../styles/tokens/typography.scss' as *;
 
 
 
@@ -27,9 +27,9 @@
 .modalBackground {
     padding-top: 70px;
 
-    position: fixed;
+    position: fixed !important;
     max-height: 500px;
-    overflow-y: auto;
+    overflow-y: auto !important;
 
     scrollbar-width: none;           
     -ms-overflow-style: none;   

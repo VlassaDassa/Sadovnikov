@@ -56,7 +56,7 @@ const uiSlice = createSlice({
             state.isSelectPeriodModalOpen = !state.isSelectPeriodModalOpen
         },
 
-        toggleEditProjectStackModalOpen: (state) => {
+        toggleEditProjectStackModal: (state) => {
             state.isEditProjectStackModalOpen = !state.isEditProjectStackModalOpen
         },
 
@@ -80,8 +80,8 @@ const uiSlice = createSlice({
             state.isSelectPeriodModalOpen = false
         },
 
-        closeEditProjectStackModalOpen: (state) => {
-            state.isEditProjectStackModalOpen = !state.isEditProjectStackModalOpen
+        closeEditProjectStackModal: (state) => {
+            state.isEditProjectStackModalOpen = false
         },
 
         setCurrentId: (state, action: PayloadAction<number>) => {
@@ -97,13 +97,13 @@ export const {
         toggleEditFooterModal,
         toggleEditMyStackModal,
         toggleSelectPeriodModal,
-        toggleEditProjectStackModalOpen,
+        toggleEditProjectStackModal,
         
         closeEditSkillsModal,
         closeEditFooterModal,
         closeEditMyStackModal,
         closeSelectPeriodModal,
-        closeEditProjectStackModalOpen,
+        closeEditProjectStackModal,
         closeMenu,
 
         setCurrentId

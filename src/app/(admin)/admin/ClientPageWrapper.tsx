@@ -5,15 +5,15 @@ import React from "react";
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 
+import EditSkillsModal from '@/components/admin/modals/editSkillsModal';
+import EditFooterModal from "@/components/admin/modals/editFooterModal";
+import EditMyStackModal from "@/components/admin/modals/editMyStackModal";
 import VisitChart from "@/components/admin/main/visitChart";
 import DeviceChart from "@/components/admin/main/deviceChart";
 import TrafficSource from "@/components/admin/main/trafficSource";
 import QuickEdit from "@/components/admin/main/quickEdit";
 import RecentProjects from "@/components/admin/main/recentProjects";
 import AnimatedSection from '@/components/shared/AnimatedScroll';
-import EditSkillsModal from '@/components/admin/modals/editSkillsModal';
-import EditFooterModal from "@/components/admin/modals/editFooterModal";
-import EditMyStackModal from "@/components/admin/modals/editMyStackModal";
 
 import styles from './index.module.scss';
 

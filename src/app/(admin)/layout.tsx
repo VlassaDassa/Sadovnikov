@@ -1,3 +1,5 @@
+import './../globals.scss';
+
 import type { Metadata } from "next";
 
 import { DynImportLayout } from '@/components/shared/DynImportLayout';
@@ -8,7 +10,7 @@ import GlobalTooltip from "@/components/shared/GlobalTooltip";
 
 import { Providers } from "@/store/Providers";
 
-import './../globals.scss';
+
 
 
 export const metaData: Metadata = {
