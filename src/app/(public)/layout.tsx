@@ -37,7 +37,7 @@ export default function PublicLayout({
                     <NoiseBackground />
                     <GlobalLoader />
                     <GlobalTooltip />
-                    <DynImportLayout />  {/* <- menu, overlay, statusMessage */}
+                    <DynImportLayout admin={false} />
                     <Header />
                     {children}
                     <Footer />

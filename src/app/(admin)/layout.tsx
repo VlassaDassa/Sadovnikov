@@ -37,7 +37,7 @@ export default function AdminLayout({
                     <NoiseBackground />
                     <GlobalLoader />
                     <GlobalTooltip />
-                    <DynImportLayout />  {/* <- menu, overlay, statusMessage */}
+                    <DynImportLayout admin={true} /> 
                     <Header />
                     {children}
                 </Providers>

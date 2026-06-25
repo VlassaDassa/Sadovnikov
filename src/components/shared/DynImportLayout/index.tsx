@@ -7,11 +7,17 @@ const Overlay = dynamic(() => import('@/components/shared/overlay'), { ssr: fals
 const StatusMessage = dynamic(() => import('@/components/shared/statusMessage'), { ssr: false });
 
 
-export const DynImportLayout = () => {
+interface DynImportLayout {
+    admin: boolean,
+}
+
+export const DynImportLayout: React.FC<DynImportLayout> = ({ admin }) => {
     return (
         <>
             <StatusMessage />
-            <Menu />
+            {
+                !admin && <Menu />
+            }
             <Overlay />
         </>
     );
