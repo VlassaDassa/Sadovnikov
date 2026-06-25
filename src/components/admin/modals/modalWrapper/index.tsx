@@ -8,6 +8,7 @@ import {
     useSensors,
     DragEndEvent
 } from '@dnd-kit/core';
+import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import {
     arrayMove,
     SortableContext,
@@ -104,6 +105,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
                 sensors={sensors}
                 collisionDetection={closestCenter}
                 onDragEnd={handleDragEnd}
+                modifiers={[restrictToVerticalAxis]}
             >
 
                 <SortableContext
