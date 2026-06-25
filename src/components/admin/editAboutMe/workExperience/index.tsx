@@ -213,6 +213,7 @@ const WorkExperience: React.FC<WorkExperienceProps> = ({ data, setData }) => {
     // DEBOUNCE
     const saveChanges = () => {
         return
+        // TODO
         // console.log('Updated Work Experience:', data);
     }
 
@@ -258,9 +259,10 @@ const WorkExperience: React.FC<WorkExperienceProps> = ({ data, setData }) => {
                 iconPosition='leftIcon'
                 icon='plus'
                 text='Add New Project'
+                noize={true}
                 onClick={addItem}
 
-                additionalClass={styles.addBtn}
+                additionalClass={`${styles.addBtn}`}
             />
         </section>
     )

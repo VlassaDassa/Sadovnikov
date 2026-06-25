@@ -100,6 +100,7 @@ const ClientPageWrapper: React.FC<ClientPageWrapperProps> = ({ projectId }) => {
                         icon='trash'
                         colorIcon={cssVars.error_600}
                         onClick={deleteProject}
+                        noize={true}
                     />
                 </AnimatedSection>
             </div>

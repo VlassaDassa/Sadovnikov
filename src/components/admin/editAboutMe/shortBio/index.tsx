@@ -23,7 +23,6 @@ const ShortBio: React.FC = () => {
                 text='Write a short bio about yourself'
             />
 
-
             <Input 
                 name='shortBio'
                 type='textarea'
@@ -33,6 +32,7 @@ const ShortBio: React.FC = () => {
                 value={data}
                 variant='admin'
                 adminLabel='withoutLabel'
+                noize={true}
                 counter={true}
                 maxLen={500}
                 maxCounter={500}

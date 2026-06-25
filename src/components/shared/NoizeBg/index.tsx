@@ -1,5 +1,6 @@
 import styles from './index.module.scss';
 
+
 const NoiseBackground = () => {
     return (
         <div className={styles.noiseWrapper}>

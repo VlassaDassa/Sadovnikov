@@ -4,6 +4,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import Icon from '../icons/Icon';
+import Noize from '../Noize';
 
 import { RootState } from '@/store';
 import { useTooltip } from '@/hooks/useTooltip';
@@ -23,6 +24,8 @@ interface ButtonProps {
     variant: 'primary' | 'secondary' | 'dark' | 'black';
     additionalClass?: string;
 
+    noize?: boolean;
+
     text?: string;
     tooltip?: TooltipConfig;
     icon?: string;
@@ -35,6 +38,7 @@ const Button: React.FC<ButtonProps> = ({
         behavior='default',
         iconPosition='noIcon',
         variant='primary',
+        noize=false,
         
         additionalClass,
         text,
@@ -130,6 +134,10 @@ const Button: React.FC<ButtonProps> = ({
             {contentButton}
             {iconButton}
             {loader}
+
+            {
+                noize && <Noize />
+            }
 
         </button>
     )

@@ -17,12 +17,10 @@ const nextConfig = {
             );
             
             if (miniCssExtractPlugin) {
-                // Игнорируем порядок (но с предупреждениями в консоли)
                 miniCssExtractPlugin.options.ignoreOrder = false;
             }
         }
 
-        // Дополнительно: заставляем порядок загрузки модулей
         config.optimization = {
             ...config.optimization,
             splitChunks: {

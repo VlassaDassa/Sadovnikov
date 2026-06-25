@@ -6,6 +6,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 import Icon from '../icons/Icon';
+import Noize from '../Noize';
 
 import { RootState } from '@/store';
 import { cssVars } from "@/styles/cssVariables";
@@ -33,6 +34,7 @@ interface InputProps {
     label?: string,
     disabled?: boolean,
     readonly?: boolean,
+    noize?: boolean,
 
     datePickerDay?: boolean,
     datePicker?: boolean,
@@ -63,6 +65,8 @@ const Input: React.FC<InputProps> = ({
     error,
     disabled=false,
     readonly=false,
+    
+    noize=false,
 
     datePicker=false,
     datePickerChange,
@@ -242,18 +246,28 @@ const Input: React.FC<InputProps> = ({
                         )}
                     </div>
                 :
-                    <textarea 
-                        className={inputClass}
-                        placeholder={placeholder}
-                        value={value}
-                        name={name}
-                        aria-label={placeholder || name}
-                        onChange={onChange}  
-                        ref={textAreaRef}
-                        maxLength={maxLen}
-                        onClick={onClick}
-                        readOnly={readonly}
-                    /> 
+
+                    <div className={style.fieldWrapper}>
+                        <textarea 
+                            className={inputClass}
+                            placeholder={placeholder}
+                            value={value}
+                            name={name}
+                            aria-label={placeholder || name}
+                            onChange={onChange}  
+                            ref={textAreaRef}
+                            maxLength={maxLen}
+                            onClick={onClick}
+                            readOnly={readonly}
+                        /> 
+
+                        {
+                            noize && <Noize className={style.noize} />
+                        }
+                        
+                    </div>
+                    
+
             }
             
             {errorEl}
