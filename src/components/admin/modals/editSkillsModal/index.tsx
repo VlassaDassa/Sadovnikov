@@ -1,6 +1,6 @@
 'use client'
 
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useState, useRef, useEffect } from 'react';
 import { CSS } from '@dnd-kit/utilities';
 import {
     useSortable,
@@ -161,6 +161,13 @@ const SkillItem: React.FC<SkillItemProps> = ({ skill, setSkills }) => {
 
 const EditSkillModal: React.FC = () => {
     const [skills, setSkills] = useState(initialSkills)
+    const containerRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        if (containerRef.current) {
+            containerRef.current.scrollTop = containerRef.current.scrollHeight;
+        }
+    }, [skills.length])
     
     const addItem = () => {
         const maxId = Math.max(...skills.map(s => s.id), 0);
@@ -189,6 +196,7 @@ const EditSkillModal: React.FC = () => {
             addItem={addItem}
             items={skills}
             setItems={setSkills}
+            ref={containerRef}
 
             modalName='editSkills'
 

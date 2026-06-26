@@ -1,4 +1,4 @@
-import React, { useState, Dispatch, SetStateAction } from 'react';
+import React, { useState, Dispatch, SetStateAction, useRef, useEffect } from 'react';
 import { CSS } from '@dnd-kit/utilities';
 import { useSortable} from '@dnd-kit/sortable'
 
@@ -127,10 +127,16 @@ const FooterItem: React.FC<FooterItemProps> = ({ item, setItems }) => {
 }
 
 
-
 const EditFooterModal: React.FC = () => {
     const [items, setItems] = useState(footerItems)
+    const containerRef = useRef<HTMLDivElement>(null);
     const defaultIcon = '/images/mockImages/footer/default.svg'
+
+    useEffect(() => {
+        if (containerRef.current) {
+            containerRef.current.scrollTop = containerRef.current.scrollHeight;
+        }
+    }, [items.length])
 
     const disableBtn = () => {
         if (items.length >= 3) {
@@ -163,21 +169,20 @@ const EditFooterModal: React.FC = () => {
 
             title='Edit Footer'
             subTitle='Customize the footer content and links'
+            ref={containerRef}
 
             items={items}
             setItems={setItems}
         >
-            <>
-                {
-                    items.map((item) => (
-                        <FooterItem 
-                            key={item.id}
-                            item={item}
-                            setItems={setItems}
-                        />
-                    ))
-                }
-            </>
+            {
+                items.map((item) => (
+                    <FooterItem 
+                        key={item.id}
+                        item={item}
+                        setItems={setItems}
+                    />
+                ))
+            }
         </ModalWrapper>
     )
 }

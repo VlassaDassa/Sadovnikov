@@ -1,6 +1,6 @@
 'use client'
 
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useState, useRef, useEffect } from 'react';
 import { CSS } from '@dnd-kit/utilities';
 import { useSortable } from '@dnd-kit/sortable'
 
@@ -93,6 +93,13 @@ const StackItem: React.FC<StackItemProps> = ({ stackItem, setStack }) => {
 
 const EditMyStackModal: React.FC = () => {
     const [stack, setStack] = useState(initialStack)
+    const containerRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        if (containerRef.current) {
+            containerRef.current.scrollTop = containerRef.current.scrollHeight;
+        }
+    }, [stack.length])
     
     const addItem = () => {
         const maxId = Math.max(...stack.map(s => s.id), 0);
@@ -120,6 +127,7 @@ const EditMyStackModal: React.FC = () => {
             addItem={addItem}
             items={stack}
             setItems={setStack}
+            ref={containerRef}
 
             modalName='editMyStack'
 

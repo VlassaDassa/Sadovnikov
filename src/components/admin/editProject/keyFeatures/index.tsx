@@ -12,14 +12,11 @@ import PaginationSlider from '@/components/shared/paginationSlider';
 import Input from '@/components/shared/input';
 import KeyFeatureImageUpload from './KeyFeatureImageUpload';
 
-import type { IProject } from '@/interfaces/general';
 import { EditProjectProps } from '@/interfaces/general';
 
 import { cssVars } from '@/styles/cssVariables';
 import styles from './index.module.scss';
 import 'swiper/css';
-
-
 
 
 
@@ -155,7 +152,7 @@ const KeyFeatures: React.FC<EditProjectProps> = ({ projects, projectId, setData 
                                 adminLabel='withLabel'
                                 label='Description'
                                 counter={true}
-                                maxCounter={400}
+                                maxCounter={200}
                                 onChange={(e) => handleChangeFeature(feature.id, 'text', e.target.value)}
                             />
 

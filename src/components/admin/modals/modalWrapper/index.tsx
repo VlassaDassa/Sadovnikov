@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction, forwardRef } from 'react';
 import { useDispatch } from 'react-redux';
 import {
     DndContext,
@@ -48,25 +48,24 @@ interface ModalWrapperProps {
 }
 
 
-const ModalWrapper: React.FC<ModalWrapperProps> = ({ 
-    drag, 
-    tooltipVisible,
-    tooltipMax,
+const ModalWrapper = forwardRef<HTMLDivElement, ModalWrapperProps>(
+    ({ 
+        drag, 
+        tooltipVisible,
+        tooltipMax,
+        modalName,
+        title,
+        subTitle,
+        tooltipText = 'Manage items',
+        button = false,
+        children,
+        disableBtn = () => "default",
+        addItem = () => {},
+        items = [],
+        setItems = () => {},
 
-    modalName,
-    
-    title,
-    subTitle,
-    tooltipText='Manage items',
+    }, ref) => {
 
-    button=false,
-
-    children, 
-    disableBtn = () => "default",
-    addItem = () => {},
-    items = [],
-    setItems = () => {}
-}) => {
     const dispatch = useDispatch()
 
     const sensors = useSensors(
@@ -162,6 +161,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
     return (
         <ModalBackground
             className={`${styles.modalBackground} ${!drag && styles.modalBackgroundNoDrag}`}
+            ref={ref}
         >
             <Button
                 variant="black"
@@ -182,6 +182,6 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
             
         </ModalBackground>
     )
-}
+})
 
 export default ModalWrapper;

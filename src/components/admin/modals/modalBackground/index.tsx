@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 
 import styles from './index.module.scss';
 
@@ -9,15 +9,16 @@ interface ModalBackgroundProps {
     className?: string
 }
 
-const ModalBackground: React.FC<ModalBackgroundProps> = ({ children, className='' }) => {
+const ModalBackground = forwardRef<HTMLDivElement, ModalBackgroundProps>(
+    ({ children, className }, ref) => {
     return (
         <div className="container">
-            <div className={`${styles.background} ${className}`}>
+            <div className={`${styles.background} ${className}`} ref={ref}>
                 { children }
             </div>
         </div>
         
     )
-}
+})
 
 export default ModalBackground;

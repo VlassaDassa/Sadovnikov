@@ -1,4 +1,4 @@
-import React, {  Dispatch, SetStateAction } from 'react';
+import React, {  Dispatch, SetStateAction, useRef, useEffect } from 'react';
 
 import Input from '@/components/shared/input';
 import IconUploader from '@/components/admin/general/iconUploader';
@@ -19,7 +19,7 @@ interface StackItemProps {
 }
 
 const StackItem: React.FC<StackItemProps> = ({ projectId, item, setData }) => {
-   
+    
     const deleteStackItem = (projectId: number, stackId: number) => {
         setData(prev =>
             prev.map(project => {
@@ -116,6 +116,7 @@ const StackItem: React.FC<StackItemProps> = ({ projectId, item, setData }) => {
                     additionalClass={styles.input}
                     type='text'
                     iconPosition='noIcon'
+                    maxLen={20}
                     value={item.name}
                     variant='admin'
                     adminLabel='withoutLabel'
@@ -171,6 +172,7 @@ const StackItem: React.FC<StackItemProps> = ({ projectId, item, setData }) => {
 const EditProjectStackModal: React.FC<EditProjectProps> = ({ projectId, projects, setData }) => {
     const project = projects.find(proj => proj.id === projectId)
     const defaultIcon = '/images/mockImages/React.svg'
+    const containerRef = useRef<HTMLDivElement>(null);
 
     if (!project) return
 
@@ -206,6 +208,12 @@ const EditProjectStackModal: React.FC<EditProjectProps> = ({ projectId, projects
         );
     };
 
+    useEffect(() => {
+        if (containerRef.current) {
+            containerRef.current.scrollTop = containerRef.current.scrollHeight;
+        }
+    }, [project.stack.length])
+
 
     return (
         <ModalWrapper
@@ -224,6 +232,7 @@ const EditProjectStackModal: React.FC<EditProjectProps> = ({ projectId, projects
 
             title='Edit Stack'
             subTitle='Manage your stack in  project'
+            ref={containerRef}
         >
             <>
                 {

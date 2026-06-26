@@ -1,8 +1,9 @@
 'use client'
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from 'swiper/react';
+import type { Swiper as SwiperType } from 'swiper';
 import 'swiper/css';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
@@ -87,6 +88,8 @@ const EditProject: React.FC<EditProjectProps> = ({ id, name, img, shortDescritio
 const RecentProjects: React.FC = () => {
     const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
     const [data, setData] = useState<IProject[]>(projects)
+    const [curIndex, setCurIndex] = useState<number>(1)
+    const swiperRef = useRef<SwiperType | null>(null);
     const countProjectView = {
         mobile: 3,
         desktop: 3,
@@ -116,6 +119,14 @@ const RecentProjects: React.FC = () => {
         };
         
         setData(prev => [...prev, newProject]);
+
+        const newLength = data.length + 1;
+        setTimeout(() => {
+            if (swiperRef.current) {
+                swiperRef.current.slideTo(newLength - 1);
+            }
+            setCurIndex(newLength);
+        }, 50);
         
         // TODO Переход на страницу редактирования нового проекта
     };
@@ -131,7 +142,8 @@ const RecentProjects: React.FC = () => {
                 <Swiper
                     slidesPerView={1}
                     spaceBetween={10}  
-                    className={styles.swiper}   
+                    className={styles.swiper}  
+                    onSwiper={(swiper) => { swiperRef.current = swiper; }} 
                 >
                     {Array.from({ length: Math.ceil(data.length / countProjectView[breakpoint]) }).map((_, i) => {
                         const start = i * countProjectView[breakpoint];
