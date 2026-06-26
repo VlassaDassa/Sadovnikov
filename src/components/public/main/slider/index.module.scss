@@ -1,5 +1,6 @@
 @use './../../../../styles/tokens/colors' as *;
 @use './../../../../styles/tokens/effects' as *;
+@use './../../../../styles/tokens/typography' as *;
 
 
 
@@ -19,4 +20,14 @@
         @media (min-width: 768px) {
             width: auto !important;
         }
+}
+
+.notFound {
+    @extend .heading-24-magra-bold;
+    width: 100%;
+    text-align: center;
+
+    @media (min-width: 768px) {
+        font-size: 48px;
+    } 
 }

@@ -52,11 +52,16 @@ const Slider: React.FC<SliderProps> = ({ projects }) => {
             pagination={true}
             modules={[EffectCoverflow, Pagination]}
         >
-            {projects.map(project => (
-                <SwiperSlide key={project.id} className={style.sliderItem}>
-                    <ProjectItem project={project} />
-                </SwiperSlide>
-            ))}
+            {
+                projects.length === 0 ?
+                    <p className={style.notFound}>PROJECTS NOT FOUND</p>
+                :
+                    projects.map(project => (
+                        <SwiperSlide key={project.id} className={style.sliderItem}>
+                            <ProjectItem project={project} />
+                        </SwiperSlide>
+                    ))
+            }
 
             <PaginationSlider totalCountItems={totalCountItems} curIndex={curIndex} /> 
         </Swiper>

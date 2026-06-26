@@ -29,5 +29,9 @@
     @media (min-width: 1280px) {
         width: calc(1041px - 60px);
     }
+
+    @media (min-width: 2048px) {
+        top: 10%;
+    }
 }
 
