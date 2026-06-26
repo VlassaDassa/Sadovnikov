@@ -51,8 +51,7 @@ const EditProject: React.FC<EditProjectProps> = ({ id, name, img, shortDescritio
                 <div className={styles.dateWrapper}>
                     <Icon 
                         name='calendar'
-                        fillColor={cssVars.neutral_600}
-                        strokeColor={'none'}
+                        strokeColor={cssVars.neutral_600}
                         size={iconSize}
                     />
                     <p className={styles.date}>{date}</p>
