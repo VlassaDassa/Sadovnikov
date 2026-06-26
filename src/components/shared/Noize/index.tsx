@@ -2,7 +2,7 @@ import React from 'react';
 
 
 interface NoizeProps {
-    className: string;
+    className?: string;
 }
 
 const Noize: React.FC<NoizeProps> = ({ className }) => {

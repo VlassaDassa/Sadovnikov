@@ -31,9 +31,19 @@ const uiSlice = createSlice({
     initialState,
     reducers: {
         toggleIsOverlayVisible: (state) => {
+            const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
             state.isOverlayVisible = !state.isOverlayVisible
             state.bodyScroll = !state.bodyScroll
-            document.documentElement.style.overflow = state.bodyScroll ? 'auto' : 'hidden';
+            // document.documentElement.style.overflow = state.bodyScroll ? 'auto' : 'hidden';
+            
+            if (state.bodyScroll) {
+                document.documentElement.style.overflow = 'auto';
+                document.documentElement.style.paddingRight = '0';
+            }
+            else {
+                document.documentElement.style.overflow = 'hidden';
+                document.documentElement.style.paddingRight = `${scrollbarWidth}px`;
+            }
         },
 
         toggleMenu: (state) => {
