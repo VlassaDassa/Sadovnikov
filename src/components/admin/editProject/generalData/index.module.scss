@@ -138,24 +138,16 @@
     cursor: pointer;
     transition: all ease 0.1s;
     
-    &:active {
-        transform: scale(0.9);
+
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+
+    &:hover {
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        transform: translateY(-8px);
     }
 
     @media (min-width: 768px) {
         border-radius: 15px;
-    }
-
-    @media (min-width: 1280px) {
-        &:hover {
-            .pgnInnerShadow {
-                box-shadow: inset 0px 0px 50px 10px rgba(0, 0, 0, 0.9);
-            }
-
-            .wrapperPgnImage {
-                transform: scale(1.1);
-            }
-        }
     }
 }
 

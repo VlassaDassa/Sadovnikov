@@ -33,8 +33,6 @@ const EditProject: React.FC<EditProjectProps> = ({ id, name, img, shortDescritio
     const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
     const iconSize = breakpoint === 'mobile' ? 12 : 20
 
-    
-
     return (
         <SectionBackground className={styles.projectBg}>
             <div className={styles.imageWrapper}>
