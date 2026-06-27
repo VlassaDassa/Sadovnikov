@@ -1,0 +1,245 @@
+'use client'
+
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+
+import style from './index.module.scss';
+
+
+    
+interface CanvasProps {
+    children?: React.ReactNode;
+    className?: string;
+}
+
+interface Coord {
+    x: number,
+    y: number
+}
+
+const Canvas: React.FC<CanvasProps> = ({
+    children,
+    className=''
+}) => {
+
+    const [manualShow, setManualShow] = useState<boolean>(true)
+    const [scale, setScale] = useState<number>(1)
+    const [renderTrigger, setRenderTrigger] = useState<number>(0)
+    const [position, setPosition] = useState<Coord>({
+        x: 0,
+        y: 0
+    })
+    const [isDragging, setIsDragging] = useState<boolean>(false)
+    const [dragStart, setDragStart] = useState<Coord>({
+        x: 0,
+        y: 0
+    })
+    const [spacePressed, setSpacePressed] = useState<boolean>(false)
+
+    const canvasRef = useRef<HTMLDivElement>(null)
+    const contentRef = useRef<HTMLDivElement>(null)
+    
+    const prevScaleRef = useRef<number>(1);
+
+    // Поведение при пробеле
+    useEffect(() => {
+        const preventSpaceDefault = (e: KeyboardEvent) => {
+            // Если курсор в canvas отключаем дефоолтное поведеение пробела
+            const canvasElement = canvasRef.current;
+            const isHoveringCanvas = canvasElement?.matches(':hover');
+
+            if (e.code === 'Space' && isHoveringCanvas) {
+                e.preventDefault(); // <- отключение стандартного поведения
+
+                if (e.type === 'keydown' && !e.repeat) {// <- !e.repeat, сработает при первом нажатии(зажатии). Без этого, код бы исполнялся множество раз 
+                    setSpacePressed(true);
+                    if (canvasRef.current) {
+                        canvasRef.current.style.cursor = 'grab'
+                    }
+                }
+
+                if (e.type === 'keyup') {
+                    setSpacePressed(false);
+                    if (canvasRef.current) {
+                        canvasRef.current.style.cursor = 'default'
+                    }
+                }
+            }
+        }
+
+        document.addEventListener('keydown', preventSpaceDefault);
+        document.addEventListener('keyup', preventSpaceDefault);
+        
+        return () => {
+            document.removeEventListener('keydown', preventSpaceDefault);
+            document.removeEventListener('keydown', preventSpaceDefault);
+        }
+    }, [])
+
+
+    // Поведение при колёсике мыши. Отключение обычного поведения внутри canvas
+    useEffect(() => {
+        const handleWheel = (e: WheelEvent) => {
+            // Находится ли курсор внутри canvas
+            const isTargetInsideCanvas = canvasRef.current?.contains(e.target as Node);
+            
+            if (isTargetInsideCanvas && (e.ctrlKey || e.metaKey)) { // <- e.metaKey - это поведение для Mac, где вместо ctrl другая клавиша
+                e.preventDefault();
+            }
+        }
+
+        window.addEventListener('wheel', handleWheel, { passive: false })
+
+        return () => {
+            window.removeEventListener('wheel', handleWheel)
+        }
+    }, [])
+
+
+    // Запоминание начальной точки нажатия
+    const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+        // Если дочерний элемент, то не смещаем
+        if (e.target instanceof Element && e.target.closest('.canvasElement')) {
+            return;
+        }
+
+        // Запоминаем начальную точку
+        if (spacePressed || e.button === 1) { // <-  e.button === 1 - это зажатие колёсика
+            e.preventDefault()
+            setIsDragging(true)
+            setDragStart({
+                x: e.clientX - position.x,
+                y: e.clientY - position.y
+            })
+        }
+
+        if (canvasRef.current) {
+            canvasRef.current.style.cursor = 'grabbing';
+        }
+    }
+
+
+    // Перемещение canvas
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (!isDragging) return;
+
+        e.preventDefault();
+
+        setPosition({
+            x: e.clientX - dragStart.x,
+            y: e.clientY - dragStart.y
+        })
+    }
+
+
+    // Отмена перемещения
+    const handleMouseUp = () => {
+        setIsDragging(false)
+
+        if (canvasRef.current) {
+            canvasRef.current.style.cursor = spacePressed ? 'grab' : 'default'
+        }
+    }
+
+
+    // Масштабирование, с учётом местоположения курсора
+    const handleWheel = useCallback(
+        (e: React.WheelEvent<HTMLDivElement>) => {
+            if (e.ctrlKey || e.metaKey) {
+                const delta = e.deltaY > 0 ? 0.9 : 1.1 // <- 0.9 и 1.1 <- шаг 
+                const newScale = Math.min(Math.max(scale * delta, 0.1), 5) // <- 0.1 и 0.5 - ограничение(10% и 500%)
+            
+                const rect = canvasRef.current?.getBoundingClientRect();
+                if (!rect) return
+
+                const mouseX = e.clientX - rect.left;
+                const mouseY = e.clientY - rect.top;
+
+                const newPosition = {
+                    x: mouseX - (mouseX - position.x) * (newScale / scale),
+                    y: mouseY - (mouseY - position.y) * (newScale / scale),
+                }
+
+                prevScaleRef.current = scale;
+
+                setPosition(newPosition);
+                setScale(newScale)
+
+
+                // Страховка от артефактов
+                setTimeout(() => {
+                    setRenderTrigger(prev => prev + 1)
+                }, 50)
+            }
+        },
+    [scale, position]
+    )
+
+
+    // Запрет на открытие контекстного меню, при перемещении
+    const handleContextMenu = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (isDragging || spacePressed) {
+            e.preventDefault()
+        }
+    } 
+
+
+    const closeManual = () => {
+        setManualShow(false)
+    }
+
+
+    return (
+        <div 
+            className={`${style.canvasWrapper} ${className}`}
+        >
+            <div
+                ref={canvasRef}
+                className={style.canvasContainer}
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseUp}
+                onWheel={handleWheel}
+                onContextMenu={handleContextMenu}
+            >
+                <div 
+                    ref={contentRef}
+                    className={style.canvasContent}
+                    style={{
+                        transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
+                        transformOrigin: '0 0',
+                        backfaceVisibility: 'hidden',
+                        WebkitBackfaceVisibility: 'hidden',
+                    }}
+                    data-render={renderTrigger}
+                >
+                    {children}
+                </div>    
+
+                <div className={style.zoomInfo}>{Math.round(scale * 100)}%</div>
+
+                {manualShow && (
+                    <div className={style.canvasManual}>
+                        <div className={style.manualElement}>
+                            <span className={style.manualKey}>CTRL</span>
+                            <span className={style.manualText}>+</span>
+                            <span className={style.manualKey}>Wheel</span>
+                            <span className={style.manualText}>- scaling</span>
+                        </div>
+
+                        <div className={style.manualElement}>
+                            <span className={style.manualKey}>Space</span>
+                            <span className={style.manualText}>+</span>
+                            <span className={style.manualKey}>Drag</span>
+                            <span className={style.manualText}>- moving across the canvas</span>
+                        </div>
+
+                        <span onClick={closeManual} className={style.closeManual}>×</span>
+                    </div>
+                )}
+            </div>
+        </div>
+    )
+}
+
+export default Canvas;

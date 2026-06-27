@@ -1,0 +1,30 @@
+@use './../../../../styles/tokens/colors.scss' as *;
+@use './../../../../styles/tokens/effects.scss' as *;
+
+
+
+.dragHandler {
+    display: grid;
+    width: fit-content;
+    gap: 5px;
+
+    cursor: grab;
+}
+
+
+.small {
+    grid-template-columns: repeat(1, 1fr);
+}
+
+.big {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.circle {
+    width: 5px;
+    height: 5px;
+    background-color: $neutral_600;
+    
+    @extend .radius-full;
+}
+

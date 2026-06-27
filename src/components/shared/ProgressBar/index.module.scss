@@ -1,0 +1,39 @@
+@use './../../../styles/tokens/colors' as *;
+@use './../../../styles/tokens/effects' as *;
+@use './../../../styles/tokens/typography' as *;
+
+
+.progressBar {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+.progressBarItem,
+.progressBarItemFill {
+    height: 10px;
+    border-radius: 20px;
+
+}
+
+.progressBarItem {
+    width: 180px;
+    background-color: $brand_300;
+}
+
+.progressBarItemFill {
+    background-color: $brand_900;
+}
+
+.title {
+    @extend .body-16-magra-bold;
+    color: $neutral_400;
+    display: flex;
+    gap: 5px;
+}
+
+
+.progressSource {
+    width: 100px;
+}

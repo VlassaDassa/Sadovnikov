@@ -1,0 +1,33 @@
+@use './../../../../styles/tokens/colors' as *;
+@use './../../../../styles/tokens/effects' as *;
+@use './../../../../styles/tokens/typography' as *;
+
+
+
+.slider {
+    margin-top: 40px;
+}
+
+.swiper-slide-active {
+    transform: unset !important;; 
+
+}
+
+
+.sliderItem {
+    @extend .radius-12;
+
+        @media (min-width: 768px) {
+            width: auto !important;
+        }
+}
+
+.notFound {
+    @extend .heading-24-magra-bold;
+    width: 100%;
+    text-align: center;
+
+    @media (min-width: 768px) {
+        font-size: 48px;
+    } 
+}

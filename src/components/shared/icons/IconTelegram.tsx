@@ -1,0 +1,21 @@
+import React from 'react';
+
+import type { IconItem } from '@/interfaces/general';
+
+
+const IconTelegram: React.FC<IconItem> = ({ strokeColor, fillColor, iconClass, size }) => {
+    return (
+        <svg width={size} height={size} viewBox="0 0 17 14"  className={iconClass} xmlns="http://www.w3.org/2000/svg">
+            <path d="M15.5538 0.091979L0.778839 5.78948C-0.229495 6.19448 -0.223661 6.75698 0.593839 7.00781L4.38717 8.19115L13.1638 2.65365C13.5788 2.40115 13.958 2.53698 13.6463 2.81365L6.53551 9.23115H6.53384L6.53551 9.23198L6.27384 13.142C6.65717 13.142 6.82634 12.9661 7.04134 12.7586L8.88384 10.967L12.7163 13.7978C13.423 14.187 13.9305 13.987 14.1063 13.1436L16.6222 1.28698C16.8797 0.254479 16.228 -0.213021 15.5538 0.091979Z" 
+                stroke={strokeColor} 
+                fill={fillColor}
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            />
+        </svg>
+
+    )
+}
+
+export default IconTelegram;

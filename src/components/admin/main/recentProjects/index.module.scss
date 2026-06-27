@@ -1,0 +1,256 @@
+@use './../../../../styles/tokens/colors' as *;
+@use './../../../../styles/tokens/effects' as *;
+@use './../../../../styles/tokens/typography' as *;
+
+
+
+
+.section {
+    margin-top: 20px;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+}
+
+.titleText {
+    margin-bottom: 0;
+}
+
+.subtitle {
+    @extend .body-14-mont-regular;
+    color: $neutral_500;
+    line-height: $leading-tight;
+}
+
+
+.textBtn {
+    @extend .body-14-mont-regular;
+    color: $brand_600 !important;
+}
+
+
+.projectBg {
+    display: flex;
+    gap: 5px;
+    align-items: flex-start;
+
+    padding: 5px;
+    width: calc(100% - 12px);
+
+    position: relative;
+
+    transition: all ease-in-out 0.1s;
+    cursor: grab;
+
+    &:active {
+        background-color: $neutral_950;
+        transform: scale(1.03);
+        cursor: grabbing;
+    }
+
+    @media (min-width: 600px) {
+        padding: 15px;
+        width: calc(100% - 32px);
+        gap: 20px;
+    }
+
+    @media (min-width: 768px) {
+        flex-direction: column;
+        padding: 10px;
+
+        width: calc(49% - 20px);
+        gap: 10px;
+    }
+
+    @media (min-width: 1280px) {
+        width: calc(32% - 20px);
+    }
+}
+
+
+.imageWrapper {
+    width: 55%;
+    position: relative;
+    aspect-ratio: 16 / 10;
+    flex-shrink: 0;
+    border-radius: 10px; // точно такой же, как у картинки
+    overflow: hidden; // всё, что вылезает, обрезается
+
+    @media (min-width: 768px) {
+        flex-direction: column;
+        width: 100%;
+    }
+}
+
+.projectImg {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.innerShadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+
+    background: radial-gradient(
+        circle at center,
+        transparent 60%,
+        rgba(0, 0, 0, 0.7) 100%
+    );
+    background: radial-gradient(
+        ellipse at center,
+        transparent 50%,
+        rgba(0, 0, 0, 0.8) 100%
+    );
+}
+
+.projectContent {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    @media (min-width:500px) {
+        gap: 25px;
+    }
+
+    @media (min-width: 1280px) {
+        gap: 40px;
+    }
+}
+
+.date {
+    @extend .body-14-mont-regular;
+    font-size: 10px;
+    color: $neutral_400;
+
+    @media (min-width: 500px) {
+        font-size: 14px;
+    }
+
+    @media (min-width: 768px) {
+        font-size: 16px;
+    }
+}
+
+.dateWrapper {
+    display: flex;
+    column-gap: 5px;
+    align-items: center;
+    
+    @media (min-width: 768px) {
+        order: 2
+    }
+}
+
+.titleWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    @media (min-width: 768px) {
+        gap: 7px;
+    }
+}
+
+.title {
+   @extend .body-14-mont-regular;
+   font-size: 12px;
+   @extend .whiteText; 
+
+    @media (min-width: 500px) {
+        font-size: 16px;
+    }
+
+    @media (min-width: 768px) {
+        font-size: 20px;
+        font-weight: $semi_bold;
+    }
+}
+
+.shortDescription {
+    @extend .body-14-mont-regular;
+    font-size: 10px;
+    color: $neutral_400; 
+
+    @media (min-width:500px) {
+        font-size: 14px;
+    }
+
+    @media (min-width: 768px) {
+        font-size: 16px;
+        font-weight: $semi_bold;
+    }
+}
+
+.btnText {
+    @extend .body-14-mont-medium;
+    font-size: 10px;
+    text-transform: uppercase;
+    color: $brand_600;
+
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+
+    @media (min-width:500px) {
+        font-size: 14px;
+    }
+
+    @media (min-width: 600px) {
+        bottom: 15px;
+        right: 15px;
+    }
+}
+
+.btn {
+    @media (min-width: 768px) {
+        padding: 15px;
+    } 
+}
+
+.btnLink {
+    position: absolute !important; 
+    @media (min-width: 768px) {
+        bottom: 10px;
+        right: 10px;
+    } 
+}
+
+.projectWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    
+    margin-top: 15px;
+    
+    @media (min-width: 768px) {
+        flex-direction: row;
+        width: 100%;
+        gap: 20px;
+    }
+}
+
+
+.addButton {
+    width: calc(100% - 60px) !important;
+    justify-content: center;
+    margin-top: 15px;
+
+    @media (min-width: 768px) {
+        margin-top: 30px;
+        width: calc(100% - 80px) !important;
+    }
+
+    @media (min-width: 1280px) {
+        width: calc(100% - 100px) !important;
+    }
+}

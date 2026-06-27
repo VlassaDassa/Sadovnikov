@@ -1,0 +1,54 @@
+@use './../../../../styles/tokens/colors' as *;
+@use './../../../../styles/tokens/typography' as *;
+
+
+
+.section {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.itemWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.headerWrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.iconWrapper {
+    background-color: $brand_900;
+    border-radius: 5px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+
+
+.itemTitle {
+    @extend .heading-20-magra-bold;
+    color: $neutral_400;
+
+    @media (min-width: 1280px) {
+        font-size: 24px;
+    }
+}
+
+.texarea {
+    @extend .line-height-1_5x;
+    min-height: 200px;
+}

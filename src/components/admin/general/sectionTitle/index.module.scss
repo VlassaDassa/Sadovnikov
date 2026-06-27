@@ -1,0 +1,66 @@
+@use './../../../../styles/tokens/colors' as *;
+@use './../../../../styles/tokens/typography' as *;
+@use './../../../../styles/tokens/effects' as *;
+
+
+.titleWrapper {
+    display: flex;
+    flex-direction: column;
+
+    gap: 15px;
+
+    @media (min-width: 600px) {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items:first baseline;
+    }
+}
+
+.textWrapper {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+
+    @media (min-width: 1280px) {
+        flex-direction: row;
+        align-items:first baseline;
+        gap: 20px;
+    }
+}
+
+.title {
+    @extend .heading-20-mont-regular;
+    @extend .whiteText;
+
+    @media (min-width: 768px) {
+        font-size: 24px;
+    }
+
+    @media (min-width: 1280px) {
+        font-size: 32px;
+    }
+}
+
+.text {
+    @extend .body-14-mont-regular;
+    color: $neutral_500;
+
+    @media (min-width: 768px) {
+        font-size: 16px;
+    }
+
+    @media (min-width: 1280px) {
+        font-size: 20px;
+    }
+}
+
+.counter {
+    @extend .body-16-mont-semi_bold;
+    color: $brand_400;
+
+    @media (min-width: 1280px) {
+        font-size: 20px;
+    }
+}
+

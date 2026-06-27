@@ -1,0 +1,142 @@
+@use './../../../../styles/tokens/colors' as *;
+@use './../../../../styles/tokens/typography' as *;
+@use './../../../../styles/tokens/effects' as *;
+
+
+
+.section {
+    margin-top: 40px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sectionBg {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.textarea {
+    @extend .line-height-1_5x;
+
+    cursor: text;
+}
+
+.input {
+    cursor: text;
+}
+
+.inputLabel {
+    @extend .body-16-mont-regular;
+    color: $neutral-500;
+    width: fit-content;
+
+    @media (min-width: 768px) {
+        font-size: 20px;
+    }
+}
+
+.wrapImage {
+    width: 298px;
+    aspect-ratio: 11/9;
+
+    border: 1px solid $neutral_900;
+    border-radius: 10px;
+    
+    transition: all ease-in-out 0.2s;
+    cursor: pointer;
+
+    @media (min-width: 1280px) {
+        &:hover {
+            opacity: 0.6;
+        }
+    }
+}
+
+.image {
+    object-fit: cover;
+}
+
+.loadImageWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: fit-content;
+
+    position: relative;
+}
+
+
+.wrapIcon {
+    height: 80px;
+    width: 80px;
+
+    background-color: $brand_900;
+    border-radius: 10px;
+
+    transition: all ease-in-out 0.2s;
+    cursor: pointer;
+
+    @media (min-width: 1280px) {
+        &:hover {
+            opacity: 0.6;
+        }
+    }
+}
+
+.pen {
+    position: absolute;
+    top: 30px;
+    right: -10px;
+}
+
+.imgContainer {
+    display: inline-flex;
+    flex-direction: column;
+    row-gap: 30px;
+
+    @media (min-width: 768px) {
+        flex-direction: row;
+        column-gap: 100px;
+        flex-wrap: wrap;
+    }
+
+    @media (min-width: 1280px) {
+        column-gap: 50px;
+    }
+}
+
+.btnWrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;   
+    
+    @media (min-width: 768px) {
+        flex-direction: row;
+        gap: 30px;
+    }
+}
+
+
+.slider {
+    width: 100%;
+}
+
+.deleteBtn {
+    p {
+        color: $error_600 !important;
+    }
+}
+
+.deleteBtn,
+.addBtn {
+    justify-content: center;
+    width: calc(100% - 60px);
+
+    @media (min-width: 768px) {
+        width: calc(100% - 80px);
+    }
+}
+

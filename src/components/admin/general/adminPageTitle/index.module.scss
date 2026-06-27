@@ -1,0 +1,90 @@
+@use './../../../../styles/tokens/colors' as *;
+@use './../../../../styles/tokens/typography' as *;
+@use './../../../../styles/tokens/effects' as *;
+
+
+
+.titleWrapper {
+    display: flex;
+    flex-direction: column;
+
+    gap: 15px;
+
+    @media (min-width: 1280px) {
+        gap: 20px;
+    }
+}
+
+.content {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    @media (min-width: 1280px) {
+        gap: 15px;
+    }
+}
+
+.textWrapper {
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.btnBack {
+    @extend .body-14-mont-regular;
+    color: $brand_600;
+
+    @media (min-width: 768px) {
+        font-size: 20px;
+    }
+
+    @media (min-width: 1280px) {
+        font-size: 24px;
+    }
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px;
+    border-radius: 10px;
+
+    background-color: $brand_900;
+
+    @media (min-width: 1280px) {
+        padding: 15px;
+    }
+}
+
+.title {
+    @extend .heading-20-mont-regular;
+    @extend .whiteText;
+
+    @media (min-width: 768px) {
+        font-size: 24px;
+    }
+
+    @media (min-width: 1280px) {
+        font-size: 32px;
+    }
+}
+
+.text {
+    @extend .body-14-mont-regular;
+    color: $neutral_500;
+
+    line-height: $leading-tight;
+
+    @media (min-width: 768px) {
+        font-size: 16px;
+    }
+
+    @media (min-width: 1280px) {
+        font-size: 20px;
+    }
+}

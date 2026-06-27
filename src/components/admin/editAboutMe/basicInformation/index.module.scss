@@ -1,0 +1,26 @@
+
+
+
+.sectionTitle {
+    text-transform: lowercase;
+
+    &::first-letter {
+        text-transform: uppercase;
+    }
+}
+
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+.section {
+    margin-top: 20px;
+
+    @media (min-width: 768px) {
+        margin-top: 30px;
+    }
+}

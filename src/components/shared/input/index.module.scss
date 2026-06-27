@@ -1,0 +1,260 @@
+@use './../../../styles/tokens/typography' as *;
+@use './../../../styles/tokens/colors' as *;
+@use './../../../styles/tokens/effects' as *;
+
+
+
+
+.inputWrapper {
+    position: relative;
+    width: 100%;
+    
+    &--textarea {
+        height: auto;
+        min-height: 80px;
+    }
+}
+
+.inputWrapper-default {
+    height: 80px;
+}
+
+.inputWrapper-admin {
+    height: auto;
+}
+
+.input {
+    border-bottom: $neutral_600 3px solid;
+
+    @extend .body-16-magra-bold;
+
+    color: $neutral_200;
+    line-height: $leading-loose;
+
+    transition: all ease-in-out .2s;
+
+    &:placeholder-shown {
+        color: $neutral_600;
+    }
+
+    @media (min-width: 1280px) {
+        &:hover {
+            border-bottom: $neutral_400 3px solid;
+            color: $neutral_400;
+
+            .inputIcon {
+                opacity: 1;
+            }
+        }
+    }
+    
+
+    &:focus {
+        border-bottom: $neutral_200 3px solid;
+        color: $neutral_200;
+
+
+        .inputIcon {
+            opacity: 1;
+        }
+    }
+
+    @media (min-width: 768px) {
+        font-size: 20px;
+    }
+}
+
+.inputAdmin {
+    background-color: $neutral_1000;
+    border: 1px solid rgba($white, 0.08);
+    border-radius: 10px;
+
+    @extend .body-16-mont-regular;
+    @extend .lightText;
+    @extend .shadow-splash;
+
+    padding: 20px;
+
+    transition: all ease-in-out .2s;
+
+    &:placeholder-shown {
+        color: $neutral_600;
+    }
+
+    @media (min-width: 1280px) {
+        &:hover {
+            background-color: $neutral_950;
+
+            &:placeholder-shown {
+                color: $neutral_400;
+            }   
+        }
+    }
+
+
+    &:focus {
+        border: 1px solid rgba($white, 0.3);
+        color: $neutral_200;
+    }
+
+    @media (min-width: 768px) {
+        font-size: 20px;
+    }
+}
+
+
+
+.inputError {
+    border-bottom: $error_600 3px solid;
+}
+
+.inputAdminError {
+    border: $error_600 1px solid;
+    color: $error_600;
+}
+
+
+.inputWithIcon {
+    padding: 0 40px;
+
+    @media (min-width: 1280px) {
+        padding: 0 50px;
+    }
+}
+
+
+.inputAdminWithIcon {
+    padding-left: 40px; 
+}
+
+.inputLabel {
+    display: block;
+    @extend .body-16-mont-regular;
+    color: $neutral_500;
+    margin-bottom: 15px;
+
+    @media (min-width: 768px) {
+        font-size: 20px;
+    }
+}
+
+.labelError {
+    color: $error_600;
+}
+
+
+.inputIcon {
+    position: absolute;
+
+    top: 5px;
+}
+
+.inputIconLeft {
+    left: 10px;
+}
+
+
+.inputAdminIcon {
+    position: absolute;
+
+    top: 20px;
+}
+
+
+.inputAdminIconLabel {
+    position: absolute;
+
+    bottom: 19px;
+    
+    @media (min-width: 768px) {
+        bottom: 21px;
+    }
+
+    @media (min-width: 1280px) {
+        bottom: 19px;
+    }
+}
+
+
+.inputIconRight {
+    right: 10px;
+}
+
+.inputIcon {
+    path {
+        transition: stroke 0.3s ease, fill 0.3s ease;
+    }
+}
+
+.inputErrorText {
+    @extend .body-14-mont-regular;
+    @extend .line-height-1_5x;
+    margin-top: 5px;
+
+    @media (min-width: 1280px) {
+        font-size: 16px;
+        margin-top: 15px;
+    }
+    
+    color: $error_600;
+}
+
+
+.input-textarea {
+    line-height: 1;
+}
+
+.inputWrapper-textarea {
+    height: auto;
+    min-height: 100px;
+}
+
+
+.counter {
+    position: absolute;
+    top: 5px;
+    right: 0px;
+
+    @extend .body-14-mont-regular;
+    color: $neutral_600;
+}
+
+
+.counterError {
+    color: $error_600;
+}
+
+
+.counterWithoutLabel {
+    top: -20px;
+}
+
+.datePickerWrapper {
+    position: relative;
+    width: 100%;
+
+    cursor: pointer;
+}
+
+.datePicker {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 100;
+    margin-top: 8px;
+}
+
+.fieldWrapper {
+    height: fit-content;
+    border-radius: 10px;
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.noize {
+    height: 95%;
+    top: 5%;
+}

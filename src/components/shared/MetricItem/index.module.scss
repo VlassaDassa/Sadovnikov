@@ -1,0 +1,78 @@
+@use './../../../styles/tokens/colors' as *;
+@use './../../../styles/tokens/typography' as *;
+@use './../../../styles/tokens/effects' as *;
+
+
+.textWrapper, 
+.contentWrapper {
+    display: flex;
+    flex-direction: column; 
+}
+
+.metricItem {
+    display: flex;
+    gap: 10px;
+
+    padding-bottom: 10px;
+    border-bottom: 1px solid $neutral_800;
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    @media (min-width: 1280px) {
+        align-items: center;
+        width: 500px;
+    } 
+}
+
+.title {
+    @extend .heading-24-magra-bold;
+    @extend .whiteText;
+
+    @media (min-width: 768px) {
+        font-size: 36px;
+    }
+
+    @media (min-width: 1280px) {
+        font-size: 40px;
+    }
+}
+
+.iconWrapper {
+    width: 64px;
+    height: 64px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: $brand_900;
+    border-radius: 10px;
+}
+
+.textWrapper {
+    gap: 5px;
+}
+
+.metricTitle {
+    @extend .heading-20-magra-bold;
+    @extend .whiteText;
+}
+
+.metricText {
+    @extend .body-16-magra-bold;
+    color: $neutral_400;
+}
+
+.contentWrapper {
+    gap: 10px;
+    
+    @media (min-width: 1280px) {
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: space-between;
+        width: 100%;
+        gap: 20px;
+    } 
+}

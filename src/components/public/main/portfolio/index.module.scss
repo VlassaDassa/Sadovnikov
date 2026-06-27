@@ -1,0 +1,36 @@
+@use './../../../../styles/tokens/typography' as *;
+@use './../../../../styles/tokens/effects' as *;
+
+
+.portfolio {
+    margin-top: 50px;
+}
+
+
+.portfolioTitle {
+    @extend .heading-32-magra-bold;
+    @extend .whiteText;
+
+    @media (min-width: 768px) {
+        font-size: 64px;
+    }
+
+    @media (min-width: 1280px) {
+        font-size: 128px;
+    }
+}
+
+
+.notFound {
+    @extend .heading-64-magra-bold;
+    width: 100%;
+    text-align: center;
+
+    position: absolute;
+
+    top: 40%;
+
+    @media (min-width: 1600px) {
+        font-size: 96px;
+    } 
+}

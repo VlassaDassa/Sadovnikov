@@ -1,0 +1,59 @@
+'use client'
+
+import React from 'react';
+
+import { useTooltip } from '@/hooks/useTooltip';
+
+import { ICommit } from '@/interfaces/general';
+
+import styles from './index.module.scss';
+
+
+interface CommitProps {
+    item: ICommit,
+}
+
+
+
+const Commit: React.FC<CommitProps> = ({ item }) => {
+    const tooltipRef = useTooltip<HTMLDivElement>({
+            text: item.text,
+            title: item.name,
+            date: item.date,
+            type: 'lvl3',
+            placement: 'bottom',
+            fakeWidth: 400,
+            delay: 400,
+        });
+
+    return (
+        <div ref={tooltipRef} key={item.name} className={styles.commitItem}>
+            <div className={styles.node}></div>
+            <p className={styles.commitText}>- {item.name}</p>
+        </div>
+    )
+}
+
+interface EvolutionProps {
+    data: ICommit[]
+}
+
+
+const Evolution: React.FC<EvolutionProps> = ({ data }) => {
+    return (
+        <section className={`${styles.evolution}`}>
+            <h2 className={`${styles.title} sectionTitle`}>EVOLUTION</h2>
+
+            <div className={styles.evolWrapper}>
+                <div className={styles.timeline}>
+                    {data.map((item) => (
+                        <Commit key={item.id} item={item} />
+                    ))}
+                </div>
+            </div>
+        </section>
+    )
+}
+
+export default Evolution;
+

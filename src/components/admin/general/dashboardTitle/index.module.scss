@@ -1,0 +1,16 @@
+@use './../../../../styles/tokens/colors' as *;
+@use './../../../../styles/tokens/typography' as *;
+
+
+
+.title {
+    @extend .body-16-mont-semi_bold;
+    @extend .whiteText;
+    text-transform: uppercase;
+
+    margin-bottom: 30px;
+
+    @media (min-width: 768px) {
+        font-size: 20px;
+    }
+}

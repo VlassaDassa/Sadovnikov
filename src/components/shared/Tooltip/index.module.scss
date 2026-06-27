@@ -1,0 +1,50 @@
+@use './../../../styles/tokens/colors' as *;
+@use './../../../styles/tokens/effects' as *;
+@use './../../../styles/tokens/typography' as *;
+
+
+
+.tooltip {
+    position: absolute;
+    
+    padding: 20px;
+    
+    background-color: $neutral_900;
+
+    width: calc(100% - 40px);
+
+    @extend .body-16-mont-regular;
+    @extend .shadow-xl;
+    @extend .radius-12;
+    @extend .whiteText;
+    
+    pointer-events: none;
+
+    transition: opacity 0.1s ease-in-out;
+
+    @media (min-width: 768px) {
+        width: max-content; 
+        max-width: 400px;
+    }
+}
+
+
+.title {
+    @extend .body-20-magra-bold;
+    @extend .whiteText;
+    margin-bottom: 10px;
+}
+
+.text {
+    @extend .body-16-mont-regular;
+    @extend .whiteText;
+    @extend .line-height-1_5x;
+}
+
+.date {
+    @extend .body-16-mont-bold;
+    color: $neutral_600;
+    margin-top: 5px;
+
+    margin-bottom: 20px;
+}

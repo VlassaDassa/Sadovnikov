@@ -1,0 +1,29 @@
+@use './../../../styles/tokens/colors' as *;
+
+
+.skillLevelWrapper {
+    display: flex;
+    column-gap: 5px;
+}
+
+.skillLevelItem {
+    width: 20px;
+    height: 5px;
+
+    background-color: $neutral_300;
+
+    border-radius: 1px;
+
+    @media (min-width: 768px) {
+        .skillLevelItem {
+            width: 30px;
+            height: 10px;
+
+            border-radius: 2px;
+        }
+    }
+}
+
+.skillLevelItem--filled {
+    background-color: $brand_600;
+}

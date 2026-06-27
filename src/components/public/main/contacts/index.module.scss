@@ -1,0 +1,91 @@
+@use './../../../../styles/tokens/typography' as *;
+
+
+
+.contacts {
+    position: relative;
+
+    margin-top: 100px;
+
+    @media (min-width: 768px) {
+        margin-top: 100px;
+        min-height: 500px;
+    }
+
+    @media (min-width: 1280px) {
+        margin-top: 150px;
+        min-height: 750px;
+    }
+}
+
+
+.contactsTitle {
+    @extend .body-24-magra-bold;
+    @extend .whiteText;
+
+    @media (min-width: 768px) {
+        font-size: 32px;
+    }
+
+    @media (min-width: 1280px) {
+        font-size: 40px;
+    }
+}
+
+.formContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 30px;
+
+    row-gap: 50px;
+
+    @media (min-width: 768px) {
+        width: 50%;
+    }
+
+    @media (min-width: 1280px) {
+        width: 40%;
+    }
+}
+
+
+.contactFormBtn {
+    margin-top: -50px;
+    margin-left: none;
+
+    @media (min-width: 768px) {
+        margin-left: auto;
+        margin-top: -40px;
+    }
+}
+
+.avatar {
+    position: absolute;
+    top: 50px;
+    right: -120px;
+}
+
+
+.avatar-anim {
+    animation: portalAppear 4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+
+    will-change: opacity, transform, filter;
+    
+    @keyframes portalAppear {
+        0% {
+            opacity: 0;
+            transform: scale(0) rotate(180deg) translateY(50px);
+            filter: blur(15px) brightness(2);
+        }
+        
+        100% {
+            opacity: 1;
+            transform: scale(1) rotate(-15deg) translateY(0);
+            filter: blur(0) brightness(1);
+        }
+    }
+}

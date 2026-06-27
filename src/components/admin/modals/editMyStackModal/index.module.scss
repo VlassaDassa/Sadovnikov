@@ -1,0 +1,78 @@
+@use './../../../../styles/tokens/colors.scss' as *;
+@use './../../../../styles/tokens/typography.scss' as *;
+@use './../../../../styles/tokens/effects.scss' as *;
+
+
+
+
+
+.stackItem {
+    padding: 15px;
+    border-radius: 15px;
+
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    &:active {
+        cursor: grabbing;
+    }
+
+    @media (min-width: 768px) {
+        gap: 40px;
+        padding: 20px;
+    }
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+
+    margin-top: 15px;
+}
+
+
+.inputWrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.firstLineWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.secondLineWrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 25px;
+    margin-top: 20px;
+}
+
+
+.deleteBtn {
+    padding: 10px;
+}
+
+.skillLevel {
+    gap: 5px;
+}
+
+.skillLevelItem {
+    width: 10px;
+    height: 5px;
+}
+
+.addBtn {
+    width: calc(100% - 60px);
+
+    p {
+        width: 100%;
+        text-align: center;
+    }
+}

@@ -1,0 +1,44 @@
+@use './../../../../styles/tokens/colors' as *;
+@use './../../../../styles/tokens/typography' as *;
+@use './../../../../styles/tokens/effects' as *;
+
+
+.section  {
+    margin-top: 20px;
+
+    @media (min-width: 1280px) {
+        margin-top: 0px;
+        max-width: 350px;
+    }
+}
+
+.wrapper {
+    display: grid;
+    gap: 30px;
+    align-items: center;
+    grid-template-columns: auto 1fr auto;
+
+    @media (min-width: 410px) {
+        grid-template-columns: 1fr 1fr 1fr;
+        width: 400px;
+    }
+
+    @media (min-width: 1280px) {
+        grid-template-columns: auto 1fr auto;
+        gap: 20px;
+        min-height: 154px;
+        width: unset;
+    }
+    
+}
+
+.item {
+    display: contents;  
+}
+
+.itemText {
+    @extend .body-14-mont-regular;
+    @extend .whiteText;
+
+    @extend .line-height-1_5x;
+}

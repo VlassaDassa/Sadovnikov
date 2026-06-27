@@ -1,0 +1,42 @@
+@use './../../../../styles/tokens/colors.scss' as *;
+@use './../../../../styles/tokens/typography.scss' as *;
+@use './../../../../styles/tokens/effects.scss' as *;
+
+
+
+
+
+.tooltip {
+    border-radius: 10px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 15px;
+
+    @media (min-width: 768px) {
+        padding: 25px;
+        border-radius: 15px;
+    }
+}
+
+.tooltipText {
+    @extend .body-14-mont-regular;
+    color: rgba($white, 0.45);
+
+    @media (min-width: 768px) {
+        font-size: 20px;
+    }
+}
+
+.tooltipCounter {
+    @extend .body-14-mont-regular;
+    color: $info_600;
+
+    @media (min-width: 768px) {
+        font-size: 20px;
+    }
+}
+
+

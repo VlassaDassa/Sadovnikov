@@ -1,0 +1,21 @@
+@use './../../../../styles/tokens/typography' as *; 
+@use './../../../../styles/tokens/effects' as *; 
+
+
+.section {
+    margin-top: 40px;
+
+    @media (min-width: 768px) {
+        margin-top: 60px;
+    }
+
+    @media (min-width: 1280px) {
+        margin-top: 80px;
+    }
+}
+
+.shortBio {
+    min-height: 200px;
+    line-height: $leading-normal;
+    margin-top: 10px;
+}

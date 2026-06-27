@@ -1,0 +1,14 @@
+.twoColumns {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    margin-top: 60px;
+
+    
+
+    @media (min-width: 850px) {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}

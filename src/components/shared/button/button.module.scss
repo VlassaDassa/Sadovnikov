@@ -1,0 +1,199 @@
+@use './../../../styles/tokens/typography' as *;
+@use './../../../styles/tokens/effects' as *;
+@use './../../../styles/tokens/colors' as *;
+
+
+
+
+// Default button
+.button {
+    position: relative;
+
+    border-radius: 35px;
+    width: fit-content;
+
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+
+    &.button-rightIcon {
+        .icon-btn {
+            order: 2;
+        }
+    
+        .buttonText {
+            order: 1;
+        }
+    }
+
+    &.button-leftIcon {
+        .icon-btn {
+            order: 1;
+        }
+    
+        .buttonText {
+            order: 2;
+        }
+    }
+
+     @media (min-width: 768px) {
+        column-gap: 10px;
+    }
+}
+
+.button-loading {
+    pointer-events: none;
+}
+
+
+.button-disabled {
+    pointer-events: none;
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+
+
+.button-big {
+    padding: 20px 50px;
+}
+
+.button-medium {
+    padding: 13px 40px;
+}
+
+.button-small {
+    padding: 10px 30px;
+}
+
+.button-only-big {
+    padding: 10px;
+}
+
+.button-only-medium,
+.button-only-small {
+    padding: 5px;
+}
+
+
+
+
+.buttonText-big {
+    @extend .heading-24-magra-bold;
+}
+
+.buttonText-medium {
+    @extend .heading-20-magra-bold;
+}
+
+.buttonText-small {
+    @extend .body-16-magra-bold;
+}
+
+.buttonText-dark,
+.buttonText-primary {
+    color: $white;
+}
+
+.buttonText-secondary {
+    color: $neutral_900;
+}
+
+
+.button-primary {
+    background-color: $brand_900;
+    transition: all ease-in-out 0.3s, transform ease 0.3s;
+
+    @media (min-width: 768px) {
+        &:hover {
+            background-color: $brand_600;
+        }
+    }
+
+    &:active {
+        transform: scale(0.95);
+        background-color: $brand_400;
+    }
+}
+
+
+.button-secondary {
+    background-color: $neutral_50;
+    transition: all ease-in-out 0.3s, transform ease 0.3s;
+
+    @media (min-width: 768px) {
+        &:hover {
+            background-color: $neutral_200;
+        }
+    }
+
+    &:active {
+        transform: scale(0.95);
+        background-color: $neutral_400;
+    }
+}
+
+
+.button-dark {
+    background-color: $neutral_900;
+    transition: all ease-in-out 0.3s, transform ease 0.3s;
+
+    @media (min-width: 768px) {
+        &:hover {
+            background-color: $neutral_700;
+        }
+    }
+
+    &:active {
+        transform: scale(0.95);
+        background-color: $neutral_500;
+    }
+}
+
+
+.buttonText-black {
+    font-family: $font-mont;
+    font-weight: $regular;
+    color: $neutral_500;
+}
+
+
+.button-black {
+    background-color: $neutral_1000;
+    transition: all ease-in-out 0.1s, transform ease 0.1s;
+    border-radius: 10px;
+    color: $neutral_500;
+    border: 1px solid rgba($white, 0.08);
+    @extend .shadow-splash;
+
+    @media (min-width: 768px) {
+        &:hover {
+            background-color: $neutral_900;
+
+            .buttonText-black {
+                transition: all ease-in-out 0.1s, transform ease 0.3s;
+            }
+        }
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+}
+
+
+.icon-btn-loader {
+    animation: default_spin 0.6s ease-in-out infinite;
+
+    @keyframes default_spin {
+        from {
+            transform: rotate(0);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
+    }
+}
+
+
