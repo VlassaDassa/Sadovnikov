@@ -19,7 +19,7 @@ export interface IProjectStack {
     id: number,
     name: string,
     icon: string,
-    tooltip: IStackTooltip
+    tooltip?: IStackTooltip
 }
 
 export interface IFeatureItem {

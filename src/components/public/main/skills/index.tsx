@@ -6,7 +6,6 @@ import TalkingAvatar from '../talkingAvatar';
 import AdaptiveImage from '@/components/shared/AdaptiveImage';
 import SkillLevel from '@/components/shared/SkillLevel';
 
-import { skills } from '@/mockData/skills';
 import type { Skill } from '@/interfaces/general';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
@@ -30,7 +29,11 @@ const SkillItem: React.FC<Skill> = ({ name, score }) => {
 }
 
 
-const Skills: React.FC = () => {
+interface SkillsProps {
+    skills: Skill[]
+}
+
+const Skills: React.FC<SkillsProps> = ({ skills }) => {
     const { isVisible, elementRef } = useScrollAnimation<HTMLDivElement>({
         threshold: 0.1,
         rootMargin: '0px 0px -100px 0px'

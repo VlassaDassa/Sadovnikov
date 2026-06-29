@@ -5,19 +5,23 @@ import React from 'react';
 import DecorButton from '../../../shared/button/DecorButton';
 import AboutIllustration from '../aboutIllustration';
 
-import { aboutMe } from '@/mockData/aboutMe';
+import type { AboutMe } from '@/interfaces/general';
 
 import style from './index.module.scss';
 
 
 
-const AboutMe: React.FC = () => {
+interface AboutMeProps {
+    aboutMe: AboutMe
+}
+
+const AboutMe: React.FC<AboutMeProps> = ({ aboutMe }) => {
 
     return (
         <section id='about' className={`${style.aboutMe} container`}>
             <h2 className={`${style.aboutMeTitle} sectionTitle`}>AboutMe</h2>
 
-            <AboutIllustration />
+            <AboutIllustration aboutMe={aboutMe} />
 
             <div className={style.aboutMeData}>
                 <p className={style.text}>Year of birth: {aboutMe['birth']}</p>
