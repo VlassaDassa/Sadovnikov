@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react';
+import { Prisma } from '@prisma/client';
 import dynamic from 'next/dynamic';
 import { useSelector } from 'react-redux';
 
@@ -9,13 +10,25 @@ const Slider = dynamic(() => import('../slider'), { ssr: false })
 const ProjectItem = dynamic(() => import('../projectItem'), { ssr: false })
 
 import { RootState } from '@/store';
-import { projects } from '@/mockData/projects';
 
 import style from './index.module.scss';
 
 
+export type Project = Prisma.ProjectGetPayload<{
+    include: {
+        images: true;
+        stack: true;
+        description: true;
+    };
+}>;
 
-const Portfolio: React.FC= () => {
+// Теперь в компоненте
+interface PortfolioProps {
+    projects: Project[];
+}
+
+
+const Portfolio: React.FC<PortfolioProps> = ({ projects }) => {
     const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
 
 

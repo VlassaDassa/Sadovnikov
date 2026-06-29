@@ -6,11 +6,35 @@ import MyStack from '@/components/public/main/myStack';
 import AboutMe from '@/components/public/main/aboutMe';
 import Portfolio from '@/components/public/main/portfolio';
 import Contacts from '@/components/public/main/contacts';
-
 import AnimatedSection from '@/components/shared/AnimatedScroll';
 
+import prisma from '@/lib/prisma';
 
-const Main: React.FC = () => {
+
+const Main: React.FC = async () => {
+    const [projects, skills, stack, aboutMe] = await Promise.all([
+        prisma.project.findMany({
+            orderBy: { createdAt: 'desc' },
+            include: {
+                images: true,
+                stack: true,
+                description: true,
+            },
+        }),
+        prisma.skill.findMany({
+            orderBy: { id: 'asc' },
+        }),
+        prisma.stack.findMany({
+            orderBy: { name: 'asc' },
+        }),
+        prisma.aboutMe.findFirst({
+            include: {
+                workExperience: true,
+            },
+        }),
+    ]);
+
+
     return (
         <main>
             <AnimatedSection animation='fade-down'>
@@ -26,7 +50,7 @@ const Main: React.FC = () => {
                 <AboutMe />
             </AnimatedSection>
             <AnimatedSection animation='fade-down'>
-                <Portfolio />
+                <Portfolio projects={projects} />
             </AnimatedSection>
             <AnimatedSection animation='zoom'>
                 <Contacts />

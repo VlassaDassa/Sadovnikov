@@ -71,7 +71,7 @@ export interface IProject {
     shortDescrition: string,
     previewDescription: string,
     stack: IProjectStack[],
-    keyFeatures: IFeatureItem[],
+    keyFeatures?: IFeatureItem[],
     description: IProjectDescription[],
     metrics: IMertics[],
     commits: ICommit[],
