@@ -13,15 +13,18 @@ import AnimatedSection from '@/components/shared/AnimatedScroll';
 const SelectPeriod = dynamic(() => import('@/components/admin/modals/selectPeriod'), { ssr: false });
 const WorkExperience = dynamic(() => import('@/components/admin/editAboutMe/workExperience'), { ssr: false });
 
-import { aboutMe as initialData } from '@/mockData/aboutMe';
-import type { WorkExperience } from '@/interfaces/general';
+import type { WorkExperience, AboutMe } from '@/interfaces/general';
 
 import styles from './index.module.scss';
 
 
 
-const ClientPageWrapper: React.FC = () => {
-    const [data, setData] = useState<WorkExperience[]>(initialData['workExperience'])
+interface ClientPageWrapperProps {
+    aboutMe: AboutMe
+}
+
+const ClientPageWrapper: React.FC<ClientPageWrapperProps> = ({ aboutMe }) => {
+    const [data, setData] = useState<WorkExperience[]>(aboutMe['workExperience'])
 
     const isSelectPeriodModalOpen = useSelector((state: RootState) => state.uiState.isSelectPeriodModalOpen)
 
@@ -44,7 +47,7 @@ const ClientPageWrapper: React.FC = () => {
                 </AnimatedSection>
 
                 <AnimatedSection animation='fade-left'>
-                    <BasicInformation />
+                    <BasicInformation aboutMe={aboutMe} />
                 </AnimatedSection>
 
                 <AnimatedSection animation='fade-right'>
@@ -52,7 +55,7 @@ const ClientPageWrapper: React.FC = () => {
                 </AnimatedSection>
 
                 <AnimatedSection animation='fade-down'>
-                    <ShortBio />
+                    <ShortBio aboutMe={aboutMe} />
                 </AnimatedSection>
             </div>  
         </main>

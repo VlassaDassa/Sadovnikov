@@ -5,13 +5,18 @@ import DashboardTitle from "../../general/dashboardTitle";
 import Input from "@/components/shared/input";
 
 import { AboutMe } from "@/interfaces/general";
-import { aboutMe as initialData } from "@/mockData/aboutMe";
 
 import styles from './index.module.scss';
 
 
-const BasicInformation: React.FC = () => {
-    const [data, setData] = useState<AboutMe>(initialData)
+
+interface BasicInformationProps {
+    aboutMe: AboutMe
+}
+
+
+const BasicInformation: React.FC<BasicInformationProps> = ({ aboutMe }) => {
+    const [data, setData] = useState<AboutMe>(aboutMe)
 
     const handleChange = (field: keyof AboutMe, e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setData(prev => ({...prev, [field]: e.target.value}))

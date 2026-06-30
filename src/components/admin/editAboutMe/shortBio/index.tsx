@@ -3,14 +3,18 @@ import React, { useState } from 'react';
 import SectionTitle from '@/components/admin/general/sectionTitle';
 import Input from '@/components/shared/input';
 
-import { aboutMe as initialData } from '@/mockData/aboutMe';
+import { AboutMe } from '@/interfaces/general';
 
 import styles from './index.module.scss';
 
 
 
-const ShortBio: React.FC = () => {
-    const [data, setData] = useState<string>(initialData['shortBio'])
+interface ShortBioProps {
+    aboutMe: AboutMe
+}
+
+const ShortBio: React.FC<ShortBioProps> = ({ aboutMe }) => {
+    const [data, setData] = useState<string>(aboutMe['shortBio'])
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setData(e.target.value)
