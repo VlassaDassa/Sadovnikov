@@ -4,21 +4,21 @@ import React from "react";
 
 import AdaptiveImage from "@/components/shared/AdaptiveImage";
 
-import { footerItems } from "@/mockData/footer";
 import { useCopy } from "@/hooks/useCopy";
+import { IFooterItem } from "@/interfaces/general";
 
 import style from './index.module.scss';
 
 
 
 interface ContactItemProps {
-    link?: string,
+    link?: string | null,
     icon: string,
     text: string,
 }
 
 
-const ContactItem: React.FC<ContactItemProps> = ({ icon, text, link }) => {
+const ContactItem: React.FC<ContactItemProps> = ({ icon, text, link='' }) => {
     const { copy, copied } = useCopy();
 
     if (!link) {
@@ -55,8 +55,13 @@ const ContactItem: React.FC<ContactItemProps> = ({ icon, text, link }) => {
 }
 
 
+interface FooterProps {
+    footerItems: IFooterItem[]
+}
 
-const Footer: React.FC = () => {
+
+const Footer: React.FC<FooterProps> = ({ footerItems }) => {
+
     return (
         <footer className={style.footer}>
             <div className={`container ${style.footerWrapper}`}>

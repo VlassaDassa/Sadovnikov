@@ -42,8 +42,8 @@ const Main: React.FC = async () => {
 
     const skills = await prisma.skill.findMany();
     const stack = await prisma.stack.findMany();
-    
-    
+    const footer = await prisma.footerItem.findMany()
+
 
     return (
         <main>

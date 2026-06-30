@@ -105,7 +105,7 @@ export interface IFooterItem {
     id: number,
     text: string,
     icon: string
-    link?: string,
+    link?: string | null,
 }
 
 
