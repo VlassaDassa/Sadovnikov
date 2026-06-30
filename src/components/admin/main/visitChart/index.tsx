@@ -105,6 +105,8 @@ const VisitChart: React.FC<VisitChartProps> = ({ visits }) => {
                         </Brush>
                         </AreaChart>
                 </ResponsiveContainer>
+
+                
             </SectionBackground>
         </section>
     )

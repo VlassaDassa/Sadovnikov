@@ -13,11 +13,13 @@ import DragHandler from '../dragHandler';
 import Input from '@/components/shared/input';
 import SkillLevel from '@/components/shared/SkillLevel';
 import ModalWrapper from '../modalWrapper';
+import SavingIndicator from '@/components/shared/SavingIndicator';
 
 import { Skill } from '@/interfaces/general';
+import { useDebounce } from '@/hooks/useDebounce';
+import { updateSkills } from '@/app/actions/skills';
 
 import styles from './index.module.scss';
-
 
 
 
@@ -27,9 +29,11 @@ import styles from './index.module.scss';
 interface SkillItemProps {
     skill: Skill,
     setSkills: Dispatch<SetStateAction<Skill[]>>
+
+    setIsSaving: Dispatch<SetStateAction<boolean>>
 }
 
-const SkillItem: React.FC<SkillItemProps> = ({ skill, setSkills }) => {
+const SkillItem: React.FC<SkillItemProps> = ({ skill, setSkills, setIsSaving }) => {
     const windowWidth = useSelector((state: RootState) => state.breakpoint.windowWidth)
 
     const {
@@ -50,6 +54,8 @@ const SkillItem: React.FC<SkillItemProps> = ({ skill, setSkills }) => {
 
     const deleteItem = (id: number) => {
         setSkills(prev => prev.filter((item) => item.id !== id))
+
+        setIsSaving(true)
     }
 
     const incrementScore = (id: number) => {
@@ -58,6 +64,8 @@ const SkillItem: React.FC<SkillItemProps> = ({ skill, setSkills }) => {
                 ? { ...skill, score: skill.score + 1 } 
                 : skill
         ));
+
+        setIsSaving(true)
     };
 
     const decrementScore = (id: number) => {
@@ -66,18 +74,22 @@ const SkillItem: React.FC<SkillItemProps> = ({ skill, setSkills }) => {
                 ? { ...skill, score: skill.score - 1 } 
                 : skill
         ));
+
+        setIsSaving(true)
     };
 
     const handleChangeName = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)  => {
         const newName = e.target.value;
         
         if (newName.length <= 20) {
-                setSkills(
+            setSkills(
                 prev => prev.map((item) => item.id === skill.id 
                     ? {...item, name: newName}
                     : item
                 ) 
             )
+
+            setIsSaving(true)
         }
     }
 
@@ -165,6 +177,32 @@ interface EditSkillModal {
 const EditSkillModal: React.FC<EditSkillModal> = ({ initialSkills}) => {
     const [skills, setSkills] = useState<Skill[]>(initialSkills)
     const containerRef = useRef<HTMLDivElement>(null)
+    const [isSaving, setIsSaving] = useState(false)
+
+    const debouncedSkills = useDebounce(skills, 1000);
+
+    // Сохранение на сервере
+    useEffect(() => {
+        const saveSkills = async () => {
+            const hasChanged = JSON.stringify(skills) !== JSON.stringify(initialSkills)
+            if (!hasChanged) return;
+
+            setIsSaving(true)
+            try {
+                await updateSkills(skills)
+                console.log('✅ Skills saved');
+            } catch (error) {
+                console.error('❌ Failed to save skills:', error);
+            }
+            finally {
+                setIsSaving(false)
+            }
+        }
+
+        saveSkills()
+    }, [debouncedSkills, initialSkills])
+  
+
 
     useEffect(() => {
         if (containerRef.current) {
@@ -179,6 +217,7 @@ const EditSkillModal: React.FC<EditSkillModal> = ({ initialSkills}) => {
             name: '',
             score: 0
         }
+        setIsSaving(true)
 
         setSkills(prev => [...prev, newSkill])
     }
@@ -209,11 +248,15 @@ const EditSkillModal: React.FC<EditSkillModal> = ({ initialSkills}) => {
             tooltipMax={4}
             tooltipText='Maximum 4 skills allowed'
         >
+            <SavingIndicator isSaving={isSaving} />
+
             {skills.map(skill => (
                 <SkillItem 
                     key={skill.id} 
                     skill={skill} 
                     setSkills={setSkills} 
+
+                    setIsSaving={setIsSaving}
                 />
             ))}
         </ModalWrapper>

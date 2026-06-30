@@ -1,5 +1,3 @@
-'use client'
-
 import React from "react";
 import { Cell, Pie, PieChart } from 'recharts';
 
@@ -21,6 +19,7 @@ const DeviceChart: React.FC<DeviceChartProps> = ({ devices }) => {
         <section className={`${styles.section} container`}>
             <SectionBackground>
                 <DashboardTitle text="DEVICES" />
+
                 <div className={styles.wrapper}>
                     <PieChart style={{ width: '100%', maxWidth: '160px', maxHeight: '160px', aspectRatio: 1 }} responsive>
                         <Pie
