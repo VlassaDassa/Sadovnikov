@@ -6,11 +6,13 @@ import KeyFeatures from "@/components/public/project/KeyFeature";
 import ProjectDescription from "@/components/public/project/ProjectDescription";
 import Metrics from "@/components/public/project/Metrics";
 import Evolution from "@/components/public/project/Evolution";
-
-import { projects } from '@/mockData/projects';
-import type { IProjectPreviewData } from '@/interfaces/general';
-
 import AnimatedSection from '@/components/shared/AnimatedScroll';
+import ErrorPage from '@/components/shared/ErrorPage';
+
+import type { IProjectPreviewData } from '@/interfaces/general';
+import prisma from '@/lib/prisma';
+import { IProject } from '@/interfaces/general';
+import { transformProject } from '@/lib/transformers/project';
 
 import styles from './index.module.scss';
 
@@ -25,7 +27,29 @@ export default async function Project({ params }: ProjectPageProps) {
 	const { id } = await params;
     const projectId = Number(id);
 
-    const project = projects.find(p => p.id === projectId);
+	let project: IProject | null = null
+
+	try {
+		const rawProject = await prisma.project.findUnique({
+			where: {
+				id: projectId
+			},
+			include: {
+				images: true,
+				stack: true,
+				description: true,
+				metrics: true,
+				commits: true,
+				keyFeatures: true,
+			},
+		})
+
+		project = rawProject ? transformProject(rawProject) : null
+	}	
+	catch(error) {
+		const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+		return <ErrorPage error={errorMessage} />
+	}
     
     if (!project) {
         notFound();
