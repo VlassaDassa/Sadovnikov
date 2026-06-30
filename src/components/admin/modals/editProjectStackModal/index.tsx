@@ -13,24 +13,17 @@ import styles from './index.module.scss';
 
 
 interface StackItemProps {
-    projectId: number,
     item: IProjectStack,
-    setData: Dispatch<SetStateAction<IProject[]>>
+    setData: Dispatch<SetStateAction<IProject>>
 }
 
-const StackItem: React.FC<StackItemProps> = ({ projectId, item, setData }) => {
+const StackItem: React.FC<StackItemProps> = ({ item, setData }) => {
     
-    const deleteStackItem = (projectId: number, stackId: number) => {
-        setData(prev =>
-            prev.map(project => {
-                if (project.id !== projectId) return project;
-                
-                return {
-                    ...project,
-                    stack: project.stack.filter(item => item.id !== stackId)
-                };
-            })
-        );
+    const deleteStackItem = (stackId: number) => {
+        setData((prev: IProject) => ({
+            ...prev,
+            stack: prev.stack.filter(item => item.id !== stackId),
+        }));
     };
 
     const handleChangeStack = (
@@ -38,20 +31,14 @@ const StackItem: React.FC<StackItemProps> = ({ projectId, item, setData }) => {
         field: string,
         value: string
     ) => {
-        setData(prev =>
-            prev.map(project =>
-                project.id === projectId
-                    ? {
-                        ...project,
-                        stack: project.stack.map(el =>
-                            el.id === stackId
-                                ? { ...el, [field]: value }
-                                : el
-                        )
-                    }
-                    : project
-            )
-        );
+        setData((prev: IProject) => ({
+            ...prev,
+            stack: prev.stack.map(el =>
+                el.id === stackId
+                    ? { ...el, [field]: value }
+                    : el
+            ),
+        }));
     };
 
     const handleChangeTooltip = (
@@ -59,43 +46,31 @@ const StackItem: React.FC<StackItemProps> = ({ projectId, item, setData }) => {
         field: 'title' | 'text',
         value: string
     ) => {
-        setData(prev =>
-            prev.map(project => {
-                if (project.id !== projectId) return project;
-                
-                return {
-                    ...project,
-                    stack: project.stack.map(el =>
-                        el.id === stackId
-                            ? {
-                                ...el,
-                                tooltip: el.tooltip
-                                    ? { ...el.tooltip, [field]: value }
-                                    : { id: Date.now(), title: '', text: '', [field]: value },
-                            }
-                            : el
-                    )
-                };
-            })
-        );
+        setData((prev: IProject) => ({
+            ...prev,
+            stack: prev.stack.map(el =>
+                el.id === stackId
+                    ? {
+                        ...el,
+                        tooltip: el.tooltip
+                            ? { ...el.tooltip, [field]: value }
+                            : { id: Date.now(), title: '', text: '', [field]: value },
+                    }
+                    : el
+            ),
+        }));
     };
 
 
     const handleIconUpload = (path: string, stackId: number) => {
-        setData(prev =>
-            prev.map(project => {
-                if (project.id !== projectId) return project;
-                
-                return {
-                    ...project,
-                    stack: project.stack.map(el =>
-                        el.id === stackId
-                            ? { ...el, icon: path }
-                            : el
-                    )
-                };
-            })
-        );
+        setData((prev: IProject) => ({
+            ...prev,
+            stack: prev.stack.map(el =>
+                el.id === stackId
+                    ? { ...el, icon: path }
+                    : el
+            ),
+        }));
     };
 
     return (
@@ -159,7 +134,7 @@ const StackItem: React.FC<StackItemProps> = ({ projectId, item, setData }) => {
                 behavior="default"
                 iconPosition="only"
                 icon="trash"
-                onClick={() => deleteStackItem(projectId, item.id)}
+                onClick={() => deleteStackItem(item.id)}
                 additionalClass={styles.deleteBtn}
             />
         </div>
@@ -168,8 +143,7 @@ const StackItem: React.FC<StackItemProps> = ({ projectId, item, setData }) => {
 
 
 
-const EditProjectStackModal: React.FC<EditProjectProps> = ({ projectId, projects, setData }) => {
-    const project = projects.find(proj => proj.id === projectId)
+const EditProjectStackModal: React.FC<EditProjectProps> = ({ project, setData }) => {
     const defaultIcon = '/images/mockImages/React.svg'
     const containerRef = useRef<HTMLDivElement>(null);
 
@@ -183,28 +157,24 @@ const EditProjectStackModal: React.FC<EditProjectProps> = ({ projectId, projects
         return 'default'
     }
 
-    const addStackItem = (projectId: number) => {
-        setData(prev =>
-            prev.map(project => {
-                if (project.id !== projectId) return project;
-                
-                const newItem = {
-                    id: Date.now(),
-                    name: '',
-                    icon: defaultIcon, 
-                    tooltip: {
-                        id: Date.now() + 1,
-                        title: 'Why was this technology chosen?',
-                        text: ''
-                    }
-                };
-                
-                return {
-                    ...project,
-                    stack: [...project.stack, newItem]
-                };
-            })
-        );
+    const addStackItem = () => {
+        setData((prev: IProject) => {
+            const newItem = {
+                id: Date.now(),
+                name: '',
+                icon: defaultIcon,
+                tooltip: {
+                    id: Date.now() + 1,
+                    title: 'Why was this technology chosen?',
+                    text: '',
+                },
+            };
+
+            return {
+                ...prev,
+                stack: [...prev.stack, newItem],
+            };
+        });
     };
 
     useEffect(() => {
@@ -223,7 +193,7 @@ const EditProjectStackModal: React.FC<EditProjectProps> = ({ projectId, projects
             
             tooltipText='Maximum 6 technologies allowed'
             disableBtn={disableBtn}
-            addItem={() => addStackItem(projectId)}
+            addItem={() => addStackItem()}
 
             button={true}
 
@@ -238,7 +208,6 @@ const EditProjectStackModal: React.FC<EditProjectProps> = ({ projectId, projects
                     project?.stack.map((item) => (
                         <StackItem 
                             key={item.id}
-                            projectId={projectId}
                             item={item}
                             setData={setData}
                         />

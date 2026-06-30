@@ -2,13 +2,12 @@ import React from 'react';
 
 import Input from '@/components/shared/input';
 
-import { EditProjectProps } from '@/interfaces/general';
+import { EditProjectProps, IProject } from '@/interfaces/general';
 
 import styles from './index.module.scss';
 
 
-const Inputs: React.FC<EditProjectProps> = ({ projects, setData, projectId }) => {
-    const project = projects.find(p => p.id === projectId);
+const Inputs: React.FC<EditProjectProps> = ({ project, setData, projectId }) => {
 
     if (!project) return
 
@@ -17,12 +16,10 @@ const Inputs: React.FC<EditProjectProps> = ({ projects, setData, projectId }) =>
         field: T,
         value: string
     ) => {
-        setData(
-            prev => prev.map((item) => item.id === projectId
-                ? {...item, [field]: value}
-                : item
-            ) 
-        )
+        setData((prev: IProject) => ({
+            ...prev,
+            [field]: value,
+        }));
     };
 
     const handleChangeTeamType = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)  => {
@@ -36,22 +33,19 @@ const Inputs: React.FC<EditProjectProps> = ({ projects, setData, projectId }) =>
             teamType = 'team'
         }
         
-        setData(
-            prev => prev.map((item) => item.id === projectId
-                ? {...item, numberTeam: newNumberTeam, teamType: teamType}
-                : item
-            ) 
-        )
+        setData((prev: IProject) => ({
+            ...prev,
+            numberTeam: newNumberTeam,
+            teamType: teamType,
+        }));
     }
 
     const handleChangeDate = (date: string) => {
         if (date) {
-            setData(
-                prev => prev.map((item) => item.id === projectId
-                    ? {...item, date: date}
-                    : item
-                ) 
-            )
+            setData((prev: IProject) => ({
+                ...prev,
+                date: date,
+            }));
         }
     };
 

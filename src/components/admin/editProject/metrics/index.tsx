@@ -7,7 +7,7 @@ import SectionBackground from '../../general/sectionBackground';
 import MetricItem from '@/components/shared/MetricItem';
 import Input from '@/components/shared/input';
 
-import { EditProjectProps } from '@/interfaces/general';
+import { EditProjectProps, IProject } from '@/interfaces/general';
 
 import styles from './index.module.scss';
 
@@ -15,9 +15,7 @@ import styles from './index.module.scss';
 
 
 
-const Metrics: React.FC<EditProjectProps> = ({ projects, projectId, setData }) => {
-    const project = projects.find(proj => proj.id === projectId)
-
+const Metrics: React.FC<EditProjectProps> = ({ project, setData }) => {
     const handleChangeMetrics = (
         metricId: number,
         value: string,
@@ -35,20 +33,14 @@ const Metrics: React.FC<EditProjectProps> = ({ projects, projectId, setData }) =
         if (parseFloat(numValue) > max) numValue = max.toString();
         if (parseFloat(numValue) < 0) numValue = '0';
         
-        setData(prev =>
-            prev.map(project =>
-                project.id === projectId
-                    ? {
-                        ...project,
-                        metrics: project.metrics.map(item =>
-                            item.id === metricId
-                                ? { ...item, current: numValue }
-                                : item
-                        )
-                    }
-                    : project
-            )
-        );
+        setData((prev: IProject) => ({
+            ...prev,
+            metrics: prev.metrics.map(item =>
+                item.id === metricId
+                    ? { ...item, current: numValue }
+                    : item
+            ),
+        }));
     };
 
     return (

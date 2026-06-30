@@ -151,8 +151,7 @@ export interface IProjectPreviewData {
 
 
 export interface EditProjectProps {
-    projects: IProject[],
-    projectId: number,
-    setData: Dispatch<SetStateAction<IProject[]>>
+    project: IProject,
+    setData: Dispatch<SetStateAction<IProject>>
 }
 

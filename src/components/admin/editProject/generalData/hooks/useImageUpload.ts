@@ -7,8 +7,7 @@ import { IImages, IProject } from '@/interfaces/general';
 
 
 export const useImageUpload = (
-    projectId: number,
-    setData: React.Dispatch<React.SetStateAction<IProject[]>>
+    setData: React.Dispatch<React.SetStateAction<IProject>>
 ) => {
     const fileInputRef = useRef<HTMLInputElement>(null)
     const [isLoading, setIsLoading] = useState(false)
@@ -63,20 +62,21 @@ export const useImageUpload = (
                 })
 
                 if (newImages.length === validFiles.length) {
-                    setData(prev => 
-                        prev.map(project => {
-                            if (project.id !== projectId) return project;
-                            const hasMain = project.images.some(img => img.main)
-                            return {
-                                ...project,
-                                images: [...project.images, ...newImages.map(img => ({
+                    setData((prev: IProject) => {
+                        const hasMain = prev.images.some(img => img.main);
+                        
+                        return {
+                            ...prev,
+                            images: [
+                                ...prev.images,
+                                ...newImages.map((img, index) => ({
                                     ...img,
-                                    main: !hasMain && img === newImages[0],
-                                }))]
-                            }
-                        })
-                    )
-                }
+                                    main: !hasMain && index === 0,
+                                })),
+                            ],
+                        };
+                    });
+                                    }
 
                 showMessage('info', 'Success!', dispatch)
                 if (fileInputRef.current) fileInputRef.current.value = ''

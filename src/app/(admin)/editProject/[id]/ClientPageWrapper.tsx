@@ -1,6 +1,5 @@
 'use client'
 
-import { notFound } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -19,7 +18,6 @@ import AnimatedSection from '@/components/shared/AnimatedScroll';
 
 
 import { IProject } from "@/interfaces/general";
-import { projects } from '@/mockData/projects';
 
 import { cssVars } from '@/styles/cssVariables';
 import styles from './index.module.scss';
@@ -27,22 +25,17 @@ import { showMessage } from '@/lib/showMessage';
 
 
 interface ClientPageWrapperProps {
-    projectId: number,
+    project: IProject
 }
 
 
-const ClientPageWrapper: React.FC<ClientPageWrapperProps> = ({ projectId }) => {
-    const [data, setData] = useState<IProject[]>(projects)
+const ClientPageWrapper: React.FC<ClientPageWrapperProps> = ({ project }) => {
+    const [data, setData] = useState<IProject>(project)
     const isEditProjectStackModalOpen = useSelector((state: RootState) => state.uiState.isEditProjectStackModalOpen)
     const router = useRouter()
     const dispatch = useDispatch()
 
-    const project = projects.find(p => p.id === projectId);
         
-    if (!project) {
-        notFound();
-    }
-
     const deleteProject = () => {
         router.push(`/admin`);
 
@@ -53,7 +46,7 @@ const ClientPageWrapper: React.FC<ClientPageWrapperProps> = ({ projectId }) => {
 
     const modals = (
         <>
-            {isEditProjectStackModalOpen && <EditProjectStackModal projects={data} projectId={projectId} setData={setData} />}
+            {isEditProjectStackModalOpen && <EditProjectStackModal project={data} setData={setData} />}
         </>
     )
 
@@ -71,23 +64,23 @@ const ClientPageWrapper: React.FC<ClientPageWrapperProps> = ({ projectId }) => {
                 </AnimatedSection>
 
                 <AnimatedSection animation='fade-right'>
-                    <GeneralData projects={data} projectId={projectId} setData={setData} />
+                    <GeneralData project={data} setData={setData} />
                 </AnimatedSection>
 
                 <AnimatedSection animation='fade-left'>
-                    <Stack projects={data} projectId={projectId} setData={setData} />
+                    <Stack project={data} setData={setData} />
                 </AnimatedSection>
 
                 <AnimatedSection animation='fade-right'>
-                    <KeyFeatures projects={data} projectId={projectId} setData={setData} />
+                    <KeyFeatures project={data} setData={setData} />
                 </AnimatedSection>
 
                 <AnimatedSection animation='fade-down'>
-                    <Description projects={data} projectId={projectId} setData={setData} />
+                    <Description project={data} setData={setData} />
                 </AnimatedSection>
 
                 <AnimatedSection animation='fade-left'>
-                    <Metrics projects={data} projectId={projectId} setData={setData} />
+                    <Metrics project={data} setData={setData} />
                 </AnimatedSection>
 
                 <AnimatedSection animation='fade-right'>
