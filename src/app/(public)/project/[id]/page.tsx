@@ -54,7 +54,7 @@ export default async function Project({ params }: ProjectPageProps) {
 			</AnimatedSection>
 
 			<AnimatedSection animation='fade-right'>
-				<KeyFeatures data={project.keyFeatures} />
+				<KeyFeatures data={project.keyFeatures || []} />
 			</AnimatedSection>
 
 			<AnimatedSection animation='fade-up'>

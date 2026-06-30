@@ -71,7 +71,7 @@ export interface IProject {
     shortDescrition: string,
     previewDescription: string,
     stack: IProjectStack[],
-    keyFeatures?: IFeatureItem[],
+    keyFeatures: IFeatureItem[],
     description: IProjectDescription[],
     metrics: IMertics[],
     commits: ICommit[],
@@ -83,7 +83,7 @@ export interface IProject {
 
 
 export interface TooltipConfig {
-    text: string,
+    text?: string,
     title?: string,
     date?: string,
     type?: 'lvl1' | 'lvl2' | 'lvl3',

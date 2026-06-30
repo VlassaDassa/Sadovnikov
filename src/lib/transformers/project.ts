@@ -1,4 +1,6 @@
-// lib/transformers/project.ts
+// Трансформер нужен, чтобы привести тип к существующему интерфейсу, если у поля есть (include)-поля,
+// т.е, если поле является другой таблицей/внешний ключ
+
 import { Prisma } from '@prisma/client';
 import { IProject, IStackTooltip } from '@/interfaces/general';
 
@@ -18,7 +20,6 @@ export function transformTooltip(data: unknown): IStackTooltip | null {
 }
 
 
-// Тип для того, что возвращает Prisma с нужными include
 type PrismaProject = Prisma.ProjectGetPayload<{
     include: {
         images: true;
@@ -49,6 +50,14 @@ export function transformProject(project: PrismaProject): IProject {
             image: img.image,
             main: img.main,
         })),
+
+        keyFeatures: project.keyFeatures?.map(f => ({
+            id: f.id,
+            title: f.title,
+            text: f.text,
+            icon: f.icon,
+            photo: f.photo,
+        })) || [],
 
         stack: project.stack.map(item => ({
             id: item.id,

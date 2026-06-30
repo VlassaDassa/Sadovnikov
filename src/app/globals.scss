@@ -151,9 +151,8 @@ svg *:focus {
 }
 
 
-// 404
-// globals.scss
-.not-found-container {
+// Error
+.error-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -193,5 +192,14 @@ svg *:focus {
         &:hover {
             background: $brand_700;
         }
+    }
+}
+
+.not-found {
+    background: $neutral_900;
+    min-height: 100vh;
+
+    h2 {
+        color: $neutral_1000;
     }
 }

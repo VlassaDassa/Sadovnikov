@@ -5,6 +5,7 @@ import React from 'react';
 import TalkingAvatar from '../talkingAvatar';
 import AdaptiveImage from '@/components/shared/AdaptiveImage';
 import SkillLevel from '@/components/shared/SkillLevel';
+import EmptySection from '@/components/shared/EmptySection';
 
 import type { Skill } from '@/interfaces/general';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
@@ -41,40 +42,47 @@ const Skills: React.FC<SkillsProps> = ({ skills }) => {
 
     return (
         <section className={`${style.skills} container`}>
-            <div ref={elementRef} className={`${style.skillsWrapper} ${isVisible ? style['skillsWrapper-anim'] : ''}`}>
-                {
-                    Array.from({ length: 3 }).map((_, index) => (
-                        <AdaptiveImage 
-                            key={index}
-                            src={vertex}
-                            wrapClass={`${style.vertex} ${style[`vertex-${index+1}`]}`}
-                        />
-                    ))
-                }
+            {
+                skills.length === 0 ?
+                    <EmptySection text='Skills not found' />
+                :
+                    <>
+                        <div ref={elementRef} className={`${style.skillsWrapper} ${isVisible ? style['skillsWrapper-anim'] : ''}`}>
+                            {
+                                Array.from({ length: 3 }).map((_, index) => (
+                                    <AdaptiveImage 
+                                        key={index}
+                                        src={vertex}
+                                        wrapClass={`${style.vertex} ${style[`vertex-${index+1}`]}`}
+                                    />
+                                ))
+                            }
 
-                <AdaptiveImage 
-                    src={vertexSelected}
-                    wrapClass={`${style.vertex} ${style.vertexSelected}`}
-                />
-                <AdaptiveImage 
-                    src={cursor}
-                    wrapClass={style.cursor}
-                />
-                {
-                    skills.map((skill, index) => (
-                        <SkillItem key={index} {...skill} />
-                    ))
-                }
-            </div>
+                            <AdaptiveImage 
+                                src={vertexSelected}
+                                wrapClass={`${style.vertex} ${style.vertexSelected}`}
+                            />
+                            <AdaptiveImage 
+                                src={cursor}
+                                wrapClass={style.cursor}
+                            />
+                            {
+                                skills.map((skill, index) => (
+                                    <SkillItem key={index} {...skill} />
+                                ))
+                            }
+                        </div>
 
-            <div className={style.avatarWrapper}>
-                <TalkingAvatar
-                    additionalClass={style.avatarWrapper}
-                    hand={true} 
-                    indexFinger={true} 
-                    text="This is how I evaluate my skills..." 
-                />
-            </div>
+                        <div className={style.avatarWrapper}>
+                            <TalkingAvatar
+                                additionalClass={style.avatarWrapper}
+                                hand={true} 
+                                indexFinger={true} 
+                                text="This is how I evaluate my skills..." 
+                            />
+                        </div>
+                    </>
+            }
         </section>
     )
 }

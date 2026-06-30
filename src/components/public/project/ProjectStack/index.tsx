@@ -20,8 +20,8 @@ interface StackItemProps {
 
 const StackItem: React.FC<StackItemProps> = ({ item, index, customLeft, customTop }) => {
     const tooltipRef = useTooltip<HTMLDivElement>({
-        text: item.tooltip.text,
-        title: item.tooltip.title,
+        text: item.tooltip?.text ,
+        title: item.tooltip?.title,
         type: 'lvl2',
         placement: 'bottom',
         fakeWidth: 400,

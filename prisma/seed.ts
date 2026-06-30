@@ -11,17 +11,14 @@ const prisma = new PrismaClient();
 async function main() {
   console.log('🌱 Начинаем заполнение базы...');
 
-  // 1. Глобальные сущности
   await prisma.skill.createMany({ data: skills });
   await prisma.stack.createMany({ data: stack });
   await prisma.footerItem.createMany({ data: footerItems });
 
-  // 2. Статистика для админки
   await prisma.visitorStat.createMany({ data: visits });
   await prisma.deviceStat.createMany({ data: devices });
   await prisma.trafficSource.createMany({ data: source });
 
-  // 3. About Me
   const about = await prisma.aboutMe.create({
     data: {
       birth: aboutMe.birth,
@@ -41,7 +38,6 @@ async function main() {
     },
   });
 
-  // 4. Проекты со всеми связями
   for (const projectData of projects) {
     const project = await prisma.project.create({
       data: {
@@ -67,12 +63,12 @@ async function main() {
           create: projectData.stack.map((item) => ({
             name: item.name,
             icon: item.icon,
-            tooltip: item.tooltip,
+            tooltip: item.tooltip ?? {},
           })),
         },
 
         keyFeatures: {
-          create: projectData.keyFeatures.map((feature) => ({
+          create: (projectData.keyFeatures || []).map((feature) => ({
             title: feature.title,
             text: feature.text,
             icon: feature.icon,
@@ -93,7 +89,7 @@ async function main() {
             icon: metric.icon,
             title: metric.title,
             text: metric.text,
-            current: metric.current,
+            current: typeof metric.current === 'string' ? parseFloat(metric.current) : metric.current,
             max: metric.max,
             type: metric.type,
           })),

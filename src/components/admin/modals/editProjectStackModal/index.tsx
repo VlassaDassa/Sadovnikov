@@ -69,10 +69,9 @@ const StackItem: React.FC<StackItemProps> = ({ projectId, item, setData }) => {
                         el.id === stackId
                             ? {
                                 ...el,
-                                tooltip: {
-                                    ...el.tooltip,
-                                    [field]: value
-                                }
+                                tooltip: el.tooltip
+                                    ? { ...el.tooltip, [field]: value }
+                                    : { id: Date.now(), title: '', text: '', [field]: value },
                             }
                             : el
                     )
@@ -129,7 +128,7 @@ const StackItem: React.FC<StackItemProps> = ({ projectId, item, setData }) => {
                     additionalClass={styles.input}
                     type='text'
                     iconPosition='noIcon'
-                    value={item.tooltip.title}
+                    value={item?.tooltip?.title}
                     variant='admin'
                     adminLabel='withLabel'
                     label='Title'
@@ -142,7 +141,7 @@ const StackItem: React.FC<StackItemProps> = ({ projectId, item, setData }) => {
                     additionalClass={styles.textarea}
                     type='textarea'
                     iconPosition='noIcon'
-                    value={item.tooltip.text}
+                    value={item?.tooltip?.text}
                     variant='admin'
                     adminLabel='withLabel'
                     label='Description'
