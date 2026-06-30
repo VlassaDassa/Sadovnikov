@@ -15,21 +15,36 @@ import QuickEdit from "@/components/admin/main/quickEdit";
 import RecentProjects from "@/components/admin/main/recentProjects";
 import AnimatedSection from '@/components/shared/AnimatedScroll';
 
+import { IProject, Skill, Stack, IFooterItem } from "@/interfaces/general";
+import { IVisits, IDevices, ITrafficSource } from "@/mockData/adminCharts";
+
 import styles from './index.module.scss';
 
 
+interface ClientPageWrapperProps {
+    visitsChart: IVisits[]
+    deviceChart: IDevices[]
+    trafficSource: ITrafficSource[]
+    recentProjects: IProject[]
+    skills: Skill[]
+    stack: Stack[]
+    footer: IFooterItem[]
+}
 
-const ClientPageWrapper: React.FC = () => {
+const ClientPageWrapper: React.FC<ClientPageWrapperProps> = ({
+    visitsChart, deviceChart, trafficSource, recentProjects, skills, stack, footer
+}) => {
     const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
     const isEditSkillsModalOpen = useSelector((state: RootState) => state.uiState.isEditSkillsModalOpen)
     const isEditFooterModalOpen = useSelector((state: RootState) => state.uiState.isEditFooterModalOpen)
     const isEditMyStackModalOpen = useSelector((state: RootState) => state.uiState.isEditMyStackModalOpen)
+
     
     const modals = (
         <>
-            {isEditSkillsModalOpen && <EditSkillsModal />}
-            {isEditFooterModalOpen && <EditFooterModal />}
-            {isEditMyStackModalOpen && <EditMyStackModal />}
+            {isEditSkillsModalOpen && <EditSkillsModal initialSkills={skills} />}
+            {isEditFooterModalOpen && <EditFooterModal footer={footer} />}
+            {isEditMyStackModalOpen && <EditMyStackModal initialStack={stack} />}
         </>
     )
     
@@ -39,15 +54,15 @@ const ClientPageWrapper: React.FC = () => {
                 {modals}
 
                 <AnimatedSection animation='fade-up'>
-                    <VisitChart />
+                    <VisitChart visits={visitsChart} />
                 </AnimatedSection>
                 
                 <AnimatedSection animation='fade-right'>
-                    <DeviceChart />
+                    <DeviceChart devices={deviceChart} />
                 </AnimatedSection>
                 
                 <AnimatedSection animation='fade-left'>
-                    <TrafficSource />
+                    <TrafficSource source={trafficSource} />
                 </AnimatedSection>
 
                 <AnimatedSection animation='fade-up'>
@@ -55,7 +70,7 @@ const ClientPageWrapper: React.FC = () => {
                 </AnimatedSection>
 
                 <AnimatedSection animation='fade-down'>
-                    <RecentProjects />
+                    <RecentProjects projects={recentProjects} />
                 </AnimatedSection>
             </main>
         )
@@ -66,7 +81,7 @@ const ClientPageWrapper: React.FC = () => {
                 {modals}
 
                 <AnimatedSection animation='fade-up'>
-                    <VisitChart />
+                    <VisitChart visits={visitsChart} />
                 </AnimatedSection>
 
                 <AnimatedSection animation='fade-right'>
@@ -74,13 +89,13 @@ const ClientPageWrapper: React.FC = () => {
                 </AnimatedSection>
 
                 <AnimatedSection animation='fade-left'>
-                    <RecentProjects />
+                    <RecentProjects projects={recentProjects} />
                 </AnimatedSection>
 
                 <AnimatedSection animation='fade-down'>
                     <div className={`${styles.deviceAndTrafficWrapper} container`}>
-                        <DeviceChart />
-                        <TrafficSource />
+                        <DeviceChart devices={deviceChart} />
+                        <TrafficSource source={trafficSource} />
                     </div>
                 </AnimatedSection>
             </main>
@@ -94,8 +109,8 @@ const ClientPageWrapper: React.FC = () => {
 
                 <AnimatedSection animation='fade-right'>
                     <div className={`container ${styles.visitAndDeviceWrapper}`}>
-                        <VisitChart />
-                        <DeviceChart />
+                        <VisitChart visits={visitsChart} />
+                        <DeviceChart devices={deviceChart} />
                     </div>
                 </AnimatedSection>
                 
@@ -103,12 +118,12 @@ const ClientPageWrapper: React.FC = () => {
                 <AnimatedSection animation='fade-left'>
                     <div className={`container ${styles.quickEditAndTrafficWrapper}`}>
                         <QuickEdit />
-                        <TrafficSource />
+                        <TrafficSource source={trafficSource} />
                     </div>
                 </AnimatedSection>
                 
                 <AnimatedSection animation='fade-down'>
-                    <RecentProjects />
+                    <RecentProjects projects={recentProjects} />
                 </AnimatedSection>
             </main>
         )

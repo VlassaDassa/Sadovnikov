@@ -8,7 +8,6 @@ import ModalWrapper from '@/components/admin/modals/modalWrapper';
 import DragHandler from '../dragHandler';
 import Button from '@/components/shared/button/Button';
 
-import { footerItems } from '@/mockData/footer';
 import { IFooterItem } from '@/interfaces/general';
 
 import styles from './index.module.scss';
@@ -127,8 +126,12 @@ const FooterItem: React.FC<FooterItemProps> = ({ item, setItems }) => {
 }
 
 
-const EditFooterModal: React.FC = () => {
-    const [items, setItems] = useState(footerItems)
+interface EditFooterModalProps {
+    footer: IFooterItem[]
+}
+
+const EditFooterModal: React.FC<EditFooterModalProps> = ({ footer }) => {
+    const [items, setItems] = useState(footer)
     const containerRef = useRef<HTMLDivElement>(null);
     const defaultIcon = '/images/mockImages/footer/default.svg'
 

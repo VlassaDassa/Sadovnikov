@@ -15,7 +15,7 @@ import Icon from "@/components/shared/icons/Icon";
 import Button from "@/components/shared/button/Button";
 
 import { IImages, IProject } from "@/interfaces/general";
-import { projects, defaultImage } from "@/mockData/projects";
+import { defaultImage } from "@/mockData/projects";
 
 import { cssVars } from "@/styles/cssVariables";
 import styles from './index.module.scss';
@@ -83,9 +83,11 @@ const EditProject: React.FC<EditProjectProps> = ({ id, name, img, shortDescritio
 }
 
 
+interface RecentProjectsProps {
+    projects: IProject[]
+}
 
-
-const RecentProjects: React.FC = () => {
+const RecentProjects: React.FC<RecentProjectsProps> = ({ projects }) => {
     const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
     const [data, setData] = useState<IProject[]>(projects)
     const [curIndex, setCurIndex] = useState<number>(1)

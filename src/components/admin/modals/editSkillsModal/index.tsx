@@ -14,7 +14,6 @@ import Input from '@/components/shared/input';
 import SkillLevel from '@/components/shared/SkillLevel';
 import ModalWrapper from '../modalWrapper';
 
-import { skills as initialSkills } from '@/mockData/skills';
 import { Skill } from '@/interfaces/general';
 
 import styles from './index.module.scss';
@@ -159,8 +158,12 @@ const SkillItem: React.FC<SkillItemProps> = ({ skill, setSkills }) => {
 }
 
 
-const EditSkillModal: React.FC = () => {
-    const [skills, setSkills] = useState(initialSkills)
+interface EditSkillModal {
+    initialSkills: Skill[]
+}
+
+const EditSkillModal: React.FC<EditSkillModal> = ({ initialSkills}) => {
+    const [skills, setSkills] = useState<Skill[]>(initialSkills)
     const containerRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {

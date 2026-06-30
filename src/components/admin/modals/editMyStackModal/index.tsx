@@ -9,7 +9,6 @@ import DragHandler from '../dragHandler';
 import Input from '@/components/shared/input';
 import ModalWrapper from '../modalWrapper';
 
-import { stack as initialStack} from '@/mockData/stack';
 import { Stack } from '@/interfaces/general';
 
 import styles from './index.module.scss';
@@ -91,7 +90,11 @@ const StackItem: React.FC<StackItemProps> = ({ stackItem, setStack }) => {
 }
 
 
-const EditMyStackModal: React.FC = () => {
+interface EditMyStackModalProps {
+    initialStack: Stack[]
+}
+
+const EditMyStackModal: React.FC<EditMyStackModalProps> = ({ initialStack }) => {
     const [stack, setStack] = useState(initialStack)
     const containerRef = useRef<HTMLDivElement>(null)
 

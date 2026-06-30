@@ -4,14 +4,17 @@ import SectionBackground from "@/components/admin/general/sectionBackground";
 import DashboardTitle from "@/components/admin/general/dashboardTitle";
 import ProgressBar from "@/components/shared/ProgressBar";
 
-import { source } from "@/mockData/adminCharts";
+import { ITrafficSource } from "@/mockData/adminCharts";
 
 import styles from './index.module.scss';
 
 
 
+interface TrafficSourceProps {
+    source: ITrafficSource[]
+}
 
-const TrafficSource: React.FC = () => {
+const TrafficSource: React.FC<TrafficSourceProps> = ({ source }) => {
     return (
         <section className={`${styles.section} container`}>
             
