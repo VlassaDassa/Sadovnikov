@@ -16,7 +16,6 @@ import Metrics from '@/components/admin/editProject/metrics';
 import EditProjectStackModal from "@/components/admin/modals/editProjectStackModal";
 import AnimatedSection from '@/components/shared/AnimatedScroll';
 
-
 import { IProject } from "@/interfaces/general";
 
 import { cssVars } from '@/styles/cssVariables';

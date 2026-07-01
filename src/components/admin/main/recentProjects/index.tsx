@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useRef } from "react";
+import { useDispatch } from 'react-redux';
 import Link from "next/link";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperType } from 'swiper';
@@ -13,9 +14,12 @@ import SectionBackground from "../../general/sectionBackground";
 import AdaptiveImage from "@/components/shared/AdaptiveImage";
 import Icon from "@/components/shared/icons/Icon";
 import Button from "@/components/shared/button/Button";
+import SavingIndicator from "@/components/shared/SavingIndicator";
 
 import { IImages, IProject } from "@/interfaces/general";
 import { defaultImage } from "@/mockData/projects";
+import { createProject } from "@/app/actions/project";
+import { showMessage } from '@/lib/showMessage';
 
 import { cssVars } from "@/styles/cssVariables";
 import styles from './index.module.scss';
@@ -90,8 +94,10 @@ interface RecentProjectsProps {
 const RecentProjects: React.FC<RecentProjectsProps> = ({ projects }) => {
     const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
     const [data, setData] = useState<IProject[]>(projects)
+    const [isCreating, setIsCreating] = useState<boolean>(false)
     const [curIndex, setCurIndex] = useState<number>(1)
     const swiperRef = useRef<SwiperType | null>(null);
+    const dispatch = useDispatch()
     const countProjectView = {
         mobile: 3,
         desktop: 3,
@@ -99,7 +105,9 @@ const RecentProjects: React.FC<RecentProjectsProps> = ({ projects }) => {
     }
 
 
-    const addProject = () => {
+    const addProject = async () => {
+        setIsCreating(true)
+
         const newProject: IProject = {
             id: Date.now(),
             category: 'Site',
@@ -119,23 +127,37 @@ const RecentProjects: React.FC<RecentProjectsProps> = ({ projects }) => {
             demoLink: '',
             numberTeam: 1,
         };
-        
-        setData(prev => [...prev, newProject]);
 
-        const newLength = data.length + 1;
-        setTimeout(() => {
-            if (swiperRef.current) {
-                swiperRef.current.slideTo(newLength - 1);
+        try {
+            const result = await createProject(newProject)
+
+            if (result.success && result.project) {
+                setData(prev => [...prev, result.project])
+
+                const newLength = data.length + 1;
+                setTimeout(() => {
+                    if (swiperRef.current) {
+                        swiperRef.current.slideTo(newLength - 1);
+                    }
+                    setCurIndex(newLength);
+                }, 50);
+
+                showMessage('info', 'Project has been created', dispatch)
             }
-            setCurIndex(newLength);
-        }, 50);
-        
-        // TODO Переход на страницу редактирования нового проекта
+        } catch (error) {
+            showMessage('error', 'Error creating project', dispatch)
+            console.error('Error creating project', error)
+        }
+        finally {
+            setIsCreating(false)
+        }
     };
 
     
     return (
         <section className={`${styles.section} container`}>
+            <SavingIndicator isSaving={isCreating} />
+
             <SectionBackground>
                 <div className={styles.title}>
                     <DashboardTitle text='RECENT PROJECTS' additionalClass={styles.titleText} /> 
@@ -172,7 +194,7 @@ const RecentProjects: React.FC<RecentProjectsProps> = ({ projects }) => {
                 </Swiper>
                 
                 <Button 
-                    behavior="default"
+                    behavior={isCreating ? 'loading' : 'default'}
                     iconPosition="leftIcon"
                     variant="black"
                     text="Add New Project"
