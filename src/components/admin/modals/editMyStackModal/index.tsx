@@ -177,7 +177,7 @@ const EditMyStackModal: React.FC<EditMyStackModalProps> = ({ initialStack }) => 
             setItems={setStack}
             ref={containerRef}
 
-            modalName='editMyStack'
+            modalName={modalName}
 
             title='Edit Stack'
             subTitle='Manage your homepage stack section'
