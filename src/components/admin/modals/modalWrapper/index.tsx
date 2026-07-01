@@ -168,7 +168,7 @@ const ModalWrapper = forwardRef<HTMLDivElement, ModalWrapperProps>(
                 behavior="default"
                 iconPosition="only"
                 icon="close"
-                onClick={() => closeModals(dispatch, modalName)}
+                onClick={async () => await closeModals(dispatch, modalName)}
                 additionalClass={styles.closeButton}
             />
 

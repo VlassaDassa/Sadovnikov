@@ -18,6 +18,7 @@ import SavingIndicator from '@/components/shared/SavingIndicator';
 import { Skill } from '@/interfaces/general';
 import { useDebounce } from '@/hooks/useDebounce';
 import { updateSkills } from '@/app/actions/skills';
+import { registerBeforeClose, unregisterBeforeClose } from '@/lib/modals';
 
 import styles from './index.module.scss';
 
@@ -178,30 +179,39 @@ const EditSkillModal: React.FC<EditSkillModal> = ({ initialSkills}) => {
     const [skills, setSkills] = useState<Skill[]>(initialSkills)
     const containerRef = useRef<HTMLDivElement>(null)
     const [isSaving, setIsSaving] = useState(false)
+    const modalName = 'editSkills'
 
     const debouncedSkills = useDebounce(skills, 1000);
 
-    // Сохранение на сервере
-    useEffect(() => {
-        const saveSkills = async () => {
-            const hasChanged = JSON.stringify(skills) !== JSON.stringify(initialSkills)
-            if (!hasChanged) return;
+    const saveSkills = async () => {
+        const hasChanged = JSON.stringify(skills) !== JSON.stringify(initialSkills)
+        if (!hasChanged) return;
 
-            setIsSaving(true)
-            try {
-                await updateSkills(skills)
-                console.log('✅ Skills saved');
-            } catch (error) {
-                console.error('❌ Failed to save skills:', error);
-            }
-            finally {
-                setIsSaving(false)
-            }
+        setIsSaving(true)
+        try {
+            await updateSkills(skills)
+            console.log('✅ Skills saved');
+        } catch (error) {
+            console.error('❌ Failed to save skills:', error);
         }
+        finally {
+            setIsSaving(false)
+        }
+    }
 
+    // Сохранение на сервере с debounce
+    useEffect(() => {
         saveSkills()
     }, [debouncedSkills, initialSkills])
-  
+
+    // Сохранение на сервере при закрытии модалки
+    useEffect(() => {
+        registerBeforeClose(modalName, saveSkills);
+
+        return () => {
+            unregisterBeforeClose(modalName);
+        };
+    }, [skills, initialSkills]);
 
 
     useEffect(() => {
@@ -209,6 +219,7 @@ const EditSkillModal: React.FC<EditSkillModal> = ({ initialSkills}) => {
             containerRef.current.scrollTop = containerRef.current.scrollHeight;
         }
     }, [skills.length])
+
     
     const addItem = () => {
         const maxId = Math.max(...skills.map(s => s.id), 0);
@@ -240,7 +251,7 @@ const EditSkillModal: React.FC<EditSkillModal> = ({ initialSkills}) => {
             setItems={setSkills}
             ref={containerRef}
 
-            modalName='editSkills'
+            modalName={modalName}
 
             title='Edit Skills'
             subTitle='Manage your homepage skill section'
