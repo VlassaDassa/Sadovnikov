@@ -11,16 +11,26 @@ import styles from './index.module.scss';
 
 
 interface BasicInformationProps {
-    aboutMe: AboutMe
+    data: AboutMe,
+    setData: React.Dispatch<React.SetStateAction<AboutMe>>,
+    setIsSaving: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 
-const BasicInformation: React.FC<BasicInformationProps> = ({ aboutMe }) => {
-    const [data, setData] = useState<AboutMe>(aboutMe)
+const BasicInformation: React.FC<BasicInformationProps> = ({ data, setData, setIsSaving }) => {
 
     const handleChange = (field: keyof AboutMe, e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setData(prev => ({...prev, [field]: e.target.value}))
-    }
+        setIsSaving(true);
+        const value = e.target.value;
+
+        if (field === 'birth') {
+            const num = Number(value);
+            setData(prev => ({ ...prev, birth: isNaN(num) ? 0 : num }));
+            return;
+        }
+        
+        setData(prev => ({ ...prev, [field]: value }));
+    };
 
 
     return (

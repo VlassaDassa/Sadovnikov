@@ -1,6 +1,6 @@
 'use client'
 
-import React, { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 import { useDispatch } from "react-redux";
 import { CSS } from '@dnd-kit/utilities';
 import {
@@ -35,7 +35,7 @@ import DragHandler from '@/components/admin/modals/dragHandler';
 import Button from '@/components/shared/button/Button';
 import Input from '@/components/shared/input';
 
-import type { WorkExperience } from '@/interfaces/general';
+import type { WorkExperience, AboutMe } from '@/interfaces/general';
 
 import { displayDate } from '@/lib/dates';
 
@@ -160,12 +160,13 @@ const Item: React.FC<ItemProps> = ({ item, onChange, deleteItem }) => {
 
 
 interface WorkExperienceProps {
-    data: WorkExperience[],
-    setData: Dispatch<SetStateAction<WorkExperience[]>>;
+    data: AboutMe,
+    setData: React.Dispatch<React.SetStateAction<AboutMe>>,
+    setIsSaving: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 
-const WorkExperience: React.FC<WorkExperienceProps> = ({ data, setData }) => {
+const WorkExperience: React.FC<WorkExperienceProps> = ({ data, setData, setIsSaving }) => {
     const sensors = useSensors(
         useSensor(PointerSensor, {
             activationConstraint: {
@@ -178,24 +179,28 @@ const WorkExperience: React.FC<WorkExperienceProps> = ({ data, setData }) => {
         const { active, over } = event;
 
         if (active.id !== over?.id) {
-            const oldIndex = data.findIndex((item) => item.id === active.id)
-            const newIndex = data.findIndex((item) => item.id === over?.id)
-            setData(arrayMove(data, oldIndex, newIndex))
+            const oldIndex = data.workExperience.findIndex((item) => item.id === active.id)
+            const newIndex = data.workExperience.findIndex((item) => item.id === over?.id)
+            setData(prev => ({...prev, workExperience: arrayMove(prev.workExperience, oldIndex, newIndex)}))
         }
+
+        setIsSaving(true)
     }
 
     const deleteItem = (id: number) => {
-        setData(prev => prev.filter((item) => item.id !== id))
+        setData(prev => ({...prev, workExperience: prev.workExperience.filter((item) => item.id !== id)}))
+        setIsSaving(true)
     }
 
     const updateItem = (id: number, field: keyof WorkExperience, value: string) => {
-        setData(prev => prev.map(item => 
+        setData(prev => ({...prev, workExperience: prev.workExperience.map(item => 
             item.id === id ? {...item, [field]: value} : item
-        ))
+        )}))
+        setIsSaving(true)
     }
 
     const addItem = () => {
-        const maxId = Math.max(...data.map(s => s.id), 0);
+        const maxId = Math.max(...data.workExperience.map(s => s.id), 0);
         const newExp: WorkExperience = {
             id: maxId + 1,
             position: '',
@@ -207,20 +212,14 @@ const WorkExperience: React.FC<WorkExperienceProps> = ({ data, setData }) => {
             description: ''
         }
 
-        setData(prev => [...prev, newExp])
+        setData(prev => ({...prev, workExperience: [...prev.workExperience, newExp]}))
+        setIsSaving(true)
     }
-
-
-    // DEBOUNCE
-    const saveChanges = () => {
-        return
-        // TODO
-        // console.log('Updated Work Experience:', data);
-    }
+   
 
     const handleChange = (id: number, field: keyof WorkExperience, value: string) => {
         updateItem(id, field, value);
-        saveChanges();
+        setIsSaving(true);
     }
 
     return (
@@ -229,7 +228,7 @@ const WorkExperience: React.FC<WorkExperienceProps> = ({ data, setData }) => {
                 text='Add, edit or reorder your work experience'
                 title='WORK EXPERIENCE'
                 counter={true}
-                count={data.length}
+                count={data.workExperience.length}
             />
 
             <DndContext 
@@ -239,10 +238,10 @@ const WorkExperience: React.FC<WorkExperienceProps> = ({ data, setData }) => {
                 modifiers={[restrictToVerticalAxis]}
             >
                 <SortableContext
-                    items={data.map(s => s.id)}
+                    items={data.workExperience.map(s => s.id)}
                     strategy={verticalListSortingStrategy}
                 >
-                    {data.map((item) => (
+                    {data.workExperience.map((item) => (
                         <AnimatedSection key={item.id}  animation='fade-up'>
                             <Item 
                                 item={item}
@@ -260,7 +259,7 @@ const WorkExperience: React.FC<WorkExperienceProps> = ({ data, setData }) => {
                 variant='black'
                 iconPosition='leftIcon'
                 icon='plus'
-                text='Add New Project'
+                text='Add New Item'
                 noize={true}
                 onClick={addItem}
 

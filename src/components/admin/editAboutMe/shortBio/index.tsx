@@ -10,14 +10,15 @@ import styles from './index.module.scss';
 
 
 interface ShortBioProps {
-    aboutMe: AboutMe
+    data: AboutMe
+    setData: React.Dispatch<React.SetStateAction<AboutMe>>,
+    setIsSaving: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const ShortBio: React.FC<ShortBioProps> = ({ aboutMe }) => {
-    const [data, setData] = useState<string>(aboutMe['shortBio'])
-
+const ShortBio: React.FC<ShortBioProps> = ({ data, setData, setIsSaving }) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setData(e.target.value)
+        setData(prev => ({...prev, shortBio: e.target.value}))
+        setIsSaving(true);
     }
 
     return (
@@ -33,7 +34,7 @@ const ShortBio: React.FC<ShortBioProps> = ({ aboutMe }) => {
                 placeholder='Text...'
                 iconPosition='noIcon'
                 additionalClass={styles.shortBio}
-                value={data}
+                value={data.shortBio}
                 variant='admin'
                 adminLabel='withoutLabel'
                 noize={true}

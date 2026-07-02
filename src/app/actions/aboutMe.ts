@@ -7,8 +7,10 @@ import { AboutMe } from "@/interfaces/general"
 import { transformAboutMe } from "@/lib/transformers/aboutMe"
 
 
-export async function editAboutMe(aboutMe: AboutMe) {
+export async function updateAboutMe(aboutMe: AboutMe) {
     try {
+        
+        await prisma.workExperience.deleteMany();
         await prisma.aboutMe.deleteMany()
 
         const newAboutMe = await prisma.aboutMe.create({
@@ -40,9 +42,9 @@ export async function editAboutMe(aboutMe: AboutMe) {
         revalidatePath('/admin')
         revalidatePath('/')
 
-        return { success: true, adboutMe: transformObjectAboutMe }
+        return { success: true, aboutMe: transformObjectAboutMe }
     } catch (error) {
-        console.error('Error editing aboutMe', error)
-        return { success: true, error: 'Failed to editing aboutMe' }
+        console.error('Error updating aboutMe', error)
+        return { success: false, error: error }
     }
 }

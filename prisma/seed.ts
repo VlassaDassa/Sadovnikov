@@ -19,7 +19,7 @@ async function main() {
   await prisma.deviceStat.createMany({ data: devices });
   await prisma.trafficSource.createMany({ data: source });
 
-  const about = await prisma.aboutMe.create({
+   await prisma.aboutMe.create({
     data: {
       birth: aboutMe.birth,
       placeBirth: aboutMe.placeBirth,

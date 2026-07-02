@@ -8,21 +8,21 @@ import ModalWrapper from "../modalWrapper";
 import Input from "@/components/shared/input";
 import Button from "@/components/shared/button/Button";
 
-import type { WorkExperience } from '@/interfaces/general';
+import type { AboutMe } from '@/interfaces/general';
 
 import { displayDate } from "@/lib/dates";
 
 
 
 interface SelectPeriodProps {
-    data: WorkExperience[],
-    setData: Dispatch<SetStateAction<WorkExperience[]>>
+    data: AboutMe,
+    setData: Dispatch<SetStateAction<AboutMe>>
 }
 
 
 const SelectPeriod: React.FC<SelectPeriodProps> = ({ data, setData }) => {
     const currentId = useSelector((state: RootState) => state.uiState.currentId)
-    const currentItem = data.find((item) => item.id === currentId);
+    const currentItem = data.workExperience.find((item) => item.id === currentId);
 
 
     const handleStartChange = (date: string) => {
@@ -34,7 +34,7 @@ const SelectPeriod: React.FC<SelectPeriodProps> = ({ data, setData }) => {
                     startDate: date
                 }
             };
-            setData(prev => prev.map(item => item.id === currentId ? updatedItem : item));
+            setData(prev => ({ ...prev, workExperience: prev.workExperience.map(item => item.id === currentId ? updatedItem : item) }));
         }
     };
 
@@ -47,7 +47,7 @@ const SelectPeriod: React.FC<SelectPeriodProps> = ({ data, setData }) => {
                     endDate: date
                 }
             };
-            setData(prev => prev.map(item => item.id === currentId ? updatedItem : item));
+            setData(prev => ({ ...prev, workExperience: prev.workExperience.map(item => item.id === currentId ? updatedItem : item) }));
         }
     };
 
@@ -60,7 +60,7 @@ const SelectPeriod: React.FC<SelectPeriodProps> = ({ data, setData }) => {
                     endDate: 'PRESENT'
                 }
             };
-            setData(prev => prev.map(item => item.id === currentId ? updatedItem : item));
+            setData(prev => ({ ...prev, workExperience: prev.workExperience.map(item => item.id === currentId ? updatedItem : item) }));
         }
     };
 
