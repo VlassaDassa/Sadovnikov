@@ -152,6 +152,7 @@ export interface IProjectPreviewData {
 
 export interface EditProjectProps {
     project: IProject,
-    setData: Dispatch<SetStateAction<IProject>>
+    setData: Dispatch<SetStateAction<IProject>>,
+    setIsSaving: Dispatch<SetStateAction<boolean>>
 }
 

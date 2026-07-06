@@ -22,7 +22,7 @@ import 'swiper/css';
 
 
 
-const KeyFeatures: React.FC<EditProjectProps> = ({ project, setData }) => {
+const KeyFeatures: React.FC<EditProjectProps> = ({ project, setData, setIsSaving }) => {
     const [curIndex, setCurIndex] = useState<number>(1)
     const swiperRef = useRef<SwiperType | null>(null);
     const totalCountItems = project?.keyFeatures.length || 0
@@ -45,6 +45,8 @@ const KeyFeatures: React.FC<EditProjectProps> = ({ project, setData }) => {
                     : feature
             ),
         }));
+
+        setIsSaving(true)
     };
 
     const handleDeleteKeyFeature = (featureId: number) => {
@@ -56,6 +58,8 @@ const KeyFeatures: React.FC<EditProjectProps> = ({ project, setData }) => {
                 keyFeatures: prev.keyFeatures.filter(feature => feature.id !== featureId),
             };
         });
+
+        setIsSaving(true)
     };
 
     const handleAddKeyFeature = () => {
@@ -83,6 +87,8 @@ const KeyFeatures: React.FC<EditProjectProps> = ({ project, setData }) => {
                 keyFeatures: [...prev.keyFeatures, newFeature],
             };
         });
+
+        setIsSaving(true)
     };
 
     return (

@@ -15,7 +15,7 @@ import styles from './index.module.scss';
 
 
 
-const Metrics: React.FC<EditProjectProps> = ({ project, setData }) => {
+const Metrics: React.FC<EditProjectProps> = ({ project, setData, setIsSaving }) => {
     const handleChangeMetrics = (
         metricId: number,
         value: string,
@@ -41,6 +41,8 @@ const Metrics: React.FC<EditProjectProps> = ({ project, setData }) => {
                     : item
             ),
         }));
+
+        setIsSaving(true)
     };
 
     return (

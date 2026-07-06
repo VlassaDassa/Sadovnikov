@@ -14,16 +14,19 @@ import styles from './index.module.scss';
 
 interface StackItemProps {
     item: IProjectStack,
-    setData: Dispatch<SetStateAction<IProject>>
+    setData: Dispatch<SetStateAction<IProject>>,
+    setIsSaving: Dispatch<SetStateAction<boolean>>
 }
 
-const StackItem: React.FC<StackItemProps> = ({ item, setData }) => {
+const StackItem: React.FC<StackItemProps> = ({ item, setData, setIsSaving }) => {
     
     const deleteStackItem = (stackId: number) => {
         setData((prev: IProject) => ({
             ...prev,
             stack: prev.stack.filter(item => item.id !== stackId),
         }));
+
+        setIsSaving(true)
     };
 
     const handleChangeStack = (
@@ -39,6 +42,8 @@ const StackItem: React.FC<StackItemProps> = ({ item, setData }) => {
                     : el
             ),
         }));
+
+        setIsSaving(true)
     };
 
     const handleChangeTooltip = (
@@ -59,6 +64,8 @@ const StackItem: React.FC<StackItemProps> = ({ item, setData }) => {
                     : el
             ),
         }));
+
+        setIsSaving(true)
     };
 
 
@@ -71,6 +78,8 @@ const StackItem: React.FC<StackItemProps> = ({ item, setData }) => {
                     : el
             ),
         }));
+
+        setIsSaving(true)
     };
 
     return (
@@ -143,7 +152,7 @@ const StackItem: React.FC<StackItemProps> = ({ item, setData }) => {
 
 
 
-const EditProjectStackModal: React.FC<EditProjectProps> = ({ project, setData }) => {
+const EditProjectStackModal: React.FC<EditProjectProps> = ({ project, setData, setIsSaving }) => {
     const defaultIcon = '/images/mockImages/React.svg'
     const containerRef = useRef<HTMLDivElement>(null);
 
@@ -210,6 +219,7 @@ const EditProjectStackModal: React.FC<EditProjectProps> = ({ project, setData })
                             key={item.id}
                             item={item}
                             setData={setData}
+                            setIsSaving={setIsSaving}
                         />
                     ))
                 }

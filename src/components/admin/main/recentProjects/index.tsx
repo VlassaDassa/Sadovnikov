@@ -20,6 +20,7 @@ import { IImages, IProject } from "@/interfaces/general";
 import { defaultImage } from "@/mockData/projects";
 import { createProject } from "@/app/actions/project";
 import { showMessage } from '@/lib/showMessage';
+import { featureIcon, featurePhoto1 } from "@/mockData/projects";  
 
 import { cssVars } from "@/styles/cssVariables";
 import styles from './index.module.scss';
@@ -117,9 +118,85 @@ const RecentProjects: React.FC<RecentProjectsProps> = ({ projects }) => {
             shortDescrition: 'Краткое описание',
             previewDescription: 'Описание для превью',
             stack: [],
-            keyFeatures: [],
-            description: [],
-            metrics: [],
+            keyFeatures: [
+                {
+                    id: 1,
+                    title: '',
+                    text: '',
+                    icon: featureIcon,
+                    photo: featurePhoto1
+                },
+            ],
+            description: [
+                {
+                    id: 1,
+                    title: 'Site',
+                    icon: 'text',
+                    content: ''
+                },
+                {
+                    id: 2,
+                    title: 'WHY I STARTED',
+                    icon: 'rocket',
+                    content: ''
+                },
+                {
+                    id: 3,
+                    title: 'CHALLENGES & SOLUTIONS',
+                    icon: 'puzzle',
+                    content: ''
+                },
+                {
+                    id: 4,
+                    title: 'CONCLUSION',
+                    icon: 'flag',
+                    content: ''
+                },
+                {
+                    id: 5,
+                    title: 'FUTURE PLANS',
+                    icon: 'time',
+                    content: ''
+                }
+            ],
+            metrics: [
+                {
+                    id: 1,
+                    icon: 'speed',
+                    title: 'Performance',
+                    text: 'Speed and performance',
+                    current: 0,
+                    max: 100,
+                    type: 'score'
+                },
+                {
+                    id: 2,
+                    icon: 'loadTime',
+                    title: 'Load time',
+                    text: 'Average loading time',
+                    current: 0,
+                    max: 10,
+                    type: 'time'
+                },
+                {
+                    id: 3,
+                    icon: 'search',
+                    title: 'SEO',
+                    text: 'Search engine optimization',
+                    current: 0,
+                    max: 100,
+                    type: 'score'
+                },
+                {
+                    id: 4,
+                    icon: 'accessibility',
+                    title: 'Accessibility',
+                    text: 'Lighehouse, A11y',
+                    current: 0,
+                    max: 100,
+                    type: 'score'
+                }
+            ],
             commits: [],
             date: new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' }),
             developmentTime: '1 week',
