@@ -2,8 +2,9 @@
 
 import React, { useRef, useEffect, useState } from 'react';
 
-import type { IProjectStack } from '@/interfaces/general';
+import EmptySection from '@/components/shared/EmptySection';
 
+import type { IProjectStack } from '@/interfaces/general';
 import { useTooltip } from '@/hooks/useTooltip';
 
 import styles from './index.module.scss';
@@ -189,6 +190,11 @@ const ProjectStack: React.FC<ProjectStackProps> = ({ data }) => {
     return (
         <section className={`${styles.projectStack} container`}>
             <h2 className={`${styles.title} sectionTitle`}>STACK</h2>
+
+            {
+                data.length === 0 &&  <EmptySection text='No stack' />
+            }
+           
 
             <div ref={wrapperRef} className={styles.stackWrapper}>
                 {data.map((item, index) => (

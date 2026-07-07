@@ -19,6 +19,13 @@ interface SliderProps {
 const Slider: React.FC<SliderProps> = ({ images }) => {
     const [curIndex, setCurIndex] = useState<number>(1)
 
+    // Главное изображение в начало
+    const sortedImages = [...images].sort((a, b) => {
+        if (a.main && !b.main) return -1;
+        if (!a.main && b.main) return 1;
+        return 0
+    })
+
     return (
         <div className={styles.photoContainer}>
             <Swiper
@@ -28,7 +35,7 @@ const Slider: React.FC<SliderProps> = ({ images }) => {
                 pagination={true}   
                 className={styles.swiper}   
             >
-                {images.map((item) => (
+                {sortedImages.map((item) => (
                     <SwiperSlide key={item.id}>
                         <AdaptiveImage 
                             src={item.image}
