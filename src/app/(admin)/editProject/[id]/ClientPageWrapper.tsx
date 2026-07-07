@@ -53,10 +53,12 @@ const ClientPageWrapper: React.FC<ClientPageWrapperProps> = ({ project }) => {
                 console.log('✅ Project updated successfully')
             }
             else {
+                showMessage('error', 'Error saving project', dispatch)
                 console.error('❌ Error saving project', response.error)
             }
 
         } catch (error) {
+            showMessage('error', 'Error saving project', dispatch)
             console.error('❌ Error saving project: ', error)
         }
         finally {

@@ -106,7 +106,6 @@ export const useImageUpload = (
             };
         });
 
-        showMessage('info', 'Success!', dispatch);
         if (fileInputRef.current) fileInputRef.current.value = '';
         setIsLoading(false);
     };

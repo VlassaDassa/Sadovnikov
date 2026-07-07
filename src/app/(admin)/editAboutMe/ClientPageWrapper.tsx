@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import dynamic from 'next/dynamic';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
+import { useDispatch } from 'react-redux';
 
 import AdminPageTitle from "@/components/admin/general/adminPageTitle";
 import BasicInformation from "@/components/admin/editAboutMe/basicInformation";
@@ -17,6 +18,7 @@ const WorkExperience = dynamic(() => import('@/components/admin/editAboutMe/work
 import type { WorkExperience, AboutMe } from '@/interfaces/general';
 import { updateAboutMe } from "@/app/actions/aboutMe";
 import { useDebounce } from "@/hooks/useDebounce";
+import { showMessage } from '@/lib/showMessage';
 
 import styles from './index.module.scss';
 
@@ -29,6 +31,7 @@ interface ClientPageWrapperProps {
 const ClientPageWrapper: React.FC<ClientPageWrapperProps> = ({ aboutMe }) => {
     const [data, setData] = useState<AboutMe>(aboutMe)
     const [isSaving, setIsSaving] = useState(false)
+    const dispatch = useDispatch()
 
     const isSelectPeriodModalOpen = useSelector((state: RootState) => state.uiState.isSelectPeriodModalOpen)
 
@@ -47,9 +50,11 @@ const ClientPageWrapper: React.FC<ClientPageWrapperProps> = ({ aboutMe }) => {
             }
             else {
                 console.error('❌ Error saving aboutMe', response.error)
+                showMessage('error', 'Error saving aboutMe', dispatch)
             }
         } catch (error) {
             console.error('❌ Error saving aboutMe', error)
+            showMessage('error', 'Error saving aboutMe', dispatch)
         }
         finally {
             setIsSaving(false)
