@@ -21,7 +21,6 @@ const Main: React.FC = async () => {
     let skills: Skill[] = [];
     let stack: Stack[] = [];
     
-    // Запрос данных
     try {
         const rawProjects = await prisma.project.findMany({
         include: {
