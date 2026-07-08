@@ -18,20 +18,7 @@
 }
 
 
-.uzbFlag {
-    position: absolute;
-    top: -50px;
-    left: 200px;
 
-    z-index: -3;
-
-    transform: rotate(-5deg);
-
-    width: 180px;
-    height: 91px;
-
-    border-radius: 10px
-}
 
 .text {
     @extend .heading-24-magra-bold;
@@ -39,30 +26,25 @@
 }
 
 .uzbIsland {
-    width: 300px;
-    height: 300px;
+    width: 500px;
 }
 
 .uzbTextContainer {
     position: absolute;
-    bottom: 50px;
+    bottom: -50px;
     left: 250px;
 } 
 
 
 .kollegePhoto {
-    height: 212px;
-    width: 318px;
-}
+    width: 350px;
 
+}
 
 .moscowPhoto {
-    width: 331px;
-    height: 394px;
-
-    border-radius: 30px
+    width: 600px;
+    left: -100px;
 }
-
 
 
 .uzbText {
@@ -71,67 +53,21 @@
 }
 
 
-.uzbWhite {
-    color: #FFF;
-}
-
-
-.uzbBlue {
-    margin-left: 10px;
-    color: #3081F7;
-}
-
-
-.uzbGreen {
-    color: #308738;
-}
-
-
-.mskFlag {
-    position: absolute;
-
-    top: -50px;
-    left: 200px;
-
-    transform: rotate(5deg);
-
-    width: 203px;
-    height: 135px;
-
-    border-radius: 10px
-}
-
-
 .mskText {
     display: flex;
 
     position: absolute;
-    bottom: 50px;
-    left: -300px;
+    bottom: -20px;
+    left: -100px;
 }
 
-
-.ruBlue {
-    color: #0039A6;
-}
-
-
-.ruWhite {
-    color: #fff;
-    margin-left: 10px;
-}
-
-
-.ruRed {
-    color: #D52B1E;
-}
 
 
 .kollegeText {
     position: absolute;
 
-    left: 0px;
-    bottom: -10px;
+    left: 30px;
+    bottom: 0px;
 }
 
 

@@ -7,10 +7,8 @@ import AdaptiveImage from '@/components/shared/AdaptiveImage';
 
 import style from './index.module.scss';
 
-const uzbFlag = '/images/main/uzbFlag.png';
 const uzbIsland = '/images/main/uzbIsland.png';
 const kollegePhoto = '/images/main/kolledge_photo.png';
-const russianFlag = '/images/main/russiaFlag.png';
 const moscowPhoto = '/images/main/moscow_photo.png';
 
 
@@ -79,13 +77,6 @@ const AboutIllustration: React.FC<AboutIllustrationProps> = ({ aboutMe }) => {
                     ariaHidden={false}
                 />
 
-                <AdaptiveImage 
-                    wrapClass={style.uzbFlag}
-                    src={uzbFlag}
-                    alt="Uzbekistan"
-                    ariaHidden={false}
-                />
-
                 <div className={style.uzbTextContainer}>
                     <p className={`${style.uzbText} ${style.text}`}>Year of birth: {aboutMe.birth}</p>
                     <p className={`${style.uzbText} ${style.text}`}>
@@ -101,13 +92,7 @@ const AboutIllustration: React.FC<AboutIllustrationProps> = ({ aboutMe }) => {
                     alt="Moscow"
                     ariaHidden={false}
                 />
-                <AdaptiveImage 
-                    wrapClass={style.mskFlag}
-                    src={russianFlag}
-                    alt="Moscow"
-                    ariaHidden={false}
-                />
-                <p className={`${style.mskText} ${style.text}`}>{aboutMe.location}</p>
+                <p className={`${style.mskText} ${style.text}`}>Location: {aboutMe.location}</p>
             </div>
 
             <div className={style.kollegeContainer} ref={ref3}>
