@@ -1,16 +1,10 @@
-import Link from 'next/link';
+import Error from '@/components/shared/Error';
+import './../globals.scss';
 
 
 
 export default function NotFound() {
     return (
-        <div className="error-container">
-            <h1>404</h1>
-            <h2>Page not found</h2>
-            <p>Sorry, but the requested page does not exist.</p>
-            <Link href="/admin" className="back-home">
-                Back to home
-            </Link>
-        </div>
+        <Error h1="404" h2="Page not found" error="Sorry, but the requested page does not exist." link="/admin" />
     );
-}
+}   
