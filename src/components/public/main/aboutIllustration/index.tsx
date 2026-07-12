@@ -86,6 +86,8 @@ const AboutIllustration: React.FC<AboutIllustrationProps> = ({ aboutMe }) => {
             </div>
 
             <div className={style.mskContainer} ref={ref2}>
+                
+
                 <AdaptiveImage 
                     wrapClass={style.moscowPhoto}
                     src={moscowPhoto}

@@ -13,6 +13,7 @@ import Input from '@/components/shared/input';
 import KeyFeatureImageUpload from './KeyFeatureImageUpload';
 
 import { EditProjectProps, IProject } from '@/interfaces/general';
+import { defaultIcon, defaultImageFeature } from '@/mockData/projects';
 
 import { cssVars } from '@/styles/cssVariables';
 import styles from './index.module.scss';
@@ -70,8 +71,8 @@ const KeyFeatures: React.FC<EditProjectProps> = ({ project, setData, setIsSaving
                 id: Date.now() + prev.keyFeatures.length + 1,
                 title: '',
                 text: '',
-                icon: '/images/mockImages/featureIcon.svg',
-                photo: '/images/mockImages/featureIcon.svg',
+                icon: defaultIcon,
+                photo: defaultImageFeature,
             };
 
             const newLength = prev.keyFeatures.length + 1;

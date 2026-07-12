@@ -17,9 +17,9 @@
 .sliderItem {
     @extend .radius-12;
 
-        @media (min-width: 768px) {
-            width: auto !important;
-        }
+    @media (min-width: 768px) {
+        width: calc(100% - 60px) !important;
+    }
 }
 
 .notFound {

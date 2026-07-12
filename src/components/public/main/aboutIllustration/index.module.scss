@@ -26,7 +26,7 @@
 }
 
 .uzbIsland {
-    width: 500px;
+    width: 300px;
 }
 
 .uzbTextContainer {
@@ -50,6 +50,9 @@
 .uzbText {
     display: flex;
     margin-top: 10px;
+    position: relative;
+
+    top: 20px;
 }
 
 
@@ -57,7 +60,7 @@
     display: flex;
 
     position: absolute;
-    bottom: -20px;
+    bottom: -50px;
     left: -100px;
 }
 
@@ -67,7 +70,7 @@
     position: absolute;
 
     left: 30px;
-    bottom: 0px;
+    bottom: -20px;
 }
 
 

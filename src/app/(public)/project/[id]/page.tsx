@@ -45,7 +45,6 @@ export default async function Project({ params }: ProjectPageProps) {
 		})
 
 		project = rawProject ? transformProject(rawProject) : null
-		throw new Error('Project not found');
 	}	
 	catch(error) {
 		const errorMessage = error instanceof Error ? error.message : 'Unknown error';

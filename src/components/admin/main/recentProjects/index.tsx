@@ -20,7 +20,7 @@ import { IImages, IProject } from "@/interfaces/general";
 import { defaultImage } from "@/mockData/projects";
 import { createProject } from "@/app/actions/project";
 import { showMessage } from '@/lib/showMessage';
-import { featureIcon, featurePhoto1 } from "@/mockData/projects";  
+import { defaultIcon, defaultImageFeature } from "@/mockData/projects";  
 
 import { cssVars } from "@/styles/cssVariables";
 import styles from './index.module.scss';
@@ -123,8 +123,8 @@ const RecentProjects: React.FC<RecentProjectsProps> = ({ projects }) => {
                     id: 1,
                     title: '',
                     text: '',
-                    icon: featureIcon,
-                    photo: featurePhoto1
+                    icon: defaultIcon,
+                    photo: defaultImageFeature
                 },
             ],
             description: [

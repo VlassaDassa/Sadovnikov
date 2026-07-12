@@ -17,7 +17,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({ project, index=1 }) => {
 
     return (
         <Link href={`/project/${project.id}`}>
-            <div className={style.projectItem} style={{top: '200px', left: `${600 * index}px` }}>
+            <div className={style.projectItem} style={{top: '200px', left: `${700 * index}px` }}>
                 <img src={project.images.find((item) => item.main)?.image} alt={project.name} className={style.projectImg} />
                 <p className={style.projectCategory}>{project.category}</p>
 
