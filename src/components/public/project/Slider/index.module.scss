@@ -4,8 +4,9 @@
 
 
 
-
 .photoContainer {
+    position: relative;
+
     @media (min-width: 1280px) {
         width: 50%;
     }
@@ -14,26 +15,103 @@
 .projectWrapPhoto {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 9; 
+    aspect-ratio: 16 / 9;
     border-radius: 20px;
     overflow: hidden;
     cursor: pointer;
+
     &::after {
         content: '';
         position: absolute;
-        top: 0;
-        left: 0;
+        inset: 0;
         width: 100%;
         height: 100%;
         border-radius: 20px;
-        box-shadow: inset 0px 0px 22.9px 13px rgba(0, 0, 0, 0.51);
+        box-shadow: inset 0 0 22.9px 13px rgba(0, 0, 0, 0.51);
         pointer-events: none;
         z-index: 2;
     }
 }
 
 .projectPhoto {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+}
+
+.sliderButtonWrapper {
+    position: absolute;
+    top: 50%;
+    z-index: 5;
+    transform: translateY(-50%);
+}
+
+.sliderButtonWrapperLeft {
+    left: 10px;
+
+    @media (min-width: 768px) {
+        left: 16px;
+    }
+}
+
+.sliderButtonWrapperRight {
+    right: 10px;
+
+    @media (min-width: 768px) {
+        right: 16px;
+    }
+}
+
+.sliderButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: 1px solid #5526ff;
+    background: #5526ff;
+    color: #ffffff;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        opacity 0.2s ease,
+        transform 0.2s ease;
+
+    &:hover:not(:disabled) {
+        background: #6d45ff;
+        border-color: #6d45ff;
+        transform: scale(1.05);
+    }
+
+    &:active:not(:disabled) {
+        transform: scale(1);
+    }
+
+    &:focus-visible {
+        outline: 2px solid #ffffff;
+        outline-offset: 3px;
+    }
+
+    &:disabled {
+        opacity: 0.3;
+        cursor: default;
+    }
+}
+
+.sliderButtonLeft {
+    svg {
+        transform: rotate(90deg) !important;
+    }
+}
+
+.sliderButtonRight {
+    svg {
+        transform: rotate(-90deg) !important;
+    }
 }
 
 .pagination {
