@@ -157,21 +157,32 @@ svg *:focus {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 70vh;
     text-align: center;
+    min-height: 65vh;
 
     .error-image {
-        width: 550px;
-        height: 400px;
+        width: 400px;
+        height: 300px;
+
+        @media (min-width: 768px) {
+            width: 550px;
+            height: 400px;
+        }
     }
 
     @extend .heading-24-mont-bold;
 
     h1 {
+        font-size: 64px;
+
         font-size: 100px;
         margin: 0;
         color: $error_600;
         font-weight: 700;
+
+        @media (min-width: 768px) {
+            font-size: 100px;
+        }
     }
 
     h2 {
@@ -183,6 +194,7 @@ svg *:focus {
 
     p {
         color: $neutral_400;
+        line-height: $leading-tight;
     }
 
     .btn-link {
@@ -225,7 +237,7 @@ svg *:focus {
     min-height: 100vh;
 
     h2 {
-        color: $neutral_1000;
+        color: $error_400;
     }
 }
 
