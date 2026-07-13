@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react';
+import Link from 'next/link';
 
 import DecorButton from '../../../shared/button/DecorButton';
 import AboutIllustration from '../aboutIllustration';
@@ -56,16 +57,17 @@ const AboutMe: React.FC<AboutMeProps> = ({ aboutMe }) => {
                             <h3 className={style.textTitle}>SHORT BIO</h3>
                             <p className={style.text}>{aboutMe['shortBio']}</p>
                         </div>
-
-                        <DecorButton 
-                            behavior='default'
-                            variant='big'
-                            text={{
-                                default: 'MY LONG STORY, VERY VERY LONG, IF YOU INTERESTED',
-                                alter: 'MY LONG STORY, IF YOU INTERESTED',
-                            }}
-                            additionalClass='aboutMe'
-                        />
+                        <Link href={'/pageInDev'}>
+                            <DecorButton 
+                                behavior='default'
+                                variant='big'
+                                text={{
+                                    default: 'MY LONG STORY, VERY VERY LONG, IF YOU INTERESTED',
+                                    alter: 'MY LONG STORY, IF YOU INTERESTED',
+                                }}
+                                additionalClass='aboutMe'
+                            />
+                        </Link>
                     </>
             }
         </section>
