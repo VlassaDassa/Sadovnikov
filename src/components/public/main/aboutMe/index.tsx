@@ -41,7 +41,7 @@ const AboutMe: React.FC<AboutMeProps> = ({ aboutMe }) => {
                                 {
                                     aboutMe.workExperience.map((item, index) => (
                                         <div key={item.id} className={style.workExperienceItem}>
-                                            <h4 className={style.text}>
+                                            <h4 className={`${style.text} ${style.workExperienceItemTitle}`}>
                                                 {item['organization']} - {item['position']} {item['workingPeriod']['startDate']} - {item['workingPeriod']['endDate']}
                                             </h4>
                                             <p className={style.description}>{item['description']}</p>

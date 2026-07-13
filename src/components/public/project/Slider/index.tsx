@@ -289,7 +289,7 @@ const Slider: React.FC<SliderProps> = ({ images }) => {
                 typeof document !== 'undefined' &&
                 createPortal(
                     <div
-                        className={styles.lightbox}
+                        className={`${styles.lightbox}`}
                         role="dialog"
                         aria-modal="true"
                         aria-label="Image viewer"
@@ -299,15 +299,15 @@ const Slider: React.FC<SliderProps> = ({ images }) => {
                             }
                         }}
                     >
-                        <button
-                            type="button"
-                            className={styles.lightboxClose}
+                        <Button 
+                            behavior="default"
+                            iconPosition="only"
+                            icon="close"
+                            variant='dark'
+                            additionalClass={styles.lightboxClose}
                             onClick={closeLightbox}
-                            aria-label="Close image viewer"
-                            autoFocus
-                        >
-                            ×
-                        </button>
+                        />
+
 
                         <div className={styles.lightboxCounter}>
                             {lightboxIndex + 1} / {sortedImages.length}
@@ -374,7 +374,7 @@ const Slider: React.FC<SliderProps> = ({ images }) => {
                         {hasNavigation && (
                             <>
                                 <div
-                                    className={`${styles.sliderButtonWrapper} ${styles.sliderButtonWrapperLeft} ${styles.lightboxArrowWrapper}`}
+                                    className={`${isLightboxOpen && styles.btnOpenLeft} ${styles.sliderButtonWrapper} ${styles.sliderButtonWrapperLeft} ${styles.lightboxArrowWrapper}`}
                                 >
                                     <Button
                                         behavior={
@@ -391,7 +391,7 @@ const Slider: React.FC<SliderProps> = ({ images }) => {
                                 </div>
 
                                 <div
-                                    className={`${styles.sliderButtonWrapper} ${styles.sliderButtonWrapperRight} ${styles.lightboxArrowWrapper}`}
+                                    className={`${isLightboxOpen && styles.btnOpenRight} ${styles.sliderButtonWrapper} ${styles.sliderButtonWrapperRight} ${styles.lightboxArrowWrapper}`}
                                 >
                                     <Button
                                         behavior={

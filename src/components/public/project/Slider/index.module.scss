@@ -44,62 +44,28 @@
     top: 50%;
     z-index: 5;
     transform: translateY(-50%);
+    display: none;
+    
+    @media (min-width: 1280px) {
+        display: block;
+    }
 }
 
 .sliderButtonWrapperLeft {
-    left: 10px;
-
-    @media (min-width: 768px) {
-        left: 16px;
-    }
+    left: 16px;
 }
 
 .sliderButtonWrapperRight {
-    right: 10px;
-
-    @media (min-width: 768px) {
-        right: 16px;
-    }
+    right: 16px;
 }
 
 .sliderButton {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
     padding: 0;
-    border: 1px solid #5526ff;
-    background: #5526ff;
-    color: #ffffff;
-    font-size: 22px;
-    line-height: 1;
-    cursor: pointer;
-    transition:
-        background-color 0.2s ease,
-        border-color 0.2s ease,
-        opacity 0.2s ease,
-        transform 0.2s ease;
-
-    &:hover:not(:disabled) {
-        background: #6d45ff;
-        border-color: #6d45ff;
-        transform: scale(1.05);
-    }
-
-    &:active:not(:disabled) {
-        transform: scale(1);
-    }
-
-    &:focus-visible {
-        outline: 2px solid #ffffff;
-        outline-offset: 3px;
-    }
-
-    &:disabled {
-        opacity: 0.3;
-        cursor: default;
-    }
 }
 
 .sliderButtonLeft {
@@ -120,11 +86,13 @@
     }
 }
 
+.btnOpenLeft {
+    left: 40px;
+}
 
-
-
-
-
+.btnOpenRight {
+    right: 40px;
+}
 
 .previewButton {
     display: block;
@@ -133,24 +101,12 @@
 
     border: 0;
     background: transparent;
-
-    text-align: inherit;
-    cursor: pointer;
-
-    &:focus-visible {
-        outline: 2px solid #6d45ff;
-        outline-offset: 4px;
-        border-radius: 20px;
-    }
 }
 
 .lightbox {
     position: fixed;
     inset: 0;
     z-index: 9999;
-
-    width: 100vw;
-    height: 100dvh;
 
     background: rgba(5, 5, 8, 0.97);
     overflow: hidden;
@@ -194,9 +150,6 @@
 .lightboxImageWrapper {
     position: relative;
 
-    width: calc(100vw - 24px);
-    height: calc(100dvh - 150px);
-
     overflow: visible !important;
 
     @media (min-width: 768px) {
@@ -217,40 +170,22 @@
 
 .lightboxClose {
     position: absolute;
-    top: 16px;
-    right: 16px;
+    top: 40px;
+    right: 0;
     z-index: 20;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    width: 44px;
-    height: 44px;
+    width: 64px;
+    height: 64px;
     padding: 0;
 
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 10px;
+    @extend .radius-full;
 
-    background: rgba(20, 20, 24, 0.85);
-    color: #ffffff;
-
-    font-size: 30px;
-    line-height: 1;
-
-    cursor: pointer;
-    transition:
-        background-color 0.2s ease,
-        border-color 0.2s ease;
-
-    &:hover {
-        border-color: #6d45ff;
-        background: #5526ff;
-    }
-
-    &:focus-visible {
-        outline: 2px solid #ffffff;
-        outline-offset: 3px;
+    @media (min-width: 768px) {
+        right: 40px;
     }
 }
 
@@ -259,13 +194,10 @@
     top: 24px;
     left: 50%;
     z-index: 20;
-
     transform: translateX(-50%);
 
-    color: #ffffff;
-
-    font-size: 16px;
-    line-height: 1;
+    @extend .body-16-mont-regular;
+    color: $white;
 }
 
 .lightboxArrowWrapper {
@@ -286,11 +218,12 @@
 
     transform: translateX(-50%);
 
-    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 12px;
 
     background: rgba(20, 20, 24, 0.88);
     backdrop-filter: blur(12px);
+
+    @extend .body-16-mont-regular;
 }
 
 .zoomButton,
@@ -306,7 +239,7 @@
     border-radius: 8px;
 
     background: transparent;
-    color: #ffffff;
+    color: $white;
 
     cursor: pointer;
     transition:
@@ -314,12 +247,7 @@
         opacity 0.2s ease;
 
     &:hover:not(:disabled) {
-        background: rgba(109, 69, 255, 0.35);
-    }
-
-    &:focus-visible {
-        outline: 2px solid #ffffff;
-        outline-offset: 2px;
+        background: $brand_900;
     }
 
     &:disabled {
