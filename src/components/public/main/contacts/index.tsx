@@ -11,6 +11,8 @@ import TalkingAvatar from '../talkingAvatar';
 
 import { setTypeMessage, setTextMessage, toggleMessage } from '@/store/slices/messageSlice';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import { sendContactMessage } from '@/app/actions/contact/sendContactMessage';
+import { showMessage } from '@/lib/showMessage';
 
 import styles from './index.module.scss';
 
@@ -112,28 +114,33 @@ const Contacts: React.FC= () => {
     const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setMessage(e.target.value)
     }
+    
 
-    const submitForm = (e: React.MouseEvent<HTMLDivElement>) => {
-        // Временная заглушка
+    const submitForm = async (e: React.MouseEvent<HTMLDivElement>) => {
+        e.preventDefault()
+
+        if (btnBehavior !== 'default') {
+            return
+        }
+
+        setBtnBehavior('loading')
+
+        const result = await sendContactMessage({
+            name, email, message
+        })
+
+        if (!result.success) {
+            showMessage('error', 'Error on sending message', dispatch)
+            setBtnBehavior('default')
+        }
+        else {
+            showMessage('info', 'Message sent successfuly!', dispatch)
+            setBtnBehavior('disabled')
+        }
+        
         setName('')
         setEmail('')
         setMessage('')
-
-        dispatch(setTypeMessage('error'))
-        dispatch(setTextMessage('Error on sending message'))
-        
-
-        setBtnBehavior('loading')
-        setTimeout(() => {
-            setBtnBehavior('disabled')
-
-            dispatch(toggleMessage())
-
-
-            setTimeout(() => {
-                dispatch(toggleMessage())
-            }, 3000)
-        }, 3000)
     }
 
 
