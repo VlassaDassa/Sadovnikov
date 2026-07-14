@@ -6,28 +6,71 @@ import MyStack from '@/components/public/main/myStack';
 import AboutMe from '@/components/public/main/aboutMe';
 import Portfolio from '@/components/public/main/portfolio';
 import Contacts from '@/components/public/main/contacts';
-
 import AnimatedSection from '@/components/shared/AnimatedScroll';
+import ErrorPage from '@/components/shared/ErrorPage';
+
+import { transformProject } from '@/lib/transformers/project';
+import { transformAboutMe } from '@/lib/transformers/aboutMe';
+import prisma from '@/lib/prisma';
+import { IProject, Skill, Stack } from '@/interfaces/general';
 
 
-const Main: React.FC = () => {
+const Main: React.FC = async () => {
+    let projects: IProject[] = [];
+    let aboutMe: AboutMe | null = null;
+    let skills: Skill[] = [];
+    let stack: Stack[] = [];
+    
+    try {
+        const rawProjects = await prisma.project.findMany({
+        include: {
+            images: true,
+            stack: true,
+            description: true,
+            metrics: true,
+            commits: true,
+            keyFeatures: true,
+        },
+        });
+
+        const rawAboutMe = await prisma.aboutMe.findFirst({
+            include: {
+                workExperience: true
+            }
+        })
+
+        projects = rawProjects.map(transformProject);
+        aboutMe = rawAboutMe ? transformAboutMe(rawAboutMe) : null;
+        skills = await prisma.skill.findMany();
+        stack = await prisma.stack.findMany();
+
+    } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+        return <ErrorPage error={errorMessage} />
+    }
+    
     return (
         <main>
             <AnimatedSection animation='fade-down'>
                 <Preview />
             </AnimatedSection>
+
             <AnimatedSection animation='fade-left'>
-                <Skills />
+                <Skills skills={skills} />
             </AnimatedSection>
+
             <AnimatedSection animation='fade-right'>
-                <MyStack />
+                <MyStack stack={stack} />
             </AnimatedSection>
+
             <AnimatedSection animation='fade-up'>
-                <AboutMe />
+                <AboutMe aboutMe={aboutMe} />
             </AnimatedSection>
+
             <AnimatedSection animation='fade-down'>
-                <Portfolio />
+                <Portfolio projects={projects} />
             </AnimatedSection>
+
             <AnimatedSection animation='zoom'>
                 <Contacts />
             </AnimatedSection>

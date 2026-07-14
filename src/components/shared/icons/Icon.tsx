@@ -30,6 +30,7 @@ import IconMathMinus from "./IconMathMinus";
 import IconSettings from "./IconSettings";
 import IconTwoPerson from "./IconTwoPerson";
 import IconManyPerson from "./IconManyPerson";
+import IconEmpty from "./IconEmpty";
 
 
 const icons = {
@@ -63,6 +64,7 @@ const icons = {
     mathPlus: IconMathPlus,
     mathMinus: IconMathMinus,
     settings: IconSettings,
+    empty: IconEmpty,
 }
 
 

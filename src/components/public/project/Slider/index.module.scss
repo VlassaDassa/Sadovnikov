@@ -4,8 +4,9 @@
 
 
 
-
 .photoContainer {
+    position: relative;
+
     @media (min-width: 1280px) {
         width: 50%;
     }
@@ -14,30 +15,255 @@
 .projectWrapPhoto {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 9; 
+    aspect-ratio: 16 / 9;
     border-radius: 20px;
     overflow: hidden;
     cursor: pointer;
+
     &::after {
         content: '';
         position: absolute;
-        top: 0;
-        left: 0;
+        inset: 0;
         width: 100%;
         height: 100%;
         border-radius: 20px;
-        box-shadow: inset 0px 0px 22.9px 13px rgba(0, 0, 0, 0.51);
+        box-shadow: inset 0 0 22.9px 13px rgba(0, 0, 0, 0.51);
         pointer-events: none;
         z-index: 2;
     }
 }
 
 .projectPhoto {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+}
+
+.sliderButtonWrapper {
+    position: absolute;
+    top: 50%;
+    z-index: 5;
+    transform: translateY(-50%);
+    display: none;
+    
+    @media (min-width: 1280px) {
+        display: block;
+    }
+}
+
+.sliderButtonWrapperLeft {
+    left: 16px;
+}
+
+.sliderButtonWrapperRight {
+    right: 16px;
+}
+
+.sliderButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+}
+
+.sliderButtonLeft {
+    svg {
+        transform: rotate(90deg) !important;
+    }
+}
+
+.sliderButtonRight {
+    svg {
+        transform: rotate(-90deg) !important;
+    }
 }
 
 .pagination {
     @media (min-width: 1280px) {
         display: none;
     }
+}
+
+.btnOpenLeft {
+    left: 40px;
+}
+
+.btnOpenRight {
+    right: 40px;
+}
+
+.previewButton {
+    display: block;
+    width: 100%;
+    padding: 0;
+
+    border: 0;
+    background: transparent;
+}
+
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    background: rgba(5, 5, 8, 0.97);
+    overflow: hidden;
+}
+
+.lightboxViewport {
+    width: 100%;
+    height: 100%;
+}
+
+.lightboxSwiper {
+    width: 100%;
+    height: 100%;
+}
+
+.lightboxSlide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.zoomContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+
+    cursor: grab;
+
+    &:active {
+        cursor: grabbing;
+    }
+}
+
+.lightboxImageWrapper {
+    position: relative;
+
+    overflow: visible !important;
+
+    @media (min-width: 768px) {
+        width: calc(100vw - 160px);
+        height: calc(100dvh - 120px);
+    }
+}
+
+.lightboxImage {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.lightboxClose {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    z-index: 20;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 64px;
+    height: 64px;
+    padding: 0;
+
+    @extend .radius-full;
+
+    @media (min-width: 768px) {
+        right: 40px;
+    }
+}
+
+.lightboxCounter {
+    position: absolute;
+    top: 24px;
+    left: 50%;
+    z-index: 20;
+    transform: translateX(-50%);
+
+    @extend .body-16-mont-regular;
+    color: $white;
+}
+
+.lightboxArrowWrapper {
+    z-index: 20;
+}
+
+.zoomControls {
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    z-index: 20;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 6px;
+
+    transform: translateX(-50%);
+
+    border-radius: 12px;
+
+    background: rgba(20, 20, 24, 0.88);
+    backdrop-filter: blur(12px);
+
+    @extend .body-16-mont-regular;
+}
+
+.zoomButton,
+.zoomValue {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 38px;
+    padding: 0;
+
+    border: 0;
+    border-radius: 8px;
+
+    background: transparent;
+    color: $white;
+
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        opacity 0.2s ease;
+
+    &:hover:not(:disabled) {
+        background: $brand_900;
+    }
+
+    &:disabled {
+        opacity: 0.3;
+        cursor: default;
+    }
+}
+
+.zoomButton {
+    width: 38px;
+    font-size: 24px;
+}
+
+.zoomValue {
+    min-width: 64px;
+    padding: 0 10px;
+
+    font-size: 14px;
 }

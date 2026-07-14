@@ -1,19 +1,19 @@
 import { cssVars } from "@/styles/cssVariables";
 
 
-interface IVisits {
+export interface IVisits {
     day: string,
     count: number
 }
 
-interface IDevices {
-    device: 'desktop' | 'mobile' | 'tablet',
+export interface IDevices {
+    device: string, //'desktop' | 'mobile' | 'tablet'
     percentage: number,
     color: string
 }
 
-interface ITrafficSource {
-    source: 'Desktop' | 'Search Engines' | 'Social Media' | 'Referrals',
+export interface ITrafficSource {
+    source: string, // 'Desktop' | 'Search Engines' | 'Social Media' | 'Referrals',
     percentage: number
 }
 

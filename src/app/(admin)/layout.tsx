@@ -1,5 +1,6 @@
 import './../globals.scss';
 
+import { redirect } from 'next/navigation';
 import type { Metadata } from "next";
 
 import { DynImportLayout } from '@/components/shared/DynImportLayout';
@@ -9,7 +10,7 @@ import NoiseBackground from "@/components/shared/NoizeBg";
 import GlobalTooltip from "@/components/shared/GlobalTooltip";
 
 import { Providers } from "@/store/Providers";
-
+import { getAdminSession } from '@/lib/auth/admin';
 
 
 
@@ -17,11 +18,16 @@ export const metaData: Metadata = {
     title: 'Admin',
 }
 
-export default function AdminLayout({
+export default async function AdminLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
+
+    const session = await getAdminSession()
+    if (!session) {
+        redirect('/login')
+    }
 
 
     return (

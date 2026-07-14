@@ -1,39 +1,56 @@
 import { AppDispatch } from "@/store";
 import { 
     toggleIsOverlayVisible, 
-    toggleEditSkillsModal, 
-    toggleEditFooterModal, 
-    toggleEditMyStackModal,
-    toggleSelectPeriodModal,
-    toggleEditProjectStackModal
+
+    closeEditFooterModal, 
+    closeEditSkillsModal, 
+    closeEditMyStackModal, 
+    closeSelectPeriodModal,
+    closeEditProjectStackModal,
 } from '@/store/slices/uiSlice';
 
 
+// Эта переменная существует на уровне файла, а не внутри компонента
+const beforeCloseCallbacks: Record<string, () => Promise<void>> = {};
 
+export const registerBeforeClose = (modalName: string, callback: () => Promise<void>) => {
+    beforeCloseCallbacks[modalName] = callback;
+};
 
-export const closeModals = (dispatch: AppDispatch, modalName: string) => {
-    dispatch(toggleIsOverlayVisible())
+export const unregisterBeforeClose = (modalName: string) => {
+    delete beforeCloseCallbacks[modalName];
+};
 
-    if (modalName === 'editSkills') {
-        dispatch(toggleEditSkillsModal())
+export const closeModals = async (dispatch: AppDispatch, modalName: string) => {
+    if (beforeCloseCallbacks[modalName]) {
+        await beforeCloseCallbacks[modalName]();
     }
 
-    if (modalName === 'editFooter') {
-        dispatch(toggleEditFooterModal())
-    }
+    dispatch(toggleIsOverlayVisible());
 
-    if (modalName === 'editMyStack') {
-        dispatch(toggleEditMyStackModal())
-    }
+    switch (modalName) {
+        case 'editSkills':
+            dispatch(closeEditSkillsModal());
+            break;
+        case 'editFooter':
+            dispatch(closeEditFooterModal());
+            break;
+        case 'editMyStack':
+            dispatch(closeEditMyStackModal());
+            break;
+        case 'selectPeriod':
+            dispatch(closeSelectPeriodModal());
+            break;
+        case 'editProjectStack':
+            dispatch(closeEditProjectStackModal());
+            break;
 
-    if (modalName === 'selectPeriod') {
-        dispatch(toggleSelectPeriodModal())
+        default:
+            break;
     }
+};
 
-    if (modalName === 'editProjectStack') {
-        dispatch(toggleEditProjectStackModal())
-    }
-}
+
 
 
 

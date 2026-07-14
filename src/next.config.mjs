@@ -2,6 +2,9 @@
 const nextConfig = {
     experimental: {
         optimizeCss: false,
+        serverActions: {
+            bodySizeLimit: '5mb',
+        },
     },
     // output: 'export',
     distDir: './dist',

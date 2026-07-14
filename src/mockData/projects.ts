@@ -10,11 +10,13 @@ const reduxImg = '/images/mockImages/Redux.svg'
 const sassImg = '/images/mockImages/SASS.svg'
 
 // Изображения должны быть в пропорции 11:9 (h:252px w:309px)
-const featureIcon = '/images/mockImages/featureIcon.svg';
-const featurePhoto1 = '/images/mockImages/featurePhoto.png';
+export const featureIcon = '/images/mockImages/featureIcon.svg';
+export const featurePhoto1 = '/images/mockImages/featurePhoto.png';
 const featurePhoto2 = '/images/mockImages/featurePhoto_1.png';
 
-export const defaultImage = '/images/mockImages/specTecno.png'
+export const defaultImage = '/images/general/emptyPhoto16_9.png'
+export const defaultImageFeature = '/images/general/emptyPhoto11_9.png'
+export const defaultIcon = '/images/general/empty.svg'
 
 
 export const projects: IProject[] = [

@@ -7,8 +7,7 @@ import { IImages, IProject } from '@/interfaces/general';
 
 
 export const useImageUpload = (
-    projectId: number,
-    setData: React.Dispatch<React.SetStateAction<IProject[]>>
+    setData: React.Dispatch<React.SetStateAction<IProject>>
 ) => {
     const fileInputRef = useRef<HTMLInputElement>(null)
     const [isLoading, setIsLoading] = useState(false)
@@ -26,66 +25,90 @@ export const useImageUpload = (
         })
     }
 
+    const compressImage = (file: File, maxWidth = 1200, quality = 0.7): Promise<string> => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = (event) => {
+                const img = new Image();
+                img.src = event.target?.result as string;
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    let width = img.width;
+                    let height = img.height;
+
+                    if (width > maxWidth) {
+                        height = (height * maxWidth) / width;
+                        width = maxWidth;
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx?.drawImage(img, 0, 0, width, height);
+                    resolve(canvas.toDataURL('image/jpeg', quality));
+                };
+                img.onerror = reject;
+            };
+            reader.onerror = reject;
+        });
+    };
+
 
     const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const files = e.target.files
+        const files = e.target.files;
+        if (!files || files.length === 0) return;
 
-        if (!files || files.length === 0) return
-
-        setIsLoading(true)
-
-        const newImages: IImages[] = []
-        const validFiles: File[] = []
+        setIsLoading(true);
+        const newImages: IImages[] = [];
+        const validFiles: File[] = [];
 
         for (const file of Array.from(files)) {
-            const { valid } = await validateImage(file)
+            const { valid } = await validateImage(file);
             if (valid) {
-                validFiles.push(file)
-            }
-            else {
-                showMessage('error', 'Photo must be 1:1, 4:3 or 16:9', dispatch)
+                validFiles.push(file);
+            } else {
+                showMessage('error', 'Photo must be 1:1, 4:3 or 16:9', dispatch);
             }
         }
 
         if (validFiles.length === 0) {
-            setIsLoading(false)
-            return
+            setIsLoading(false);
+            return;
         }
 
-        validFiles.forEach((file, index) => {
-            const reader = new FileReader();
-            reader.onload = (event) => {
-                const imageUrl = event.target?.result as string
+
+        for (let i = 0; i < validFiles.length; i++) {
+            const file = validFiles[i];
+            try {
+                const compressed = await compressImage(file, 1200, 0.7);
                 newImages.push({
-                    id: Date.now() + index,
-                    image: imageUrl,
-                    main: false // !
-                })
-
-                if (newImages.length === validFiles.length) {
-                    setData(prev => 
-                        prev.map(project => {
-                            if (project.id !== projectId) return project;
-                            const hasMain = project.images.some(img => img.main)
-                            return {
-                                ...project,
-                                images: [...project.images, ...newImages.map(img => ({
-                                    ...img,
-                                    main: !hasMain && img === newImages[0],
-                                }))]
-                            }
-                        })
-                    )
-                }
-
-                showMessage('info', 'Success!', dispatch)
-                if (fileInputRef.current) fileInputRef.current.value = ''
-                setIsLoading(false)
+                    id: Date.now() + i,
+                    image: compressed,
+                    main: false,
+                });
+            } catch (error) {
+                console.error('Error compressing image:', error);
             }
+        }
 
-            reader.readAsDataURL(file)
-        })
-    }
+        setData((prev: IProject) => {
+            const hasMain = prev.images.some(img => img.main);
+            return {
+                ...prev,
+                images: [
+                    ...prev.images,
+                    ...newImages.map((img, index) => ({
+                        ...img,
+                        main: !hasMain && index === 0,
+                    })),
+                ],
+            };
+        });
+
+        if (fileInputRef.current) fileInputRef.current.value = '';
+        setIsLoading(false);
+    };
 
     const openFilePicker = () => fileInputRef.current?.click()
     return { fileInputRef, handleFileUpload, openFilePicker, isLoading }

@@ -6,7 +6,9 @@
 
 .projectItem {
     background-color: $neutral_900;
-    aspect-ratio: 3 / 4;
+    aspect-ratio: 16 / 9;
+    height: 300px;
+    width: 265px;
 
     overflow: hidden;
 
@@ -24,12 +26,47 @@
         transition: background-color 0.2s ease, transform 0.2s ease;
     }
 
+
+    @media (min-width: 400px) {
+        height: 300px;
+        width: 300px;
+    }
+
+    @media (min-width: 450px) {
+        width: 100%;
+        height: 330px;
+    }
+
+    @media (min-width: 600px) {
+        height: 440px;
+    }
+
+    @media (min-width: 690px) {
+        height: 480px;
+    }
+
+    @media (min-width: 768px) {
+        height: 650px;
+    }
+
+    @media (min-width: 900px) {
+        height: 700px;
+    }
+
+    @media (min-width: 1000px) {
+        height: 800px;
+    }
+
+    @media (min-width: 1190px) {
+        height: 860px;
+    }
+
     @media (min-width: 1280px) {
         position: absolute;
 
         aspect-ratio: none; 
         width: 500px; 
-        height: 650px; 
+        height: 530px; 
 
         cursor: pointer;
 
@@ -46,21 +83,16 @@
             color: $brand_600;
         }
     }
-
-    @media (min-width: 768px) {
-        width: 520px;
-        height: auto;
-        aspect-ratio: 3 / 4;
-    }
 }
 
 
 .projectImg {
-    width: 100%;
-    aspect-ratio: 3/2.5;
+    aspect-ratio: 16/9;
 
     object-fit: cover;
     object-position: left;
+
+    width: 100%;
 
     @extend .radius-12;
 }

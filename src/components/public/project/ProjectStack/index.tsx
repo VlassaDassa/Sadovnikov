@@ -2,8 +2,9 @@
 
 import React, { useRef, useEffect, useState } from 'react';
 
-import type { IProjectStack } from '@/interfaces/general';
+import EmptySection from '@/components/shared/EmptySection';
 
+import type { IProjectStack } from '@/interfaces/general';
 import { useTooltip } from '@/hooks/useTooltip';
 
 import styles from './index.module.scss';
@@ -20,8 +21,8 @@ interface StackItemProps {
 
 const StackItem: React.FC<StackItemProps> = ({ item, index, customLeft, customTop }) => {
     const tooltipRef = useTooltip<HTMLDivElement>({
-        text: item.tooltip.text,
-        title: item.tooltip.title,
+        text: item.tooltip?.text ,
+        title: item.tooltip?.title,
         type: 'lvl2',
         placement: 'bottom',
         fakeWidth: 400,
@@ -189,6 +190,11 @@ const ProjectStack: React.FC<ProjectStackProps> = ({ data }) => {
     return (
         <section className={`${styles.projectStack} container`}>
             <h2 className={`${styles.title} sectionTitle`}>STACK</h2>
+
+            {
+                data.length === 0 &&  <EmptySection text='No stack' />
+            }
+           
 
             <div ref={wrapperRef} className={styles.stackWrapper}>
                 {data.map((item, index) => (

@@ -10,15 +10,18 @@ import SectionBackground from '@/components/admin/general/sectionBackground';
 import DashboardTitle from '@/components/admin/general/dashboardTitle';
 import ChartTooltip from '@/components/admin/general/chartTooltip';
 
-import { visits } from '@/mockData/adminCharts';
+import { IVisits } from '@/mockData/adminCharts';
 
 import { cssVars } from '@/styles/cssVariables';
 import styles from './index.module.scss';
 
 
 
+interface VisitChartProps {
+    visits: IVisits[]
+}
 
-const VisitChart: React.FC = () => {
+const VisitChart: React.FC<VisitChartProps> = ({ visits }) => {
     const windowWidth = useSelector((state: RootState) => state.breakpoint.windowWidth)
 
     const handleResize = () => {
@@ -102,6 +105,8 @@ const VisitChart: React.FC = () => {
                         </Brush>
                         </AreaChart>
                 </ResponsiveContainer>
+
+                
             </SectionBackground>
         </section>
     )

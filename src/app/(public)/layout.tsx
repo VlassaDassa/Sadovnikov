@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { DynImportLayout } from '@/components/shared/DynImportLayout';
 import Header from "@/components/public/general/header";
-import Footer from "@/components/public/general/footer";
+import FooterWrapper from "@/components/public/general/footer/footerWrapper";
 import GlobalLoader from "@/components/shared/GlobalLoader";
 import NoiseBackground from "@/components/shared/NoizeBg";
 import GlobalTooltip from "@/components/shared/GlobalTooltip";
@@ -40,7 +40,7 @@ export default function PublicLayout({
                     <DynImportLayout admin={false} />
                     <Header />
                     {children}
-                    <Footer />
+                    <FooterWrapper />
                 </Providers>
             </body>
         </html>

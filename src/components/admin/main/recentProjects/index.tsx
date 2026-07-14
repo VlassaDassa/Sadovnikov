@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useRef } from "react";
+import { useDispatch } from 'react-redux';
 import Link from "next/link";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperType } from 'swiper';
@@ -13,9 +14,13 @@ import SectionBackground from "../../general/sectionBackground";
 import AdaptiveImage from "@/components/shared/AdaptiveImage";
 import Icon from "@/components/shared/icons/Icon";
 import Button from "@/components/shared/button/Button";
+import SavingIndicator from "@/components/shared/SavingIndicator";
 
 import { IImages, IProject } from "@/interfaces/general";
-import { projects, defaultImage } from "@/mockData/projects";
+import { defaultImage } from "@/mockData/projects";
+import { createProject } from "@/app/actions/project";
+import { showMessage } from '@/lib/showMessage';
+import { defaultIcon, defaultImageFeature } from "@/mockData/projects";  
 
 import { cssVars } from "@/styles/cssVariables";
 import styles from './index.module.scss';
@@ -83,13 +88,17 @@ const EditProject: React.FC<EditProjectProps> = ({ id, name, img, shortDescritio
 }
 
 
+interface RecentProjectsProps {
+    projects: IProject[]
+}
 
-
-const RecentProjects: React.FC = () => {
+const RecentProjects: React.FC<RecentProjectsProps> = ({ projects }) => {
     const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
     const [data, setData] = useState<IProject[]>(projects)
+    const [isCreating, setIsCreating] = useState<boolean>(false)
     const [curIndex, setCurIndex] = useState<number>(1)
     const swiperRef = useRef<SwiperType | null>(null);
+    const dispatch = useDispatch()
     const countProjectView = {
         mobile: 3,
         desktop: 3,
@@ -97,7 +106,9 @@ const RecentProjects: React.FC = () => {
     }
 
 
-    const addProject = () => {
+    const addProject = async () => {
+        setIsCreating(true)
+
         const newProject: IProject = {
             id: Date.now(),
             category: 'Site',
@@ -107,9 +118,85 @@ const RecentProjects: React.FC = () => {
             shortDescrition: 'Краткое описание',
             previewDescription: 'Описание для превью',
             stack: [],
-            keyFeatures: [],
-            description: [],
-            metrics: [],
+            keyFeatures: [
+                {
+                    id: 1,
+                    title: '',
+                    text: '',
+                    icon: defaultIcon,
+                    photo: defaultImageFeature
+                },
+            ],
+            description: [
+                {
+                    id: 1,
+                    title: 'Site',
+                    icon: 'text',
+                    content: ''
+                },
+                {
+                    id: 2,
+                    title: 'WHY I STARTED',
+                    icon: 'rocket',
+                    content: ''
+                },
+                {
+                    id: 3,
+                    title: 'CHALLENGES & SOLUTIONS',
+                    icon: 'puzzle',
+                    content: ''
+                },
+                {
+                    id: 4,
+                    title: 'CONCLUSION',
+                    icon: 'flag',
+                    content: ''
+                },
+                {
+                    id: 5,
+                    title: 'FUTURE PLANS',
+                    icon: 'time',
+                    content: ''
+                }
+            ],
+            metrics: [
+                {
+                    id: 1,
+                    icon: 'speed',
+                    title: 'Performance',
+                    text: 'Speed and performance',
+                    current: 0,
+                    max: 100,
+                    type: 'score'
+                },
+                {
+                    id: 2,
+                    icon: 'loadTime',
+                    title: 'Load time',
+                    text: 'Average loading time',
+                    current: 0,
+                    max: 10,
+                    type: 'time'
+                },
+                {
+                    id: 3,
+                    icon: 'search',
+                    title: 'SEO',
+                    text: 'Search engine optimization',
+                    current: 0,
+                    max: 100,
+                    type: 'score'
+                },
+                {
+                    id: 4,
+                    icon: 'accessibility',
+                    title: 'Accessibility',
+                    text: 'Lighehouse, A11y',
+                    current: 0,
+                    max: 100,
+                    type: 'score'
+                }
+            ],
             commits: [],
             date: new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' }),
             developmentTime: '1 week',
@@ -117,23 +204,37 @@ const RecentProjects: React.FC = () => {
             demoLink: '',
             numberTeam: 1,
         };
-        
-        setData(prev => [...prev, newProject]);
 
-        const newLength = data.length + 1;
-        setTimeout(() => {
-            if (swiperRef.current) {
-                swiperRef.current.slideTo(newLength - 1);
+        try {
+            const result = await createProject(newProject)
+
+            if (result.success && result.project) {
+                setData(prev => [...prev, result.project])
+
+                const newLength = data.length + 1;
+                setTimeout(() => {
+                    if (swiperRef.current) {
+                        swiperRef.current.slideTo(newLength - 1);
+                    }
+                    setCurIndex(newLength);
+                }, 50);
+
+                showMessage('info', 'Project has been created', dispatch)
             }
-            setCurIndex(newLength);
-        }, 50);
-        
-        // TODO Переход на страницу редактирования нового проекта
+        } catch (error) {
+            showMessage('error', 'Error creating project', dispatch)
+            console.error('Error creating project', error)
+        }
+        finally {
+            setIsCreating(false)
+        }
     };
 
     
     return (
         <section className={`${styles.section} container`}>
+            <SavingIndicator isSaving={isCreating} />
+
             <SectionBackground>
                 <div className={styles.title}>
                     <DashboardTitle text='RECENT PROJECTS' additionalClass={styles.titleText} /> 
@@ -170,7 +271,7 @@ const RecentProjects: React.FC = () => {
                 </Swiper>
                 
                 <Button 
-                    behavior="default"
+                    behavior={isCreating ? 'loading' : 'default'}
                     iconPosition="leftIcon"
                     variant="black"
                     text="Add New Project"

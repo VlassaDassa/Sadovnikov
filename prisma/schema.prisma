@@ -1,0 +1,215 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Project {
+  id                 Int     @id @default(autoincrement())
+  category           String
+  name               String
+  shortDescription   String
+  previewDescription String
+  date               String
+  developmentTime    String
+  githubLink         String?
+  demoLink           String?
+  numberTeam         Int
+  teamType           String
+
+  images      ProjectImage[]
+  stack       StackItem[]
+  keyFeatures KeyFeature[]
+  description DescriptionBlock[]
+  metrics     Metric[]
+  commits     Commit[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProjectImage {
+  id        Int     @id @default(autoincrement())
+  projectId Int
+  project   Project @relation(fields: [projectId], references: [id])
+  image     String
+  main      Boolean @default(false)
+}
+
+model StackItem {
+  id        Int     @id @default(autoincrement())
+  projectId Int
+  project   Project @relation(fields: [projectId], references: [id])
+  name      String
+  icon      String
+  tooltip   Json? // { title, text }
+}
+
+model KeyFeature {
+  id        Int     @id @default(autoincrement())
+  projectId Int
+  project   Project @relation(fields: [projectId], references: [id])
+  title     String
+  text      String
+  icon      String
+  photo     String
+}
+
+model DescriptionBlock {
+  id        Int     @id @default(autoincrement())
+  projectId Int
+  project   Project @relation(fields: [projectId], references: [id])
+  title     String
+  icon      String
+  content   String
+}
+
+model Metric {
+  id        Int     @id @default(autoincrement())
+  projectId Int
+  project   Project @relation(fields: [projectId], references: [id])
+  icon      String // Название иконки (speed, search, и тд)
+  title     String
+  text      String
+  current   Float
+  max       Float
+  type      String // score/time
+}
+
+model Commit {
+  id        Int     @id @default(autoincrement())
+  projectId Int
+  project   Project @relation(fields: [projectId], references: [id])
+  name      String
+  date      String
+  text      String
+}
+
+// -------- Глобальные сущности -----------
+
+model Skill {
+  id    Int    @id @default(autoincrement())
+  name  String
+  score Int    @default(0)
+}
+
+model Stack {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+}
+
+model FooterItem {
+  id   Int     @id @default(autoincrement())
+  text String
+  link String?
+  icon String
+}
+
+model VisitorStat {
+  id    Int    @id @default(autoincrement())
+  day   String
+  count Int
+}
+
+model DeviceStat {
+  id         Int     @id @default(autoincrement())
+  device     String
+  percentage Int
+  color      String?
+}
+
+model TrafficSource {
+  id         Int    @id @default(autoincrement())
+  source     String
+  percentage Int
+}
+
+model AboutMe {
+  id         Int    @id @default(autoincrement())
+  birth      Int
+  placeBirth String
+  education  String
+  location   String
+  shortBio   String
+
+  workExperience WorkExperience[]
+}
+
+model WorkExperience {
+  id           Int     @id @default(autoincrement())
+  aboutMeId    Int
+  aboutMe      AboutMe @relation(fields: [aboutMeId], references: [id])
+  organization String
+  position     String
+  startDate    String
+  endDate      String?
+  description  String
+}
+
+model User {
+  id            String    @id
+  name          String
+  email         String
+  emailVerified Boolean   @default(false)
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  role          String?   @default("USER")
+  sessions      Session[]
+  accounts      Account[]
+
+  @@unique([email])
+  @@map("user")
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
+}

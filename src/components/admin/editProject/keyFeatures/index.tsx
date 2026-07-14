@@ -12,7 +12,8 @@ import PaginationSlider from '@/components/shared/paginationSlider';
 import Input from '@/components/shared/input';
 import KeyFeatureImageUpload from './KeyFeatureImageUpload';
 
-import { EditProjectProps } from '@/interfaces/general';
+import { EditProjectProps, IProject } from '@/interfaces/general';
+import { defaultIcon, defaultImageFeature } from '@/mockData/projects';
 
 import { cssVars } from '@/styles/cssVariables';
 import styles from './index.module.scss';
@@ -22,8 +23,7 @@ import 'swiper/css';
 
 
 
-const KeyFeatures: React.FC<EditProjectProps> = ({ projects, projectId, setData }) => {
-    const project = projects.find(proj => proj.id === projectId)
+const KeyFeatures: React.FC<EditProjectProps> = ({ project, setData, setIsSaving }) => {
     const [curIndex, setCurIndex] = useState<number>(1)
     const swiperRef = useRef<SwiperType | null>(null);
     const totalCountItems = project?.keyFeatures.length || 0
@@ -38,70 +38,58 @@ const KeyFeatures: React.FC<EditProjectProps> = ({ projects, projectId, setData 
         field: T,
         value: string
     ) => {
-        setData(prev =>
-            prev.map(project =>
-                project.id === projectId
-                    ? {
-                        ...project,
-                        keyFeatures: project.keyFeatures.map(feature =>
-                            feature.id === featureId
-                                ? { ...feature, [field]: value }
-                                : feature
-                        )
-                    }
-                    : project
-            )
-        );
+        setData((prev: IProject) => ({
+            ...prev,
+            keyFeatures: prev.keyFeatures.map(feature =>
+                feature.id === featureId
+                    ? { ...feature, [field]: value }
+                    : feature
+            ),
+        }));
+
+        setIsSaving(true)
     };
 
     const handleDeleteKeyFeature = (featureId: number) => {
-        setData(prev =>
-            prev.map(project => {
-                if (project.id !== projectId) return project;
-                
-                if (project.keyFeatures.length <= 1) {
-                    return project;
-                }
-                
-                return {
-                    ...project,
-                    keyFeatures: project.keyFeatures.filter(
-                        feature => feature.id !== featureId
-                    ),
-                };
-            })
-        );
+        setData((prev: IProject) => {
+            if (prev.keyFeatures.length <= 1) return prev;
+
+            return {
+                ...prev,
+                keyFeatures: prev.keyFeatures.filter(feature => feature.id !== featureId),
+            };
+        });
+
+        setIsSaving(true)
     };
 
     const handleAddKeyFeature = () => {
         if (project.keyFeatures.length >= 6) return;
 
-        setData(prev =>
-            prev.map(project => {
-                if (project.id !== projectId) return project;
-                
-                const newFeature = {
-                    id: Date.now() + project.keyFeatures.length + 1,
-                    title: '',
-                    text: '',
-                    icon: '/images/mockImages/featureIcon.svg',
-                    photo: '/images/mockImages/featureIcon.svg',
-                };
-                
-                const newLength = project.keyFeatures.length + 1;
-                setTimeout(() => {
-                    if (swiperRef.current) {
-                        swiperRef.current.slideTo(newLength - 1);
-                    }
-                    setCurIndex(newLength);
-                }, 50);
-                
-                return {
-                    ...project,
-                    keyFeatures: [...project.keyFeatures, newFeature],
-                };
-            })
-        );
+        setData((prev: IProject) => {
+            const newFeature = {
+                id: Date.now() + prev.keyFeatures.length + 1,
+                title: '',
+                text: '',
+                icon: defaultIcon,
+                photo: defaultImageFeature,
+            };
+
+            const newLength = prev.keyFeatures.length + 1;
+            setTimeout(() => {
+                if (swiperRef.current) {
+                    swiperRef.current.slideTo(newLength - 1);
+                }
+                setCurIndex(newLength);
+            }, 50);
+
+            return {
+                ...prev,
+                keyFeatures: [...prev.keyFeatures, newFeature],
+            };
+        });
+
+        setIsSaving(true)
     };
 
     return (
@@ -158,7 +146,6 @@ const KeyFeatures: React.FC<EditProjectProps> = ({ projects, projectId, setData 
 
                             <div className={styles.imgContainer}>
                                 <KeyFeatureImageUpload
-                                    projectId={projectId}
                                     featureId={feature.id}
                                     field="photo"
                                     src={feature.photo}
@@ -168,7 +155,6 @@ const KeyFeatures: React.FC<EditProjectProps> = ({ projects, projectId, setData 
                                 />
 
                                 <KeyFeatureImageUpload
-                                    projectId={projectId}
                                     featureId={feature.id}
                                     field="icon"
                                     src={feature.icon}

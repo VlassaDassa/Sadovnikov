@@ -3,9 +3,10 @@
 import React, { useRef, useEffect } from 'react';
 
 import AdaptiveImage from '@/components/shared/AdaptiveImage';
+import EmptySection from '@/components/shared/EmptySection';
 
 import { randomPlacementItems } from '@/lib/stack';
-import { stack } from '@/mockData/stack';
+import type { Stack } from '@/interfaces/general';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 import style from './index.module.scss';
@@ -15,7 +16,12 @@ import style from './index.module.scss';
 
 const hand = '/images/main/hand.png'
 
-const MyStack: React.FC = () => {
+
+interface StackProps {
+	stack: Stack[]
+}
+
+const MyStack: React.FC<StackProps> = ({ stack }) => {
 	const wrapperRef = useRef<HTMLDivElement>(null);
 	const itemsRef = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -61,25 +67,35 @@ const MyStack: React.FC = () => {
 	return (
 		<section className={`${style.myStack} container`}>
 			<h2 className={`sectionTitle ${style.stackTitle}`}>MY STACK</h2>
-			<AdaptiveImage 
-				wrapClass={`${style.stackHandBg} ${isVisible ? style['stackHandBg-anim'] : ''} `} 
-				ref={elementRef}
-				src={hand} 
-			/>
 
-			<div className={style.stackWrapper} ref={wrapperRef}>
-				{stack.map((item, index) => (
-					<div
-						key={item.id}
-						className={style.stackItem}
-						ref={(el) => {
-							itemsRef.current[index] = el
-						}}
-					>
-						{item.name}
-					</div>
-				))}
-			</div>
+			{
+				stack.length === 0 ?
+					<EmptySection text='Stack not found' />
+				:
+					<>
+						<AdaptiveImage 
+							wrapClass={`${style.stackHandBg} ${isVisible ? style['stackHandBg-anim'] : ''} `} 
+							ref={elementRef}
+							src={hand} 
+						/>
+
+						<div className={style.stackWrapper} ref={wrapperRef}>
+							{stack.map((item, index) => (
+								<div
+									key={item.id}
+									className={style.stackItem}
+									ref={(el) => {
+										itemsRef.current[index] = el
+									}}
+								>
+									{item.name}
+								</div>
+							))}
+						</div>
+					</>
+			}
+
+			
 		</section> 
 	);
 };

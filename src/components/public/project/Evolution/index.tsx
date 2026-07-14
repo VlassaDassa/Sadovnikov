@@ -2,8 +2,9 @@
 
 import React from 'react';
 
-import { useTooltip } from '@/hooks/useTooltip';
+import EmptySection from '@/components/shared/EmptySection';
 
+import { useTooltip } from '@/hooks/useTooltip';
 import { ICommit } from '@/interfaces/general';
 
 import styles from './index.module.scss';
@@ -44,13 +45,18 @@ const Evolution: React.FC<EvolutionProps> = ({ data }) => {
         <section className={`${styles.evolution}`}>
             <h2 className={`${styles.title} sectionTitle`}>EVOLUTION</h2>
 
-            <div className={styles.evolWrapper}>
-                <div className={styles.timeline}>
-                    {data.map((item) => (
-                        <Commit key={item.id} item={item} />
-                    ))}
-                </div>
-            </div>
+            {
+                data.length === 0 ? <EmptySection text='No commits' /> : 
+
+                    <div className={styles.evolWrapper}>
+                        <div className={styles.timeline}>
+                            {data.map((item) => (
+                                <Commit key={item.id} item={item} />
+                            ))}
+                        </div>
+                    </div>
+            }
+            
         </section>
     )
 }

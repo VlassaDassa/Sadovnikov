@@ -1,0 +1,19 @@
+@use './../../../styles/tokens/typography' as *;
+@use './../../../styles/tokens/colors' as *;
+@use './../../../styles/tokens/effects' as *;
+
+
+
+.empty {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+
+    margin: 50px 0;
+
+    @extend .heading-24-magra-bold;
+
+    @media (min-width: 768px) {
+        font-size: 64px;
+    }
+}

@@ -1,20 +1,22 @@
 'use client'
 
 import React, { useEffect, useRef, useCallback } from 'react';
+import { AboutMe } from '@/interfaces/general';
 
 import AdaptiveImage from '@/components/shared/AdaptiveImage';
 
 import style from './index.module.scss';
 
-const uzbFlag = '/images/main/uzbFlag.png';
 const uzbIsland = '/images/main/uzbIsland.png';
 const kollegePhoto = '/images/main/kolledge_photo.png';
-const russianFlag = '/images/main/russiaFlag.png';
 const moscowPhoto = '/images/main/moscow_photo.png';
 
 
+interface AboutIllustrationProps {
+    aboutMe: AboutMe
+}
 
-const AboutIllustration: React.FC = () => {
+const AboutIllustration: React.FC<AboutIllustrationProps> = ({ aboutMe }) => {
     const ref1 = useRef<HTMLDivElement>(null)
     const ref2 = useRef<HTMLDivElement>(null)
     const ref3 = useRef<HTMLDivElement>(null)
@@ -75,35 +77,24 @@ const AboutIllustration: React.FC = () => {
                     ariaHidden={false}
                 />
 
-                <AdaptiveImage 
-                    wrapClass={style.uzbFlag}
-                    src={uzbFlag}
-                    alt="Uzbekistan"
-                    ariaHidden={false}
-                />
-
                 <div className={style.uzbTextContainer}>
-                    <p className={`${style.uzbText} ${style.text}`}>Year of birth: 2004</p>
+                    <p className={`${style.uzbText} ${style.text}`}>Year of birth: {aboutMe.birth}</p>
                     <p className={`${style.uzbText} ${style.text}`}>
-                        Place of birth: <span className={style.uzbBlue}>Uzb</span><span className={style.uzbWhite}>eki</span><span className={style.uzbGreen}>stan</span>
+                        Place of birth: {aboutMe.placeBirth}
                     </p>
                 </div>
             </div>
 
             <div className={style.mskContainer} ref={ref2}>
+                
+
                 <AdaptiveImage 
                     wrapClass={style.moscowPhoto}
                     src={moscowPhoto}
                     alt="Moscow"
                     ariaHidden={false}
                 />
-                <AdaptiveImage 
-                    wrapClass={style.mskFlag}
-                    src={russianFlag}
-                    alt="Moscow"
-                    ariaHidden={false}
-                />
-                <p className={`${style.mskText} ${style.text}`}>Location Moscow, <span className={style.ruWhite}>Ru</span><span className={style.ruBlue}>ss</span><span className={style.ruRed}>ia</span></p>
+                <p className={`${style.mskText} ${style.text}`}>Location: {aboutMe.location}</p>
             </div>
 
             <div className={style.kollegeContainer} ref={ref3}>
@@ -113,7 +104,7 @@ const AboutIllustration: React.FC = () => {
                     alt="kollege"
                     ariaHidden={false}
                 />
-                <p className={`${style.text} ${style.kollegeText}`}>Education: Konakovo Energy College, 2025</p>
+                <p className={`${style.text} ${style.kollegeText}`}>{aboutMe.education}</p>
             </div>
 
             <svg ref={svgRef} className={style.connections}>

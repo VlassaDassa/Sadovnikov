@@ -3,17 +3,22 @@ import React, { useState } from 'react';
 import SectionTitle from '@/components/admin/general/sectionTitle';
 import Input from '@/components/shared/input';
 
-import { aboutMe as initialData } from '@/mockData/aboutMe';
+import { AboutMe } from '@/interfaces/general';
 
 import styles from './index.module.scss';
 
 
 
-const ShortBio: React.FC = () => {
-    const [data, setData] = useState<string>(initialData['shortBio'])
+interface ShortBioProps {
+    data: AboutMe
+    setData: React.Dispatch<React.SetStateAction<AboutMe>>,
+    setIsSaving: React.Dispatch<React.SetStateAction<boolean>>
+}
 
+const ShortBio: React.FC<ShortBioProps> = ({ data, setData, setIsSaving }) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setData(e.target.value)
+        setData(prev => ({...prev, shortBio: e.target.value}))
+        setIsSaving(true);
     }
 
     return (
@@ -29,7 +34,7 @@ const ShortBio: React.FC = () => {
                 placeholder='Text...'
                 iconPosition='noIcon'
                 additionalClass={styles.shortBio}
-                value={data}
+                value={data.shortBio}
                 variant='admin'
                 adminLabel='withoutLabel'
                 noize={true}

@@ -1,5 +1,3 @@
-'use client'
-
 import React from "react";
 import { Cell, Pie, PieChart } from 'recharts';
 
@@ -7,16 +5,21 @@ import SectionBackground from "../../general/sectionBackground";
 import DashboardTitle from "../../general/dashboardTitle";
 import ChartTooltip from "../../general/chartTooltip";
 
-import { devices } from "@/mockData/adminCharts";
+import { IDevices } from "@/mockData/adminCharts";
 
 import styles from './index.module.scss';
 
 
-const DeviceChart: React.FC = () => {
+interface DeviceChartProps {
+    devices: IDevices[]
+}
+
+const DeviceChart: React.FC<DeviceChartProps> = ({ devices }) => {
     return (
         <section className={`${styles.section} container`}>
             <SectionBackground>
                 <DashboardTitle text="DEVICES" />
+
                 <div className={styles.wrapper}>
                     <PieChart style={{ width: '100%', maxWidth: '160px', maxHeight: '160px', aspectRatio: 1 }} responsive>
                         <Pie

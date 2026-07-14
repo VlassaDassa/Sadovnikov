@@ -96,3 +96,11 @@
 .brandColor {
     color: $brand_600;
 }
+
+
+.exitBtn {
+    p {
+        color: $error_600;
+        font-weight: 600;
+    }
+}

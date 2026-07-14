@@ -7,10 +7,9 @@ import { IProject } from '@/interfaces/general';
 
 
 export const useKeyFeatureImageUpload = (
-    projectId: number,
     featureId: number,
     field: 'photo' | 'icon',
-    setData: React.Dispatch<React.SetStateAction<IProject[]>>
+    setData: React.Dispatch<React.SetStateAction<IProject>>
 ) => {
     const dispatch = useDispatch();
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -71,19 +70,14 @@ export const useKeyFeatureImageUpload = (
         reader.onload = (event) => {
             const imageUrl = event.target?.result as string;
 
-            setData(prev =>
-                prev.map(project => {
-                    if (project.id !== projectId) return project;
-                    return {
-                        ...project,
-                        keyFeatures: project.keyFeatures.map(feature =>
-                            feature.id === featureId
-                                ? { ...feature, [field]: imageUrl }
-                                : feature
-                        ),
-                    };
-                })
-            );
+            setData((prev: IProject) => ({
+                ...prev,
+                keyFeatures: prev.keyFeatures.map(feature =>
+                    feature.id === featureId
+                        ? { ...feature, [field]: imageUrl }
+                        : feature
+                ),
+            }));
 
             showMessage('info', 'Success!');
             setIsLoading(false);

@@ -16,29 +16,21 @@ import styles from './index.module.scss';
 
 
 
-const Description: React.FC<EditProjectProps> = ({ projects, projectId, setData }) => {
-    const project = projects.find(proj => proj.id === projectId)
-
-    if (!project) return
-
+const Description: React.FC<EditProjectProps> = ({ project, setData, setIsSaving }) => {
     const handleChangeDescription= (
         descId: number,
         value: string
     ) => {
-        setData(prev =>
-            prev.map(project =>
-                project.id === projectId
-                    ? {
-                        ...project,
-                        description: project.description.map(item =>
-                            item.id === descId
-                                ? { ...item, content: value }
-                                : item
-                        )
-                    }
-                    : project
-            )
-        );
+        setData((prev: IProject) => ({
+            ...prev,
+            description: prev.description.map(item =>
+                item.id === descId
+                    ? { ...item, content: value }
+                    : item
+            ),
+        }));
+
+        setIsSaving(true)
     };
 
     if (!project) return

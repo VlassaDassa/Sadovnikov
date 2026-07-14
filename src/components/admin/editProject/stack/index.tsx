@@ -22,9 +22,7 @@ import styles from './index.module.scss';
 
 
 
-const Stack: React.FC<EditProjectProps> = ({ projects, projectId, setData }) => {
-    const project = projects.find(proj => proj.id === projectId)
-
+const Stack: React.FC<EditProjectProps> = ({ project }) => {
     const dispatch = useDispatch()
     
     const openEditStack= () => {

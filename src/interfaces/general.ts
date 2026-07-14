@@ -19,7 +19,7 @@ export interface IProjectStack {
     id: number,
     name: string,
     icon: string,
-    tooltip: IStackTooltip
+    tooltip?: IStackTooltip
 }
 
 export interface IFeatureItem {
@@ -83,7 +83,7 @@ export interface IProject {
 
 
 export interface TooltipConfig {
-    text: string,
+    text?: string,
     title?: string,
     date?: string,
     type?: 'lvl1' | 'lvl2' | 'lvl3',
@@ -105,7 +105,7 @@ export interface IFooterItem {
     id: number,
     text: string,
     icon: string
-    link?: string,
+    link?: string | null,
 }
 
 
@@ -151,8 +151,8 @@ export interface IProjectPreviewData {
 
 
 export interface EditProjectProps {
-    projects: IProject[],
-    projectId: number,
-    setData: Dispatch<SetStateAction<IProject[]>>
+    project: IProject,
+    setData: Dispatch<SetStateAction<IProject>>,
+    setIsSaving: Dispatch<SetStateAction<boolean>>
 }
 

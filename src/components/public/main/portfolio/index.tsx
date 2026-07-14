@@ -9,13 +9,18 @@ const Slider = dynamic(() => import('../slider'), { ssr: false })
 const ProjectItem = dynamic(() => import('../projectItem'), { ssr: false })
 
 import { RootState } from '@/store';
-import { projects } from '@/mockData/projects';
+import { IProject } from '@/interfaces/general';
 
 import style from './index.module.scss';
 
 
 
-const Portfolio: React.FC= () => {
+
+interface PortfolioProps {
+    projects: IProject[];
+}
+
+const Portfolio: React.FC<PortfolioProps> = ({ projects }) => {
     const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
 
 
