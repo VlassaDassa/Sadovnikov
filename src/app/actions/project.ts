@@ -5,10 +5,13 @@ import { revalidatePath } from "next/cache"
 import prisma from "@/lib/prisma"
 import { IProject } from "@/interfaces/general"
 import { transformProject } from "@/lib/transformers/project"
+import { requireAdmin } from "@/lib/auth/admin";
 
 
 
 export async function createProject(projectData: IProject) {
+    requireAdmin()
+
     try {
         const newProject = await prisma.project.create({
             data: {

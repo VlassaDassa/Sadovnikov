@@ -23,6 +23,7 @@ interface ButtonProps {
     
     variant: 'primary' | 'secondary' | 'dark' | 'black';
     additionalClass?: string;
+    type?: 'button' | 'submit',
 
     noize?: boolean;
 
@@ -39,6 +40,7 @@ const Button: React.FC<ButtonProps> = ({
         iconPosition='noIcon',
         variant='primary',
         noize=false,
+        type='button',
         
         additionalClass,
         text,
@@ -120,6 +122,7 @@ const Button: React.FC<ButtonProps> = ({
             onClick={onClick}
             ref={tooltipRef}
             disabled={behavior === 'disabled'}
+            type={type}
             className={`
                 ${style.button} 
                 ${style[`button-${size}`]} 

@@ -1,12 +1,16 @@
 'use server';
 
-import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+
+import prisma from "@/lib/prisma";
 import { Stack } from "@/interfaces/general";
+import { requireAdmin } from "@/lib/auth/admin";
 
 
 
 export async function updateStack(stack: Stack[]) {
+    requireAdmin()
+
     try {
         // Так как количество stack ограниченное (до 10 шт и это количество ТОЧНО расти не будет),
         // то просто "перезатираем"

@@ -2,6 +2,10 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
+import Button from '@/components/shared/button/Button';
+
+import { logoutAction } from '@/app/actions/auth/logout';
+
 import styles from './index.module.scss';
 
 
@@ -25,7 +29,17 @@ const Header: React.FC = () => {
                 </p>
             </Link>
 
-            <p className={styles.welcomeText}>Hello, <span className={styles.brandColor}>Vlad! 🖐</span></p>
+            <form action={logoutAction}>
+                <Button 
+                    behavior='default'
+                    iconPosition='noIcon'
+                    variant='black'
+                    type='submit'
+                    noize={true}
+                    text='Exit'
+                    additionalClass={styles.exitBtn}
+                />
+            </form>
         </header>
     )
 }

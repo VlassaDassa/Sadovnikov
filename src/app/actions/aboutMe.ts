@@ -5,9 +5,12 @@ import { revalidatePath } from "next/cache"
 import prisma from "@/lib/prisma"
 import { AboutMe } from "@/interfaces/general"
 import { transformAboutMe } from "@/lib/transformers/aboutMe"
+import { requireAdmin } from "@/lib/auth/admin";
 
 
 export async function updateAboutMe(aboutMe: AboutMe) {
+    requireAdmin()
+
     try {
         
         await prisma.workExperience.deleteMany();

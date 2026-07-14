@@ -1,33 +1,25 @@
-import './../globals.scss';
-
-import { redirect } from 'next/navigation';
 import type { Metadata } from "next";
 
-import { DynImportLayout } from '@/components/shared/DynImportLayout';
-import Header from "@/components/admin/general/header";
+import Header from "@/components/public/general/header";
+import FooterWrapper from "@/components/public/general/footer/footerWrapper";
 import GlobalLoader from "@/components/shared/GlobalLoader";
 import NoiseBackground from "@/components/shared/NoizeBg";
-import GlobalTooltip from "@/components/shared/GlobalTooltip";
 
 import { Providers } from "@/store/Providers";
-import { getAdminSession } from '@/lib/auth/admin';
 
+import './../globals.scss';
 
 
 export const metaData: Metadata = {
-    title: 'Admin',
+    title: 'Login',
+    description: 'Description portfolio'
 }
 
-export default async function AdminLayout({
+export default function PublicLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
-
-    const session = await getAdminSession()
-    if (!session) {
-        redirect('/login')
-    }
 
 
     return (
@@ -42,10 +34,9 @@ export default async function AdminLayout({
                 <Providers>
                     <NoiseBackground />
                     <GlobalLoader />
-                    <GlobalTooltip />
-                    <DynImportLayout admin={true} /> 
                     <Header />
                     {children}
+                    <FooterWrapper />
                 </Providers>
             </body>
         </html>

@@ -1,0 +1,73 @@
+@use './../../styles/tokens/typography' as *;
+@use './../../styles/tokens/colors' as *;
+
+
+.main {
+    height: 44.4vh;
+
+    @media (min-width: 768px) {
+        height: 46vh;
+    }
+
+    @media (min-width: 1280px) {
+        height: 50vh;
+    }
+}
+
+.submitBtn {
+    height: 20px;
+    width: 50%;
+
+    margin: 20px auto;
+
+    align-items: center !important;
+    justify-content: center;
+
+    p {
+        text-align: center !important;
+        align-items: center !important;
+
+        width: 100%;
+    }
+}
+
+.title {
+    @extend .heading-32-mont-bold;
+    text-align: center;
+    color: $neutral_400;
+    margin-bottom: 30px;
+
+    @media (min-width: 768px) {
+        margin-bottom: 40px;
+    }
+
+    @media (min-width: 1280px) {
+        font-size: 48px;
+        margin-bottom: 50px;
+    }
+}
+
+.inputWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.formWrapper {
+    width: 70%;
+    margin: 0 auto;
+    padding: 50px;
+
+    @media (min-width: 768px) {
+        width: 50%;
+    }
+}
+
+
+.error {
+    @extend .heading-20-mont-regular;
+    margin-bottom: 20px;
+    text-align: right;
+
+    color: $error_600;
+}
