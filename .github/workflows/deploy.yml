@@ -1,13 +1,17 @@
-name: Deploy production
+name: Deploy Production
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 concurrency:
-  group: portfolio-production
+  group: production-deploy
   cancel-in-progress: false
+
+permissions:
+  contents: read
 
 jobs:
   deploy:
@@ -16,18 +20,36 @@ jobs:
     steps:
       - name: Configure SSH
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-          SSH_KNOWN_HOSTS: ${{ secrets.SERVER_KNOWN_HOSTS }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SERVER_KNOWN_HOSTS: ${{ secrets.SERVER_KNOWN_HOSTS }}
         run: |
-          mkdir -p ~/.ssh
-          printf '%s' "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
-          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
-          chmod 600 ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/known_hosts
+          set -euo pipefail
+
+          install -m 700 -d "$HOME/.ssh"
+
+          printf '%s\n' "$SSH_PRIVATE_KEY" \
+            | tr -d '\r' \
+            > "$HOME/.ssh/deploy_key"
+
+          chmod 600 "$HOME/.ssh/deploy_key"
+
+          printf '%s\n' "$SERVER_KNOWN_HOSTS" \
+            > "$HOME/.ssh/known_hosts"
+
+          chmod 644 "$HOME/.ssh/known_hosts"
 
       - name: Deploy
         env:
           SERVER_HOST: ${{ secrets.SERVER_HOST }}
           SERVER_USER: ${{ secrets.SERVER_USER }}
         run: |
-          ssh "$SERVER_USER@$SERVER_HOST" /srv/portfolio/deploy.sh
+          set -euo pipefail
+
+          ssh \
+            -i "$HOME/.ssh/deploy_key" \
+            -o IdentitiesOnly=yes \
+            -o BatchMode=yes \
+            -o StrictHostKeyChecking=yes \
+            -o ConnectTimeout=15 \
+            "$SERVER_USER@$SERVER_HOST" \
+            "/srv/portfolio/deploy.sh"
