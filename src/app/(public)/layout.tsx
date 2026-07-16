@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { connection } from "next/server";
+import Script from 'next/script';
 
 import { DynImportLayout } from '@/components/shared/DynImportLayout';
 import Header from "@/components/public/general/header";
@@ -24,6 +25,9 @@ export default async function PublicLayout({
     children: React.ReactNode;
 }) {
     await connection();
+    const umamiUrl = process.env.UMAMI_URL;
+    const umamiWebsiteId = process.env.UMAMI_WEBSITE_ID;
+
 
 
     return (
@@ -44,6 +48,20 @@ export default async function PublicLayout({
                     {children}
                     <FooterWrapper />
                 </Providers>
+
+
+                {
+                    umamiUrl && umamiWebsiteId ? (
+                        <Script
+                            src={`${umamiUrl}/scripts.js`}
+                            data-website-id={umamiWebsiteId}
+                            data-domains='vlassadassa.ru'
+                            data-performance='true'
+                            data-exclude-search='true'
+                            strategy='afterInteractive'
+                        />
+                    ) : null
+                }
             </body>
         </html>
     )
