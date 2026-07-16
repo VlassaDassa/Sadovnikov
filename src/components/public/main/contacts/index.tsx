@@ -86,8 +86,8 @@ const Contacts: React.FC= () => {
         }
         
         // Проверка сообщения
-        if (message.length < 100 || message.length > 300) {
-            newErrors.message = 'Сообщение должно быть от 100 до 300 символов'
+        if (message.length < 10 || message.length > 300) {
+            newErrors.message = 'Сообщение должно быть от 10 до 300 символов'
             isValid = false
         }
 
