@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { connection } from "next/server";
 
 import Header from "@/components/public/general/header";
 import FooterWrapper from "@/components/public/general/footer/footerWrapper";
@@ -15,12 +16,12 @@ export const metaData: Metadata = {
     description: 'Description portfolio'
 }
 
-export default function PublicLayout({
+export default async function PublicLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
-
+    await connection();
 
     return (
         <html data-scroll-behavior="smooth" lang="en">
