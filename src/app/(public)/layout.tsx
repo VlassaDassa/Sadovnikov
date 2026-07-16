@@ -53,7 +53,7 @@ export default async function PublicLayout({
                 {
                     umamiUrl && umamiWebsiteId ? (
                         <Script
-                            src={`${umamiUrl}/scripts.js`}
+                            src={`${umamiUrl}/script.js`}
                             data-website-id={umamiWebsiteId}
                             data-domains='vlassadassa.ru'
                             data-performance='true'
