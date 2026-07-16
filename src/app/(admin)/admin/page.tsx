@@ -6,7 +6,10 @@ import ErrorPage from "@/components/shared/ErrorPage";
 import { transformProject } from "@/lib/transformers/project";
 import { IProject, Skill, Stack, IFooterItem } from "@/interfaces/general";
 import { IVisits, IDevices, ITrafficSource } from "@/mockData/adminCharts";
+import { createMockVisits } from '@/mockData/analytics';
 import prisma from "@/lib/prisma";
+import { getAnalyticsDashboard } from "@/lib/umami/umami";
+
 
 
 
@@ -19,6 +22,20 @@ const Admin: React.FC = async () => {
     let skills: Skill[] = []
     let stack: Stack[] = []
     let footer: IFooterItem[] = []
+
+    // const analytics = await getAnalyticsDashboard(30)
+
+    const useMockAnalytics =
+        process.env.ANALYTICS_USE_MOCK === 'true';
+
+    const realAnalytics = await getAnalyticsDashboard(30);
+
+    const analytics = {
+        ...realAnalytics,
+        visits: useMockAnalytics
+            ? createMockVisits(1000)
+            : realAnalytics.visits,
+    };
 
     try {
         visitsChart = await prisma.visitorStat.findMany()
@@ -55,6 +72,7 @@ const Admin: React.FC = async () => {
            skills={skills} 
            stack={stack} 
            footer={footer} 
+           analytics={analytics}
         />   
     )
 }
