@@ -2,6 +2,7 @@ import './../globals.scss';
 
 import { redirect } from 'next/navigation';
 import type { Metadata } from "next";
+import { connection } from "next/server";
 
 import { DynImportLayout } from '@/components/shared/DynImportLayout';
 import Header from "@/components/admin/general/header";
@@ -23,6 +24,8 @@ export default async function AdminLayout({
 }: {
     children: React.ReactNode;
 }) {
+
+    await connection();
 
     const session = await getAdminSession()
     if (!session) {

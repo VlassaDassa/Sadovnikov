@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { connection } from "next/server";
 
 import { DynImportLayout } from '@/components/shared/DynImportLayout';
 import Header from "@/components/public/general/header";
@@ -17,11 +18,12 @@ export const metaData: Metadata = {
     description: 'Description portfolio'
 }
 
-export default function PublicLayout({
+export default async function PublicLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
+    await connection();
 
 
     return (
