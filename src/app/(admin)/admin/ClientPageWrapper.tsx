@@ -16,7 +16,6 @@ import RecentProjects from "@/components/admin/main/recentProjects";
 import AnimatedSection from '@/components/shared/AnimatedScroll';
 
 import type { IProject, Skill, Stack, IFooterItem } from "@/interfaces/general";
-import type { IVisits, IDevices, ITrafficSource } from "@/mockData/adminCharts";
 import type { IAnalyticsDashboard } from "@/interfaces/analytics";
 
 import styles from './index.module.scss';
