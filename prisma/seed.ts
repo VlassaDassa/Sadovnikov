@@ -3,7 +3,6 @@ import { projects } from './../src/mockData/projects'
 import { skills  } from './../src/mockData/skills'
 import { stack } from './../src/mockData/stack'
 import { footerItems  } from './../src/mockData/footer'
-import { visits, devices, source } from './../src/mockData/adminCharts'
 import { aboutMe  } from './../src/mockData/aboutMe'
 
 const prisma = new PrismaClient();
@@ -14,10 +13,6 @@ async function main() {
   await prisma.skill.createMany({ data: skills });
   await prisma.stack.createMany({ data: stack });
   await prisma.footerItem.createMany({ data: footerItems });
-
-  await prisma.visitorStat.createMany({ data: visits });
-  await prisma.deviceStat.createMany({ data: devices });
-  await prisma.trafficSource.createMany({ data: source });
 
    await prisma.aboutMe.create({
     data: {

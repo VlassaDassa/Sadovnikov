@@ -15,29 +15,29 @@ import QuickEdit from "@/components/admin/main/quickEdit";
 import RecentProjects from "@/components/admin/main/recentProjects";
 import AnimatedSection from '@/components/shared/AnimatedScroll';
 
-import { IProject, Skill, Stack, IFooterItem } from "@/interfaces/general";
-import { IVisits, IDevices, ITrafficSource } from "@/mockData/adminCharts";
+import type { IProject, Skill, Stack, IFooterItem } from "@/interfaces/general";
+import type { IVisits, IDevices, ITrafficSource } from "@/mockData/adminCharts";
+import type { IAnalyticsDashboard } from "@/interfaces/analytics";
 
 import styles from './index.module.scss';
 
 
 interface ClientPageWrapperProps {
-    visitsChart: IVisits[]
-    deviceChart: IDevices[]
-    trafficSource: ITrafficSource[]
     recentProjects: IProject[]
     skills: Skill[]
     stack: Stack[]
     footer: IFooterItem[]
+    analytics: IAnalyticsDashboard
 }
 
 const ClientPageWrapper: React.FC<ClientPageWrapperProps> = ({
-    visitsChart, deviceChart, trafficSource, recentProjects, skills, stack, footer
+    recentProjects, skills, stack, footer, analytics
 }) => {
     const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
     const isEditSkillsModalOpen = useSelector((state: RootState) => state.uiState.isEditSkillsModalOpen)
     const isEditFooterModalOpen = useSelector((state: RootState) => state.uiState.isEditFooterModalOpen)
     const isEditMyStackModalOpen = useSelector((state: RootState) => state.uiState.isEditMyStackModalOpen)
+
 
     
     const modals = (
@@ -54,15 +54,15 @@ const ClientPageWrapper: React.FC<ClientPageWrapperProps> = ({
                 {modals}
 
                 <AnimatedSection animation='fade-up'>
-                    <VisitChart visits={visitsChart} />
+                    <VisitChart data={analytics.visits} />
                 </AnimatedSection>
                 
                 <AnimatedSection animation='fade-right'>
-                    <DeviceChart devices={deviceChart} />
+                    <DeviceChart data={analytics.devices} />
                 </AnimatedSection>
                 
                 <AnimatedSection animation='fade-left'>
-                    <TrafficSource source={trafficSource} />
+                    <TrafficSource data={analytics.sources} />
                 </AnimatedSection>
 
                 <AnimatedSection animation='fade-up'>
@@ -81,7 +81,7 @@ const ClientPageWrapper: React.FC<ClientPageWrapperProps> = ({
                 {modals}
 
                 <AnimatedSection animation='fade-up'>
-                    <VisitChart visits={visitsChart} />
+                    <VisitChart data={analytics.visits} />
                 </AnimatedSection>
 
                 <AnimatedSection animation='fade-right'>
@@ -94,8 +94,8 @@ const ClientPageWrapper: React.FC<ClientPageWrapperProps> = ({
 
                 <AnimatedSection animation='fade-down'>
                     <div className={`${styles.deviceAndTrafficWrapper} container`}>
-                        <DeviceChart devices={deviceChart} />
-                        <TrafficSource source={trafficSource} />
+                        <DeviceChart data={analytics.devices} />
+                        <TrafficSource data={analytics.sources} />
                     </div>
                 </AnimatedSection>
             </main>
@@ -109,8 +109,8 @@ const ClientPageWrapper: React.FC<ClientPageWrapperProps> = ({
 
                 <AnimatedSection animation='fade-right'>
                     <div className={`container ${styles.visitAndDeviceWrapper}`}>
-                        <VisitChart visits={visitsChart} />
-                        <DeviceChart devices={deviceChart} />
+                        <VisitChart data={analytics.visits} />
+                        <DeviceChart data={analytics.devices} />
                     </div>
                 </AnimatedSection>
                 
@@ -118,7 +118,7 @@ const ClientPageWrapper: React.FC<ClientPageWrapperProps> = ({
                 <AnimatedSection animation='fade-left'>
                     <div className={`container ${styles.quickEditAndTrafficWrapper}`}>
                         <QuickEdit />
-                        <TrafficSource source={trafficSource} />
+                        <TrafficSource data={analytics.sources} />
                     </div>
                 </AnimatedSection>
                 

@@ -54,6 +54,10 @@ body {
 
 
 // Admin charts
+.recharts-legend-item-text {
+    @extend .body-16-mont-regular;
+}
+
 .recharts-brush-texts {
     display: none;
 }
