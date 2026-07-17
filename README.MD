@@ -71,6 +71,29 @@ Tooltip
 В dev-режиме после перехода на другую страницу через Link стили меняют порядок и могут слетать. В build - всё хорошо.
 
 
+VISIT ГРАФИК
+--------------------------------------------------------------
+Если необходимы моковые данные для теста их можно сделать так:
+в .env:
+ANALYTICS_USE_MOCK=false
+
+В admin/page.tsx:
+Вместо:
+const analytics = await getAnalyticsDashboard(30)
+Это:
+const useMockAnalytics =
+        process.env.ANALYTICS_USE_MOCK === 'true';
+
+    const realAnalytics = await getAnalyticsDashboard(30);
+
+    const analytics = {
+        ...realAnalytics,
+        visits: useMockAnalytics
+            ? createMockVisits(30)
+            : realAnalytics.visits,
+    };
+
+
 ```
 Sadovnikov
 ├─ eslint.config.js

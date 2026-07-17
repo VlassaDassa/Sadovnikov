@@ -23,9 +23,6 @@ import styles from './index.module.scss';
 
 
 interface ClientPageWrapperProps {
-    visitsChart: IVisits[]
-    deviceChart: IDevices[]
-    trafficSource: ITrafficSource[]
     recentProjects: IProject[]
     skills: Skill[]
     stack: Stack[]
@@ -34,7 +31,7 @@ interface ClientPageWrapperProps {
 }
 
 const ClientPageWrapper: React.FC<ClientPageWrapperProps> = ({
-    visitsChart, deviceChart, trafficSource, recentProjects, skills, stack, footer, analytics
+    recentProjects, skills, stack, footer, analytics
 }) => {
     const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
     const isEditSkillsModalOpen = useSelector((state: RootState) => state.uiState.isEditSkillsModalOpen)

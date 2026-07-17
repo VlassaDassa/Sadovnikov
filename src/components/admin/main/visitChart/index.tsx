@@ -1,6 +1,11 @@
 'use client';
 
-import React, { useMemo } from 'react';
+import React, {
+    useEffect,
+    useMemo,
+    useState,
+    useCallback
+} from 'react';
 import {
     Area,
     AreaChart,
@@ -22,16 +27,49 @@ import ChartTooltip from '@/components/admin/general/chartTooltip';
 import { cssVars } from '@/styles/cssVariables';
 import styles from './index.module.scss';
 
+
 interface VisitChartProps {
     data: IVisitPoint[];
 }
 
+interface ChartVisitPoint extends IVisitPoint {
+    index: number;
+}
+
 interface YAxisConfig {
     max: number;
+    step: number;
     ticks: number[];
 }
 
-function createYAxisConfig(data: IVisitPoint[]): YAxisConfig {
+function getNiceStep(
+    maximumValue: number,
+    desiredIntervals: number,
+): number {
+    const roughStep = maximumValue / desiredIntervals;
+    const magnitude =
+        10 ** Math.floor(Math.log10(roughStep));
+
+    const normalizedStep = roughStep / magnitude;
+
+    let multiplier: number;
+
+    if (normalizedStep >= Math.sqrt(50)) {
+        multiplier = 10;
+    } else if (normalizedStep >= Math.sqrt(10)) {
+        multiplier = 5;
+    } else if (normalizedStep >= Math.sqrt(2)) {
+        multiplier = 2;
+    } else {
+        multiplier = 1;
+    }
+
+    return Math.max(1, multiplier * magnitude);
+}
+
+function createYAxisConfig(
+    data: IVisitPoint[],
+): YAxisConfig {
     const maximumValue = Math.max(
         0,
         ...data.flatMap((item) => [
@@ -42,45 +80,119 @@ function createYAxisConfig(data: IVisitPoint[]): YAxisConfig {
 
     if (maximumValue === 0) {
         return {
-            max: 10,
-            ticks: [0, 2, 4, 6, 8, 10],
+            max: 5,
+            step: 1,
+            ticks: [0, 1, 2, 3, 4, 5],
         };
     }
 
-    const approximateStep = maximumValue / 5;
-    const magnitude = 10 ** Math.floor(
-        Math.log10(approximateStep),
+    const desiredIntervals = 5;
+    const step = getNiceStep(
+        maximumValue,
+        desiredIntervals,
     );
 
-    const normalizedStep = approximateStep / magnitude;
+    const max =
+        Math.ceil(maximumValue / step) * step;
 
-    let multiplier: number;
+    const intervalsCount = Math.round(max / step);
 
-    if (normalizedStep <= 1) {
-        multiplier = 1;
-    } else if (normalizedStep <= 2) {
-        multiplier = 2;
-    } else if (normalizedStep <= 5) {
-        multiplier = 5;
-    } else {
-        multiplier = 10;
-    }
-
-    const step = multiplier * magnitude;
-    const max = Math.ceil(maximumValue / step) * step;
+    const ticks = Array.from(
+        { length: intervalsCount + 1 },
+        (_, index) => index * step,
+    );
 
     return {
         max,
-        ticks: Array.from(
-            { length: 6 },
-            (_, index) => index * step,
-        ),
+        step,
+        ticks,
+    };
+}
+
+interface BrushRange {
+    startIndex: number;
+    endIndex: number;
+}
+
+function createInitialBrushRange(
+    dataLength: number,
+): BrushRange {
+    return {
+        startIndex: 0,
+        endIndex: Math.max(dataLength - 1, 0),
     };
 }
 
 const VisitChart: React.FC<VisitChartProps> = ({ data }) => {
     const windowWidth = useSelector(
         (state: RootState) => state.breakpoint.windowWidth,
+    );
+
+    const [brushRange, setBrushRange] =
+        useState<BrushRange>(() => {
+            return createInitialBrushRange(data.length);
+        });
+
+    useEffect(() => {
+        setBrushRange(
+            createInitialBrushRange(data.length),
+        );
+    }, [data.length]);
+
+    const chartData = useMemo<ChartVisitPoint[]>(() => {
+        return data.map((item, index) => ({
+            ...item,
+            index,
+        }));
+    }, [data]);
+
+    const brushGap = useMemo(() => {
+        return Math.max(
+            1,
+            Math.ceil(data.length / 60),
+        );
+    }, [data.length]);
+
+    const visibleData = useMemo(() => {
+        return data.slice(
+            brushRange.startIndex,
+            brushRange.endIndex + 1,
+        );
+    }, [
+        data,
+        brushRange.startIndex,
+        brushRange.endIndex,
+    ]);
+
+    const handleBrushChange = useCallback(
+        (range: {
+            startIndex?: number;
+            endIndex?: number;
+        }) => {
+            const { startIndex, endIndex } = range;
+
+            if (
+                typeof startIndex !== 'number' ||
+                typeof endIndex !== 'number'
+            ) {
+                return;
+            }
+
+            setBrushRange((currentRange) => {
+                if (
+                    currentRange.startIndex === startIndex &&
+                    currentRange.endIndex === endIndex
+                ) {
+                    return currentRange;
+                }
+
+                return {
+                    startIndex,
+                    endIndex,
+                };
+            });
+        },
+        [],
     );
 
     const pageviewsGradientId = React.useId().replaceAll(':', '');
@@ -98,30 +210,76 @@ const VisitChart: React.FC<VisitChartProps> = ({ data }) => {
         return 16;
     }, [windowWidth]);
 
-    const filteredXTicks = useMemo(() => {
-        if (data.length === 0) {
+    const maximumXAxisTicks = useMemo(() => {
+        if (windowWidth < 550) {
+            return 4;
+        }
+
+        if (windowWidth < 900) {
+            return 6;
+        }
+
+        return 8;
+    }, [windowWidth]);
+
+    const xAxisTicks = useMemo(() => {
+        const { startIndex, endIndex } = brushRange;
+
+        const rangeLength =
+            endIndex - startIndex + 1;
+
+        if (rangeLength <= 0) {
             return [];
         }
 
-        const desiredTicksCount = windowWidth < 550 ? 4 : 7;
-        const step = Math.max(
-            1,
-            Math.ceil(data.length / desiredTicksCount),
+        if (rangeLength <= maximumXAxisTicks) {
+            return Array.from(
+                { length: rangeLength },
+                (_, index) => startIndex + index,
+            );
+        }
+
+        const intervalsCount =
+            maximumXAxisTicks - 1;
+
+        const step =
+            (endIndex - startIndex) /
+            intervalsCount;
+
+        const ticks = Array.from(
+            { length: maximumXAxisTicks },
+            (_, index) => {
+                if (index === 0) {
+                    return startIndex;
+                }
+
+                if (index === intervalsCount) {
+                    return endIndex;
+                }
+
+                return Math.round(
+                    startIndex + index * step,
+                );
+            },
         );
 
-        return data
-            .filter((_, index) => {
-                return (
-                    index % step === 0 ||
-                    index === data.length - 1
-                );
-            })
-            .map((item) => item.day);
-    }, [data, windowWidth]);
+        return Array.from(new Set(ticks));
+    }, [
+        brushRange,
+        maximumXAxisTicks,
+    ]);
+
+    const formatXAxis = (
+        index: number,
+    ): string => {
+        const item = chartData[Math.round(index)];
+
+        return item?.day ?? '';
+    };
 
     const yAxisConfig = useMemo(
-        () => createYAxisConfig(data),
-        [data],
+        () => createYAxisConfig(visibleData),
+        [visibleData],
     );
 
     const formatYAxis = (value: number): string => {
@@ -130,20 +288,24 @@ const VisitChart: React.FC<VisitChartProps> = ({ data }) => {
         }
 
         if (value >= 1_000_000) {
-            return `${Number((value / 1_000_000).toFixed(1))}m`;
+            const formattedValue = value / 1_000_000;
+
+            return `${Number(
+                formattedValue.toFixed(1),
+            )}m`;
         }
 
         if (value >= 1000) {
-            return `${Number((value / 1000).toFixed(1))}k`;
+            const formattedValue = value / 1000;
+
+            return `${Number(
+                formattedValue.toFixed(1),
+            )}k`;
         }
 
         return value.toString();
     };
 
-    const brushEndIndex = Math.min(
-        Math.max(data.length - 1, 0),
-        7,
-    );
 
     return (
         <section className={`${styles.section} container`}>
@@ -157,11 +319,11 @@ const VisitChart: React.FC<VisitChartProps> = ({ data }) => {
                 ) : (
                     <ResponsiveContainer width="100%" height={350}>
                         <AreaChart
-                            data={data}
+                            data={chartData}
                             tabIndex={-1}
                             margin={{
-                                top: 16,
-                                right: 8,
+                                top: 0,
+                                right: 12,
                                 bottom: 0,
                                 left: 0,
                             }}
@@ -208,9 +370,17 @@ const VisitChart: React.FC<VisitChartProps> = ({ data }) => {
 
                             <XAxis
                                 className={styles.axisX}
-                                dataKey="day"
-                                ticks={filteredXTicks}
+                                type="number"
+                                dataKey="index"
+                                domain={[
+                                    brushRange.startIndex,
+                                    brushRange.endIndex,
+                                ]}
+                                ticks={xAxisTicks}
+                                tickFormatter={formatXAxis}
                                 interval={0}
+                                allowDecimals={false}
+                                tickMargin={10}
                                 tick={{
                                     fill: cssVars.neutral_600,
                                     fontSize,
@@ -219,13 +389,20 @@ const VisitChart: React.FC<VisitChartProps> = ({ data }) => {
                                 }}
                                 tabIndex={-1}
                             />
-
                             <YAxis
                                 className={styles.axisY}
                                 domain={[0, yAxisConfig.max]}
                                 ticks={yAxisConfig.ticks}
+                                interval={0}
                                 tickFormatter={formatYAxis}
                                 allowDecimals={false}
+                                tickMargin={8}
+                                axisLine={{
+                                    stroke: cssVars.neutral_600,
+                                }}
+                                tickLine={{
+                                    stroke: cssVars.neutral_600,
+                                }}
                                 tick={{
                                     fill: cssVars.neutral_600,
                                     fontSize,
@@ -240,7 +417,8 @@ const VisitChart: React.FC<VisitChartProps> = ({ data }) => {
                             <Legend
                                 verticalAlign="top"
                                 align="right"
-                                height={36}
+                                height={35}
+                                iconType="plainline"
                             />
 
                             <Area
@@ -271,11 +449,17 @@ const VisitChart: React.FC<VisitChartProps> = ({ data }) => {
                                 stroke={cssVars.neutral_950}
                                 fill={cssVars.neutral_1000}
                                 travellerWidth={10}
-                                startIndex={0}
-                                endIndex={brushEndIndex}
+                                startIndex={brushRange.startIndex}
+                                endIndex={brushRange.endIndex}
+                                gap={brushGap}
+                                onChange={handleBrushChange}
+                                onDragEnd={handleBrushChange}
                                 tabIndex={-1}
                             >
-                                <AreaChart data={data} tabIndex={-1}>
+                                <AreaChart
+                                    data={chartData}
+                                    tabIndex={-1}
+                                >
                                     <Area
                                         tabIndex={-1}
                                         type="monotone"

@@ -16,6 +16,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
+
+    width: 100%;
+    min-width: 0;
+
     gap: 40px;
 
     @media (min-width: 1280px) {
@@ -23,12 +28,27 @@
     }
 }
 
+
 .labelWrapper {
     display: inline-flex;
     flex-direction: column;
     
-    
     row-gap: 15px;   
+}
+
+.chartWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 160px;
+
+    width: 160px;
+    min-width: 160px;
+    height: 160px;
+    min-height: 160px;
+
+    margin-inline: auto;
 }
 
 .itemWrapper {
@@ -61,3 +81,5 @@
         text-transform: uppercase;
     }
 }
+
+
