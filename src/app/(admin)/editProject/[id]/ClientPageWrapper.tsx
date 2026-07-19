@@ -16,22 +16,39 @@ import Metrics from '@/components/admin/editProject/metrics';
 import EditProjectStackModal from "@/components/admin/modals/editProjectStackModal";
 import AnimatedSection from '@/components/shared/AnimatedScroll';
 import SavingIndicator from '@/components/shared/SavingIndicator';
+import Evolution from '@/components/admin/editProject/evolution';
 
 import { IProject } from "@/interfaces/general";
 import { useDebounce } from '@/hooks/useDebounce';
 import { updateProject, deleteProject } from '@/app/actions/project';
 import { showMessage } from '@/lib/showMessage';
+import type {
+    IEvolutionDraftItem,
+} from '@/interfaces/evolution';
 
 import { cssVars } from '@/styles/cssVariables';
 import styles from './index.module.scss';
 
 
 interface ClientPageWrapperProps {
-    project: IProject
+    project: IProject;
+
+    initialEvolutionDraft:
+        IEvolutionDraftItem[];
+
+    initialEvolutionGeneratedAt:
+        string | null;
 }
 
 
-const ClientPageWrapper: React.FC<ClientPageWrapperProps> = ({ project }) => {
+const ClientPageWrapper:
+    React.FC<
+        ClientPageWrapperProps
+    > = ({
+        project,
+        initialEvolutionDraft,
+        initialEvolutionGeneratedAt,
+    }) => {
     const [data, setData] = useState<IProject>(project)
     const [isSaving, setIsSaving] = useState<boolean>(false)
     const isEditProjectStackModalOpen = useSelector((state: RootState) => state.uiState.isEditProjectStackModalOpen)
@@ -128,6 +145,27 @@ const ClientPageWrapper: React.FC<ClientPageWrapperProps> = ({ project }) => {
 
                 <AnimatedSection animation='fade-left'>
                     <Metrics project={data} setData={setData} setIsSaving={setIsSaving} />
+                </AnimatedSection>
+
+                <AnimatedSection animation="fade-right">
+                    <Evolution
+                        projectId={
+                            data.id
+                        }
+                        githubLink={
+                            data.gitHubLink
+                        }
+                        initialDraft={
+                            initialEvolutionDraft
+                        }
+                        initialGeneratedAt={
+                            initialEvolutionGeneratedAt
+                        }
+                        initialPublishedCount={
+                            data.commits?.length ??
+                            0
+                        }
+                    />
                 </AnimatedSection>
 
                 <AnimatedSection animation='fade-right'>

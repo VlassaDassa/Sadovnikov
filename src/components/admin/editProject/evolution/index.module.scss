@@ -1,0 +1,163 @@
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    width: 100%;
+    margin-top: 40px;
+    padding: 24px;
+
+    border: 1px solid
+        rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+
+    background:
+        rgba(255, 255, 255, 0.025);
+}
+
+.header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.title {
+    margin: 0;
+}
+
+.description {
+    margin: 8px 0 0;
+
+    opacity: 0.65;
+}
+
+.statusBadge {
+    flex-shrink: 0;
+
+    padding: 8px 12px;
+
+    border: 1px solid
+        rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.label {
+    font-size: 14px;
+    opacity: 0.55;
+}
+
+.repositoryLink {
+    width: fit-content;
+    max-width: 100%;
+
+    color: inherit;
+
+    overflow-wrap: anywhere;
+}
+
+.repositoryLink:hover {
+    text-decoration: underline;
+}
+
+.emptyValue {
+    opacity: 0.55;
+}
+
+.currentState {
+    font-weight: 500;
+}
+
+.meta {
+    font-size: 14px;
+    opacity: 0.6;
+}
+
+.error {
+    margin: 0;
+
+    color: #ff7777;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.generateButton,
+.reviewButton {
+    min-height: 44px;
+    padding: 10px 18px;
+
+    border-radius: 10px;
+
+    font: inherit;
+
+    cursor: pointer;
+
+    transition:
+        opacity 150ms ease,
+        transform 150ms ease;
+}
+
+.generateButton {
+    border: 1px solid #fff;
+
+    color: #111;
+    background: #fff;
+}
+
+.reviewButton {
+    border: 1px solid
+        rgba(255, 255, 255, 0.35);
+
+    color: inherit;
+    background: transparent;
+}
+
+.generateButton:not(:disabled):hover,
+.reviewButton:not(:disabled):hover {
+    transform: translateY(-1px);
+}
+
+.generateButton:disabled,
+.reviewButton:disabled {
+    cursor: not-allowed;
+
+    opacity: 0.4;
+}
+
+@media (max-width: 700px) {
+    .section {
+        padding: 18px;
+    }
+
+    .header {
+        flex-direction: column;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+    .generateButton,
+    .reviewButton {
+        width: 100%;
+    }
+}

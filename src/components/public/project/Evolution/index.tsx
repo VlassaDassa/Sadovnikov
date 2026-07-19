@@ -28,7 +28,7 @@ const Commit: React.FC<CommitProps> = ({ item }) => {
         });
 
     return (
-        <div ref={tooltipRef} key={item.name} className={styles.commitItem}>
+        <div ref={tooltipRef} className={styles.commitItem}>
             <div className={styles.node}></div>
             <p className={styles.commitText}>- {item.name}</p>
         </div>

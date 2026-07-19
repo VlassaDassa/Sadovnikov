@@ -39,7 +39,16 @@ export default async function Project({ params }: ProjectPageProps) {
 				stack: true,
 				description: true,
 				metrics: true,
-				commits: true,
+				commits: {
+				orderBy: [
+					{
+						order: 'asc',
+					},
+					{
+						id: 'asc',
+					},
+				],
+			},
 				keyFeatures: true,
 			},
 		})
