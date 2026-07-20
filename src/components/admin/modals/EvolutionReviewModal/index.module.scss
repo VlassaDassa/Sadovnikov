@@ -1,0 +1,356 @@
+@use './../../../../styles/tokens/typography' as *;
+@use './../../../../styles/tokens/colors' as *;
+
+
+
+
+.modalWrapper {
+    max-height: 700px;
+}
+
+.body {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 2fr)
+        clamp(280px, 30%, 420px);
+
+    min-width: 0;
+    min-height: 0;
+
+    overflow: hidden;
+
+    @extend .body-20-mont-regular;
+    color: $neutral_600;
+}
+
+
+.editorColumn,
+.sourceColumn {
+    min-width: 0;
+    min-height: 0;
+
+    padding: 22px;
+}
+
+.list {
+    height: 500px;
+    overflow-y: auto;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+     &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+
+
+.sourceColumn {
+    border-left: 1px solid
+        rgba(255, 255, 255, 0.1);
+}
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.toolbar h3,
+.toolbar span {
+    margin: 0;
+}
+
+.toolbar span {
+    display: block;
+
+    margin-top: 5px;
+
+    font-size: 14px;
+    opacity: 0.55;
+}
+
+.addButton {
+    padding: 20px 25px;
+
+    p {
+        font-size: 16px;
+    }
+}
+
+.input {
+    line-height: $leading-normal;
+    font-size: 16px;
+
+    input, textarea {
+        padding: 15px;
+        color: $neutral_400;
+
+        &:focus {
+            color: $neutral_300;
+        }
+    }
+    
+
+    label {
+        font-size: 16px !important;
+    }
+}
+
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    margin-top: 18px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    padding: 18px;
+
+    border: 1px solid
+        rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    cursor: pointer;
+}
+
+.selectedCard {
+    border-color:
+        rgba(255, 255, 255, 0.65);
+}
+
+.cardHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.cardPosition {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cardPosition > span {
+    min-width: 30px;
+    height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    
+
+    border: 1px solid
+        rgba(255, 255, 255, 0.18);
+    border-radius: 50%;
+
+    font-size: 13px;
+}
+
+.cardHeader {
+    strong {
+        line-height: $leading-normal;
+
+        font-size: 16px;
+
+        @media (min-width: 768px) {
+            font-size: 20px;
+        }
+    }
+}
+
+.cardActions {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+
+
+
+.sourceDescription,
+.sourceEmpty {
+    opacity: 0.65;
+    line-height: $leading-tight;
+    font-size: 16px;
+
+    margin-top: 10px;
+}
+
+.sourceList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    margin-top: 18px;
+}
+
+.sourceItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+
+    padding: 12px;
+
+    border: 1px solid
+        rgba(255, 255, 255, 0.12);
+    border-radius: 9px;
+
+    color: inherit;
+    text-decoration: none;
+}
+
+
+.emptyDraft {
+    display: grid;
+    place-items: center;
+    gap: 14px;
+
+    min-height: 280px;
+
+    text-align: center;
+
+    color: $error_600;
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+
+    padding: 18px 24px;
+
+    border-top: 1px solid
+        rgba(255, 255, 255, 0.1);
+
+    @extend .body-20-mont-regular;
+    color: $neutral_600;
+}
+
+.footerMessage {
+    min-width: 0;
+
+    font-size: 14px;
+    opacity: 0.65;
+}
+
+.footerMessage p {
+    margin: 0;
+
+    line-height: $leading-tight;
+}
+
+.error {
+    color: $error_600;
+}
+
+.footerActions {
+    display: flex;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+
+.saveButton,
+.publishButton {
+    padding: 20px 25px;
+    justify-content: center;
+
+    width: calc(100% - 60px) !important;
+
+    border-radius: 10px;
+
+    p {
+        @extend .body-16-mont-bold;
+    }
+
+    @media (min-width: 600px) {
+        width: unset !important;
+    }
+}
+
+.saveButton {
+
+    p {
+        color: $neutral_400;
+    }
+}
+
+
+.itemActionBtn {
+    padding: 15px;
+    
+    p {
+        font-size: 16px;
+    }
+}
+
+.deleteButton {
+    p {
+        color: $error_600;
+    }
+}
+
+
+@media (max-width: 850px) {
+    .body {
+        grid-template-columns:
+            1fr;
+    }
+
+    .sourceColumn {
+        border-top: 1px solid
+            rgba(
+                255,
+                255,
+                255,
+                0.1
+            );
+        border-left: 0;
+    }
+
+    .footer {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .footerActions {
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .header,
+    .editorColumn,
+    .sourceColumn,
+    .footer {
+        padding: 16px;
+    }
+
+    .toolbar,
+    .cardHeader {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .footerActions {
+        flex-direction: column;
+    }
+}
+
+

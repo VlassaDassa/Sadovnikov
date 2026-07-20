@@ -2,9 +2,8 @@
 
 import { useRouter } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/store';
-import { useDispatch } from 'react-redux';
 
 import Button from '@/components/shared/button/Button';
 import AdminPageTitle from "@/components/admin/general/adminPageTitle";

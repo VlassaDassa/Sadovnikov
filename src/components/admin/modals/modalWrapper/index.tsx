@@ -23,6 +23,7 @@ import Button from '@/components/shared/button/Button';
 import { closeModals } from '@/lib/modals';
 
 import styles from './index.module.scss';
+import { closeOverlay } from '@/store/slices/uiSlice';
 
 
 
@@ -36,6 +37,7 @@ interface ModalWrapperProps {
     tooltipText?: string;
     title: string;
     subTitle: string;
+    additionalClass?: string;
 
     button?: boolean;
 
@@ -54,6 +56,7 @@ const ModalWrapper = forwardRef<HTMLDivElement, ModalWrapperProps>(
         tooltipVisible,
         tooltipMax,
         modalName,
+        additionalClass,
         title,
         subTitle,
         tooltipText = 'Manage items',
@@ -160,7 +163,7 @@ const ModalWrapper = forwardRef<HTMLDivElement, ModalWrapperProps>(
 
     return (
         <ModalBackground
-            className={`${styles.modalBackground} ${!drag && styles.modalBackgroundNoDrag}`}
+            className={`${styles.modalBackground} ${!drag && styles.modalBackgroundNoDrag} ${additionalClass}`}
             ref={ref}
         >
             <Button
@@ -168,7 +171,14 @@ const ModalWrapper = forwardRef<HTMLDivElement, ModalWrapperProps>(
                 behavior="default"
                 iconPosition="only"
                 icon="close"
-                onClick={async () => await closeModals(dispatch, modalName)}
+                onClick={
+                    async () => {
+                        await closeModals(dispatch, modalName)
+                        dispatch(closeOverlay())
+                    } 
+                    
+
+                }
                 additionalClass={styles.closeButton}
             />
 

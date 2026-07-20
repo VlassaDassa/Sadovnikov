@@ -1,17 +1,21 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '@/store';
+import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
 
-import EvolutionReviewModal from "./EvolutionReviewModal";
+import EvolutionReviewModal from "@/components/admin/modals/EvolutionReviewModal"
 import SectionBackground from "@/components/admin/general/sectionBackground";
 import SectionTitle from "@/components/admin/general/sectionTitle";
 import Button from "@/components/shared/button/Button";
 
 import { generateEvolutionDraft } from "@/app/actions/evolution";
 import type { IEvolutionDraftItem } from "@/interfaces/evolution";
+import { closeOverlay, toggleEvolutionReviewModal, toggleIsOverlayVisible } from "@/store/slices/uiSlice";
+import { closeModals } from "@/lib/modals";
 
-import { cssVars } from "@/styles/cssVariables";
 import styles from "./index.module.scss";
 
 
@@ -63,6 +67,9 @@ const Evolution: React.FC<EvolutionProps> = ({
     const [isReviewOpen, setIsReviewOpen] = useState(false);
 
     const [error, setError] = useState<string | null>(null);
+
+    const isEvolutionReviewModalOpen = useSelector((state: RootState) => state.uiState.isEvolutionReviewModal)
+    const dispatch = useDispatch()
 
     const normalizedGithubLink = useMemo(() => {
         return (
@@ -124,7 +131,7 @@ const Evolution: React.FC<EvolutionProps> = ({
                 analyzedCommits: response.data.analyzedCommits,
             });
 
-            setIsReviewOpen(true);
+            openReviewModal();
         } catch (generationError) {
             setError(getErrorMessage(generationError));
         } finally {
@@ -132,13 +139,19 @@ const Evolution: React.FC<EvolutionProps> = ({
         }
     }
 
-    function handlePublished(count: number): void {
+    async function handlePublished(count: number) {
         setPublishedCount(count);
         setDraft([]);
         setGenerationInfo(null);
-        setIsReviewOpen(false);
-
+        await closeModals(dispatch, 'evolutionReviewModal')
+        dispatch(closeOverlay())
+        
         router.refresh();
+    }
+
+    const openReviewModal = () => {
+        dispatch(toggleEvolutionReviewModal())
+        dispatch(toggleIsOverlayVisible())
     }
 
     const statusClass = hasDraft
@@ -236,31 +249,37 @@ const Evolution: React.FC<EvolutionProps> = ({
                       
                         <Button 
                             iconPosition='noIcon'
-                            behavior={
-                                !hasDraft || isGenerating ? 'disabled' : 'default'
-                            }
+                            behavior='default'
                             variant='secondary'
                             additionalClass={styles.reviewButton}
-                            text='Review draft'
+                            text={
+                                !hasDraft || isGenerating ? 'Edit' : 'Review Draft'
+                            }
                             onClick={() => {
-                                setIsReviewOpen(true);
+                                openReviewModal()
                             }}
                             noize={true}
                         />
                     </div>
                 </SectionBackground>
             </section>
-
-
-            <EvolutionReviewModal
-                projectId={projectId}
-                githubLink={normalizedGithubLink}
-                initialItems={draft}
-                onDraftSaved={(savedDraft) => {
-                    setDraft(savedDraft);
-                }}
-                onPublished={handlePublished}
-            />
+            
+            
+            {isEvolutionReviewModalOpen &&
+                createPortal(
+                    <EvolutionReviewModal
+                        projectId={projectId}
+                        githubLink={normalizedGithubLink}
+                        initialItems={draft}
+                        onDraftSaved={(savedDraft) => {
+                            setDraft(savedDraft);
+                        }}
+                        onPublished={handlePublished}
+                    />,
+                    document.body
+                )
+            }
+            
         </>
     );
 };
