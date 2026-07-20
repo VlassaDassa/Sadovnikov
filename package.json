@@ -22,6 +22,7 @@
     "@reduxjs/toolkit": "^2.11.2",
     "@types/react-datepicker": "^7.0.0",
     "better-auth": "^1.6.23",
+    "gigachat": "^0.0.20",
     "next": "^16.2.4",
     "nodemailer": "^9.0.3",
     "react": "^19.2.5",

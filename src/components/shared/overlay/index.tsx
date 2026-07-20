@@ -3,7 +3,7 @@
 import { useSelector, useDispatch } from "react-redux";
 
 import { RootState } from "@/store";
-import { closeMenu } from '@/store/slices/uiSlice'; 
+import { closeMenu, closeOverlay } from '@/store/slices/uiSlice'; 
 import { closeModals } from "@/lib/modals";
 
 import style from './index.module.scss';
@@ -23,12 +23,15 @@ const Overlay = () => {
         await closeModals(dispatch, 'editMyStack')
         await closeModals(dispatch, 'selectPeriod')
         await closeModals(dispatch, 'editProjectStack')
+        await closeModals(dispatch, 'evolutionReviewModal')
+
+        dispatch(closeOverlay())
     }
 
     return (
         <div 
             className={`${style.overlay} ${isOverlayVisible ? style.overlayShow : ''}`}
-            onClick={overlayClickHandler}
+            onClick={async () => await overlayClickHandler()}
         >
         </div>
     )

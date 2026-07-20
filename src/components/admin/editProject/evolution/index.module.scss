@@ -1,0 +1,128 @@
+@use './../../../../styles/tokens/typography' as *;
+@use './../../../../styles/tokens/colors' as *;
+
+
+
+.section {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+.description {
+    margin: 8px 0 0;
+}
+
+.statusBadge {
+    display: inline-block;
+    padding: 8px 12px;
+
+    border: 1px solid
+        rgba(255, 255, 255, 0.14);
+    border-radius: 10px;
+
+    @extend .body-14-mont-regular;
+    color: $info_600;
+}
+
+.statusEmpty {
+    color: $error_600;
+}
+
+.statusDraft {
+    color: $warning_600;
+}
+
+.label {
+    color: $neutral_800;
+    font-weight: $semi_bold;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin: 20px 0;
+
+    @extend .body-14-mont-regular;
+    color: $neutral_600;
+
+    @media (min-width: 700px) {
+        font-size: 20px;
+    }
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+
+.repositoryLink {
+    width: fit-content;
+    max-width: 100%;
+
+    line-height: $leading-tight;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+
+.repositoryLink:hover {
+    text-decoration: underline;
+}
+
+
+.generateButton {
+    p {
+        color: $neutral_400;
+    }
+}
+
+.reviewButton,
+.generateButton {
+    border-radius: 5px;
+
+    width: 100%;
+    justify-content: center;
+
+    p {
+        @extend .body-16-mont-medium;
+    }
+
+    @media (min-width: 600px) {
+        width: unset;
+    }
+
+    @media (min-width: 768px) {
+        p {
+            font-size: 18px;
+        }
+
+        border-radius: 10px;
+    }
+
+    @media (min-width: 1280px) {
+         p {
+            font-size: 20px;
+        }
+    }
+}
+
+.error {
+    margin: 0;
+
+    color: $error_600;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+

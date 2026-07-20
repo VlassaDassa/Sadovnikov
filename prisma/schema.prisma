@@ -27,6 +27,9 @@ model Project {
   metrics     Metric[]
   commits     Commit[]
 
+  evolutionDraft       Json?
+  evolutionGeneratedAt DateTime?
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -82,10 +85,13 @@ model Metric {
 model Commit {
   id        Int     @id @default(autoincrement())
   projectId Int
-  project   Project @relation(fields: [projectId], references: [id])
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
   name      String
   date      String
   text      String
+  order     Int     @default(0)
+
+  @@index([projectId, order])
 }
 
 // -------- Глобальные сущности -----------

@@ -1,12 +1,11 @@
 import { AppDispatch } from "@/store";
 import { 
-    toggleIsOverlayVisible, 
-
     closeEditFooterModal, 
     closeEditSkillsModal, 
     closeEditMyStackModal, 
     closeSelectPeriodModal,
     closeEditProjectStackModal,
+    closeEvolutionReviewModal
 } from '@/store/slices/uiSlice';
 
 
@@ -26,8 +25,6 @@ export const closeModals = async (dispatch: AppDispatch, modalName: string) => {
         await beforeCloseCallbacks[modalName]();
     }
 
-    dispatch(toggleIsOverlayVisible());
-
     switch (modalName) {
         case 'editSkills':
             dispatch(closeEditSkillsModal());
@@ -43,6 +40,9 @@ export const closeModals = async (dispatch: AppDispatch, modalName: string) => {
             break;
         case 'editProjectStack':
             dispatch(closeEditProjectStackModal());
+            break;
+        case 'evolutionReviewModal':
+            dispatch(closeEvolutionReviewModal());
             break;
 
         default:

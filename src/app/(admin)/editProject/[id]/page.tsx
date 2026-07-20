@@ -1,41 +1,141 @@
-import { notFound } from "next/navigation";
+import {
+    notFound,
+} from 'next/navigation';
 
-import ClientPageWrapper from "./ClientPageWrapper";
+import ClientPageWrapper from './ClientPageWrapper';
+
 import ErrorPage from '@/components/shared/ErrorPage';
 
-import { transformProject } from '@/lib/transformers/project';
-import prisma from '@/lib/prisma';
-import { IProject } from '@/interfaces/general';
+import {
+    transformProject,
+} from '@/lib/transformers/project';
 
+import {
+    evolutionDraftSchema,
+} from '@/lib/evolution/schemas';
+
+import prisma from '@/lib/prisma';
+
+import type {
+    IProject,
+} from '@/interfaces/general';
+
+import type {
+    IEvolutionDraftItem,
+} from '@/interfaces/evolution';
 
 interface EditProjectProps {
-    params: Promise<{ id: string }>;
+    params: Promise<{
+        id: string;
+    }>;
 }
 
-async function EditProject({ params }: EditProjectProps) {
-    const { id } = await params;
-    const projectId = Number(id);
-    let project: IProject | null = null
+async function EditProject({
+    params,
+}: EditProjectProps) {
+    const { id } =
+        await params;
+
+    const projectId =
+        Number(id);
+
+    if (
+        !Number.isInteger(
+            projectId,
+        ) ||
+        projectId <= 0
+    ) {
+        notFound();
+    }
+
+    let project:
+        IProject | null = null;
+
+    let initialEvolutionDraft:
+        IEvolutionDraftItem[] = [];
+
+    let initialEvolutionGeneratedAt:
+        string | null = null;
 
     try {
-        const rawProject = await prisma.project.findUnique({
-            where: {
-                id: projectId
-            },
-            include: {
-                images: true,
-                stack: true,
-                description: true,
-                metrics: true,
-                commits: true,
-                keyFeatures: true,
-            },
-        })
+        const rawProject =
+            await prisma.project
+                .findUnique({
+                    where: {
+                        id:
+                            projectId,
+                    },
 
-        project = rawProject ? transformProject(rawProject) : null
+                    include: {
+                        images:
+                            true,
+
+                        stack:
+                            true,
+
+                        description:
+                            true,
+
+                        metrics:
+                            true,
+
+                        commits: {
+                            orderBy: [
+                                {
+                                    order:
+                                        'asc',
+                                },
+                                {
+                                    id:
+                                        'asc',
+                                },
+                            ],
+                        },
+
+                        keyFeatures:
+                            true,
+                    },
+                });
+
+        if (rawProject) {
+            project =
+                transformProject(
+                    rawProject,
+                );
+
+            const parsedDraft =
+                evolutionDraftSchema
+                    .safeParse(
+                        rawProject
+                            .evolutionDraft,
+                    );
+
+            if (
+                parsedDraft.success
+            ) {
+                initialEvolutionDraft =
+                    parsedDraft.data;
+            }
+
+            initialEvolutionGeneratedAt =
+                rawProject
+                    .evolutionGeneratedAt
+                    ?.toISOString() ??
+                null;
+        }
     } catch (error) {
-        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-        return <ErrorPage error={errorMessage} />
+        const errorMessage =
+            error instanceof Error
+                ? error.message
+                : 'Unknown error';
+
+        return (
+            <ErrorPage
+                error={
+                    errorMessage
+                }
+            />
+        );
     }
 
     if (!project) {
@@ -43,9 +143,18 @@ async function EditProject({ params }: EditProjectProps) {
     }
 
     return (
-        <ClientPageWrapper project={project} />   
-    )
+        <ClientPageWrapper
+            project={
+                project
+            }
+            initialEvolutionDraft={
+                initialEvolutionDraft
+            }
+            initialEvolutionGeneratedAt={
+                initialEvolutionGeneratedAt
+            }
+        />
+    );
 }
-
 
 export default EditProject;
