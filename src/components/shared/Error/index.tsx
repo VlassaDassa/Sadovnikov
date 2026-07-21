@@ -2,6 +2,8 @@ import Link from 'next/link';
 import Button from '@/components/shared/button/Button';
 import AdaptiveImage from '../AdaptiveImage';
 
+import { useTranslations } from 'next-intl';
+
 import './../../../app/globals.scss';
 
 
@@ -17,6 +19,8 @@ interface ErrorProps {
 }
 
 export default function Error({ error, h1, h2, link, btn=true }: ErrorProps) {
+
+    const t = useTranslations('NotFound')
     return (
         <div className={`error-container ${btn ? 'with-btn' : 'without-btn'}`}>
             <AdaptiveImage 
@@ -33,14 +37,14 @@ export default function Error({ error, h1, h2, link, btn=true }: ErrorProps) {
                 {
                     btn ? (
                         <Button 
-                            text={`Back to home`}
+                            text={t('BackToHome')}
                             variant='black'
                             behavior='default'
                             iconPosition='noIcon'
                         />
                     )
                     : (
-                        <span className='back-home'>Back to home</span>
+                        <span className='back-home'>{t('BackToHome')}</span>
                     )
                 }            
                 

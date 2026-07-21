@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react';
+import { useTranslations } from 'next-intl';
 
 import EmptySection from '@/components/shared/EmptySection';
 
@@ -41,12 +42,14 @@ interface EvolutionProps {
 
 
 const Evolution: React.FC<EvolutionProps> = ({ data }) => {
+    const t = useTranslations('Evolution')
+
     return (
         <section className={`${styles.evolution}`}>
-            <h2 className={`${styles.title} sectionTitle`}>EVOLUTION</h2>
+            <h2 className={`${styles.title} sectionTitle`}>{t('Title')}</h2>
 
             {
-                data.length === 0 ? <EmptySection text='No commits' /> : 
+                data.length === 0 ? <EmptySection text={t('Empty')} /> : 
 
                     <div className={styles.evolWrapper}>
                         <div className={styles.timeline}>

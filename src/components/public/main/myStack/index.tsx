@@ -73,7 +73,7 @@ const MyStack: React.FC<StackProps> = ({ stack }) => {
 
 			{
 				stack.length === 0 ?
-					<EmptySection text='Stack not found' />
+					<EmptySection text={t('Empty')} />
 				:
 					<>
 						<AdaptiveImage 

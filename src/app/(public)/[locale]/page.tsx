@@ -43,7 +43,6 @@ const Main: React.FC = async () => {
         aboutMe = rawAboutMe ? transformAboutMe(rawAboutMe) : null;
         skills = await prisma.skill.findMany();
         stack = await prisma.stack.findMany();
-
     } catch (error) {
         const errorMessage = error instanceof Error ? error.message : 'Unknown error';
         return <ErrorPage error={errorMessage} />

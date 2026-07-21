@@ -26,7 +26,7 @@ const AboutMe: React.FC<AboutMeProps> = ({ aboutMe }) => {
             <h2 className={`${style.aboutMeTitle} sectionTitle`}>{t('title')}</h2>
 
             {
-                !aboutMe ? <EmptySection text='Data about me not found' />
+                !aboutMe ? <EmptySection text={t('Empty')} />
                 :
                     <>
                         <AboutIllustration aboutMe={aboutMe} />

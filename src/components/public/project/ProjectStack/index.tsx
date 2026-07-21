@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useRef, useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 import EmptySection from '@/components/shared/EmptySection';
 
@@ -58,6 +59,7 @@ const ProjectStack: React.FC<ProjectStackProps> = ({ data }) => {
     const [renderTrigger, setRenderTrigger] = useState(0);
 
     const linesRef = useRef<HTMLDivElement[]>([]);
+    const t = useTranslations('ProjectStack')
 
     const createLines = () => {
         if (!wrapperRef.current) return;
@@ -189,10 +191,10 @@ const ProjectStack: React.FC<ProjectStackProps> = ({ data }) => {
 
     return (
         <section className={`${styles.projectStack} container`}>
-            <h2 className={`${styles.title} sectionTitle`}>STACK</h2>
+            <h2 className={`${styles.title} sectionTitle`}>{t('Title')}</h2>
 
             {
-                data.length === 0 &&  <EmptySection text='No stack' />
+                data.length === 0 &&  <EmptySection text={t('Empty')} />
             }
            
 

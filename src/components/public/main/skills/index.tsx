@@ -156,7 +156,7 @@ const Skills: React.FC<SkillsProps> = ({ skills }) => {
     if (skills.length === 0) {
         return (
             <section className={`${styles.skills} container`}>
-                <EmptySection text="Skills not found" />
+                <EmptySection text={t('Empty')} />
             </section>
         );
     }

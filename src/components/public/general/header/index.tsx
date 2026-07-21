@@ -9,6 +9,7 @@ import { useLocale } from 'next-intl';
 import { usePathname, useRouter } from '@/i18n/navigation'
 import type { AppLocale } from '@/i18n/routing';
 
+
 import DecorButton from '@/components/shared/button/DecorButton';
 
 import { toggleMenu, toggleIsOverlayVisible } from '@/store/slices/uiSlice'; 
@@ -26,6 +27,8 @@ interface SelectLangProps {
 
 
 const SelectLang: React.FC<SelectLangProps> = ({ show, onClick }) => {
+    const t = useTranslations('Localization')
+
     return (
         <div className={`${style.selectLang} 
             ${style.selectLang}-${show ? 'show' : ''} `
@@ -35,7 +38,7 @@ const SelectLang: React.FC<SelectLangProps> = ({ show, onClick }) => {
                 className={style.selectLangItem}
                 onClick={onClick}
             >
-                    Русский 
+                    {t('ru')} 
                 <span className={style.spanLang}>RU</span>
             </p>
             <p 
@@ -43,7 +46,7 @@ const SelectLang: React.FC<SelectLangProps> = ({ show, onClick }) => {
                 className={style.selectLangItem}
                 onClick={onClick}
             >
-                    Английский 
+                    {t('en')} 
                 <span className={style.spanLang}>EN</span>
             </p>
         </div>

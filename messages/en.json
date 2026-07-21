@@ -5,12 +5,19 @@
     "portfolio": "portfolio"
   },
 
+  "Localization": {
+    "ru": "Russian",
+    "en": "English"
+  },
+
   "SkillsMain": {
-    "AvatarText": "How I rate my skills..."
+    "AvatarText": "This is how I evaluate my skills...",
+    "Empty": "Skills not found"
   },
 
   "MyStack": {
-    "title": "MY STACK"
+    "title": "MY STACK",
+    "Empty": "Stack not found"
   },
 
   "AboutMe": {
@@ -22,8 +29,8 @@
     "Location": "Location:",
     "Education": "Education:",
     "DecorBtnLong": "MY LONG STORY, VERY VERY LONG, IF YOU INTERESTED",
-    "DecorBtn": "MY LONG STORY, IF YOU INTERESTED"
-    
+    "DecorBtn": "MY LONG STORY, IF YOU INTERESTED",
+    "Empty": "Data about me not found"
   },
 
   "DecorBtn": {
@@ -47,6 +54,33 @@
     "Send": "Send",
     "Avatar": "I'm waiting for your messages"
   },
+
+  "NotFound": {
+    "Title": "Page not found",
+    "Description": "Sorry, but the requested page does not exist.",
+    "BackToHome": "Back to home"
+  },
+
+  "ErrorPage": {
+    "Title": "Error",
+    "subTitle": "Something went wrong"
+  },
+
+  "Evolution": {
+    "Title": "EVOLUTION",
+    "Empty": "No commits"
+  },
+
+  "KeyFeatures": {
+    "Title": "KEY FEATURES",
+    "Empty": "Key features not found"
+  },
+
+  "ProjectStack": {
+    "Title": "STACK",
+    "Empty": "Stack not found"
+  },
+
 
 
 

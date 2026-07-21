@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import type { Swiper as SwiperType } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -23,6 +24,8 @@ const KeyFeatures: React.FC<KeyFeaturesProps> = ({ data }) => {
     const [curIndex, setCurIndex] = useState<number>(1);
     const [isBeginning, setIsBeginning] = useState<boolean>(true);
     const [isEnd, setIsEnd] = useState<boolean>(data.length <= 1);
+
+    const t = useTranslations('KeyFeatures')
 
     const renderCondition =
         data.length === 0 ||
@@ -48,11 +51,11 @@ const KeyFeatures: React.FC<KeyFeaturesProps> = ({ data }) => {
     return (
         <section className={`${styles.keyFeatures} container`}>
             <h2 className={`${styles.title} sectionTitle`}>
-                KEY FEATURES
+                {t('Title')}
             </h2>
 
             {renderCondition ? (
-                <EmptySection text="No key features" />
+                <EmptySection text={t('Empty')} />
             ) : (
                 <>
                     <Swiper

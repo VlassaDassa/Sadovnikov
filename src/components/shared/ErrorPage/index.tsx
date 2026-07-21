@@ -1,4 +1,7 @@
+import { useTranslations } from 'next-intl';
+
 import Error from '../Error';
+
 
 
 
@@ -7,7 +10,9 @@ interface ErrorPageProps {
 }
 
 export default function ErrorPage({ error }: ErrorPageProps) {
+    const t = useTranslations('ErrorPage')
+
     return (
-        <Error h1="Error" h2="Something went wrong..." error={error} link="/" />
+        <Error h1={t('Title')} h2={`${t('subTitle')}...`} error={error} link="/" />
     );
 }

@@ -1,9 +1,27 @@
 import Error from '@/components/shared/Error';
 
+import { getTranslations } from 'next-intl/server';
 
 
-export default function NotFound() {
+
+interface NotFoundProps {
+    params: Promise<{
+        locale: string;
+    }>;
+}
+
+
+export default async function NotFound({
+    params,
+}: NotFoundProps) {
+    const {
+        locale,
+    } =  await params;
+
+    const t = await getTranslations({ locale, namespace: 'NotFound'});
+
+
     return (
-        <Error h1="404" h2="Page not found" error="Sorry, but the requested page does not exist." link="/" />
+        <Error h1="404" h2={t('Title')} error={t('Description')} link="/" />
     );
 }
