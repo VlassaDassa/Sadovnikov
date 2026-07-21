@@ -1,0 +1,22 @@
+{
+  "HomePage": {
+    "title": "Портфолио разработчика",
+    "description": "Я создаю современные веб-приложения"
+  },
+  "Navigation": {
+    "home": "Главная",
+    "projects": "Проекты",
+    "contacts": "Контакты"
+  },
+  "Project": {
+    "evolution": "Развитие",
+    "noCommits": "Нет этапов развития",
+    "github": "GitHub",
+    "demo": "Демонстрация"
+  },
+  "Common": {
+    "open": "Открыть",
+    "close": "Закрыть",
+    "loading": "Загрузка..."
+  }
+}

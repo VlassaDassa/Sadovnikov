@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { connection } from "next/server";
 import Script from 'next/script';
+import { getLocale } from "next-intl/server";
 
 import { DynImportLayout } from '@/components/shared/DynImportLayout';
 import Header from "@/components/public/general/header";
@@ -28,10 +29,10 @@ export default async function PublicLayout({
     const umamiUrl = process.env.UMAMI_URL;
     const umamiWebsiteId = process.env.UMAMI_WEBSITE_ID;
 
-
+    const locale = await getLocale();
 
     return (
-        <html data-scroll-behavior="smooth" lang="en">
+        <html data-scroll-behavior="smooth" lang={locale}>
             <head>
                 <link 
                     href="https://fonts.googleapis.com/css2?family=Magra:wght@400;700&family=Montserrat:wght@100..900&display=swap" 

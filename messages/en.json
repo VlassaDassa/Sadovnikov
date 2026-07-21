@@ -1,0 +1,22 @@
+{
+  "HomePage": {
+    "title": "Developer Portfolio",
+    "description": "I create modern web applications"
+  },
+  "Navigation": {
+    "home": "Home",
+    "projects": "Projects",
+    "contacts": "Contacts"
+  },
+  "Project": {
+    "evolution": "Evolution",
+    "noCommits": "No commits",
+    "github": "GitHub",
+    "demo": "Live demo"
+  },
+  "Common": {
+    "open": "Open",
+    "close": "Close",
+    "loading": "Loading..."
+  }
+}
