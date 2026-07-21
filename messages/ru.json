@@ -1,4 +1,54 @@
 {
+  "Header": {
+    "contacts": "контакты",
+    "about": "обо мне",
+    "portfolio": "портфолио"
+  },
+
+  "SkillsMain": {
+    "AvatarText": "Как я оцениваю свои навыки..."
+  },
+
+  "MyStack": {
+    "title": "STACK"
+  },
+
+  "AboutMe": {
+    "title": "Обо мне",
+    "WorkExperience": "Опыт работы",
+    "ShortBio": "Коротко обо мне",
+    "YearOfBirth": "Год рождения:",
+    "PlaceOfBirth": "Место рождения:",
+    "Location": "Местоположение:",
+    "Education": "Образование:",
+    "DecorBtnLong": "МОЯ ОЧЕНЬ ДЛИННАЯ, ЕСЛИ ВАМ ИНТЕРЕСНО",
+    "DecorBtn": "МОЯ ДЛИННАЯ ИСТОРИЯ, ЕСЛИ ВАМ ИНТЕРЕСНО"
+  },
+
+  "DecorBtn": {
+    "Click": "клик"
+  },
+
+  "Portfolio": {
+    "Title": "ПОРТФОЛИО"
+  },
+
+  "Canvas": {
+    "Scaling": "масштабирование",
+    "Moving": "перемещение по холсту"
+  },
+
+  "Contacts": {
+    "Title": "КОНТАКТЫ",
+    "Name": "Имя",
+    "Email": "Почта",
+    "Message": "Сообщение",
+    "Send": "Отправить",
+    "Avatar": "Я жду ваших сообщений"
+  },
+
+
+
   "HomePage": {
     "title": "Портфолио разработчика",
     "description": "Я создаю современные веб-приложения"

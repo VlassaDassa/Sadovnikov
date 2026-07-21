@@ -3,6 +3,10 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
+import { useLocale } from 'next-intl';
+import { usePathname, useRouter as locUseRouter } from '@/i18n/navigation'
+import type { AppLocale } from '@/i18n/routing';
 
 import { useSelector, useDispatch } from "react-redux";
 
@@ -19,8 +23,13 @@ import { cssVars } from '@/styles/cssVariables';
 
 const Menu = () => {
     const isMenuOpen = useSelector((state: RootState) => state.uiState.isMenuOpen)
-    const [curLang, setCurLang] = useState<'RU' | 'EN'>('EN')
+    const locale = useLocale()
+    const [curLang, setCurLang] = useState<string>(locale.toUpperCase())
+    const pathname = usePathname()
+    const locRouter = locUseRouter()
     const router = useRouter();
+
+    const t = useTranslations('Header');
 
     useEffect(() => {
         if (isMenuOpen) {
@@ -51,7 +60,19 @@ const Menu = () => {
     }
 
     const langClickHandler = () => {
-        setCurLang(prev => prev === 'RU' ? 'EN' : 'RU')
+        setCurLang(
+            prev => prev === 'RU' ? 'EN' : 'RU'
+        )
+
+        const nextLocale: AppLocale = locale === 'en' ? 'ru' : 'en'
+
+        locRouter.replace(
+            pathname,
+            {
+                locale:
+                    nextLocale,
+            },
+        );
     }
 
     return (
@@ -72,7 +93,7 @@ const Menu = () => {
                 <ul className={style.menuList}>
                     <li>
                         <Link className={style.listItem} href="/#contacts" onClick={linkClickHandler}>
-                            <p className={style.listItemText}>CONTACTS</p>
+                            <p className={style.listItemText}>{t('contacts')}</p>
                             <Icon 
                                 name='link'
                                 strokeColor={cssVars.neutral_300}
@@ -83,7 +104,7 @@ const Menu = () => {
                     </li>
                     <li>
                         <Link className={style.listItem} href="/#about" onClick={linkClickHandler}>
-                            <p className={style.listItemText}>ABOUT</p>
+                            <p className={style.listItemText}>{t('about')}</p>
                             <Icon 
                                 name='link'
                                 strokeColor={cssVars.neutral_300}
@@ -94,7 +115,7 @@ const Menu = () => {
                     </li>
                     <li>
                         <Link className={style.listItem} href="/#portfolio" onClick={linkClickHandler}>
-                            <p className={style.listItemText}>PORTFOLIO</p>
+                            <p className={style.listItemText}>{t('portfolio')}</p>
                             <Icon 
                                 name='link'
                                 strokeColor={cssVars.neutral_300}

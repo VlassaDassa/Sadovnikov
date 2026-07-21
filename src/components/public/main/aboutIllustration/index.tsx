@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useCallback } from 'react';
 import { AboutMe } from '@/interfaces/general';
+import { useTranslations } from 'next-intl';
 
 import AdaptiveImage from '@/components/shared/AdaptiveImage';
 
@@ -66,6 +67,8 @@ const AboutIllustration: React.FC<AboutIllustrationProps> = ({ aboutMe }) => {
         return () => window.removeEventListener("resize", update)
     }, [buildCurve])
 
+    const t = useTranslations('AboutMe');
+
     return (
         <div className={style.illustationContainer}>
             <div className={style.uzbContainer} ref={ref1}>
@@ -78,9 +81,9 @@ const AboutIllustration: React.FC<AboutIllustrationProps> = ({ aboutMe }) => {
                 />
 
                 <div className={style.uzbTextContainer}>
-                    <p className={`${style.uzbText} ${style.text}`}>Year of birth: {aboutMe.birth}</p>
+                    <p className={`${style.uzbText} ${style.text}`}>{t('YearOfBirth')} {aboutMe.birth}</p>
                     <p className={`${style.uzbText} ${style.text}`}>
-                        Place of birth: {aboutMe.placeBirth}
+                        {t('PlaceOfBirth')} {aboutMe.placeBirth}
                     </p>
                 </div>
             </div>
@@ -94,7 +97,7 @@ const AboutIllustration: React.FC<AboutIllustrationProps> = ({ aboutMe }) => {
                     alt="Moscow"
                     ariaHidden={false}
                 />
-                <p className={`${style.mskText} ${style.text}`}>Location: {aboutMe.location}</p>
+                <p className={`${style.mskText} ${style.text}`}>{t('Location')} {aboutMe.location}</p>
             </div>
 
             <div className={style.kollegeContainer} ref={ref3}>
@@ -104,7 +107,7 @@ const AboutIllustration: React.FC<AboutIllustrationProps> = ({ aboutMe }) => {
                     alt="kollege"
                     ariaHidden={false}
                 />
-                <p className={`${style.text} ${style.kollegeText}`}>{aboutMe.education}</p>
+                <p className={`${style.text} ${style.kollegeText}`}>{t('Education')} {aboutMe.education}</p>
             </div>
 
             <svg ref={svgRef} className={style.connections}>

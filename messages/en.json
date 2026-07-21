@@ -1,4 +1,56 @@
 {
+  "Header": {
+    "contacts": "contacts",
+    "about": "about",
+    "portfolio": "portfolio"
+  },
+
+  "SkillsMain": {
+    "AvatarText": "How I rate my skills..."
+  },
+
+  "MyStack": {
+    "title": "MY STACK"
+  },
+
+  "AboutMe": {
+    "title": "ABOUT ME",
+    "WorkExperience": "WORK EXPERIENCE",
+    "ShortBio": "SHORT BIO",
+    "YearOfBirth": "Year of birth:",
+    "PlaceOfBirth": "Place of birth:",
+    "Location": "Location:",
+    "Education": "Education:",
+    "DecorBtnLong": "MY LONG STORY, VERY VERY LONG, IF YOU INTERESTED",
+    "DecorBtn": "MY LONG STORY, IF YOU INTERESTED"
+    
+  },
+
+  "DecorBtn": {
+    "Click": "click"
+  },
+
+  "Portfolio": {
+    "Title": "PORTFOLIO"
+  },
+
+  "Canvas": {
+    "Scaling": "scaling",
+    "Moving": "moving across the canvas"
+  },
+
+  "Contacts": {
+    "Title": "CONTACTS",
+    "Name": "Name",
+    "Email": "Email",
+    "Message": "Message",
+    "Send": "Send",
+    "Avatar": "I'm waiting for your messages"
+  },
+
+
+
+
   "HomePage": {
     "title": "Developer Portfolio",
     "description": "I create modern web applications"

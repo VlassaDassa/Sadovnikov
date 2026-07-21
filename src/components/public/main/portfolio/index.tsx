@@ -2,6 +2,7 @@
 
 import React from 'react';
 import dynamic from 'next/dynamic';
+import { useTranslations } from 'next-intl';
 import { useSelector } from 'react-redux';
 
 const Canvas = dynamic(() => import('../canvas'), { ssr: false })
@@ -22,7 +23,7 @@ interface PortfolioProps {
 
 const Portfolio: React.FC<PortfolioProps> = ({ projects }) => {
     const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
-
+    const t = useTranslations('Portfolio');
 
     const portfolioContent = (
         breakpoint === 'mobile' || breakpoint === 'tablet' ? 
@@ -43,7 +44,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ projects }) => {
 
     return (
         <section id="portfolio" className={style.portfolio}>
-            <h2 className={`sectionTitle ${style.portfolioTitle}`}>PORTFOLIO</h2>
+            <h2 className={`sectionTitle ${style.portfolioTitle}`}>{t('Title')}</h2>
 
             {portfolioContent}
         </section>

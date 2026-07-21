@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslations } from 'next-intl';
 
 import AdaptiveImage from '../AdaptiveImage';
 import Icon from '../icons/Icon';
@@ -53,6 +54,8 @@ const DecorButton: React.FC<DecorButtonProps> = ({
 
     const bgBtn = variant === 'big' ? bigBgBtn:
                         variant === 'medium' ? mediumBgBtn: smallBgBtn; 
+    
+    const t = useTranslations('DecorBtn');
 
 
     // Определение размера декоративного Loader
@@ -125,7 +128,7 @@ const DecorButton: React.FC<DecorButtonProps> = ({
                                 ${style[`decorBtnLabel_${size}`]} 
                             `}
                         >
-                            (click)
+                            ({t('Click')})
                         </p>
                     </>
                 :

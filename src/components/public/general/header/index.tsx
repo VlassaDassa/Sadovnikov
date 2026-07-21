@@ -4,6 +4,10 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { useDispatch } from 'react-redux';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
+import { useLocale } from 'next-intl';
+import { usePathname, useRouter } from '@/i18n/navigation'
+import type { AppLocale } from '@/i18n/routing';
 
 import DecorButton from '@/components/shared/button/DecorButton';
 
@@ -48,8 +52,14 @@ const SelectLang: React.FC<SelectLangProps> = ({ show, onClick }) => {
 
 
 const Header: React.FC = () => {
+    const t = useTranslations('Header')
+    const locale = useLocale()
+    const pathname = usePathname()
+    const router = useRouter()
+
     const [selectLangShow, setSelectLangShow] = useState<boolean>(false)
-    const [curLang, setCurLang] = useState<string>('RU')
+    const [curLang, setCurLang] = useState<string>(locale.toUpperCase())
+
 
     const dispatch = useDispatch()
 
@@ -61,6 +71,17 @@ const Header: React.FC = () => {
         const newLang = String(e.currentTarget.getAttribute('data-lang')) 
         setCurLang(newLang)
         toggleLang()
+
+        const nextLocale:
+            AppLocale = newLang === 'RU' ? 'ru' : 'en' 
+
+        router.replace(
+            pathname,
+            {
+                locale:
+                    nextLocale,
+            },
+        );
     }
 
     const burgerClickHandler = () => {
@@ -97,15 +118,15 @@ const Header: React.FC = () => {
             <nav className={style.headerNav}>
                 <ul className={style.headerNavList}>
                     <li className={style.headerNavItem}>
-                        <Link className={style.headerNavItemLink} href="/#contacts">Contacts</Link>
+                        <Link className={style.headerNavItemLink} href="/#contacts">{t('contacts')}</Link>
                     </li>
 
                     <li className={style.headerNavItem}>
-                        <Link className={style.headerNavItemLink} href="/#about">About</Link>
+                        <Link className={style.headerNavItemLink} href="/#about">{t('about')}</Link>
                     </li>
 
                     <li className={style.headerNavItem}>
-                        <Link className={style.headerNavItemLink} href="/#portfolio">Portfolio</Link>
+                        <Link className={style.headerNavItemLink} href="/#portfolio">{t('portfolio')}</Link>
                     </li>
                     
                     <li className={style.headerNavItem}>
