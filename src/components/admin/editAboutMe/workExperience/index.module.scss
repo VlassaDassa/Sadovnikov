@@ -35,6 +35,16 @@
     margin-top: 30px;
 }
 
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.inputGroupTextArea {
+    gap: 25px;
+}
+
 
 .responsibilities {
     min-height: 200px;
@@ -68,6 +78,4 @@
     @media (min-width: 1280px) {
         width: calc(100% - 100px);
     }
-
-    
 }

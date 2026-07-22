@@ -11,7 +11,7 @@ export const aboutMe: AboutMe = {
             id: 1,
             organization: 'Spetstechnologiya (Moscow)',
             position: 'Server Maintenance Engineer',
-            workingPeriod: {startDate: 'July 2025', endDate: 'Present'},
+            workingPeriod: {startDate: 'July 2025', endDate: 'Now'},
             description: 'Ensuring 24/7 uptime for dev environments; configuring servers & CI/CD; assisting with frontend deploys (Nginx); code review (Docker, Nginx).'
         },
         {

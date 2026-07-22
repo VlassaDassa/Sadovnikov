@@ -20,17 +20,24 @@ export async function updateAboutMe(aboutMe: AboutMe) {
             data: {
                 birth: aboutMe.birth,  
                 placeBirth: aboutMe.placeBirth,  
+                placeBirthRu: aboutMe.placeBirthRu,  
                 education: aboutMe.education,   
+                educationRu: aboutMe.educationRu,   
                 location: aboutMe.location,    
+                locationRu: aboutMe.locationRu,    
                 shortBio: aboutMe.shortBio,    
+                shortBioRu: aboutMe.shortBioRu,    
 
                 workExperience: {
                     create: aboutMe.workExperience.map(item => ({
                         organization: item.organization,
+                        organizationRu: item.organizationRu,
                         position: item.position,   
+                        positionRu: item.positionRu,   
                         startDate: item.workingPeriod.startDate,   
                         endDate: item.workingPeriod.endDate,     
-                        description: item.description 
+                        description: item.description, 
+                        descriptionRu: item.descriptionRu 
                     }))
                 }
             },

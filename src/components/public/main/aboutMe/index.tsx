@@ -10,6 +10,7 @@ import AboutIllustration from '../aboutIllustration';
 import EmptySection from '@/components/shared/EmptySection';
 
 import type { AboutMe } from '@/interfaces/general';
+import { displayDate } from '@/lib/dates';
 
 import style from './index.module.scss';
 
@@ -35,7 +36,7 @@ const AboutMe: React.FC<AboutMeProps> = ({ aboutMe }) => {
 
                         <div className={style.aboutMeData}>
                             <p className={style.text}>{t('YearOfBirth')} {aboutMe['birth']}</p>
-                            <p className={style.text}>{t('PlaceOfBirth')} {}</p>
+                            <p className={style.text}>{t('PlaceOfBirth')} {aboutMe['placeBirth']}</p>
                             <p className={style.text}>{t('Education')} {aboutMe['education']}</p>
                             <p className={style.text}>{t('Location')} {aboutMe['location']}</p>
                         </div>
@@ -48,7 +49,7 @@ const AboutMe: React.FC<AboutMeProps> = ({ aboutMe }) => {
                                     aboutMe.workExperience.map((item, index) => (
                                         <div key={item.id} className={style.workExperienceItem}>
                                             <h4 className={`${style.text} ${style.workExperienceItemTitle}`}>
-                                                {item['organization']} - {item['position']} {item['workingPeriod']['startDate']} - {item['workingPeriod']['endDate']}
+                                                {item['organization']} | {item['position']} | {displayDate(item['workingPeriod']['startDate'], false, locale)} - {displayDate(item['workingPeriod']['endDate'], false, locale)}
                                             </h4>
                                             <p className={style.description}>{item['description']}</p>
                                         </div>

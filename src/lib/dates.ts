@@ -17,19 +17,23 @@ export const parseDate = (dateString: string | undefined): Date | null => {
     };
 
 
-export const displayDate = (dateString: string | undefined, day?: boolean, lang?: string): string => {
+export const displayDate = (dateString: string | undefined, day?: boolean, lang: string = 'en'): string => {
         const curLang = lang === "en" ? "en-US" : "ru-RU"
+        function capitalize(str: string): string {
+            if (!str) return '';
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
 
         if (!dateString) return '';
-        if (dateString.toUpperCase() === 'PRESENT') return 'Present';
+        if (dateString.toUpperCase() === 'NOW') return 'Now';
         
         const date = parseDate(dateString);
         if (!date) return '';
         
         if (day) {
-            return date.toLocaleDateString(curLang, { month: 'long', day: 'numeric', year: 'numeric' });
+            return capitalize(date.toLocaleDateString(curLang, { month: 'long', day: 'numeric', year: 'numeric' }))
 
         }
         
-        return date.toLocaleDateString(curLang, { month: 'long', year: 'numeric' });
+        return capitalize(date.toLocaleDateString(curLang, { month: 'long', year: 'numeric' }));
     };

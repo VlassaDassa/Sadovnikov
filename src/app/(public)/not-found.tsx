@@ -4,24 +4,13 @@ import { getTranslations } from 'next-intl/server';
 
 
 
-interface NotFoundProps {
-    params: Promise<{
-        locale: string;
-    }>;
-}
-
-
-export default async function NotFound({
-    params,
-}: NotFoundProps) {
-    const {
-        locale,
-    } =  await params;
-
-    const t = await getTranslations({ locale, namespace: 'NotFound'});
-
+export default async function NotFound() {
+    const t =
+        await getTranslations(
+            'NotFound',
+        )
 
     return (
-        <Error h1="404" h2={t('Title')} error={t('Description')} link="/" />
+        <Error h1="404" h2={t('Title')} error={t('Description')} link="/" btn={false} />
     );
 }

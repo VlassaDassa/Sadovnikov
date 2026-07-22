@@ -51,13 +51,13 @@ const SelectPeriod: React.FC<SelectPeriodProps> = ({ data, setData }) => {
         }
     };
 
-    const handlePresentClick = () => {
+    const handleNowClick = () => {
         if (currentItem) {
             const updatedItem = {
                 ...currentItem,
                 workingPeriod: {
                     ...currentItem.workingPeriod,
-                    endDate: 'PRESENT'
+                    endDate: 'NOW'
                 }
             };
             setData(prev => ({ ...prev, workExperience: prev.workExperience.map(item => item.id === currentId ? updatedItem : item) }));
@@ -107,8 +107,8 @@ const SelectPeriod: React.FC<SelectPeriodProps> = ({ data, setData }) => {
                 variant="black"
                 behavior="default"
                 iconPosition="noIcon"
-                text='PRESENT'
-                onClick={handlePresentClick}
+                text='NOW'
+                onClick={handleNowClick}
             />
         </ModalWrapper>
     )

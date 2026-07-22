@@ -71,14 +71,22 @@ export interface IProject {
     name: string,
 
     shortDescription: string,
+    shortDescriptionRu?: string,
+
     previewDescription: string,
+    previewDescriptionRu?: string,
+
     stack: IProjectStack[],
     keyFeatures: IFeatureItem[],
     description: IProjectDescription[],
     metrics: IMertics[],
     commits: ICommit[],
+
     developmentTime: string,
+    developmentTimeRu?: string,
+
     date: string,
+    dateRu?: string,
 
     gitHubLink: string,
     demoLink: string,
@@ -124,9 +132,15 @@ export interface WorkExperience {
         startDate: string,
         endDate: string
     },
+
     organization: string,
+    organizationRu?: string,
+
     position: string,
+    positionRu?: string,
+
     description: string
+    descriptionRu?: string
 }
 
 
@@ -134,10 +148,18 @@ export interface AboutMe {
     birth: number,
 
     placeBirth: string,
+    placeBirthRu?: string,
+
     education: string,
+    educationRu?: string,
+
     location: string,
+    locationRu?: string,
+
     workExperience: WorkExperience[],
+    
     shortBio: string
+    shortBioRu?: string
 }
 
 

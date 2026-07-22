@@ -1,4 +1,4 @@
-import { Link } from '@/i18n/navigation';
+import Link from 'next/link';
 import Button from '@/components/shared/button/Button';
 import AdaptiveImage from '../AdaptiveImage';
 

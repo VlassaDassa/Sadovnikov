@@ -36,7 +36,7 @@ function transformWorkExperience(exp: PrismaAboutMe['workExperience'][number], l
     };
 }
 
-export function transformAboutMe(data: PrismaAboutMe, locale: AppLocale): AboutMe {
+export function transformAboutMe(data: PrismaAboutMe, locale: AppLocale = 'en'): AboutMe {
 
     return {
         birth: data.birth,
@@ -66,5 +66,49 @@ export function transformAboutMe(data: PrismaAboutMe, locale: AppLocale): AboutM
         ),
 
         workExperience: data.workExperience.map((exp) => transformWorkExperience(exp, locale)),
+    };
+}
+
+
+
+function transformRawWorkExperience(exp: PrismaAboutMe['workExperience'][number], locale: AppLocale): WorkExperience {
+    return {
+        id: exp.id,
+        workingPeriod: {
+            startDate: exp.startDate,
+            endDate: exp.endDate || '', 
+        },
+
+        organization: exp.organization,
+        organizationRu: exp.organizationRu || '',
+
+
+        position: exp.position,
+        positionRu: exp.positionRu || '',
+
+        description: exp.description,
+        descriptionRu: exp.descriptionRu || ''
+    };
+}
+
+
+export function transformRawAboutMe(data: PrismaAboutMe, locale: AppLocale = 'en'): AboutMe {
+    return {
+        birth: data.birth,
+
+        placeBirth: data.placeBirth,
+        placeBirthRu: data.placeBirthRu || '',
+        
+
+        education: data.education,
+        educationRu: data.educationRu || '',
+
+        location: data.location,
+        locationRu: data.locationRu || '',
+
+        shortBio: data.shortBio,
+        shortBioRu: data.shortBioRu || '',
+
+        workExperience: data.workExperience.map((exp) => transformRawWorkExperience(exp, locale)),
     };
 }
