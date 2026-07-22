@@ -2,11 +2,13 @@
 
 import React from 'react';
 import { useTranslations } from 'next-intl';
+import { useLocale } from 'next-intl';
 
 import EmptySection from '@/components/shared/EmptySection';
 
 import { useTooltip } from '@/hooks/useTooltip';
 import { ICommit } from '@/interfaces/general';
+import { displayDate } from '@/lib/dates';
 
 import styles from './index.module.scss';
 
@@ -18,10 +20,12 @@ interface CommitProps {
 
 
 const Commit: React.FC<CommitProps> = ({ item }) => {
+    const locale = useLocale() === 'en' ? 'en' : 'ru'
+
     const tooltipRef = useTooltip<HTMLDivElement>({
             text: item.text,
             title: item.name,
-            date: item.date,
+            date: displayDate(item.date, false, locale),
             type: 'lvl3',
             placement: 'bottom',
             fakeWidth: 400,

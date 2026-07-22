@@ -2,6 +2,9 @@
 // т.е, если поле является другой таблицей/внешний ключ
 
 import { Prisma } from '@prisma/client';
+
+import { getLocalizedText } from '@/i18n/getLocalizedText';
+import { AppLocale } from '@/i18n/routing';
 import { IProject, IStackTooltip } from '@/interfaces/general';
 
 
@@ -31,7 +34,130 @@ type PrismaProject = Prisma.ProjectGetPayload<{
     };
 }>;
 
-export function transformProject(project: PrismaProject): IProject {
+export function transformProject(project: PrismaProject, locale: AppLocale): IProject {
+    return {
+        id: project.id,
+        category: project.category,
+        name: project.name,
+        gitHubLink: project.githubLink || '',
+        demoLink: project.demoLink || '',
+
+        shortDescription: getLocalizedText(
+            locale,
+            project.shortDescription,
+            project.shortDescriptionRu
+        ),
+
+        previewDescription: getLocalizedText(
+            locale,
+            project.previewDescription,
+            project.previewDescriptionRu
+        ),
+
+        date: getLocalizedText(
+            locale,
+            project.date,
+            project.dateRu
+        ),
+
+        developmentTime: getLocalizedText(
+            locale,
+            project.developmentTime,
+            project.developmentTimeRu
+        ),
+
+        numberTeam: project.numberTeam,
+        teamType: project.teamType,
+
+        images: project.images.map(img => ({
+            id: img.id,
+            image: img.image,
+            main: img.main,
+        })),
+
+        keyFeatures: project.keyFeatures?.map(f => ({
+            id: f.id,
+            title: getLocalizedText(
+                locale,
+                f.title,
+                f.titleRu
+            ),
+
+            text: getLocalizedText(
+                locale,
+                f.text,
+                f.textRu
+            ),
+
+            icon: f.icon,
+            photo: f.photo,
+        })) || [],
+
+        stack: project.stack.map(item => {
+            const englishTooltip = transformTooltip(item.tooltip);
+            const russianTooltip = transformTooltip(item.tooltipRu);
+
+            const selectedTooltip = locale === 'ru' && russianTooltip
+                ? russianTooltip
+                : englishTooltip;
+
+            return {
+                id: item.id,
+                name: item.name,
+                icon: item.icon,
+                tooltip: selectedTooltip ?? undefined,
+            };
+        }),
+
+        description: project.description.map(desc => ({
+            id: desc.id,
+            title: getLocalizedText(
+                locale,
+                desc.title,
+                desc.titleRu
+            ),
+
+            icon: desc.icon,
+
+            content: getLocalizedText(
+                locale,
+                desc.content,
+                desc.contentRu
+            ),
+        })),
+
+
+        metrics: project.metrics.map(m => ({
+            id: m.id,
+            icon: m.icon,
+
+            title: getLocalizedText(
+                locale,
+                m.title,
+                m.titleRu
+            ),
+
+            text: getLocalizedText(
+                locale,
+                m.text,
+                m.textRu
+            ),
+
+            current: m.current,
+            max: m.max,
+            type: m.type as 'score' | 'time',
+        })),
+
+        commits: project.commits.map(c => ({
+            id: c.id,
+            name: c.name,
+            date: c.date,
+            text: c.text,
+        })),
+    };
+}
+
+export function transformRawProject(project: PrismaProject): IProject {
     return {
         id: project.id,
         category: project.category,

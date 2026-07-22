@@ -1,11 +1,13 @@
 import React from 'react';
 import { useTranslations } from 'next-intl';
+import { useLocale } from 'next-intl';
 
 import Button from '@/components/shared/button/Button';
 import Icon from '@/components/shared/icons/Icon';
 import Slider from '../Slider';
 
 import type { IProjectPreviewData } from '@/interfaces/general';
+import { displayDate } from '@/lib/dates';
 
 import styles from './index.module.scss';
 import { cssVars } from '@/styles/cssVariables';
@@ -18,6 +20,7 @@ interface ProjectPreviewProps {
 
 const ProjectPreview: React.FC<ProjectPreviewProps> = ({ data }) => {
     const t = useTranslations('TeamType');
+    const locale = useLocale() === 'en' ? 'en' : 'ru'
 
     const teamTypeIcon = ( data.teamType === 'solo' ? 'person' : data.teamType === 'duo' ? 'twoPerson' : 'manyPerson' )
     const localeTeamType = t(data.teamType)
@@ -34,7 +37,7 @@ const ProjectPreview: React.FC<ProjectPreviewProps> = ({ data }) => {
                             fillColor='none'
                             size={20}
                             />
-                        <p className={styles.metadataText}>{data.date}</p>
+                        <p className={styles.metadataText}>{displayDate(data.date, true, locale)}</p>
                     </div>
                     
                     <span className={styles.divider} />

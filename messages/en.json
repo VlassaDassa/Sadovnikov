@@ -97,6 +97,15 @@
     "team": "team"
   },
 
+  "ProjectDescription": {
+    "Title": "DESCRIPTION",
+    "NoContent": "Content not found..."
+  },
+
+  "Metrics": {
+    "Title": "METRICS"
+  },
+
 
 
 

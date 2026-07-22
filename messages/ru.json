@@ -97,6 +97,15 @@
     "team": "командный"
   },
 
+  "ProjectDescription": {
+    "Title": "ОПИСАНИЕ",
+    "NoContent": "Контент не найден..."
+  },
+
+  "Metrics": {
+    "Title": "Показатели"
+  },
+
 
 
 

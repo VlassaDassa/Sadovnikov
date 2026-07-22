@@ -4,9 +4,8 @@ import { revalidatePath } from "next/cache"
 
 import prisma from "@/lib/prisma"
 import { IProject } from "@/interfaces/general"
-import { transformProject } from "@/lib/transformers/project"
+import { transformRawProject } from "@/lib/transformers/project"
 import { requireAdmin } from "@/lib/auth/admin";
-
 
 
 export async function createProject(projectData: IProject) {
@@ -17,10 +16,18 @@ export async function createProject(projectData: IProject) {
             data: {
                 category: projectData.category,
                 name: projectData.name,
-                shortDescription: projectData.shortDescrition,
+
+                shortDescription: projectData.shortDescription,
+                shortDescriptionRu: projectData.shortDescriptionRu,
+
                 previewDescription: projectData.previewDescription,
+                previewDescriptionRu: projectData.previewDescriptionRu,
+
                 date: projectData.date,
+
                 developmentTime: projectData.developmentTime,
+                developmentTimeRu: projectData.developmentTimeRu,
+
                 githubLink: projectData.gitHubLink || null,
                 demoLink: projectData.demoLink || null,
                 numberTeam: projectData.numberTeam,
@@ -38,13 +45,18 @@ export async function createProject(projectData: IProject) {
                         name: item.name,
                         icon: item.icon,
                         tooltip: item.tooltip ? JSON.parse(JSON.stringify(item.tooltip)) : null,
+                        tooltipRu: item.tooltip ? JSON.parse(JSON.stringify(item.tooltipRu)) : null,
                     })),
                 },
 
                 keyFeatures: {
                     create: (projectData.keyFeatures || []).map(feature => ({
                         title: feature.title,
+                        titleRu: feature.titleRu,
+
                         text: feature.text,
+                        textRu: feature.text,
+
                         icon: feature.icon,
                         photo: feature.photo,
                     })),
@@ -53,16 +65,25 @@ export async function createProject(projectData: IProject) {
                 description: {
                     create: projectData.description.map(desc => ({
                         title: desc.title,
+                        titleRu: desc.titleRu,
+
                         icon: desc.icon,
+
                         content: desc.content,
+                        contentRu: desc.contentRu,
                     })),
                 },
 
                 metrics: {
                     create: projectData.metrics.map(metric => ({
                         icon: metric.icon,
+
                         title: metric.title,
+                        titleRu: metric.titleRu,
+
                         text: metric.text,
+                        textRu: metric.textRu,
+
                         current: typeof metric.current === 'string' ? parseFloat(metric.current) : metric.current,
                         max: metric.max,
                         type: metric.type,
@@ -88,7 +109,7 @@ export async function createProject(projectData: IProject) {
             },
         })
 
-        const transformedProject = transformProject(newProject);
+        const transformedProject = transformRawProject(newProject);
 
         revalidatePath('/admin')
         revalidatePath('/')
@@ -111,10 +132,18 @@ export async function updateProject(projectData: IProject) {
                 data: {
                     category: projectData.category,
                     name: projectData.name,
-                    shortDescription: projectData.shortDescrition,
+
+                    shortDescription: projectData.shortDescription,
+                    shortDescriptionRu: projectData.shortDescriptionRu,
+
                     previewDescription: projectData.previewDescription,
+                    previewDescriptionRu: projectData.previewDescriptionRu,
+
                     date: projectData.date,
+
                     developmentTime: projectData.developmentTime,
+                    developmentTimeRu: projectData.developmentTimeRu,
+
                     githubLink: projectData.gitHubLink || null,
                     demoLink: projectData.demoLink || null,
                     numberTeam: projectData.numberTeam,
@@ -221,7 +250,7 @@ export async function updateProject(projectData: IProject) {
         if (!updatedProject) {
             throw new Error(`Project with id ${projectId} not found`);
         }
-        const transformedProject = transformProject(updatedProject)
+        const transformedProject = transformRawProject(updatedProject)
 
         revalidatePath(`/project/${projectId}`)
         revalidatePath(`/editProject/${projectId}`)

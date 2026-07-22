@@ -79,22 +79,41 @@ const Inputs: React.FC<EditProjectProps> = ({ project, setData, setIsSaving }) =
                 maxLen={20}
                 onChange={(e) => handleChangeGeneralData('category', e.target.value)}
             />
+            
+            <div className={`${styles.inputsGroup} ${styles.inputsGroupTextArea}`}>
+                <Input 
+                    name='projectPreviewDescription'
+                    additionalClass={styles.textarea}
+                    type='textarea'
+                    placeholder='Text...'
+                    variant='admin'
+                    value={project?.previewDescription}
+                    iconPosition='noIcon'
+                    adminLabel='withLabel'
+                    label='Preview description'
+                    counter={true}
+                    maxCounter={300}
+                    maxLen={300}
+                    onChange={(e) => handleChangeGeneralData('previewDescription', e.target.value)}
+                />
 
-            <Input 
-                name='projectPreviewDescription'
-                additionalClass={styles.textarea}
-                type='textarea'
-                placeholder='Text...'
-                variant='admin'
-                value={project?.previewDescription}
-                iconPosition='noIcon'
-                adminLabel='withLabel'
-                label='Preview description'
-                counter={true}
-                maxCounter={300}
-                maxLen={300}
-                onChange={(e) => handleChangeGeneralData('previewDescription', e.target.value)}
-            />
+                <Input 
+                    name='projectPreviewDescriptionRu'
+                    additionalClass={styles.textarea}
+                    type='textarea'
+                    placeholder='Text on russian...'
+                    variant='admin'
+                    value={project?.previewDescriptionRu}
+                    iconPosition='noIcon'
+                    adminLabel='withoutLabel'
+                    counter={true}
+                    maxCounter={300}
+                    maxLen={300}
+                    onChange={(e) => handleChangeGeneralData('previewDescriptionRu', e.target.value)}
+                />
+
+            </div>
+            
 
             <Input 
                 name='link(demo)'
@@ -119,17 +138,31 @@ const Inputs: React.FC<EditProjectProps> = ({ project, setData, setIsSaving }) =
                 onChange={(e) => handleChangeGeneralData('gitHubLink', e.target.value)}
             />
 
-            <Input 
-                name='developmentTime'
-                placeholder='Time...'
-                value={project?.developmentTime}
-                variant='admin'
-                iconPosition='noIcon'
-                adminLabel='withLabel'
-                label='Development time'
-                maxLen={20}
-                onChange={(e) => handleChangeGeneralData('developmentTime', e.target.value)}
-            />
+            <div className={styles.inputsGroup}>
+                <Input 
+                    name='developmentTime'
+                    placeholder='Time...'
+                    value={project?.developmentTime}
+                    variant='admin'
+                    iconPosition='noIcon'
+                    adminLabel='withLabel'
+                    label='Development time'
+                    maxLen={20}
+                    onChange={(e) => handleChangeGeneralData('developmentTime', e.target.value)}
+                />
+
+                <Input 
+                    name='developmentTimeRu'
+                    placeholder='Text on russian...'
+                    value={project?.developmentTimeRu}
+                    variant='admin'
+                    iconPosition='noIcon'
+                    adminLabel='withoutLabel'
+                    maxLen={20}
+                    onChange={(e) => handleChangeGeneralData('developmentTimeRu', e.target.value)}
+                />
+            </div>
+            
 
             <Input 
                 name='teamType'

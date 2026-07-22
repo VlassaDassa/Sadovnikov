@@ -20,29 +20,43 @@ export interface IProjectStack {
     name: string,
     icon: string,
     tooltip?: IStackTooltip,
+    tooltipRu?: IStackTooltip,
 }
 
 export interface IFeatureItem {
     id: number,
-
     title: string,
+    titleRu?: string,
+
     text: string,
+    textRu?: string,
+
     icon: string,
     photo: string
 }
 
 export interface IProjectDescription {
     id: number,
+
     title: string;
+    titleRu?: string;
+
     icon: string,
+
     content: string;
+    contentRu?: string;
 }
 
 export interface IMertics {
     id: number,
     icon: string,
+
     title: string,
+    titleRu?: string,
+
     text: string,
+    textRu: string,
+
     current: string | number;
     max: number,
     type: 'score' | 'time'

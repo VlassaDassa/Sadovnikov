@@ -71,7 +71,7 @@ export function transformAboutMe(data: PrismaAboutMe, locale: AppLocale = 'en'):
 
 
 
-function transformRawWorkExperience(exp: PrismaAboutMe['workExperience'][number], locale: AppLocale): WorkExperience {
+function transformRawWorkExperience(exp: PrismaAboutMe['workExperience'][number]): WorkExperience {
     return {
         id: exp.id,
         workingPeriod: {
@@ -92,7 +92,7 @@ function transformRawWorkExperience(exp: PrismaAboutMe['workExperience'][number]
 }
 
 
-export function transformRawAboutMe(data: PrismaAboutMe, locale: AppLocale = 'en'): AboutMe {
+export function transformRawAboutMe(data: PrismaAboutMe): AboutMe {
     return {
         birth: data.birth,
 
@@ -109,6 +109,6 @@ export function transformRawAboutMe(data: PrismaAboutMe, locale: AppLocale = 'en
         shortBio: data.shortBio,
         shortBioRu: data.shortBioRu || '',
 
-        workExperience: data.workExperience.map((exp) => transformRawWorkExperience(exp, locale)),
+        workExperience: data.workExperience.map((exp) => transformRawWorkExperience(exp)),
     };
 }
