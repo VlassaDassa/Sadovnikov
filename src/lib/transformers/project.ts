@@ -36,10 +36,19 @@ export function transformProject(project: PrismaProject): IProject {
         id: project.id,
         category: project.category,
         name: project.name,
-        shortDescrition: project.shortDescription,
+
+        shortDescription: project.shortDescription,
+        shortDescriptionRu: project.shortDescriptionRu || '',
+
         previewDescription: project.previewDescription,
+        previewDescriptionRu: project.previewDescriptionRu || '',
+
         date: project.date,
+        dateRu: project.dateRu || '',
+
         developmentTime: project.developmentTime,
+        developmentTimeRu: project.developmentTimeRu || '',
+
         gitHubLink: project.githubLink || '',     
         demoLink: project.demoLink || '',
         numberTeam: project.numberTeam,
@@ -54,7 +63,11 @@ export function transformProject(project: PrismaProject): IProject {
         keyFeatures: project.keyFeatures?.map(f => ({
             id: f.id,
             title: f.title,
+            titleRu: f.titleRu || '',
+
             text: f.text,
+            textRu: f.textRu || '',
+
             icon: f.icon,
             photo: f.photo,
         })) || [],
@@ -64,21 +77,31 @@ export function transformProject(project: PrismaProject): IProject {
             name: item.name,
             icon: item.icon,
             tooltip: transformTooltip(item.tooltip) ?? undefined,
+            tooltipRu: transformTooltip(item.tooltipRu) ?? undefined
         })),
 
         description: project.description.map(desc => ({
             id: desc.id,
             title: desc.title,
+            titleRu: desc.titleRu || '',
+
             icon: desc.icon,
+
             content: desc.content,
+            contentRu: desc.contentRu || ''
         })),
 
 
         metrics: project.metrics.map(m => ({
             id: m.id,
             icon: m.icon,
+
             title: m.title,
+            titleRu: m.titleRu || '',
+
             text: m.text,
+            textRu: m.textRu || '',
+
             current: m.current,
             max: m.max,
             type: m.type as 'score' | 'time',

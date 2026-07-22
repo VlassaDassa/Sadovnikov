@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { useDispatch } from 'react-redux';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 import { useLocale } from 'next-intl';
 import { usePathname, useRouter } from '@/i18n/navigation'

@@ -1,8 +1,9 @@
 'use client'
 
 import React from 'react';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
+import { useLocale } from 'next-intl';
 
 import DecorButton from '../../../shared/button/DecorButton';
 import AboutIllustration from '../aboutIllustration';
@@ -20,6 +21,7 @@ interface AboutMeProps {
 
 const AboutMe: React.FC<AboutMeProps> = ({ aboutMe }) => {
     const t = useTranslations('AboutMe');
+    const locale = useLocale() === 'en' ? 'en' : 'ru'
 
     return (
         <section id='about' className={`${style.aboutMe} container`}>
@@ -33,7 +35,7 @@ const AboutMe: React.FC<AboutMeProps> = ({ aboutMe }) => {
 
                         <div className={style.aboutMeData}>
                             <p className={style.text}>{t('YearOfBirth')} {aboutMe['birth']}</p>
-                            <p className={style.text}>{t('PlaceOfBirth')} {aboutMe['placeBirth']}</p>
+                            <p className={style.text}>{t('PlaceOfBirth')} {}</p>
                             <p className={style.text}>{t('Education')} {aboutMe['education']}</p>
                             <p className={style.text}>{t('Location')} {aboutMe['location']}</p>
                         </div>

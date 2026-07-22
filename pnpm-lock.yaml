@@ -35,6 +35,9 @@ importers:
       better-auth:
         specifier: ^1.6.23
         version: 1.6.23(@prisma/client@6.19.3(prisma@6.19.3(typescript@5.9.3))(typescript@5.9.3))(next@16.2.4(@babel/core@7.29.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(sass@1.99.0))(prisma@6.19.3(typescript@5.9.3))(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+      date-fns:
+        specifier: ^4.4.0
+        version: 4.4.0
       gigachat:
         specifier: ^0.0.20
         version: 0.0.20

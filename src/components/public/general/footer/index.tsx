@@ -1,6 +1,7 @@
 'use client' 
 
 import React from "react";
+import { useTranslations } from 'next-intl';
 
 import AdaptiveImage from "@/components/shared/AdaptiveImage";
 
@@ -20,6 +21,7 @@ interface ContactItemProps {
 
 const ContactItem: React.FC<ContactItemProps> = ({ icon, text, link='' }) => {
     const { copy, copied } = useCopy();
+    const t = useTranslations('Footer')
 
     if (!link) {
         return (
@@ -34,7 +36,7 @@ const ContactItem: React.FC<ContactItemProps> = ({ icon, text, link='' }) => {
 
                 <p className={style.footerText}>{text}</p>
 
-                {copied && <span className='copyText'>Скопировано!</span>}
+                {copied && <span className='copyText'>{t('Copy')}</span>}
             </div>
         )
     }

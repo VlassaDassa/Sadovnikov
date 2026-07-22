@@ -19,11 +19,12 @@ export interface IProjectStack {
     id: number,
     name: string,
     icon: string,
-    tooltip?: IStackTooltip
+    tooltip?: IStackTooltip,
 }
 
 export interface IFeatureItem {
     id: number,
+
     title: string,
     text: string,
     icon: string,
@@ -68,7 +69,8 @@ export interface IProject {
     teamType: string,
     numberTeam: number,
     name: string,
-    shortDescrition: string,
+
+    shortDescription: string,
     previewDescription: string,
     stack: IProjectStack[],
     keyFeatures: IFeatureItem[],
@@ -77,6 +79,7 @@ export interface IProject {
     commits: ICommit[],
     developmentTime: string,
     date: string,
+
     gitHubLink: string,
     demoLink: string,
 }
@@ -129,6 +132,7 @@ export interface WorkExperience {
 
 export interface AboutMe {
     birth: number,
+
     placeBirth: string,
     education: string,
     location: string,

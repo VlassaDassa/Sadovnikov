@@ -16,12 +16,12 @@ interface NotFoundProps {
 export default async function NotFound({
     params,
 }: NotFoundProps) {
+
     const {
         locale,
     } =  await params;
 
     const t = await getTranslations({ locale, namespace: 'NotFound'});
-
 
     return (
         <Error h1="404" h2={t('Title')} error={t('Description')} link="/" btn={false} />

@@ -32,7 +32,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ projects }) => {
             <Canvas>
                 {
                     projects.length === 0 ? 
-                        <p className={style.notFound}>PROJECTS NOT FOUND</p>
+                        <p className={style.notFound}>{t('Empty')}</p>
                     :
                     projects.map((project, index) => (
                         <ProjectItem key={project.id} project={project} index={index} />

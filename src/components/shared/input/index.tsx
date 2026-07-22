@@ -2,8 +2,10 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import { DatePicker, registerLocale } from 'react-datepicker';
+import { ru } from 'date-fns/locale/ru';
+import { enUS } from 'date-fns/locale/en-US';
+
 
 import Icon from '../icons/Icon';
 import Noize from '../Noize';
@@ -12,7 +14,12 @@ import { RootState } from '@/store';
 import { cssVars } from "@/styles/cssVariables";
 import { displayDate } from '@/lib/dates';
 
+import 'react-datepicker/dist/react-datepicker.css';
 import style from './index.module.scss';
+
+
+registerLocale('ru', ru);
+registerLocale('en', enUS);
 
 
 interface Icon {
@@ -35,6 +42,7 @@ interface InputProps {
     disabled?: boolean,
     readonly?: boolean,
     noize?: boolean,
+    lang?: 'ru' | 'en',
 
     datePickerDay?: boolean,
     datePicker?: boolean,
@@ -68,6 +76,8 @@ const Input: React.FC<InputProps> = ({
     
     noize=false,
 
+    lang='en',
+
     datePicker=false,
     datePickerChange,
     datePickerDay=false,
@@ -95,7 +105,7 @@ const Input: React.FC<InputProps> = ({
     const handleDatePicker = (date: Date | null) => {
         setDatePickerOpen(false);
         if (datePickerChange) {
-            const newDate = displayDate(date?.toISOString(), datePickerDay)
+            const newDate = displayDate(date?.toISOString(), datePickerDay, lang)
             datePickerChange(newDate)
         }
     };
@@ -240,6 +250,7 @@ const Input: React.FC<InputProps> = ({
                                 onChange={handleDatePicker}
                                 onClickOutside={() => setDatePickerOpen(false)}
                                 open={datePickerOpen}
+                                locale={lang}
                                 inline
                                 className={style.datePicker}
                             />

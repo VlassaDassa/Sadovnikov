@@ -75,7 +75,7 @@ const Contacts: React.FC= () => {
 
         // Проверка имени
         if (name.length < 5 || name.length >= 10) {
-            newErrors.name = 'Имя должно быть от 5 до 10 символов'
+            newErrors.name = t('ErrorName')
             isValid = false
         }
        
@@ -83,13 +83,13 @@ const Contacts: React.FC= () => {
         // Проверка email
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-            newErrors.email = 'Некорректный email'
+            newErrors.email = t('ErrorEmail')
             isValid = false
         }
         
         // Проверка сообщения
         if (message.length < 10 || message.length > 300) {
-            newErrors.message = 'Сообщение должно быть от 10 до 300 символов'
+            newErrors.message = t('ErrorMessage')
             isValid = false
         }
 
@@ -132,11 +132,11 @@ const Contacts: React.FC= () => {
         })
 
         if (!result.success) {
-            showMessage('error', 'Error on sending message', dispatch)
+            showMessage('error', t('ErrorSend'), dispatch)
             setBtnBehavior('default')
         }
         else {
-            showMessage('info', 'Message sent successfuly!', dispatch)
+            showMessage('info', t('SuccessSend'), dispatch)
             setBtnBehavior('disabled')
         }
         

@@ -5,6 +5,10 @@
     "portfolio": "portfolio"
   },
 
+  "Footer": {
+    "Copy": "Copied!"
+  },
+
   "Localization": {
     "ru": "Russian",
     "en": "English"
@@ -38,7 +42,8 @@
   },
 
   "Portfolio": {
-    "Title": "PORTFOLIO"
+    "Title": "PORTFOLIO",
+    "Empty": "PROJECTS NOT FOUND"
   },
 
   "Canvas": {
@@ -52,7 +57,12 @@
     "Email": "Email",
     "Message": "Message",
     "Send": "Send",
-    "Avatar": "I'm waiting for your messages"
+    "Avatar": "I'm waiting for your messages",
+    "ErrorName": "The name must be between 5 and 10 characters long.",
+    "ErrorEmail": "Incorrect email address",
+    "ErrorMessage": "The message should be between 10 and 300 characters.",
+    "ErrorSend": "Error when sending a message",
+    "SuccessSend": "The message has been sent successfully!"
   },
 
   "NotFound": {
@@ -79,6 +89,12 @@
   "ProjectStack": {
     "Title": "STACK",
     "Empty": "Stack not found"
+  },
+
+  "TeamType": {
+    "solo": "solo",
+    "duo": "duo",
+    "team": "team"
   },
 
 
