@@ -86,7 +86,7 @@ export default async function Project({ params }: ProjectPageProps) {
 			</AnimatedSection>
 
 			<AnimatedSection animation='fade-left'>
-				<ProjectStack data={[]} />
+				<ProjectStack data={project.stack || []} />
 			</AnimatedSection>
 
 			<AnimatedSection animation='fade-right'>

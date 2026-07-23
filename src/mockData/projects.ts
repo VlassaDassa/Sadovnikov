@@ -47,7 +47,7 @@ export const projects: IProject[] = [
         ],
         teamType: 'solo',
         name: 'SpecTechnologia1',
-        shortDescrition: 'Site-card + Admin panel',
+        shortDescription: 'Site-card + Admin panel',
         previewDescription: 'A modern corporate website for a technology company specializing in security systems and software solutions. Built with performance, accessibility and a clean user experience in mind',
         stack: [
             {
@@ -140,33 +140,43 @@ export const projects: IProject[] = [
         description: [
             {
                 id: 1,
-                title: 'Site',
+                title: 'PROJECT',
+                titleRu: 'ПРОЕКТ',
                 icon: 'text',
-                content: 'React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools. React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.'
+                content: 'React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools. React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.',
+                contentRu: 'React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты. React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты.'
             },
             {
                 id: 2,
                 title: 'WHY I STARTED',
+                titleRu: 'ПОЧЕМУ Я НАЧАЛ',
                 icon: 'rocket',
-                content: 'The project was developed over several months, including design, architecture, and optimization.'
+                content: 'The project was developed over several months, including design, architecture, and optimization.',
+                contentRu: 'Проект разрабатывался в течение нескольких месяцев, включая дизайн, архитектуру и оптимизацию.'
             },
             {
                 id: 3,
                 title: 'CHALLENGES & SOLUTIONS',
+                titleRu: 'СЛОЖНОСТИ И РЕШЕНИЯ',
                 icon: 'puzzle',
-                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.'
+                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.',
+                contentRu: 'Да, веб-сайт использует Next.js SSR, семантический HTML, мета-теги и структурированные данные для улучшения SEO.'
             },
             {
                 id: 4,
                 title: 'CONCLUSION',
+                titleRu: 'ЗАКЛЮЧЕНИЕ',
                 icon: 'flag',
-                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.'
+                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.',
+                contentRu: 'Да, веб-сайт использует Next.js SSR, семантический HTML, мета-теги и структурированные данные для улучшения SEO.'
             },
             {
                 id: 5,
                 title: 'FUTURE PLANS',
+                titleRu: 'ПЛАНЫ НА БУДУЩЕЕ',
                 icon: 'time',
-                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.'
+                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.',
+                contentRu: 'Да, веб-сайт использует Next.js SSR, семантический HTML, мета-теги и структурированные данные для улучшения SEO.'
             }
         ],
         metrics: [
@@ -212,25 +222,29 @@ export const projects: IProject[] = [
                 id: 1,
                 name: 'First commit',
                 date: 'June 28, 2026',
-                text: 'First initialization commit, start development project'
+                text: 'First initialization commit, start development project',
+                order: 1
             },
             {
                 id: 2,
                 name: 'Added “Header”',
                 date: 'June 23, 2026',
-                text: 'First initialization commit, start development project'
+                text: 'First initialization commit, start development project',
+                order: 2
             },
             {
                 id: 3,
                 name: 'Fix “Preview”',
                 date: 'June 22, 2026',
-                text: 'First initialization commit, start development project'
+                text: 'First initialization commit, start development project',
+                order: 3
             },
             {
                 id: 4,
                 name: 'Added “Contacts”, fix errors, animations',
                 date: 'June 21, 2026',
-                text: 'First initialization commit, start development project'
+                text: 'First initialization commit, start development project',
+                order: 4
             },
         ],
         date: 'June 28, 2026',
@@ -266,7 +280,7 @@ export const projects: IProject[] = [
         ],
         teamType: 'solo',
         name: 'SpecTechnologia2',
-        shortDescrition: 'Site-card + Admin panel',
+        shortDescription: 'Site-card + Admin panel',
         previewDescription: 'A modern corporate website for a technology company specializing in security systems and software solutions. Built with performance, accessibility and a clean user experience in mind',
         stack: [
             {
@@ -383,33 +397,43 @@ export const projects: IProject[] = [
         description: [
             {
                 id: 1,
-                title: 'Site',
+                title: 'PROJECT',
+                titleRu: 'ПРОЕКТ',
                 icon: 'text',
-                content: 'React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools. React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.'
+                content: 'React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools. React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.',
+                contentRu: 'React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты. React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты.'
             },
             {
                 id: 2,
                 title: 'WHY I STARTED',
+                titleRu: 'ПОЧЕМУ Я НАЧАЛ',
                 icon: 'rocket',
-                content: 'The project was developed over several months, including design, architecture, and optimization.'
+                content: 'The project was developed over several months, including design, architecture, and optimization.',
+                contentRu: 'Проект разрабатывался в течение нескольких месяцев, включая дизайн, архитектуру и оптимизацию.'
             },
             {
                 id: 3,
                 title: 'CHALLENGES & SOLUTIONS',
+                titleRu: 'СЛОЖНОСТИ И РЕШЕНИЯ',
                 icon: 'puzzle',
-                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.'
+                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.',
+                contentRu: 'Да, веб-сайт использует Next.js SSR, семантический HTML, мета-теги и структурированные данные для улучшения SEO.'
             },
             {
                 id: 4,
                 title: 'CONCLUSION',
+                titleRu: 'ЗАКЛЮЧЕНИЕ',
                 icon: 'flag',
-                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.'
+                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.',
+                contentRu: 'Да, веб-сайт использует Next.js SSR, семантический HTML, мета-теги и структурированные данные для улучшения SEO.'
             },
             {
                 id: 5,
                 title: 'FUTURE PLANS',
+                titleRu: 'ПЛАНЫ НА БУДУЩЕЕ',
                 icon: 'time',
-                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.'
+                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.',
+                contentRu: 'Да, веб-сайт использует Next.js SSR, семантический HTML, мета-теги и структурированные данные для улучшения SEO.'
             }
         ],
         metrics: [
@@ -455,25 +479,29 @@ export const projects: IProject[] = [
                 id: 1,
                 name: 'First commit',
                 date: 'June 28, 2026',
-                text: 'First initialization commit, start development project'
+                text: 'First initialization commit, start development project',
+                order: 1
             },
             {
                 id: 2,
                 name: 'Added “Header”',
                 date: 'June 23, 2026',
-                text: 'First initialization commit, start development project'
+                text: 'First initialization commit, start development project',
+                order: 2
             },
             {
                 id: 3,
                 name: 'Fix “Preview”',
                 date: 'June 22, 2026',
-                text: 'First initialization commit, start development project'
+                text: 'First initialization commit, start development project',
+                order: 3
             },
             {
                 id: 4,
                 name: 'Added “Contacts”, fix errors, animations',
                 date: 'June 21, 2026',
-                text: 'First initialization commit, start development project'
+                text: 'First initialization commit, start development project',
+                order: 4
             },
         ],
         date: 'June 28, 2026',
@@ -509,7 +537,7 @@ export const projects: IProject[] = [
         ],
         teamType: 'solo',
         name: 'SpecTechnologia3',
-        shortDescrition: 'Site-card + Admin panel',
+        shortDescription: 'Site-card + Admin panel',
         previewDescription: 'A modern corporate website for a technology company specializing in security systems and software solutions. Built with performance, accessibility and a clean user experience in mind',
         stack: [
             {
@@ -626,33 +654,43 @@ export const projects: IProject[] = [
         description: [
             {
                 id: 1,
-                title: 'Site',
+                title: 'PROJECT',
+                titleRu: 'ПРОЕКТ',
                 icon: 'text',
-                content: 'React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools. React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.'
+                content: 'React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools. React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.',
+                contentRu: 'React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты. React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты.'
             },
             {
                 id: 2,
                 title: 'WHY I STARTED',
+                titleRu: 'ПОЧЕМУ Я НАЧАЛ',
                 icon: 'rocket',
-                content: 'The project was developed over several months, including design, architecture, and optimization.'
+                content: 'The project was developed over several months, including design, architecture, and optimization.',
+                contentRu: 'Проект разрабатывался в течение нескольких месяцев, включая дизайн, архитектуру и оптимизацию.'
             },
             {
                 id: 3,
                 title: 'CHALLENGES & SOLUTIONS',
+                titleRu: 'СЛОЖНОСТИ И РЕШЕНИЯ',
                 icon: 'puzzle',
-                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.'
+                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.',
+                contentRu: 'Да, веб-сайт использует Next.js SSR, семантический HTML, мета-теги и структурированные данные для улучшения SEO.'
             },
             {
                 id: 4,
                 title: 'CONCLUSION',
+                titleRu: 'ЗАКЛЮЧЕНИЕ',
                 icon: 'flag',
-                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.'
+                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.',
+                contentRu: 'Да, веб-сайт использует Next.js SSR, семантический HTML, мета-теги и структурированные данные для улучшения SEO.'
             },
             {
                 id: 5,
                 title: 'FUTURE PLANS',
+                titleRu: 'ПЛАНЫ НА БУДУЩЕЕ',
                 icon: 'time',
-                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.'
+                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.',
+                contentRu: 'Да, веб-сайт использует Next.js SSR, семантический HTML, мета-теги и структурированные данные для улучшения SEO.'
             }
         ],
         metrics: [
@@ -698,25 +736,29 @@ export const projects: IProject[] = [
                 id: 1,
                 name: 'First commit',
                 date: 'June 28, 2026',
-                text: 'First initialization commit, start development project'
+                text: 'First initialization commit, start development project',
+                order: 1
             },
             {
                 id: 2,
                 name: 'Added “Header”',
                 date: 'June 23, 2026',
-                text: 'First initialization commit, start development project'
+                text: 'First initialization commit, start development project',
+                order: 2
             },
             {
                 id: 3,
                 name: 'Fix “Preview”',
                 date: 'June 22, 2026',
-                text: 'First initialization commit, start development project'
+                text: 'First initialization commit, start development project',
+                order: 3
             },
             {
                 id: 4,
                 name: 'Added “Contacts”, fix errors, animations',
                 date: 'June 21, 2026',
-                text: 'First initialization commit, start development project'
+                text: 'First initialization commit, start development project',
+                order: 4
             },
         ],
         date: 'June 28, 2026',
@@ -752,7 +794,7 @@ export const projects: IProject[] = [
         ],
         teamType: 'solo',
         name: 'SpecTechnologia4',
-        shortDescrition: 'Site-card + Admin panel',
+        shortDescription: 'Site-card + Admin panel',
         previewDescription: 'A modern corporate website for a technology company specializing in security systems and software solutions. Built with performance, accessibility and a clean user experience in mind',
         stack: [
             {
@@ -869,33 +911,43 @@ export const projects: IProject[] = [
         description: [
             {
                 id: 1,
-                title: 'Site',
+                title: 'PROJECT',
+                titleRu: 'ПРОЕКТ',
                 icon: 'text',
-                content: 'React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools. React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.'
+                content: 'React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools. React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.',
+                contentRu: 'React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты. React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты.'
             },
             {
                 id: 2,
                 title: 'WHY I STARTED',
+                titleRu: 'ПОЧЕМУ Я НАЧАЛ',
                 icon: 'rocket',
-                content: 'The project was developed over several months, including design, architecture, and optimization.'
+                content: 'The project was developed over several months, including design, architecture, and optimization.',
+                contentRu: 'Проект разрабатывался в течение нескольких месяцев, включая дизайн, архитектуру и оптимизацию.'
             },
             {
                 id: 3,
                 title: 'CHALLENGES & SOLUTIONS',
+                titleRu: 'СЛОЖНОСТИ И РЕШЕНИЯ',
                 icon: 'puzzle',
-                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.'
+                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.',
+                contentRu: 'Да, веб-сайт использует Next.js SSR, семантический HTML, мета-теги и структурированные данные для улучшения SEO.'
             },
             {
                 id: 4,
                 title: 'CONCLUSION',
+                titleRu: 'ЗАКЛЮЧЕНИЕ',
                 icon: 'flag',
-                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.'
+                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.',
+                contentRu: 'Да, веб-сайт использует Next.js SSR, семантический HTML, мета-теги и структурированные данные для улучшения SEO.'
             },
             {
                 id: 5,
                 title: 'FUTURE PLANS',
+                titleRu: 'ПЛАНЫ НА БУДУЩЕЕ',
                 icon: 'time',
-                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.'
+                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.',
+                contentRu: 'Да, веб-сайт использует Next.js SSR, семантический HTML, мета-теги и структурированные данные для улучшения SEO.'
             }
         ],
         metrics: [
@@ -941,25 +993,29 @@ export const projects: IProject[] = [
                 id: 1,
                 name: 'First commit',
                 date: 'June 28, 2026',
-                text: 'First initialization commit, start development project'
+                text: 'First initialization commit, start development project',
+                order: 1
             },
             {
                 id: 2,
                 name: 'Added “Header”',
                 date: 'June 23, 2026',
-                text: 'First initialization commit, start development project'
+                text: 'First initialization commit, start development project',
+                order: 2
             },
             {
                 id: 3,
                 name: 'Fix “Preview”',
                 date: 'June 22, 2026',
-                text: 'First initialization commit, start development project'
+                text: 'First initialization commit, start development project',
+                order: 3
             },
             {
                 id: 4,
                 name: 'Added “Contacts”, fix errors, animations',
                 date: 'June 21, 2026',
-                text: 'First initialization commit, start development project'
+                text: 'First initialization commit, start development project',
+                order: 4
             },
         ],
         date: 'June 28, 2026',
@@ -995,7 +1051,7 @@ export const projects: IProject[] = [
         ],
         teamType: 'solo',
         name: 'SpecTechnologia5',
-        shortDescrition: 'Site-card + Admin panel',
+        shortDescription: 'Site-card + Admin panel',
         previewDescription: 'A modern corporate website for a technology company specializing in security systems and software solutions. Built with performance, accessibility and a clean user experience in mind',
         stack: [
             {
@@ -1112,33 +1168,43 @@ export const projects: IProject[] = [
         description: [
             {
                 id: 1,
-                title: 'Site',
+                title: 'PROJECT',
+                titleRu: 'ПРОЕКТ',
                 icon: 'text',
-                content: 'React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools. React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.'
+                content: 'React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools. React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.',
+                contentRu: 'React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты. React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты.'
             },
             {
                 id: 2,
                 title: 'WHY I STARTED',
+                titleRu: 'ПОЧЕМУ Я НАЧАЛ',
                 icon: 'rocket',
-                content: 'The project was developed over several months, including design, architecture, and optimization.'
+                content: 'The project was developed over several months, including design, architecture, and optimization.',
+                contentRu: 'Проект разрабатывался в течение нескольких месяцев, включая дизайн, архитектуру и оптимизацию.'
             },
             {
                 id: 3,
                 title: 'CHALLENGES & SOLUTIONS',
+                titleRu: 'СЛОЖНОСТИ И РЕШЕНИЯ',
                 icon: 'puzzle',
-                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.'
+                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.',
+                contentRu: 'Да, веб-сайт использует Next.js SSR, семантический HTML, мета-теги и структурированные данные для улучшения SEO.'
             },
             {
                 id: 4,
                 title: 'CONCLUSION',
+                titleRu: 'ЗАКЛЮЧЕНИЕ',
                 icon: 'flag',
-                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.'
+                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.',
+                contentRu: 'Да, веб-сайт использует Next.js SSR, семантический HTML, мета-теги и структурированные данные для улучшения SEO.'
             },
             {
                 id: 5,
                 title: 'FUTURE PLANS',
+                titleRu: 'ПЛАНЫ НА БУДУЩЕЕ',
                 icon: 'time',
-                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.'
+                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.',
+                contentRu: 'Да, веб-сайт использует Next.js SSR, семантический HTML, мета-теги и структурированные данные для улучшения SEO.'
             }
         ],
         metrics: [
@@ -1184,25 +1250,29 @@ export const projects: IProject[] = [
                 id: 1,
                 name: 'First commit',
                 date: 'June 28, 2026',
-                text: 'First initialization commit, start development project'
+                text: 'First initialization commit, start development project',
+                order: 1
             },
             {
                 id: 2,
                 name: 'Added “Header”',
                 date: 'June 23, 2026',
-                text: 'First initialization commit, start development project'
+                text: 'First initialization commit, start development project',
+                order: 2
             },
             {
                 id: 3,
                 name: 'Fix “Preview”',
                 date: 'June 22, 2026',
-                text: 'First initialization commit, start development project'
+                text: 'First initialization commit, start development project',
+                order: 3
             },
             {
                 id: 4,
                 name: 'Added “Contacts”, fix errors, animations',
                 date: 'June 21, 2026',
-                text: 'First initialization commit, start development project'
+                text: 'First initialization commit, start development project',
+                order: 4
             },
         ],
         date: 'June 28, 2026',
@@ -1238,7 +1308,7 @@ export const projects: IProject[] = [
         ],
         teamType: 'solo',
         name: 'SpecTechnologia6',
-        shortDescrition: 'Site-card + Admin panel',
+        shortDescription: 'Site-card + Admin panel',
         previewDescription: 'A modern corporate website for a technology company specializing in security systems and software solutions. Built with performance, accessibility and a clean user experience in mind',
         stack: [
             {
@@ -1355,33 +1425,43 @@ export const projects: IProject[] = [
         description: [
             {
                 id: 1,
-                title: 'Site',
+                title: 'PROJECT',
+                titleRu: 'ПРОЕКТ',
                 icon: 'text',
-                content: 'React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools. React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.'
+                content: 'React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools. React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.',
+                contentRu: 'React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты. React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты.'
             },
             {
                 id: 2,
                 title: 'WHY I STARTED',
+                titleRu: 'ПОЧЕМУ Я НАЧАЛ',
                 icon: 'rocket',
-                content: 'The project was developed over several months, including design, architecture, and optimization.'
+                content: 'The project was developed over several months, including design, architecture, and optimization.',
+                contentRu: 'Проект разрабатывался в течение нескольких месяцев, включая дизайн, архитектуру и оптимизацию.'
             },
             {
                 id: 3,
                 title: 'CHALLENGES & SOLUTIONS',
+                titleRu: 'СЛОЖНОСТИ И РЕШЕНИЯ',
                 icon: 'puzzle',
-                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.'
+                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.',
+                contentRu: 'Да, веб-сайт использует Next.js SSR, семантический HTML, мета-теги и структурированные данные для улучшения SEO.'
             },
             {
                 id: 4,
                 title: 'CONCLUSION',
+                titleRu: 'ЗАКЛЮЧЕНИЕ',
                 icon: 'flag',
-                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.'
+                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.',
+                contentRu: 'Да, веб-сайт использует Next.js SSR, семантический HTML, мета-теги и структурированные данные для улучшения SEO.'
             },
             {
                 id: 5,
                 title: 'FUTURE PLANS',
+                titleRu: 'ПЛАНЫ НА БУДУЩЕЕ',
                 icon: 'time',
-                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.'
+                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.',
+                contentRu: 'Да, веб-сайт использует Next.js SSR, семантический HTML, мета-теги и структурированные данные для улучшения SEO.'
             }
         ],
         metrics: [
@@ -1427,25 +1507,29 @@ export const projects: IProject[] = [
                 id: 1,
                 name: 'First commit',
                 date: 'June 28, 2026',
-                text: 'First initialization commit, start development project'
+                text: 'First initialization commit, start development project',
+                order: 1
             },
             {
                 id: 2,
                 name: 'Added “Header”',
                 date: 'June 23, 2026',
-                text: 'First initialization commit, start development project'
+                text: 'First initialization commit, start development project',
+                order: 2
             },
             {
                 id: 3,
                 name: 'Fix “Preview”',
                 date: 'June 22, 2026',
-                text: 'First initialization commit, start development project'
+                text: 'First initialization commit, start development project',
+                order: 3
             },
             {
                 id: 4,
                 name: 'Added “Contacts”, fix errors, animations',
                 date: 'June 21, 2026',
-                text: 'First initialization commit, start development project'
+                text: 'First initialization commit, start development project',
+                order: 4
             },
         ],
         date: 'June 28, 2026',
@@ -1481,7 +1565,7 @@ export const projects: IProject[] = [
         ],
         teamType: 'solo',
         name: 'SpecTechnologia7',
-        shortDescrition: 'Site-card + Admin panel',
+        shortDescription: 'Site-card + Admin panel',
         previewDescription: 'A modern corporate website for a technology company specializing in security systems and software solutions. Built with performance, accessibility and a clean user experience in mind',
         stack: [
             {
@@ -1598,33 +1682,43 @@ export const projects: IProject[] = [
         description: [
             {
                 id: 1,
-                title: 'Site',
+                title: 'PROJECT',
+                titleRu: 'ПРОЕКТ',
                 icon: 'text',
-                content: 'React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools. React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.'
+                content: 'React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools. React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper, and many other modern tools.',
+                contentRu: 'React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты. React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты.React, Next.js, TypeScript, SCSS, Redux Toolkit, Swiper и многие другие современные инструменты.'
             },
             {
                 id: 2,
                 title: 'WHY I STARTED',
+                titleRu: 'ПОЧЕМУ Я НАЧАЛ',
                 icon: 'rocket',
-                content: 'The project was developed over several months, including design, architecture, and optimization.'
+                content: 'The project was developed over several months, including design, architecture, and optimization.',
+                contentRu: 'Проект разрабатывался в течение нескольких месяцев, включая дизайн, архитектуру и оптимизацию.'
             },
             {
                 id: 3,
                 title: 'CHALLENGES & SOLUTIONS',
+                titleRu: 'СЛОЖНОСТИ И РЕШЕНИЯ',
                 icon: 'puzzle',
-                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.'
+                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.',
+                contentRu: 'Да, веб-сайт использует Next.js SSR, семантический HTML, мета-теги и структурированные данные для улучшения SEO.'
             },
             {
                 id: 4,
                 title: 'CONCLUSION',
+                titleRu: 'ЗАКЛЮЧЕНИЕ',
                 icon: 'flag',
-                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.'
+                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.',
+                contentRu: 'Да, веб-сайт использует Next.js SSR, семантический HTML, мета-теги и структурированные данные для улучшения SEO.'
             },
             {
                 id: 5,
                 title: 'FUTURE PLANS',
+                titleRu: 'ПЛАНЫ НА БУДУЩЕЕ',
                 icon: 'time',
-                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.'
+                content: 'Yes, the website uses Next.js SSR, semantic HTML, meta tags, and structured data for better SEO.',
+                contentRu: 'Да, веб-сайт использует Next.js SSR, семантический HTML, мета-теги и структурированные данные для улучшения SEO.'
             }
         ],
         metrics: [
@@ -1670,25 +1764,29 @@ export const projects: IProject[] = [
                 id: 1,
                 name: 'First commit',
                 date: 'June 28, 2026',
-                text: 'First initialization commit, start development project'
+                text: 'First initialization commit, start development project',
+                order: 1
             },
             {
                 id: 2,
                 name: 'Added “Header”',
                 date: 'June 23, 2026',
-                text: 'First initialization commit, start development project'
+                text: 'First initialization commit, start development project',
+                order: 2
             },
             {
                 id: 3,
                 name: 'Fix “Preview”',
                 date: 'June 22, 2026',
-                text: 'First initialization commit, start development project'
+                text: 'First initialization commit, start development project',
+                order: 3
             },
             {
                 id: 4,
                 name: 'Added “Contacts”, fix errors, animations',
                 date: 'June 21, 2026',
-                text: 'First initialization commit, start development project'
+                text: 'First initialization commit, start development project',
+                order: 4
             },
         ],
         date: 'June 28, 2026',

@@ -48,7 +48,7 @@ const StackItem: React.FC<StackItemProps> = ({ item, setData, setIsSaving }) => 
 
     const handleChangeTooltip = (
         stackId: number,
-        field: 'title' | 'text',
+        field: 'title' | 'text' | 'titleRu' | 'textRu',
         value: string
     ) => {
         setData((prev: IProject) => ({
@@ -59,7 +59,7 @@ const StackItem: React.FC<StackItemProps> = ({ item, setData, setIsSaving }) => 
                         ...el,
                         tooltip: el.tooltip
                             ? { ...el.tooltip, [field]: value }
-                            : { id: Date.now(), title: '', text: '', [field]: value },
+                            : { id: Date.now(), title: '', titleRu: '', text: '', textRu: '', [field]: value },
                     }
                     : el
             ),
@@ -92,7 +92,7 @@ const StackItem: React.FC<StackItemProps> = ({ item, setData, setIsSaving }) => 
                     icon={item.icon}
                     onIconUpload={(path: string) => handleIconUpload(path, item.id)}
                 />
-
+                
                 <Input 
                     name={item.name}
                     placeholder='Text...'
@@ -106,36 +106,66 @@ const StackItem: React.FC<StackItemProps> = ({ item, setData, setIsSaving }) => 
                     onChange={(e) => handleChangeStack(item.id, 'name', e.target.value)}
                 />
 
-                <Input 
-                    name={item.name + '_title'}
-                    placeholder='Text...'
-                    additionalClass={styles.input}
-                    type='text'
-                    iconPosition='noIcon'
-                    value={item?.tooltip?.title}
-                    variant='admin'
-                    adminLabel='withLabel'
-                    label='Title'
-                    onChange={(e) => handleChangeTooltip(item.id, 'title', e.target.value)}
-                />
+                <div className={styles.inputsGroup}>
+                    <Input 
+                        name={item.name + '_title'}
+                        placeholder='Text...'
+                        additionalClass={styles.input}
+                        type='text'
+                        iconPosition='noIcon'
+                        value={item?.tooltip?.title}
+                        variant='admin'
+                        adminLabel='withLabel'
+                        label='Title'
+                        onChange={(e) => handleChangeTooltip(item.id, 'title', e.target.value)}
+                    />
 
-                <Input 
-                    name={item.name + '_description'}
-                    placeholder='Text...'
-                    additionalClass={styles.textarea}
-                    type='textarea'
-                    iconPosition='noIcon'
-                    value={item?.tooltip?.text}
-                    variant='admin'
-                    adminLabel='withLabel'
-                    label='Description'
-                    counter={true}
-                    maxCounter={400}
-                    maxLen={400}
-                    onChange={(e) => handleChangeTooltip(item.id, 'text', e.target.value)}
-                />
+                    <Input 
+                        name={item.name + '_titleRu'}
+                        placeholder='Text on russian...'
+                        additionalClass={styles.input}
+                        type='text'
+                        iconPosition='noIcon'
+                        value={item?.tooltip?.titleRu || ''}
+                        variant='admin'
+                        adminLabel='withoutLabel'
+                        onChange={(e) => handleChangeTooltip(item.id, 'titleRu', e.target.value)}
+                    />
+                </div>
 
                 
+                <div className={styles.inputsGroup}>
+                    <Input 
+                        name={item.name + '_description'}
+                        placeholder='Text...'
+                        additionalClass={styles.textarea}
+                        type='textarea'
+                        iconPosition='noIcon'
+                        value={item?.tooltip?.text}
+                        variant='admin'
+                        adminLabel='withLabel'
+                        label='Description'
+                        counter={true}
+                        maxCounter={400}
+                        maxLen={400}
+                        onChange={(e) => handleChangeTooltip(item.id, 'text', e.target.value)}
+                    />
+
+                    <Input 
+                        name={item.name + '_descriptionRu'}
+                        placeholder='Text on russian...'
+                        additionalClass={styles.textarea}
+                        type='textarea'
+                        iconPosition='noIcon'
+                        value={item?.tooltip?.textRu || ''}
+                        variant='admin'
+                        adminLabel='withoutLabel'
+                        counter={true}
+                        maxCounter={400}
+                        maxLen={400}
+                        onChange={(e) => handleChangeTooltip(item.id, 'textRu', e.target.value)}
+                    />
+                </div>
             </div>
 
             <Button
@@ -175,7 +205,9 @@ const EditProjectStackModal: React.FC<EditProjectProps> = ({ project, setData, s
                 tooltip: {
                     id: Date.now() + 1,
                     title: 'Why was this technology chosen?',
+                    titleRu: 'Why was this technology chosen?',
                     text: '',
+                    textRu: '',
                 },
             };
 

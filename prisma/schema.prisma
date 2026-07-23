@@ -59,7 +59,6 @@ model StackItem {
   icon      String
 
   tooltip   Json? // { title, text }
-  tooltipRu Json? // { title, text }
 }
 
 model KeyFeature {

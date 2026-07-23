@@ -19,13 +19,16 @@ import styles from './index.module.scss';
 const Description: React.FC<EditProjectProps> = ({ project, setData, setIsSaving }) => {
     const handleChangeDescription= (
         descId: number,
-        value: string
+        value: string,
+        ru?: boolean
     ) => {
+        const field = ru ? 'contentRu': 'content' 
+
         setData((prev: IProject) => ({
             ...prev,
             description: prev.description.map(item =>
                 item.id === descId
-                    ? { ...item, content: value }
+                    ? { ...item, [field]: value }
                     : item
             ),
         }));
@@ -57,21 +60,39 @@ const Description: React.FC<EditProjectProps> = ({ project, setData, setIsSaving
                                 </div>
                                 <h3 className={styles.itemTitle}>{item.title}</h3>
                             </div>
-                        
-                            <Input 
-                                placeholder='Text...'
-                                name={item.title}
-                                type='textarea'
-                                value={item.content}
-                                iconPosition='noIcon'
-                                additionalClass={styles.texarea}
-                                adminLabel='withoutLabel'
-                                maxLen={300}
-                                variant='admin'
-                                counter={true}
-                                maxCounter={300}
-                                onChange={(e) => handleChangeDescription(item.id, e.target.value)}
-                            />
+
+                            <div className={styles.inputsGroup}>
+                                <Input 
+                                    placeholder='Text...'
+                                    name={item.title}
+                                    type='textarea'
+                                    value={item.content}
+                                    iconPosition='noIcon'
+                                    additionalClass={styles.texarea}
+                                    adminLabel='withoutLabel'
+                                    maxLen={300}
+                                    variant='admin'
+                                    counter={true}
+                                    maxCounter={300}
+                                    onChange={(e) => handleChangeDescription(item.id, e.target.value)}
+                                />
+
+                                <Input 
+                                    placeholder='Text on russian...'
+                                    name={item.title + 'Ru'}
+                                    type='textarea'
+                                    value={item.contentRu}
+                                    iconPosition='noIcon'
+                                    additionalClass={styles.texarea}
+                                    adminLabel='withoutLabel'
+                                    maxLen={300}
+                                    variant='admin'
+                                    counter={true}
+                                    maxCounter={300}
+                                    onChange={(e) => handleChangeDescription(item.id, e.target.value, true)}
+                                />
+                            </div>
+                            
                         </div>
                     ))
                 }

@@ -134,8 +134,8 @@ const RecentProjects: React.FC<RecentProjectsProps> = ({ projects }) => {
             description: [
                 {
                     id: 1,
-                    title: 'Site',
-                    titleRu: 'Сайт',
+                    title: 'PROJECT',
+                    titleRu: 'ПРОЕКТ',
                     icon: 'text',
                     content: '',
                     contentRu: ''
@@ -143,7 +143,7 @@ const RecentProjects: React.FC<RecentProjectsProps> = ({ projects }) => {
                 {
                     id: 2,
                     title: 'WHY I STARTED',
-                    titleRu: '',
+                    titleRu: 'ПОЧЕМУ Я НАЧАЛ',
                     icon: 'rocket',
                     content: '',
                     contentRu: ''
@@ -151,7 +151,7 @@ const RecentProjects: React.FC<RecentProjectsProps> = ({ projects }) => {
                 {
                     id: 3,
                     title: 'CHALLENGES & SOLUTIONS',
-                    titleRu: '',
+                    titleRu: 'СЛОЖНОСТИ И РЕШЕНИЯ',
                     icon: 'puzzle',
                     content: '',
                     contentRu: ''
@@ -159,7 +159,7 @@ const RecentProjects: React.FC<RecentProjectsProps> = ({ projects }) => {
                 {
                     id: 4,
                     title: 'CONCLUSION',
-                    titleRu: '',
+                    titleRu: 'ЗАКЛЮЧЕНИЕ',
                     icon: 'flag',
                     content: '',
                     contentRu: ''
@@ -167,7 +167,7 @@ const RecentProjects: React.FC<RecentProjectsProps> = ({ projects }) => {
                 {
                     id: 5,
                     title: 'FUTURE PLANS',
-                    titleRu: '',
+                    titleRu: 'ПЛАНЫ НА БУДУЩЕЕ',
                     icon: 'time',
                     content: '',
                     contentRu: ''

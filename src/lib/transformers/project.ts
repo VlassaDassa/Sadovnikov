@@ -10,18 +10,79 @@ import { IProject, IStackTooltip } from '@/interfaces/general';
 
 
 export function transformTooltip(data: unknown): IStackTooltip | null {
-    if (!data || typeof data !== 'object') return null;
-    const obj = data as Record<string, unknown>;
-    if (typeof obj.id === 'number' && typeof obj.title === 'string' && typeof obj.text === 'string') {
-        return {
-            id: obj.id,
-            title: obj.title,
-            text: obj.text,
-        };
+    if (!data || typeof data !== 'object') {
+        return null
     }
-    return null;
+
+    const obj = data as Record<string, unknown>
+
+    if (
+        typeof obj.id !== 'number' ||
+        typeof obj.title !== 'string' ||
+        typeof obj.text !== 'string'
+    ) {
+        return null
+    }
+
+    return {
+        id: obj.id,
+        title: obj.title,
+        titleRu: typeof obj.titleRu === 'string' ? obj.titleRu : '',
+        text: obj.text,
+        textRu: typeof obj.textRu === 'string' ? obj.textRu : '',
+    }
 }
 
+export function transformRawTooltip(data: unknown): IStackTooltip | null {
+    if (!data || typeof data !== 'object') {
+        return null
+    }
+
+    const obj = data as Record<string, unknown>
+
+    if (
+        typeof obj.id !== 'number' ||
+        typeof obj.title !== 'string' ||
+        typeof obj.text !== 'string'
+    ) {
+        return null
+    }
+
+    return {
+        id: obj.id,
+        title: obj.title,
+        titleRu: typeof obj.titleRu === 'string' ? obj.titleRu : '',
+        text: obj.text,
+        textRu: typeof obj.textRu === 'string' ? obj.textRu : '',
+    }
+}
+
+export function transformLocalizedTooltip(
+    data: unknown,
+    locale: AppLocale
+): IStackTooltip | null {
+    const tooltip = transformRawTooltip(data)
+
+    if (!tooltip) {
+        return null
+    }
+
+    return {
+        id: tooltip.id,
+        title: getLocalizedText(
+            locale,
+            tooltip.title,
+            tooltip.titleRu
+        ),
+        titleRu: tooltip.titleRu,
+        text: getLocalizedText(
+            locale,
+            tooltip.text,
+            tooltip.textRu
+        ),
+        textRu: tooltip.textRu,
+    }
+}
 
 type PrismaProject = Prisma.ProjectGetPayload<{
     include: {
@@ -34,7 +95,7 @@ type PrismaProject = Prisma.ProjectGetPayload<{
     };
 }>;
 
-export function transformProject(project: PrismaProject, locale: AppLocale): IProject {
+export function transformProject(project: PrismaProject, locale: AppLocale='en'): IProject {
     return {
         id: project.id,
         category: project.category,
@@ -93,21 +154,15 @@ export function transformProject(project: PrismaProject, locale: AppLocale): IPr
             photo: f.photo,
         })) || [],
 
-        stack: project.stack.map(item => {
-            const englishTooltip = transformTooltip(item.tooltip);
-            const russianTooltip = transformTooltip(item.tooltipRu);
-
-            const selectedTooltip = locale === 'ru' && russianTooltip
-                ? russianTooltip
-                : englishTooltip;
-
-            return {
-                id: item.id,
-                name: item.name,
-                icon: item.icon,
-                tooltip: selectedTooltip ?? undefined,
-            };
-        }),
+        stack: project.stack.map(item => ({
+            id: item.id,
+            name: item.name,
+            icon: item.icon,
+            tooltip: transformLocalizedTooltip(
+                item.tooltip,
+                locale
+            ) ?? undefined,
+        })),
 
         description: project.description.map(desc => ({
             id: desc.id,
@@ -153,6 +208,7 @@ export function transformProject(project: PrismaProject, locale: AppLocale): IPr
             name: c.name,
             date: c.date,
             text: c.text,
+            order: c.order
         })),
     };
 }
@@ -188,10 +244,10 @@ export function transformRawProject(project: PrismaProject): IProject {
 
         keyFeatures: project.keyFeatures?.map(f => ({
             id: f.id,
-            title: f.title,
+            title: f.title || '',
             titleRu: f.titleRu || '',
 
-            text: f.text,
+            text: f.text || '',
             textRu: f.textRu || '',
 
             icon: f.icon,
@@ -202,8 +258,7 @@ export function transformRawProject(project: PrismaProject): IProject {
             id: item.id,
             name: item.name,
             icon: item.icon,
-            tooltip: transformTooltip(item.tooltip) ?? undefined,
-            tooltipRu: transformTooltip(item.tooltipRu) ?? undefined
+            tooltip: transformRawTooltip(item.tooltip) ?? undefined,
         })),
 
         description: project.description.map(desc => ({
@@ -238,6 +293,7 @@ export function transformRawProject(project: PrismaProject): IProject {
             name: c.name,
             date: c.date,
             text: c.text,
+            order: c.order
         })),
     };
 }

@@ -51,7 +51,7 @@ const Main: React.FC = async () => {
             }
         })
 
-        projects = rawProjects.map(transformProject);
+        projects = rawProjects.map((proj) => transformProject(proj));
         aboutMe = rawAboutMe ? transformAboutMe(rawAboutMe, locale) : null;
         skills = await prisma.skill.findMany();
         stack = await prisma.stack.findMany();

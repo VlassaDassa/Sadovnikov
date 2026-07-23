@@ -12,7 +12,9 @@ export interface IconItem {
 export interface IStackTooltip {
     id: number,
     title: string,
+    titleRu?: string,
     text: string
+    textRu?: string
 }
 
 export interface IProjectStack {
@@ -20,7 +22,6 @@ export interface IProjectStack {
     name: string,
     icon: string,
     tooltip?: IStackTooltip,
-    tooltipRu?: IStackTooltip,
 }
 
 export interface IFeatureItem {
@@ -55,7 +56,7 @@ export interface IMertics {
     titleRu?: string,
 
     text: string,
-    textRu: string,
+    textRu?: string,
 
     current: string | number;
     max: number,
@@ -66,7 +67,8 @@ export interface ICommit {
     id: number,
     name: string,
     date: string,
-    text: string
+    text: string,
+    order: number
 }
 
 export interface IImages {

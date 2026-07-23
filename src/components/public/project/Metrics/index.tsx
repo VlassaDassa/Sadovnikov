@@ -13,7 +13,6 @@ interface MetricsProps {
     data: IMertics[]
 }
 
-
 const Metrics: React.FC<MetricsProps> = ({ data }) => {
     const t = useTranslations('Metrics')
 

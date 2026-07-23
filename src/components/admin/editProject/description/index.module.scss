@@ -52,3 +52,9 @@
     @extend .line-height-1_5x;
     min-height: 200px;
 }
+
+.inputsGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}

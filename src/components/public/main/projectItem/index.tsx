@@ -24,7 +24,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({ project, index=1 }) => {
                 <div className={style.projectContentContainer}>
                     <div className={style.projectText}>
                         <p className={style.projectName}>{project.name}</p>
-                        <p className={style.projectDescription}>{project.shortDescrition}</p>
+                        <p className={style.projectDescription}>{project.shortDescription}</p>
                     </div>
 
                     <div className={style.projectStack}>

@@ -45,7 +45,6 @@ export async function createProject(projectData: IProject) {
                         name: item.name,
                         icon: item.icon,
                         tooltip: item.tooltip ? JSON.parse(JSON.stringify(item.tooltip)) : null,
-                        tooltipRu: item.tooltip ? JSON.parse(JSON.stringify(item.tooltipRu)) : null,
                     })),
                 },
 
@@ -125,6 +124,7 @@ export async function updateProject(projectData: IProject) {
         const projectId = projectData.id
 
         const updatedProject = await prisma.$transaction(async (tx) => {
+
             
             // Обновление основных полей
             await tx.project.update({
@@ -184,7 +184,9 @@ export async function updateProject(projectData: IProject) {
                     data: projectData.keyFeatures.map(feature => ({
                         projectId,
                         title: feature.title,
+                        titleRu: feature.titleRu,
                         text: feature.text,
+                        textRu: feature.textRu,
                         icon: feature.icon,
                         photo: feature.photo,
                     }))
@@ -198,8 +200,10 @@ export async function updateProject(projectData: IProject) {
                     data: projectData.description.map(desc => ({
                         projectId,
                         title: desc.title,
+                        titleRu: desc.titleRu,
                         icon: desc.icon,
-                        content: desc.content
+                        content: desc.content,
+                        contentRu: desc.contentRu
                     }))
                 })
             };

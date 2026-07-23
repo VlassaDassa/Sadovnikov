@@ -78,7 +78,7 @@ const Accordion: React.FC<AccordionProps> = ({ items, allowMultiple=true }) => {
                     >
                         <p className={styles.accordionInner}>
                             {
-                                item.content='' === '' ? t('NoContent') : item.content
+                                item.content === '' ? t('NoContent') : item.content
                             }
                         </p>
                     </div>

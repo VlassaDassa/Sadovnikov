@@ -60,9 +60,7 @@ const Admin: React.FC = async () => {
     stack = stackResult;
     footer = footerResult;
     analytics = analyticsResult;
-    recentProjects = rawRecentProjects.map(
-        transformProject,
-    );
+    recentProjects = rawRecentProjects.map((proj) => transformProject(proj));
     } catch (error) {
         const errorMessage =
             error instanceof Error

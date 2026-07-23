@@ -54,7 +54,6 @@ const ClientPageWrapper:
     const router = useRouter()
     const dispatch = useDispatch()
 
-
     const debouncedData = useDebounce(data, 1000)
 
     const saveProject = async () => {
