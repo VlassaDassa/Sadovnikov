@@ -115,11 +115,7 @@ export function transformProject(project: PrismaProject, locale: AppLocale='en')
             project.previewDescriptionRu
         ),
 
-        date: getLocalizedText(
-            locale,
-            project.date,
-            project.dateRu
-        ),
+        date: project.date,
 
         developmentTime: getLocalizedText(
             locale,
@@ -213,7 +209,6 @@ export function transformProject(project: PrismaProject, locale: AppLocale='en')
             date: getLocalizedText(
                 locale,
                 commit.date,
-                commit.dateRu
             ),
             text: getLocalizedText(
                 locale,
@@ -238,7 +233,6 @@ export function transformRawProject(project: PrismaProject): IProject {
         previewDescriptionRu: project.previewDescriptionRu || '',
 
         date: project.date,
-        dateRu: project.dateRu || '',
 
         developmentTime: project.developmentTime,
         developmentTimeRu: project.developmentTimeRu || '',

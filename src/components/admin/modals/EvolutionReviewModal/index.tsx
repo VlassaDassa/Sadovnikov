@@ -8,6 +8,7 @@ import Input from '@/components/shared/input';
 import ModalWrapper from '@/components/admin/modals/modalWrapper';
 import Button from '@/components/shared/button/Button';
 
+import { capitalize } from "@/lib/textFormat";
 import { publishEvolution, saveEvolutionDraft } from "@/app/actions/evolution";
 import type { IEvolutionDraftItem } from "@/interfaces/evolution";
 
@@ -575,7 +576,7 @@ const EvolutionReviewModal: React.FC<EvolutionReviewModalProps> = ({
                                                 <Input
                                                     name={`date-ru-${item.id}`}
                                                     placeholder='Date...'
-                                                    value={item.dateRu}
+                                                    value={capitalize(item.dateRu)}
                                                     variant='admin'
                                                     iconPosition='noIcon'
                                                     adminLabel='withLabel'

@@ -105,7 +105,6 @@ export interface IProject {
     developmentTimeRu?: string,
 
     date: string,
-    dateRu?: string,
 
     gitHubLink: string,
     demoLink: string,

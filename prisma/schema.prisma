@@ -19,7 +19,6 @@ model Project {
   previewDescriptionRu String?
 
   date   String
-  dateRu String?
 
   developmentTime   String
   developmentTimeRu String?

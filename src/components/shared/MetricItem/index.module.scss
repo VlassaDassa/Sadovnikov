@@ -62,6 +62,7 @@
 
 .metricText {
     @extend .body-16-magra-bold;
+    line-height: $leading-tight;
     color: $neutral_400;
 }
 
