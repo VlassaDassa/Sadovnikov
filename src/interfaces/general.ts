@@ -66,8 +66,11 @@ export interface IMertics {
 export interface ICommit {
     id: number,
     name: string,
+    nameRu?: string,
     date: string,
+    dateRu?: string,
     text: string,
+    textRu?: string,
     order: number
 }
 

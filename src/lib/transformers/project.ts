@@ -203,12 +203,24 @@ export function transformProject(project: PrismaProject, locale: AppLocale='en')
             type: m.type as 'score' | 'time',
         })),
 
-        commits: project.commits.map(c => ({
-            id: c.id,
-            name: c.name,
-            date: c.date,
-            text: c.text,
-            order: c.order
+        commits: project.commits.map((commit) => ({
+            id: commit.id,
+            name: getLocalizedText(
+                locale,
+                commit.name,
+                commit.nameRu
+            ),
+            date: getLocalizedText(
+                locale,
+                commit.date,
+                commit.dateRu
+            ),
+            text: getLocalizedText(
+                locale,
+                commit.text,
+                commit.textRu
+            ),
+            order: commit.order
         })),
     };
 }
@@ -288,12 +300,15 @@ export function transformRawProject(project: PrismaProject): IProject {
             type: m.type as 'score' | 'time',
         })),
 
-        commits: project.commits.map(c => ({
-            id: c.id,
-            name: c.name,
-            date: c.date,
-            text: c.text,
-            order: c.order
+        commits: project.commits.map((commit) => ({
+            id: commit.id,
+            name: commit.name,
+            nameRu: commit.nameRu ?? '',
+            date: commit.date,
+            dateRu: commit.dateRu ?? '',
+            text: commit.text,
+            textRu: commit.textRu ?? '',
+            order: commit.order
         })),
     };
 }

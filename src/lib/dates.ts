@@ -1,3 +1,5 @@
+import { capitalize } from "./textFormat";
+
 export const parseDate = (dateString: string | undefined): Date | null => {
         if (!dateString) return null;
         
@@ -19,10 +21,7 @@ export const parseDate = (dateString: string | undefined): Date | null => {
 
 export const displayDate = (dateString: string | undefined, day?: boolean, lang: string = 'en'): string => {
         const curLang = lang === "en" ? "en-US" : "ru-RU"
-        function capitalize(str: string): string {
-            if (!str) return '';
-            return str.charAt(0).toUpperCase() + str.slice(1);
-        }
+        
 
         if (!dateString) return '';
         if (dateString.toUpperCase() === 'NOW') return 'Now';

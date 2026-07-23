@@ -226,17 +226,24 @@ export async function updateProject(projectData: IProject) {
             };
 
             // Обновление commits
-            await tx.commit.deleteMany({ where: { projectId } })
-            if (projectData.commits.length > 0) {
-                await tx.commit.createMany({
-                    data: projectData.commits.map(commit => ({
+            await tx.commit.createMany({
+                data: projectData.commits.map(
+                    (commit, index) => ({
                         projectId,
+
                         name: commit.name,
+                        nameRu: commit.nameRu || null,
+
                         date: commit.date,
-                        text: commit.text
-                    }))
-                })
-            }
+                        dateRu: commit.dateRu || null,
+
+                        text: commit.text,
+                        textRu: commit.textRu || null,
+
+                        order: index,
+                    })
+                ),
+            })
 
             return await tx.project.findUnique({
                 where: { id: projectId },

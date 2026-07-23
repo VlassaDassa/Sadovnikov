@@ -1,84 +1,77 @@
-import { z } from 'zod';
+import { z } from 'zod'
 
-export const evolutionDraftItemSchema =
-    z.object({
+const milestoneNameSchema = z
+    .string()
+    .trim()
+    .min(3)
+    .max(70)
+
+const milestoneDateSchema = z
+    .string()
+    .trim()
+    .min(1)
+    .max(40)
+
+const milestoneTextSchema = z
+    .string()
+    .trim()
+    .min(10)
+    .max(300)
+
+const sourceShaSchema = z
+    .string()
+    .trim()
+    .min(7)
+    .max(64)
+
+export const evolutionDraftItemSchema = z
+    .object({
         id: z
             .string()
             .trim()
             .min(1)
             .max(100),
 
-        name: z
-            .string()
-            .trim()
-            .min(3)
-            .max(70),
+        name: milestoneNameSchema,
+        nameRu: milestoneNameSchema,
 
-        date: z
-            .string()
-            .trim()
-            .min(1)
-            .max(40),
+        date: milestoneDateSchema,
+        dateRu: milestoneDateSchema,
 
-        text: z
-            .string()
-            .trim()
-            .min(10)
-            .max(240),
+        text: milestoneTextSchema,
+        textRu: milestoneTextSchema,
 
         sourceShas: z
-            .array(
-                z
-                    .string()
-                    .trim()
-                    .min(7)
-                    .max(64),
-            )
+            .array(sourceShaSchema)
             .max(100),
     })
-    .strict();
+    .strict()
 
-export const evolutionDraftSchema =
-    z.array(
-        evolutionDraftItemSchema,
-    )
+export const evolutionDraftSchema = z
+    .array(evolutionDraftItemSchema)
     .min(1)
-    .max(20);
+    .max(20)
 
-export const gigaChatMilestoneSchema =
-    z.object({
-        name: z
-            .string()
-            .trim()
-            .min(3)
-            .max(70),
+export const gigaChatMilestoneSchema = z
+    .object({
+        name: milestoneNameSchema,
+        nameRu: milestoneNameSchema,
 
-        text: z
-            .string()
-            .trim()
-            .min(10)
-            .max(240),
+        text: milestoneTextSchema,
+        textRu: milestoneTextSchema,
 
         sourceShas: z
-            .array(
-                z
-                    .string()
-                    .trim()
-                    .min(7)
-                    .max(64),
-            )
+            .array(sourceShaSchema)
             .min(1)
             .max(100),
     })
-    .strict();
+    .strict()
 
-export const gigaChatMilestoneResponseSchema =
-    z.object({
+export const gigaChatMilestoneResponseSchema = z
+    .object({
         milestones: z
-            .array(
-                gigaChatMilestoneSchema,
-            )
+            .array(gigaChatMilestoneSchema)
             .min(1)
             .max(15),
     })
-    .strict();
+    .strict()

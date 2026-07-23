@@ -110,10 +110,17 @@ model Commit {
   id        Int     @id @default(autoincrement())
   projectId Int
   project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  name      String
-  date      String
-  text      String
-  order     Int     @default(0)
+
+  name   String
+  nameRu String?
+
+  date   String
+  dateRu String?
+
+  text   String
+  textRu String?
+
+  order Int @default(0)
 
   @@index([projectId, order])
 }
