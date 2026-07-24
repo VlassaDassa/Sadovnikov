@@ -16,7 +16,7 @@
 }
 
 .stackTitle {
-    @extend .heading-24-magra-bold;
+    @extend .heading-24-ubuntu-bold;
     @extend .whiteText;
 
     @media (min-width: 768px) {
@@ -132,7 +132,7 @@
 
 
 .stackItem {
-    @extend .heading-20-magra-bold;
+    @extend .heading-20-ubuntu-bold;
     position: absolute;
 
 

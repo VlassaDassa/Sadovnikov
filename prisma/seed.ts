@@ -44,17 +44,6 @@ function getRequiredString(
     )
 }
 
-function getNullableString(
-    source: unknown,
-    key: string
-): string | null {
-    const value = getOptionalString(source, key)
-
-    return value && value.trim().length > 0
-        ? value
-        : null
-}
-
 function toJson(value: unknown): Prisma.InputJsonValue {
     return JSON.parse(
         JSON.stringify(value)
@@ -112,54 +101,24 @@ async function seedAboutMe() {
     await prisma.aboutMe.create({
         data: {
             birth: aboutMe.birth,
-
             placeBirth: aboutMe.placeBirth,
-            placeBirthRu: getOptionalString(
-                aboutMe,
-                'placeBirthRu'
-            ),
-
+            placeBirthRu: aboutMe.placeBirthRu || null,
             education: aboutMe.education,
-            educationRu: getOptionalString(
-                aboutMe,
-                'educationRu'
-            ),
-
+            educationRu: aboutMe.educationRu || null,
             location: aboutMe.location,
-            locationRu: getOptionalString(
-                aboutMe,
-                'locationRu'
-            ),
-
+            locationRu: aboutMe.locationRu || null,
             shortBio: aboutMe.shortBio,
-            shortBioRu: getOptionalString(
-                aboutMe,
-                'shortBioRu'
-            ),
-
+            shortBioRu: aboutMe.shortBioRu || null,
             workExperience: {
                 create: aboutMe.workExperience.map((experience) => ({
                     organization: experience.organization,
-                    organizationRu: getOptionalString(
-                        experience,
-                        'organizationRu'
-                    ),
-
+                    organizationRu: experience.organizationRu || null,
                     position: experience.position,
-                    positionRu: getOptionalString(
-                        experience,
-                        'positionRu'
-                    ),
-
+                    positionRu: experience.positionRu || null,
                     startDate: experience.workingPeriod.startDate,
-                    endDate:
-                        experience.workingPeriod.endDate || null,
-
+                    endDate: experience.workingPeriod.endDate || null,
                     description: experience.description,
-                    descriptionRu: getOptionalString(
-                        experience,
-                        'descriptionRu'
-                    ),
+                    descriptionRu: experience.descriptionRu || null,
                 })),
             },
         },
@@ -181,47 +140,30 @@ async function seedProjects() {
             data: {
                 category: projectData.category,
                 name: projectData.name,
-
                 shortDescription,
-                shortDescriptionRu: getOptionalString(
-                    projectData,
-                    'shortDescriptionRu'
-                ),
-
-                previewDescription: projectData.previewDescription,
-                previewDescriptionRu: getOptionalString(
-                    projectData,
-                    'previewDescriptionRu'
-                ),
-
+                shortDescriptionRu:
+                    projectData.shortDescriptionRu || null,
+                previewDescription:
+                    projectData.previewDescription,
+                previewDescriptionRu:
+                    projectData.previewDescriptionRu || null,
                 date: projectData.date,
-                dateRu: getOptionalString(
-                    projectData,
-                    'dateRu'
-                ),
-
-                developmentTime: projectData.developmentTime,
-                developmentTimeRu: getOptionalString(
-                    projectData,
-                    'developmentTimeRu'
-                ),
-
+                developmentTime:
+                    projectData.developmentTime,
+                developmentTimeRu:
+                    projectData.developmentTimeRu || null,
                 githubLink:
                     projectData.gitHubLink || null,
-
                 demoLink:
                     projectData.demoLink || null,
-
                 numberTeam: projectData.numberTeam,
                 teamType: projectData.teamType,
-
                 images: {
                     create: projectData.images.map((image) => ({
                         image: image.image,
                         main: image.main,
                     })),
                 },
-
                 stack: {
                     create: projectData.stack.map((item) => ({
                         name: item.name,
@@ -231,82 +173,54 @@ async function seedProjects() {
                             : undefined,
                     })),
                 },
-
                 keyFeatures: {
                     create: (
                         projectData.keyFeatures || []
                     ).map((feature) => ({
                         title: feature.title,
-                        titleRu: getOptionalString(
-                            feature,
-                            'titleRu'
-                        ),
-
+                        titleRu: feature.titleRu || null,
                         text: feature.text,
-                        textRu: getOptionalString(
-                            feature,
-                            'textRu'
-                        ),
-
+                        textRu: feature.textRu || null,
                         icon: feature.icon,
                         photo: feature.photo,
                     })),
                 },
-
                 description: {
                     create: projectData.description.map((block) => ({
                         title: block.title,
-                        titleRu: getOptionalString(
-                            block,
-                            'titleRu'
-                        ),
-
+                        titleRu: block.titleRu || null,
                         icon: block.icon,
-
                         content: block.content,
-                        contentRu: getOptionalString(
-                            block,
-                            'contentRu'
-                        ),
+                        contentRu: block.contentRu || null,
                     })),
                 },
-
                 metrics: {
                     create: projectData.metrics.map((metric) => ({
                         icon: metric.icon,
-
                         title: metric.title,
-                        titleRu: getOptionalString(
-                            metric,
-                            'titleRu'
-                        ),
-
+                        titleRu: metric.titleRu || null,
                         text: metric.text,
-                        textRu: getOptionalString(
-                            metric,
-                            'textRu'
-                        ),
-
+                        textRu: metric.textRu || null,
                         current: toFiniteNumber(
                             metric.current,
                             `metric "${metric.title}" current`
                         ),
-
                         max: toFiniteNumber(
                             metric.max,
                             `metric "${metric.title}" max`
                         ),
-
                         type: metric.type,
                     })),
                 },
-
                 commits: {
                     create: projectData.commits.map(
                         (commit, index) => ({
                             name: commit.name,
+                            nameRu: commit.nameRu || null,
                             date: commit.date,
+                            dateRu: commit.dateRu || null,
                             text: commit.text,
+                            textRu: commit.textRu || null,
                             order:
                                 typeof commit.order === 'number'
                                     ? commit.order

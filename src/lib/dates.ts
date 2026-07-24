@@ -24,7 +24,12 @@ export const displayDate = (dateString: string | undefined, day?: boolean, lang:
         
 
         if (!dateString) return '';
-        if (dateString.toUpperCase() === 'NOW') return 'Now';
+        if (dateString.toUpperCase() === 'NOW' && lang === 'en') {
+            return 'Now'
+        }
+        else if (dateString.toUpperCase() === 'NOW' && lang === 'ru') {
+            return 'Настоящее время'
+        }
         
         const date = parseDate(dateString);
         if (!date) return '';

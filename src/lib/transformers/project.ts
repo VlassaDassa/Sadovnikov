@@ -206,10 +206,8 @@ export function transformProject(project: PrismaProject, locale: AppLocale='en')
                 commit.name,
                 commit.nameRu
             ),
-            date: getLocalizedText(
-                locale,
-                commit.date,
-            ),
+            date: commit.date,
+            dateRu: commit.dateRu || '',
             text: getLocalizedText(
                 locale,
                 commit.text,

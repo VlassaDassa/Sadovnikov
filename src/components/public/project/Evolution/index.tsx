@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useTranslations } from 'next-intl';
+import { useLocale } from 'next-intl';
 
 import EmptySection from '@/components/shared/EmptySection';
 
@@ -19,11 +20,12 @@ interface CommitProps {
 
 
 const Commit: React.FC<CommitProps> = ({ item }) => {
-
+    const locale = useLocale() === 'en' ? 'en' : 'ru'
+    
     const tooltipRef = useTooltip<HTMLDivElement>({
             text: item.text,
             title: item.name,
-            date: capitalize(item.date),
+            date: locale === 'ru' ? capitalize(item.dateRu || ''): capitalize(item.date),
             type: 'lvl3',
             placement: 'bottom',
             fakeWidth: 400,

@@ -41,7 +41,7 @@
 }
 
 .text, .description, .textTitle {
-    @extend .body-16-magra-bold;
+    @extend .body-16-ubuntu-bold;
     @extend .lightText;
     @extend .line-height-1_5x;
 }
@@ -99,7 +99,7 @@
 }
 
 .aboutMeTitle {
-    @extend .heading-24-magra-bold;
+    @extend .heading-24-ubuntu-bold;
     @extend .whiteText;
 
     @media (min-width: 768px) {

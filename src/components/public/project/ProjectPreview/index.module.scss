@@ -72,7 +72,7 @@
 
 .metadataText {
     @extend .lightText;
-    @extend .body-14-magra-regular;
+    @extend .body-14-ubuntu-regular;
     font-size: 12px;
     white-space: nowrap;
 
@@ -96,7 +96,7 @@
 
 .name {
     @extend .whiteText;
-    @extend .heading-40-magra-bold;
+    @extend .heading-40-ubuntu-bold;
     @media (min-width: 768px) {
         font-size: 48px;
     }
@@ -109,7 +109,7 @@
 }
 
 .subname {
-    @extend .heading-24-magra-bold;
+    @extend .heading-24-ubuntu-bold;
 
     @media (min-width: 768px) {
         font-size: 32px;
@@ -118,7 +118,7 @@
 
 
 .shortDescription {
-    @extend .body-16-magra-bold;
+    @extend .body-16-ubuntu-bold;
     @extend .line-height-1_5x;
 
     @media (min-width: 768px) {
