@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useRef, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 
 import AdaptiveImage from '@/components/shared/AdaptiveImage';
 import EmptySection from '@/components/shared/EmptySection';
@@ -29,6 +30,8 @@ const MyStack: React.FC<StackProps> = ({ stack }) => {
 		threshold: 0.1,
 		rootMargin: '0px 0px -100px 0px'
 	})
+
+	const t = useTranslations('MyStack');
 
 
 	useEffect(() => {
@@ -66,11 +69,11 @@ const MyStack: React.FC<StackProps> = ({ stack }) => {
 
 	return (
 		<section className={`${style.myStack} container`}>
-			<h2 className={`sectionTitle ${style.stackTitle}`}>MY STACK</h2>
+			<h2 className={`sectionTitle ${style.stackTitle}`}>{t('title')}</h2>
 
 			{
 				stack.length === 0 ?
-					<EmptySection text='Stack not found' />
+					<EmptySection text={t('Empty')} />
 				:
 					<>
 						<AdaptiveImage 

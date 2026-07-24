@@ -98,7 +98,7 @@
 
 
 .frameName {
-    @extend .body-20-magra-regular;
+    @extend .body-20-ubuntu-regular;
     @extend .darkText;
     top: unset;
     bottom: 75px;
@@ -120,7 +120,7 @@
 
 
 .previewTitle {
-    @extend .heading-32-magra-bold;
+    @extend .heading-32-ubuntu-bold;
     @extend .whiteText;
 
     transform: rotate(0deg);

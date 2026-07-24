@@ -108,7 +108,7 @@
     
     padding: 5px 20px;
     
-    @extend .body-14-magra-bold;
+    @extend .body-14-ubuntu-bold;
     @extend .whiteText;
     @extend .radius-6;
     @extend .glass;
@@ -139,7 +139,7 @@
 
 
 .projectName {
-    @extend .body-16-magra-bold;
+    @extend .body-16-ubuntu-bold;
     @extend .whiteText;
 
     @media (min-width: 600px)  {
@@ -153,7 +153,7 @@
 
 
 .projectDescription {
-    @extend .body-16-magra-regular;
+    @extend .body-16-ubuntu-regular;
     @extend .lightText;
 
     @media (min-width: 600px)  {
@@ -172,7 +172,7 @@
 .projectStackItem {
     background-color: $brand_900;
     
-    @extend .body-14-magra-regular;
+    @extend .body-14-ubuntu-regular;
     @extend .radius-4;
     @extend .whiteText;
 

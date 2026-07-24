@@ -52,6 +52,7 @@
 .listItem {
     display: flex;
     align-items: center;
+    text-transform: uppercase;
 
     padding: 20px 10px;
 
@@ -97,7 +98,7 @@
 }
 
 .selectLangItem {
-    @extend .body-20-magra-bold;
+    @extend .body-20-ubuntu-bold;
     @extend .lightText;
 
     text-transform: uppercase;

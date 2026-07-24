@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
+import { useTranslations } from 'next-intl';
 
 import Icon from '@/components/shared/icons/Icon';
 
@@ -26,6 +27,7 @@ const Accordion: React.FC<AccordionProps> = ({ items, allowMultiple=true }) => {
     const [openIndexes, setOpenIndexes] = useState<number[]>([]);
     const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
     const iconSize = breakpoint === 'mobile' ?  25 : 44 
+    const t = useTranslations('ProjectDescription')
     
 
     const toggleItem = (index: number) => {
@@ -76,7 +78,7 @@ const Accordion: React.FC<AccordionProps> = ({ items, allowMultiple=true }) => {
                     >
                         <p className={styles.accordionInner}>
                             {
-                                item.content === '' ? 'No content...' : item.content
+                                item.content === '' ? t('NoContent') : item.content
                             }
                         </p>
                     </div>
@@ -92,10 +94,11 @@ interface ProjectDescriptionProps {
 }
 
 const ProjectDescription: React.FC<ProjectDescriptionProps> = ({ data }) => {
+    const t = useTranslations('ProjectDescription')
     
     return (
         <section className={`${styles.description} container`}>
-            <h2 className={`${styles.title} sectionTitle`}>DESCRIPTION</h2>
+            <h2 className={`${styles.title} sectionTitle`}>{t('Title')}</h2>
 
             <Accordion items={data} />
         </section>

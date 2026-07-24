@@ -12,36 +12,52 @@ export interface IconItem {
 export interface IStackTooltip {
     id: number,
     title: string,
+    titleRu?: string,
     text: string
+    textRu?: string
 }
 
 export interface IProjectStack {
     id: number,
     name: string,
     icon: string,
-    tooltip?: IStackTooltip
+    tooltip?: IStackTooltip,
 }
 
 export interface IFeatureItem {
     id: number,
     title: string,
+    titleRu?: string,
+
     text: string,
+    textRu?: string,
+
     icon: string,
     photo: string
 }
 
 export interface IProjectDescription {
     id: number,
+
     title: string;
+    titleRu?: string;
+
     icon: string,
+
     content: string;
+    contentRu?: string;
 }
 
 export interface IMertics {
     id: number,
     icon: string,
+
     title: string,
+    titleRu?: string,
+
     text: string,
+    textRu?: string,
+
     current: string | number;
     max: number,
     type: 'score' | 'time'
@@ -50,8 +66,12 @@ export interface IMertics {
 export interface ICommit {
     id: number,
     name: string,
+    nameRu?: string,
     date: string,
-    text: string
+    dateRu?: string,
+    text: string,
+    textRu?: string,
+    order: number
 }
 
 export interface IImages {
@@ -68,15 +88,24 @@ export interface IProject {
     teamType: string,
     numberTeam: number,
     name: string,
-    shortDescrition: string,
+
+    shortDescription: string,
+    shortDescriptionRu?: string,
+
     previewDescription: string,
+    previewDescriptionRu?: string,
+
     stack: IProjectStack[],
     keyFeatures: IFeatureItem[],
     description: IProjectDescription[],
     metrics: IMertics[],
     commits: ICommit[],
+
     developmentTime: string,
+    developmentTimeRu?: string,
+
     date: string,
+
     gitHubLink: string,
     demoLink: string,
 }
@@ -121,19 +150,34 @@ export interface WorkExperience {
         startDate: string,
         endDate: string
     },
+
     organization: string,
+    organizationRu?: string,
+
     position: string,
+    positionRu?: string,
+
     description: string
+    descriptionRu?: string
 }
 
 
 export interface AboutMe {
     birth: number,
+
     placeBirth: string,
+    placeBirthRu?: string,
+
     education: string,
+    educationRu?: string,
+
     location: string,
+    locationRu?: string,
+
     workExperience: WorkExperience[],
+    
     shortBio: string
+    shortBioRu?: string
 }
 
 

@@ -1,0 +1,137 @@
+{
+  "Header": {
+    "contacts": "контакты",
+    "about": "обо мне",
+    "portfolio": "портфолио"
+  },
+
+  "Footer": {
+    "Copy": "Скопировано!"
+  },
+
+  "Localization": {
+    "ru": "Руссский",
+    "en": "Английский"
+  },
+
+  "SkillsMain": {
+    "AvatarText": "Как я оцениваю свои навыки...",
+    "Empty": "Навыки не найдены"
+  },
+
+  "MyStack": {
+    "title": "STACK",
+    "Empty": "Stack не найден"
+  },
+
+  "AboutMe": {
+    "title": "Обо мне",
+    "WorkExperience": "Опыт работы",
+    "ShortBio": "Коротко обо мне",
+    "YearOfBirth": "Год рождения:",
+    "PlaceOfBirth": "Место рождения:",
+    "Location": "Местоположение:",
+    "Education": "Образование:",
+    "DecorBtnLong": "МОЯ ОЧЕНЬ ДЛИННАЯ ИСТОРИЯ, ЕСЛИ ВАМ ИНТЕРЕСНО",
+    "DecorBtn": "МОЯ ДЛИННАЯ ИСТОРИЯ, ЕСЛИ ВАМ ИНТЕРЕСНО",
+    "Empty": "Данные обо мне не найдены"
+  },
+
+  "DecorBtn": {
+    "Click": "клик"
+  },
+
+  "Portfolio": {
+    "Title": "ПОРТФОЛИО",
+    "Empty": "ПРОЕКТЫ НЕ НАЙДЕНЫ"
+  },
+
+  "Canvas": {
+    "Scaling": "масштабирование",
+    "Moving": "перемещение по холсту"
+  },
+
+  "Contacts": {
+    "Title": "КОНТАКТЫ",
+    "Name": "Имя",
+    "Email": "Почта",
+    "Message": "Сообщение",
+    "Send": "Отправить",
+    "Avatar": "Я жду ваших сообщений",
+    "ErrorName": "Имя должно быть от 5 до 10 символов",
+    "ErrorEmail": "Некорректный email",
+    "ErrorMessage": "Сообщение должно быть от 10 до 300 символов",
+    "ErrorSend": "Ошибка при отправке сообщения",
+    "SuccessSend": "Сообщение успешно отправлено!"
+  },
+
+  "NotFound": {
+    "Title": "Страница не найдена",
+    "Description": "Извините, но запрошенная страница не найдена",
+    "BackToHome": "Домой"
+  },
+
+  "ErrorPage": {
+    "Title": "Ошибка",
+    "subTitle": "Что-то пошло не так"
+  },
+
+  "Evolution": {
+    "Title": "ЭВОЛЮЦИЯ",
+    "Empty": "Коммитов нет"
+  },
+
+  "KeyFeatures": {
+    "Title": "КЛЮЧЕВЫЕ ФУНКЦИИ",
+    "Empty": "Ключевые функции не найдены"
+  },
+
+  "ProjectStack": {
+    "Title": "STACK",
+    "Empty": "Stack не найден"
+  },
+
+  "TeamType": {
+    "solo": "сольный",
+    "duo": "парный",
+    "team": "командный"
+  },
+
+  "ProjectDescription": {
+    "Title": "ОПИСАНИЕ",
+    "NoContent": "Контент не найден..."
+  },
+
+  "Metrics": {
+    "Title": "Показатели"
+  },
+
+  "PageInDev": {
+    "Title": "Приходите позже...",
+    "SubTitle": "Страница в разработке"
+  },
+
+
+
+
+  "HomePage": {
+    "title": "Портфолио разработчика",
+    "description": "Я создаю современные веб-приложения"
+  },
+  "Navigation": {
+    "home": "Главная",
+    "projects": "Проекты",
+    "contacts": "Контакты"
+  },
+  "Project": {
+    "evolution": "Развитие",
+    "noCommits": "Нет этапов развития",
+    "github": "GitHub",
+    "demo": "Демонстрация"
+  },
+  "Common": {
+    "open": "Открыть",
+    "close": "Закрыть",
+    "loading": "Загрузка..."
+  }
+}

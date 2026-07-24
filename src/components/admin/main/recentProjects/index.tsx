@@ -115,14 +115,18 @@ const RecentProjects: React.FC<RecentProjectsProps> = ({ projects }) => {
             images: [{id: Date.now(), image: defaultImage, main: true}],
             teamType: 'solo',
             name: 'Новый проект',
-            shortDescrition: 'Краткое описание',
+            shortDescription: 'Краткое описание',
+            shortDescriptionRu: '',
             previewDescription: 'Описание для превью',
+            previewDescriptionRu: '',
             stack: [],
             keyFeatures: [
                 {
                     id: 1,
                     title: '',
+                    titleRu: '',
                     text: '',
+                    textRu: '',
                     icon: defaultIcon,
                     photo: defaultImageFeature
                 },
@@ -130,33 +134,43 @@ const RecentProjects: React.FC<RecentProjectsProps> = ({ projects }) => {
             description: [
                 {
                     id: 1,
-                    title: 'Site',
+                    title: 'PROJECT',
+                    titleRu: 'ПРОЕКТ',
                     icon: 'text',
-                    content: ''
+                    content: '',
+                    contentRu: ''
                 },
                 {
                     id: 2,
                     title: 'WHY I STARTED',
+                    titleRu: 'ПОЧЕМУ Я НАЧАЛ',
                     icon: 'rocket',
-                    content: ''
+                    content: '',
+                    contentRu: ''
                 },
                 {
                     id: 3,
                     title: 'CHALLENGES & SOLUTIONS',
+                    titleRu: 'СЛОЖНОСТИ И РЕШЕНИЯ',
                     icon: 'puzzle',
-                    content: ''
+                    content: '',
+                    contentRu: ''
                 },
                 {
                     id: 4,
                     title: 'CONCLUSION',
+                    titleRu: 'ЗАКЛЮЧЕНИЕ',
                     icon: 'flag',
-                    content: ''
+                    content: '',
+                    contentRu: ''
                 },
                 {
                     id: 5,
                     title: 'FUTURE PLANS',
+                    titleRu: 'ПЛАНЫ НА БУДУЩЕЕ',
                     icon: 'time',
-                    content: ''
+                    content: '',
+                    contentRu: ''
                 }
             ],
             metrics: [
@@ -164,7 +178,9 @@ const RecentProjects: React.FC<RecentProjectsProps> = ({ projects }) => {
                     id: 1,
                     icon: 'speed',
                     title: 'Performance',
-                    text: 'Speed and performance',
+                    titleRu: 'Производительность',
+                    text: 'Speed and perormance',
+                    textRu: 'Скорость и производительность',
                     current: 0,
                     max: 100,
                     type: 'score'
@@ -173,7 +189,9 @@ const RecentProjects: React.FC<RecentProjectsProps> = ({ projects }) => {
                     id: 2,
                     icon: 'loadTime',
                     title: 'Load time',
+                    titleRu: 'Время загрузки',
                     text: 'Average loading time',
+                    textRu: 'Среднее время загрузки',
                     current: 0,
                     max: 10,
                     type: 'time'
@@ -182,7 +200,9 @@ const RecentProjects: React.FC<RecentProjectsProps> = ({ projects }) => {
                     id: 3,
                     icon: 'search',
                     title: 'SEO',
+                    titleRu: 'SEO',
                     text: 'Search engine optimization',
+                    textRu: 'Поисковая оптимизация',
                     current: 0,
                     max: 100,
                     type: 'score'
@@ -191,7 +211,9 @@ const RecentProjects: React.FC<RecentProjectsProps> = ({ projects }) => {
                     id: 4,
                     icon: 'accessibility',
                     title: 'Accessibility',
+                    titleRu: 'Доступность',
                     text: 'Lighehouse, A11y',
+                    textRu: 'Lighehouse, A11y',
                     current: 0,
                     max: 100,
                     type: 'score'
@@ -200,6 +222,7 @@ const RecentProjects: React.FC<RecentProjectsProps> = ({ projects }) => {
             commits: [],
             date: new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' }),
             developmentTime: '1 week',
+            developmentTimeRu: '1 неделя',
             gitHubLink: '',
             demoLink: '',
             numberTeam: 1,
@@ -260,7 +283,7 @@ const RecentProjects: React.FC<RecentProjectsProps> = ({ projects }) => {
                                             id={project.id}
                                             name={project.name}
                                             img={project.images.find((item) => item.main)!} // !!! 
-                                            shortDescrition={project.shortDescrition}
+                                            shortDescrition={project.shortDescription}
                                             date={project.date}
                                         />
                                     ))}

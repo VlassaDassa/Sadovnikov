@@ -27,7 +27,7 @@ export default async function PublicLayout({
         <html data-scroll-behavior="smooth" lang="en">
             <head>
                 <link 
-                    href="https://fonts.googleapis.com/css2?family=Magra:wght@400;700&family=Montserrat:wght@100..900&display=swap" 
+                    href="https://fonts.googleapis.com/css2?family=ubuntu:wght@400;700&family=Montserrat:wght@100..900&display=swap" 
                     rel="stylesheet"
                 />
             </head>

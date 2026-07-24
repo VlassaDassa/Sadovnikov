@@ -11,7 +11,7 @@
 }
 
 .title {
-    @extend .heading-24-magra-bold;
+    @extend .heading-24-ubuntu-bold;
     @extend .whiteText;
 
     margin-bottom: 20px;
@@ -91,7 +91,7 @@
 }
 
 .featureTitle {
-    @extend .heading-20-magra-bold;
+    @extend .heading-20-ubuntu-bold;
     @extend .whiteText;
 
     @media (min-width: 1280px) {
@@ -101,7 +101,7 @@
 
 
 .featureText {
-    @extend .body-16-magra-bold;
+    @extend .body-16-ubuntu-bold;
     @extend .line-height-1_5x;
 
     color: $neutral_400;

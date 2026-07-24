@@ -354,3 +354,40 @@
 }
 
 
+
+
+
+
+.localizedFields {
+    display: grid;
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    min-width: 0;
+
+    @media (max-width: 1100px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.languageColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+}
+
+.languageLabel {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.65;
+}
+
+.body {
+    grid-template-columns:
+        minmax(0, 3fr)
+        clamp(260px, 25%, 360px);
+}

@@ -1,13 +1,16 @@
 'use client'
 
 import React from 'react';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
+import { useTranslations } from 'next-intl';
+import { useLocale } from 'next-intl';
 
 import DecorButton from '../../../shared/button/DecorButton';
 import AboutIllustration from '../aboutIllustration';
 import EmptySection from '@/components/shared/EmptySection';
 
 import type { AboutMe } from '@/interfaces/general';
+import { displayDate } from '@/lib/dates';
 
 import style from './index.module.scss';
 
@@ -18,32 +21,35 @@ interface AboutMeProps {
 }
 
 const AboutMe: React.FC<AboutMeProps> = ({ aboutMe }) => {
+    const t = useTranslations('AboutMe');
+    const locale = useLocale() === 'en' ? 'en' : 'ru'
+
     return (
         <section id='about' className={`${style.aboutMe} container`}>
-            <h2 className={`${style.aboutMeTitle} sectionTitle`}>AboutMe</h2>
+            <h2 className={`${style.aboutMeTitle} sectionTitle`}>{t('title')}</h2>
 
             {
-                !aboutMe ? <EmptySection text='Data about me not found' />
+                !aboutMe ? <EmptySection text={t('Empty')} />
                 :
                     <>
                         <AboutIllustration aboutMe={aboutMe} />
 
                         <div className={style.aboutMeData}>
-                            <p className={style.text}>Year of birth: {aboutMe['birth']}</p>
-                            <p className={style.text}>Place of birth: {aboutMe['placeBirth']}</p>
-                            <p className={style.text}>Education: {aboutMe['education']}</p>
-                            <p className={style.text}>Location: {aboutMe['location']}</p>
+                            <p className={style.text}>{t('YearOfBirth')} {aboutMe['birth']}</p>
+                            <p className={style.text}>{t('PlaceOfBirth')} {aboutMe['placeBirth']}</p>
+                            <p className={style.text}>{t('Education')} {aboutMe['education']}</p>
+                            <p className={style.text}>{t('Location')} {aboutMe['location']}</p>
                         </div>
 
                         <div className={style.workExperience}>
-                            <h3 className={style.textTitle}>WORK EXPERIENCE</h3>
+                            <h3 className={style.textTitle}>{t('WorkExperience')}</h3>
 
                             <div className={style.workExperienceWrapper}>
                                 {
                                     aboutMe.workExperience.map((item, index) => (
                                         <div key={item.id} className={style.workExperienceItem}>
                                             <h4 className={`${style.text} ${style.workExperienceItemTitle}`}>
-                                                {item['organization']} - {item['position']} {item['workingPeriod']['startDate']} - {item['workingPeriod']['endDate']}
+                                                {item['organization']} | {item['position']} | {displayDate(item['workingPeriod']['startDate'], false, locale)} - {displayDate(item['workingPeriod']['endDate'], false, locale)}
                                             </h4>
                                             <p className={style.description}>{item['description']}</p>
                                         </div>
@@ -54,7 +60,7 @@ const AboutMe: React.FC<AboutMeProps> = ({ aboutMe }) => {
                         </div>
 
                         <div className={style.shortBio}>
-                            <h3 className={style.textTitle}>SHORT BIO</h3>
+                            <h3 className={style.textTitle}>{t('ShortBio')} </h3>
                             <p className={style.text}>{aboutMe['shortBio']}</p>
                         </div>
                         <Link href={'/pageInDev'}>
@@ -62,8 +68,8 @@ const AboutMe: React.FC<AboutMeProps> = ({ aboutMe }) => {
                                 behavior='default'
                                 variant='big'
                                 text={{
-                                    default: 'MY LONG STORY, VERY VERY LONG, IF YOU INTERESTED',
-                                    alter: 'MY LONG STORY, IF YOU INTERESTED',
+                                    default: t('DecorBtnLong'),
+                                    alter: t('DecorBtn'),
                                 }}
                                 additionalClass='aboutMe'
                             />

@@ -4,7 +4,7 @@ import ClientPageWrapper from "./ClientPageWrapper";
 import ErrorPage from "@/components/shared/ErrorPage";
 
 import { AboutMe } from "@/interfaces/general";
-import { transformAboutMe } from '@/lib/transformers/aboutMe';
+import { transformRawAboutMe } from '@/lib/transformers/aboutMe';
 import prisma from "@/lib/prisma";
 import { notFound } from "next/navigation";
 
@@ -19,7 +19,7 @@ const EditAboutMe: React.FC = async () => {
             }
         })
 
-        aboutMe = rawAboutMe ? transformAboutMe(rawAboutMe) : null;
+        aboutMe = rawAboutMe ? transformRawAboutMe(rawAboutMe) : null;
     } catch (error) {
         const errorMessage = error instanceof Error ? error.message : 'Unknown error';
         return <ErrorPage error={errorMessage} />

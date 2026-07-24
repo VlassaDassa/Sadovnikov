@@ -1,28 +1,17 @@
-import {
-    notFound,
-} from 'next/navigation';
+import { notFound } from "next/navigation";
 
-import ClientPageWrapper from './ClientPageWrapper';
+import ClientPageWrapper from "./ClientPageWrapper";
+import ErrorPage from "@/components/shared/ErrorPage";
 
-import ErrorPage from '@/components/shared/ErrorPage';
+import { transformRawProject } from "@/lib/transformers/project";
+import { evolutionDraftSchema } from "@/lib/evolution/schemas";
+import prisma from "@/lib/prisma";
+import type { IProject } from "@/interfaces/general";
+import type { IEvolutionDraftItem } from "@/interfaces/evolution";
 
-import {
-    transformProject,
-} from '@/lib/transformers/project';
 
-import {
-    evolutionDraftSchema,
-} from '@/lib/evolution/schemas';
 
-import prisma from '@/lib/prisma';
 
-import type {
-    IProject,
-} from '@/interfaces/general';
-
-import type {
-    IEvolutionDraftItem,
-} from '@/interfaces/evolution';
 
 interface EditProjectProps {
     params: Promise<{
@@ -30,112 +19,70 @@ interface EditProjectProps {
     }>;
 }
 
-async function EditProject({
-    params,
-}: EditProjectProps) {
-    const { id } =
-        await params;
+async function EditProject({ params }: EditProjectProps) {
+    const { id } = await params;
 
-    const projectId =
-        Number(id);
+    const projectId = Number(id);
 
-    if (
-        !Number.isInteger(
-            projectId,
-        ) ||
-        projectId <= 0
-    ) {
+    if (!Number.isInteger(projectId) || projectId <= 0) {
         notFound();
     }
 
-    let project:
-        IProject | null = null;
+    let project: IProject | null = null;
 
-    let initialEvolutionDraft:
-        IEvolutionDraftItem[] = [];
+    let initialEvolutionDraft: IEvolutionDraftItem[] = [];
 
-    let initialEvolutionGeneratedAt:
-        string | null = null;
+    let initialEvolutionGeneratedAt: string | null = null;
 
     try {
-        const rawProject =
-            await prisma.project
-                .findUnique({
-                    where: {
-                        id:
-                            projectId,
-                    },
+        const rawProject = await prisma.project.findUnique({
+            where: {
+                id: projectId,
+            },
 
-                    include: {
-                        images:
-                            true,
+            include: {
+                images: true,
 
-                        stack:
-                            true,
+                stack: true,
 
-                        description:
-                            true,
+                description: true,
 
-                        metrics:
-                            true,
+                metrics: true,
 
-                        commits: {
-                            orderBy: [
-                                {
-                                    order:
-                                        'asc',
-                                },
-                                {
-                                    id:
-                                        'asc',
-                                },
-                            ],
+                commits: {
+                    orderBy: [
+                        {
+                            order: "asc",
                         },
+                        {
+                            id: "asc",
+                        },
+                    ],
+                },
 
-                        keyFeatures:
-                            true,
-                    },
-                });
+                keyFeatures: true,
+            },
+        });
 
         if (rawProject) {
-            project =
-                transformProject(
-                    rawProject,
-                );
+            project = transformRawProject(rawProject);
 
-            const parsedDraft =
-                evolutionDraftSchema
-                    .safeParse(
-                        rawProject
-                            .evolutionDraft,
-                    );
+            const parsedDraft = evolutionDraftSchema.safeParse(
+                rawProject.evolutionDraft,
+            );
 
-            if (
-                parsedDraft.success
-            ) {
-                initialEvolutionDraft =
-                    parsedDraft.data;
+            if (parsedDraft.success) {
+                initialEvolutionDraft = parsedDraft.data;
             }
 
             initialEvolutionGeneratedAt =
-                rawProject
-                    .evolutionGeneratedAt
-                    ?.toISOString() ??
-                null;
+                rawProject.evolutionGeneratedAt?.toISOString() ?? null;
         }
     } catch (error) {
         const errorMessage =
-            error instanceof Error
-                ? error.message
-                : 'Unknown error';
+            error instanceof Error ? error.message : "Unknown error";
 
-        return (
-            <ErrorPage
-                error={
-                    errorMessage
-                }
-            />
-        );
+        return <ErrorPage error={errorMessage} />;
     }
 
     if (!project) {
@@ -144,15 +91,9 @@ async function EditProject({
 
     return (
         <ClientPageWrapper
-            project={
-                project
-            }
-            initialEvolutionDraft={
-                initialEvolutionDraft
-            }
-            initialEvolutionGeneratedAt={
-                initialEvolutionGeneratedAt
-            }
+            project={project}
+            initialEvolutionDraft={initialEvolutionDraft}
+            initialEvolutionGeneratedAt={initialEvolutionGeneratedAt}
         />
     );
 }

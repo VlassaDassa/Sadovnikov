@@ -71,5 +71,15 @@
     padding: 15px;
 }
 
+.inputsGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.inputsGroupTextArea {
+    gap: 20px;
+}
+
 
 

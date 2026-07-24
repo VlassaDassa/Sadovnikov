@@ -40,7 +40,7 @@
 
 
 .itemTitle {
-    @extend .heading-20-magra-bold;
+    @extend .heading-20-ubuntu-bold;
     color: $neutral_400;
 
     @media (min-width: 1280px) {
@@ -51,4 +51,10 @@
 .texarea {
     @extend .line-height-1_5x;
     min-height: 200px;
+}
+
+.inputsGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }

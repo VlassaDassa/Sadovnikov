@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { useTranslations } from 'next-intl';
 
 import style from './index.module.scss';
 
@@ -39,6 +40,8 @@ const Canvas: React.FC<CanvasProps> = ({
     const contentRef = useRef<HTMLDivElement>(null)
     
     const prevScaleRef = useRef<number>(1);
+
+    const t = useTranslations('Canvas');
 
     // Поведение при пробеле
     useEffect(() => {
@@ -224,14 +227,14 @@ const Canvas: React.FC<CanvasProps> = ({
                             <span className={style.manualKey}>CTRL</span>
                             <span className={style.manualText}>+</span>
                             <span className={style.manualKey}>Wheel</span>
-                            <span className={style.manualText}>- scaling</span>
+                            <span className={style.manualText}>- {t('Scaling')}</span>
                         </div>
 
                         <div className={style.manualElement}>
                             <span className={style.manualKey}>Space</span>
                             <span className={style.manualText}>+</span>
                             <span className={style.manualKey}>Drag</span>
-                            <span className={style.manualText}>- moving across the canvas</span>
+                            <span className={style.manualText}>- {t('Moving')}</span>
                         </div>
 
                         <span onClick={closeManual} className={style.closeManual}>×</span>

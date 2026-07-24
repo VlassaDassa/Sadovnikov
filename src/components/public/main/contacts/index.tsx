@@ -3,13 +3,13 @@
 import React, { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { useDispatch } from 'react-redux';
+import { useTranslations } from 'next-intl';
 
 import Input from '../../../shared/input';
 import DecorButton from '../../../shared/button/DecorButton';
     
 import TalkingAvatar from '../talkingAvatar';
 
-import { setTypeMessage, setTextMessage, toggleMessage } from '@/store/slices/messageSlice';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { sendContactMessage } from '@/app/actions/contact/sendContactMessage';
 import { showMessage } from '@/lib/showMessage';
@@ -36,6 +36,8 @@ const Contacts: React.FC= () => {
         message: ''
     })
     const [isFirstRender, setIsFirstRender] = useState(true);
+
+    const t = useTranslations('Contacts');
 
     const { isVisible, elementRef } = useScrollAnimation<HTMLDivElement>({
         threshold: 0.1,
@@ -73,7 +75,7 @@ const Contacts: React.FC= () => {
 
         // Проверка имени
         if (name.length < 5 || name.length >= 10) {
-            newErrors.name = 'Имя должно быть от 5 до 10 символов'
+            newErrors.name = t('ErrorName')
             isValid = false
         }
        
@@ -81,13 +83,13 @@ const Contacts: React.FC= () => {
         // Проверка email
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-            newErrors.email = 'Некорректный email'
+            newErrors.email = t('ErrorEmail')
             isValid = false
         }
         
         // Проверка сообщения
         if (message.length < 10 || message.length > 300) {
-            newErrors.message = 'Сообщение должно быть от 10 до 300 символов'
+            newErrors.message = t('ErrorMessage')
             isValid = false
         }
 
@@ -130,11 +132,11 @@ const Contacts: React.FC= () => {
         })
 
         if (!result.success) {
-            showMessage('error', 'Error on sending message', dispatch)
+            showMessage('error', t('ErrorSend'), dispatch)
             setBtnBehavior('default')
         }
         else {
-            showMessage('info', 'Message sent successfuly!', dispatch)
+            showMessage('info', t('SuccessSend'), dispatch)
             setBtnBehavior('disabled')
         }
         
@@ -147,13 +149,13 @@ const Contacts: React.FC= () => {
     return (
         <section id='contacts' className={`container ${styles.contacts}`}>
             
-            <h2 className={`${styles.contactsTitle} sectionTitle`}>CONTACTS</h2>
+            <h2 className={`${styles.contactsTitle} sectionTitle`}>{t('Title')}</h2>
 
             <form>
                 <div className={styles.formContent}>
                     <Input 
                         name='name'
-                        placeholder='Name...'
+                        placeholder={`${t('Name')}...`}
                         value={name}
                         iconPosition='noIcon'
                         error={error.name}
@@ -162,7 +164,7 @@ const Contacts: React.FC= () => {
 
                     <Input 
                         name='email'
-                        placeholder='Email...'
+                        placeholder={`${t('Email')}...`}
                         type='email'
                         value={email}
                         iconPosition='noIcon'
@@ -172,7 +174,7 @@ const Contacts: React.FC= () => {
 
                     <Input 
                         name='message'
-                        placeholder='Message...'
+                        placeholder={`${t('Message')}...`}
                         value={message}
                         type='textarea'
                         iconPosition='noIcon'
@@ -184,7 +186,7 @@ const Contacts: React.FC= () => {
                     <DecorButton 
                         behavior={btnBehavior}
                         variant='medium'
-                        text={ {default: 'Send', alter: 'Send'} }
+                        text={ {default: t('Send'), alter: t('Send')} }
                         additionalClass={styles.contactFormBtn}
                         onClick={submitForm}
                     />
@@ -195,7 +197,7 @@ const Contacts: React.FC= () => {
                 ref={elementRef}
                 hand={false}
                 indexFinger={false}
-                text={"I'm waiting for your messages"}
+                text={t('Avatar')}
                 additionalClass={`${styles.avatar} ${isVisible ? styles['avatar-anim'] : ''}`}
             />
         </section>

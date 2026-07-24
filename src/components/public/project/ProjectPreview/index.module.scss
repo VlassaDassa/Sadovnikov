@@ -43,29 +43,42 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: nowrap;
 
     @media (min-width: 450px) {
         justify-content: start;
-        gap: 20px;
+        gap: 10px;
     }
 }
 
 .metadataItem {
     display: flex;
     align-items: center;
-    column-gap: 10px;
+    white-space: nowrap;
+    column-gap: 5px;
+
+    @media (min-width: 400px) {
+        column-gap: 10px;
+    }
 }
 
 .divider {
     height: 15px;
     width: 1px;
+    flex-shrink: 0;
 
     background-color: $neutral_700;
 }
 
 .metadataText {
     @extend .lightText;
-    @extend .body-16-magra-regular;
+    @extend .body-14-ubuntu-regular;
+    font-size: 12px;
+    white-space: nowrap;
+
+    @media (min-width: 400px) {
+        font-size: 16px;
+    }
 
     @media (min-width: 768px) {
         font-size: 20px;
@@ -83,7 +96,7 @@
 
 .name {
     @extend .whiteText;
-    @extend .heading-40-magra-bold;
+    @extend .heading-40-ubuntu-bold;
     @media (min-width: 768px) {
         font-size: 48px;
     }
@@ -96,7 +109,7 @@
 }
 
 .subname {
-    @extend .heading-24-magra-bold;
+    @extend .heading-24-ubuntu-bold;
 
     @media (min-width: 768px) {
         font-size: 32px;
@@ -105,7 +118,7 @@
 
 
 .shortDescription {
-    @extend .body-16-magra-bold;
+    @extend .body-16-ubuntu-bold;
     @extend .line-height-1_5x;
 
     @media (min-width: 768px) {

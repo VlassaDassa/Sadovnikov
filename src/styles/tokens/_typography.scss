@@ -2,8 +2,9 @@
 
 
 // Font families
-$font-magra: "Magra", sans-serif;
+$font-ubuntu: "Ubuntu", sans-serif;
 $font-mont: "Montserrat";
+
 
 
 
@@ -82,8 +83,8 @@ $body-sizes: (
 // Generate classes for headings
 @each $size-name, $size-value in $heading-sizes {
     @each $weight-name, $weight-value in $font-weights {
-        .heading-#{$size-name}-magra-#{$weight-name} {
-            font-family: $font-magra;
+        .heading-#{$size-name}-ubuntu-#{$weight-name} {
+            font-family: $font-ubuntu;
             font-size: $size-value;
             font-weight: $weight-value;
             color: $neutral_900;
@@ -103,8 +104,8 @@ $body-sizes: (
 // Generate classes for body text
 @each $size-name, $size-value in $body-sizes {
     @each $weight-name, $weight-value in $font-weights {
-        .body-#{$size-name}-magra-#{$weight-name} {
-            font-family: $font-magra;
+        .body-#{$size-name}-ubuntu-#{$weight-name} {
+            font-family: $font-ubuntu;
             font-size: $size-value;
             font-weight: $weight-value;
             color: $neutral_900;

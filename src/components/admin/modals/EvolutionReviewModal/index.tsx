@@ -8,6 +8,7 @@ import Input from '@/components/shared/input';
 import ModalWrapper from '@/components/admin/modals/modalWrapper';
 import Button from '@/components/shared/button/Button';
 
+import { capitalize } from "@/lib/textFormat";
 import { publishEvolution, saveEvolutionDraft } from "@/app/actions/evolution";
 import type { IEvolutionDraftItem } from "@/interfaces/evolution";
 
@@ -25,25 +26,39 @@ interface EvolutionReviewModalProps {
     onPublished: (publishedCount: number) => void;
 }
 
-function cloneItems(items: IEvolutionDraftItem[]): IEvolutionDraftItem[] {
-    return items.map((item) => {
-        return {
-            ...item,
-            sourceShas: [...item.sourceShas],
-        };
-    });
+function cloneItems(
+    items: IEvolutionDraftItem[]
+): IEvolutionDraftItem[] {
+    return items.map((item) => ({
+        ...item,
+
+        nameRu: item.nameRu ?? '',
+        dateRu: item.dateRu ?? '',
+        textRu: item.textRu ?? '',
+
+        sourceShas: [...item.sourceShas],
+    }))
 }
 
-function prepareItems(items: IEvolutionDraftItem[]): IEvolutionDraftItem[] {
-    return items.map((item) => {
-        return {
-            ...item,
-            name: item.name.trim(),
-            date: item.date.trim(),
-            text: item.text.trim(),
-            sourceShas: Array.from(new Set(item.sourceShas)),
-        };
-    });
+function prepareItems(
+    items: IEvolutionDraftItem[]
+): IEvolutionDraftItem[] {
+    return items.map((item) => ({
+        ...item,
+
+        name: item.name.trim(),
+        nameRu: item.nameRu.trim(),
+
+        date: item.date.trim(),
+        dateRu: item.dateRu.trim(),
+
+        text: item.text.trim(),
+        textRu: item.textRu.trim(),
+
+        sourceShas: Array.from(
+            new Set(item.sourceShas)
+        ),
+    }))
 }
 
 function getErrorMessage(error: unknown): string {
@@ -131,11 +146,18 @@ const EvolutionReviewModal: React.FC<EvolutionReviewModalProps> = ({
     function addItem(): void {
         const newItem: IEvolutionDraftItem = {
             id: crypto.randomUUID(),
-            name: "",
-            date: "",
-            text: "",
+
+            name: '',
+            nameRu: '',
+
+            date: '',
+            dateRu: '',
+
+            text: '',
+            textRu: '',
+
             sourceShas: [],
-        };
+        }
 
         setItems((currentItems) => {
             return [...currentItems, newItem];
@@ -197,44 +219,82 @@ const EvolutionReviewModal: React.FC<EvolutionReviewModalProps> = ({
 
     function validateItems(): string | null {
         if (items.length === 0) {
-            return "At least one milestone is required";
+            return 'At least one milestone is required'
         }
 
         if (items.length > 20) {
-            return "Evolution cannot contain more than 20 milestones";
+            return 'Evolution cannot contain more than 20 milestones'
         }
 
-        for (let index = 0; index < items.length; index += 1) {
-            const item = items[index];
+        for (
+            let index = 0;
+            index < items.length;
+            index += 1
+        ) {
+            const item = items[index]
+            const position = index + 1
 
-            const position = index + 1;
+            const fields = [
+                {
+                    value: item.name,
+                    label: 'English title',
+                    min: 3,
+                    max: 70,
+                },
+                {
+                    value: item.nameRu,
+                    label: 'Russian title',
+                    min: 3,
+                    max: 70,
+                },
+                {
+                    value: item.date,
+                    label: 'English date',
+                    min: 1,
+                    max: 40,
+                },
+                {
+                    value: item.dateRu,
+                    label: 'Russian date',
+                    min: 1,
+                    max: 40,
+                },
+                {
+                    value: item.text,
+                    label: 'English description',
+                    min: 10,
+                    max: 300,
+                },
+                {
+                    value: item.textRu,
+                    label: 'Russian description',
+                    min: 10,
+                    max: 300,
+                },
+            ]
 
-            if (item.name.trim().length < 3) {
-                return `Milestone ${position}: title must contain at least 3 characters`;
-            }
+            for (const field of fields) {
+                const length = field.value.trim().length
 
-            if (item.name.trim().length > 70) {
-                return `Milestone ${position}: title cannot exceed 70 characters`;
-            }
+                if (length < field.min) {
+                    return [
+                        `Milestone ${position}:`,
+                        `${field.label} must contain`,
+                        `at least ${field.min} characters`,
+                    ].join(' ')
+                }
 
-            if (item.date.trim().length === 0) {
-                return `Milestone ${position}: date is required`;
-            }
-
-            if (item.date.trim().length > 40) {
-                return `Milestone ${position}: date cannot exceed 40 characters`;
-            }
-
-            if (item.text.trim().length < 10) {
-                return `Milestone ${position}: description must contain at least 10 characters`;
-            }
-
-            if (item.text.trim().length > 240) {
-                return `Milestone ${position}: description cannot exceed 240 characters`;
+                if (length > field.max) {
+                    return [
+                        `Milestone ${position}:`,
+                        `${field.label} cannot exceed`,
+                        `${field.max} characters`,
+                    ].join(' ')
+                }
             }
         }
 
-        return null;
+        return null
     }
 
     async function handleSave(): Promise<void> {
@@ -426,64 +486,133 @@ const EvolutionReviewModal: React.FC<EvolutionReviewModalProps> = ({
                                             </div>
                                         </div>
 
-                                        <Input 
-                                            name='name'
-                                            placeholder='Text...'
-                                            value={item.name}
-                                            variant='admin'
-                                            iconPosition='noIcon'
-                                            adminLabel='withLabel'
-                                            additionalClass={styles.input}
-                                            label='Name'
-                                            readonly={isBusy}
-                                            maxLen={70}
-                                            onChange={(event) => {
-                                                updateItem(item.id, {
-                                                    name: event.target
-                                                        .value,
-                                                });
-                                            }}
-                                        />
+                                        <div className={styles.localizedFields}>
+                                            <div className={styles.languageColumn}>
+                                                <span className={styles.languageLabel}>
+                                                    English
+                                                </span>
 
-                                        <Input 
-                                            name='date'
-                                            placeholder='Date...'
-                                            value={item.date}
-                                            variant='admin'
-                                            iconPosition='noIcon'
-                                            adminLabel='withLabel'
-                                            additionalClass={styles.input}
-                                            readonly={isBusy}
-                                            label='Date'
-                                            onChange={(event) => {
-                                                updateItem(item.id, {
-                                                    date: event.target
-                                                        .value,
-                                                });
-                                            }}
-                                        />
+                                                <Input
+                                                    name={`name-${item.id}`}
+                                                    placeholder='Milestone name...'
+                                                    value={item.name}
+                                                    variant='admin'
+                                                    iconPosition='noIcon'
+                                                    adminLabel='withLabel'
+                                                    additionalClass={styles.input}
+                                                    label='Name'
+                                                    readonly={isBusy}
+                                                    maxLen={70}
+                                                    onChange={(event) => {
+                                                        updateItem(item.id, {
+                                                            name: event.target.value,
+                                                        })
+                                                    }}
+                                                />
 
-                                        <Input 
-                                            name='description'
-                                            placeholder='Text...'
-                                            value={item.text}
-                                            type="textarea"
-                                            counter={true}
-                                            maxCounter={240}
-                                            variant='admin'
-                                            iconPosition='noIcon'
-                                            adminLabel='withLabel'
-                                            additionalClass={styles.input}
-                                            readonly={isBusy}
-                                            maxLen={240}
-                                            label='Description'
-                                            onChange={(event) => {
-                                                updateItem(item.id, {
-                                                    text: event.target
-                                                        .value,
-                                                });
-                                            }}
-                                        />
+                                                <Input
+                                                    name={`date-${item.id}`}
+                                                    placeholder='Date...'
+                                                    value={item.date}
+                                                    variant='admin'
+                                                    iconPosition='noIcon'
+                                                    adminLabel='withLabel'
+                                                    additionalClass={styles.input}
+                                                    label='Date'
+                                                    readonly={isBusy}
+                                                    maxLen={40}
+                                                    onChange={(event) => {
+                                                        updateItem(item.id, {
+                                                            date: event.target.value,
+                                                        })
+                                                    }}
+                                                />
+
+                                                <Input
+                                                    name={`text-${item.id}`}
+                                                    placeholder='Description...'
+                                                    value={item.text}
+                                                    type='textarea'
+                                                    counter={true}
+                                                    maxCounter={300}
+                                                    variant='admin'
+                                                    iconPosition='noIcon'
+                                                    adminLabel='withLabel'
+                                                    additionalClass={styles.input}
+                                                    readonly={isBusy}
+                                                    maxLen={300}
+                                                    label='Description'
+                                                    onChange={(event) => {
+                                                        updateItem(item.id, {
+                                                            text: event.target.value,
+                                                        })
+                                                    }}
+                                                />
+                                            </div>
+
+                                            <div className={styles.languageColumn}>
+                                                <span className={styles.languageLabel}>
+                                                    Russian
+                                                </span>
+
+                                                <Input
+                                                    name={`name-ru-${item.id}`}
+                                                    placeholder='Milestone name...'
+                                                    value={item.nameRu}
+                                                    variant='admin'
+                                                    iconPosition='noIcon'
+                                                    adminLabel='withLabel'
+                                                    additionalClass={styles.input}
+                                                    label='Name'
+                                                    readonly={isBusy}
+                                                    maxLen={70}
+                                                    onChange={(event) => {
+                                                        updateItem(item.id, {
+                                                            nameRu: event.target.value,
+                                                        })
+                                                    }}
+                                                />
+
+                                                <Input
+                                                    name={`date-ru-${item.id}`}
+                                                    placeholder='Date...'
+                                                    value={capitalize(item.dateRu)}
+                                                    variant='admin'
+                                                    iconPosition='noIcon'
+                                                    adminLabel='withLabel'
+                                                    additionalClass={styles.input}
+                                                    label='Date'
+                                                    readonly={isBusy}
+                                                    maxLen={40}
+                                                    onChange={(event) => {
+                                                        updateItem(item.id, {
+                                                            dateRu: event.target.value,
+                                                        })
+                                                    }}
+                                                />
+
+                                                <Input
+                                                    name={`text-ru-${item.id}`}
+                                                    placeholder='Description...'
+                                                    value={item.textRu}
+                                                    type='textarea'
+                                                    counter={true}
+                                                    maxCounter={300}
+                                                    variant='admin'
+                                                    iconPosition='noIcon'
+                                                    adminLabel='withLabel'
+                                                    additionalClass={styles.input}
+                                                    readonly={isBusy}
+                                                    maxLen={300}
+                                                    label='Description'
+                                                    onChange={(event) => {
+                                                        updateItem(item.id, {
+                                                            textRu: event.target.value,
+                                                        })
+                                                    }}
+                                                />
+                                            </div>
+                                        </div>
                                             
                                     </article>
                                 );

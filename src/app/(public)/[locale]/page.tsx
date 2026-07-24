@@ -1,4 +1,7 @@
 import React from 'react';
+import { getLocale } from 'next-intl/server';
+import { routing } from '@/i18n/routing';
+import { hasLocale } from 'next-intl';
 
 import Preview from '@/components/public/main/preview';
 import Skills from '@/components/public/main/skills';
@@ -21,6 +24,15 @@ const Main: React.FC = async () => {
     let skills: Skill[] = [];
     let stack: Stack[] = [];
     
+    const requestedLocale = await getLocale();
+    const locale =
+        hasLocale(
+            routing.locales,
+            requestedLocale,
+        )
+            ? requestedLocale
+            : routing.defaultLocale;
+    
     try {
         const rawProjects = await prisma.project.findMany({
         include: {
@@ -39,11 +51,10 @@ const Main: React.FC = async () => {
             }
         })
 
-        projects = rawProjects.map(transformProject);
-        aboutMe = rawAboutMe ? transformAboutMe(rawAboutMe) : null;
+        projects = rawProjects.map((proj) => transformProject(proj));
+        aboutMe = rawAboutMe ? transformAboutMe(rawAboutMe, locale) : null;
         skills = await prisma.skill.findMany();
         stack = await prisma.stack.findMany();
-
     } catch (error) {
         const errorMessage = error instanceof Error ? error.message : 'Unknown error';
         return <ErrorPage error={errorMessage} />

@@ -100,27 +100,51 @@ const Item: React.FC<ItemProps> = ({ item, onChange, deleteItem }) => {
             </div>
 
             <div className={styles.inputs}>
-                <Input 
-                    name='organization'
-                    placeholder='Text...'
-                    iconPosition='noIcon'
-                    value={item.organization}
-                    variant='admin'
-                    adminLabel='withLabel'
-                    label='Organization'
-                    onChange={handleChange('organization')}
-                />
+                <div className={styles.inputGroup}>
+                    <Input 
+                        name='organization'
+                        placeholder='Text...'
+                        iconPosition='noIcon'
+                        value={item.organization}
+                        variant='admin'
+                        adminLabel='withLabel'
+                        label='Organization'
+                        onChange={handleChange('organization')}
+                    />
 
-                <Input 
-                    name='position'
-                    placeholder='Text...'
-                    iconPosition='noIcon'
-                    value={item.position}
-                    variant='admin'
-                    adminLabel='withLabel'
-                    label='Position'
-                    onChange={handleChange('position')}
-                />
+                    <Input 
+                        name='organizationRu'
+                        placeholder='Text on russian...'
+                        iconPosition='noIcon'
+                        value={item.organizationRu}
+                        variant='admin'
+                        adminLabel='withoutLabel'
+                        onChange={handleChange('organizationRu')}
+                    />
+                </div>
+
+                <div className={styles.inputGroup}>
+                    <Input 
+                        name='position'
+                        placeholder='Text...'
+                        iconPosition='noIcon'
+                        value={item.position}
+                        variant='admin'
+                        adminLabel='withLabel'
+                        label='Position'
+                        onChange={handleChange('position')}
+                    />
+
+                    <Input 
+                        name='positionRu'
+                        placeholder='Text on russian...'
+                        iconPosition='noIcon'
+                        value={item.positionRu}
+                        variant='admin'
+                        adminLabel='withoutLabel'
+                        onChange={handleChange('positionRu')}
+                    />
+                </div>
 
                 <Input 
                     name='period'
@@ -137,21 +161,40 @@ const Item: React.FC<ItemProps> = ({ item, onChange, deleteItem }) => {
                     onClick={openSelectPeriod}
                 />
 
-                <Input 
-                    name='responsibilities'
-                    type='textarea'
-                    placeholder='Text...'
-                    iconPosition='noIcon'
-                    additionalClass={styles.responsibilities}
-                    value={item.description}
-                    variant='admin'
-                    adminLabel='withLabel'
-                    label='Responsibilities'
-                    counter={true}
-                    maxLen={500}
-                    maxCounter={500}
-                    onChange={handleChange('description')}
-                />
+                <div className={`${styles.inputGroup} ${styles.inputGroupTextArea}`}>
+                    <Input 
+                        name='responsibilities'
+                        type='textarea'
+                        placeholder='Text...'
+                        iconPosition='noIcon'
+                        additionalClass={styles.responsibilities}
+                        value={item.description}
+                        variant='admin'
+                        adminLabel='withLabel'
+                        label='Responsibilities'
+                        counter={true}
+                        maxLen={500}
+                        maxCounter={500}
+                        onChange={handleChange('description')}
+                    />
+
+                    <Input 
+                        name='responsibilitiesRu'
+                        type='textarea'
+                        placeholder='Text on russian...'
+                        iconPosition='noIcon'
+                        additionalClass={styles.responsibilities}
+                        value={item.descriptionRu}
+                        variant='admin'
+                        adminLabel='withoutLabel'
+                        counter={true}
+                        maxLen={500}
+                        maxCounter={500}
+                        onChange={handleChange('descriptionRu')}
+                    />
+                </div>
+
+                
             </div>
         </SectionBackground>
     )

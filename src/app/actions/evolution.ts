@@ -56,11 +56,24 @@ const projectIdSchema =
         .positive();
 
 function getErrorMessage(
-    error: unknown,
+    error: unknown
 ): string {
+    if (error instanceof z.ZodError) {
+        return error.issues
+            .map((issue) => {
+                const path =
+                    issue.path.length > 0
+                        ? issue.path.join('.')
+                        : 'draft'
+
+                return `${path}: ${issue.message}`
+            })
+            .join('; ')
+    }
+
     return error instanceof Error
         ? error.message
-        : 'Unknown Evolution error';
+        : 'Unknown Evolution error'
 }
 
 function normalizeGithubLink(
@@ -166,7 +179,7 @@ export async function generateEvolutionDraft(
 
                 evolutionDraft:
                     draft as unknown as
-                        Prisma.InputJsonValue,
+                    Prisma.InputJsonValue,
 
                 evolutionGeneratedAt:
                     generatedAt,
@@ -254,7 +267,7 @@ export async function saveEvolutionDraft(
             data: {
                 evolutionDraft:
                     draft as unknown as
-                        Prisma.InputJsonValue,
+                    Prisma.InputJsonValue,
             },
         });
 
@@ -333,32 +346,22 @@ export async function publishEvolution(
                         },
                     });
 
-                await transaction
-                    .commit
-                    .createMany({
-                        data:
-                            draft.map(
-                                (
-                                    item,
-                                    index,
-                                ) => ({
-                                    projectId:
-                                        validProjectId,
+                await transaction.commit.createMany({
+                    data: draft.map((item, index) => ({
+                        projectId: validProjectId,
 
-                                    name:
-                                        item.name,
+                        name: item.name,
+                        nameRu: item.nameRu,
 
-                                    date:
-                                        item.date,
+                        date: item.date,
+                        dateRu: item.dateRu,
 
-                                    text:
-                                        item.text,
+                        text: item.text,
+                        textRu: item.textRu,
 
-                                    order:
-                                        index,
-                                }),
-                            ),
-                    });
+                        order: index,
+                    })),
+                })
 
                 await transaction
                     .project

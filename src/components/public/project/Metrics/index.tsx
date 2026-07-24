@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslations } from 'next-intl';
 
 import MetricItem from '@/components/shared/MetricItem';
 
@@ -12,11 +13,12 @@ interface MetricsProps {
     data: IMertics[]
 }
 
-
 const Metrics: React.FC<MetricsProps> = ({ data }) => {
+    const t = useTranslations('Metrics')
+
     return ( 
         <section className={`${styles.metrics}`}>
-            <h2 className={`${styles.title} sectionTitle`}>METRICS</h2>
+            <h2 className={`${styles.title} sectionTitle`}>{t('Title')}</h2>
 
             <div className={styles.metricsWrapper}>
                 {

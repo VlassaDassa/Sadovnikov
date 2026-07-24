@@ -2,10 +2,13 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslations } from 'next-intl';
+
 import TalkingAvatar from '../talkingAvatar';
 import AdaptiveImage from '@/components/shared/AdaptiveImage';
 import SkillLevel from '@/components/shared/SkillLevel';
 import EmptySection from '@/components/shared/EmptySection';
+
 
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import type { Skill } from '@/interfaces/general';
@@ -52,6 +55,8 @@ const Skills: React.FC<SkillsProps> = ({ skills }) => {
 
     const containerRef = useRef<HTMLDivElement>(null);
     const windowWidth = useSelector((state: RootState) => state.breakpoint.windowWidth);
+
+    const t = useTranslations('SkillsMain');
 
     useEffect(() => {
         let active = true;
@@ -151,7 +156,7 @@ const Skills: React.FC<SkillsProps> = ({ skills }) => {
     if (skills.length === 0) {
         return (
             <section className={`${styles.skills} container`}>
-                <EmptySection text="Skills not found" />
+                <EmptySection text={t('Empty')} />
             </section>
         );
     }
@@ -224,7 +229,7 @@ const Skills: React.FC<SkillsProps> = ({ skills }) => {
                     additionalClass={styles.avatarWrapper}
                     hand={true}
                     indexFinger={true}
-                    text="This is how I evaluate my skills..."
+                    text={t('AvatarText')}
                 />
             </div>
         </section>

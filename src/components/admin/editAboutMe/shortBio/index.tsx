@@ -21,6 +21,11 @@ const ShortBio: React.FC<ShortBioProps> = ({ data, setData, setIsSaving }) => {
         setIsSaving(true);
     }
 
+    const handleChangeRu = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setData(prev => ({...prev, shortBioRu: e.target.value}))
+        setIsSaving(true);
+    }
+
     return (
         <section className={`${styles.section}`}>
             <SectionTitle 
@@ -28,21 +33,41 @@ const ShortBio: React.FC<ShortBioProps> = ({ data, setData, setIsSaving }) => {
                 text='Write a short bio about yourself'
             />
 
-            <Input 
-                name='shortBio'
-                type='textarea'
-                placeholder='Text...'
-                iconPosition='noIcon'
-                additionalClass={styles.shortBio}
-                value={data.shortBio}
-                variant='admin'
-                adminLabel='withoutLabel'
-                noize={true}
-                counter={true}
-                maxLen={500}
-                maxCounter={500}
-                onChange={handleChange}
-            />
+            <div className={`${styles.inputGroup} ${styles.inputGroupTextArea}`}>
+                <Input 
+                    name='shortBio'
+                    type='textarea'
+                    placeholder='Text...'
+                    iconPosition='noIcon'
+                    additionalClass={styles.shortBio}
+                    value={data.shortBio}
+                    variant='admin'
+                    adminLabel='withoutLabel'
+                    noize={true}
+                    counter={true}
+                    maxLen={500}
+                    maxCounter={500}
+                    onChange={handleChange}
+                />
+
+                <Input 
+                    name='shortBioRu'
+                    type='textarea'
+                    placeholder='Text on russian...'
+                    iconPosition='noIcon'
+                    additionalClass={styles.shortBio}
+                    value={data.shortBioRu}
+                    variant='admin'
+                    adminLabel='withoutLabel'
+                    noize={true}
+                    counter={true}
+                    maxLen={500}
+                    maxCounter={500}
+                    onChange={handleChangeRu}
+                />
+            </div>
+
+            
 
         </section>
     )

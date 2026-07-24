@@ -4,7 +4,6 @@ export const useCopy = () => {
     const [copied, setCopied] = useState(false);
 
     const copy = async (text: string) => {
-        // Метод 1: Clipboard API (только для HTTPS и localhost)
         if (navigator.clipboard && window.isSecureContext) {
             try {
                 await navigator.clipboard.writeText(text);
@@ -16,7 +15,6 @@ export const useCopy = () => {
             }
         }
 
-        // Метод 2: execCommand (работает везде, даже на HTTP с IP)
         try {
             const textarea = document.createElement('textarea');
             textarea.value = text;
@@ -39,8 +37,7 @@ export const useCopy = () => {
             console.warn('execCommand failed:', err);
         }
 
-        // Метод 3: Подсказка для пользователя (крайний случай)
-        alert(`Скопируйте вручную: ${text}`);
+        console.warn('copy error');
         return false;
     };
 

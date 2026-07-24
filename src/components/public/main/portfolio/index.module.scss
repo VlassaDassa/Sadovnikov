@@ -8,7 +8,7 @@
 
 
 .portfolioTitle {
-    @extend .heading-32-magra-bold;
+    @extend .heading-32-ubuntu-bold;
     @extend .whiteText;
 
     @media (min-width: 768px) {
@@ -22,7 +22,7 @@
 
 
 .notFound {
-    @extend .heading-64-magra-bold;
+    @extend .heading-64-ubuntu-bold;
     width: 100%;
     text-align: center;
 

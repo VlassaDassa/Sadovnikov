@@ -48,7 +48,7 @@
 
 
 .title {
-    @extend .heading-24-magra-bold;
+    @extend .heading-24-ubuntu-bold;
     @extend .whiteText;
 
     @media (min-width: 768px) {
@@ -96,7 +96,7 @@
 }
 
 .commitText {
-    @extend .body-16-magra-bold;
+    @extend .body-16-ubuntu-bold;
     @extend .line-height-1_5x;
     
     color: $neutral_400;

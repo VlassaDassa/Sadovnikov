@@ -70,7 +70,9 @@ const KeyFeatures: React.FC<EditProjectProps> = ({ project, setData, setIsSaving
             const newFeature = {
                 id: Date.now() + prev.keyFeatures.length + 1,
                 title: '',
+                titleRu: '',
                 text: '',
+                textRu: '',
                 icon: defaultIcon,
                 photo: defaultImageFeature,
             };
@@ -115,35 +117,68 @@ const KeyFeatures: React.FC<EditProjectProps> = ({ project, setData, setIsSaving
                 {project?.keyFeatures.map(feature => (
                     <SwiperSlide key={feature.id} className={styles.sliderItem}>
                         <SectionBackground className={styles.sectionBg}>
-                            <Input 
-                                placeholder='Text...'
-                                name='title'
-                                value={feature.title}
-                                additionalClass={styles.input}
-                                iconPosition='noIcon'
-                                maxLen={200}
-                                variant='admin'
-                                adminLabel='withLabel'
-                                label='Title'
-                                onChange={(e) => handleChangeFeature(feature.id, 'title', e.target.value)}
-                            />
 
-                            <Input 
-                                placeholder='Text...'
-                                name='description'
-                                type='textarea'
-                                value={feature.text}
-                                additionalClass={styles.textarea}
-                                iconPosition='noIcon'
-                                maxLen={200}
-                                variant='admin'
-                                adminLabel='withLabel'
-                                label='Description'
-                                counter={true}
-                                maxCounter={200}
-                                onChange={(e) => handleChangeFeature(feature.id, 'text', e.target.value)}
-                            />
+                            <div className={styles.inputsGroup}>
+                                <Input 
+                                    placeholder='Text...'
+                                    name='title'
+                                    value={feature.title}
+                                    additionalClass={styles.input}
+                                    iconPosition='noIcon'
+                                    maxLen={200}
+                                    variant='admin'
+                                    adminLabel='withLabel'
+                                    label='Title'
+                                    onChange={(e) => handleChangeFeature(feature.id, 'title', e.target.value)}
+                                />
 
+                                <Input 
+                                    placeholder='Text on russian...'
+                                    name='titleRu'
+                                    value={feature.titleRu}
+                                    additionalClass={styles.input}
+                                    iconPosition='noIcon'
+                                    maxLen={200}
+                                    variant='admin'
+                                    adminLabel='withoutLabel'
+                                    onChange={(e) => handleChangeFeature(feature.id, 'titleRu', e.target.value)}
+                                />
+                            </div>
+                            
+                            <div className={`${styles.inputsGroup} ${styles.inputsGroupTextArea}`}>
+                                <Input 
+                                    placeholder='Text...'
+                                    name='description'
+                                    type='textarea'
+                                    value={feature.text}
+                                    additionalClass={styles.textarea}
+                                    iconPosition='noIcon'
+                                    maxLen={200}
+                                    variant='admin'
+                                    adminLabel='withLabel'
+                                    label='Description'
+                                    counter={true}
+                                    maxCounter={200}
+                                    onChange={(e) => handleChangeFeature(feature.id, 'text', e.target.value)}
+                                />
+
+                                <Input 
+                                    placeholder='Text on russian...'
+                                    name='descriptionRu'
+                                    type='textarea'
+                                    value={feature.textRu}
+                                    additionalClass={styles.textarea}
+                                    iconPosition='noIcon'
+                                    maxLen={200}
+                                    variant='admin'
+                                    adminLabel='withoutLabel'
+                                    counter={true}
+                                    maxCounter={200}
+                                    onChange={(e) => handleChangeFeature(feature.id, 'textRu', e.target.value)}
+                                />
+
+                            </div>
+                            
                             <div className={styles.imgContainer}>
                                 <KeyFeatureImageUpload
                                     featureId={feature.id}

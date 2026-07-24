@@ -8,17 +8,25 @@ datasource db {
 }
 
 model Project {
-  id                 Int     @id @default(autoincrement())
-  category           String
-  name               String
+  id       Int    @id @default(autoincrement())
+  category String
+  name     String
+
   shortDescription   String
-  previewDescription String
-  date               String
-  developmentTime    String
-  githubLink         String?
-  demoLink           String?
-  numberTeam         Int
-  teamType           String
+  shortDescriptionRu String?
+
+  previewDescription   String
+  previewDescriptionRu String?
+
+  date   String
+
+  developmentTime   String
+  developmentTimeRu String?
+
+  githubLink String?
+  demoLink   String?
+  numberTeam Int
+  teamType   String
 
   images      ProjectImage[]
   stack       StackItem[]
@@ -48,6 +56,7 @@ model StackItem {
   project   Project @relation(fields: [projectId], references: [id])
   name      String
   icon      String
+
   tooltip   Json? // { title, text }
 }
 
@@ -55,10 +64,15 @@ model KeyFeature {
   id        Int     @id @default(autoincrement())
   projectId Int
   project   Project @relation(fields: [projectId], references: [id])
-  title     String
-  text      String
-  icon      String
-  photo     String
+
+  title   String
+  titleRu String?
+
+  text   String
+  textRu String?
+
+  icon  String
+  photo String
 }
 
 model DescriptionBlock {
@@ -66,8 +80,12 @@ model DescriptionBlock {
   projectId Int
   project   Project @relation(fields: [projectId], references: [id])
   title     String
-  icon      String
+  titleRu   String?
+
+  icon String
+
   content   String
+  contentRu String?
 }
 
 model Metric {
@@ -75,21 +93,33 @@ model Metric {
   projectId Int
   project   Project @relation(fields: [projectId], references: [id])
   icon      String // Название иконки (speed, search, и тд)
-  title     String
-  text      String
-  current   Float
-  max       Float
-  type      String // score/time
+
+  title   String
+  titleRu String?
+
+  text   String
+  textRu String?
+
+  current Float
+  max     Float
+  type    String // score/time
 }
 
 model Commit {
   id        Int     @id @default(autoincrement())
   projectId Int
   project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  name      String
-  date      String
-  text      String
-  order     Int     @default(0)
+
+  name   String
+  nameRu String?
+
+  date   String
+  dateRu String?
+
+  text   String
+  textRu String?
+
+  order Int @default(0)
 
   @@index([projectId, order])
 }
@@ -115,25 +145,39 @@ model FooterItem {
 }
 
 model AboutMe {
-  id         Int    @id @default(autoincrement())
-  birth      Int
-  placeBirth String
-  education  String
+  id    Int @id @default(autoincrement())
+  birth Int
+
+  placeBirth   String
+  placeBirthRu String?
+
+  education   String
+  educationRu String?
+
   location   String
+  locationRu String?
+
   shortBio   String
+  shortBioRu String?
 
   workExperience WorkExperience[]
 }
 
 model WorkExperience {
-  id           Int     @id @default(autoincrement())
-  aboutMeId    Int
-  aboutMe      AboutMe @relation(fields: [aboutMeId], references: [id])
-  organization String
-  position     String
-  startDate    String
-  endDate      String?
-  description  String
+  id             Int     @id @default(autoincrement())
+  aboutMeId      Int
+  aboutMe        AboutMe @relation(fields: [aboutMeId], references: [id])
+  organization   String
+  organizationRu String?
+
+  position   String
+  positionRu String?
+
+  startDate String
+  endDate   String?
+
+  description   String
+  descriptionRu String?
 }
 
 model User {

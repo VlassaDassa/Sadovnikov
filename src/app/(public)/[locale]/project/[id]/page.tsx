@@ -19,15 +19,18 @@ import styles from './index.module.scss';
 
 
 interface ProjectPageProps {
-    params: Promise<{ id: string }>;
+    params: Promise<{ id: string, locale: string }>;
 }
 
 
 export default async function Project({ params }: ProjectPageProps) {
-	const { id } = await params;
+	const { id, locale } = await params;
     const projectId = Number(id);
 
+	const currentLocale = locale === 'ru' ? 'ru' : 'en';
+
 	let project: IProject | null = null
+
 
 	try {
 		const rawProject = await prisma.project.findUnique({
@@ -53,7 +56,7 @@ export default async function Project({ params }: ProjectPageProps) {
 			},
 		})
 
-		project = rawProject ? transformProject(rawProject) : null
+		project = rawProject ? transformProject(rawProject, currentLocale) : null
 	}	
 	catch(error) {
 		const errorMessage = error instanceof Error ? error.message : 'Unknown error';
@@ -83,7 +86,7 @@ export default async function Project({ params }: ProjectPageProps) {
 			</AnimatedSection>
 
 			<AnimatedSection animation='fade-left'>
-				<ProjectStack data={project.stack} />
+				<ProjectStack data={project.stack || []} />
 			</AnimatedSection>
 
 			<AnimatedSection animation='fade-right'>

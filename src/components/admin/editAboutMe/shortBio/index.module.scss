@@ -19,3 +19,13 @@
     line-height: $leading-normal;
     margin-top: 10px;
 }
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.inputGroupTextArea {
+    gap: 25px;
+}

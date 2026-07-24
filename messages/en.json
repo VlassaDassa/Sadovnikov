@@ -1,0 +1,138 @@
+{
+  "Header": {
+    "contacts": "contacts",
+    "about": "about",
+    "portfolio": "portfolio"
+  },
+
+  "Footer": {
+    "Copy": "Copied!"
+  },
+
+  "Localization": {
+    "ru": "Russian",
+    "en": "English"
+  },
+
+  "SkillsMain": {
+    "AvatarText": "This is how I evaluate my skills...",
+    "Empty": "Skills not found"
+  },
+
+  "MyStack": {
+    "title": "MY STACK",
+    "Empty": "Stack not found"
+  },
+
+  "AboutMe": {
+    "title": "ABOUT ME",
+    "WorkExperience": "WORK EXPERIENCE",
+    "ShortBio": "SHORT BIO",
+    "YearOfBirth": "Year of birth:",
+    "PlaceOfBirth": "Place of birth:",
+    "Location": "Location:",
+    "Education": "Education:",
+    "DecorBtnLong": "MY LONG STORY, VERY VERY LONG, IF YOU INTERESTED",
+    "DecorBtn": "MY LONG STORY, IF YOU INTERESTED",
+    "Empty": "Data about me not found"
+  },
+
+  "DecorBtn": {
+    "Click": "click"
+  },
+
+  "Portfolio": {
+    "Title": "PORTFOLIO",
+    "Empty": "PROJECTS NOT FOUND"
+  },
+
+  "Canvas": {
+    "Scaling": "scaling",
+    "Moving": "moving across the canvas"
+  },
+
+  "Contacts": {
+    "Title": "CONTACTS",
+    "Name": "Name",
+    "Email": "Email",
+    "Message": "Message",
+    "Send": "Send",
+    "Avatar": "I'm waiting for your messages",
+    "ErrorName": "The name must be between 5 and 10 characters long.",
+    "ErrorEmail": "Incorrect email address",
+    "ErrorMessage": "The message should be between 10 and 300 characters.",
+    "ErrorSend": "Error when sending a message",
+    "SuccessSend": "The message has been sent successfully!"
+  },
+
+  "NotFound": {
+    "Title": "Page not found",
+    "Description": "Sorry, but the requested page does not exist.",
+    "BackToHome": "Back to home"
+  },
+
+  "ErrorPage": {
+    "Title": "Error",
+    "subTitle": "Something went wrong"
+  },
+
+  "Evolution": {
+    "Title": "EVOLUTION",
+    "Empty": "No commits"
+  },
+
+  "KeyFeatures": {
+    "Title": "KEY FEATURES",
+    "Empty": "Key features not found"
+  },
+
+  "ProjectStack": {
+    "Title": "STACK",
+    "Empty": "Stack not found"
+  },
+
+  "TeamType": {
+    "solo": "solo",
+    "duo": "duo",
+    "team": "team"
+  },
+
+  "ProjectDescription": {
+    "Title": "DESCRIPTION",
+    "NoContent": "Content not found..."
+  },
+
+  "Metrics": {
+    "Title": "METRICS"
+  },
+
+  "PageInDev": {
+    "Title": "Come back later...",
+    "SubTitle": "The page is under development"
+  },
+
+
+
+
+
+  "HomePage": {
+    "title": "Developer Portfolio",
+    "description": "I create modern web applications"
+  },
+  "Navigation": {
+    "home": "Home",
+    "projects": "Projects",
+    "contacts": "Contacts"
+  },
+  "Project": {
+    "evolution": "Evolution",
+    "noCommits": "No commits",
+    "github": "GitHub",
+    "demo": "Live demo"
+  },
+  "Common": {
+    "open": "Open",
+    "close": "Close",
+    "loading": "Loading..."
+  }
+}

@@ -140,3 +140,14 @@
     }
 }
 
+
+.inputsGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.inputsGroupTextArea {
+    gap: 30px;
+}
+

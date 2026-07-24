@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Pagination } from 'swiper/modules';
+import { useTranslations } from 'next-intl';
 import { useSelector } from 'react-redux';
 
 import { RootState } from '@/store';
@@ -26,7 +27,7 @@ const Slider: React.FC<SliderProps> = ({ projects }) => {
     const [curIndex, setCurIndex] = useState<number>(1)
     const totalCountItems = projects.length
     const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
-
+    const t = useTranslations('Portfolio');
 
     return (
         <Swiper
@@ -54,7 +55,7 @@ const Slider: React.FC<SliderProps> = ({ projects }) => {
         >
             {
                 projects.length === 0 ?
-                    <p className={style.notFound}>PROJECTS NOT FOUND</p>
+                    <p className={style.notFound}>{t('Empty')}</p>
                 :
                     projects.map(project => (
                         <SwiperSlide key={project.id} className={style.sliderItem}>

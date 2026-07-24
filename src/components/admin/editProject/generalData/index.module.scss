@@ -11,7 +11,7 @@
 .inputs {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 50px;
 }
 
 
@@ -20,7 +20,7 @@
 }
 
 .images {
-    margin-top: 20px;
+    margin-top: 50px;
 }
 
 .imageWrapper {
@@ -38,6 +38,7 @@
         border-radius: 15px;
     }
 }
+
 
 .mainImgWrapper {
     width: 100%;
@@ -216,4 +217,17 @@
 
 .curInnerShadow {
     box-shadow: inset 0px 0px 30px 10px rgba(0, 0, 0, 0.9);
+}
+
+
+.inputsGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.inputsGroupTextArea {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
