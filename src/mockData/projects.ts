@@ -43,7 +43,6 @@ const createProject = (id: number): IProject => ({
     teamType: 'solo',
     name: `SpecTechnologia${id}`,
     shortDescription: 'Corporate website and admin panel',
-    shortDescriptionRu: 'Сайт-визитка + панель администратора',
     previewDescription: 'A modern corporate website for a technology company specializing in security systems and software solutions. The project focuses on performance, accessibility, and a clear user experience.',
     previewDescriptionRu: 'Современный корпоративный сайт для технологической компании, специализирующейся на системах безопасности и программных решениях. При разработке особое внимание уделено производительности, доступности и удобству использования.',
     stack: [

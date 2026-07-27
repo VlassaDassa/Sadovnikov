@@ -18,7 +18,6 @@ export async function createProject(projectData: IProject) {
                 name: projectData.name,
 
                 shortDescription: projectData.shortDescription,
-                shortDescriptionRu: projectData.shortDescriptionRu,
 
                 previewDescription: projectData.previewDescription,
                 previewDescriptionRu: projectData.previewDescriptionRu,
@@ -133,7 +132,6 @@ export async function updateProject(projectData: IProject) {
                     name: projectData.name,
 
                     shortDescription: projectData.shortDescription,
-                    shortDescriptionRu: projectData.shortDescriptionRu,
 
                     previewDescription: projectData.previewDescription,
                     previewDescriptionRu: projectData.previewDescriptionRu,

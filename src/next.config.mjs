@@ -4,7 +4,7 @@ const nextConfig = {
         optimizeCss: false,
         globalNotFound: true,
         serverActions: {
-            bodySizeLimit: '5mb',
+            bodySizeLimit: '10mb',
         },
     },
     // output: 'export',

@@ -247,12 +247,15 @@ const WorkExperience: React.FC<WorkExperienceProps> = ({ data, setData, setIsSav
         const newExp: WorkExperience = {
             id: maxId + 1,
             position: '',
+            positionRu: '',
             organization: '',
+            organizationRu: '',
             workingPeriod: {
                 startDate: '',
                 endDate: ''
             },
-            description: ''
+            description: '',
+            descriptionRu: ''
         }
 
         setData(prev => ({...prev, workExperience: [...prev.workExperience, newExp]}))

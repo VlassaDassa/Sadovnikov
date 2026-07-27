@@ -52,15 +52,13 @@ const Button: React.FC<ButtonProps> = ({
     
     let tooltipRef = null
         
-    if (tooltip) {
-        tooltipRef = useTooltip<HTMLButtonElement>({
-            text: tooltip?.text,
-            type: 'lvl1',
-            fakeWidth: tooltip?.fakeWidth,
-            placement: tooltip?.placement,
-            delay: 300,
-        });
-    }
+    tooltipRef = useTooltip<HTMLButtonElement>({
+        text: tooltip?.text,
+        type: 'lvl1',
+        fakeWidth: tooltip?.fakeWidth,
+        placement: tooltip?.placement,
+        delay: 300,
+    });
     
 
     const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
