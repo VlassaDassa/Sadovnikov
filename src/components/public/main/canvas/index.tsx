@@ -38,6 +38,7 @@ const Canvas: React.FC<CanvasProps> = ({
 
     const canvasRef = useRef<HTMLDivElement>(null)
     const contentRef = useRef<HTMLDivElement>(null)
+    const suppressLinkClickRef = useRef(false)
     
     const prevScaleRef = useRef<number>(1);
 
@@ -51,7 +52,7 @@ const Canvas: React.FC<CanvasProps> = ({
             const isHoveringCanvas = canvasElement?.matches(':hover');
 
             if (e.code === 'Space' && isHoveringCanvas) {
-                e.preventDefault(); // <- отключение стандартного поведения
+                e.preventDefault(); 
 
                 if (e.type === 'keydown' && !e.repeat) {// <- !e.repeat, сработает при первом нажатии(зажатии). Без этого, код бы исполнялся множество раз 
                     setSpacePressed(true);
@@ -99,25 +100,107 @@ const Canvas: React.FC<CanvasProps> = ({
 
 
     // Запоминание начальной точки нажатия
-    const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
-        // Если дочерний элемент, то не смещаем
-        if (e.target instanceof Element && e.target.closest('.canvasElement')) {
-            return;
+    // const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    //     // Если дочерний элемент, то не смещаем
+    //     if (e.target instanceof Element && e.target.closest('.linkProject')) {
+    //         e.preventDefault()
+    //         e.stopPropagation()
+    //     }
+
+    //     if (e.target instanceof Element && e.target.closest('.canvasElement')) {
+    //         return;
+    //     }
+
+
+
+    //     // Запоминаем начальную точку
+    //     if (spacePressed || e.button === 1) { // <-  e.button === 1 - это зажатие колёсика
+    //         e.preventDefault()
+    //         setIsDragging(true)
+    //         setDragStart({
+    //             x: e.clientX - position.x,
+    //             y: e.clientY - position.y
+    //         })
+    //     }
+
+    //     if (canvasRef.current) {
+    //         canvasRef.current.style.cursor = 'grabbing';
+    //     }
+    // }
+
+    const handlePointerDown = (
+        e: React.PointerEvent<HTMLDivElement>
+    ) => {
+        const target = e.target instanceof Element
+            ? e.target
+            : null
+
+        const isPanMode = spacePressed || e.button === 1
+        const isCanvasElement = Boolean(
+            target?.closest('.canvasElement')
+        )
+
+        if (!isPanMode && isCanvasElement) {
+            return
         }
 
-        // Запоминаем начальную точку
-        if (spacePressed || e.button === 1) { // <-  e.button === 1 - это зажатие колёсика
-            e.preventDefault()
-            setIsDragging(true)
-            setDragStart({
-                x: e.clientX - position.x,
-                y: e.clientY - position.y
-            })
+        if (!isPanMode) {
+            return
         }
+
+        e.preventDefault()
+
+        suppressLinkClickRef.current = true
+
+        e.currentTarget.setPointerCapture(e.pointerId)
+
+        setIsDragging(true)
+
+        setDragStart({
+            x: e.clientX - position.x,
+            y: e.clientY - position.y,
+        })
 
         if (canvasRef.current) {
-            canvasRef.current.style.cursor = 'grabbing';
+            canvasRef.current.style.cursor = 'grabbing'
         }
+    }
+
+    const handleClickCapture = (
+        e: React.MouseEvent<HTMLDivElement>
+    ) => {
+        if (!suppressLinkClickRef.current) {
+            return
+        }
+
+        const target = e.target instanceof Element
+            ? e.target
+            : null
+
+        if (target?.closest('.linkProject')) {
+            e.preventDefault()
+            e.stopPropagation()
+        }
+
+        suppressLinkClickRef.current = false
+    }
+
+    const handlePointerUp = (
+        e: React.PointerEvent<HTMLDivElement>
+    ) => {
+        if (e.currentTarget.hasPointerCapture(e.pointerId)) {
+            e.currentTarget.releasePointerCapture(e.pointerId)
+        }
+
+        setIsDragging(false)
+
+        if (canvasRef.current) {
+            canvasRef.current.style.cursor = 'grab'
+        }
+
+        window.setTimeout(() => {
+            suppressLinkClickRef.current = false
+        }, 0)
     }
 
 
@@ -176,7 +259,7 @@ const Canvas: React.FC<CanvasProps> = ({
         },
     [scale, position]
     )
-
+ 
 
     // Запрет на открытие контекстного меню, при перемещении
     const handleContextMenu = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -198,13 +281,17 @@ const Canvas: React.FC<CanvasProps> = ({
             <div
                 ref={canvasRef}
                 className={style.canvasContainer}
-                onMouseDown={handleMouseDown}
-                onMouseMove={handleMouseMove}
-                onMouseUp={handleMouseUp}
+                 onMouseUp={handleMouseUp}
                 onMouseLeave={handleMouseUp}
                 onWheel={handleWheel}
                 onContextMenu={handleContextMenu}
-            >
+
+                onPointerDown={handlePointerDown}
+                onPointerMove={handleMouseMove}
+                onPointerUp={handlePointerUp}
+                onPointerCancel={handlePointerUp}
+                onClickCapture={handleClickCapture}
+                        >
                 <div 
                     ref={contentRef}
                     className={style.canvasContent}

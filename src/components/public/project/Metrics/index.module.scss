@@ -23,6 +23,7 @@
 .metricsWrapper {
     background-color: $neutral_900;
     width: calc(100% - 60px);
+    min-height: 400px;
     gap: 40px;
 
     padding: 30px 25px;

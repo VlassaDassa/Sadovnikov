@@ -1,188 +1,117 @@
-'use server';
+"use server";
 
-import {
-    Prisma,
-} from '@prisma/client';
+import { Prisma } from "@prisma/client";
 
-import {
-    revalidatePath,
-} from 'next/cache';
+import { revalidatePath } from "next/cache";
 
-import {
-    z,
-} from 'zod';
+import { z } from "zod";
 
-import prisma from '@/lib/prisma';
+import prisma from "@/lib/prisma";
 
-import { requireAdmin } from '@/lib/auth/admin';
+import { requireAdmin } from "@/lib/auth/admin";
 
-import {
-    getGithubCommits,
-} from '@/lib/evolution/getGithubCommits';
+import { getGithubCommits } from "@/lib/evolution/getGithubCommits";
 
-import {
-    generateEvolutionWithGigaChat,
-} from '@/lib/evolution/generateEvolutionWithGigaChat';
+import { generateEvolutionWithGigaChat } from "@/lib/evolution/generateEvolutionWithGigaChat";
 
-import {
-    evolutionDraftSchema,
-} from '@/lib/evolution/schemas';
+import { evolutionDraftSchema } from "@/lib/evolution/schemas";
 
 import type {
     EvolutionActionResult,
     IEvolutionDraftItem,
     IEvolutionGenerationResult,
-} from '@/interfaces/evolution';
+} from "@/interfaces/evolution";
 
-const generateInputSchema =
-    z.object({
-        projectId:
-            z
-                .number()
-                .int()
-                .positive(),
+const generateInputSchema = z.object({
+    projectId: z.number().int().positive(),
 
-        githubLink:
-            z
-                .string()
-                .trim()
-                .url(),
-    });
+    githubLink: z.string().trim().url(),
+});
 
-const projectIdSchema =
-    z
-        .number()
-        .int()
-        .positive();
+const projectIdSchema = z.number().int().positive();
 
-function getErrorMessage(
-    error: unknown
-): string {
+function getErrorMessage(error: unknown): string {
     if (error instanceof z.ZodError) {
         return error.issues
             .map((issue) => {
                 const path =
-                    issue.path.length > 0
-                        ? issue.path.join('.')
-                        : 'draft'
+                    issue.path.length > 0 ? issue.path.join(".") : "draft";
 
-                return `${path}: ${issue.message}`
+                return `${path}: ${issue.message}`;
             })
-            .join('; ')
+            .join("; ");
     }
 
-    return error instanceof Error
-        ? error.message
-        : 'Unknown Evolution error'
+    return error instanceof Error ? error.message : "Unknown Evolution error";
 }
 
-function normalizeGithubLink(
-    value: string,
-): string {
+function normalizeGithubLink(value: string): string {
     return value
         .trim()
-        .replace(
-            /\.git$/i,
-            '',
-        )
-        .replace(
-            /\/+$/,
-            '',
-        );
+        .replace(/\.git$/i, "")
+        .replace(/\/+$/, "");
 }
 
 export async function generateEvolutionDraft(
     projectId: number,
     githubLink: string,
-): Promise<
-    EvolutionActionResult<
-        IEvolutionGenerationResult
-    >
-> {
+): Promise<EvolutionActionResult<IEvolutionGenerationResult>> {
     try {
         await requireAdmin();
 
-        const input =
-            generateInputSchema.parse({
-                projectId,
-                githubLink,
-            });
+        const input = generateInputSchema.parse({
+            projectId,
+            githubLink,
+        });
 
-        const normalizedGithubLink =
-            normalizeGithubLink(
-                input.githubLink,
-            );
+        const normalizedGithubLink = normalizeGithubLink(input.githubLink);
 
-        const project =
-            await prisma.project
-                .findUnique({
-                    where: {
-                        id:
-                            input.projectId,
-                    },
+        const project = await prisma.project.findUnique({
+            where: {
+                id: input.projectId,
+            },
 
-                    select: {
-                        id: true,
-                        name: true,
-                        shortDescription:
-                            true,
-                        previewDescription:
-                            true,
-                    },
-                });
+            select: {
+                id: true,
+                name: true,
+                shortDescription: true,
+                previewDescription: true,
+            },
+        });
 
         if (!project) {
-            throw new Error(
-                'Project not found',
-            );
+            throw new Error("Project not found");
         }
 
-        const githubResult =
-            await getGithubCommits(
-                normalizedGithubLink,
-            );
+        const githubResult = await getGithubCommits(normalizedGithubLink);
 
-        const draft =
-            await generateEvolutionWithGigaChat({
-                project: {
-                    name:
-                        project.name,
+        const draft = await generateEvolutionWithGigaChat({
+            project: {
+                name: project.name,
 
-                    shortDescription:
-                        project
-                            .shortDescription,
+                shortDescription: project.shortDescription,
 
-                    previewDescription:
-                        project
-                            .previewDescription,
-                },
+                previewDescription: project.previewDescription,
+            },
 
-                repository:
-                    normalizedGithubLink,
+            repository: normalizedGithubLink,
 
-                commits:
-                    githubResult.commits,
-            });
+            commits: githubResult.commits,
+        });
 
-        const generatedAt =
-            new Date();
+        const generatedAt = new Date();
 
         await prisma.project.update({
             where: {
-                id:
-                    input.projectId,
+                id: input.projectId,
             },
 
             data: {
-                githubLink:
-                    normalizedGithubLink,
+                githubLink: normalizedGithubLink,
 
-                evolutionDraft:
-                    draft as unknown as
-                    Prisma.InputJsonValue,
+                evolutionDraft: draft as unknown as Prisma.InputJsonValue,
 
-                evolutionGeneratedAt:
-                    generatedAt,
+                evolutionGeneratedAt: generatedAt,
             },
         });
 
@@ -192,32 +121,19 @@ export async function generateEvolutionDraft(
             data: {
                 draft,
 
-                generatedAt:
-                    generatedAt
-                        .toISOString(),
+                generatedAt: generatedAt.toISOString(),
 
-                totalCommits:
-                    githubResult
-                        .totalCommits,
+                totalCommits: githubResult.totalCommits,
 
-                analyzedCommits:
-                    githubResult
-                        .commits
-                        .length,
+                analyzedCommits: githubResult.commits.length,
             },
         };
     } catch (error) {
-        console.error(
-            'Failed to generate Evolution',
-            error,
-        );
+        console.error("Failed to generate Evolution", error);
 
         return {
             success: false,
-            error:
-                getErrorMessage(
-                    error,
-                ),
+            error: getErrorMessage(error),
         };
     }
 }
@@ -225,69 +141,44 @@ export async function generateEvolutionDraft(
 export async function saveEvolutionDraft(
     projectId: number,
     rawDraft: unknown,
-): Promise<
-    EvolutionActionResult<
-        IEvolutionDraftItem[]
-    >
-> {
+): Promise<EvolutionActionResult<IEvolutionDraftItem[]>> {
     try {
         await requireAdmin();
 
-        const validProjectId =
-            projectIdSchema.parse(
-                projectId,
-            );
+        const validProjectId = projectIdSchema.parse(projectId);
 
-        const draft =
-            evolutionDraftSchema.parse(
-                rawDraft,
-            );
+        const draft = evolutionDraftSchema.parse(rawDraft);
 
-        const projectExists =
-            await prisma.project
-                .count({
-                    where: {
-                        id:
-                            validProjectId,
-                    },
-                });
+        const projectExists = await prisma.project.count({
+            where: {
+                id: validProjectId,
+            },
+        });
 
         if (!projectExists) {
-            throw new Error(
-                'Project not found',
-            );
+            throw new Error("Project not found");
         }
 
         await prisma.project.update({
             where: {
-                id:
-                    validProjectId,
+                id: validProjectId,
             },
 
             data: {
-                evolutionDraft:
-                    draft as unknown as
-                    Prisma.InputJsonValue,
+                evolutionDraft: draft as unknown as Prisma.InputJsonValue,
             },
         });
 
         return {
             success: true,
-            data:
-                draft,
+            data: draft,
         };
     } catch (error) {
-        console.error(
-            'Failed to save Evolution draft',
-            error,
-        );
+        console.error("Failed to save Evolution draft", error);
 
         return {
             success: false,
-            error:
-                getErrorMessage(
-                    error,
-                ),
+            error: getErrorMessage(error),
         };
     }
 }
@@ -303,107 +194,74 @@ export async function publishEvolution(
     try {
         await requireAdmin();
 
-        const validProjectId =
-            projectIdSchema.parse(
-                projectId,
-            );
+        const validProjectId = projectIdSchema.parse(projectId);
 
-        const draft =
-            evolutionDraftSchema.parse(
-                rawDraft,
-            );
+        const draft = evolutionDraftSchema.parse(rawDraft);
 
-        await prisma.$transaction(
-            async (
-                transaction,
-            ) => {
-                const project =
-                    await transaction
-                        .project
-                        .findUnique({
-                            where: {
-                                id:
-                                    validProjectId,
-                            },
+        await prisma.$transaction(async (transaction) => {
+            const project = await transaction.project.findUnique({
+                where: {
+                    id: validProjectId,
+                },
 
-                            select: {
-                                id: true,
-                            },
-                        });
+                select: {
+                    id: true,
+                },
+            });
 
-                if (!project) {
-                    throw new Error(
-                        'Project not found',
-                    );
-                }
+            if (!project) {
+                throw new Error("Project not found");
+            }
 
-                await transaction
-                    .commit
-                    .deleteMany({
-                        where: {
-                            projectId:
-                                validProjectId,
-                        },
-                    });
+            await transaction.commit.deleteMany({
+                where: {
+                    projectId: validProjectId,
+                },
+            });
 
-                await transaction.commit.createMany({
-                    data: draft.map((item, index) => ({
-                        projectId: validProjectId,
+            await transaction.commit.createMany({
+                data: draft.map((item, index) => ({
+                    projectId: validProjectId,
 
-                        name: item.name,
-                        nameRu: item.nameRu,
+                    name: item.name,
+                    nameRu: item.nameRu,
 
-                        date: item.date,
-                        dateRu: item.dateRu,
+                    date: item.date,
+                    dateRu: item.dateRu,
 
-                        text: item.text,
-                        textRu: item.textRu,
+                    text: item.text,
+                    textRu: item.textRu,
 
-                        order: index,
-                    })),
-                })
+                    order: index,
+                })),
+            });
 
-                await transaction
-                    .project
-                    .update({
-                        where: {
-                            id:
-                                validProjectId,
-                        },
+            await transaction.project.update({
+                where: {
+                    id: validProjectId,
+                },
 
-                        data: {
-                            evolutionDraft:
-                                Prisma.DbNull,
-                        },
-                    });
-            },
-        );
+                data: {
+                    evolutionDraft: Prisma.DbNull,
+                },
+            });
+        });
 
-        revalidatePath(
-            '/',
-            'layout',
-        );
+        revalidatePath("/", "layout");
 
         return {
             success: true,
 
             data: {
-                publishedCount:
-                    draft.length,
+                publishedCount: draft.length,
             },
         };
     } catch (error) {
-        console.error(
-            'Failed to publish Evolution',
-            error,
-        );
+        console.error("Failed to publish Evolution", error);
 
         return {
             success: false,
-            error:
-                getErrorMessage(
-                    error,
-                ),
+            error: getErrorMessage(error),
         };
     }
 }

@@ -6,13 +6,17 @@ import './globals.scss';
 
 
 
-export default async function NotFound() {
+export default async function GlobalNotFound() {
     const t =
         await getTranslations(
             'NotFound',
         )
 
     return (
-        <Error h1="404" h2={t('Title')} error={t('Description')} link="/" btn={false} />
+        <html lang="en">
+            <body>
+                <Error h1="404" h2={t('Title')} error={t('Description')} link="/" btn={false} />
+            </body>
+        </html>
     );
 }

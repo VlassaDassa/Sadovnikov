@@ -73,6 +73,9 @@
     @extend .body-16-mont-medium;
     @extend .whiteText;
 
+    background-color: $neutral_1000;
+    opacity: 0.98;
+
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;

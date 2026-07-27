@@ -92,6 +92,7 @@ const Input: React.FC<InputProps> = ({
     const textAreaRef = useRef<HTMLTextAreaElement>(null)
     const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
     const [datePickerOpen, setDatePickerOpen] = useState<boolean>(false);
+    const datePickerWrapperRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         if (type === 'textarea' && textAreaRef.current) {
@@ -99,6 +100,35 @@ const Input: React.FC<InputProps> = ({
             textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`
         }
     }, [value])
+
+    useEffect(() => {
+        const handlePointerDown = (event: PointerEvent) => {
+            const target = event.target
+
+            if (!(target instanceof Node)) {
+                return
+            }
+
+            if (
+                datePickerWrapperRef.current &&
+                !datePickerWrapperRef.current.contains(target)
+            ) {
+                setDatePickerOpen(false)
+            }
+        }
+
+        document.addEventListener(
+            'pointerdown',
+            handlePointerDown
+        )
+
+        return () => {
+            document.removeEventListener(
+                'pointerdown',
+                handlePointerDown
+            )
+        }
+    }, [])
 
 
 
@@ -230,26 +260,30 @@ const Input: React.FC<InputProps> = ({
                         readOnly={readonly}
                     />
                 : datePicker ?
-                    <div className={style.datePickerWrapper}>
+                    <div
+                        ref={datePickerWrapperRef}
+                        className={style.datePickerWrapper}
+                    >
                         {iconOne}
 
-                        <input 
-                            type={type} 
+                        <input
+                            type={type}
                             className={inputClass}
                             placeholder={placeholder}
                             value={value}
                             aria-label={placeholder || name}
                             name={name}
                             maxLength={maxLen}
-                            onClick={() => setDatePickerOpen(true)}
+                            onClick={() => {
+                                setDatePickerOpen((prev) => !prev)
+                            }}
                             readOnly
+                            disabled={disabled}
                         />
 
                         {datePickerOpen && (
                             <DatePicker
                                 onChange={handleDatePicker}
-                                onClickOutside={() => setDatePickerOpen(false)}
-                                open={datePickerOpen}
                                 locale={lang}
                                 inline
                                 className={style.datePicker}

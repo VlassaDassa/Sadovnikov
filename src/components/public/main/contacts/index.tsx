@@ -78,7 +78,6 @@ const Contacts: React.FC= () => {
             newErrors.name = t('ErrorName')
             isValid = false
         }
-       
 
         // Проверка email
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -93,6 +92,7 @@ const Contacts: React.FC= () => {
             isValid = false
         }
 
+
         if (isValid) {
             setBtnBehavior('default')
         }
@@ -102,6 +102,15 @@ const Contacts: React.FC= () => {
         
         
         setError(newErrors)
+
+        // Если все поля пустые - отключить валидацию
+        if (name.length === 0 && email.length === 0 && message.length === 0) {
+            setError(
+                {name: '', email: '', message: ''}
+            )
+
+            isValid = false
+        }
     }
 
 
@@ -180,6 +189,7 @@ const Contacts: React.FC= () => {
                         iconPosition='noIcon'
                         error={error.message}
                         onChange={handleMessageChange}
+                        additionalClass={styles.input}
                         maxLen={300}
                     />
 

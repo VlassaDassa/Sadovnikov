@@ -22,7 +22,7 @@
     flex-direction: column;
     row-gap: 20px;
     position: relative;
-    width: 300px;
+    width: unset;
     min-height: 250px;
     opacity: 1;
 
@@ -33,6 +33,7 @@
         padding-top: 20px;
         box-sizing: border-box;
     }
+
 }
 
 .selectionBox {
@@ -45,6 +46,8 @@
     row-gap: 20px;
     position: relative;
     z-index: 1;
+    
+    max-width: 245px;
 }
 
 .skillItem {

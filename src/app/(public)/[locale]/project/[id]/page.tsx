@@ -13,6 +13,7 @@ import type { IProjectPreviewData } from '@/interfaces/general';
 import prisma from '@/lib/prisma';
 import { IProject } from '@/interfaces/general';
 import { transformProject } from '@/lib/transformers/project';
+import { parseEntityId } from '@/lib/project';
 
 import styles from './index.module.scss';
 
@@ -25,7 +26,8 @@ interface ProjectPageProps {
 
 export default async function Project({ params }: ProjectPageProps) {
 	const { id, locale } = await params;
-    const projectId = Number(id);
+	
+	const projectId = parseEntityId(id)
 
 	const currentLocale = locale === 'ru' ? 'ru' : 'en';
 

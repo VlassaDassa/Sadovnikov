@@ -2,6 +2,7 @@
 const nextConfig = {
     experimental: {
         optimizeCss: false,
+        globalNotFound: true,
         serverActions: {
             bodySizeLimit: '5mb',
         },

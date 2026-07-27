@@ -1,6 +1,7 @@
 @use './../../../../styles/tokens/colors' as *;
 @use './../../../../styles/tokens/effects' as *;
 @use './../../../../styles/tokens/typography' as *;
+@use 'sass:math';
 
 
 .projectStack {
@@ -58,11 +59,11 @@
 
 @for $i from 1 through 50 {
     .itemWrapper:nth-child(#{$i}) {
-        $duration: random(5) + 3;
-        $delay: random(5) - 2;
-        $y: random(15) + 5;
-        $rotate: random(10) - 5;
-        $scale: 1 + (random(5) / 100);
+        $duration: math.random(5) + 3;
+        $delay: math.random(5) - 2;
+        $y: math.random(15) + 5;
+        $rotate: math.random(10) - 5;
+        $scale: 1 + math.div(math.random(5), 100);
         
         animation: customFloat#{$i} $duration + s ease-in-out infinite;
         animation-delay: $delay + s;
@@ -102,6 +103,9 @@
     transition: all 0.2s ease-in-out
 }
 
+.icon {
+    width: 50px;
+}
 
 .stackWrapper {
     display: grid;

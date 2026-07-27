@@ -1,6 +1,6 @@
 'use server'
 
-import { email, success, z } from 'zod';
+import { z } from 'zod';
 
 import { sendContactEmail } from '@/lib/mail/sendContactEmail';
 
