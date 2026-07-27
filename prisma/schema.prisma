@@ -13,7 +13,6 @@ model Project {
   name     String
 
   shortDescription   String
-  shortDescriptionRu String?
 
   previewDescription   String
   previewDescriptionRu String?

@@ -90,7 +90,6 @@ export interface IProject {
     name: string,
 
     shortDescription: string,
-    shortDescriptionRu?: string,
 
     previewDescription: string,
     previewDescriptionRu?: string,

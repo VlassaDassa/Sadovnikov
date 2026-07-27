@@ -166,7 +166,7 @@ const Input: React.FC<InputProps> = ({
         (iconPosition === 'iconLeft' || iconPosition === 'iconBoth') && icon?.first ?
             <Icon 
                 name={icon.first}
-                iconClass={`${variant === 'default' ? style.inputIcon : adminLabel==='withLabel' ? style.inputAdminIconLabel : style.inputAdminIcon} ${style.inputIconLeft}`}
+                iconClass={`${variant === 'default' ? style.inputIcon : adminLabel==='withLabel' ? style.inputAdminIconLabel : style.inputAdminIcon} ${style.inputIconLeft} ${datePickerOpen && style.iconDatePickerOpen} ${datePicker && style.iconDatePicker}`}
                 strokeColor={iconColor[variant].strokeColor}
                 fillColor={iconColor[variant].fillColor}
                 size={
@@ -264,8 +264,6 @@ const Input: React.FC<InputProps> = ({
                         ref={datePickerWrapperRef}
                         className={style.datePickerWrapper}
                     >
-                        {iconOne}
-
                         <input
                             type={type}
                             className={inputClass}
@@ -311,8 +309,6 @@ const Input: React.FC<InputProps> = ({
                         }
                         
                     </div>
-                    
-
             }
             
             {errorEl}

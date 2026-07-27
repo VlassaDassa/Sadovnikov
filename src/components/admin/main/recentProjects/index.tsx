@@ -114,10 +114,9 @@ const RecentProjects: React.FC<RecentProjectsProps> = ({ projects }) => {
             category: 'Site',
             images: [{id: Date.now(), image: defaultImage, main: true}],
             teamType: 'solo',
-            name: 'Новый проект',
-            shortDescription: 'Краткое описание',
-            shortDescriptionRu: '',
-            previewDescription: 'Описание для превью',
+            name: 'New project',
+            shortDescription: 'Short Description',
+            previewDescription: 'Description for preview',
             previewDescriptionRu: '',
             stack: [],
             keyFeatures: [

@@ -111,8 +111,21 @@ const Inputs: React.FC<EditProjectProps> = ({ project, setData, setIsSaving }) =
                     maxLen={300}
                     onChange={(e) => handleChangeGeneralData('previewDescriptionRu', e.target.value)}
                 />
-
             </div>
+
+            <Input 
+                name='projectShortDescription'
+                additionalClass={styles.textarea}
+                type='text'
+                placeholder='Text...'
+                variant='admin'
+                value={project?.shortDescription}
+                iconPosition='noIcon'
+                adminLabel='withLabel'
+                label='Short description (for project card)'
+                maxLen={100}
+                onChange={(e) => handleChangeGeneralData('shortDescription', e.target.value)}
+            />
             
 
             <Input 
