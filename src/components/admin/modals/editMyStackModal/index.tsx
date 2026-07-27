@@ -118,7 +118,6 @@ const EditMyStackModal: React.FC<EditMyStackModalProps> = ({ initialStack }) => 
         setIsSaving(true)
         try {
             await updateStack(stack)
-            console.log('✅ Stack saved');
         } catch (error) {
             console.error('❌ Failed to save stack:', error);
         }

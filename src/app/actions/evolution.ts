@@ -129,7 +129,6 @@ export async function generateEvolutionDraft(
             },
         };
     } catch (error) {
-        console.error("Failed to generate Evolution", error);
 
         return {
             success: false,
@@ -174,7 +173,6 @@ export async function saveEvolutionDraft(
             data: draft,
         };
     } catch (error) {
-        console.error("Failed to save Evolution draft", error);
 
         return {
             success: false,
@@ -257,7 +255,6 @@ export async function publishEvolution(
             },
         };
     } catch (error) {
-        console.error("Failed to publish Evolution", error);
 
         return {
             success: false,

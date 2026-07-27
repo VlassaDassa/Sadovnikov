@@ -246,7 +246,6 @@ const RecentProjects: React.FC<RecentProjectsProps> = ({ projects }) => {
             }
         } catch (error) {
             showMessage('error', 'Error creating project', dispatch)
-            console.error('Error creating project', error)
         }
         finally {
             setIsCreating(false)

@@ -3,14 +3,14 @@ import { useTranslations } from 'next-intl';
 
 import MetricItem from '@/components/shared/MetricItem';
 
-import type { IMertics } from '@/interfaces/general';
+import type { IMetrics } from '@/interfaces/general';
 
 import styles from './index.module.scss';
 
 
 
 interface MetricsProps {
-    data: IMertics[]
+    data: IMetrics[]
 }
 
 const Metrics: React.FC<MetricsProps> = ({ data }) => {

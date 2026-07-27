@@ -46,7 +46,6 @@ export async function sendContactMessage(input: {
         }
     }
     catch(error: unknown) {
-        console.error('Contact email error: ', error)
 
         return {
             success: false,

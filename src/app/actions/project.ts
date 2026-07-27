@@ -114,7 +114,6 @@ export async function createProject(projectData: IProject) {
         revalidatePath('/')
         return { success: true, project: transformedProject }
     } catch (error) {
-        console.error('Error creating project', error)
         return { success: false, error: 'Failed to create project' }
     }
 }
@@ -271,7 +270,6 @@ export async function updateProject(projectData: IProject) {
     }
 
     catch (error) {
-        console.error('❌ Error updating project', error)
         return { success: false, error: String(error) }
     }
 }

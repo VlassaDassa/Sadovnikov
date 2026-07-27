@@ -230,8 +230,6 @@ async function seedProjects() {
                 },
             },
         })
-
-        console.log(`Created project: ${project.name}`)
     }
 }
 

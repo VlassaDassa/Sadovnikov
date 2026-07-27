@@ -190,7 +190,6 @@ const EditSkillModal: React.FC<EditSkillModal> = ({ initialSkills}) => {
         setIsSaving(true)
         try {
             await updateSkills(skills)
-            console.log('✅ Skills saved');
         } catch (error) {
             console.error('❌ Failed to save skills:', error);
         }

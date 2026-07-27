@@ -46,14 +46,11 @@ const ClientPageWrapper: React.FC<ClientPageWrapperProps> = ({ aboutMe }) => {
         try {
             const response = await updateAboutMe(data)
             if (response.success) {
-                console.log('✅ AboutMe updated successfully')
             }
             else {
-                console.error('❌ Error saving aboutMe', response.error)
                 showMessage('error', 'Error saving aboutMe', dispatch)
             }
         } catch (error) {
-            console.error('❌ Error saving aboutMe', error)
             showMessage('error', 'Error saving aboutMe', dispatch)
         }
         finally {

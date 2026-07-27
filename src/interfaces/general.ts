@@ -48,7 +48,7 @@ export interface IProjectDescription {
     contentRu?: string;
 }
 
-export interface IMertics {
+export interface IMetrics {
     id: number,
     icon: string,
 
@@ -98,7 +98,7 @@ export interface IProject {
     stack: IProjectStack[],
     keyFeatures: IFeatureItem[],
     description: IProjectDescription[],
-    metrics: IMertics[],
+    metrics: IMetrics[],
     commits: ICommit[],
 
     developmentTime: string,

@@ -54,7 +54,6 @@ export async function updateAboutMe(aboutMe: AboutMe) {
 
         return { success: true, aboutMe: transformObjectAboutMe }
     } catch (error) {
-        console.error('Error updating aboutMe', error)
         return { success: false, error: error }
     }
 }

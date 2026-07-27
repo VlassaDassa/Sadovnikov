@@ -166,9 +166,7 @@ const EditFooterModal: React.FC<EditFooterModalProps> = ({ footer }) => {
         setIsSaving(true)
         try {
             await updateFooter(items)
-            console.log('✅ Footer saved');
         } catch (error) {
-            console.error('❌ Failed to save footer:', error);
         }
         finally {
             setIsSaving(false)
