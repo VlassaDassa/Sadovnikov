@@ -12,7 +12,7 @@ export const useTooltip = <T extends HTMLElement = HTMLDivElement>(config: Toolt
     const dispatch = useDispatch()
     const ref = useRef<T>(null);
     const timeoutRef = useRef<NodeJS.Timeout>(null);
-    const { delay=300, offset=10, placement='right', text='', title, date, type='lvl1', fakeWidth } = config
+    const { delay=300, offset=10, placement='right', text='', title, date, type='lvl1', fakeWidth, enabled=true } = config
 
     const calculatePosition = useCallback((target: HTMLElement): { top: number, left: number } => {
         const rect = target.getBoundingClientRect()
@@ -84,7 +84,9 @@ export const useTooltip = <T extends HTMLElement = HTMLDivElement>(config: Toolt
 
     useEffect(() => {
         const element = ref.current
-        if (!element) return
+        if (!enabled || !element || !text) {
+            return
+        }
 
         element.addEventListener('mouseenter', handleMouseEnter)
         element.addEventListener('mouseleave', handleMouseLeave)

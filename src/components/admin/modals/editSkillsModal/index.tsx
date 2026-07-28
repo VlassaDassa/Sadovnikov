@@ -131,7 +131,7 @@ const SkillItem: React.FC<SkillItemProps> = ({ skill, setSkills, setIsSaving }) 
             <div className={styles.firstLineWrapper}>
                 <div className={styles.inputWrapper}>
                     <DragHandler
-                        variant="small"
+                        variant="big"
                     />
 
                     <Input 

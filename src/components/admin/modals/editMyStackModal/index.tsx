@@ -73,7 +73,7 @@ const StackItem: React.FC<StackItemProps> = ({ stackItem, setStack, setIsSaving 
             className={`${styles.stackItem} modalElementBg`}
         >
             <DragHandler
-                variant="small"
+                variant="big"
             />
 
             <Input 

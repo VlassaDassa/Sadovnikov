@@ -194,7 +194,7 @@ const Inputs: React.FC<EditProjectProps> = ({ project, setData, setIsSaving }) =
                 datePicker={true}
                 datePickerDay={true}
                 value={project?.date}
-                placeholder='Date...'
+                placeholder='Date (DD-MM-YEAR)'
                 variant='admin'
                 iconPosition='noIcon'
                 adminLabel='withLabel'

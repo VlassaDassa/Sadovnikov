@@ -76,7 +76,7 @@ const SelectPeriod: React.FC<SelectPeriodProps> = ({ data, setData }) => {
         >
             <Input 
                 name='startDate'
-                placeholder='Start date'
+                placeholder='Start date (DD-MM-YEAR)'
                 variant='admin'
                 value={displayDate(currentItem?.workingPeriod?.startDate)}
                 iconPosition='iconLeft'
@@ -91,7 +91,7 @@ const SelectPeriod: React.FC<SelectPeriodProps> = ({ data, setData }) => {
 
             <Input 
                 name='endDate'
-                placeholder='End date'
+                placeholder='End date (DD-MM-YEAR)'
                 value={displayDate(currentItem?.workingPeriod?.endDate)}
                 datePickerChange={handleEndChange}
                 variant='admin'
