@@ -465,7 +465,6 @@ const Input: React.FC<InputProps> = ({
     }
    
 
-
     const iconOne = (
         (iconPosition === 'iconLeft' || iconPosition === 'iconBoth') && icon?.first ?
             <Icon 

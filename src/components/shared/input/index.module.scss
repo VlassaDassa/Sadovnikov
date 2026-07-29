@@ -318,7 +318,6 @@
     color: #f5f5f5;
     font-family: inherit;
 
-    background-color: #171717;
     border: 1px solid #404040;
     border-radius: 12px;
     box-shadow: 0 16px 48px rgb(0 0 0 / 40%);
@@ -340,7 +339,7 @@
     :global(.react-datepicker__header) {
         padding: 8px 0 12px;
 
-        background-color: transparent;
+        background-color: transparent !important;
         border-bottom: 1px solid #404040;
         border-radius: 0;
     }
@@ -454,20 +453,10 @@
 
     :global(.react-datepicker__month-select:hover),
     :global(.react-datepicker__year-select:hover) {
-        background-color: #333333;
         border-color: #737373;
     }
 
-    :global(
-        .react-datepicker__month-select:focus-visible
-    ),
-    :global(
-        .react-datepicker__year-select:focus-visible
-    ) {
-        border-color: #7c3aed;
-        box-shadow:
-            0 0 0 3px rgb(124 58 237 / 20%);
-    }
+    
 
     :global(
         .react-datepicker__month-select:disabled
@@ -486,8 +475,6 @@
         .react-datepicker__year-select option
     ) {
         color: #f5f5f5;
-
-        background-color: #262626;
     }
 
     :global(.react-datepicker__year-dropdown),
@@ -519,10 +506,6 @@
         border-radius: 8px;
 
         transition: background-color 150ms ease;
-    }
-
-    :global(.react-datepicker__navigation:hover) {
-        background-color: #333333;
     }
 
     :global(
@@ -591,8 +574,6 @@
 
     :global(.react-datepicker__day:hover) {
         color: #ffffff;
-
-        background-color: #333333;
     }
 
     :global(.react-datepicker__day--selected),
@@ -601,24 +582,12 @@
     ) {
         color: #ffffff;
         font-weight: 600;
-
-        background-color: #7c3aed;
     }
 
-    :global(
-        .react-datepicker__day--selected:hover
-    ),
-    :global(
-        .react-datepicker__day--keyboard-selected:hover
-    ) {
-        background-color: #6d28d9;
-    }
+    
 
     :global(.react-datepicker__day--today) {
         font-weight: 700;
-
-        box-shadow:
-            inset 0 0 0 1px #7c3aed;
     }
 
     :global(

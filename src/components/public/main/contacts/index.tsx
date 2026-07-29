@@ -24,11 +24,15 @@ interface Errors {
     message: string
 }
 
+type AvatarState = | 'checking' | 'visible' | 'leaving' | 'hidden'
+const AVATAR_DISMISSED_KEY = 'contacts-avatar-dismissed'
+
 
 const Contacts: React.FC= () => {
     const [name, setName] = useState<string>('')
     const [email, setEmail] = useState<string>('')
     const [message, setMessage] = useState<string>('')
+    const [avatarState, setAvatarState] = useState<AvatarState>('checking')
     const [btnBehavior, setBtnBehavior] = useState<'default' | 'loading' | 'disabled'>('disabled')
     const [error, setError] = useState<Errors>({
         name: '',
@@ -52,7 +56,14 @@ const Contacts: React.FC= () => {
         setIsFirstRender(true);
     }, [pathname]);
 
+    useEffect(() => {
+        const isDismissed = sessionStorage.getItem(AVATAR_DISMISSED_KEY) === 'true'
 
+        setAvatarState(
+            isDismissed ? 'hidden' : 'visible'
+        )
+
+    }, [])
 
     useEffect(() => {
         // Пропуск валидации при первом рендере
@@ -74,7 +85,7 @@ const Contacts: React.FC= () => {
         const newErrors = {name: '', email: '', message: ''}
 
         // Проверка имени
-        if (name.length < 5 || name.length >= 10) {
+        if (name.length < 2 || name.length >= 50) {
             newErrors.name = t('ErrorName')
             isValid = false
         }
@@ -112,7 +123,6 @@ const Contacts: React.FC= () => {
             isValid = false
         }
     }
-
 
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setName(e.target.value)
