@@ -164,10 +164,31 @@ const Contacts: React.FC= () => {
         setMessage('')
     }
 
+    const dismissAvatar = () => {
+        if (avatarState === 'leaving' || avatarState === 'hidden') return
+
+        sessionStorage.setItem(
+            AVATAR_DISMISSED_KEY, 'true'
+        )
+
+        setAvatarState('leaving')
+    }
+
+    const handleAvatarAnimationEnd = (e: React.AnimationEvent<HTMLDivElement>) => {
+        if (e.target !== e.currentTarget) return
+
+        if (avatarState === 'leaving') {
+            setAvatarState('hidden')
+        }
+    }
 
     return (
-        <section id='contacts' className={`container ${styles.contacts}`}>
-            
+        <section 
+            id='contacts' 
+            className={`container ${styles.contacts}`}
+            onPointerDownCapture={dismissAvatar}
+            onFocusCapture={dismissAvatar}
+        >
             <h2 className={`${styles.contactsTitle} sectionTitle`}>{t('Title')}</h2>
 
             <form>
@@ -213,13 +234,28 @@ const Contacts: React.FC= () => {
                 </div>
             </form>
 
-            <TalkingAvatar 
-                ref={elementRef}
-                hand={false}
-                indexFinger={false}
-                text={t('Avatar')}
-                additionalClass={`${styles.avatar} ${isVisible ? styles['avatar-anim'] : ''}`}
-            />
+            
+
+            {
+                avatarState !== 'hidden' && (
+                    <div
+                        ref={elementRef}
+                        className={[
+                            styles.avatar,
+                            avatarState === 'checking' ? styles['avatar-hidden'] : '',
+                            avatarState === 'visible' && isVisible ? styles['avatar-anim'] : '',
+                            avatarState === 'leaving' ? styles['avatar-leaving'] : '',
+                        ].filter(Boolean).join(' ')}
+                        onAnimationEnd={handleAvatarAnimationEnd}
+                    >
+                        <TalkingAvatar 
+                            hand={false}
+                            indexFinger={false}
+                            text={t('Avatar')}
+                        />
+                    </div>
+                )
+            }
         </section>
     )
 }
