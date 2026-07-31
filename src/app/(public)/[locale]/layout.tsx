@@ -1,51 +1,24 @@
-import type {
-    Metadata,
-} from 'next';
+import type { Metadata } from 'next';
+
+import { hasLocale, NextIntlClientProvider } from 'next-intl';
+import { getMessages, setRequestLocale } from 'next-intl/server';
+import { notFound } from 'next/navigation';
+import { routing } from '@/i18n/routing';
+
+import { DynImportLayout } from '@/components/shared/DynImportLayout';
+import Header from '@/components/public/general/header';
+import DevelopmentNotice from '@/components/public/general/developmentNotice';
+import FooterWrapper from '@/components/public/general/footer/footerWrapper';
+import GlobalLoader from '@/components/shared/GlobalLoader';
+import NoiseBackground from '@/components/shared/NoizeBg';
+import GlobalTooltip from '@/components/shared/GlobalTooltip';
+import { Providers } from '@/store/Providers';
 
 import Script from 'next/script';
 
-import {
-    hasLocale,
-    NextIntlClientProvider,
-} from 'next-intl';
-
-import {
-    getMessages,
-    setRequestLocale,
-} from 'next-intl/server';
-
-import {
-    notFound,
-} from 'next/navigation';
-
-import {
-    routing,
-} from '@/i18n/routing';
-
-import {
-    DynImportLayout,
-} from '@/components/shared/DynImportLayout';
-
-import Header
-    from '@/components/public/general/header';
-
-import FooterWrapper
-    from '@/components/public/general/footer/footerWrapper';
-
-import GlobalLoader
-    from '@/components/shared/GlobalLoader';
-
-import NoiseBackground
-    from '@/components/shared/NoizeBg';
-
-import GlobalTooltip
-    from '@/components/shared/GlobalTooltip';
-
-import {
-    Providers,
-} from '@/store/Providers';
-
 import '../../globals.scss';
+
+
 
 export const metadata: Metadata = {
     title: 'Portfolio',
@@ -125,15 +98,16 @@ export default async function LocaleLayout({
                         />
 
                         <Header />
-
+                        
                         {children}
 
                         <FooterWrapper />
+                        <DevelopmentNotice />
                     </Providers>
                 </NextIntlClientProvider>
 
                 {umamiUrl &&
-                umamiWebsiteId ? (
+                    umamiWebsiteId ? (
                     <Script
                         src={`${umamiUrl}/script.js`}
                         data-website-id={

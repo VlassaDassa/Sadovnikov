@@ -364,6 +364,36 @@ const Input: React.FC<InputProps> = ({
         lang,
     ])
 
+    useEffect(() => {
+        if (!datePickerOpen) {
+            return
+        }
+
+        const animationFrame =
+            requestAnimationFrame(() => {
+                const modal =
+                    datePickerWrapperRef.current
+                        ?.closest<HTMLElement>(
+                            '[data-modal-scroll]',
+                        )
+
+                if (!modal) {
+                    return
+                }
+
+                modal.scrollTo({
+                    top: modal.scrollHeight,
+                    behavior: 'smooth',
+                })
+            })
+
+        return () => {
+            cancelAnimationFrame(
+                animationFrame,
+            )
+        }
+    }, [datePickerOpen])
+
     const commitDate = (
         date: Date,
     ) => {

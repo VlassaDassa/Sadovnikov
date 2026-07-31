@@ -111,6 +111,16 @@
     "SubTitle": "The page is under development"
   },
 
+  "DevelopmentNotice": {
+        "AriaLabel": "Development status notice",
+        "Title": "This website is still in development",
+        "Description": "Some projects, descriptions, metrics and other content are temporary demonstration data and should not be treated as factual.",
+        "GitHub": "View source on GitHub",
+        "Close": "Close notice"
+  },
+
+  
+
 
 
 

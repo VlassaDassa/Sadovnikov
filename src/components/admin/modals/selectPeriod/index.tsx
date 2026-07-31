@@ -1,7 +1,6 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
-import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 import ModalWrapper from "../modalWrapper";
@@ -14,10 +13,12 @@ import { displayDate } from "@/lib/dates";
 
 
 
+
 interface SelectPeriodProps {
     data: AboutMe,
     setData: Dispatch<SetStateAction<AboutMe>>
 }
+
 
 
 const SelectPeriod: React.FC<SelectPeriodProps> = ({ data, setData }) => {

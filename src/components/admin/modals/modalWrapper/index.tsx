@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, forwardRef } from 'react';
+import React, { Dispatch, SetStateAction, forwardRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import {
     DndContext,
@@ -50,6 +50,7 @@ interface ModalWrapperProps {
 }
 
 
+
 const ModalWrapper = forwardRef<HTMLDivElement, ModalWrapperProps>(
     ({ 
         drag, 
@@ -70,6 +71,7 @@ const ModalWrapper = forwardRef<HTMLDivElement, ModalWrapperProps>(
     }, ref) => {
 
     const dispatch = useDispatch()
+
 
     const sensors = useSensors(
         useSensor(PointerSensor, {

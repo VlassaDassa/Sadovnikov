@@ -1,0 +1,212 @@
+@use './../../../../styles/tokens/colors' as *;
+@use './../../../../styles/tokens/typography' as *;
+
+
+.notice {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    left: 16px;
+    z-index: 10000;
+
+    display: flex;
+    justify-content: center;
+
+    pointer-events: none;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 30px;
+
+    width: min(100%, 900px);
+    padding: 40px;
+
+    color: $neutral_100;
+
+    background:
+        rgb(18 18 18 / 92%);
+    border: 1px solid $neutral_700;
+    border-radius: 14px;
+    box-shadow:
+        0 16px 50px rgb(0 0 0 / 45%);
+
+    backdrop-filter: blur(14px);
+
+    pointer-events: auto;
+
+    animation:
+        noticeAppear
+        350ms
+        ease-out
+        forwards;
+}
+
+.marker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 46px;
+    height: 28px;
+    padding: 0 8px;
+
+    color: $neutral_100;
+
+    @extend .body-14-mont-regular;
+    font-size: 11px;
+
+    background-color: $brand_900;
+    border-radius: 6px;
+}
+
+.text {
+    min-width: 0;
+}
+
+.title {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: $neutral_100;
+    @extend .body-14-mont-regular;
+    font-size: 14px;
+}
+
+.description {
+    margin: 0;
+
+    color: $neutral_400;
+    @extend .body-14-mont-regular;
+    font-size: 13px;
+    line-height: $leading-normal;
+}
+
+.link {
+    flex-shrink: 0;
+
+    padding: 8px 12px;
+
+    color: $neutral_100;
+    p {
+        @extend .body-14-mont-regular;
+        font-size: 13px;
+        color: $neutral_300;
+        text-wrap: nowrap;
+    }
+
+    background-color: $neutral_800;
+    border: 1px solid $neutral_600;
+    border-radius: 8px;
+
+    transition:
+        color 150ms ease,
+        background-color 150ms ease,
+        border-color 150ms ease;
+}
+
+.link:hover {
+    color: $white;
+
+    background-color: $neutral_700;
+    border-color: $neutral_500;
+}
+
+.link:focus-visible,
+.close:focus-visible {
+    outline: 2px solid $brand_700;
+    outline-offset: 3px;
+}
+
+.close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 34px;
+    height: 34px;
+    padding: 0;
+
+    color: $neutral_400;
+    @extend .body-14-mont-regular;
+    font-size: 24px;
+    line-height: 1;
+
+    background: transparent;
+    border: 0;
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    transition:
+        color 150ms ease,
+        background-color 150ms ease;
+
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.close:hover {
+    color: $white;
+
+    background-color: $neutral_800;
+}
+
+@keyframes noticeAppear {
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(20px)
+            scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+@media (max-width: 1024px) {
+    .marker {
+        display: none;
+    }
+}
+
+@media (max-width: 700px) {
+    .notice {
+        right: 10px;
+        bottom: 10px;
+        left: 10px;
+    }
+
+    .description {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 600px) {
+    .content {
+        padding: 40px;
+        flex-direction: column;
+    }
+
+    .close {
+        grid-column: 3;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .content {
+        animation-duration: 1ms;
+    }
+}

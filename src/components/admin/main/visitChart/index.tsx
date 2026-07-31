@@ -15,6 +15,9 @@ import {
     XAxis,
     YAxis,
 } from 'recharts';
+import type {
+    XAxisTickContentProps,
+} from 'recharts'
 import { useSelector } from 'react-redux';
 
 import { RootState } from '@/store';
@@ -210,63 +213,42 @@ const VisitChart: React.FC<VisitChartProps> = ({ data }) => {
         return 16;
     }, [windowWidth]);
 
-    const maximumXAxisTicks = useMemo(() => {
-        if (windowWidth < 550) {
-            return 4;
-        }
-
-        if (windowWidth < 900) {
-            return 6;
-        }
-
-        return 8;
-    }, [windowWidth]);
+    
 
     const xAxisTicks = useMemo(() => {
-        const { startIndex, endIndex } = brushRange;
+        const {
+            startIndex,
+            endIndex,
+        } = brushRange;
 
-        const rangeLength =
-            endIndex - startIndex + 1;
-
-        if (rangeLength <= 0) {
-            return [];
+        if (startIndex === endIndex) {
+            return [startIndex];
         }
 
-        if (rangeLength <= maximumXAxisTicks) {
-            return Array.from(
-                { length: rangeLength },
-                (_, index) => startIndex + index,
-            );
+        const boundaryTicks = [
+            startIndex,
+            endIndex,
+        ];
+
+        if (
+            windowWidth < 550 ||
+            endIndex - startIndex < 2
+        ) {
+            return boundaryTicks;
         }
 
-        const intervalsCount =
-            maximumXAxisTicks - 1;
-
-        const step =
-            (endIndex - startIndex) /
-            intervalsCount;
-
-        const ticks = Array.from(
-            { length: maximumXAxisTicks },
-            (_, index) => {
-                if (index === 0) {
-                    return startIndex;
-                }
-
-                if (index === intervalsCount) {
-                    return endIndex;
-                }
-
-                return Math.round(
-                    startIndex + index * step,
-                );
-            },
+        const middleIndex = Math.floor(
+            (startIndex + endIndex) / 2,
         );
 
-        return Array.from(new Set(ticks));
+        return [
+            startIndex,
+            middleIndex,
+            endIndex,
+        ];
     }, [
         brushRange,
-        maximumXAxisTicks,
+        windowWidth,
     ]);
 
     const formatXAxis = (
@@ -276,6 +258,83 @@ const VisitChart: React.FC<VisitChartProps> = ({ data }) => {
 
         return item?.day ?? '';
     };
+
+    const renderXAxisTick = useCallback(
+        ({
+            x,
+            y,
+            payload,
+        }: XAxisTickContentProps) => {
+            const xCoordinate = Number(x)
+            const yCoordinate = Number(y)
+            const tickIndex = Number(
+                payload.value,
+            )
+
+            if (
+                !Number.isFinite(xCoordinate) ||
+                !Number.isFinite(yCoordinate) ||
+                !Number.isFinite(tickIndex)
+            ) {
+                return null
+            }
+
+            const isFirst =
+                tickIndex ===
+                brushRange.startIndex
+
+            const isLast =
+                tickIndex ===
+                brushRange.endIndex
+
+            const isSingle =
+                brushRange.startIndex ===
+                brushRange.endIndex
+
+            let textAnchor:
+                | 'start'
+                | 'middle'
+                | 'end' = 'middle'
+
+            let horizontalOffset = 0
+
+            if (!isSingle && isFirst) {
+                textAnchor = 'start'
+                horizontalOffset = 4
+            }
+
+            if (!isSingle && isLast) {
+                textAnchor = 'end'
+                horizontalOffset = -4
+            }
+
+            return (
+                <text
+                    x={
+                        xCoordinate +
+                        horizontalOffset
+                    }
+                    y={yCoordinate}
+                    dy={18}
+                    fill={cssVars.neutral_600}
+                    fontSize={fontSize}
+                    fontFamily="Montserrat, sans-serif"
+                    fontWeight={
+                        cssVars.semi_bold
+                    }
+                    textAnchor={textAnchor}
+                >
+                    {formatXAxis(tickIndex)}
+                </text>
+            )
+        },
+        [
+            brushRange.startIndex,
+            brushRange.endIndex,
+            fontSize,
+            chartData,
+        ],
+    )
 
     const yAxisConfig = useMemo(
         () => createYAxisConfig(visibleData),
@@ -377,18 +436,14 @@ const VisitChart: React.FC<VisitChartProps> = ({ data }) => {
                                     brushRange.endIndex,
                                 ]}
                                 ticks={xAxisTicks}
-                                tickFormatter={formatXAxis}
+                                tick={renderXAxisTick}
                                 interval={0}
                                 allowDecimals={false}
-                                tickMargin={10}
-                                tick={{
-                                    fill: cssVars.neutral_600,
-                                    fontSize,
-                                    fontFamily: 'Montserrat, sans-serif',
-                                    fontWeight: cssVars.semi_bold,
-                                }}
+                                height={36}
+                                tickLine={false}
                                 tabIndex={-1}
                             />
+
                             <YAxis
                                 className={styles.axisY}
                                 domain={[0, yAxisConfig.max]}
@@ -459,6 +514,12 @@ const VisitChart: React.FC<VisitChartProps> = ({ data }) => {
                                 <AreaChart
                                     data={chartData}
                                     tabIndex={-1}
+                                    margin={{
+                                        top: 0,
+                                        right: 16,
+                                        bottom: 0,
+                                        left: 4,
+                                    }}
                                 >
                                     <Area
                                         tabIndex={-1}
