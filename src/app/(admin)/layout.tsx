@@ -13,6 +13,9 @@ import GlobalTooltip from "@/components/shared/GlobalTooltip";
 import { Providers } from "@/store/Providers";
 import { getAdminSession } from '@/lib/auth/admin';
 
+import { fontVariables } from '@/styles/fonts';
+
+
 
 
 export const metadata: Metadata = {
@@ -46,13 +49,7 @@ export default async function AdminLayout({
     }
 
     return (
-        <html data-scroll-behavior="smooth" lang="en">
-            <head>
-                <link 
-                    href="https://fonts.googleapis.com/css2?family=ubuntu:wght@400;700&family=Montserrat:wght@100..900&display=swap" 
-                    rel="stylesheet"
-                />
-            </head>
+        <html data-scroll-behavior="smooth" lang="en" className={fontVariables}>
             <body>
                 <Providers>
                     <NoiseBackground />

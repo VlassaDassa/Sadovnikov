@@ -18,6 +18,7 @@ import Script from 'next/script';
 import { getOpenGraphLocale,siteConfig } from '@/lib/seo/site';
 import { routing } from '@/i18n/routing';
 import type { AppLocale } from '@/i18n/routing';
+import { fontVariables } from '@/styles/fonts';
 
 import '../../globals.scss';
 
@@ -140,14 +141,8 @@ export default async function LocaleLayout({
         <html
             lang={locale}
             data-scroll-behavior="smooth"
+            className={fontVariables}
         >
-            <head>
-                <link
-                    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
-                    rel="stylesheet"
-                />
-            </head>
-
             <body>
                 <NextIntlClientProvider
                     locale={locale}

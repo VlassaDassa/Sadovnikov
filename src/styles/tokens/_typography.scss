@@ -2,8 +2,8 @@
 
 
 // Font families
-$font-ubuntu: "Ubuntu", sans-serif;
-$font-mont: "Montserrat";
+$font-ubuntu: var(--font-ubuntu), Arial, sans-serif;
+$font-mont: var(--font-montserrat), Arial, sans-serif;
 
 
 
