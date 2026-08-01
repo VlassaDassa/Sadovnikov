@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 
 const Canvas = dynamic(() => import('../canvas'), { ssr: false })
 const Slider = dynamic(() => import('../slider'), { ssr: false })
-const ProjectItem = dynamic(() => import('../projectItem'), { ssr: false })
+import ProjectItem from '../projectItem'
 
 import { RootState } from '@/store';
 import { IProject } from '@/interfaces/general';

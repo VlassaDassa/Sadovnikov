@@ -12,12 +12,31 @@ import NoiseBackground from '@/components/shared/NoizeBg'
 
 import { Providers } from '@/store/Providers'
 
+import { fontVariables } from '@/styles/fonts'
 import './../../globals.scss'
+
+
+
+
+
 
 export const metadata: Metadata = {
     title: 'Login',
-    description: 'Description portfolio',
+
+    robots: {
+        index: false,
+        follow: false,
+        nocache: true,
+
+        googleBot: {
+            index: false,
+            follow: false,
+            noimageindex: true
+        }
+    }
 }
+
+
 
 interface AuthLayoutProps {
     children: React.ReactNode
@@ -33,14 +52,8 @@ export default async function AuthLayout({
         <html
             data-scroll-behavior="smooth"
             lang={locale}
+            className={fontVariables}
         >
-            <head>
-                <link
-                    href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&family=Montserrat:wght@100..900&display=swap"
-                    rel="stylesheet"
-                />
-            </head>
-
             <body>
                 <NextIntlClientProvider
                     locale={locale}

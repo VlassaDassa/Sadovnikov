@@ -13,11 +13,27 @@ import GlobalTooltip from "@/components/shared/GlobalTooltip";
 import { Providers } from "@/store/Providers";
 import { getAdminSession } from '@/lib/auth/admin';
 
+import { fontVariables } from '@/styles/fonts';
+
+
 
 
 export const metadata: Metadata = {
     title: 'Admin',
+
+    robots: {
+        index: false,
+        follow: false,
+        nocache: true,
+
+        googleBot: {
+            index: false,
+            follow: false,
+            noimageindex: true
+        }
+    }
 }
+
 
 export default async function AdminLayout({
     children,
@@ -32,15 +48,8 @@ export default async function AdminLayout({
         redirect('/login')
     }
 
-
     return (
-        <html data-scroll-behavior="smooth" lang="en">
-            <head>
-                <link 
-                    href="https://fonts.googleapis.com/css2?family=ubuntu:wght@400;700&family=Montserrat:wght@100..900&display=swap" 
-                    rel="stylesheet"
-                />
-            </head>
+        <html data-scroll-behavior="smooth" lang="en" className={fontVariables}>
             <body>
                 <Providers>
                     <NoiseBackground />

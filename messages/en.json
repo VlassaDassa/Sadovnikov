@@ -118,31 +118,16 @@
         "GitHub": "View source on GitHub",
         "Close": "Close notice"
   },
-
   
-
-
-
-
-
-  "HomePage": {
-    "title": "Developer Portfolio",
-    "description": "I create modern web applications"
-  },
-  "Navigation": {
-    "home": "Home",
-    "projects": "Projects",
-    "contacts": "Contacts"
-  },
-  "Project": {
-    "evolution": "Evolution",
-    "noCommits": "No commits",
-    "github": "GitHub",
-    "demo": "Live demo"
-  },
-  "Common": {
-    "open": "Open",
-    "close": "Close",
-    "loading": "Loading..."
+  "SEO": {
+    "DefaultTitle": "Vlad Sadovniov - Frontend Developer",
+    "DefaultDescription": "Frontend developer portfolio featuring modern web applications, technologies and development experience.",
+    "HomeTitle": "Vlad Sadovnikov - Frontend Developer",
+    "HomeDescription": "Frontend developer portfolio with selected web projects, technology stack, skills and development experience."
   }
+
+
+
+
+ 
 }
