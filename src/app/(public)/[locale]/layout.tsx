@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
-import { routing } from '@/i18n/routing';
 
 import { DynImportLayout } from '@/components/shared/DynImportLayout';
 import Header from '@/components/public/general/header';
@@ -15,15 +15,82 @@ import GlobalTooltip from '@/components/shared/GlobalTooltip';
 import { Providers } from '@/store/Providers';
 
 import Script from 'next/script';
+import { getOpenGraphLocale,siteConfig } from '@/lib/seo/site';
+import { routing } from '@/i18n/routing';
+import type { AppLocale } from '@/i18n/routing';
 
 import '../../globals.scss';
 
 
 
-export const metadata: Metadata = {
-    title: 'Portfolio',
-    description: 'Description portfolio',
-};
+interface LocaleParams {
+    params: Promise<{locale: string}>
+} 
+
+export async function generateMetadata({params}: LocaleParams): Promise<Metadata> {
+    const { locale: requestedLocale } = await params
+
+    const locale: AppLocale = requestedLocale === 'ru' ? 'ru' : 'en'
+
+    const t = await getTranslations({locale, namespace: 'SEO'})
+
+    const indexingEnabled = siteConfig.indexingEnabled
+
+    return {
+        metadataBase: siteConfig.url,
+        applicationName: siteConfig.name,
+        title: {
+            default: t('DefaultTitle'),
+            template: `%s | ${siteConfig.name}`
+        },
+        description: t('DefaultDescription'),
+        authors: [{
+            name: siteConfig.name,
+            url: siteConfig.url
+        }],
+        creator: siteConfig.name,
+        publisher: siteConfig.name,
+        referrer: 'origin-when-cross-origin',
+        formatDetection: {
+            email: false,
+            address: false,
+            telephone: false
+        },
+        robots: {
+            index: indexingEnabled,
+            follow: indexingEnabled,
+            nocache: !indexingEnabled,
+
+            googleBot: {
+                index: indexingEnabled,
+                follow: indexingEnabled,
+                noimageindex: !indexingEnabled,
+                'max-video-preview': -1,
+                'max-image-preview': 'large',
+                'max-snippet': -1
+            }
+        },
+
+        openGraph: {
+            type: 'website',
+            siteName: siteConfig.name,
+            locale: getOpenGraphLocale(locale),
+            alternateLocale: [
+                locale === 'ru' ? 'en_US' : 'ru_RU'
+            ]
+        },
+
+        twitter: {
+            card: 'summary_large_image'
+        },
+
+        manifest: '/manifest.webmanifest'
+    }
+
+
+}
+
+
 
 interface LocaleLayoutProps {
     children: React.ReactNode;

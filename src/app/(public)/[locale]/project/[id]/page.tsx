@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
 
 import ProjectPreview from "@/components/public/project/ProjectPreview";
 import ProjectStack from "@/components/public/project/ProjectStack";
@@ -14,6 +15,8 @@ import prisma from '@/lib/prisma';
 import { IProject } from '@/interfaces/general';
 import { transformProject } from '@/lib/transformers/project';
 import { parseEntityId } from '@/lib/project';
+import { getProjectById } from '@/lib/project';
+import { getAbsoluteUrl, getLanguageAlternates, getOpenGraphLocale, siteConfig } from '@/lib/seo/site';
 
 import styles from './index.module.scss';
 
@@ -22,6 +25,68 @@ import styles from './index.module.scss';
 interface ProjectPageProps {
     params: Promise<{ id: string, locale: string }>;
 }
+
+
+export async function generateMetadata({params}: ProjectPageProps): Promise<Metadata> {
+	const { id, locale: requestedLocale } = await params
+	const projectId = parseEntityId(id)
+	const locale = requestedLocale === 'ru' ? 'ru' : 'en'
+	const rawProject = await getProjectById(projectId)
+
+	if (!rawProject) {
+		return {
+			title: 'Project not found',
+			robots: {
+				index: false,
+				follow: false
+			}
+		}
+	}
+
+	const project = transformProject(rawProject, locale)
+	const path = `/project/${project.id}`
+	const canonical = getAbsoluteUrl(path, locale)
+	const title = `${project.name} - ${project.category}`
+	const description = project.previewDescription || project.shortDescription
+	const projectImage = project.images.find((image) => image.main)?.image
+	const socialImage = projectImage && !projectImage.startsWith('data:') ? projectImage : '/opengraph-image.png'
+
+	return {
+		title,
+		description,
+		alternates: {
+			canonical,
+			languages: getLanguageAlternates(path)
+		},
+		openGraph: {
+			title,
+			description,
+			type: 'article',
+			url: canonical,
+			siteName: siteConfig.name,
+			locale: getOpenGraphLocale(locale),
+			alternateLocale: [ locale === 'ru' ? 'en_US' : 'ru_RU' ],
+			images: [
+				{
+					url: socialImage,
+					alt: project.name
+				}
+			]
+		},
+		twitter: {
+			card: 'summary_large_image',
+			title,
+			description,
+			images: [ socialImage ]
+		}
+	}
+
+}
+
+
+
+
+
 
 
 export default async function Project({ params }: ProjectPageProps) {

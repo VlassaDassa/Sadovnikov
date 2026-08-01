@@ -14,10 +14,28 @@ import { Providers } from '@/store/Providers'
 
 import './../../globals.scss'
 
+
+
+
+
+
 export const metadata: Metadata = {
-    title: 'Login',
-    description: 'Description portfolio',
+    title: 'Admin',
+
+    robots: {
+        index: false,
+        follow: false,
+        nocache: true,
+
+        googleBot: {
+            index: false,
+            follow: false,
+            noimageindex: true
+        }
+    }
 }
+
+
 
 interface AuthLayoutProps {
     children: React.ReactNode

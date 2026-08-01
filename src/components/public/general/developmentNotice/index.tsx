@@ -48,7 +48,7 @@ const DevelopmentNotice = () => {
             role="status"
             aria-label={t('AriaLabel')}
         >
-            <div className={styles.content}>
+            <div className={styles.content} data-nosnippet>
                 <div className={styles.marker}>
                     WIP
                 </div>
