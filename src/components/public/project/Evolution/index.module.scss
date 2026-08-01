@@ -17,17 +17,21 @@
 .evolWrapper {
     background-color: $neutral_900;
     width: calc(100% - 60px);
-
     padding: 30px 25px;
     border-radius: 20px;
-    height: 350px;
 
     border: 1px solid $neutral_800;
+    height: 510px;
+
 
     @extend .shadow-lg;
 
     @media (min-width: 450px) {
         width: 330px;
+    }
+
+    @media (min-width: 1280px) {
+        height: 420px;
     }
 }
 

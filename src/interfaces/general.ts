@@ -48,7 +48,7 @@ export interface IProjectDescription {
     contentRu?: string;
 }
 
-export interface IMertics {
+export interface IMetrics {
     id: number,
     icon: string,
 
@@ -90,7 +90,6 @@ export interface IProject {
     name: string,
 
     shortDescription: string,
-    shortDescriptionRu?: string,
 
     previewDescription: string,
     previewDescriptionRu?: string,
@@ -98,7 +97,7 @@ export interface IProject {
     stack: IProjectStack[],
     keyFeatures: IFeatureItem[],
     description: IProjectDescription[],
-    metrics: IMertics[],
+    metrics: IMetrics[],
     commits: ICommit[],
 
     developmentTime: string,
@@ -120,6 +119,7 @@ export interface TooltipConfig {
     fakeWidth?: number, // Предполагаемая ширина(приблизительная) для расчётов положения (чтобы не вылезало за края). Для мало текста +- 100, для большого +- 400
     offset?: number,
     placement?: 'top' | 'bottom' | 'left' | 'right';
+    enabled?: boolean;
 }
 
 

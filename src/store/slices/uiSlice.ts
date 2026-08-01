@@ -47,6 +47,15 @@ const uiSlice = createSlice({
             }
         },
 
+        showOverlay: (state) => {
+            const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+            state.isOverlayVisible = true
+            state.bodyScroll = false
+           
+            document.documentElement.style.overflow = 'hidden';
+            document.documentElement.style.paddingRight = `${scrollbarWidth}px`;
+        },
+
         closeOverlay: (state) => {
             state.isOverlayVisible = false;
             document.documentElement.style.overflow = 'auto';
@@ -116,6 +125,8 @@ const uiSlice = createSlice({
 })
 
 export const { 
+        showOverlay,
+
         toggleIsOverlayVisible,
         toggleMenu,
         toggleEditSkillsModal,

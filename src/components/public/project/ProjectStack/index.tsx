@@ -41,7 +41,7 @@ const StackItem: React.FC<StackItemProps> = ({ item, index, customLeft, customTo
             data-index={index}
         >
             <div className={styles.iconWrapper}>
-                <img src={item.icon} alt="" aria-hidden='true' />
+                <img src={item.icon} alt="" aria-hidden='true' className={styles.icon} />
             </div>
             <p className={styles.iconName}>{item.name}</p>
         </div>

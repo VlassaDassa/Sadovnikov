@@ -103,11 +103,7 @@ export function transformProject(project: PrismaProject, locale: AppLocale='en')
         gitHubLink: project.githubLink || '',
         demoLink: project.demoLink || '',
 
-        shortDescription: getLocalizedText(
-            locale,
-            project.shortDescription,
-            project.shortDescriptionRu
-        ),
+        shortDescription: project.shortDescription,
 
         previewDescription: getLocalizedText(
             locale,
@@ -225,7 +221,6 @@ export function transformRawProject(project: PrismaProject): IProject {
         name: project.name,
 
         shortDescription: project.shortDescription,
-        shortDescriptionRu: project.shortDescriptionRu || '',
 
         previewDescription: project.previewDescription,
         previewDescriptionRu: project.previewDescriptionRu || '',

@@ -141,8 +141,6 @@ async function seedProjects() {
                 category: projectData.category,
                 name: projectData.name,
                 shortDescription,
-                shortDescriptionRu:
-                    projectData.shortDescriptionRu || null,
                 previewDescription:
                     projectData.previewDescription,
                 previewDescriptionRu:
@@ -230,8 +228,6 @@ async function seedProjects() {
                 },
             },
         })
-
-        console.log(`Created project: ${project.name}`)
     }
 }
 

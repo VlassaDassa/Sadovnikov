@@ -13,7 +13,7 @@ import Button from "@/components/shared/button/Button";
 
 import { generateEvolutionDraft } from "@/app/actions/evolution";
 import type { IEvolutionDraftItem } from "@/interfaces/evolution";
-import { closeOverlay, toggleEvolutionReviewModal, toggleIsOverlayVisible } from "@/store/slices/uiSlice";
+import { closeOverlay, toggleEvolutionReviewModal, showOverlay } from "@/store/slices/uiSlice";
 import { closeModals } from "@/lib/modals";
 
 import styles from "./index.module.scss";
@@ -63,8 +63,6 @@ const Evolution: React.FC<EvolutionProps> = ({
     );
 
     const [isGenerating, setIsGenerating] = useState(false);
-
-    const [isReviewOpen, setIsReviewOpen] = useState(false);
 
     const [error, setError] = useState<string | null>(null);
 
@@ -151,7 +149,7 @@ const Evolution: React.FC<EvolutionProps> = ({
 
     const openReviewModal = () => {
         dispatch(toggleEvolutionReviewModal())
-        dispatch(toggleIsOverlayVisible())
+        dispatch(showOverlay())
     }
 
     const statusClass = hasDraft

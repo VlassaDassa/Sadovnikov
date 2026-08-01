@@ -5,16 +5,11 @@ import type { IconItem } from '@/interfaces/general';
 
 const IconCalendar: React.FC<IconItem> = ({ strokeColor, fillColor, iconClass, size }) => {
     return (
-        <svg width={size} height={size} viewBox={`0 0 ${20} ${20}`} className={iconClass} xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 0C3.44772 0 3 0.447715 3 1V2H2C0.895431 2 0 2.89543 0 4V14C0 15.1046 0.895431 16 2 16H14C15.1046 16 16 15.1046 16 14V4C16 2.89543 15.1046 2 14 2H13V1C13 0.447715 12.5523 0 12 0C11.4477 0 11 0.447715 11 1V2H5V1C5 0.447715 4.55228 0 4 0ZM4 5C3.44772 5 3 5.44772 3 6C3 6.55228 3.44772 7 4 7H12C12.5523 7 13 6.55228 13 6C13 5.44772 12.5523 5 12 5H4Z" 
-                stroke={'none'} 
+        <svg width={size} height={size} viewBox="0 0 20 20" fill="none" className={iconClass} xmlns="http://www.w3.org/2000/svg">
+            <path fillRule="evenodd" clipRule="evenodd" d="M6 2C5.44772 2 5 2.44772 5 3V4H4C2.89543 4 2 4.89543 2 6V16C2 17.1046 2.89543 18 4 18H16C17.1046 18 18 17.1046 18 16V6C18 4.89543 17.1046 4 16 4H15V3C15 2.44772 14.5523 2 14 2C13.4477 2 13 2.44772 13 3V4H7V3C7 2.44772 6.55228 2 6 2ZM6 7C5.44772 7 5 7.44772 5 8C5 8.55228 5.44772 9 6 9H14C14.5523 9 15 8.55228 15 8C15 7.44772 14.5523 7 14 7H6Z"
                 fill={strokeColor}
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
             />
         </svg>
-
     )
 }
 

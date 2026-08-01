@@ -1,6 +1,6 @@
 'use server'
 
-import { email, success, z } from 'zod';
+import { z } from 'zod';
 
 import { sendContactEmail } from '@/lib/mail/sendContactEmail';
 
@@ -46,7 +46,6 @@ export async function sendContactMessage(input: {
         }
     }
     catch(error: unknown) {
-        console.error('Contact email error: ', error)
 
         return {
             success: false,

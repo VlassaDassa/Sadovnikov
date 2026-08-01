@@ -24,37 +24,19 @@ function getCredentials(): string {
 }
 
 function getCertificatePath(): string {
-    const configuredPath =
-        process.env
-            .GIGACHAT_CA_CERT_PATH;
+    const resolvedPath = path.join(
+        process.cwd(),
+        'certs',
+        'russian-trusted-ca.pem',
+    )
 
-    if (!configuredPath) {
-        throw new Error(
-            'GIGACHAT_CA_CERT_PATH is missing',
-        );
-    }
-
-    const resolvedPath =
-        path.isAbsolute(
-            configuredPath,
-        )
-            ? configuredPath
-            : path.resolve(
-                  process.cwd(),
-                  configuredPath,
-              );
-
-    if (
-        !fs.existsSync(
-            resolvedPath,
-        )
-    ) {
+    if (!fs.existsSync(resolvedPath)) {
         throw new Error(
             `GigaChat CA certificate was not found: ${resolvedPath}`,
-        );
+        )
     }
 
-    return resolvedPath;
+    return resolvedPath
 }
 
 function getTimeout(): number {

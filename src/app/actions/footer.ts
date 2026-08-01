@@ -31,7 +31,6 @@ export async function updateFooter(footer: IFooterItem[]) {
 
         return { success: true }
     } catch (error) {
-        console.error('Error updating footer', error)
         return { success: false, error: 'Failed to update footer' }        
     }
 }

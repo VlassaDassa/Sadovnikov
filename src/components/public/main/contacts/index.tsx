@@ -24,11 +24,15 @@ interface Errors {
     message: string
 }
 
+type AvatarState = | 'checking' | 'visible' | 'leaving' | 'hidden'
+const AVATAR_DISMISSED_KEY = 'contacts-avatar-dismissed'
+
 
 const Contacts: React.FC= () => {
     const [name, setName] = useState<string>('')
     const [email, setEmail] = useState<string>('')
     const [message, setMessage] = useState<string>('')
+    const [avatarState, setAvatarState] = useState<AvatarState>('checking')
     const [btnBehavior, setBtnBehavior] = useState<'default' | 'loading' | 'disabled'>('disabled')
     const [error, setError] = useState<Errors>({
         name: '',
@@ -52,7 +56,14 @@ const Contacts: React.FC= () => {
         setIsFirstRender(true);
     }, [pathname]);
 
+    useEffect(() => {
+        const isDismissed = sessionStorage.getItem(AVATAR_DISMISSED_KEY) === 'true'
 
+        setAvatarState(
+            isDismissed ? 'hidden' : 'visible'
+        )
+
+    }, [])
 
     useEffect(() => {
         // Пропуск валидации при первом рендере
@@ -74,11 +85,10 @@ const Contacts: React.FC= () => {
         const newErrors = {name: '', email: '', message: ''}
 
         // Проверка имени
-        if (name.length < 5 || name.length >= 10) {
+        if (name.length < 2 || name.length >= 50) {
             newErrors.name = t('ErrorName')
             isValid = false
         }
-       
 
         // Проверка email
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -93,6 +103,7 @@ const Contacts: React.FC= () => {
             isValid = false
         }
 
+
         if (isValid) {
             setBtnBehavior('default')
         }
@@ -102,8 +113,16 @@ const Contacts: React.FC= () => {
         
         
         setError(newErrors)
-    }
 
+        // Если все поля пустые - отключить валидацию
+        if (name.length === 0 && email.length === 0 && message.length === 0) {
+            setError(
+                {name: '', email: '', message: ''}
+            )
+
+            isValid = false
+        }
+    }
 
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setName(e.target.value)
@@ -145,10 +164,31 @@ const Contacts: React.FC= () => {
         setMessage('')
     }
 
+    const dismissAvatar = () => {
+        if (avatarState === 'leaving' || avatarState === 'hidden') return
+
+        sessionStorage.setItem(
+            AVATAR_DISMISSED_KEY, 'true'
+        )
+
+        setAvatarState('leaving')
+    }
+
+    const handleAvatarAnimationEnd = (e: React.AnimationEvent<HTMLDivElement>) => {
+        if (e.target !== e.currentTarget) return
+
+        if (avatarState === 'leaving') {
+            setAvatarState('hidden')
+        }
+    }
 
     return (
-        <section id='contacts' className={`container ${styles.contacts}`}>
-            
+        <section 
+            id='contacts' 
+            className={`container ${styles.contacts}`}
+            onPointerDownCapture={dismissAvatar}
+            onFocusCapture={dismissAvatar}
+        >
             <h2 className={`${styles.contactsTitle} sectionTitle`}>{t('Title')}</h2>
 
             <form>
@@ -180,6 +220,7 @@ const Contacts: React.FC= () => {
                         iconPosition='noIcon'
                         error={error.message}
                         onChange={handleMessageChange}
+                        additionalClass={styles.input}
                         maxLen={300}
                     />
 
@@ -193,13 +234,28 @@ const Contacts: React.FC= () => {
                 </div>
             </form>
 
-            <TalkingAvatar 
-                ref={elementRef}
-                hand={false}
-                indexFinger={false}
-                text={t('Avatar')}
-                additionalClass={`${styles.avatar} ${isVisible ? styles['avatar-anim'] : ''}`}
-            />
+            
+
+            {
+                avatarState !== 'hidden' && (
+                    <div
+                        ref={elementRef}
+                        className={[
+                            styles.avatar,
+                            avatarState === 'checking' ? styles['avatar-hidden'] : '',
+                            avatarState === 'visible' && isVisible ? styles['avatar-anim'] : '',
+                            avatarState === 'leaving' ? styles['avatar-leaving'] : '',
+                        ].filter(Boolean).join(' ')}
+                        onAnimationEnd={handleAvatarAnimationEnd}
+                    >
+                        <TalkingAvatar 
+                            hand={false}
+                            indexFinger={false}
+                            text={t('Avatar')}
+                        />
+                    </div>
+                )
+            }
         </section>
     )
 }

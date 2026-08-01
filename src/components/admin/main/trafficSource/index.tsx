@@ -134,28 +134,33 @@ const TrafficSource: React.FC<TrafficSourceProps> = ({
             <SectionBackground>
                 <DashboardTitle text="TRAFFIC SOURCE" />
 
-                <div className={styles.wrapper}>
-                    {sources.map((item) => (
-                        <div
-                            key={item.key}
-                            className={styles.item}
-                        >
-                            <p className={styles.itemText}>
-                                {item.source}
-                            </p>
+                {
+                    data.length === 0 ? <div className={styles.empty}>No analytics data yet</div> : 
+                        <div className={styles.wrapper}>
+                            {sources.map((item) => (
+                                <div
+                                    key={item.key}
+                                    className={styles.item}
+                                >
+                                    <p className={styles.itemText}>
+                                        {item.source}
+                                    </p>
 
-                            <ProgressBar
-                                type="source"
-                                max={100}
-                                current={item.percentage}
-                            />
+                                    <ProgressBar
+                                        type="source"
+                                        max={100}
+                                        current={item.percentage}
+                                    />
 
-                            <p className={styles.itemText}>
-                                {item.percentage}%
-                            </p>
+                                    <p className={styles.itemText}>
+                                        {item.percentage}%
+                                    </p>
+                                </div>
+                            ))}
                         </div>
-                    ))}
-                </div>
+                }
+
+                
             </SectionBackground>
         </section>
     );

@@ -83,3 +83,8 @@
 }
 
 
+.empty {
+    @extend .heading-24-mont-medium;
+    color: $neutral_600;
+    min-height: 350px;
+}

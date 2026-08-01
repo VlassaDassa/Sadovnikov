@@ -13,7 +13,7 @@ const ModalBackground = forwardRef<HTMLDivElement, ModalBackgroundProps>(
     ({ children, className }, ref) => {
     return (
         <div className="container">
-            <div className={`${styles.background} ${className}`} ref={ref}>
+            <div data-modal-scroll className={`${styles.background} ${className}`} ref={ref}>
                 { children }
             </div>
         </div>

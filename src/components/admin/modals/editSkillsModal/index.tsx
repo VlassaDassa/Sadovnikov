@@ -131,7 +131,7 @@ const SkillItem: React.FC<SkillItemProps> = ({ skill, setSkills, setIsSaving }) 
             <div className={styles.firstLineWrapper}>
                 <div className={styles.inputWrapper}>
                     <DragHandler
-                        variant="small"
+                        variant="big"
                     />
 
                     <Input 
@@ -190,7 +190,6 @@ const EditSkillModal: React.FC<EditSkillModal> = ({ initialSkills}) => {
         setIsSaving(true)
         try {
             await updateSkills(skills)
-            console.log('✅ Skills saved');
         } catch (error) {
             console.error('❌ Failed to save skills:', error);
         }

@@ -31,7 +31,6 @@ export async function updateSkills(skills: Skill[]) {
 
         return { success: true }
     } catch (error) {
-        console.error('Error updating skills', error)
         return { success: false, error: 'Failed to update skills' }        
     }
 }

@@ -30,7 +30,6 @@ export async function updateStack(stack: Stack[]) {
 
         return { success: true }
     } catch (error) {
-        console.error('Error updating stack', error)
         return { success: false, error: 'Failed to update stack' }        
     }
 }

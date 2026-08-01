@@ -42,9 +42,12 @@
 .secondLineWrapper {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-left: 25px;
     margin-top: 20px;
+    gap: 10px;
+    
+    @media (min-width: 400px) {
+        margin-left: 33px;
+    }
 
     @media (min-width: 768px) {
         margin-left: 0px;

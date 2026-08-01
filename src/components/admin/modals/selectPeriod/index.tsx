@@ -1,7 +1,6 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
-import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 import ModalWrapper from "../modalWrapper";
@@ -14,10 +13,12 @@ import { displayDate } from "@/lib/dates";
 
 
 
+
 interface SelectPeriodProps {
     data: AboutMe,
     setData: Dispatch<SetStateAction<AboutMe>>
 }
+
 
 
 const SelectPeriod: React.FC<SelectPeriodProps> = ({ data, setData }) => {
@@ -76,7 +77,7 @@ const SelectPeriod: React.FC<SelectPeriodProps> = ({ data, setData }) => {
         >
             <Input 
                 name='startDate'
-                placeholder='Start date'
+                placeholder='Start date (DD-MM-YEAR)'
                 variant='admin'
                 value={displayDate(currentItem?.workingPeriod?.startDate)}
                 iconPosition='iconLeft'
@@ -91,7 +92,7 @@ const SelectPeriod: React.FC<SelectPeriodProps> = ({ data, setData }) => {
 
             <Input 
                 name='endDate'
-                placeholder='End date'
+                placeholder='End date (DD-MM-YEAR)'
                 value={displayDate(currentItem?.workingPeriod?.endDate)}
                 datePickerChange={handleEndChange}
                 variant='admin'

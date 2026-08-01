@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef, } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/store';
 
@@ -54,36 +54,79 @@ const ClientPageWrapper:
     const router = useRouter()
     const dispatch = useDispatch()
 
+    const lastSavedRef = useRef(JSON.stringify(project))
+    const pendingProjectRef = useRef<IProject | null>(null)
+    const savingRef = useRef(false)
+
     const debouncedData = useDebounce(data, 1000)
 
-    const saveProject = async () => {
-        const hasChanged = JSON.stringify(data) !== JSON.stringify(project)
-        if (!hasChanged) return
+    const persistProject = useCallback(
+        async (nextProject: IProject) => {
+            pendingProjectRef.current =
+                nextProject
 
-        setIsSaving(true)
-
-        try {
-            const response = await updateProject(data)
-            if (response.success) {
-                console.log('✅ Project updated successfully')
-            }
-            else {
-                showMessage('error', 'Error saving project', dispatch)
-                console.error('❌ Error saving project', response.error)
+            if (savingRef.current) {
+                return
             }
 
-        } catch (error) {
-            showMessage('error', 'Error saving project', dispatch)
-            console.error('❌ Error saving project: ', error)
-        }
-        finally {
-            setIsSaving(false)
-        }
-    }
+            savingRef.current = true
+            setIsSaving(true)
+
+            try {
+                while (pendingProjectRef.current) {
+                    const projectToSave =
+                        pendingProjectRef.current
+
+                    pendingProjectRef.current =
+                        null
+
+                    const serializedProject =
+                        JSON.stringify(
+                            projectToSave
+                        )
+
+                    if (
+                        serializedProject ===
+                        lastSavedRef.current
+                    ) {
+                        continue
+                    }
+
+                    const response =
+                        await updateProject(
+                            projectToSave
+                        )
+
+                    if (!response.success) {
+                        throw new Error(
+                            'Project update failed'
+                        )
+                    }
+
+                    lastSavedRef.current =
+                        serializedProject
+                }
+            } catch {
+                showMessage(
+                    'error',
+                    'Error saving project',
+                    dispatch
+                )
+            } finally {
+                savingRef.current = false
+                setIsSaving(false)
+            }
+        },
+        [dispatch]
+    )
 
     useEffect(() => {
-        saveProject()
-    }, [debouncedData])
+        void persistProject(debouncedData)
+    }, [
+        debouncedData,
+        persistProject,
+    ])
+   
 
         
     const deleteProjectHandle = async () => {
@@ -96,11 +139,9 @@ const ClientPageWrapper:
             }
             else {
                 showMessage('error', 'Error deleting project', dispatch)
-                console.log('❌ Error deleting project: ',response.error)
             }
         } catch (error) {
             showMessage('error', 'Error deleting project', dispatch)
-            console.log('❌ Error deleting project: ', error)
         }
     };
 

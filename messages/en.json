@@ -58,7 +58,7 @@
     "Message": "Message",
     "Send": "Send",
     "Avatar": "I'm waiting for your messages",
-    "ErrorName": "The name must be between 5 and 10 characters long.",
+    "ErrorName": "The name must be between 2 and 50 characters long.",
     "ErrorEmail": "Incorrect email address",
     "ErrorMessage": "The message should be between 10 and 300 characters.",
     "ErrorSend": "Error when sending a message",
@@ -110,6 +110,16 @@
     "Title": "Come back later...",
     "SubTitle": "The page is under development"
   },
+
+  "DevelopmentNotice": {
+        "AriaLabel": "Development status notice",
+        "Title": "This website is still in development",
+        "Description": "Some projects, descriptions, metrics and other content are temporary demonstration data and should not be treated as factual.",
+        "GitHub": "View source on GitHub",
+        "Close": "Close notice"
+  },
+
+  
 
 
 

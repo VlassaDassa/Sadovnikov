@@ -1,4 +1,4 @@
-// import 'server-only'
+import 'server-only'
 
 import nodemailer from 'nodemailer';
 
@@ -19,26 +19,27 @@ function getRequiredEnv(name: string): string {
 }
 
 
-const smtpUser = getRequiredEnv('YANDEX_SMTP_USER')
-const smtpPassword = getRequiredEnv('YANDEX_SMTP_PASSWORD')
-const contactEmailTo = getRequiredEnv('CONTACT_EMAIL_TO')
-
-const transporter = nodemailer.createTransport({
-    host: 'smtp.yandex.com',
-    port: 465,
-    secure: true,
-    auth: {
-        user: smtpUser,
-        pass: smtpPassword,
-    }
-})
-
 
 export async function sendContactEmail({
     name,
     email,
     message
 }: ContactMailInput) {
+    const smtpUser = getRequiredEnv('YANDEX_SMTP_USER')
+    const smtpPassword = getRequiredEnv('YANDEX_SMTP_PASSWORD')
+    const contactEmailTo = getRequiredEnv('CONTACT_EMAIL_TO')
+
+    const transporter = nodemailer.createTransport({
+        host: 'smtp.yandex.com',
+        port: 465,
+        secure: true,
+        auth: {
+            user: smtpUser,
+            pass: smtpPassword,
+        }
+    })
+
+
     await transporter.sendMail({
         from: `"Portfolio contact" <${smtpUser}>`,
         to: contactEmailTo,

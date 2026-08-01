@@ -177,28 +177,49 @@ svg *:focus {
     @extend .heading-24-mont-bold;
 
     h1 {
-        font-size: 64px;
+        font-size: 24px;
 
-        font-size: 100px;
         margin: 0;
         color: $error_600;
         font-weight: 700;
 
         @media (min-width: 768px) {
+            font-size: 48px;
+        }
+
+        @media (min-width: 1024px) {
+            font-size: 64px;
+        }
+
+        @media (min-width: 1280px) {
             font-size: 100px;
         }
     }
 
     h2 {
-        font-size: 24px;
+        font-size: 20px;
         margin: 10px 0;
         font-weight: 400;
         color: $error_400;
+
+        @media (min-width: 768px) {
+            font-size: 24px;
+        }
     }
 
     p {
         color: $neutral_400;
         line-height: $leading-tight;
+
+        font-size: 18px;
+
+        @media (min-width: 768px) {
+            font-size: 20px;
+        }
+
+        @media (min-width: 1024px) {
+            font-size: 24px;
+        }
     }
 
     .btn-link {

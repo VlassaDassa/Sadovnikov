@@ -33,7 +33,8 @@ export default function Error({ error, h1, h2, link, btn=true }: ErrorProps) {
             <h1>{h1}</h1>
             <h2>{h2}</h2>
             <p>{error}</p>
-            <Link href={link} className='btn-link'>
+            
+            <a href={link} className='btn-link'>
                 {
                     btn ? (
                         <Button 
@@ -48,7 +49,7 @@ export default function Error({ error, h1, h2, link, btn=true }: ErrorProps) {
                     )
                 }            
                 
-            </Link>
+            </a>
         </div>
     );
 }

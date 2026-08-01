@@ -97,7 +97,7 @@ const FooterItem: React.FC<FooterItemProps> = ({ item, setItems, setIsSaving }) 
             style={style} 
         >
             <DragHandler 
-                variant='small'
+                variant='big'
                 additionalClass={styles.dragHand}
 
             />
@@ -166,9 +166,7 @@ const EditFooterModal: React.FC<EditFooterModalProps> = ({ footer }) => {
         setIsSaving(true)
         try {
             await updateFooter(items)
-            console.log('✅ Footer saved');
         } catch (error) {
-            console.error('❌ Failed to save footer:', error);
         }
         finally {
             setIsSaving(false)
@@ -219,7 +217,9 @@ const EditFooterModal: React.FC<EditFooterModalProps> = ({ footer }) => {
     return (
         <ModalWrapper
             drag={true}
-            tooltipVisible={false}
+            tooltipVisible={true}
+            tooltipText='Maximum 3 items allowed'
+            tooltipMax={3}
             disableBtn={disableBtn}
             addItem={addItem}
 

@@ -15,7 +15,7 @@ import { getAdminSession } from '@/lib/auth/admin';
 
 
 
-export const metaData: Metadata = {
+export const metadata: Metadata = {
     title: 'Admin',
 }
 

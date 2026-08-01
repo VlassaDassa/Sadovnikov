@@ -1,4 +1,4 @@
-// import 'server-only';
+import 'server-only';
 
 import type { IAnalyticsDashboard, IAnalyticsMetric, IVisitPoint } from '@/interfaces/analytics';
 
@@ -152,7 +152,7 @@ export async function getAnalyticsDashboard(
     days=30,
 ): Promise<IAnalyticsDashboard> {
     const websiteId = getRequiredEnv('UMAMI_WEBSITE_ID')
-    const timezone = process.env.ANALYTICS_TIMEZOME ?? 'Europe/Moscow'
+    const timezone = process.env.ANALYTICS_TIMEZONE ?? 'Europe/Moscow'
 
     const token = await getUmamiToken()
     const { startAt, endAt } = createDateRange(days)
