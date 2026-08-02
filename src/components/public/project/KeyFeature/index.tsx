@@ -68,7 +68,7 @@ const KeyFeatures: React.FC<KeyFeaturesProps> = ({ data }) => {
                         onSlideChange={updateSliderState}
                         className={styles.slider}
                     >
-                        {data.map((item) => (
+                        {data.map((item, index) => (
                             <SwiperSlide
                                 key={item.id}
                                 className={styles.slide}
@@ -81,6 +81,11 @@ const KeyFeatures: React.FC<KeyFeaturesProps> = ({ data }) => {
                                                     src={item.icon}
                                                     alt=""
                                                     ariaHidden={true}
+                                                    loading={
+                                                        index === 0
+                                                            ? 'eager'
+                                                            : 'lazy'
+                                                    }
                                                     wrapClass={styles.projectWrapPhoto}
                                                 />
                                             </div>
@@ -99,6 +104,11 @@ const KeyFeatures: React.FC<KeyFeaturesProps> = ({ data }) => {
                                         <AdaptiveImage
                                             src={item.photo}
                                             alt={item.title}
+                                            loading={
+                                                index === 0
+                                                    ? 'eager'
+                                                    : 'lazy'
+                                            }
                                             imgClass={styles.featurePhoto}
                                             wrapClass={styles.featurePhotoWrapper}
                                         />

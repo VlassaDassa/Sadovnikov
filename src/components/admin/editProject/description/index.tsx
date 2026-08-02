@@ -16,7 +16,7 @@ import styles from './index.module.scss';
 
 
 
-const Description: React.FC<EditProjectProps> = ({ project, setData, setIsSaving }) => {
+const Description: React.FC<EditProjectProps> = ({ project, setData }) => {
     const handleChangeDescription= (
         descId: number,
         value: string,
@@ -33,7 +33,6 @@ const Description: React.FC<EditProjectProps> = ({ project, setData, setIsSaving
             ),
         }));
 
-        setIsSaving(true)
     };
 
     if (!project) return
