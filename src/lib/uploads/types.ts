@@ -2,10 +2,13 @@ export const uploadCategories = ['gallery', 'feature-photo', 'feature-icon']
 
 export type UploadCategory = typeof uploadCategories[number]
 
-export interface SaveUpload {
-    url: string;
-    width: number;
-    height: number;
-    size: number;
-    mimeType: 'image/webp'
+export interface SavedUpload {
+    url: string
+    width: number | null
+    height: number | null
+    size: number
+
+    mimeType:
+        | 'image/webp'
+        | 'image/svg+xml'
 }

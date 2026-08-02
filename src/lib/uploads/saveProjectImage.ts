@@ -8,8 +8,7 @@ import { uploadConfig } from './config';
 import { createPublicUploadUrl, getProjectUploadDirectory } from './paths';
 import { processImage} from './processImage';
 
-import type { SaveUpload, UploadCategory } from './types';
-import { create } from 'node:domain';
+import type { UploadCategory, SavedUpload } from './types';
 
 
 
@@ -19,7 +18,7 @@ interface SaveProjectImageInput {
     file: File
 }
 
-export async function saveProjectImage({ projectId, category, file }: SaveProjectImageInput): Promise<SaveUpload> {
+export async function saveProjectImage({ projectId, category, file }: SaveProjectImageInput): Promise<SavedUpload> {
     if (file.size <= 0) {
         throw new Error('EMPTY_FILE')
     }
@@ -29,8 +28,9 @@ export async function saveProjectImage({ projectId, category, file }: SaveProjec
     }
 
     const sourceBuffer = Buffer.from(await file.arrayBuffer())
-    const processed = await processImage(sourceBuffer, category)
-    const fileName = `${randomUUID()}.webp`
+    const processed = await processImage(sourceBuffer, category, file.type)
+
+    const fileName = [ randomUUID(), processed.extension].join('.')
     const directory = getProjectUploadDirectory(projectId, category)
     await mkdir(directory, { recursive: true })
     const finalPath = path.join(directory, fileName)
@@ -46,10 +46,23 @@ export async function saveProjectImage({ projectId, category, file }: SaveProjec
     }
 
     return {
-        url: createPublicUploadUrl(projectId, category, fileName),
-        width: processed.width,
-        height: processed.height,
-        size: processed.buffer.length,
-        mimeType: 'image/webp'
+        url:
+            createPublicUploadUrl(
+                projectId,
+                category,
+                fileName,
+            ),
+
+        width:
+            processed.width,
+
+        height:
+            processed.height,
+
+        size:
+            processed.buffer.length,
+
+        mimeType:
+            processed.mimeType,
     }
 }

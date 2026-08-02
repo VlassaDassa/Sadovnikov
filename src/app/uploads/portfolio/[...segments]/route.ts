@@ -60,6 +60,32 @@ function resolveRequestedFile(
     return requestedPath
 }
 
+function getContentType(
+    filePath: string,
+): string {
+    const extension =
+        path.extname(
+            filePath,
+        ).toLowerCase()
+
+    switch (extension) {
+        case '.svg':
+            return (
+                'image/svg+xml; ' +
+                'charset=utf-8'
+            )
+
+        case '.webp':
+            return 'image/webp'
+
+        default:
+            return (
+                'application/' +
+                'octet-stream'
+            )
+    }
+}
+
 export async function GET(
     _request: Request,
     {
@@ -107,7 +133,9 @@ export async function GET(
 
                 headers: {
                     'Content-Type':
-                        'image/webp',
+                        getContentType(
+                            filePath,
+                        ),
 
                     'Content-Length':
                         file.length.toString(),
@@ -117,6 +145,11 @@ export async function GET(
 
                     'X-Content-Type-Options':
                         'nosniff',
+
+                    'Content-Security-Policy':
+                        "default-src 'none'; " +
+                        "style-src 'unsafe-inline'; " +
+                        'sandbox',
                 },
             },
         )

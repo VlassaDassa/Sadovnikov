@@ -1,15 +1,26 @@
 import 'server-only'
 
 import sharp from 'sharp'
+import { sanitizeSvg } from './sanitizeSvg'
 
 import type {
     UploadCategory,
 } from './types'
 
+type ProcessedMimeType =
+    | 'image/webp'
+    | 'image/svg+xml'
+
+type ProcessedExtension =
+    | 'webp'
+    | 'svg'
+
 interface ProcessedImage {
     buffer: Buffer
-    width: number
-    height: number
+    width: number | null
+    height: number | null
+    extension: ProcessedExtension
+    mimeType: ProcessedMimeType
 }
 
 function validateRatio(
@@ -17,7 +28,8 @@ function validateRatio(
     height: number,
     category: UploadCategory,
 ): void {
-    const ratio = width / height
+    const ratio =
+        width / height
 
     if (
         category === 'gallery' &&
@@ -32,7 +44,8 @@ function validateRatio(
     }
 
     if (
-        category === 'feature-photo' &&
+        category ===
+            'feature-photo' &&
         (
             ratio < 1.1 ||
             ratio > 1.4
@@ -45,7 +58,10 @@ function validateRatio(
 }
 
 function getMaxWidth(
-    category: UploadCategory,
+    category: Exclude<
+        UploadCategory,
+        'feature-icon'
+    >,
 ): number {
     switch (category) {
         case 'gallery':
@@ -53,22 +69,71 @@ function getMaxWidth(
 
         case 'feature-photo':
             return 1920
+        default: return 1920
+    }
+}
 
-        case 'feature-icon':
-            return 512
+async function processSvgIcon(
+    sourceBuffer: Buffer,
+    declaredMimeType: string,
+): Promise<ProcessedImage> {
+    if (
+        declaredMimeType !==
+        'image/svg+xml'
+    ) {
+        throw new Error(
+            'FEATURE_ICON_MUST_BE_SVG',
+        )
+    }
 
-        default: {
-            throw new Error(
-                `Unknown category: ${category}`,
-            )
-        }
+    const sanitizedBuffer =
+        sanitizeSvg(sourceBuffer)
+
+    const metadata =
+        await sharp(
+            sanitizedBuffer,
+        ).metadata()
+
+    if (
+        metadata.format !== 'svg'
+    ) {
+        throw new Error(
+            'INVALID_SVG',
+        )
+    }
+
+    return {
+        buffer:
+            sanitizedBuffer,
+
+        width:
+            metadata.width ?? null,
+
+        height:
+            metadata.height ?? null,
+
+        extension: 'svg',
+
+        mimeType:
+            'image/svg+xml',
     }
 }
 
 export async function processImage(
     sourceBuffer: Buffer,
     category: UploadCategory,
+    declaredMimeType: string,
 ): Promise<ProcessedImage> {
+    if (
+        category ===
+        'feature-icon'
+    ) {
+        return processSvgIcon(
+            sourceBuffer,
+            declaredMimeType,
+        )
+    }
+
     const metadata =
         await sharp(
             sourceBuffer,
@@ -120,10 +185,8 @@ export async function processImage(
             width: maxWidth,
             fit: 'inside',
             withoutEnlargement: true,
-
-            // Стандартный качественный
-            // алгоритм уменьшения.
-            kernel: sharp.kernel.lanczos3,
+            kernel:
+                sharp.kernel.lanczos3,
         })
         .webp({
             quality: 96,
@@ -137,33 +200,11 @@ export async function processImage(
             resolveWithObject: true,
         })
 
-    console.log(
-        'Processed image:',
-        {
-            category,
-
-            input: {
-                width:
-                    metadata.width,
-                height:
-                    metadata.height,
-                bytes:
-                    sourceBuffer.length,
-            },
-
-            output: {
-                width: info.width,
-                height: info.height,
-                bytes: data.length,
-                format:
-                    info.format,
-            },
-        },
-    )
-
     return {
         buffer: data,
         width: info.width,
         height: info.height,
+        extension: 'webp',
+        mimeType: 'image/webp',
     }
 }
