@@ -9,7 +9,7 @@ import { requireAdmin } from "@/lib/auth/admin";
 
 
 export async function createProject(projectData: IProject) {
-    requireAdmin()
+    await requireAdmin()
 
     try {
         const newProject = await prisma.project.create({
@@ -118,6 +118,8 @@ export async function createProject(projectData: IProject) {
 }
 
 export async function updateProject(projectData: IProject) {
+    await requireAdmin()
+
     try {
         const projectId = projectData.id
 
@@ -273,6 +275,8 @@ export async function updateProject(projectData: IProject) {
 }
 
 export async function deleteProject(projectId: number) {
+    await requireAdmin()
+
     try {
         // Сначала связанные поля
         await prisma.projectImage.deleteMany({ where: { projectId } });
