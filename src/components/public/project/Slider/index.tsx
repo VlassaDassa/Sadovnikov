@@ -227,7 +227,11 @@ const Slider: React.FC<SliderProps> = ({ images }) => {
                                 <AdaptiveImage
                                     src={item.image}
                                     alt={`Project image ${index + 1}`}
-                                    loading="eager"
+                                    loading={
+                                        index === 0
+                                            ? 'eager'
+                                            : 'lazy'
+                                    }
                                     ariaHidden={false}
                                     wrapClass={styles.projectWrapPhoto}
                                     imgClass={styles.projectPhoto}
@@ -357,7 +361,11 @@ const Slider: React.FC<SliderProps> = ({ images }) => {
                                             <AdaptiveImage
                                                 src={item.image}
                                                 alt={`Project image ${index + 1}`}
-                                                loading="eager"
+                                                loading={
+                                                    index === 0
+                                                        ? 'eager'
+                                                        : 'lazy'
+                                                }
                                                 ariaHidden={false}
                                                 wrapClass={
                                                     styles.lightboxImageWrapper

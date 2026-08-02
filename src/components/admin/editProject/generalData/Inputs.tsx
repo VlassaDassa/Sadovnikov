@@ -7,7 +7,7 @@ import { EditProjectProps, IProject } from '@/interfaces/general';
 import styles from './index.module.scss';
 
 
-const Inputs: React.FC<EditProjectProps> = ({ project, setData, setIsSaving }) => {
+const Inputs: React.FC<EditProjectProps> = ({ project, setData }) => {
 
     if (!project) return
 
@@ -20,7 +20,6 @@ const Inputs: React.FC<EditProjectProps> = ({ project, setData, setIsSaving }) =
             [field]: value,
         }));
 
-        setIsSaving(true)
     };
 
     const handleChangeTeamType = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)  => {
@@ -40,7 +39,6 @@ const Inputs: React.FC<EditProjectProps> = ({ project, setData, setIsSaving }) =
             teamType: teamType,
         }));
 
-        setIsSaving(true)
     }
 
     const handleChangeDate = (date: string) => {
@@ -51,7 +49,6 @@ const Inputs: React.FC<EditProjectProps> = ({ project, setData, setIsSaving }) =
             }));
         }
 
-        setIsSaving(true)
     };
 
     return (

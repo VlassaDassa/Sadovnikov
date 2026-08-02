@@ -1,220 +1,224 @@
-'use client'
+"use client";
 
-import { useRouter } from 'next/navigation';
-import React, { useState, useEffect, useCallback, useRef, } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '@/store';
+import { useRouter } from "next/navigation";
+import React, { useState, useEffect, useCallback, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "@/store";
 
-import Button from '@/components/shared/button/Button';
+import Button from "@/components/shared/button/Button";
 import AdminPageTitle from "@/components/admin/general/adminPageTitle";
 import GeneralData from "@/components/admin/editProject/generalData";
-import Stack from '@/components/admin/editProject/stack';
-import KeyFeatures from '@/components/admin/editProject/keyFeatures';
-import Description from '@/components/admin/editProject/description';
-import Metrics from '@/components/admin/editProject/metrics';
+import Stack from "@/components/admin/editProject/stack";
+import KeyFeatures from "@/components/admin/editProject/keyFeatures";
+import Description from "@/components/admin/editProject/description";
+import Metrics from "@/components/admin/editProject/metrics";
 import EditProjectStackModal from "@/components/admin/modals/editProjectStackModal";
-import AnimatedSection from '@/components/shared/AnimatedScroll';
-import SavingIndicator from '@/components/shared/SavingIndicator';
-import Evolution from '@/components/admin/editProject/evolution';
+import AnimatedSection from "@/components/shared/AnimatedScroll";
+import SavingIndicator from "@/components/shared/SavingIndicator";
+import Evolution from "@/components/admin/editProject/evolution";
 
 import { IProject } from "@/interfaces/general";
-import { useDebounce } from '@/hooks/useDebounce';
-import { updateProject, deleteProject } from '@/app/actions/project';
-import { showMessage } from '@/lib/showMessage';
-import type {
-    IEvolutionDraftItem,
-} from '@/interfaces/evolution';
+import { useDebounce } from "@/hooks/useDebounce";
+import { updateProject, deleteProject } from "@/app/actions/project";
+import { showMessage } from "@/lib/showMessage";
+import type { IEvolutionDraftItem } from "@/interfaces/evolution";
 
-import { cssVars } from '@/styles/cssVariables';
-import styles from './index.module.scss';
-
+import { cssVars } from "@/styles/cssVariables";
+import styles from "./index.module.scss";
 
 interface ClientPageWrapperProps {
     project: IProject;
-
-    initialEvolutionDraft:
-        IEvolutionDraftItem[];
-
-    initialEvolutionGeneratedAt:
-        string | null;
+    initialEvolutionDraft: IEvolutionDraftItem[];
+    initialEvolutionGeneratedAt: string | null;
 }
 
+const ClientPageWrapper: React.FC<ClientPageWrapperProps> = ({
+    project,
+    initialEvolutionDraft,
+    initialEvolutionGeneratedAt,
+}) => {
+    const [data, setData] = useState<IProject>(project);
+    const [isSaving, setIsSaving] = useState<boolean>(false);
+    const isEditProjectStackModalOpen = useSelector(
+        (state: RootState) => state.uiState.isEditProjectStackModalOpen,
+    );
+    const router = useRouter();
+    const dispatch = useDispatch();
 
-const ClientPageWrapper:
-    React.FC<
-        ClientPageWrapperProps
-    > = ({
-        project,
-        initialEvolutionDraft,
-        initialEvolutionGeneratedAt,
-    }) => {
-    const [data, setData] = useState<IProject>(project)
-    const [isSaving, setIsSaving] = useState<boolean>(false)
-    const isEditProjectStackModalOpen = useSelector((state: RootState) => state.uiState.isEditProjectStackModalOpen)
-    const router = useRouter()
-    const dispatch = useDispatch()
+    const lastSavedRef = useRef(JSON.stringify(project));
+    const pendingProjectRef = useRef<PendingProject | null>(null)
+    const inFlightSerializedRef = useRef<string | null>(null);
+    const savingRef = useRef(false);
 
-    const lastSavedRef = useRef(JSON.stringify(project))
-    const pendingProjectRef = useRef<IProject | null>(null)
-    const savingRef = useRef(false)
+    const debouncedData = useDebounce(data, 1000);
 
-    const debouncedData = useDebounce(data, 1000)
+    interface PendingProject {
+        project: IProject;
+        serialized: string;
+    }
 
     const persistProject = useCallback(
         async (nextProject: IProject) => {
-            pendingProjectRef.current =
-                nextProject
+            const serialized = JSON.stringify(nextProject);
 
-            if (savingRef.current) {
-                return
+            if (serialized === lastSavedRef.current) {
+                return;
             }
 
-            savingRef.current = true
-            setIsSaving(true)
+            if (serialized === inFlightSerializedRef.current) {
+                return;
+            }
+
+            if (serialized === pendingProjectRef.current?.serialized) {
+                return;
+            }
+
+            pendingProjectRef.current = {
+                project: nextProject,
+                serialized,
+            };
+
+            if (savingRef.current) {
+                return;
+            }
+
+            savingRef.current = true;
+            setIsSaving(true);
 
             try {
                 while (pendingProjectRef.current) {
-                    const projectToSave =
-                        pendingProjectRef.current
+                    const pending = pendingProjectRef.current;
 
-                    pendingProjectRef.current =
-                        null
+                    pendingProjectRef.current = null;
 
-                    const serializedProject =
-                        JSON.stringify(
-                            projectToSave
-                        )
-
-                    if (
-                        serializedProject ===
-                        lastSavedRef.current
-                    ) {
-                        continue
+                    if (pending.serialized === lastSavedRef.current) {
+                        continue;
                     }
 
-                    const response =
-                        await updateProject(
-                            projectToSave
-                        )
+                    inFlightSerializedRef.current = pending.serialized;
+
+                    const response = await updateProject(pending.project);
 
                     if (!response.success) {
-                        throw new Error(
-                            'Project update failed'
-                        )
+                        throw new Error("Project update failed");
                     }
 
-                    lastSavedRef.current =
-                        serializedProject
+                    lastSavedRef.current = pending.serialized;
+
+                    inFlightSerializedRef.current = null;
                 }
-            } catch {
-                showMessage(
-                    'error',
-                    'Error saving project',
-                    dispatch
-                )
+            } catch (error) {
+                console.error("Project autosave failed:", error);
+
+                showMessage("error", "Error saving project", dispatch);
             } finally {
-                savingRef.current = false
-                setIsSaving(false)
+                inFlightSerializedRef.current = null;
+
+                savingRef.current = false;
+                setIsSaving(false);
             }
         },
-        [dispatch]
-    )
+        [dispatch],
+    );
 
     useEffect(() => {
-        void persistProject(debouncedData)
-    }, [
-        debouncedData,
-        persistProject,
-    ])
-   
+        void persistProject(debouncedData);
+    }, [debouncedData, persistProject]);
 
-        
     const deleteProjectHandle = async () => {
         try {
-            const response = await deleteProject(data.id)
+            const response = await deleteProject(data.id);
 
             if (response.success) {
-                showMessage('info', 'Project has been deleted', dispatch)
+                showMessage("info", "Project has been deleted", dispatch);
                 router.push(`/admin`);
-            }
-            else {
-                showMessage('error', 'Error deleting project', dispatch)
+            } else {
+                showMessage("error", "Error deleting project", dispatch);
             }
         } catch (error) {
-            showMessage('error', 'Error deleting project', dispatch)
+            showMessage("error", "Error deleting project", dispatch);
         }
     };
 
     const modals = (
         <>
-            {isEditProjectStackModalOpen && <EditProjectStackModal project={data} setData={setData} setIsSaving={setIsSaving} />}
+            {isEditProjectStackModalOpen && (
+                <EditProjectStackModal
+                    project={data}
+                    setData={setData}
+                />
+            )}
         </>
-    )
+    );
 
     return (
         <main className={`${styles.main}`}>
-            { modals }
+            {modals}
 
             <div className="container">
                 <SavingIndicator isSaving={isSaving} />
 
-                <AnimatedSection animation='fade-up'>
-                    <AdminPageTitle 
-                        title='Edit Project'
-                        text='Edit and update all project content'
-                        icon='settings'
+                <AnimatedSection animation="fade-up">
+                    <AdminPageTitle
+                        title="Edit Project"
+                        text="Edit and update all project content"
+                        icon="settings"
                     />
                 </AnimatedSection>
 
-                <AnimatedSection animation='fade-right'>
-                    <GeneralData project={data} setData={setData} setIsSaving={setIsSaving} />
+                <AnimatedSection animation="fade-right">
+                    <GeneralData
+                        project={data}
+                        setData={setData}
+                    />
                 </AnimatedSection>
 
-                <AnimatedSection animation='fade-left'>
-                    <Stack project={data} setData={setData} setIsSaving={setIsSaving} />
+                <AnimatedSection animation="fade-left">
+                    <Stack
+                        project={data}
+                        setData={setData}
+                    />
                 </AnimatedSection>
 
-                <AnimatedSection animation='fade-right'>
-                    <KeyFeatures project={data} setData={setData} setIsSaving={setIsSaving} />
+                <AnimatedSection animation="fade-right">
+                    <KeyFeatures
+                        project={data}
+                        setData={setData}
+                    />
                 </AnimatedSection>
 
-                <AnimatedSection animation='fade-down'>
-                    <Description project={data} setData={setData} setIsSaving={setIsSaving} />
+                <AnimatedSection animation="fade-down">
+                    <Description
+                        project={data}
+                        setData={setData}
+                    />
                 </AnimatedSection>
 
-                <AnimatedSection animation='fade-left'>
-                    <Metrics project={data} setData={setData} setIsSaving={setIsSaving} />
+                <AnimatedSection animation="fade-left">
+                    <Metrics
+                        project={data}
+                        setData={setData}
+                    />
                 </AnimatedSection>
 
                 <AnimatedSection animation="fade-right">
                     <Evolution
-                        projectId={
-                            data.id
-                        }
-                        githubLink={
-                            data.gitHubLink
-                        }
-                        initialDraft={
-                            initialEvolutionDraft
-                        }
-                        initialGeneratedAt={
-                            initialEvolutionGeneratedAt
-                        }
-                        initialPublishedCount={
-                            data.commits?.length ??
-                            0
-                        }
+                        projectId={data.id}
+                        githubLink={data.gitHubLink}
+                        initialDraft={initialEvolutionDraft}
+                        initialGeneratedAt={initialEvolutionGeneratedAt}
+                        initialPublishedCount={data.commits?.length ?? 0}
                     />
                 </AnimatedSection>
 
-                <AnimatedSection animation='fade-right'>
-                    <Button 
-                        iconPosition='leftIcon'
-                        behavior='default'
-                        variant='black'
+                <AnimatedSection animation="fade-right">
+                    <Button
+                        iconPosition="leftIcon"
+                        behavior="default"
+                        variant="black"
                         additionalClass={styles.deleteBtn}
-                        text='Delete Project'
-                        icon='trash'
+                        text="Delete Project"
+                        icon="trash"
                         colorIcon={cssVars.error_600}
                         onClick={async () => await deleteProjectHandle()}
                         noize={true}
@@ -222,8 +226,7 @@ const ClientPageWrapper:
                 </AnimatedSection>
             </div>
         </main>
-    )    
-    
-}
+    );
+};
 
 export default ClientPageWrapper;

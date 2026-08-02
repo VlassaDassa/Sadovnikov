@@ -17,16 +17,16 @@ import styles from './index.module.scss';
 
 
 
-const GeneralData: React.FC<EditProjectProps> = ({ project, setData, setIsSaving }) => {
+const GeneralData: React.FC<EditProjectProps> = ({ project, setData }) => {
     const { curImage, setCurImage, currentImage, handleMainClick, handleDeleteImage } =
         useImageManagement(project, setData);
-    const { fileInputRef, handleFileUpload, openFilePicker, isLoading } = useImageUpload(setData);
+    const { fileInputRef, handleFileUpload, openFilePicker, isLoading } = useImageUpload(project, setData);
 
     if (!project) return null;
 
     return (
         <SectionBackground className={styles.section}>
-            <Inputs project={project} setData={setData} setIsSaving={setIsSaving} />
+            <Inputs project={project} setData={setData} />
 
             <Images
                 project={project}

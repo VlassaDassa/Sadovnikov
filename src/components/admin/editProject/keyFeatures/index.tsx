@@ -23,7 +23,7 @@ import 'swiper/css';
 
 
 
-const KeyFeatures: React.FC<EditProjectProps> = ({ project, setData, setIsSaving }) => {
+const KeyFeatures: React.FC<EditProjectProps> = ({ project, setData }) => {
     const [curIndex, setCurIndex] = useState<number>(1)
     const swiperRef = useRef<SwiperType | null>(null);
     const totalCountItems = project?.keyFeatures.length || 0
@@ -47,7 +47,6 @@ const KeyFeatures: React.FC<EditProjectProps> = ({ project, setData, setIsSaving
             ),
         }));
 
-        setIsSaving(true)
     };
 
     const handleDeleteKeyFeature = (featureId: number) => {
@@ -60,7 +59,6 @@ const KeyFeatures: React.FC<EditProjectProps> = ({ project, setData, setIsSaving
             };
         });
 
-        setIsSaving(true)
     };
 
     const handleAddKeyFeature = () => {
@@ -91,7 +89,6 @@ const KeyFeatures: React.FC<EditProjectProps> = ({ project, setData, setIsSaving
             };
         });
 
-        setIsSaving(true)
     };
 
     return (
@@ -181,6 +178,7 @@ const KeyFeatures: React.FC<EditProjectProps> = ({ project, setData, setIsSaving
                             
                             <div className={styles.imgContainer}>
                                 <KeyFeatureImageUpload
+                                    projectId={project.id}
                                     featureId={feature.id}
                                     field="photo"
                                     src={feature.photo}
@@ -190,11 +188,12 @@ const KeyFeatures: React.FC<EditProjectProps> = ({ project, setData, setIsSaving
                                 />
 
                                 <KeyFeatureImageUpload
+                                    projectId={project.id}
                                     featureId={feature.id}
                                     field="icon"
                                     src={feature.icon}
                                     label="Icon"
-                                    sizeInfo="*.svg"
+                                    sizeInfo="SVG input"
                                     setData={setData}
                                 />
                             </div>

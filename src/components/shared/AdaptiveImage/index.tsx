@@ -27,8 +27,8 @@ const AdaptiveImage = forwardRef<HTMLDivElement, AdaptiveImageProps>(
                 alt={alt}
                 aria-hidden={ariaHidden}
                 fill
+                sizes="99vw"
                 className={imgClass}
-                sizes='50vw'
                 loading={loading}
                 aria-label={ariaLabel}
             />

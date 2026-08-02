@@ -1,115 +1,139 @@
-import React, { useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useRef, useState } from "react";
 
-import { showMessage } from '@/lib/showMessage';
+import { useDispatch } from "react-redux";
 
-import { IImages, IProject } from '@/interfaces/general';
+import { showMessage } from "@/lib/showMessage";
 
+import { uploadProjectImage } from "@/lib/uploads/uploadProjectImage";
+
+import type { IImages, IProject } from "@/interfaces/general";
 
 export const useImageUpload = (
-    setData: React.Dispatch<React.SetStateAction<IProject>>
+    project: IProject,
+    setData: React.Dispatch<React.SetStateAction<IProject>>,
 ) => {
-    const fileInputRef = useRef<HTMLInputElement>(null)
-    const [isLoading, setIsLoading] = useState(false)
-    const dispatch = useDispatch()
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
-    const validateImage = (file: File): Promise<{valid: boolean, ratio?: number}> => {
+    const [isLoading, setIsLoading] = useState(false);
+
+    const dispatch = useDispatch();
+
+    const validateImage = (file: File): Promise<boolean> => {
         return new Promise((resolve) => {
-            const img = new Image()
-            img.onload = () => {
-                const ratio = img.naturalWidth / img.naturalHeight
-                const isValid = ratio >= 0.8 && ratio <= 2.0
-                resolve({ valid: isValid, ratio })
-            }
-            img.src = URL.createObjectURL(file)
-        })
-    }
+            const image = new Image();
 
-    const compressImage = (file: File, maxWidth = 1200, quality = 0.7): Promise<string> => {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = (event) => {
-                const img = new Image();
-                img.src = event.target?.result as string;
-                img.onload = () => {
-                    const canvas = document.createElement('canvas');
-                    let width = img.width;
-                    let height = img.height;
+            const objectUrl = URL.createObjectURL(file);
 
-                    if (width > maxWidth) {
-                        height = (height * maxWidth) / width;
-                        width = maxWidth;
-                    }
+            image.onload = () => {
+                const ratio = image.naturalWidth / image.naturalHeight;
 
-                    canvas.width = width;
-                    canvas.height = height;
-                    const ctx = canvas.getContext('2d');
-                    ctx?.drawImage(img, 0, 0, width, height);
-                    resolve(canvas.toDataURL('image/jpeg', quality));
-                };
-                img.onerror = reject;
+                URL.revokeObjectURL(objectUrl);
+
+                resolve(ratio >= 0.8 && ratio <= 2);
             };
-            reader.onerror = reject;
+
+            image.onerror = () => {
+                URL.revokeObjectURL(objectUrl);
+
+                resolve(false);
+            };
+
+            image.src = objectUrl;
         });
     };
 
+    const handleFileUpload = async (
+        event: React.ChangeEvent<HTMLInputElement>,
+    ) => {
+        const files = event.target.files;
 
-    const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const files = e.target.files;
-        if (!files || files.length === 0) return;
-
-        setIsLoading(true);
-        const newImages: IImages[] = [];
-        const validFiles: File[] = [];
-
-        for (const file of Array.from(files)) {
-            const { valid } = await validateImage(file);
-            if (valid) {
-                validFiles.push(file);
-            } else {
-                showMessage('error', 'Photo must be 1:1, 4:3 or 16:9', dispatch);
-            }
-        }
-
-        if (validFiles.length === 0) {
-            setIsLoading(false);
+        if (!files || files.length === 0) {
             return;
         }
 
+        const availableSlots = Math.max(0, 4 - project.images.length);
 
-        for (let i = 0; i < validFiles.length; i++) {
-            const file = validFiles[i];
-            try {
-                const compressed = await compressImage(file, 1200, 0.7);
-                newImages.push({
-                    id: Date.now() + i,
-                    image: compressed,
-                    main: false,
-                });
-            } catch (error) {
-                console.error('Error compressing image:', error);
-            }
+        const selectedFiles = Array.from(files).slice(0, availableSlots);
+
+        if (selectedFiles.length === 0) {
+            return;
         }
 
-        setData((prev: IProject) => {
-            const hasMain = prev.images.some(img => img.main);
-            return {
-                ...prev,
-                images: [
-                    ...prev.images,
-                    ...newImages.map((img, index) => ({
-                        ...img,
-                        main: !hasMain && index === 0,
-                    })),
-                ],
-            };
-        });
+        setIsLoading(true);
 
-        if (fileInputRef.current) fileInputRef.current.value = '';
-        setIsLoading(false);
+        const newImages: IImages[] = [];
+
+        try {
+            for (let index = 0; index < selectedFiles.length; index += 1) {
+                const file = selectedFiles[index];
+
+                const valid = await validateImage(file);
+
+                if (!valid) {
+                    showMessage(
+                        "error",
+                        "Photo must be 1:1, 4:3 or 16:9",
+                        dispatch,
+                    );
+
+                    continue;
+                }
+
+                const uploaded = await uploadProjectImage({
+                    file,
+                    projectId: project.id,
+                    category: "gallery",
+                });
+
+                newImages.push({
+                    id: Date.now() + index,
+
+                    image: uploaded.url,
+
+                    main: false,
+                });
+            }
+
+            if (newImages.length > 0) {
+                setData((previous) => {
+                    const hasMain = previous.images.some((image) => image.main);
+
+                    return {
+                        ...previous,
+
+                        images: [
+                            ...previous.images,
+
+                            ...newImages.map((image, index) => ({
+                                ...image,
+
+                                main: !hasMain && index === 0,
+                            })),
+                        ],
+                    };
+                });
+            }
+        } catch (error) {
+            console.error("Image upload failed:", error);
+
+            showMessage("error", "Image upload failed", dispatch);
+        } finally {
+            if (fileInputRef.current) {
+                fileInputRef.current.value = "";
+            }
+
+            setIsLoading(false);
+        }
     };
 
-    const openFilePicker = () => fileInputRef.current?.click()
-    return { fileInputRef, handleFileUpload, openFilePicker, isLoading }
-}
+    const openFilePicker = () => {
+        fileInputRef.current?.click();
+    };
+
+    return {
+        fileInputRef,
+        handleFileUpload,
+        openFilePicker,
+        isLoading,
+    };
+};

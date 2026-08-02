@@ -13,15 +13,21 @@ import styles from './../index.module.scss';
 
 
 interface KeyFeatureImageUploadProps {
-    featureId: number;
-    field: 'photo' | 'icon';
-    src: string;
-    label: string;
-    sizeInfo: string;
-    setData: React.Dispatch<React.SetStateAction<IProject>>;
+    projectId: number
+    featureId: number
+    field: 'photo' | 'icon'
+    src: string
+    label: string
+    sizeInfo: string
+
+    setData:
+        React.Dispatch<
+            React.SetStateAction<IProject>
+        >
 }
 
 const KeyFeatureImageUpload: React.FC<KeyFeatureImageUploadProps> = ({
+    projectId,
     featureId,
     field,
     src,
@@ -34,7 +40,12 @@ const KeyFeatureImageUpload: React.FC<KeyFeatureImageUploadProps> = ({
         handleFileUpload,
         openFilePicker,
         isLoading,
-    } = useKeyFeatureImageUpload(featureId, field, setData);
+    } = useKeyFeatureImageUpload(
+        projectId,
+        featureId,
+        field,
+        setData,
+    )
 
     return (
         <div className={styles.loadImageWrapper} onClick={openFilePicker}>

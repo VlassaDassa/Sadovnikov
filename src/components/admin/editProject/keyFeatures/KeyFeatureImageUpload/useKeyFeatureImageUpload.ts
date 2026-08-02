@@ -2,14 +2,20 @@ import { useRef, useState } from 'react';
 
 import { useDispatch } from 'react-redux';
 import { setTypeMessage, setTextMessage, toggleMessage } from '@/store/slices/messageSlice';
+import { uploadProjectImage } from '@/lib/uploads/uploadProjectImage';
 
 import { IProject } from '@/interfaces/general';
 
 
 export const useKeyFeatureImageUpload = (
+    projectId: number,
     featureId: number,
     field: 'photo' | 'icon',
-    setData: React.Dispatch<React.SetStateAction<IProject>>
+
+    setData:
+        React.Dispatch<
+            React.SetStateAction<IProject>
+        >,
 ) => {
     const dispatch = useDispatch();
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -50,41 +56,100 @@ export const useKeyFeatureImageUpload = (
         setTimeout(() => dispatch(toggleMessage()), 3000);
     };
 
-    const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const files = e.target.files;
-        if (!files || files.length === 0) return;
+    const handleFileUpload =
+        async (
+            event:
+                React.ChangeEvent<
+                    HTMLInputElement
+                >,
+        ) => {
+            const file =
+                event.target.files?.[0]
 
-        setIsLoading(true);
-        const file = files[0];
+            if (!file) {
+                return
+            }
 
-        // Валидация
-        const validation = await validateFile(file);
-        if (!validation.valid) {
-            showMessage('error', validation.error || 'Invalid file');
-            setIsLoading(false);
-            if (fileInputRef.current) fileInputRef.current.value = '';
-            return;
+            setIsLoading(true)
+
+            try {
+                const validation =
+                    await validateFile(
+                        file,
+                    )
+
+                if (!validation.valid) {
+                    showMessage(
+                        'error',
+                        validation.error ??
+                        'Invalid file',
+                    )
+
+                    return
+                }
+
+                const uploaded =
+                    await uploadProjectImage({
+                        file,
+                        projectId,
+
+                        category:
+                            field === 'icon'
+                                ? 'feature-icon'
+                                : 'feature-photo',
+                    })
+
+                setData(
+                    (
+                        previous,
+                    ) => ({
+                        ...previous,
+
+                        keyFeatures:
+                            previous
+                                .keyFeatures
+                                .map(
+                                    (
+                                        feature,
+                                    ) =>
+                                        feature.id ===
+                                        featureId
+                                            ? {
+                                                ...feature,
+
+                                                [field]:
+                                                    uploaded.url,
+                                            }
+                                            : feature,
+                                ),
+                    }),
+                )
+
+                showMessage(
+                    'info',
+                    'Success!',
+                )
+            } catch (error) {
+                console.error(
+                    'Feature image upload failed:',
+                    error,
+                )
+
+                showMessage(
+                    'error',
+                    'Image upload failed',
+                )
+            } finally {
+                setIsLoading(false)
+
+                if (
+                    fileInputRef.current
+                ) {
+                    fileInputRef.current
+                        .value = ''
+                }
+            }
         }
-
-        const reader = new FileReader();
-        reader.onload = (event) => {
-            const imageUrl = event.target?.result as string;
-
-            setData((prev: IProject) => ({
-                ...prev,
-                keyFeatures: prev.keyFeatures.map(feature =>
-                    feature.id === featureId
-                        ? { ...feature, [field]: imageUrl }
-                        : feature
-                ),
-            }));
-
-            showMessage('info', 'Success!');
-            setIsLoading(false);
-            if (fileInputRef.current) fileInputRef.current.value = '';
-        };
-        reader.readAsDataURL(file);
-    };
 
     const openFilePicker = () => fileInputRef.current?.click();
 
