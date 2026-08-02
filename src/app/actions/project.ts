@@ -1,11 +1,16 @@
 'use server'
 
 import { revalidatePath } from "next/cache"
+import { isManageUpload, isProjectManageUpload } from "@/lib/uploads/paths"
+import { deleteManagedUpload } from "@/lib/uploads/deleteUpload"
+import path from "node:path";
+import { rm } from "node:fs/promises";
 
 import prisma from "@/lib/prisma"
 import { IProject } from "@/interfaces/general"
 import { transformRawProject } from "@/lib/transformers/project"
 import { requireAdmin } from "@/lib/auth/admin";
+import { uploadConfig } from "@/lib/uploads/config";
 
 
 export async function createProject(projectData: IProject) {
@@ -117,11 +122,156 @@ export async function createProject(projectData: IProject) {
     }
 }
 
+function assertUploadOwnership(
+    project: IProject,
+): void {
+    for (
+        const value of
+        getProjectAssetValues(project)
+    ) {
+        if (
+            isManageUpload(value) &&
+            !isProjectManageUpload(
+                value,
+                project.id,
+            )
+        ) {
+            throw new Error(
+                'INVALID_UPLOAD_OWNER',
+            )
+        }
+    }
+}
+
+function getProjectAssetValues(
+    project: IProject,
+): string[] {
+    return [
+        ...project.images.map(
+            (item) => item.image,
+        ),
+
+        ...project.keyFeatures.flatMap(
+            (item) => [
+                item.icon,
+                item.photo,
+            ],
+        ),
+
+        ...project.stack.map(
+            (item) => item.icon,
+        ),
+
+        ...project.description.map(
+            (item) => item.icon,
+        ),
+
+        ...project.metrics.map(
+            (item) => item.icon,
+        ),
+    ]
+}
+
+
 export async function updateProject(projectData: IProject) {
     await requireAdmin()
 
+    assertUploadOwnership(
+        projectData,
+    )
+
     try {
         const projectId = projectData.id
+
+        const previousProject = await prisma.project.findUnique({
+                where: {
+                    id: projectId,
+                },
+
+                select: {
+                    images: {
+                        select: {
+                            image: true,
+                        },
+                    },
+
+                    keyFeatures: {
+                        select: {
+                            icon: true,
+                            photo: true,
+                        },
+                    },
+
+                    stack: {
+                        select: {
+                            icon: true,
+                        },
+                    },
+
+                    description: {
+                        select: {
+                            icon: true,
+                        },
+                    },
+
+                    metrics: {
+                        select: {
+                            icon: true,
+                        },
+                    },
+                },
+            })
+
+        const previousUrls =
+            new Set<string>([
+                ...(
+                    previousProject?.images.map(
+                        (item) =>
+                            item.image,
+                    ) ?? []
+                ),
+
+                ...(
+                    previousProject
+                        ?.keyFeatures
+                        .flatMap(
+                            (item) => [
+                                item.icon,
+                                item.photo,
+                            ],
+                        ) ?? []
+                ),
+
+                ...(
+                    previousProject?.stack.map(
+                        (item) =>
+                            item.icon,
+                    ) ?? []
+                ),
+
+                ...(
+                    previousProject
+                        ?.description
+                        .map(
+                            (item) =>
+                                item.icon,
+                        ) ?? []
+                ),
+
+                ...(
+                    previousProject?.metrics.map(
+                        (item) =>
+                            item.icon,
+                    ) ?? []
+                ),
+            ])
+
+        const nextUrls =
+            new Set(
+                getProjectAssetValues(
+                    projectData,
+                ),
+            )
 
         const updatedProject = await prisma.$transaction(async (tx) => {
 
@@ -262,6 +412,38 @@ export async function updateProject(projectData: IProject) {
         }
         const transformedProject = transformRawProject(updatedProject)
 
+        const removedUrls =
+            [...previousUrls].filter(
+                (url) =>
+                    isProjectManageUpload(
+                        url,
+                        projectId,
+                    ) &&
+                    !nextUrls.has(url),
+            )
+
+        const deletionResults =
+            await Promise.allSettled(
+                removedUrls.map(
+                    deleteManagedUpload,
+                ),
+            )
+
+        for (
+            const result of
+            deletionResults
+        ) {
+            if (
+                result.status ===
+                'rejected'
+            ) {
+                console.error(
+                    'Failed to delete project upload:',
+                    result.reason,
+                )
+            }
+        }
+
         revalidatePath(`/project/${projectId}`)
         revalidatePath(`/editProject/${projectId}`)
         revalidatePath('/')
@@ -291,6 +473,20 @@ export async function deleteProject(projectId: number) {
         revalidatePath(`/project/${projectId}`)
         revalidatePath('/admin')
         revalidatePath(`/editProject/${projectId}`)
+        const projectUploadDirectory =
+            path.join(
+                uploadConfig.root,
+                'projects',
+                projectId.toString(),
+            )
+
+        await rm(
+            projectUploadDirectory,
+            {
+                recursive: true,
+                force: true,
+            },
+        )
 
         return { success: true }
         
