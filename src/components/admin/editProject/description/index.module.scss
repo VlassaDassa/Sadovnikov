@@ -19,7 +19,11 @@
 .item {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px; 
+
+    @media (min-width: 500px) {
+        gap: 15px;
+    }
 }
 
 .headerWrapper {
