@@ -40,7 +40,6 @@
     gap: 20px;
 
     padding: 15px;
-    padding-left: 35px;
 
     border-radius: 10px;
 
@@ -71,10 +70,24 @@
     padding: 15px;
 }
 
+.deleteBtn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    
+    @media (min-width: 700px) {
+        position: relative;
+        top: 0;
+        right: 0;
+    }
+
+}
+
+
 .inputsGroup {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 30px;
 }
 
 .inputsGroupTextArea {
