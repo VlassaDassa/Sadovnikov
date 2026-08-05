@@ -181,6 +181,10 @@ export default async function LocaleLayout({
                         strategy="afterInteractive"
                     />
                 ) : null}
+                
+                {/* <!-- Yandex Autoplacement 19707056 --> */}
+                <script src="https://yandex.ru/ads/system/context.js" async></script>
+                <script data-page-id="19707056" src="https://yandex.ru/ads/system/ap-loader.js" async></script>
             </body>
         </html>
     );
