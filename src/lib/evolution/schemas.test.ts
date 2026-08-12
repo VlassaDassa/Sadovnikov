@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { evolutionDraftItemSchema, evolutionDraftSchema, gigaChatMilestoneResponseSchema } from './schemas';
+import { evolutionDraftItemSchema, gigaChatMilestoneResponseSchema } from './schemas';
 
 
 

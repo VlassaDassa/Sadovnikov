@@ -29,7 +29,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({ project, index=1 }) => {
 
                     <div className={style.projectStack}>
                         {
-                            project.stack.map((item, index) => (
+                            project.stack.map((item) => (
                                 <p key={item.id + ' ' + project.id} className={style.projectStackItem}>
                                     {item.name}
                                 </p>

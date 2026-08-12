@@ -3,7 +3,7 @@ import { capitalize } from "./textFormat";
 export const parseDate = (dateString: string | undefined): Date | null => {
         if (!dateString) return null;
         
-        let date = new Date(dateString);
+        const date = new Date(dateString);
         if (!isNaN(date.getTime())) return date;
         
         const parts = dateString.split(' ');

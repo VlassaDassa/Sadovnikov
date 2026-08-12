@@ -1,0 +1,125 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:18-bookworm
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: sadovnikov_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d sadovnikov_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+
+    env:
+      CI: true
+      TZ: UTC
+      NODE_ENV: test
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/sadovnikov_test
+      BETTER_AUTH_SECRET: test-secret-with-sufficient-length
+      BETTER_AUTH_URL: http://127.0.0.1:3000
+      AUTH_BOOTSTRAP: false
+      UPLOAD_ROOT: ${{ github.workspace }}/.tmp/uploads
+      UPLOAD_PUBLIC_PREFIX: /uploads/portfolio
+      UPLOAD_MAX_IMAGE_BYTES: 8388608
+      YANDEX_SMTP_USER: sender@example.com
+      YANDEX_SMTP_PASSWORD: test-password
+      CONTACT_EMAIL_TO: owner@example.com
+      GITHUB_TOKEN: test-token
+      GIGACHAT_CLIENT_SECRET: test
+      GIGACHAT_AUTH_KEY: test
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.26.2
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate Prisma client
+        run: pnpm exec prisma generate
+
+      - name: Validate Prisma schema
+        run: pnpm exec prisma validate
+
+      - name: Apply migrations
+        run: pnpm exec prisma migrate deploy
+
+      - name: Seed database
+        run: pnpm exec prisma db seed
+
+      - name: Run lint
+        run: pnpm lint
+
+      - name: Run type checking
+        run: pnpm typecheck
+
+      - name: Run unit and component tests
+        run: pnpm test:unit
+
+      - name: Run server tests
+        run: pnpm test:server
+
+      - name: Run integration tests
+        run: pnpm test:integration
+
+      - name: Build application
+        run: pnpm build
+
+      - name: Install Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run Chromium E2E tests
+        run: pnpm exec playwright test --project=chromium
+
+      - name: Upload coverage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: coverage
+          if-no-files-found: ignore
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report
+          if-no-files-found: ignore
+
+      - name: Upload Playwright output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: test-results
+          if-no-files-found: ignore

@@ -188,60 +188,6 @@ function extractJson(
     }
 }
 
-function formatMilestoneDate(
-    dates: Date[],
-    locale: string
-): string {
-    const sortedDates = [...dates].sort(
-        (first, second) =>
-            first.getTime() - second.getTime()
-    )
-
-    const first = sortedDates[0]
-    const last = sortedDates[sortedDates.length - 1]
-
-    if (!first || !last) {
-        throw new Error('Milestone source dates are missing')
-    }
-
-    const sameYear =
-        first.getUTCFullYear() === last.getUTCFullYear()
-
-    const sameMonth =
-        sameYear &&
-        first.getUTCMonth() === last.getUTCMonth()
-
-    if (sameMonth) {
-        return new Intl.DateTimeFormat(locale, {
-            month: 'long',
-            year: 'numeric',
-            timeZone: 'UTC',
-        }).format(first)
-    }
-
-    if (sameYear) {
-        const firstMonth = new Intl.DateTimeFormat(locale, {
-            month: 'short',
-            timeZone: 'UTC',
-        }).format(first)
-
-        const lastMonth = new Intl.DateTimeFormat(locale, {
-            month: 'short',
-            year: 'numeric',
-            timeZone: 'UTC',
-        }).format(last)
-
-        return `${firstMonth} - ${lastMonth}`
-    }
-
-    const formatter = new Intl.DateTimeFormat(locale, {
-        month: 'short',
-        year: 'numeric',
-        timeZone: 'UTC',
-    })
-
-    return `${formatter.format(first)} - ${formatter.format(last)}`
-}
 
 function resolveCommitReference(
     rawReference: string,
@@ -474,8 +420,6 @@ function prepareDraft(
 
     return prepared.map(
         ({
-            firstTimestamp:
-            _firstTimestamp,
             ...item
         }) => {
             return item;

@@ -20,7 +20,6 @@ interface MetricItemProps {
 }
 
 const MetricItem: React.FC<MetricItemProps> = ({
-        id, 
         icon, 
         title, 
         text, 

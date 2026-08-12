@@ -6,13 +6,13 @@ import { useEffect, useRef, useState } from "react";
 interface UseScrollAnimationProps {
     threshold?: number,
     rootMargin?: string,
-    animationClass?: string,
+    animationClassHTML?: string,
 }
 
 export const useScrollAnimation = <T extends HTMLElement>({
     threshold = 0.1,
     rootMargin = '0px 0px -50px 0px',
-    animationClass = 'animate-in'
+    animationClassHTML = 'animate-in'
 }: UseScrollAnimationProps = {}) => {
 
     const elementRef = useRef<T>(null);
@@ -46,5 +46,5 @@ export const useScrollAnimation = <T extends HTMLElement>({
         }
     }, [threshold, rootMargin])
 
-    return { elementRef, isVisible, animationClassm: isVisible ? animationClass : '' }
+    return { elementRef, isVisible, animationClass: isVisible ? animationClassHTML : '' }
 }

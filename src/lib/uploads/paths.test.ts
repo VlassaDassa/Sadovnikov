@@ -39,7 +39,7 @@ import {
     ] as const)(
         'maps %s to a directory',
         (category, expected) => {
-            expect(getCategoryDirectory(category)).toBe(expect)
+            expect(getCategoryDirectory(category)).toBe(expected)
         }
     )
 

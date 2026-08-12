@@ -3,9 +3,9 @@ import React from 'react';
 import type { IconItem } from '@/interfaces/general';
 
 
-const IconEmpty: React.FC<IconItem> = ({ strokeColor, fillColor, iconClass, size }) => {
+const IconEmpty: React.FC<IconItem> = ({ strokeColor, iconClass, size }) => {
     return (
-        <svg width={size} height={size} viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width={size} height={size} className={iconClass} viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M380 136H132C116.536 136 104 148.536 104 164V348C104 363.464 116.536 376 132 376H380C395.464 376 408 363.464 408 348V164C408 148.536 395.464 136 380 136Z" stroke={strokeColor} 
                 strokeWidth="24" 
                 strokeLinecap="round" 

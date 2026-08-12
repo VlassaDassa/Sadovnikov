@@ -45,7 +45,7 @@ const DecorButton: React.FC<DecorButtonProps> = ({
 }) => {
     const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
 
-
+    const isDisabled = behavior !== "default"
 
     const size = breakpoint === 'desktop' ? 'big' :
                                 breakpoint === 'tablet' ? 'medium' : 'small'
@@ -57,6 +57,14 @@ const DecorButton: React.FC<DecorButtonProps> = ({
     
     const t = useTranslations('DecorBtn');
 
+
+    const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+        if (isDisabled) {
+            return;
+        }
+
+        onClick?.(event as unknown as React.MouseEvent<HTMLDivElement>);
+    };
 
     // Определение размера декоративного Loader
     const defineSizeLoader = () => {
@@ -138,13 +146,15 @@ const DecorButton: React.FC<DecorButtonProps> = ({
     return (
         <div 
             tabIndex={0}
-            role='button' 
+            role='button'
             className={`${style.decorBtn} 
                 ${style[`decorBtn-${additionalClass}`]} 
                 ${style[`decorBtn_${behavior}`]} 
                 ${style[`decorBtn_${variant}`]} 
             `}
-            onClick={onClick}
+            aria-busy={behavior === "loading"}
+            
+            onClick={handleClick}
         >
             <AdaptiveImage 
                 src={bgBtn}

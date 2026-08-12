@@ -8,8 +8,8 @@ const contactSchema = z.object({
     name: z
         .string()
         .trim()
-        .min(5)
-        .max(10)
+        .min(2)
+        .max(50)
         .regex(/^[^\r\n]+$/),
     email: z
         .string()

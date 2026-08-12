@@ -57,9 +57,12 @@ const uiSlice = createSlice({
         },
 
         closeOverlay: (state) => {
-            state.isOverlayVisible = false;
-            document.documentElement.style.overflow = 'auto';
-            document.documentElement.style.paddingRight = '0';
+            state.isOverlayVisible = false
+            state.bodyScroll = true
+            document.documentElement.style.overflow =
+                "auto"
+            document.documentElement.style.paddingRight =
+                "0"
         },
 
         toggleMenu: (state) => {

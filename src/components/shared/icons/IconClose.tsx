@@ -3,7 +3,7 @@ import React from 'react';
 import type { IconItem } from '@/interfaces/general';
 
 
-const IconClose: React.FC<IconItem> = ({ strokeColor, fillColor, iconClass, size }) => {
+const IconClose: React.FC<IconItem> = ({ strokeColor, iconClass, size }) => {
     return (
         <svg width={size} height={size} viewBox={`0 0 ${24} ${24}`} fill="none" className={iconClass} xmlns="http://www.w3.org/2000/svg">
             <path 

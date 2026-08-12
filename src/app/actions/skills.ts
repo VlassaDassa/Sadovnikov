@@ -9,28 +9,39 @@ import { requireAdmin } from "@/lib/auth/admin";
 
 
 export async function updateSkills(skills: Skill[]) {
-    requireAdmin()
+    await requireAdmin()
+
+    // Так как количество skills ограниченное (до 10 шт и это количество ТОЧНО расти не будет),
+    // то просто "перезатираем"
+    // Удаляем всё старое и неактуальное и добавляем новое актуальное
 
     try {
-        // Так как количество skills ограниченное (до 10 шт и это количество ТОЧНО расти не будет),
-        // то просто "перезатираем"
-        // Удаляем всё старое и неактуальное и добавляем новое актуальное
+        await prisma.$transaction(
+            async (tx) => {
+                await tx.skill.deleteMany()
 
-        await prisma.skill.deleteMany();
+                await tx.skill.createMany({
+                    data: skills.map(
+                        (skill) => ({
+                            id: skill.id,
+                            name: skill.name,
+                            score: skill.score,
+                        }),
+                    ),
+                })
+            },
+        )
 
-        await prisma.skill.createMany({
-            data: skills.map(skill => ({
-                id: skill.id,
-                name: skill.name,
-                score: skill.score
-            }))
-        })
+        revalidatePath("/")
+        revalidatePath("/admin")
 
-        revalidatePath('/')
-        revalidatePath('/admin')
-
-        return { success: true }
-    } catch (error) {
-        return { success: false, error: 'Failed to update skills' }        
+        return {
+            success: true,
+        }
+    } catch {
+        return {
+            success: false,
+            error: "Failed to update skills",
+        }
     }
 }

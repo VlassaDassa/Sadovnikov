@@ -120,7 +120,8 @@ const Button: React.FC<ButtonProps> = ({
         <button 
             onClick={onClick}
             ref={tooltipRef}
-            disabled={behavior === 'disabled'}
+            disabled={behavior !== "default"}
+            aria-busy={behavior === "loading"}
             type={type}
             className={`
                 ${style.button} 

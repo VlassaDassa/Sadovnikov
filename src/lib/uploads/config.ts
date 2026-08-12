@@ -1,15 +1,22 @@
-import 'server-only'
+import "server-only";
 
-import path from 'node:path'
+import path from "node:path";
 
+const defaultUploadRoot =
+    process.env.NODE_ENV === "production"
+        ? "/app/uploads"
+        : path.join(process.cwd(), ".uploads", "portfolio");
 
+const configuredPrefix =
+    process.env.UPLOAD_PUBLIC_PREFIX ?? "/uploads/portfolio";
 
-const defaultUploadRoot = process.env.NODE_ENV === 'production' ? '/app/uploads' : path.join(process.cwd(), '.uploads', 'portfolio')
-
-const configuredPrefix = process.env.UPLOAD_PUBLIC_PREFIX ?? '/uploads/portfolio'
+const parsedMaxImageBytes = Number(process.env.UPLOAD_MAX_IMAGE_BYTES);
 
 export const uploadConfig = {
     root: path.resolve(process.env.UPLOAD_ROOT ?? defaultUploadRoot),
-    publicPrefix: configuredPrefix.replace(/\/+$/, '',),
-    maxImageBytes: Number(process.env.UPLOAD_MAX_IMGE_BYTES) ?? 8 * 1024 * 1024
-}
+    publicPrefix: configuredPrefix.replace(/\/+$/, ""),
+    maxImageBytes:
+        Number.isFinite(parsedMaxImageBytes) && parsedMaxImageBytes > 0
+            ? parsedMaxImageBytes
+            : 8 * 1024 * 1024,
+};

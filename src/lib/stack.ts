@@ -14,9 +14,9 @@ export const randomPlacementItems = (props: RandomPlacementItems) => {
 
 		items.forEach((item, index) => {
 			if (item) {
-				var attempts = 0
+				let attempts = 0
 				const maxAttempts = 200
-				var placed = false
+				let placed = false
 				
 				while (!placed && attempts < maxAttempts) {
 					const x = Math.random() * (wrapper.clientWidth - item.offsetWidth)
@@ -26,7 +26,7 @@ export const randomPlacementItems = (props: RandomPlacementItems) => {
 					item.style.top = `${y}px`;
 
 					// Определение пересечения
-					var collision = false
+					let collision = false
 					for (let i = 0; i < index; i++) {
 						const otherItem = items[i];
 						if (!otherItem) continue;

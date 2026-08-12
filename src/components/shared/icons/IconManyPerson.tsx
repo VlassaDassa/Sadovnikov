@@ -3,7 +3,7 @@ import React from 'react';
 import type { IconItem } from '@/interfaces/general';
 
 
-const IconManyPerson: React.FC<IconItem> = ({ strokeColor, fillColor, iconClass, size }) => {
+const IconManyPerson: React.FC<IconItem> = ({ strokeColor, iconClass, size }) => {
     return (
         <svg width={size} height={size} viewBox={`0 0 ${20} ${20}`} fill="none" className={iconClass} xmlns="http://www.w3.org/2000/svg">
             <path d="M13 6C13 7.65685 11.6569 9 10 9C8.34315 9 7 7.65685 7 6C7 4.34315 8.34315 3 10 3C11.6569 3 13 4.34315 13 6Z" 

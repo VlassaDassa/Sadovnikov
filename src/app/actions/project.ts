@@ -58,7 +58,7 @@ export async function createProject(projectData: IProject) {
                         titleRu: feature.titleRu,
 
                         text: feature.text,
-                        textRu: feature.text,
+                        textRu: feature.textRu,
 
                         icon: feature.icon,
                         photo: feature.photo,
@@ -94,11 +94,17 @@ export async function createProject(projectData: IProject) {
                 },
 
                 commits: {
-                    create: projectData.commits.map(commit => ({
-                        name: commit.name,
-                        date: commit.date,
-                        text: commit.text,
-                    })),
+                    create: projectData.commits.map(
+                        (commit, index) => ({
+                            name: commit.name,
+                            nameRu: commit.nameRu || null,
+                            date: commit.date,
+                            dateRu: commit.dateRu || null,
+                            text: commit.text,
+                            textRu: commit.textRu || null,
+                            order: index,
+                        }),
+                    ),
                 },
             },
 
@@ -274,7 +280,6 @@ export async function updateProject(projectData: IProject) {
             )
 
         const updatedProject = await prisma.$transaction(async (tx) => {
-
             
             // Обновление основных полей
             await tx.project.update({
@@ -365,7 +370,9 @@ export async function updateProject(projectData: IProject) {
                         projectId,
                         icon: metric.icon,
                         title: metric.title,
+                        titleRu: metric.titleRu || null,
                         text: metric.text,
+                        textRu: metric.textRu || null,
                         current: typeof metric.current === 'string' ? parseFloat(metric.current) : metric.current,
                         max: metric.max,
                         type: metric.type
@@ -374,25 +381,29 @@ export async function updateProject(projectData: IProject) {
                 })
             };
 
-            // Обновление commits
-            await tx.commit.createMany({
-                data: projectData.commits.map(
-                    (commit, index) => ({
-                        projectId,
-
-                        name: commit.name,
-                        nameRu: commit.nameRu || null,
-
-                        date: commit.date,
-                        dateRu: commit.dateRu || null,
-
-                        text: commit.text,
-                        textRu: commit.textRu || null,
-
-                        order: index,
-                    })
-                ),
+            await tx.commit.deleteMany({
+                where: {
+                    projectId,
+                },
             })
+
+            // Обновление commits
+            if (projectData.commits.length > 0) {
+                await tx.commit.createMany({
+                    data: projectData.commits.map(
+                        (commit, index) => ({
+                            projectId,
+                            name: commit.name,
+                            nameRu: commit.nameRu || null,
+                            date: commit.date,
+                            dateRu: commit.dateRu || null,
+                            text: commit.text,
+                            textRu: commit.textRu || null,
+                            order: index,
+                        }),
+                    ),
+                })
+            }
 
             return await tx.project.findUnique({
                 where: { id: projectId },

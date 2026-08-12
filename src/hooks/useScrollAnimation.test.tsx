@@ -38,20 +38,20 @@ class IntersectionObserverMock {
 function Harness({
     threshold,
     rootMargin,
-    animationClass,
+    animationClassHTML,
 }: {
     threshold?: number
     rootMargin?: string
-    animationClass?: string
+    animationClassHTML?: string
 }) {
     const {
         elementRef,
         isVisible,
-        animationClassm,
+        animationClass,
     } = useScrollAnimation<HTMLDivElement>({
         threshold,
         rootMargin,
-        animationClass,
+        animationClassHTML,
     })
 
     return (
@@ -59,7 +59,7 @@ function Harness({
             ref={elementRef}
             data-testid="target"
             data-visible={String(isVisible)}
-            className={animationClassm}
+            className={animationClass}
         />
     )
 }
@@ -86,7 +86,7 @@ describe("useScrollAnimation", () => {
 
     it("shows the element after intersection", () => {
         render(
-            <Harness animationClass="visible-now" />,
+            <Harness animationClassHTML="visible-now" />,
         )
 
         const target = screen.getByTestId(
