@@ -1,32 +1,43 @@
-'use client'
+"use client";
 
-import React, { Dispatch, SetStateAction, useState, useRef, useEffect } from 'react';
-import { CSS } from '@dnd-kit/utilities';
-import { useSortable } from '@dnd-kit/sortable'
+import React, {
+    Dispatch,
+    SetStateAction,
+    useCallback,
+    useEffect,
+    useRef,
+    useState,
+} from "react";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
-import Button from '@/components/shared/button/Button';
-import DragHandler from '../dragHandler';
-import Input from '@/components/shared/input';
-import ModalWrapper from '../modalWrapper';
-import SavingIndicator from '@/components/shared/SavingIndicator';
+import Button from "@/components/shared/button/Button";
+import Input from "@/components/shared/input";
+import SavingIndicator from "@/components/shared/SavingIndicator";
 
-import { Stack } from '@/interfaces/general';
-import { useDebounce } from '@/hooks/useDebounce';
-import { updateStack } from '@/app/actions/stack';
-import { registerBeforeClose, unregisterBeforeClose } from '@/lib/modals';
+import DragHandler from "../dragHandler";
+import ModalWrapper from "../modalWrapper";
 
-import styles from './index.module.scss';
+import { updateStack } from "@/app/actions/stack";
+import { useDebounce } from "@/hooks/useDebounce";
+import { Stack } from "@/interfaces/general";
+import { registerBeforeClose, unregisterBeforeClose } from "@/lib/modals";
 
+import styles from "./index.module.scss";
 
-
+const MODAL_NAME = "editMyStack";
 
 interface StackItemProps {
-    stackItem: Stack,
-    setStack: Dispatch<SetStateAction<Stack[]>>
-    setIsSaving: Dispatch<SetStateAction<boolean>>
+    stackItem: Stack;
+    setStack: Dispatch<SetStateAction<Stack[]>>;
+    setIsSaving: Dispatch<SetStateAction<boolean>>;
 }
 
-const StackItem: React.FC<StackItemProps> = ({ stackItem, setStack, setIsSaving }) => {
+const StackItem: React.FC<StackItemProps> = ({
+    stackItem,
+    setStack,
+    setIsSaving,
+}) => {
     const {
         attributes,
         listeners,
@@ -34,55 +45,62 @@ const StackItem: React.FC<StackItemProps> = ({ stackItem, setStack, setIsSaving 
         transform,
         transition,
         isDragging,
-    } = useSortable({id: stackItem.id})
-
+    } = useSortable({
+        id: stackItem.id,
+    });
 
     const style = {
         transform: CSS.Transform.toString(transform),
         transition,
-        opacity: isDragging ? 0.5 : 1
-    }
+        opacity: isDragging ? 0.5 : 1,
+    };
 
     const deleteItem = (id: number) => {
-        setIsSaving(true)
-        setStack(prev => prev.filter((item) => item.id !== id))
-    }
+        setIsSaving(true);
 
+        setStack((previous) => previous.filter((item) => item.id !== id));
+    };
 
-    const handleChangeName = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)  => {
-        const newName = e.target.value;
-        
-        if (newName.length <= 20) {
-            setStack(
-                prev => prev.map((item) => item.id === stackItem.id 
-                    ? {...item, name: newName}
-                    : item
-                ) 
-            )
+    const handleChangeName = (
+        event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    ) => {
+        const newName = event.target.value;
 
-            setIsSaving(true)
+        if (newName.length > 20) {
+            return;
         }
-    }
-    
+
+        setStack((previous) =>
+            previous.map((item) =>
+                item.id === stackItem.id
+                    ? {
+                          ...item,
+                          name: newName,
+                      }
+                    : item,
+            ),
+        );
+
+        setIsSaving(true);
+    };
+
     return (
-        <div 
-            ref={setNodeRef} 
+        <div
+            ref={setNodeRef}
             {...attributes}
             {...listeners}
-            style={style} 
+            style={style}
             className={`${styles.stackItem} modalElementBg`}
         >
-            <DragHandler
-                variant="big"
-            />
+            <DragHandler variant="big" />
 
-            <Input 
+            <Input
                 name={stackItem.name}
-                placeholder='Text...'
+                placeholder="Text..."
                 value={stackItem.name}
-                variant='admin'
-                iconPosition='noIcon'
-                adminLabel='withoutLabel'
+                variant="admin"
+                iconPosition="noIcon"
+                adminLabel="withoutLabel"
                 onChange={handleChangeName}
             />
 
@@ -95,76 +113,96 @@ const StackItem: React.FC<StackItemProps> = ({ stackItem, setStack, setIsSaving 
                 additionalClass={styles.deleteBtn}
             />
         </div>
-    )
-}
-
+    );
+};
 
 interface EditMyStackModalProps {
-    initialStack: Stack[]
+    initialStack: Stack[];
 }
 
-const EditMyStackModal: React.FC<EditMyStackModalProps> = ({ initialStack }) => {
-    const [stack, setStack] = useState(initialStack)
-    const containerRef = useRef<HTMLDivElement>(null)
-    const [isSaving, setIsSaving] = useState(false)
-    const modalName = 'editMyStack'
+const EditMyStackModal: React.FC<EditMyStackModalProps> = ({
+    initialStack,
+}) => {
+    const [stack, setStack] = useState<Stack[]>(initialStack);
 
-    const debouncedStack = useDebounce(stack, 1000)
+    const [isSaving, setIsSaving] = useState(false);
 
-    const saveStack = async () => {
-        const hasChanged = JSON.stringify(stack) !== JSON.stringify(initialStack)
-        if (!hasChanged) return;
+    const containerRef = useRef<HTMLDivElement>(null);
 
-        setIsSaving(true)
-        try {
-            await updateStack(stack)
-        } catch (error) {
-            console.error('❌ Failed to save stack:', error);
-        }
-        finally {
-            setIsSaving(false)
-        }
-    }
+    const debouncedStack = useDebounce(stack, 1000);
 
-    // Сохранение на сервере с debounce
+    const saveStack = useCallback(
+        async (stackToSave: Stack[]) => {
+            const hasChanged =
+                JSON.stringify(stackToSave) !== JSON.stringify(initialStack);
+
+            if (!hasChanged) {
+                return;
+            }
+
+            try {
+                await updateStack(stackToSave);
+            } catch (error) {
+                console.error("Failed to save stack:", error);
+            } finally {
+                setIsSaving(false);
+            }
+        },
+        [initialStack],
+    );
+
+    const setStackFromDrag = useCallback<Dispatch<SetStateAction<Stack[]>>>(
+        (nextStack) => {
+            setIsSaving(true);
+            setStack(nextStack);
+        },
+        [],
+    );
+
     useEffect(() => {
-        saveStack()
-    }, [debouncedStack, initialStack])
+        void saveStack(debouncedStack);
+    }, [debouncedStack, saveStack]);
 
-    // Сохранение на сервере при закрытии модалки
     useEffect(() => {
-        registerBeforeClose(modalName, saveStack)
+        const saveBeforeClose = () => {
+            return saveStack(stack);
+        };
+
+        registerBeforeClose(MODAL_NAME, saveBeforeClose);
 
         return () => {
-            unregisterBeforeClose(modalName)
-        }
-    }, [stack, initialStack])
-
+            unregisterBeforeClose(MODAL_NAME);
+        };
+    }, [stack, saveStack]);
 
     useEffect(() => {
-        if (containerRef.current) {
-            containerRef.current.scrollTop = containerRef.current.scrollHeight;
+        if (!containerRef.current) {
+            return;
         }
-    }, [stack.length])
-    
-    const addItem = () => {
-        const maxId = Math.max(...stack.map(s => s.id), 0);
-        const nweStack: Stack = {
-            id: maxId + 1,
-            name: '',
-        }
-        setIsSaving(true)
 
-        setStack(prev => [...prev, nweStack])
-    }
+        containerRef.current.scrollTop = containerRef.current.scrollHeight;
+    }, [stack.length]);
+
+    const addItem = () => {
+        const maxId = Math.max(...stack.map((stackItem) => stackItem.id), 0);
+
+        const newStack: Stack = {
+            id: maxId + 1,
+            name: "",
+        };
+
+        setIsSaving(true);
+
+        setStack((previous) => [...previous, newStack]);
+    };
 
     const disableBtn = () => {
         if (stack.length >= 9) {
-            return 'disabled'
+            return "disabled";
         }
 
-        return 'default'
-    }
+        return "default";
+    };
 
     return (
         <ModalWrapper
@@ -173,30 +211,26 @@ const EditMyStackModal: React.FC<EditMyStackModalProps> = ({ initialStack }) => 
             disableBtn={disableBtn}
             addItem={addItem}
             items={stack}
-            setItems={setStack}
+            setItems={setStackFromDrag}
             ref={containerRef}
-
-            modalName={modalName}
-
-            title='Edit Stack'
-            subTitle='Manage your homepage stack section'
-
+            modalName={MODAL_NAME}
+            title="Edit Stack"
+            subTitle="Manage your homepage stack section"
             tooltipMax={9}
-            tooltipText='Maximum 9 technologies allowed'
+            tooltipText="Maximum 9 technologies allowed"
         >
             <SavingIndicator isSaving={isSaving} />
 
-            {stack.map(stackItem => (
-                <StackItem 
-                    key={stackItem.id} 
-                    stackItem={stackItem} 
-                    setStack={setStack} 
+            {stack.map((stackItem) => (
+                <StackItem
+                    key={stackItem.id}
+                    stackItem={stackItem}
+                    setStack={setStack}
                     setIsSaving={setIsSaving}
                 />
             ))}
         </ModalWrapper>
-                 
     );
-}
+};
 
 export default EditMyStackModal;

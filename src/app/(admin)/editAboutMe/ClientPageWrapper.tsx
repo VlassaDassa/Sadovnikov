@@ -1,102 +1,136 @@
-'use client'
+"use client";
 
-import React, { useState, useEffect } from "react";
-import dynamic from 'next/dynamic';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/store';
-import { useDispatch } from 'react-redux';
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
+import { useDispatch, useSelector } from "react-redux";
 
 import AdminPageTitle from "@/components/admin/general/adminPageTitle";
 import BasicInformation from "@/components/admin/editAboutMe/basicInformation";
 import ShortBio from "@/components/admin/editAboutMe/shortBio";
-import AnimatedSection from '@/components/shared/AnimatedScroll';
+import AnimatedSection from "@/components/shared/AnimatedScroll";
 import SavingIndicator from "@/components/shared/SavingIndicator";
 
-const SelectPeriod = dynamic(() => import('@/components/admin/modals/selectPeriod'), { ssr: false });
-const WorkExperience = dynamic(() => import('@/components/admin/editAboutMe/workExperience'), { ssr: false });
-
-import type { WorkExperience, AboutMe } from '@/interfaces/general';
 import { updateAboutMe } from "@/app/actions/aboutMe";
 import { useDebounce } from "@/hooks/useDebounce";
-import { showMessage } from '@/lib/showMessage';
+import type { AboutMe } from "@/interfaces/general";
+import { showMessage } from "@/lib/showMessage";
+import { RootState } from "@/store";
 
-import styles from './index.module.scss';
+import styles from "./index.module.scss";
 
+const SelectPeriod = dynamic(
+    () => import("@/components/admin/modals/selectPeriod"),
+    {
+        ssr: false,
+    },
+);
 
+const WorkExperience = dynamic(
+    () => import("@/components/admin/editAboutMe/workExperience"),
+    {
+        ssr: false,
+    },
+);
 
 interface ClientPageWrapperProps {
-    aboutMe: AboutMe
+    aboutMe: AboutMe;
 }
 
 const ClientPageWrapper: React.FC<ClientPageWrapperProps> = ({ aboutMe }) => {
-    const [data, setData] = useState<AboutMe>(aboutMe)
-    const [isSaving, setIsSaving] = useState(false)
-    const dispatch = useDispatch()
+    const [data, setData] = useState<AboutMe>(aboutMe);
 
-    const isSelectPeriodModalOpen = useSelector((state: RootState) => state.uiState.isSelectPeriodModalOpen)
+    const [isSaving, setIsSaving] = useState(false);
 
-    const debouncedData = useDebounce(data, 1000)
-    
-    const saveAboutMe = async () => {
-        const hasChanged = JSON.stringify(data) !== JSON.stringify(aboutMe)
-        if (!hasChanged) return;
+    const dispatch = useDispatch();
 
-        setIsSaving(true)
+    const lastSavedDataRef = useRef(JSON.stringify(aboutMe));
 
-        try {
-            const response = await updateAboutMe(data)
-            if (response.success) {
+    const isSelectPeriodModalOpen = useSelector(
+        (state: RootState) => state.uiState.isSelectPeriodModalOpen,
+    );
+
+    const debouncedData = useDebounce(data, 1000);
+
+    const saveAboutMe = useCallback(
+        async (dataToSave: AboutMe) => {
+            const serializedData = JSON.stringify(dataToSave);
+
+            if (serializedData === lastSavedDataRef.current) {
+                return;
             }
-            else {
-                showMessage('error', 'Error saving aboutMe', dispatch)
+
+            try {
+                const response = await updateAboutMe(dataToSave);
+
+                if (!response.success) {
+                    showMessage("error", "Error saving aboutMe", dispatch);
+
+                    return;
+                }
+
+                lastSavedDataRef.current = serializedData;
+            } catch {
+                showMessage("error", "Error saving aboutMe", dispatch);
+            } finally {
+                setIsSaving(false);
             }
-        } catch (error) {
-            showMessage('error', 'Error saving aboutMe', dispatch)
-        }
-        finally {
-            setIsSaving(false)
-        }
-    }
+        },
+        [dispatch],
+    );
 
     useEffect(() => {
-        saveAboutMe()
-    }, [debouncedData])
+        void saveAboutMe(debouncedData);
+    }, [debouncedData, saveAboutMe]);
 
-    
     const modals = (
         <>
-            {isSelectPeriodModalOpen && <SelectPeriod data={data} setData={setData} />}
+            {isSelectPeriodModalOpen && (
+                <SelectPeriod data={data} setData={setData} />
+            )}
         </>
-    )
+    );
 
     return (
-        <main className={`${styles.main}`}>
+        <main className={styles.main}>
             {modals}
+
             <SavingIndicator isSaving={isSaving} />
+
             <div className="container">
-                <AnimatedSection animation='fade-up'>
-                    <AdminPageTitle 
-                        title={'Edit section “About Me”'}
-                        text={'Update your information and experience'}
-                        icon={'person'}
+                <AnimatedSection animation="fade-up">
+                    <AdminPageTitle
+                        title="Edit section “About Me”"
+                        text="Update your information and experience"
+                        icon="person"
                     />
                 </AnimatedSection>
 
-                <AnimatedSection animation='fade-left'>
-                    <BasicInformation data={data} setData={setData} setIsSaving={setIsSaving} />
+                <AnimatedSection animation="fade-left">
+                    <BasicInformation
+                        data={data}
+                        setData={setData}
+                        setIsSaving={setIsSaving}
+                    />
                 </AnimatedSection>
 
-                <AnimatedSection animation='fade-right'>
-                    <WorkExperience data={data} setData={setData} setIsSaving={setIsSaving} />
+                <AnimatedSection animation="fade-right">
+                    <WorkExperience
+                        data={data}
+                        setData={setData}
+                        setIsSaving={setIsSaving}
+                    />
                 </AnimatedSection>
 
-                <AnimatedSection animation='fade-down'>
-                    <ShortBio setData={setData} data={data} setIsSaving={setIsSaving} />
+                <AnimatedSection animation="fade-down">
+                    <ShortBio
+                        data={data}
+                        setData={setData}
+                        setIsSaving={setIsSaving}
+                    />
                 </AnimatedSection>
-            </div>  
+            </div>
         </main>
-    )    
-    
-}
+    );
+};
 
 export default ClientPageWrapper;

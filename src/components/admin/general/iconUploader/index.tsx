@@ -10,7 +10,6 @@ interface IconUploaderProps {
 }
 
 const IconUploader: React.FC<IconUploaderProps> = ({ icon, additionalClass, onIconUpload}) => {
-    const [error, setError] = useState<string | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [currentIcon, setCurrentIcon] = useState(icon);
 
@@ -24,12 +23,9 @@ const IconUploader: React.FC<IconUploaderProps> = ({ icon, additionalClass, onIc
         if (!file) return;
 
         if (file.type !== 'image/svg+xml' && !file.name.endsWith('.svg')) {
-            setError('Необходимо выбрать SVG файл');
-            setTimeout(() => setError(null), 3000);
             return;
         } 
 
-        setError(null)
 
         // Загрузка на сервер
         if (fileInputRef.current) {

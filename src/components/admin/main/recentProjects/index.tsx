@@ -96,7 +96,6 @@ const RecentProjects: React.FC<RecentProjectsProps> = ({ projects }) => {
     const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
     const [data, setData] = useState<IProject[]>(projects)
     const [isCreating, setIsCreating] = useState<boolean>(false)
-    const [curIndex, setCurIndex] = useState<number>(1)
     const swiperRef = useRef<SwiperType | null>(null);
     const dispatch = useDispatch()
     const countProjectView = {
@@ -238,12 +237,11 @@ const RecentProjects: React.FC<RecentProjectsProps> = ({ projects }) => {
                     if (swiperRef.current) {
                         swiperRef.current.slideTo(newLength - 1);
                     }
-                    setCurIndex(newLength);
                 }, 50);
 
                 showMessage('info', 'Project has been created', dispatch)
             }
-        } catch (error) {
+        } catch {
             showMessage('error', 'Error creating project', dispatch)
         }
         finally {

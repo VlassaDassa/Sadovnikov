@@ -1,32 +1,36 @@
-'use client'
+"use client";
 
 import React from "react";
 
-import styles from './index.module.scss';
+import styles from "./index.module.scss";
 
-
-interface SectionBackgroundProps {
-    children: React.ReactNode;
-    className?: string;
-    section?: boolean,
-
-    [key: string]: any;
+interface SectionBackgroundProps extends React.HTMLAttributes<HTMLElement> {
+    section?: boolean;
 }
 
-const SectionBackground: React.FC<SectionBackgroundProps> = ({ children, className='', section=false, ...rest }) => {
+const SectionBackground: React.FC<SectionBackgroundProps> = ({
+    children,
+    className = "",
+    section = false,
+    ...rest
+}) => {
     if (section) {
-        <section className={`${styles.background} ${className}`} {...rest} >
-            <div className={styles.noise} aria-hidden="true" />
-            { children }
-        </section>
+        return (
+            <section className={`${styles.background} ${className}`} {...rest}>
+                <div className={styles.noise} aria-hidden="true" />
+
+                {children}
+            </section>
+        );
     }
 
     return (
-        <div className={`${styles.background} ${className}`} {...rest} >
+        <div className={`${styles.background} ${className}`} {...rest}>
             <div className={styles.noise} aria-hidden="true" />
-            { children }
+
+            {children}
         </div>
-    )
-}
+    );
+};
 
 export default SectionBackground;

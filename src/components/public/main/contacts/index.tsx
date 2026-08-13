@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useSyncExternalStore } from "react";
 import { useDispatch } from "react-redux";
 import { useTranslations } from "next-intl";
 
@@ -22,16 +22,44 @@ interface Errors {
 }
 
 type AvatarState = "checking" | "visible" | "leaving" | "hidden";
+type AvatarTransitionState = | 'idle' | 'leaving' | 'hidden'
 const AVATAR_DISMISSED_KEY = "contacts-avatar-dismissed";
+const AVATAR_DISMISSED_EVENT = 'contacts-avatar-dismissed-change'
+
+
+const subscribeAvatarDismissed = (callback: () => void) => {
+    window.addEventListener(AVATAR_DISMISSED_EVENT, callback)
+
+    return () => {
+        window.removeEventListener(AVATAR_DISMISSED_KEY, callback)
+    }
+}
+
+const getAvatarDismissedSnapshot = (): AvatarState => {
+    return sessionStorage.getItem(AVATAR_DISMISSED_KEY) === 'true' ? 'hidden' : 'visible'
+}
+
+const getAvatarDismissedServerSnapshot = (): AvatarState => {
+    return 'checking'
+}
+
 
 const Contacts: React.FC = () => {
     const [name, setName] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [message, setMessage] = useState<string>("");
-    const [avatarState, setAvatarState] = useState<AvatarState>("checking");
     const [isSubmitting, setIsSubmitting] = useState(false);
 
+    const storedAvatarState = useSyncExternalStore(
+        subscribeAvatarDismissed,
+        getAvatarDismissedSnapshot,
+        getAvatarDismissedServerSnapshot
+    ) 
+    const [avatarTransitionState, setAvatarTransitionState] = useState<AvatarTransitionState>('idle')
+
     const t = useTranslations("Contacts");
+
+    const avatarState: AvatarState = avatarTransitionState === 'leaving' ? 'leaving' : avatarTransitionState === 'hidden' ? 'hidden' : storedAvatarState
 
     const { isVisible, elementRef } = useScrollAnimation<HTMLDivElement>({
         threshold: 0.1,
@@ -80,12 +108,6 @@ const Contacts: React.FC = () => {
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        const isDismissed =
-            sessionStorage.getItem(AVATAR_DISMISSED_KEY) === "true";
-
-        setAvatarState(isDismissed ? "hidden" : "visible");
-    }, []);
 
     const handleNameChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -140,20 +162,30 @@ const Contacts: React.FC = () => {
     };
 
     const dismissAvatar = () => {
-        if (avatarState === "leaving" || avatarState === "hidden") return;
+        if (
+            avatarState === "checking" ||
+            avatarState === "leaving" ||
+            avatarState === "hidden"
+        ) {
+            return;
+        }
+
+        setAvatarTransitionState("leaving");
 
         sessionStorage.setItem(AVATAR_DISMISSED_KEY, "true");
 
-        setAvatarState("leaving");
+        window.dispatchEvent(new Event(AVATAR_DISMISSED_EVENT));
     };
 
     const handleAvatarAnimationEnd = (
         e: React.AnimationEvent<HTMLDivElement>,
     ) => {
-        if (e.target !== e.currentTarget) return;
+        if (e.target !== e.currentTarget) {
+            return;
+        }
 
         if (avatarState === "leaving") {
-            setAvatarState("hidden");
+            setAvatarTransitionState("hidden");
         }
     };
 

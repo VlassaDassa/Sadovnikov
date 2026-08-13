@@ -33,7 +33,7 @@ export async function updateStack(stack: Stack[]) {
         revalidatePath('/admin')
 
         return { success: true }
-    } catch (error) {
+    } catch {
         return { success: false, error: 'Failed to update stack' }        
     }
 }

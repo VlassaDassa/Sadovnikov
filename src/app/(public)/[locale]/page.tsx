@@ -1,8 +1,6 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
-import { getLocale } from 'next-intl/server';
-import { hasLocale } from 'next-intl';
 
 import Preview from '@/components/public/main/preview';
 import Skills from '@/components/public/main/skills';
@@ -15,7 +13,6 @@ import ErrorPage from '@/components/shared/ErrorPage';
 
 import { transformProject } from '@/lib/transformers/project';
 import { transformAboutMe } from '@/lib/transformers/aboutMe';
-import { routing } from '@/i18n/routing';
 import type { AppLocale } from '@/i18n/routing';
 import prisma from '@/lib/prisma';
 import { getAbsoluteUrl, getLanguageAlternates, getOpenGraphLocale, siteConfig } from '@/lib/seo/site';

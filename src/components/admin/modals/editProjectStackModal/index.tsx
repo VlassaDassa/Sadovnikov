@@ -1,257 +1,113 @@
-import React, {  Dispatch, SetStateAction, useRef, useEffect } from 'react';
+"use client";
 
-import Input from '@/components/shared/input';
-import IconUploader from '@/components/admin/general/iconUploader';
-import ModalWrapper from '@/components/admin/modals/modalWrapper';
-import Button from '@/components/shared/button/Button';
+import { useSyncExternalStore } from "react";
+import { useTranslations } from "next-intl";
 
-import type { EditProjectProps, IProject, IProjectStack } from '@/interfaces/general';
+import Button from "@/components/shared/button/Button";
 
-import styles from './index.module.scss';
+import styles from "./index.module.scss";
 
 
 
 
-interface StackItemProps {
-    item: IProjectStack,
-    setData: Dispatch<SetStateAction<IProject>>,
-}
 
-const StackItem: React.FC<StackItemProps> = ({ item, setData }) => {
-    
-    const deleteStackItem = (stackId: number) => {
-        setData((prev: IProject) => ({
-            ...prev,
-            stack: prev.stack.filter(item => item.id !== stackId),
-        }));
+const STORAGE_KEY = "development-notice-dismissed-v1";
+const STORAGE_EVENT = "development-notice-dismissed-change";
 
-    };
-
-    const handleChangeStack = (
-        stackId: number,
-        field: string,
-        value: string
-    ) => {
-        setData((prev: IProject) => ({
-            ...prev,
-            stack: prev.stack.map(el =>
-                el.id === stackId
-                    ? { ...el, [field]: value }
-                    : el
-            ),
-        }));
-
-    };
-
-    const handleChangeTooltip = (
-        stackId: number,
-        field: 'title' | 'text' | 'titleRu' | 'textRu',
-        value: string
-    ) => {
-        setData((prev: IProject) => ({
-            ...prev,
-            stack: prev.stack.map(el =>
-                el.id === stackId
-                    ? {
-                        ...el,
-                        tooltip: el.tooltip
-                            ? { ...el.tooltip, [field]: value }
-                            : { id: Date.now(), title: '', titleRu: '', text: '', textRu: '', [field]: value },
-                    }
-                    : el
-            ),
-        }));
-
-    };
-
-
-    const handleIconUpload = (path: string, stackId: number) => {
-        setData((prev: IProject) => ({
-            ...prev,
-            stack: prev.stack.map(el =>
-                el.id === stackId
-                    ? { ...el, icon: path }
-                    : el
-            ),
-        }));
-
-    };
-
-    return (
-        <div 
-            className={`${styles.item} modalElementBg`}
-        >
-            <div className={styles.inputs}>
-                <IconUploader 
-                    additionalClass={styles.iconBtnWrapper}
-                    icon={item.icon}
-                    onIconUpload={(path: string) => handleIconUpload(path, item.id)}
-                />
-                
-                <Input 
-                    name={item.name}
-                    placeholder='Text...'
-                    additionalClass={styles.input}
-                    type='text'
-                    iconPosition='noIcon'
-                    maxLen={20}
-                    value={item.name}
-                    variant='admin'
-                    adminLabel='withoutLabel'
-                    onChange={(e) => handleChangeStack(item.id, 'name', e.target.value)}
-                />
-
-                <div className={styles.inputsGroup}>
-                    <Input 
-                        name={item.name + '_title'}
-                        placeholder='Text...'
-                        additionalClass={styles.input}
-                        type='text'
-                        iconPosition='noIcon'
-                        value={item?.tooltip?.title}
-                        variant='admin'
-                        adminLabel='withLabel'
-                        label='Title'
-                        onChange={(e) => handleChangeTooltip(item.id, 'title', e.target.value)}
-                    />
-
-                    <Input 
-                        name={item.name + '_titleRu'}
-                        placeholder='Text on russian...'
-                        additionalClass={styles.input}
-                        type='text'
-                        iconPosition='noIcon'
-                        value={item?.tooltip?.titleRu || ''}
-                        variant='admin'
-                        adminLabel='withoutLabel'
-                        onChange={(e) => handleChangeTooltip(item.id, 'titleRu', e.target.value)}
-                    />
-                </div>
-
-                
-                <div className={styles.inputsGroup}>
-                    <Input 
-                        name={item.name + '_description'}
-                        placeholder='Text...'
-                        additionalClass={styles.textarea}
-                        type='textarea'
-                        iconPosition='noIcon'
-                        value={item?.tooltip?.text}
-                        variant='admin'
-                        adminLabel='withLabel'
-                        label='Description'
-                        counter={true}
-                        maxCounter={400}
-                        maxLen={400}
-                        onChange={(e) => handleChangeTooltip(item.id, 'text', e.target.value)}
-                    />
-
-                    <Input 
-                        name={item.name + '_descriptionRu'}
-                        placeholder='Text on russian...'
-                        additionalClass={styles.textarea}
-                        type='textarea'
-                        iconPosition='noIcon'
-                        value={item?.tooltip?.textRu || ''}
-                        variant='admin'
-                        adminLabel='withoutLabel'
-                        counter={true}
-                        maxCounter={400}
-                        maxLen={400}
-                        onChange={(e) => handleChangeTooltip(item.id, 'textRu', e.target.value)}
-                    />
-                </div>
-            </div>
-
-            <Button
-                variant="black"
-                behavior="default"
-                iconPosition="only"
-                icon="trash"
-                onClick={() => deleteStackItem(item.id)}
-                additionalClass={styles.deleteBtn}
-            />
-        </div>
-    )
-}
-
-
-
-const EditProjectStackModal: React.FC<EditProjectProps> = ({ project, setData }) => {
-    const defaultIcon = '/images/mockImages/React.svg'
-    const containerRef = useRef<HTMLDivElement>(null);
-
-    if (!project) return
-
-    const disableBtn = () => {
-        if (project.stack.length >= 6) {
-            return 'disabled'
+const subscribe = (callback: () => void) => {
+    const handleStorage = (event: StorageEvent) => {
+        if (event.key === STORAGE_KEY) {
+            callback();
         }
+    };
 
-        return 'default'
+    const handleChange = () => {
+        callback();
+    };
+
+    window.addEventListener("storage", handleStorage);
+
+    window.addEventListener(STORAGE_EVENT, handleChange);
+
+    return () => {
+        window.removeEventListener("storage", handleStorage);
+
+        window.removeEventListener(STORAGE_EVENT, handleChange);
+    };
+};
+
+const getSnapshot = (): boolean => {
+    return localStorage.getItem(STORAGE_KEY) === "true";
+};
+
+const getServerSnapshot = (): boolean => {
+    return true;
+};
+
+const DevelopmentNotice = () => {
+    const t = useTranslations("DevelopmentNotice");
+
+    const isDismissed = useSyncExternalStore(
+        subscribe,
+        getSnapshot,
+        getServerSnapshot,
+    );
+
+    const handleClose = () => {
+        localStorage.setItem(STORAGE_KEY, "true");
+
+        window.dispatchEvent(new Event(STORAGE_EVENT));
+    };
+
+    if (isDismissed) {
+        return null;
     }
 
-    const addStackItem = () => {
-        setData((prev: IProject) => {
-            const newItem = {
-                id: Date.now(),
-                name: '',
-                icon: defaultIcon,
-                tooltip: {
-                    id: Date.now() + 1,
-                    title: 'Why was this technology chosen?',
-                    titleRu: 'Why was this technology chosen?',
-                    text: '',
-                    textRu: '',
-                },
-            };
-
-            return {
-                ...prev,
-                stack: [...prev.stack, newItem],
-            };
-        });
-    };
-
-    useEffect(() => {
-        if (containerRef.current) {
-            containerRef.current.scrollTop = containerRef.current.scrollHeight;
-        }
-    }, [project.stack.length])
-
-
     return (
-        <ModalWrapper
-            drag={false}
-            tooltipVisible={true}
-            tooltipMax={6}
-            items={project.stack}
-            
-            tooltipText='Maximum 6 technologies allowed'
-            disableBtn={disableBtn}
-            addItem={() => addStackItem()}
-
-            button={true}
-
-            modalName='editProjectStack'
-
-            title='Edit Stack'
-            subTitle='Manage your stack in  project'
-            ref={containerRef}
+        <aside
+            className={styles.notice}
+            role="status"
+            aria-label={t("AriaLabel")}
         >
-            <>
-                {
-                    project?.stack.map((item) => (
-                        <StackItem 
-                            key={item.id}
-                            item={item}
-                            setData={setData}
-                        />
-                    ))
-                }
-            </>
-        </ModalWrapper>
-    )
-}
+            <div className={styles.content} data-nosnippet>
+                <div className={styles.marker}>WIP</div>
 
-export default EditProjectStackModal;
+                <div className={styles.text}>
+                    <strong className={styles.title}>{t("Title")}</strong>
+
+                    <p className={styles.description}>{t("Description")}</p>
+                </div>
+
+                <a
+                    href="https://github.com/VlassaDassa/Sadovnikov"
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    <Button
+                        behavior="default"
+                        iconPosition="noIcon"
+                        variant="black"
+                        noize={false}
+                        type="button"
+                        text={t("GitHub")}
+                        additionalClass={styles.link}
+                        onClick={handleClose}
+                    />
+                </a>
+
+                <Button
+                    behavior="default"
+                    iconPosition="noIcon"
+                    variant="black"
+                    noize={false}
+                    type="button"
+                    text="×"
+                    additionalClass={styles.close}
+                    onClick={handleClose}
+                />
+            </div>
+        </aside>
+    );
+};
+
+export default DevelopmentNotice;

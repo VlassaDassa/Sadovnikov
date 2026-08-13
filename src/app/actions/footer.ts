@@ -36,7 +36,7 @@ export async function updateFooter(footer: IFooterItem[]) {
         revalidatePath('/admin')
 
         return { success: true }
-    } catch (error) {
+    } catch {
         return { success: false, error: 'Failed to update footer' }        
     }
 }

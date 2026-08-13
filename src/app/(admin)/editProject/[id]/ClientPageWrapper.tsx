@@ -135,7 +135,7 @@ const ClientPageWrapper: React.FC<ClientPageWrapperProps> = ({
             } else {
                 showMessage("error", "Error deleting project", dispatch);
             }
-        } catch (error) {
+        } catch {
             showMessage("error", "Error deleting project", dispatch);
         }
     };

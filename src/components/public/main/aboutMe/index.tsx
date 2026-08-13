@@ -46,7 +46,7 @@ const AboutMe: React.FC<AboutMeProps> = ({ aboutMe }) => {
 
                             <div className={style.workExperienceWrapper}>
                                 {
-                                    aboutMe.workExperience.map((item, index) => (
+                                    aboutMe.workExperience.map((item) => (
                                         <div key={item.id} className={style.workExperienceItem}>
                                             <h4 className={`${style.text} ${style.workExperienceItemTitle}`}>
                                                 {item['organization']} | {item['position']} | {displayDate(item['workingPeriod']['startDate'], false, locale)} - {displayDate(item['workingPeriod']['endDate'], false, locale)}

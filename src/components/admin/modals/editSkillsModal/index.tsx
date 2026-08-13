@@ -1,41 +1,49 @@
-'use client'
+"use client";
 
-import React, { Dispatch, SetStateAction, useState, useRef, useEffect } from 'react';
-import { CSS } from '@dnd-kit/utilities';
-import {
-    useSortable,
-} from '@dnd-kit/sortable'
-import { useSelector } from 'react-redux';
-import { RootState } from '@/store';
+import React, {
+    Dispatch,
+    SetStateAction,
+    useCallback,
+    useEffect,
+    useRef,
+    useState,
+} from "react";
+import { CSS } from "@dnd-kit/utilities";
+import { useSortable } from "@dnd-kit/sortable";
+import { useSelector } from "react-redux";
 
-import Button from '@/components/shared/button/Button';
-import DragHandler from '../dragHandler';
-import Input from '@/components/shared/input';
-import SkillLevel from '@/components/shared/SkillLevel';
-import ModalWrapper from '../modalWrapper';
-import SavingIndicator from '@/components/shared/SavingIndicator';
+import Button from "@/components/shared/button/Button";
+import Input from "@/components/shared/input";
+import SavingIndicator from "@/components/shared/SavingIndicator";
+import SkillLevel from "@/components/shared/SkillLevel";
 
-import { Skill } from '@/interfaces/general';
-import { useDebounce } from '@/hooks/useDebounce';
-import { updateSkills } from '@/app/actions/skills';
-import { registerBeforeClose, unregisterBeforeClose } from '@/lib/modals';
+import DragHandler from "../dragHandler";
+import ModalWrapper from "../modalWrapper";
 
-import styles from './index.module.scss';
+import { updateSkills } from "@/app/actions/skills";
+import { useDebounce } from "@/hooks/useDebounce";
+import { Skill } from "@/interfaces/general";
+import { registerBeforeClose, unregisterBeforeClose } from "@/lib/modals";
+import { RootState } from "@/store";
 
+import styles from "./index.module.scss";
 
-
-
-
+const MODAL_NAME = "editSkills";
 
 interface SkillItemProps {
-    skill: Skill,
-    setSkills: Dispatch<SetStateAction<Skill[]>>
-
-    setIsSaving: Dispatch<SetStateAction<boolean>>
+    skill: Skill;
+    setSkills: Dispatch<SetStateAction<Skill[]>>;
+    setIsSaving: Dispatch<SetStateAction<boolean>>;
 }
 
-const SkillItem: React.FC<SkillItemProps> = ({ skill, setSkills, setIsSaving }) => {
-    const windowWidth = useSelector((state: RootState) => state.breakpoint.windowWidth)
+const SkillItem: React.FC<SkillItemProps> = ({
+    skill,
+    setSkills,
+    setIsSaving,
+}) => {
+    const windowWidth = useSelector(
+        (state: RootState) => state.breakpoint.windowWidth,
+    );
 
     const {
         attributes,
@@ -44,112 +52,127 @@ const SkillItem: React.FC<SkillItemProps> = ({ skill, setSkills, setIsSaving }) 
         transform,
         transition,
         isDragging,
-    } = useSortable({id: skill.id})
-
+    } = useSortable({
+        id: skill.id,
+    });
 
     const style = {
         transform: CSS.Transform.toString(transform),
         transition,
-        opacity: isDragging ? 0.5 : 1
-    }
+        opacity: isDragging ? 0.5 : 1,
+    };
 
     const deleteItem = (id: number) => {
-        setSkills(prev => prev.filter((item) => item.id !== id))
+        setSkills((previous) => previous.filter((item) => item.id !== id));
 
-        setIsSaving(true)
-    }
+        setIsSaving(true);
+    };
 
     const incrementScore = (id: number) => {
-        setSkills(prev => prev.map(skill => 
-            skill.id === id && skill.score < 10 
-                ? { ...skill, score: skill.score + 1 } 
-                : skill
-        ));
+        setSkills((previous) =>
+            previous.map((item) =>
+                item.id === id && item.score < 10
+                    ? {
+                          ...item,
+                          score: item.score + 1,
+                      }
+                    : item,
+            ),
+        );
 
-        setIsSaving(true)
+        setIsSaving(true);
     };
 
     const decrementScore = (id: number) => {
-        setSkills(prev => prev.map(skill => 
-            skill.id === id && skill.score > 0 
-                ? { ...skill, score: skill.score - 1 } 
-                : skill
-        ));
+        setSkills((previous) =>
+            previous.map((item) =>
+                item.id === id && item.score > 0
+                    ? {
+                          ...item,
+                          score: item.score - 1,
+                      }
+                    : item,
+            ),
+        );
 
-        setIsSaving(true)
+        setIsSaving(true);
     };
 
-    const handleChangeName = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)  => {
-        const newName = e.target.value;
-        
-        if (newName.length <= 20) {
-            setSkills(
-                prev => prev.map((item) => item.id === skill.id 
-                    ? {...item, name: newName}
-                    : item
-                ) 
-            )
+    const handleChangeName = (
+        event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    ) => {
+        const newName = event.target.value;
 
-            setIsSaving(true)
+        if (newName.length > 20) {
+            return;
         }
-    }
 
+        setSkills((previous) =>
+            previous.map((item) =>
+                item.id === skill.id
+                    ? {
+                          ...item,
+                          name: newName,
+                      }
+                    : item,
+            ),
+        );
+
+        setIsSaving(true);
+    };
 
     const secondLine = (
         <div className={styles.secondLineWrapper}>
-                <Button
-                    variant="black"
-                    behavior="default"
-                    iconPosition="only"
-                    icon="mathMinus"
-                    additionalClass={styles.deleteBtn}
-                    onClick={() => decrementScore(skill.id)}
-                />
+            <Button
+                variant="black"
+                behavior="default"
+                iconPosition="only"
+                icon="mathMinus"
+                additionalClass={styles.deleteBtn}
+                onClick={() => decrementScore(skill.id)}
+            />
 
-                <SkillLevel score={skill.score} classNameWrapper={styles.skillLevel} classNameItem={styles.skillLevelItem} />
+            <SkillLevel
+                score={skill.score}
+                classNameWrapper={styles.skillLevel}
+                classNameItem={styles.skillLevelItem}
+            />
 
-                <Button
-                    variant="black"
-                    behavior="default"
-                    iconPosition="only"
-                    icon="mathPlus"
-                    additionalClass={styles.deleteBtn}
-                    onClick={() => incrementScore(skill.id)}
-                />
-            </div>
-    )
-    
+            <Button
+                variant="black"
+                behavior="default"
+                iconPosition="only"
+                icon="mathPlus"
+                additionalClass={styles.deleteBtn}
+                onClick={() => incrementScore(skill.id)}
+            />
+        </div>
+    );
 
     return (
-        <div 
-            ref={setNodeRef} 
+        <div
+            ref={setNodeRef}
             {...attributes}
             {...listeners}
-            style={style} 
+            style={style}
             className={`${styles.skill} modalElementBg`}
         >
             <div className={styles.firstLineWrapper}>
                 <div className={styles.inputWrapper}>
-                    <DragHandler
-                        variant="big"
-                    />
+                    <DragHandler variant="big" />
 
-                    <Input 
+                    <Input
                         name={skill.name}
-                        placeholder='Text...'
+                        placeholder="Text..."
                         value={skill.name}
-                        variant='admin'
-                        iconPosition='noIcon'
-                        adminLabel='withoutLabel'
+                        variant="admin"
+                        iconPosition="noIcon"
+                        adminLabel="withoutLabel"
                         onChange={handleChangeName}
                     />
                 </div>
 
-                {
-                    windowWidth >= 800 && (
-                        secondLine
-                    )
-                }
+                {windowWidth >= 800 && secondLine}
 
                 <Button
                     variant="black"
@@ -161,84 +184,97 @@ const SkillItem: React.FC<SkillItemProps> = ({ skill, setSkills, setIsSaving }) 
                 />
             </div>
 
-                {
-                    windowWidth <= 800 && (
-                        secondLine
-                    )
-                }
+            {windowWidth <= 800 && secondLine}
         </div>
-    )
+    );
+};
+
+interface EditSkillModalProps {
+    initialSkills: Skill[];
 }
 
+const EditSkillModal: React.FC<EditSkillModalProps> = ({ initialSkills }) => {
+    const [skills, setSkills] = useState<Skill[]>(initialSkills);
 
-interface EditSkillModal {
-    initialSkills: Skill[]
-}
+    const [isSaving, setIsSaving] = useState(false);
 
-const EditSkillModal: React.FC<EditSkillModal> = ({ initialSkills}) => {
-    const [skills, setSkills] = useState<Skill[]>(initialSkills)
-    const containerRef = useRef<HTMLDivElement>(null)
-    const [isSaving, setIsSaving] = useState(false)
-    const modalName = 'editSkills'
+    const containerRef = useRef<HTMLDivElement>(null);
 
     const debouncedSkills = useDebounce(skills, 1000);
 
-    const saveSkills = async () => {
-        const hasChanged = JSON.stringify(skills) !== JSON.stringify(initialSkills)
-        if (!hasChanged) return;
+    const saveSkills = useCallback(
+        async (skillsToSave: Skill[]) => {
+            const hasChanged =
+                JSON.stringify(skillsToSave) !== JSON.stringify(initialSkills);
 
-        setIsSaving(true)
-        try {
-            await updateSkills(skills)
-        } catch (error) {
-            console.error('❌ Failed to save skills:', error);
-        }
-        finally {
-            setIsSaving(false)
-        }
-    }
+            if (!hasChanged) {
+                return;
+            }
 
-    // Сохранение на сервере с debounce
+            try {
+                await updateSkills(skillsToSave);
+            } catch (error) {
+                console.error("Failed to save skills:", error);
+            } finally {
+                setIsSaving(false);
+            }
+        },
+        [initialSkills],
+    );
+
+    const setSkillsFromDrag = useCallback<Dispatch<SetStateAction<Skill[]>>>(
+        (nextSkills) => {
+            setIsSaving(true);
+            setSkills(nextSkills);
+        },
+        [],
+    );
+
     useEffect(() => {
-        saveSkills()
-    }, [debouncedSkills, initialSkills])
+        void saveSkills(debouncedSkills);
+    }, [debouncedSkills, saveSkills]);
 
-    // Сохранение на сервере при закрытии модалки
     useEffect(() => {
-        registerBeforeClose(modalName, saveSkills);
+        const saveBeforeClose = () => {
+            return saveSkills(skills);
+        };
+
+        registerBeforeClose(MODAL_NAME, saveBeforeClose);
 
         return () => {
-            unregisterBeforeClose(modalName);
+            unregisterBeforeClose(MODAL_NAME);
         };
-    }, [skills, initialSkills]);
-
+    }, [skills, saveSkills]);
 
     useEffect(() => {
-        if (containerRef.current) {
-            containerRef.current.scrollTop = containerRef.current.scrollHeight;
+        if (!containerRef.current) {
+            return;
         }
-    }, [skills.length])
 
-    
+        containerRef.current.scrollTop = containerRef.current.scrollHeight;
+    }, [skills.length]);
+
     const addItem = () => {
-        const maxId = Math.max(...skills.map(s => s.id), 0);
+        const maxId = Math.max(...skills.map((skill) => skill.id), 0);
+
         const newSkill: Skill = {
             id: maxId + 1,
-            name: '',
-            score: 0
-        }
-        setIsSaving(true)
+            name: "",
+            score: 0,
+        };
 
-        setSkills(prev => [...prev, newSkill])
-    }
+        setIsSaving(true);
+
+        setSkills((previous) => [...previous, newSkill]);
+    };
 
     const disableBtn = () => {
         if (skills.length >= 4) {
-            return 'disabled'
+            return "disabled";
         }
 
-        return 'default'
-    }
+        return "default";
+    };
 
     return (
         <ModalWrapper
@@ -247,31 +283,26 @@ const EditSkillModal: React.FC<EditSkillModal> = ({ initialSkills}) => {
             disableBtn={disableBtn}
             addItem={addItem}
             items={skills}
-            setItems={setSkills}
+            setItems={setSkillsFromDrag}
             ref={containerRef}
-
-            modalName={modalName}
-
-            title='Edit Skills'
-            subTitle='Manage your homepage skill section'
-
+            modalName={MODAL_NAME}
+            title="Edit Skills"
+            subTitle="Manage your homepage skill section"
             tooltipMax={4}
-            tooltipText='Maximum 4 skills allowed'
+            tooltipText="Maximum 4 skills allowed"
         >
             <SavingIndicator isSaving={isSaving} />
 
-            {skills.map(skill => (
-                <SkillItem 
-                    key={skill.id} 
-                    skill={skill} 
-                    setSkills={setSkills} 
-
+            {skills.map((skill) => (
+                <SkillItem
+                    key={skill.id}
+                    skill={skill}
+                    setSkills={setSkills}
                     setIsSaving={setIsSaving}
                 />
             ))}
         </ModalWrapper>
-                 
     );
-}
+};
 
 export default EditSkillModal;

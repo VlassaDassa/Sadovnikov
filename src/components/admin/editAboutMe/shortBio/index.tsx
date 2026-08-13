@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import SectionTitle from '@/components/admin/general/sectionTitle';
 import Input from '@/components/shared/input';

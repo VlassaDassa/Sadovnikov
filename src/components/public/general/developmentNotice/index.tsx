@@ -1,33 +1,77 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useSyncExternalStore } from 'react'
 import { useTranslations } from 'next-intl'
 
 import Button from '@/components/shared/button/Button'
 
 import styles from './index.module.scss'
 
-
-
-
 const STORAGE_KEY =
     'development-notice-dismissed-v1'
 
-const DevelopmentNotice = () => {
-    const t = useTranslations('DevelopmentNotice')
+const STORAGE_EVENT =
+    'development-notice-dismissed-change'
 
-    const [isVisible, setIsVisible] = useState(false)
-
-    useEffect(() => {
-        const isDismissed =
-            localStorage.getItem(
-                STORAGE_KEY,
-            ) === 'true'
-
-        if (!isDismissed) {
-            setIsVisible(true)
+const subscribe = (
+    callback: () => void,
+) => {
+    const handleStorage = (
+        event: StorageEvent,
+    ) => {
+        if (event.key === STORAGE_KEY) {
+            callback()
         }
-    }, [])
+    }
+
+    const handleChange = () => {
+        callback()
+    }
+
+    window.addEventListener(
+        'storage',
+        handleStorage,
+    )
+
+    window.addEventListener(
+        STORAGE_EVENT,
+        handleChange,
+    )
+
+    return () => {
+        window.removeEventListener(
+            'storage',
+            handleStorage,
+        )
+
+        window.removeEventListener(
+            STORAGE_EVENT,
+            handleChange,
+        )
+    }
+}
+
+const getSnapshot = (): boolean => {
+    return (
+        localStorage.getItem(STORAGE_KEY) ===
+        'true'
+    )
+}
+
+const getServerSnapshot = (): boolean => {
+    return true
+}
+
+const DevelopmentNotice = () => {
+    const t =
+        useTranslations('DevelopmentNotice')
+
+    const isDismissed =
+        useSyncExternalStore(
+            subscribe,
+            getSnapshot,
+            getServerSnapshot,
+        )
 
     const handleClose = () => {
         localStorage.setItem(
@@ -35,10 +79,12 @@ const DevelopmentNotice = () => {
             'true',
         )
 
-        setIsVisible(false)
+        window.dispatchEvent(
+            new Event(STORAGE_EVENT),
+        )
     }
 
-    if (!isVisible) {
+    if (isDismissed) {
         return null
     }
 
@@ -48,56 +94,68 @@ const DevelopmentNotice = () => {
             role="status"
             aria-label={t('AriaLabel')}
         >
-            <div className={styles.content} data-nosnippet>
-                <div className={styles.marker}>
+            <div
+                className={styles.content}
+                data-nosnippet
+            >
+                <div
+                    className={styles.marker}
+                >
                     WIP
                 </div>
 
-                <div className={styles.text}>
-                    <strong className={styles.title}>
+                <div
+                    className={styles.text}
+                >
+                    <strong
+                        className={styles.title}
+                    >
                         {t('Title')}
                     </strong>
 
-                    <p className={styles.description}>
+                    <p
+                        className={
+                            styles.description
+                        }
+                    >
                         {t('Description')}
                     </p>
                 </div>
 
-                <a 
+                <a
                     href="https://github.com/VlassaDassa/Sadovnikov"
                     target="_blank"
                     rel="noreferrer"
                 >
-                    <Button 
-                        behavior='default'
-                        iconPosition='noIcon'
-                        variant='black'
+                    <Button
+                        behavior="default"
+                        iconPosition="noIcon"
+                        variant="black"
                         noize={false}
-                        type='button'
+                        type="button"
                         text={t('GitHub')}
-                        additionalClass={styles.link}
+                        additionalClass={
+                            styles.link
+                        }
                         onClick={handleClose}
                     />
                 </a>
 
-                <Button 
-                    behavior='default'
-                    iconPosition='noIcon'
-                    variant='black'
+                <Button
+                    behavior="default"
+                    iconPosition="noIcon"
+                    variant="black"
                     noize={false}
-                    type='button'
-                    text='×'
-                    additionalClass={styles.close}
+                    type="button"
+                    text="×"
+                    additionalClass={
+                        styles.close
+                    }
                     onClick={handleClose}
                 />
             </div>
         </aside>
     )
 }
-
-// Ввести это в консоль, чтобы плашка снова появилась
-// localStorage.removeItem(
-//     'development-notice-dismissed-v1',
-// )
 
 export default DevelopmentNotice

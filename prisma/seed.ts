@@ -1,9 +1,7 @@
 import {
-    Prisma,
     PrismaClient,
 } from '@prisma/client'
 
-import { projects } from './../src/mockData/projects'
 import { skills } from './../src/mockData/skills'
 import { stack as globalStack } from './../src/mockData/stack'
 import { footerItems } from './../src/mockData/footer'
@@ -11,59 +9,7 @@ import { aboutMe } from './../src/mockData/aboutMe'
 
 const prisma = new PrismaClient()
 
-function getOptionalString(
-    source: unknown,
-    key: string
-): string | undefined {
-    if (!source || typeof source !== 'object') {
-        return undefined
-    }
 
-    const value = (source as Record<string, unknown>)[key]
-
-    return typeof value === 'string'
-        ? value
-        : undefined
-}
-
-function getRequiredString(
-    source: unknown,
-    keys: string[],
-    context: string
-): string {
-    for (const key of keys) {
-        const value = getOptionalString(source, key)
-
-        if (value !== undefined) {
-            return value
-        }
-    }
-
-    throw new Error(
-        `Missing required field "${keys.join('" or "')}" in ${context}`
-    )
-}
-
-function toJson(value: unknown): Prisma.InputJsonValue {
-    return JSON.parse(
-        JSON.stringify(value)
-    ) as Prisma.InputJsonValue
-}
-
-function toFiniteNumber(
-    value: string | number,
-    context: string
-): number {
-    const result = typeof value === 'string'
-        ? Number.parseFloat(value)
-        : value
-
-    if (!Number.isFinite(result)) {
-        throw new Error(`Invalid number in ${context}`)
-    }
-
-    return result
-}
 
 async function clearSeedData() {
     await prisma.$transaction([
@@ -125,111 +71,7 @@ async function seedAboutMe() {
     })
 }
 
-async function seedProjects() {
-    for (const projectData of projects) {
-        const shortDescription = getRequiredString(
-            projectData,
-            [
-                'shortDescription',
-                'shortDescrition',
-            ],
-            `project "${projectData.name}"`
-        )
 
-        const project = await prisma.project.create({
-            data: {
-                category: projectData.category,
-                name: projectData.name,
-                shortDescription,
-                previewDescription:
-                    projectData.previewDescription,
-                previewDescriptionRu:
-                    projectData.previewDescriptionRu || null,
-                date: projectData.date,
-                developmentTime:
-                    projectData.developmentTime,
-                developmentTimeRu:
-                    projectData.developmentTimeRu || null,
-                githubLink:
-                    projectData.gitHubLink || null,
-                demoLink:
-                    projectData.demoLink || null,
-                numberTeam: projectData.numberTeam,
-                teamType: projectData.teamType,
-                images: {
-                    create: projectData.images.map((image) => ({
-                        image: image.image,
-                        main: image.main,
-                    })),
-                },
-                stack: {
-                    create: projectData.stack.map((item) => ({
-                        name: item.name,
-                        icon: item.icon,
-                        tooltip: item.tooltip
-                            ? toJson(item.tooltip)
-                            : undefined,
-                    })),
-                },
-                keyFeatures: {
-                    create: (
-                        projectData.keyFeatures || []
-                    ).map((feature) => ({
-                        title: feature.title,
-                        titleRu: feature.titleRu || null,
-                        text: feature.text,
-                        textRu: feature.textRu || null,
-                        icon: feature.icon,
-                        photo: feature.photo,
-                    })),
-                },
-                description: {
-                    create: projectData.description.map((block) => ({
-                        title: block.title,
-                        titleRu: block.titleRu || null,
-                        icon: block.icon,
-                        content: block.content,
-                        contentRu: block.contentRu || null,
-                    })),
-                },
-                metrics: {
-                    create: projectData.metrics.map((metric) => ({
-                        icon: metric.icon,
-                        title: metric.title,
-                        titleRu: metric.titleRu || null,
-                        text: metric.text,
-                        textRu: metric.textRu || null,
-                        current: toFiniteNumber(
-                            metric.current,
-                            `metric "${metric.title}" current`
-                        ),
-                        max: toFiniteNumber(
-                            metric.max,
-                            `metric "${metric.title}" max`
-                        ),
-                        type: metric.type,
-                    })),
-                },
-                commits: {
-                    create: projectData.commits.map(
-                        (commit, index) => ({
-                            name: commit.name,
-                            nameRu: commit.nameRu || null,
-                            date: commit.date,
-                            dateRu: commit.dateRu || null,
-                            text: commit.text,
-                            textRu: commit.textRu || null,
-                            order:
-                                typeof commit.order === 'number'
-                                    ? commit.order
-                                    : index,
-                        })
-                    ),
-                },
-            },
-        })
-    }
-}
 
 async function main() {
     console.log('Starting database seed')
@@ -237,7 +79,6 @@ async function main() {
     await clearSeedData()
     await seedGlobalData()
     await seedAboutMe()
-    await seedProjects()
 
     console.log('Database seed completed')
 }

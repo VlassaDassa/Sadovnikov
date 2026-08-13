@@ -123,7 +123,7 @@ export async function createProject(projectData: IProject) {
         revalidatePath('/admin')
         revalidatePath('/')
         return { success: true, project: transformedProject }
-    } catch (error) {
+    } catch {
         return { success: false, error: 'Failed to create project' }
     }
 }

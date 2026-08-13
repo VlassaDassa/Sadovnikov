@@ -45,7 +45,7 @@ export async function sendContactMessage(input: {
             success: true
         }
     }
-    catch(error: unknown) {
+    catch {
 
         return {
             success: false,

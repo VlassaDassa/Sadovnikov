@@ -48,7 +48,7 @@ export const useTooltip = <T extends HTMLElement = HTMLDivElement>(config: Toolt
         if (top + tooltipHeight > window.innerHeight) top = window.innerHeight - tooltipHeight - 10
 
         return { top, left }
-}, [placement, offset]);
+}, [placement, offset, fakeWidth]);
 
     const handleMouseEnter = useCallback(() => {
         if (!ref.current) return
@@ -100,7 +100,7 @@ export const useTooltip = <T extends HTMLElement = HTMLDivElement>(config: Toolt
             window.removeEventListener('touchmove', hideTooltipOnScroll);
             if (timeoutRef.current) clearTimeout(timeoutRef.current)
         }
-    }, [handleMouseEnter, handleMouseLeave])
+    }, [handleMouseEnter, handleMouseLeave, enabled, text, hideTooltipOnScroll])
 
     return ref;
 }

@@ -1,33 +1,42 @@
-import React, { Dispatch, SetStateAction, forwardRef, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React, {
+    Dispatch,
+    ForwardedRef,
+    SetStateAction,
+    forwardRef,
+} from "react";
+import { useDispatch } from "react-redux";
 import {
     DndContext,
-    closestCenter,
+    DragEndEvent,
     PointerSensor,
+    UniqueIdentifier,
+    closestCenter,
     useSensor,
     useSensors,
-    DragEndEvent
-} from '@dnd-kit/core';
-import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
+} from "@dnd-kit/core";
+import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import {
-    arrayMove,
     SortableContext,
-    verticalListSortingStrategy
-} from '@dnd-kit/sortable'
+    arrayMove,
+    verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
 
-import ModalBackground from '@/components/admin/modals/modalBackground';
-import ModalHeader from '../modalHeader';
-import ModalTooltip from '../modalTooltip';
-import Button from '@/components/shared/button/Button';
+import ModalBackground from "@/components/admin/modals/modalBackground";
+import Button from "@/components/shared/button/Button";
 
-import { closeModals } from '@/lib/modals';
+import ModalHeader from "../modalHeader";
+import ModalTooltip from "../modalTooltip";
 
-import styles from './index.module.scss';
-import { closeOverlay } from '@/store/slices/uiSlice';
+import { closeModals } from "@/lib/modals";
+import { closeOverlay } from "@/store/slices/uiSlice";
 
+import styles from "./index.module.scss";
 
+interface SortableItem {
+    id: UniqueIdentifier;
+}
 
-interface ModalWrapperProps {
+interface ModalWrapperProps<T extends SortableItem> {
     drag: boolean;
     tooltipVisible: boolean;
     tooltipMax?: number;
@@ -42,82 +51,84 @@ interface ModalWrapperProps {
     button?: boolean;
 
     disableBtn?: () => "default" | "loading" | "disabled";
+
     addItem?: () => void;
-    items?: any[];
-    setItems?: Dispatch<SetStateAction<any[]>>;
+
+    items?: T[];
+
+    setItems?: Dispatch<SetStateAction<T[]>>;
 
     children: React.ReactNode;
 }
 
-
-
-const ModalWrapper = forwardRef<HTMLDivElement, ModalWrapperProps>(
-    ({ 
-        drag, 
+const ModalWrapperInner = <T extends SortableItem>(
+    {
+        drag,
         tooltipVisible,
         tooltipMax,
         modalName,
         additionalClass,
         title,
         subTitle,
-        tooltipText = 'Manage items',
+        tooltipText = "Manage items",
         button = false,
         children,
         disableBtn = () => "default",
         addItem = () => {},
         items = [],
-        setItems = () => {},
-
-    }, ref) => {
-
-    const dispatch = useDispatch()
-
+        setItems,
+    }: ModalWrapperProps<T>,
+    ref: ForwardedRef<HTMLDivElement>,
+) => {
+    const dispatch = useDispatch();
 
     const sensors = useSensors(
         useSensor(PointerSensor, {
             activationConstraint: {
-                distance: 8, 
+                distance: 8,
             },
-        })
+        }),
     );
 
     const handleDragEnd = (event: DragEndEvent) => {
         const { active, over } = event;
 
-        if (active.id !== over?.id) {
-            const oldIndex = items.findIndex((item) => item.id === active.id)
-            const newIndex = items.findIndex((item) => item.id === over?.id)
-            setItems(arrayMove(items, oldIndex, newIndex))
+        if (!over || !setItems || active.id === over.id) {
+            return;
         }
-    }
 
-    
+        const oldIndex = items.findIndex((item) => item.id === active.id);
+
+        const newIndex = items.findIndex((item) => item.id === over.id);
+
+        if (oldIndex === -1 || newIndex === -1) {
+            return;
+        }
+
+        setItems(arrayMove(items, oldIndex, newIndex));
+    };
+
     let content = (
         <div className={styles.content}>
-            {
-                tooltipVisible && (
-                    <ModalTooltip 
-                        text={tooltipText}
-                        counter={items.length}
-                        max={tooltipMax}
-                    />
-                )
-                    
-            }
+            {tooltipVisible && (
+                <ModalTooltip
+                    text={tooltipText}
+                    counter={items.length}
+                    max={tooltipMax}
+                />
+            )}
 
-            <DndContext 
+            <DndContext
                 sensors={sensors}
                 collisionDetection={closestCenter}
                 onDragEnd={handleDragEnd}
                 modifiers={[restrictToVerticalAxis]}
             >
-
                 <SortableContext
-                    items={items.map(s => s.id)}
+                    items={items.map((item) => item.id)}
                     strategy={verticalListSortingStrategy}
                 >
-                    { children }
-
+                    {children}
                 </SortableContext>
             </DndContext>
 
@@ -125,47 +136,45 @@ const ModalWrapper = forwardRef<HTMLDivElement, ModalWrapperProps>(
                 variant="black"
                 behavior={disableBtn()}
                 iconPosition="noIcon"
-                text={'Add Item'}
+                text="Add Item"
                 additionalClass={styles.addBtn}
                 onClick={addItem}
             />
         </div>
-    )
+    );
 
     if (!drag) {
         content = (
             <div className={styles.content}>
-                {
-                    tooltipVisible &&
-                    <ModalTooltip 
+                {tooltipVisible && (
+                    <ModalTooltip
                         text={tooltipText}
                         counter={items.length}
                         max={tooltipMax}
                     />
-                }
+                )}
 
-                { children }
-                
-                {
-                    button &&
+                {children}
 
+                {button && (
                     <Button
                         variant="black"
                         behavior={disableBtn()}
                         iconPosition="noIcon"
-                        text={'Add Item'}
+                        text="Add Item"
                         additionalClass={styles.addBtn}
                         onClick={addItem}
                     />
-                }
-                
+                )}
             </div>
-        )
+        );
     }
 
     return (
         <ModalBackground
-            className={`${styles.modalBackground} ${!drag && styles.modalBackgroundNoDrag} ${additionalClass}`}
+            className={`${styles.modalBackground} ${
+                !drag ? styles.modalBackgroundNoDrag : ""
+            } ${additionalClass ?? ""}`}
             ref={ref}
         >
             <Button
@@ -173,27 +182,23 @@ const ModalWrapper = forwardRef<HTMLDivElement, ModalWrapperProps>(
                 behavior="default"
                 iconPosition="only"
                 icon="close"
-                onClick={
-                    async () => {
-                        await closeModals(dispatch, modalName)
-                        dispatch(closeOverlay())
-                    } 
-                    
+                onClick={async () => {
+                    await closeModals(dispatch, modalName);
 
-                }
+                    dispatch(closeOverlay());
+                }}
                 additionalClass={styles.closeButton}
             />
 
-            <ModalHeader 
-                title={title}
-                subTitle={subTitle}
-                icon='arrow'
-            />
+            <ModalHeader title={title} subTitle={subTitle} icon="arrow" />
 
             {content}
-            
         </ModalBackground>
-    )
-})
+    );
+};
+
+const ModalWrapper = forwardRef(ModalWrapperInner) as <T extends SortableItem>(
+    props: ModalWrapperProps<T> & React.RefAttributes<HTMLDivElement>,
+) => React.ReactElement | null;
 
 export default ModalWrapper;
