@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { join } from "node:path";
 
 import { makeProject } from "../../fixtures/project";
 
@@ -162,9 +163,7 @@ describe("project actions", () => {
             const input = mocks.projectCreate.mock.calls[0][0];
 
             expect(input.data.keyFeatures.create[0].text).toBe("Feature text");
-            expect(input.data.keyFeatures.create[0].textRu).toBe(
-                "Feature text ru",
-            );
+            expect(input.data.keyFeatures.create[0].textRu).toBe("Feature text ru");
         });
 
         it("stores localized commits and their order", async () => {
@@ -404,10 +403,13 @@ describe("project actions", () => {
                     id: 7,
                 },
             });
-            expect(mocks.rm).toHaveBeenCalledWith("/tmp/uploads/projects/7", {
-                recursive: true,
-                force: true,
-            });
+            expect(mocks.rm).toHaveBeenCalledWith(
+                join("/tmp/uploads", "projects", "7"),
+                {
+                    recursive: true,
+                    force: true,
+                },
+            );
         });
     });
 });

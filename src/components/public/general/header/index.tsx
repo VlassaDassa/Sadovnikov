@@ -118,7 +118,7 @@ const Header: React.FC = () => {
                 <span className="radius-12"></span>
             </button>
 
-            <nav className={style.headerNav}>
+            <nav aria-label="Primary navigation" className={style.headerNav}>
                 <ul className={style.headerNavList}>
                     <li className={style.headerNavItem}>
                         <Link className={style.headerNavItemLink} href="/#contacts">{t('contacts')}</Link>

@@ -38,8 +38,8 @@ export function makeProject(overrides: Partial<IProject> = {}): IProject {
                 id: 1,
                 title: 'Title',
                 titleRu: 'Заголовок',
-                text: 'Text',
-                textRu: 'Текст',
+                text: 'Feature text',
+                textRu: 'Feature text ru',
                 icon: '/static/feature.svg',
                 photo: '/static/feature.webp'
 

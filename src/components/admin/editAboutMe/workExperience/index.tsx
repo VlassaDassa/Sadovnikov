@@ -65,7 +65,6 @@ const Item: React.FC<ItemProps> = ({ item, onChange, deleteItem }) => {
     const {
         attributes,
         listeners,
-        setNodeRef,
         transform,
         transition,
         isDragging,
@@ -80,7 +79,6 @@ const Item: React.FC<ItemProps> = ({ item, onChange, deleteItem }) => {
     return (
         <SectionBackground 
             className={`${styles.sectionBg} ${styles.item}`}
-            ref={setNodeRef} 
             {...attributes}
             {...listeners}
             style={style} 
