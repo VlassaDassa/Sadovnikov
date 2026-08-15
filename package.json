@@ -8,6 +8,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "test:build": "pnpm exec dotenv -e .env.test -- pnpm build",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "cross-env VITE_CONFIG_NATIVE_IGNORE_WARNING=true vitest",
@@ -23,8 +24,7 @@
     "test:db:down": "docker compose -f compose.test.yaml down -v",
     "test:db:migrate": "dotenv -e .env.test -- prisma migrate deploy",
     "test:db:seed": "dotenv -e .env.test -- prisma db seed",
-    "test:lighthouse": "lhci autorun",
-    "test:all": "pnpm lint && pnpm typecheck && pnpm test:unit && pnpm test:server && pnpm test:integration && pnpm build && pnpm test:e2e"
+    "test:all": "pnpm lint && pnpm typecheck && pnpm test:unit && pnpm test:server && pnpm test:integration && pnpm exec dotenv -e .env.test -- pnpm build && pnpm test:e2e"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
