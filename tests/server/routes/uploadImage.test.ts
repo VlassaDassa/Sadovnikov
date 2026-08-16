@@ -154,6 +154,7 @@ describe("POST image upload", () => {
         );
 
         expect(response.status).toBe(201);
+
         expect(await response.json()).toEqual({
             url: "/uploads/portfolio/projects/1/gallery/file.webp",
             width: 100,
@@ -161,11 +162,22 @@ describe("POST image upload", () => {
             size: 10,
             mimeType: "image/webp",
         });
+
         expect(mocks.saveProjectImage).toHaveBeenCalledWith({
             projectId: 1,
             category: "gallery",
-            file,
+            file: expect.any(File),
         });
+
+        const call = mocks.saveProjectImage.mock.calls[0];
+
+        const uploadedFile = call[0].file;
+
+        expect(uploadedFile.name).toBe("image.png");
+
+        expect(uploadedFile.type).toBe("image/png");
+
+        expect(uploadedFile.size).toBe(3);
     });
 
     it.each([

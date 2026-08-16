@@ -1,125 +1,77 @@
-'use client'
+"use client";
 
-import { useSyncExternalStore } from 'react'
-import { useTranslations } from 'next-intl'
+import { useSyncExternalStore } from "react";
+import { useTranslations } from "next-intl";
 
-import Button from '@/components/shared/button/Button'
+import Button from "@/components/shared/button/Button";
 
-import styles from './index.module.scss'
+import styles from "./index.module.scss";
 
-const STORAGE_KEY =
-    'development-notice-dismissed-v1'
+const STORAGE_KEY = "development-notice-dismissed-v1";
 
-const STORAGE_EVENT =
-    'development-notice-dismissed-change'
+const STORAGE_EVENT = "development-notice-dismissed-change";
 
-const subscribe = (
-    callback: () => void,
-) => {
-    const handleStorage = (
-        event: StorageEvent,
-    ) => {
+const subscribe = (callback: () => void) => {
+    const handleStorage = (event: StorageEvent) => {
         if (event.key === STORAGE_KEY) {
-            callback()
+            callback();
         }
-    }
+    };
 
     const handleChange = () => {
-        callback()
-    }
+        callback();
+    };
 
-    window.addEventListener(
-        'storage',
-        handleStorage,
-    )
+    window.addEventListener("storage", handleStorage);
 
-    window.addEventListener(
-        STORAGE_EVENT,
-        handleChange,
-    )
+    window.addEventListener(STORAGE_EVENT, handleChange);
 
     return () => {
-        window.removeEventListener(
-            'storage',
-            handleStorage,
-        )
+        window.removeEventListener("storage", handleStorage);
 
-        window.removeEventListener(
-            STORAGE_EVENT,
-            handleChange,
-        )
-    }
-}
+        window.removeEventListener(STORAGE_EVENT, handleChange);
+    };
+};
 
 const getSnapshot = (): boolean => {
-    return (
-        localStorage.getItem(STORAGE_KEY) ===
-        'true'
-    )
-}
+    return localStorage.getItem(STORAGE_KEY) === "true";
+};
 
 const getServerSnapshot = (): boolean => {
-    return true
-}
+    return true;
+};
 
 const DevelopmentNotice = () => {
-    const t =
-        useTranslations('DevelopmentNotice')
+    const t = useTranslations("DevelopmentNotice");
 
-    const isDismissed =
-        useSyncExternalStore(
-            subscribe,
-            getSnapshot,
-            getServerSnapshot,
-        )
+    const isDismissed = useSyncExternalStore(
+        subscribe,
+        getSnapshot,
+        getServerSnapshot,
+    );
 
     const handleClose = () => {
-        localStorage.setItem(
-            STORAGE_KEY,
-            'true',
-        )
+        localStorage.setItem(STORAGE_KEY, "true");
 
-        window.dispatchEvent(
-            new Event(STORAGE_EVENT),
-        )
-    }
+        window.dispatchEvent(new Event(STORAGE_EVENT));
+    };
 
     if (isDismissed) {
-        return null
+        return null;
     }
 
     return (
         <aside
             className={styles.notice}
-            role="status"
-            aria-label={t('AriaLabel')}
+            aria-label={t("AriaLabel")}
         >
-            <div
-                className={styles.content}
-                data-nosnippet
-            >
-                <div
-                    className={styles.marker}
-                >
-                    WIP
-                </div>
+            <div className={styles.content} data-nosnippet>
+                <div className={styles.marker}>WIP</div>
 
-                <div
-                    className={styles.text}
-                >
-                    <strong
-                        className={styles.title}
-                    >
-                        {t('Title')}
-                    </strong>
+                <div className={styles.text}>
+                    <strong className={styles.title}>{t("Title")}</strong>
 
-                    <p
-                        className={
-                            styles.description
-                        }
-                    >
-                        {t('Description')}
-                    </p>
+                    <p className={styles.description}>{t("Description")}</p>
                 </div>
 
                 <a
@@ -133,10 +85,8 @@ const DevelopmentNotice = () => {
                         variant="black"
                         noize={false}
                         type="button"
-                        text={t('GitHub')}
-                        additionalClass={
-                            styles.link
-                        }
+                        text={t("GitHub")}
+                        additionalClass={styles.link}
                         onClick={handleClose}
                     />
                 </a>
@@ -148,14 +98,12 @@ const DevelopmentNotice = () => {
                     noize={false}
                     type="button"
                     text="×"
-                    additionalClass={
-                        styles.close
-                    }
+                    additionalClass={styles.close}
                     onClick={handleClose}
                 />
             </div>
         </aside>
-    )
-}
+    );
+};
 
-export default DevelopmentNotice
+export default DevelopmentNotice;

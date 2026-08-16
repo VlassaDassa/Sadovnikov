@@ -1,20 +1,19 @@
-'use server'
+"use server";
 
-import { revalidatePath } from "next/cache"
-import { isManageUpload, isProjectManageUpload } from "@/lib/uploads/paths"
-import { deleteManagedUpload } from "@/lib/uploads/deleteUpload"
+import { revalidatePath } from "next/cache";
+import { isManageUpload, isProjectManageUpload } from "@/lib/uploads/paths";
+import { deleteManagedUpload } from "@/lib/uploads/deleteUpload";
 import path from "node:path";
 import { rm } from "node:fs/promises";
 
-import prisma from "@/lib/prisma"
-import { IProject } from "@/interfaces/general"
-import { transformRawProject } from "@/lib/transformers/project"
+import prisma from "@/lib/prisma";
+import { IProject } from "@/interfaces/general";
+import { transformRawProject } from "@/lib/transformers/project";
 import { requireAdmin } from "@/lib/auth/admin";
 import { uploadConfig } from "@/lib/uploads/config";
 
-
 export async function createProject(projectData: IProject) {
-    await requireAdmin()
+    await requireAdmin();
 
     try {
         const newProject = await prisma.project.create({
@@ -38,22 +37,24 @@ export async function createProject(projectData: IProject) {
                 teamType: projectData.teamType,
 
                 images: {
-                    create: projectData.images.map(img => ({
+                    create: projectData.images.map((img) => ({
                         image: img.image,
-                        main: img.main
-                    }))
+                        main: img.main,
+                    })),
                 },
 
                 stack: {
-                    create: projectData.stack.map(item => ({
+                    create: projectData.stack.map((item) => ({
                         name: item.name,
                         icon: item.icon,
-                        tooltip: item.tooltip ? JSON.parse(JSON.stringify(item.tooltip)) : null,
+                        tooltip: item.tooltip
+                            ? JSON.parse(JSON.stringify(item.tooltip))
+                            : null,
                     })),
                 },
 
                 keyFeatures: {
-                    create: (projectData.keyFeatures || []).map(feature => ({
+                    create: (projectData.keyFeatures || []).map((feature) => ({
                         title: feature.title,
                         titleRu: feature.titleRu,
 
@@ -66,7 +67,7 @@ export async function createProject(projectData: IProject) {
                 },
 
                 description: {
-                    create: projectData.description.map(desc => ({
+                    create: projectData.description.map((desc) => ({
                         title: desc.title,
                         titleRu: desc.titleRu,
 
@@ -78,7 +79,7 @@ export async function createProject(projectData: IProject) {
                 },
 
                 metrics: {
-                    create: projectData.metrics.map(metric => ({
+                    create: projectData.metrics.map((metric) => ({
                         icon: metric.icon,
 
                         title: metric.title,
@@ -87,24 +88,25 @@ export async function createProject(projectData: IProject) {
                         text: metric.text,
                         textRu: metric.textRu,
 
-                        current: typeof metric.current === 'string' ? parseFloat(metric.current) : metric.current,
+                        current:
+                            typeof metric.current === "string"
+                                ? parseFloat(metric.current)
+                                : metric.current,
                         max: metric.max,
                         type: metric.type,
                     })),
                 },
 
                 commits: {
-                    create: projectData.commits.map(
-                        (commit, index) => ({
-                            name: commit.name,
-                            nameRu: commit.nameRu || null,
-                            date: commit.date,
-                            dateRu: commit.dateRu || null,
-                            text: commit.text,
-                            textRu: commit.textRu || null,
-                            order: index,
-                        }),
-                    ),
+                    create: projectData.commits.map((commit, index) => ({
+                        name: commit.name,
+                        nameRu: commit.nameRu || null,
+                        date: commit.date,
+                        dateRu: commit.dateRu || null,
+                        text: commit.text,
+                        textRu: commit.textRu || null,
+                        order: index,
+                    })),
                 },
             },
 
@@ -116,171 +118,108 @@ export async function createProject(projectData: IProject) {
                 commits: true,
                 keyFeatures: true,
             },
-        })
+        });
 
         const transformedProject = transformRawProject(newProject);
 
-        revalidatePath('/admin')
-        revalidatePath('/')
-        return { success: true, project: transformedProject }
+        revalidatePath("/admin");
+        revalidatePath("/");
+        return { success: true, project: transformedProject };
     } catch {
-        return { success: false, error: 'Failed to create project' }
+        return { success: false, error: "Failed to create project" };
     }
 }
 
-function assertUploadOwnership(
-    project: IProject,
-): void {
-    for (
-        const value of
-        getProjectAssetValues(project)
-    ) {
+function assertUploadOwnership(project: IProject): void {
+    for (const value of getProjectAssetValues(project)) {
         if (
             isManageUpload(value) &&
-            !isProjectManageUpload(
-                value,
-                project.id,
-            )
+            !isProjectManageUpload(value, project.id)
         ) {
-            throw new Error(
-                'INVALID_UPLOAD_OWNER',
-            )
+            throw new Error("INVALID_UPLOAD_OWNER");
         }
     }
 }
 
-function getProjectAssetValues(
-    project: IProject,
-): string[] {
+function getProjectAssetValues(project: IProject): string[] {
     return [
-        ...project.images.map(
-            (item) => item.image,
-        ),
+        ...project.images.map((item) => item.image),
 
-        ...project.keyFeatures.flatMap(
-            (item) => [
-                item.icon,
-                item.photo,
-            ],
-        ),
+        ...project.keyFeatures.flatMap((item) => [item.icon, item.photo]),
 
-        ...project.stack.map(
-            (item) => item.icon,
-        ),
+        ...project.stack.map((item) => item.icon),
 
-        ...project.description.map(
-            (item) => item.icon,
-        ),
+        ...project.description.map((item) => item.icon),
 
-        ...project.metrics.map(
-            (item) => item.icon,
-        ),
-    ]
+        ...project.metrics.map((item) => item.icon),
+    ];
 }
 
-
 export async function updateProject(projectData: IProject) {
-    await requireAdmin()
+    await requireAdmin();
 
-    assertUploadOwnership(
-        projectData,
-    )
+    assertUploadOwnership(projectData);
 
     try {
-        const projectId = projectData.id
+        const projectId = projectData.id;
 
         const previousProject = await prisma.project.findUnique({
-                where: {
-                    id: projectId,
-                },
+            where: {
+                id: projectId,
+            },
 
-                select: {
-                    images: {
-                        select: {
-                            image: true,
-                        },
-                    },
-
-                    keyFeatures: {
-                        select: {
-                            icon: true,
-                            photo: true,
-                        },
-                    },
-
-                    stack: {
-                        select: {
-                            icon: true,
-                        },
-                    },
-
-                    description: {
-                        select: {
-                            icon: true,
-                        },
-                    },
-
-                    metrics: {
-                        select: {
-                            icon: true,
-                        },
+            select: {
+                images: {
+                    select: {
+                        image: true,
                     },
                 },
-            })
 
-        const previousUrls =
-            new Set<string>([
-                ...(
-                    previousProject?.images.map(
-                        (item) =>
-                            item.image,
-                    ) ?? []
-                ),
+                keyFeatures: {
+                    select: {
+                        icon: true,
+                        photo: true,
+                    },
+                },
 
-                ...(
-                    previousProject
-                        ?.keyFeatures
-                        .flatMap(
-                            (item) => [
-                                item.icon,
-                                item.photo,
-                            ],
-                        ) ?? []
-                ),
+                stack: {
+                    select: {
+                        icon: true,
+                    },
+                },
 
-                ...(
-                    previousProject?.stack.map(
-                        (item) =>
-                            item.icon,
-                    ) ?? []
-                ),
+                description: {
+                    select: {
+                        icon: true,
+                    },
+                },
 
-                ...(
-                    previousProject
-                        ?.description
-                        .map(
-                            (item) =>
-                                item.icon,
-                        ) ?? []
-                ),
+                metrics: {
+                    select: {
+                        icon: true,
+                    },
+                },
+            },
+        });
 
-                ...(
-                    previousProject?.metrics.map(
-                        (item) =>
-                            item.icon,
-                    ) ?? []
-                ),
-            ])
+        const previousUrls = new Set<string>([
+            ...(previousProject?.images.map((item) => item.image) ?? []),
 
-        const nextUrls =
-            new Set(
-                getProjectAssetValues(
-                    projectData,
-                ),
-            )
+            ...(previousProject?.keyFeatures.flatMap((item) => [
+                item.icon,
+                item.photo,
+            ]) ?? []),
+
+            ...(previousProject?.stack.map((item) => item.icon) ?? []),
+
+            ...(previousProject?.description.map((item) => item.icon) ?? []),
+
+            ...(previousProject?.metrics.map((item) => item.icon) ?? []),
+        ]);
+
+        const nextUrls = new Set(getProjectAssetValues(projectData));
 
         const updatedProject = await prisma.$transaction(async (tx) => {
-            
             // Обновление основных полей
             await tx.project.update({
                 where: { id: projectId },
@@ -302,40 +241,39 @@ export async function updateProject(projectData: IProject) {
                     demoLink: projectData.demoLink || null,
                     numberTeam: projectData.numberTeam,
                     teamType: projectData.teamType,
-
-                }
+                },
             });
 
             // Обновление изображений
-            await tx.projectImage.deleteMany({ where: { projectId } })
+            await tx.projectImage.deleteMany({ where: { projectId } });
             if (projectData.images.length > 0) {
                 await tx.projectImage.createMany({
-                    data: projectData.images.map(img => ({
+                    data: projectData.images.map((img) => ({
                         projectId,
                         image: img.image,
-                        main: img.main
-                    }))
-                })
-            };
-            
+                        main: img.main,
+                    })),
+                });
+            }
+
             // Обновление стэка
             await tx.stackItem.deleteMany({ where: { projectId } });
             if (projectData.stack.length > 0) {
                 await tx.stackItem.createMany({
-                    data: projectData.stack.map(item => ({
+                    data: projectData.stack.map((item) => ({
                         projectId,
                         name: item.name,
                         icon: item.icon,
-                        tooltip: JSON.parse(JSON.stringify(item.tooltip))
-                    }))
-                })
+                        tooltip: JSON.parse(JSON.stringify(item.tooltip)),
+                    })),
+                });
             }
 
             // Обновление keyFeatures
-            await tx.keyFeature.deleteMany({ where: { projectId } })
+            await tx.keyFeature.deleteMany({ where: { projectId } });
             if (projectData.keyFeatures && projectData.keyFeatures.length > 0) {
                 await tx.keyFeature.createMany({
-                    data: projectData.keyFeatures.map(feature => ({
+                    data: projectData.keyFeatures.map((feature) => ({
                         projectId,
                         title: feature.title,
                         titleRu: feature.titleRu,
@@ -343,66 +281,66 @@ export async function updateProject(projectData: IProject) {
                         textRu: feature.textRu,
                         icon: feature.icon,
                         photo: feature.photo,
-                    }))
-                })
-            };
+                    })),
+                });
+            }
 
             // Обновление description
-            await tx.descriptionBlock.deleteMany({where: { projectId }})
+            await tx.descriptionBlock.deleteMany({ where: { projectId } });
             if (projectData.description.length > 0) {
                 await tx.descriptionBlock.createMany({
-                    data: projectData.description.map(desc => ({
+                    data: projectData.description.map((desc) => ({
                         projectId,
                         title: desc.title,
                         titleRu: desc.titleRu,
                         icon: desc.icon,
                         content: desc.content,
-                        contentRu: desc.contentRu
-                    }))
-                })
-            };
+                        contentRu: desc.contentRu,
+                    })),
+                });
+            }
 
             // Обновление metrics
-            await tx.metric.deleteMany({ where: { projectId } })
+            await tx.metric.deleteMany({ where: { projectId } });
             if (projectData.metrics.length > 0) {
                 await tx.metric.createMany({
-                    data: projectData.metrics.map(metric => ({
+                    data: projectData.metrics.map((metric) => ({
                         projectId,
                         icon: metric.icon,
                         title: metric.title,
                         titleRu: metric.titleRu || null,
                         text: metric.text,
                         textRu: metric.textRu || null,
-                        current: typeof metric.current === 'string' ? parseFloat(metric.current) : metric.current,
+                        current:
+                            typeof metric.current === "string"
+                                ? parseFloat(metric.current)
+                                : metric.current,
                         max: metric.max,
-                        type: metric.type
-
-                    }))
-                })
-            };
+                        type: metric.type,
+                    })),
+                });
+            }
 
             await tx.commit.deleteMany({
                 where: {
                     projectId,
                 },
-            })
+            });
 
             // Обновление commits
             if (projectData.commits.length > 0) {
                 await tx.commit.createMany({
-                    data: projectData.commits.map(
-                        (commit, index) => ({
-                            projectId,
-                            name: commit.name,
-                            nameRu: commit.nameRu || null,
-                            date: commit.date,
-                            dateRu: commit.dateRu || null,
-                            text: commit.text,
-                            textRu: commit.textRu || null,
-                            order: index,
-                        }),
-                    ),
-                })
+                    data: projectData.commits.map((commit, index) => ({
+                        projectId,
+                        name: commit.name,
+                        nameRu: commit.nameRu || null,
+                        date: commit.date,
+                        dateRu: commit.dateRu || null,
+                        text: commit.text,
+                        textRu: commit.textRu || null,
+                        order: index,
+                    })),
+                });
             }
 
             return await tx.project.findUnique({
@@ -413,62 +351,46 @@ export async function updateProject(projectData: IProject) {
                     keyFeatures: true,
                     description: true,
                     metrics: true,
-                    commits: true
-                }
-            })
+                    commits: true,
+                },
+            });
         });
 
         if (!updatedProject) {
             throw new Error(`Project with id ${projectId} not found`);
         }
-        const transformedProject = transformRawProject(updatedProject)
+        const transformedProject = transformRawProject(updatedProject);
 
-        const removedUrls =
-            [...previousUrls].filter(
-                (url) =>
-                    isProjectManageUpload(
-                        url,
-                        projectId,
-                    ) &&
-                    !nextUrls.has(url),
-            )
+        const removedUrls = [...previousUrls].filter(
+            (url) =>
+                isProjectManageUpload(url, projectId) && !nextUrls.has(url),
+        );
 
-        const deletionResults =
-            await Promise.allSettled(
-                removedUrls.map(
-                    deleteManagedUpload,
-                ),
-            )
+        const deletionResults = await Promise.allSettled(
+            removedUrls.map((url) => deleteManagedUpload(url)),
+        );
 
-        for (
-            const result of
-            deletionResults
-        ) {
-            if (
-                result.status ===
-                'rejected'
-            ) {
+        for (const result of deletionResults) {
+            if (result.status === "rejected") {
                 console.error(
-                    'Failed to delete project upload:',
+                    "Failed to delete project upload:",
                     result.reason,
-                )
+                );
             }
         }
 
-        revalidatePath(`/project/${projectId}`)
-        revalidatePath(`/editProject/${projectId}`)
-        revalidatePath('/')
-        
-        return { success: true, project: transformedProject }
-    }
+        revalidatePath(`/project/${projectId}`);
+        revalidatePath(`/editProject/${projectId}`);
+        revalidatePath("/");
 
-    catch (error) {
-        return { success: false, error: String(error) }
+        return { success: true, project: transformedProject };
+    } catch (error) {
+        return { success: false, error: String(error) };
     }
 }
 
 export async function deleteProject(projectId: number) {
-    await requireAdmin()
+    await requireAdmin();
 
     try {
         // Сначала связанные поля
@@ -479,29 +401,24 @@ export async function deleteProject(projectId: number) {
         await prisma.metric.deleteMany({ where: { projectId } });
         await prisma.commit.deleteMany({ where: { projectId } });
 
-        await prisma.project.delete({ where: { id: projectId } })
+        await prisma.project.delete({ where: { id: projectId } });
 
-        revalidatePath(`/project/${projectId}`)
-        revalidatePath('/admin')
-        revalidatePath(`/editProject/${projectId}`)
-        const projectUploadDirectory =
-            path.join(
-                uploadConfig.root,
-                'projects',
-                projectId.toString(),
-            )
+        revalidatePath(`/project/${projectId}`);
+        revalidatePath("/admin");
+        revalidatePath(`/editProject/${projectId}`);
+        const projectUploadDirectory = path.join(
+            uploadConfig.root,
+            "projects",
+            projectId.toString(),
+        );
 
-        await rm(
-            projectUploadDirectory,
-            {
-                recursive: true,
-                force: true,
-            },
-        )
+        await rm(projectUploadDirectory, {
+            recursive: true,
+            force: true,
+        });
 
-        return { success: true }
-        
+        return { success: true };
     } catch (error) {
-        return { success: false, error: error }
+        return { success: false, error: error };
     }
 }

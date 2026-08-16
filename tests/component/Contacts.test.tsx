@@ -250,15 +250,27 @@ describe("Contacts", () => {
         );
     });
 
-    it("does not accept a name that the server rejects", async () => {
+    it("does not accept a name that exceeds the character limit", async () => {
         renderWithStore(<Contacts />);
 
-        await fillValidForm("John");
+        await fillValidForm();
 
-        expect(
-            screen.getByRole("button", {
-                name: "Send",
-            }),
-        ).toBeDisabled();
+        fireEvent.change(screen.getByLabelText("Name..."), {
+            target: {
+                value: "J".repeat(50),
+            },
+        });
+
+        await waitFor(() => {
+            expect(
+                screen.getByRole("button", {
+                    name: "Send",
+                }),
+            ).toBeDisabled();
+        });
+
+        expect(screen.getByText("Invalid name")).toBeInTheDocument();
+
+        expect(mocks.sendContactMessage).not.toHaveBeenCalled();
     });
 });
