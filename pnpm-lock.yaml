@@ -78,8 +78,8 @@ importers:
         specifier: 0.35.3
         version: 0.35.3(@types/node@24.13.3)
       swiper:
-        specifier: ^12.2.0
-        version: 12.2.0
+        specifier: ^14.1.0
+        version: 14.1.0
       zod:
         specifier: ^4.4.3
         version: 4.4.3
@@ -2903,8 +2903,8 @@ packages:
     resolution: {integrity: sha512-MpUEN2OodtUzxvKQl72cUF7RQ5EiHsGvSsVG0ia9c5RbWGL2CI4C7EpPS8UTBIplnlzZiNuV56w+FuNxy3ty2Q==}
     engines: {node: '>=10'}
 
-  swiper@12.2.0:
-    resolution: {integrity: sha512-K8uXsBZU6ME97Ia3xbBge8IRCnR1lOmIILzvY/jGVic7dSTQ530s3uO8RvXbPUtkkXLWIwmZLRPbtDxRWVAFdg==}
+  swiper@14.1.0:
+    resolution: {integrity: sha512-ppit/AqmGvThKlXy4I1/9N/gEyb9s/BDHWciWNeIxbfteFKUhPQXrYuOMKszomXKd9WiLd+/0vKdPHW+0N0mhA==}
     engines: {node: '>= 4.7.0'}
 
   symbol-tree@3.2.4:
@@ -5693,7 +5693,7 @@ snapshots:
     dependencies:
       has-flag: 4.0.0
 
-  swiper@12.2.0: {}
+  swiper@14.1.0: {}
 
   symbol-tree@3.2.4: {}
 
