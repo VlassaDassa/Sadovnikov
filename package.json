@@ -17,7 +17,6 @@
     "test:coverage": "vitest run --config vitest.config.ts --coverage",
     "test:integration": "dotenv -e .env.test -- vitest run --config vitest.integration.config.ts",
     "test:e2e": "playwright test",
-    "test:e2e:ui": "playwright test --ui",
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:update": "playwright test --update-snapshots",
     "test:db:up": "docker compose -f compose.test.yaml up -d",
