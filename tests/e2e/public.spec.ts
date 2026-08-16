@@ -1,5 +1,24 @@
 import { expect, test } from "@playwright/test";
 
+
+
+function isYandexUrl(value: string): boolean {
+    try {
+        const { hostname } = new URL(value);
+
+        return (
+            hostname === "yandex.ru" ||
+            hostname.endsWith(".yandex.ru") ||
+            hostname === "yandex.net" ||
+            hostname.endsWith(".yandex.net") ||
+            hostname === "yandex.com" ||
+            hostname.endsWith(".yandex.com")
+        );
+    } catch {
+        return false;
+    }
+}
+
 for (const [route, language] of [
     ["/", "en"],
     ["/ru", "ru"],
@@ -19,7 +38,6 @@ for (const [route, language] of [
                 if (
                     !text.includes("metrika_enabled") &&
                     !text.includes("yandex") &&
-                    !text.includes("hdrc.yandex.net") &&
                     !text.includes("XML Parsing Error")
                 ) {
                     consoleErrors.push(text);
@@ -39,20 +57,11 @@ for (const [route, language] of [
             const errorText = request.failure()?.errorText ?? "";
 
             // Игнорируем известные внешние запросы
-            if (url.startsWith("https://hdrc.yandex.net/")) {
+            if (isYandexUrl(url)) {
                 return;
             }
 
             if (url.includes("_rsc=") && errorText.includes("ERR_ABORTED")) {
-                return;
-            }
-
-            // Игнорируем все запросы к Яндекс.Метрике
-            if (
-                url.includes("yandex.ru") ||
-                url.includes("mc.yandex") ||
-                url.includes("yandex.net")
-            ) {
                 return;
             }
 
