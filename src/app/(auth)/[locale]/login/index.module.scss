@@ -1,6 +1,5 @@
-@use './../../../../styles/tokens/typography' as *;
-@use './../../../../styles/tokens/colors' as *;
-
+@use "./../../../../styles/tokens/typography" as *;
+@use "./../../../../styles/tokens/colors" as *;
 
 .main {
     height: 44.4vh;
@@ -63,11 +62,22 @@
     }
 }
 
-
 .error {
     @extend .heading-20-mont-regular;
     margin-bottom: 20px;
     text-align: right;
 
     color: $error_600;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }

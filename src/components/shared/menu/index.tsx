@@ -89,7 +89,7 @@ const Menu = () => {
                 />
             </div>
 
-            <nav className={style.menuNav}>
+            <nav aria-label="Mobile navigation" className={style.menuNav}>
                 <ul className={style.menuList}>
                     <li>
                         <Link className={style.listItem} href="/#contacts" onClick={linkClickHandler}>

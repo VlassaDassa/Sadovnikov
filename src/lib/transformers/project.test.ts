@@ -132,19 +132,25 @@ describe('tooltip transformers', () => {
     })
 
     it('localizes a tooltip', () => {
-        const result = transformLocalizedTooltip(
-            {
-                id: 1,
-                tite: 'Title',
-                titleRu: 'Title ru',
-                text: 'Text',
-                textRu: 'Text ru'
-            },
-            'ru'
-        )
+        const result =
+            transformLocalizedTooltip(
+                {
+                    id: 1,
+                    title: 'Title en',
+                    titleRu: 'Title ru',
+                    text: 'Text en',
+                    textRu: 'Text ru',
+                },
+                'ru',
+            )
 
-        expect(result?.title).toBe('Title ru')
-        expect(result?.text).toBe('Text ru')
+        expect(result).toEqual({
+            id: 1,
+            title: 'Title ru',
+            titleRu: 'Title ru',
+            text: 'Text ru',
+            textRu: 'Text ru',
+        })
     })
 })
 

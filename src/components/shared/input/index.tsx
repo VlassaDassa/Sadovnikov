@@ -520,11 +520,16 @@ const Input: React.FC<InputProps> = ({
 
             {type !== "textarea" && !datePicker ? (
                 <input
+                    id={name}
                     type={type}
                     className={inputClass}
                     placeholder={placeholder}
                     value={value}
-                    aria-label={placeholder || name}
+                    aria-label={
+                        label && adminLabel === 'withLabel'
+                            ? undefined
+                            : placeholder || name
+                    }
                     name={name}
                     disabled={disabled}
                     aria-invalid={Boolean(error)}
@@ -539,20 +544,25 @@ const Input: React.FC<InputProps> = ({
                     className={style.datePickerWrapper}
                 >
                     <input
+                        id={name}
                         type="text"
                         className={inputClass}
                         placeholder={
                             placeholder ??
                             (datePickerDay
-                                ? lang === "ru"
-                                    ? "ДД.ММ.ГГГГ"
-                                    : "DD/MM/YYYY"
-                                : lang === "ru"
-                                  ? "ММ.ГГГГ"
-                                  : "MM/YYYY")
+                                ? lang === 'ru'
+                                    ? 'ДД.ММ.ГГГГ'
+                                    : 'DD/MM/YYYY'
+                                : lang === 'ru'
+                                ? 'ММ.ГГГГ'
+                                : 'MM/YYYY')
                         }
                         value={dateInputValue}
-                        aria-label={placeholder || name}
+                        aria-label={
+                            label && adminLabel === 'withLabel'
+                                ? undefined
+                                : placeholder || name
+                        }
                         aria-expanded={datePickerOpen}
                         name={name}
                         aria-invalid={Boolean(error)}
@@ -560,13 +570,16 @@ const Input: React.FC<InputProps> = ({
                         autoComplete="off"
                         disabled={disabled}
                         onChange={(event) => {
-                            setDateInputValue(event.target.value);
+                            setDateInputValue(event.target.value)
                         }}
                         onClick={() => {
-                            setDatePickerOpen((previous) => !previous);
+                            setDatePickerOpen(
+                                (previous) => !previous,
+                            )
                         }}
                         onBlur={(event) => {
-                            const nextTarget = event.relatedTarget;
+                            const nextTarget =
+                                event.relatedTarget
 
                             if (
                                 nextTarget instanceof Node &&
@@ -574,10 +587,10 @@ const Input: React.FC<InputProps> = ({
                                     nextTarget,
                                 )
                             ) {
-                                return;
+                                return
                             }
 
-                            commitDateInput();
+                            commitDateInput()
                         }}
                         onKeyDown={(event) => {
                             if (event.key === "Enter") {
@@ -621,12 +634,17 @@ const Input: React.FC<InputProps> = ({
             ) : (
                 <div className={style.fieldWrapper}>
                     <textarea
+                        id={name}
                         className={inputClass}
                         placeholder={placeholder}
                         disabled={disabled}
                         value={value}
                         name={name}
-                        aria-label={placeholder || name}
+                        aria-label={
+                            label && adminLabel === 'withLabel'
+                                ? undefined
+                                : placeholder || name
+                        }
                         onChange={onChange}
                         aria-invalid={Boolean(error)}
                         ref={textAreaRef}

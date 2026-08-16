@@ -123,3 +123,47 @@ jobs:
           name: test-results
           path: test-results
           if-no-files-found: ignore
+
+  deploy:
+    needs: test
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.test.result == 'success' }}
+    runs-on: ubuntu-latest
+
+    concurrency:
+      group: production-deploy
+      cancel-in-progress: false
+
+    steps:
+      - name: Configure SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SERVER_KNOWN_HOSTS: ${{ secrets.SERVER_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+
+          install -m 700 -d "$HOME/.ssh"
+          printf '%s\n' "$SSH_PRIVATE_KEY" \
+            | tr -d '\r' \
+            > "$HOME/.ssh/deploy_key"
+
+          chmod 600 "$HOME/.ssh/deploy_key"
+
+          printf '%s\n' "$SERVER_KNOWN_HOSTS" \
+            > "$HOME/.ssh/known_hosts"
+
+          chmod 644 "$HOME/.ssh/known_hosts"
+
+      - name: Deploy
+        env:
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+        run: |
+          set -euo pipefail
+          ssh \
+            -i "$HOME/.ssh/deploy_key" \
+            -o IdentitiesOnly=yes \
+            -o BatchMode=yes \
+            -o StrictHostKeyChecking=yes \
+            -o ConnectTimeout=15 \
+            "$SERVER_USER@$SERVER_HOST" \
+            "/srv/portfolio/deploy.sh"
