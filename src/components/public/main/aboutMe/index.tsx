@@ -5,7 +5,6 @@ import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 import { useLocale } from 'next-intl';
 
-import DecorButton from '../../../shared/button/DecorButton';
 import AboutIllustration from '../aboutIllustration';
 import EmptySection from '@/components/shared/EmptySection';
 
@@ -63,17 +62,6 @@ const AboutMe: React.FC<AboutMeProps> = ({ aboutMe }) => {
                             <h3 className={style.textTitle}>{t('ShortBio')} </h3>
                             <p className={style.text}>{aboutMe['shortBio']}</p>
                         </div>
-                        <Link href={'/pageInDev'}>
-                            <DecorButton 
-                                behavior='default'
-                                variant='big'
-                                text={{
-                                    default: t('DecorBtnLong'),
-                                    alter: t('DecorBtn'),
-                                }}
-                                additionalClass='aboutMe'
-                            />
-                        </Link>
                     </>
             }
         </section>
