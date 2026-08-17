@@ -120,7 +120,7 @@ const Inputs: React.FC<EditProjectProps> = ({ project, setData }) => {
                 iconPosition='noIcon'
                 adminLabel='withLabel'
                 label='Short description (for project card)'
-                maxLen={100}
+                maxLen={50}
                 onChange={(e) => handleChangeGeneralData('shortDescription', e.target.value)}
             />
             
@@ -157,7 +157,7 @@ const Inputs: React.FC<EditProjectProps> = ({ project, setData }) => {
                     iconPosition='noIcon'
                     adminLabel='withLabel'
                     label='Development time'
-                    maxLen={20}
+                    maxLen={10}
                     onChange={(e) => handleChangeGeneralData('developmentTime', e.target.value)}
                 />
 

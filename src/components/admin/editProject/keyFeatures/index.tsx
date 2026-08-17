@@ -122,7 +122,7 @@ const KeyFeatures: React.FC<EditProjectProps> = ({ project, setData }) => {
                                     value={feature.title}
                                     additionalClass={styles.input}
                                     iconPosition='noIcon'
-                                    maxLen={200}
+                                    maxLen={50}
                                     variant='admin'
                                     adminLabel='withLabel'
                                     label='Title'
@@ -135,7 +135,7 @@ const KeyFeatures: React.FC<EditProjectProps> = ({ project, setData }) => {
                                     value={feature.titleRu}
                                     additionalClass={styles.input}
                                     iconPosition='noIcon'
-                                    maxLen={200}
+                                    maxLen={50}
                                     variant='admin'
                                     adminLabel='withoutLabel'
                                     onChange={(e) => handleChangeFeature(feature.id, 'titleRu', e.target.value)}
@@ -150,12 +150,12 @@ const KeyFeatures: React.FC<EditProjectProps> = ({ project, setData }) => {
                                     value={feature.text}
                                     additionalClass={styles.textarea}
                                     iconPosition='noIcon'
-                                    maxLen={200}
+                                    maxLen={150}
                                     variant='admin'
                                     adminLabel='withLabel'
                                     label='Description'
                                     counter={true}
-                                    maxCounter={200}
+                                    maxCounter={150}
                                     onChange={(e) => handleChangeFeature(feature.id, 'text', e.target.value)}
                                 />
 
@@ -166,11 +166,11 @@ const KeyFeatures: React.FC<EditProjectProps> = ({ project, setData }) => {
                                     value={feature.textRu}
                                     additionalClass={styles.textarea}
                                     iconPosition='noIcon'
-                                    maxLen={200}
+                                    maxLen={150}
                                     variant='admin'
                                     adminLabel='withoutLabel'
                                     counter={true}
-                                    maxCounter={200}
+                                    maxCounter={150}
                                     onChange={(e) => handleChangeFeature(feature.id, 'textRu', e.target.value)}
                                 />
 

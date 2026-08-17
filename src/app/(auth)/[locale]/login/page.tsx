@@ -29,7 +29,7 @@ export default function LoginForm() {
     return (
         <main className={`${styles.main} container`}>
             <SectionBackground className={styles.formWrapper}>
-                <h1 className="visually-hidden">Login</h1>
+                <h1 className={styles.visuallyHidden}>Login</h1>
                 <form action={action}>
                     {state.error && (
                         <p className={styles.error} role="error">

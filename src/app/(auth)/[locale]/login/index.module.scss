@@ -55,6 +55,7 @@
 .formWrapper {
     width: 70%;
     margin: 0 auto;
+    position: relative;
     padding: 50px;
 
     @media (min-width: 768px) {
@@ -70,7 +71,7 @@
     color: $error_600;
 }
 
-.visually-hidden {
+.visuallyHidden {
     position: absolute;
     width: 1px;
     height: 1px;

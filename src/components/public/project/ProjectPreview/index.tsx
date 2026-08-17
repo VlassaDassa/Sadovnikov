@@ -77,9 +77,9 @@ const ProjectPreview: React.FC<ProjectPreviewProps> = ({ data }) => {
                 </div>
                 
                 <div className={styles.btnWrapper}>
-                    <a href={data.gitHubLink} target='_blank'>
+                    <a href={data.gitHubLink || undefined} target="_blank" rel="noopener noreferrer">
                         <Button
-                            behavior='default'
+                            behavior={data.gitHubLink ? 'default' : 'disabled'}
                             iconPosition='leftIcon'
                             variant='dark'
                             text={'GitHub'}
@@ -87,9 +87,9 @@ const ProjectPreview: React.FC<ProjectPreviewProps> = ({ data }) => {
                         />
                     </a>
                     
-                    <a href={data.demoLink} target='_blank'>
+                    <a href={data.demoLink || undefined} target="_blank" rel="noopener noreferrer">
                         <Button
-                            behavior='default'
+                            behavior={data.demoLink ? 'default' : 'disabled'}
                             iconPosition='leftIcon'
                             variant='primary'
                             text={'Live Demo'}
