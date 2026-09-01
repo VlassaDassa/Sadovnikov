@@ -569,6 +569,8 @@ const Input: React.FC<InputProps> = ({
                         maxLength={maxLen ?? 30}
                         autoComplete="off"
                         disabled={disabled}
+                        readOnly={readonly}
+                        inputMode={readonly ? "none" : undefined}
                         onChange={(event) => {
                             setDateInputValue(event.target.value)
                         }}

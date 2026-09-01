@@ -62,10 +62,10 @@ export const useImageUpload = (
         setIsLoading(true);
 
         const newImages: IImages[] = [];
+        const usedIds = new Set(project.images.map((image) => image.id));
 
         try {
-            for (let index = 0; index < selectedFiles.length; index += 1) {
-                const file = selectedFiles[index];
+            for (const file of selectedFiles) {
 
                 const valid = await validateImage(file);
 
@@ -85,8 +85,19 @@ export const useImageUpload = (
                     category: "gallery",
                 });
 
+                const temporaryId = Array.from(
+                    { length: 99 },
+                    (_, offset) => -(project.id * 100 + offset + 1),
+                ).find((id) => !usedIds.has(id));
+
+                if (temporaryId === undefined) {
+                    throw new Error("No temporary image id is available");
+                }
+
+                usedIds.add(temporaryId);
+
                 newImages.push({
-                    id: Date.now() + index,
+                    id: temporaryId,
 
                     image: uploaded.url,
 

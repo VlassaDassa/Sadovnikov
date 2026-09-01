@@ -65,8 +65,20 @@ const KeyFeatures: React.FC<EditProjectProps> = ({ project, setData }) => {
         if (project.keyFeatures.length >= 6) return;
 
         setData((prev: IProject) => {
+            const usedIds = new Set(
+                prev.keyFeatures.map((feature) => feature.id),
+            );
+            const temporaryId = Array.from(
+                { length: 99 },
+                (_, index) => -(prev.id * 100 + index + 1),
+            ).find((id) => !usedIds.has(id));
+
+            if (temporaryId === undefined) {
+                return prev;
+            }
+
             const newFeature = {
-                id: Date.now() + prev.keyFeatures.length + 1,
+                id: temporaryId,
                 title: '',
                 titleRu: '',
                 text: '',

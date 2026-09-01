@@ -196,6 +196,7 @@ const Inputs: React.FC<EditProjectProps> = ({ project, setData }) => {
                 iconPosition='noIcon'
                 adminLabel='withLabel'
                 label='Date'
+                readonly={true}
                 datePickerChange={handleChangeDate}
             />
         </div>

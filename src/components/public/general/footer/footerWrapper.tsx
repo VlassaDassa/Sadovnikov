@@ -14,7 +14,9 @@ import prisma from '@/lib/prisma';
 const FooterWrapper: React.FC = async () => {
     let footerItems: IFooterItem[] = []
     try {
-        footerItems = await prisma.footerItem.findMany()
+        footerItems = await prisma.footerItem.findMany({
+            orderBy: { order: 'asc' },
+        })
     } catch (error) {
         const errorMessage = error instanceof Error ? error.message : 'Unknown error';
         return <ErrorPage error={errorMessage} />

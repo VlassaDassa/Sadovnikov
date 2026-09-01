@@ -157,12 +157,12 @@ const FooterItem: React.FC<
         <div
             className={`${styles.item} modalElementBg`}
             ref={setNodeRef}
-            {...attributes}
-            {...listeners}
             style={style}
         >
             <DragHandler
                 variant="big"
+                {...attributes}
+                {...listeners}
                 additionalClass={
                     styles.dragHand
                 }

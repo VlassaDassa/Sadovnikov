@@ -51,7 +51,7 @@ const StackItem: React.FC<StackItemProps> = ({ item, setData }) => {
                           tooltip: el.tooltip
                               ? { ...el.tooltip, [field]: value }
                               : {
-                                    id: Date.now(),
+                                    id: -(prev.id * 100 + stackId),
                                     title: "",
                                     titleRu: "",
                                     text: "",
@@ -210,12 +210,22 @@ const EditProjectStackModal: React.FC<EditProjectProps> = ({
 
     const addStackItem = () => {
         setData((prev: IProject) => {
+            const usedIds = new Set(prev.stack.map((item) => item.id));
+            const temporaryId = Array.from(
+                { length: 99 },
+                (_, index) => -(prev.id * 100 + index + 1),
+            ).find((id) => !usedIds.has(id));
+
+            if (temporaryId === undefined) {
+                return prev;
+            }
+
             const newItem = {
-                id: Date.now(),
+                id: temporaryId,
                 name: "",
                 icon: defaultIcon,
                 tooltip: {
-                    id: Date.now() + 1,
+                    id: temporaryId - 100,
                     title: "Why was this technology chosen?",
                     titleRu: "Why was this technology chosen?",
                     text: "",

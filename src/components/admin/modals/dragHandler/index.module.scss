@@ -9,6 +9,8 @@
     gap: 5px;
 
     cursor: grab;
+    touch-action: none;
+    user-select: none;
 }
 
 
@@ -27,4 +29,3 @@
     
     @extend .radius-full;
 }
-

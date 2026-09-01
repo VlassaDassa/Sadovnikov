@@ -20,15 +20,14 @@ import {
 } from '@dnd-kit/sortable'
 
 
-import { 
-    toggleIsOverlayVisible, 
-    toggleSelectPeriodModal,
-    setCurrentId
+import {
+    openSelectPeriodModal,
+    setCurrentId,
+    showOverlay,
 
 } from '@/store/slices/uiSlice'; 
 
 
-import AnimatedSection from '@/components/shared/AnimatedScroll';
 import SectionBackground from "@/components/admin/general/sectionBackground";
 import SectionTitle from '@/components/admin/general/sectionTitle';
 import DragHandler from '@/components/admin/modals/dragHandler';
@@ -57,9 +56,9 @@ const Item: React.FC<ItemProps> = ({ item, onChange, deleteItem }) => {
     }
 
     const openSelectPeriod = () => {
-        dispatch(toggleSelectPeriodModal())
-        dispatch(toggleIsOverlayVisible())
         dispatch(setCurrentId(item.id))
+        dispatch(openSelectPeriodModal())
+        dispatch(showOverlay())
     }
 
     const {
@@ -81,13 +80,13 @@ const Item: React.FC<ItemProps> = ({ item, onChange, deleteItem }) => {
         <SectionBackground 
             className={`${styles.sectionBg} ${styles.item}`}
             ref={setNodeRef}
-            {...attributes}
-            {...listeners}
             style={style} 
         >
             <div className={styles.assistantBtn}>
                 <DragHandler 
                     variant='big'
+                    {...attributes}
+                    {...listeners}
                 />
 
                 <Button 
@@ -220,11 +219,31 @@ const WorkExperience: React.FC<WorkExperienceProps> = ({ data, setData, setIsSav
     const handleDragEnd = (event: DragEndEvent) => {
         const { active, over } = event;
 
-        if (active.id !== over?.id) {
-            const oldIndex = data.workExperience.findIndex((item) => item.id === active.id)
-            const newIndex = data.workExperience.findIndex((item) => item.id === over?.id)
-            setData(prev => ({...prev, workExperience: arrayMove(prev.workExperience, oldIndex, newIndex)}))
+        if (!over || active.id === over.id) {
+            return
         }
+
+        setData((previous) => {
+            const oldIndex = previous.workExperience.findIndex(
+                (item) => item.id === active.id,
+            )
+            const newIndex = previous.workExperience.findIndex(
+                (item) => item.id === over.id,
+            )
+
+            if (oldIndex === -1 || newIndex === -1) {
+                return previous
+            }
+
+            return {
+                ...previous,
+                workExperience: arrayMove(
+                    previous.workExperience,
+                    oldIndex,
+                    newIndex,
+                ),
+            }
+        })
 
         setIsSaving(true)
     }
@@ -242,9 +261,12 @@ const WorkExperience: React.FC<WorkExperienceProps> = ({ data, setData, setIsSav
     }
 
     const addItem = () => {
-        const maxId = Math.max(...data.workExperience.map(s => s.id), 0);
+        const nextTemporaryId = Math.min(
+            0,
+            ...data.workExperience.map((experience) => experience.id),
+        ) - 1;
         const newExp: WorkExperience = {
-            id: maxId + 1,
+            id: nextTemporaryId,
             position: '',
             positionRu: '',
             organization: '',
@@ -287,14 +309,12 @@ const WorkExperience: React.FC<WorkExperienceProps> = ({ data, setData, setIsSav
                     strategy={verticalListSortingStrategy}
                 >
                     {data.workExperience.map((item) => (
-                        <AnimatedSection key={item.id}  animation='fade-up'>
-                            <Item 
-                                item={item}
-                                onChange={handleChange} 
-                                deleteItem={deleteItem}
-                            />
-                        </AnimatedSection>
-                        
+                        <Item
+                            key={item.id}
+                            item={item}
+                            onChange={handleChange}
+                            deleteItem={deleteItem}
+                        />
                     ))}
                 </SortableContext>
             </DndContext>

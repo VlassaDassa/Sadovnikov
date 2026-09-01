@@ -29,16 +29,16 @@ async function clearSeedData() {
 
 async function seedGlobalData() {
     await prisma.skill.createMany({
-        data: skills,
+        data: skills.map((skill, order) => ({ ...skill, order })),
     });
 
     await prisma.stack.createMany({
-        data: globalStack,
+        data: globalStack.map((item, order) => ({ ...item, order })),
         skipDuplicates: true,
     });
 
     await prisma.footerItem.createMany({
-        data: footerItems,
+        data: footerItems.map((item, order) => ({ ...item, order })),
     });
 }
 
@@ -56,7 +56,7 @@ async function seedAboutMe() {
             shortBioRu: aboutMe.shortBioRu || null,
 
             workExperience: {
-                create: aboutMe.workExperience.map((experience) => ({
+                create: aboutMe.workExperience.map((experience, order) => ({
                     organization: experience.organization,
                     organizationRu: experience.organizationRu || null,
 
@@ -70,6 +70,7 @@ async function seedAboutMe() {
                     description: experience.description,
 
                     descriptionRu: experience.descriptionRu || null,
+                    order,
                 })),
             },
         },

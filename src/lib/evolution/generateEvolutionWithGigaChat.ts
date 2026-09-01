@@ -418,13 +418,16 @@ function prepareDraft(
         },
     );
 
-    return prepared.map(
-        ({
-            ...item
-        }) => {
-            return item;
-        },
-    );
+    return prepared.map((item) => ({
+        id: item.id,
+        name: item.name,
+        nameRu: item.nameRu,
+        date: item.date,
+        dateRu: item.dateRu,
+        text: item.text,
+        textRu: item.textRu,
+        sourceShas: item.sourceShas,
+    }));
 }
 
 function getErrorMessage(

@@ -12,24 +12,47 @@ export async function updateFooter(footer: IFooterItem[]) {
     await requireAdmin()
 
     try {
-        // Так как количество footer ограниченное (до 10 шт и это количество ТОЧНО расти не будет),
-        // то просто "перезатираем"
-        // Удаляем всё старое и неактуальное и добавляем новое актуальное
-        
-        await prisma.$transaction(
-            async (tx) => {
-                await tx.footerItem.deleteMany();
+        if (new Set(footer.map((item) => item.id)).size !== footer.length) {
+            throw new Error("Duplicate footer item ids are not allowed")
+        }
 
-                await tx.footerItem.createMany({
-                    data: footer.map(item => ({
-                        id: item.id,
-                        text: item.text,
-                        icon: item.icon,
-                        link: item.link ?? null
-                    }))
-                })
+        await prisma.$transaction(async (tx) => {
+            const current = await tx.footerItem.findMany()
+            const currentById = new Map(current.map((item) => [item.id, item]))
+            const nextIds = new Set(footer.map((item) => item.id))
+            const removedIds = current
+                .filter((item) => !nextIds.has(item.id))
+                .map((item) => item.id)
+
+            if (removedIds.length > 0) {
+                await tx.footerItem.deleteMany({ where: { id: { in: removedIds } } })
             }
-        )
+
+            return Promise.all(footer.map((item, order) => {
+                const previous = currentById.get(item.id)
+                const data = {
+                    text: item.text,
+                    icon: item.icon,
+                    link: item.link ?? null,
+                    order,
+                }
+
+                if (!previous) {
+                    return tx.footerItem.create({ data: { id: item.id, ...data } })
+                }
+
+                if (
+                    previous.text !== data.text ||
+                    previous.icon !== data.icon ||
+                    previous.link !== data.link ||
+                    previous.order !== data.order
+                ) {
+                    return tx.footerItem.update({ where: { id: item.id }, data })
+                }
+
+                return previous
+            }))
+        })
         
 
         revalidatePath('/')

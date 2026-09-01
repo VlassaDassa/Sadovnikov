@@ -11,26 +11,42 @@ import { requireAdmin } from "@/lib/auth/admin";
 export async function updateSkills(skills: Skill[]) {
     await requireAdmin()
 
-    // Так как количество skills ограниченное (до 10 шт и это количество ТОЧНО расти не будет),
-    // то просто "перезатираем"
-    // Удаляем всё старое и неактуальное и добавляем новое актуальное
-
     try {
-        await prisma.$transaction(
-            async (tx) => {
-                await tx.skill.deleteMany()
+        if (new Set(skills.map((skill) => skill.id)).size !== skills.length) {
+            throw new Error("Duplicate skill ids are not allowed")
+        }
 
-                await tx.skill.createMany({
-                    data: skills.map(
-                        (skill) => ({
-                            id: skill.id,
-                            name: skill.name,
-                            score: skill.score,
-                        }),
-                    ),
-                })
-            },
-        )
+        await prisma.$transaction(async (tx) => {
+            const current = await tx.skill.findMany()
+            const currentById = new Map(current.map((skill) => [skill.id, skill]))
+            const nextIds = new Set(skills.map((skill) => skill.id))
+            const removedIds = current
+                .filter((skill) => !nextIds.has(skill.id))
+                .map((skill) => skill.id)
+
+            if (removedIds.length > 0) {
+                await tx.skill.deleteMany({ where: { id: { in: removedIds } } })
+            }
+
+            return Promise.all(skills.map((skill, order) => {
+                const previous = currentById.get(skill.id)
+                const data = { name: skill.name, score: skill.score, order }
+
+                if (!previous) {
+                    return tx.skill.create({ data: { id: skill.id, ...data } })
+                }
+
+                if (
+                    previous.name !== data.name ||
+                    previous.score !== data.score ||
+                    previous.order !== data.order
+                ) {
+                    return tx.skill.update({ where: { id: skill.id }, data })
+                }
+
+                return previous
+            }))
+        })
 
         revalidatePath("/")
         revalidatePath("/admin")

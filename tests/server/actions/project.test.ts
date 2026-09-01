@@ -101,28 +101,64 @@ function makeTransactionClient() {
         },
         projectImage: {
             deleteMany: vi.fn(),
-            createMany: vi.fn(),
+            create: vi.fn(),
+            update: vi.fn(),
         },
         stackItem: {
             deleteMany: vi.fn(),
-            createMany: vi.fn(),
+            create: vi.fn(),
+            update: vi.fn(),
         },
         keyFeature: {
             deleteMany: vi.fn(),
-            createMany: vi.fn(),
+            create: vi.fn(),
+            update: vi.fn(),
         },
         descriptionBlock: {
             deleteMany: vi.fn(),
-            createMany: vi.fn(),
+            create: vi.fn(),
+            update: vi.fn(),
         },
         metric: {
             deleteMany: vi.fn(),
-            createMany: vi.fn(),
+            create: vi.fn(),
+            update: vi.fn(),
         },
         commit: {
             deleteMany: vi.fn(),
-            createMany: vi.fn(),
+            create: vi.fn(),
+            update: vi.fn(),
         },
+    };
+}
+
+function makeStoredProject(overrides: Record<string, unknown> = {}) {
+    const project = makeProject();
+
+    return {
+        id: project.id,
+        category: project.category,
+        name: project.name,
+        shortDescription: project.shortDescription,
+        previewDescription: project.previewDescription,
+        previewDescriptionRu: project.previewDescriptionRu,
+        date: project.date,
+        developmentTime: project.developmentTime,
+        developmentTimeRu: project.developmentTimeRu,
+        githubLink: project.gitHubLink,
+        demoLink: project.demoLink,
+        numberTeam: project.numberTeam,
+        teamType: project.teamType,
+        images: project.images,
+        stack: project.stack,
+        keyFeatures: project.keyFeatures,
+        description: project.description,
+        metrics: project.metrics.map((metric) => ({
+            ...metric,
+            current: Number(metric.current),
+        })),
+        commits: project.commits,
+        ...overrides,
     };
 }
 
@@ -233,20 +269,14 @@ describe("project actions", () => {
             expect(mocks.projectFindUnique).not.toHaveBeenCalled();
         });
 
-        it("replaces commits instead of appending them", async () => {
+        it("does not rewrite unchanged commits", async () => {
             const transactionClient = makeTransactionClient();
 
-            transactionClient.project.findUnique.mockResolvedValue({
-                id: 1,
-            });
+            transactionClient.project.findUnique.mockResolvedValue(
+                makeStoredProject(),
+            );
 
-            mocks.projectFindUnique.mockResolvedValue({
-                images: [],
-                keyFeatures: [],
-                stack: [],
-                description: [],
-                metrics: [],
-            });
+            mocks.projectFindUnique.mockResolvedValue(makeStoredProject());
 
             mocks.transaction.mockImplementation(async (callback) => {
                 return callback(transactionClient);
@@ -255,28 +285,37 @@ describe("project actions", () => {
             const result = await updateProject(makeProject());
 
             expect(result.success).toBe(true);
-            expect(transactionClient.commit.deleteMany).toHaveBeenCalledWith({
-                where: {
-                    projectId: 1,
-                },
-            });
-            expect(transactionClient.commit.createMany).toHaveBeenCalledOnce();
+            expect(transactionClient.commit.deleteMany).not.toHaveBeenCalled();
+            expect(transactionClient.commit.create).not.toHaveBeenCalled();
+            expect(transactionClient.commit.update).not.toHaveBeenCalled();
         });
 
         it("preserves localized metric fields", async () => {
             const transactionClient = makeTransactionClient();
 
-            transactionClient.project.findUnique.mockResolvedValue({
-                id: 1,
-            });
+            transactionClient.project.findUnique.mockResolvedValue(
+                makeStoredProject({
+                    metrics: [
+                        {
+                            ...makeProject().metrics[0],
+                            current: 8.5,
+                            title: "Old metric title",
+                        },
+                    ],
+                }),
+            );
 
-            mocks.projectFindUnique.mockResolvedValue({
-                images: [],
-                keyFeatures: [],
-                stack: [],
-                description: [],
-                metrics: [],
-            });
+            mocks.projectFindUnique.mockResolvedValue(
+                makeStoredProject({
+                    metrics: [
+                        {
+                            ...makeProject().metrics[0],
+                            current: 8.5,
+                            title: "Old metric title",
+                        },
+                    ],
+                }),
+            );
 
             mocks.transaction.mockImplementation(async (callback) => {
                 return callback(transactionClient);
@@ -284,39 +323,48 @@ describe("project actions", () => {
 
             await updateProject(makeProject());
 
-            expect(transactionClient.metric.createMany).toHaveBeenCalledWith({
-                data: [
-                    expect.objectContaining({
-                        title: "Metric title",
-                        titleRu: "Metric title ru",
-                        text: "Metric text",
-                        textRu: "Metric text ru",
-                    }),
-                ],
+            expect(transactionClient.metric.update).toHaveBeenCalledWith({
+                where: { id: 1 },
+                data: expect.objectContaining({
+                    title: "Metric title",
+                    titleRu: "Metric title ru",
+                    text: "Metric text",
+                    textRu: "Metric text ru",
+                }),
             });
         });
 
         it("deletes only removed uploads from this project", async () => {
             const transactionClient = makeTransactionClient();
 
-            transactionClient.project.findUnique.mockResolvedValue({
-                id: 7,
-            });
+            transactionClient.project.findUnique.mockResolvedValue(
+                makeStoredProject({
+                    id: 7,
+                    images: [
+                        {
+                            id: 1,
+                            image: "/uploads/7/gallery/keep.webp",
+                            main: true,
+                        },
+                    ],
+                }),
+            );
 
-            mocks.projectFindUnique.mockResolvedValue({
+            mocks.projectFindUnique.mockResolvedValue(makeStoredProject({
+                id: 7,
                 images: [
                     {
+                        id: 2,
                         image: "/uploads/7/gallery/old.webp",
+                        main: false,
                     },
                     {
+                        id: 1,
                         image: "/uploads/7/gallery/keep.webp",
+                        main: true,
                     },
                 ],
-                keyFeatures: [],
-                stack: [],
-                description: [],
-                metrics: [],
-            });
+            }));
 
             mocks.transaction.mockImplementation(async (callback) => {
                 return callback(transactionClient);
@@ -342,13 +390,7 @@ describe("project actions", () => {
         });
 
         it("returns a failure when the transaction fails", async () => {
-            mocks.projectFindUnique.mockResolvedValue({
-                images: [],
-                keyFeatures: [],
-                stack: [],
-                description: [],
-                metrics: [],
-            });
+            mocks.projectFindUnique.mockResolvedValue(makeStoredProject());
 
             mocks.transaction.mockRejectedValue(
                 new Error("transaction failed"),

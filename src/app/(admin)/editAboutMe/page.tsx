@@ -15,7 +15,9 @@ const EditAboutMe: React.FC = async () => {
     try {
         const rawAboutMe = await prisma.aboutMe.findFirst({
             include: {
-                workExperience: true
+                workExperience: {
+                    orderBy: { order: "asc" },
+                }
             }
         })
 

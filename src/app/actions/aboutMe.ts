@@ -3,58 +3,160 @@
 import { revalidatePath } from "next/cache";
 
 import prisma from "@/lib/prisma";
-import { AboutMe } from "@/interfaces/general";
-import { transformAboutMe } from "@/lib/transformers/aboutMe";
+import { AboutMe, WorkExperience } from "@/interfaces/general";
+import { transformRawAboutMe } from "@/lib/transformers/aboutMe";
 import { requireAdmin } from "@/lib/auth/admin";
+
+function assertUniqueIds(items: WorkExperience[]): void {
+    if (new Set(items.map((item) => item.id)).size !== items.length) {
+        throw new Error("Duplicate work experience ids are not allowed");
+    }
+}
+
+function toWorkExperienceData(item: WorkExperience, order: number) {
+    return {
+        organization: item.organization,
+        organizationRu: item.organizationRu ?? null,
+        position: item.position,
+        positionRu: item.positionRu ?? null,
+        startDate: item.workingPeriod.startDate,
+        endDate: item.workingPeriod.endDate || null,
+        description: item.description,
+        descriptionRu: item.descriptionRu ?? null,
+        order,
+    };
+}
 
 export async function updateAboutMe(aboutMe: AboutMe) {
     await requireAdmin();
 
+    assertUniqueIds(aboutMe.workExperience);
+
     try {
-        await prisma.workExperience.deleteMany();
-        await prisma.aboutMe.deleteMany();
-
-        const newAboutMe = await prisma.$transaction(async (tx) => {
-            await tx.workExperience.deleteMany();
-
-            await tx.aboutMe.deleteMany();
-
-            return tx.aboutMe.create({
-                data: {
-                    birth: aboutMe.birth,
-                    placeBirth: aboutMe.placeBirth,
-                    placeBirthRu: aboutMe.placeBirthRu,
-                    education: aboutMe.education,
-                    educationRu: aboutMe.educationRu,
-                    location: aboutMe.location,
-                    locationRu: aboutMe.locationRu,
-                    shortBio: aboutMe.shortBio,
-                    shortBioRu: aboutMe.shortBioRu,
+        const savedAboutMe = await prisma.$transaction(async (tx) => {
+            const current = await tx.aboutMe.findFirst({
+                include: {
                     workExperience: {
-                        create: aboutMe.workExperience.map((item) => ({
-                            organization: item.organization,
-                            organizationRu: item.organizationRu,
-                            position: item.position,
-                            positionRu: item.positionRu,
-                            startDate: item.workingPeriod.startDate,
-                            endDate: item.workingPeriod.endDate,
-                            description: item.description,
-                            descriptionRu: item.descriptionRu,
-                        })),
+                        orderBy: { order: "asc" },
                     },
                 },
+            });
+
+            const aboutMeData = {
+                birth: aboutMe.birth,
+                placeBirth: aboutMe.placeBirth,
+                placeBirthRu: aboutMe.placeBirthRu ?? null,
+                education: aboutMe.education,
+                educationRu: aboutMe.educationRu ?? null,
+                location: aboutMe.location,
+                locationRu: aboutMe.locationRu ?? null,
+                shortBio: aboutMe.shortBio,
+                shortBioRu: aboutMe.shortBioRu ?? null,
+            };
+
+            if (!current) {
+                return tx.aboutMe.create({
+                    data: {
+                        ...aboutMeData,
+                        workExperience: {
+                            create: aboutMe.workExperience.map((item, order) => ({
+                                id: item.id,
+                                ...toWorkExperienceData(item, order),
+                            })),
+                        },
+                    },
+                    include: {
+                        workExperience: {
+                            orderBy: { order: "asc" },
+                        },
+                    },
+                });
+            }
+
+            const currentById = new Map(
+                current.workExperience.map((item) => [item.id, item]),
+            );
+            const nextIds = new Set(
+                aboutMe.workExperience.map((item) => item.id),
+            );
+            const removedIds = current.workExperience
+                .filter((item) => !nextIds.has(item.id))
+                .map((item) => item.id);
+
+            if (removedIds.length > 0) {
+                await tx.workExperience.deleteMany({
+                    where: {
+                        aboutMeId: current.id,
+                        id: { in: removedIds },
+                    },
+                });
+            }
+
+            for (const [order, item] of aboutMe.workExperience.entries()) {
+                const previous = currentById.get(item.id);
+                const data = toWorkExperienceData(item, order);
+
+                if (!previous) {
+                    await tx.workExperience.create({
+                        data: {
+                            id: item.id,
+                            aboutMeId: current.id,
+                            ...data,
+                        },
+                    });
+                } else if (
+                    previous.organization !== data.organization ||
+                    previous.organizationRu !== data.organizationRu ||
+                    previous.position !== data.position ||
+                    previous.positionRu !== data.positionRu ||
+                    previous.startDate !== data.startDate ||
+                    previous.endDate !== data.endDate ||
+                    previous.description !== data.description ||
+                    previous.descriptionRu !== data.descriptionRu ||
+                    previous.order !== data.order
+                ) {
+                    await tx.workExperience.update({
+                        where: { id: item.id },
+                        data,
+                    });
+                }
+            }
+
+            const aboutMeHasChanges =
+                current.birth !== aboutMeData.birth ||
+                current.placeBirth !== aboutMeData.placeBirth ||
+                current.placeBirthRu !== aboutMeData.placeBirthRu ||
+                current.education !== aboutMeData.education ||
+                current.educationRu !== aboutMeData.educationRu ||
+                current.location !== aboutMeData.location ||
+                current.locationRu !== aboutMeData.locationRu ||
+                current.shortBio !== aboutMeData.shortBio ||
+                current.shortBioRu !== aboutMeData.shortBioRu;
+
+            if (aboutMeHasChanges) {
+                await tx.aboutMe.update({
+                    where: { id: current.id },
+                    data: aboutMeData,
+                });
+            }
+
+            return tx.aboutMe.findUniqueOrThrow({
+                where: { id: current.id },
                 include: {
-                    workExperience: true,
+                    workExperience: {
+                        orderBy: { order: "asc" },
+                    },
                 },
             });
         });
 
-        const transformObjectAboutMe = transformAboutMe(newAboutMe);
-
         revalidatePath("/admin");
         revalidatePath("/");
 
-        return { success: true, aboutMe: transformObjectAboutMe };
+        return {
+            success: true,
+            aboutMe: transformRawAboutMe(savedAboutMe),
+        };
     } catch (error) {
         return { success: false, error: error };
     }

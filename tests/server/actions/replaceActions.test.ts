@@ -4,16 +4,7 @@ const mocks = vi.hoisted(() => ({
     requireAdmin: vi.fn(),
     revalidatePath: vi.fn(),
     transaction: vi.fn(),
-    skillDeleteMany: vi.fn(),
-    skillCreateMany: vi.fn(),
-    stackDeleteMany: vi.fn(),
-    stackCreateMany: vi.fn(),
-    footerDeleteMany: vi.fn(),
-    footerCreateMany: vi.fn(),
-    workExperienceDeleteMany: vi.fn(),
-    aboutMeDeleteMany: vi.fn(),
-    aboutMeCreate: vi.fn(),
-    transformAboutMe: vi.fn(),
+    transformRawAboutMe: vi.fn(),
 }));
 
 vi.mock("next/cache", () => ({
@@ -25,30 +16,11 @@ vi.mock("@/lib/auth/admin", () => ({
 }));
 
 vi.mock("@/lib/transformers/aboutMe", () => ({
-    transformAboutMe: mocks.transformAboutMe,
+    transformRawAboutMe: mocks.transformRawAboutMe,
 }));
 
 vi.mock("@/lib/prisma", () => ({
     default: {
-        skill: {
-            deleteMany: mocks.skillDeleteMany,
-            createMany: mocks.skillCreateMany,
-        },
-        stack: {
-            deleteMany: mocks.stackDeleteMany,
-            createMany: mocks.stackCreateMany,
-        },
-        footerItem: {
-            deleteMany: mocks.footerDeleteMany,
-            createMany: mocks.footerCreateMany,
-        },
-        workExperience: {
-            deleteMany: mocks.workExperienceDeleteMany,
-        },
-        aboutMe: {
-            deleteMany: mocks.aboutMeDeleteMany,
-            create: mocks.aboutMeCreate,
-        },
         $transaction: mocks.transaction,
     },
 }));
@@ -57,19 +29,6 @@ import { updateAboutMe } from "@/app/actions/aboutMe";
 import { updateFooter } from "@/app/actions/footer";
 import { updateSkills } from "@/app/actions/skills";
 import { updateStack } from "@/app/actions/stack";
-
-function deferred<T>() {
-    let resolve!: (value: T) => void;
-
-    const promise = new Promise<T>((resolvePromise) => {
-        resolve = resolvePromise;
-    });
-
-    return {
-        promise,
-        resolve,
-    };
-}
 
 const aboutMe = {
     birth: 1995,
@@ -84,10 +43,7 @@ const aboutMe = {
     workExperience: [
         {
             id: 1,
-            workingPeriod: {
-                startDate: "2020",
-                endDate: "NOW",
-            },
+            workingPeriod: { startDate: "2020", endDate: "NOW" },
             organization: "Company",
             organizationRu: "Company ru",
             position: "Engineer",
@@ -98,173 +54,209 @@ const aboutMe = {
     ],
 };
 
-describe("replace actions", () => {
+function makeTransactionClient() {
+    return {
+        skill: {
+            findMany: vi.fn().mockResolvedValue([]),
+            deleteMany: vi.fn(),
+            create: vi.fn((input) => Promise.resolve({ id: input.data.id, ...input.data })),
+            update: vi.fn(),
+        },
+        stack: {
+            findMany: vi.fn().mockResolvedValue([]),
+            deleteMany: vi.fn(),
+            create: vi.fn((input) => Promise.resolve({ id: input.data.id, ...input.data })),
+            update: vi.fn(),
+        },
+        footerItem: {
+            findMany: vi.fn().mockResolvedValue([]),
+            deleteMany: vi.fn(),
+            create: vi.fn((input) => Promise.resolve({ id: input.data.id, ...input.data })),
+            update: vi.fn(),
+        },
+        workExperience: {
+            deleteMany: vi.fn(),
+            create: vi.fn(),
+            update: vi.fn(),
+        },
+        aboutMe: {
+            findFirst: vi.fn().mockResolvedValue({
+                id: 1,
+                ...aboutMe,
+                workExperience: [
+                    {
+                        id: 1,
+                        aboutMeId: 1,
+                        organization: aboutMe.workExperience[0].organization,
+                        organizationRu: aboutMe.workExperience[0].organizationRu,
+                        position: aboutMe.workExperience[0].position,
+                        positionRu: aboutMe.workExperience[0].positionRu,
+                        startDate: aboutMe.workExperience[0].workingPeriod.startDate,
+                        endDate: aboutMe.workExperience[0].workingPeriod.endDate,
+                        description: aboutMe.workExperience[0].description,
+                        descriptionRu: aboutMe.workExperience[0].descriptionRu,
+                        order: 0,
+                    },
+                ],
+            }),
+            create: vi.fn(),
+            update: vi.fn(),
+            findUniqueOrThrow: vi.fn().mockResolvedValue(aboutMe),
+        },
+    };
+}
+
+describe("incremental collection actions", () => {
     beforeEach(() => {
-        const tx = {
-            skill: {
-                deleteMany: mocks.skillDeleteMany,
-                createMany: mocks.skillCreateMany,
-            },
-            stack: {
-                deleteMany: mocks.stackDeleteMany,
-                createMany: mocks.stackCreateMany,
-            },
-            footerItem: {
-                deleteMany: mocks.footerDeleteMany,
-                createMany: mocks.footerCreateMany,
-            },
-            workExperience: {
-                deleteMany: mocks.workExperienceDeleteMany,
-            },
-            aboutMe: {
-                deleteMany: mocks.aboutMeDeleteMany,
-                create: mocks.aboutMeCreate,
-            },
-        };
+        mocks.requireAdmin.mockResolvedValue({
+            user: { id: "admin", role: "ADMIN" },
+        });
+        mocks.transformRawAboutMe.mockImplementation((value) => value);
+    });
 
-        mocks.transaction.mockImplementation(async (callback) => {
-            return callback(tx);
+    it("waits for authorization before querying the database", async () => {
+        let resolveAuth!: () => void;
+        const authorization = new Promise<void>((resolve) => {
+            resolveAuth = resolve;
+        });
+        const transactionClient = makeTransactionClient();
+        mocks.requireAdmin.mockReturnValue(authorization);
+        mocks.transaction.mockImplementation(async (callback) => callback(transactionClient));
+
+        const action = updateSkills([{ id: 1, name: "Testing", score: 9 }]);
+
+        await Promise.resolve();
+        expect(transactionClient.skill.findMany).not.toHaveBeenCalled();
+
+        resolveAuth();
+        await action;
+
+        expect(transactionClient.skill.findMany).toHaveBeenCalledOnce();
+    });
+
+    it("updates only changed skills and preserves unchanged rows", async () => {
+        const transactionClient = makeTransactionClient();
+        transactionClient.skill.findMany.mockResolvedValue([
+            { id: 1, name: "Testing", score: 5, order: 0 },
+            { id: 2, name: "Unused", score: 1, order: 1 },
+        ]);
+        mocks.transaction.mockImplementation(async (callback) => callback(transactionClient));
+
+        const result = await updateSkills([{ id: 1, name: "Testing", score: 9 }]);
+
+        expect(result.success).toBe(true);
+        expect(transactionClient.skill.update).toHaveBeenCalledWith({
+            where: { id: 1 },
+            data: { name: "Testing", score: 9, order: 0 },
+        });
+        expect(transactionClient.skill.deleteMany).toHaveBeenCalledWith({
+            where: { id: { in: [2] } },
+        });
+        expect(transactionClient.skill.create).not.toHaveBeenCalled();
+    });
+
+    it("updates one footer item without recreating the collection", async () => {
+        const transactionClient = makeTransactionClient();
+        transactionClient.footerItem.findMany.mockResolvedValue([
+            {
+                id: 1,
+                text: "GitHub",
+                icon: "/old.svg",
+                link: null,
+                order: 0,
+            },
+        ]);
+        mocks.transaction.mockImplementation(async (callback) => callback(transactionClient));
+
+        await updateFooter([
+            { id: 1, text: "GitHub", icon: "/github.svg", link: "https://github.com" },
+        ]);
+
+        expect(transactionClient.footerItem.update).toHaveBeenCalledWith({
+            where: { id: 1 },
+            data: {
+                text: "GitHub",
+                icon: "/github.svg",
+                link: "https://github.com",
+                order: 0,
+            },
+        });
+        expect(transactionClient.footerItem.create).not.toHaveBeenCalled();
+        expect(transactionClient.footerItem.deleteMany).not.toHaveBeenCalled();
+    });
+
+    it("uses temporary names to safely swap unique stack names", async () => {
+        const transactionClient = makeTransactionClient();
+        transactionClient.stack.findMany.mockResolvedValue([
+            { id: 1, name: "React", order: 0 },
+            { id: 2, name: "Vue", order: 1 },
+        ]);
+        mocks.transaction.mockImplementation(async (callback) => callback(transactionClient));
+
+        await updateStack([
+            { id: 1, name: "Vue" },
+            { id: 2, name: "React" },
+        ]);
+
+        expect(transactionClient.stack.update).toHaveBeenCalledTimes(4);
+        expect(transactionClient.stack.deleteMany).not.toHaveBeenCalled();
+    });
+
+    it("updates only the modified work experience", async () => {
+        const transactionClient = makeTransactionClient();
+        mocks.transaction.mockImplementation(async (callback) => callback(transactionClient));
+
+        await updateAboutMe({
+            ...aboutMe,
+            workExperience: [
+                {
+                    ...aboutMe.workExperience[0],
+                    position: "Senior Engineer",
+                },
+            ],
         });
 
-        mocks.skillDeleteMany.mockResolvedValue({
-            count: 0,
+        expect(transactionClient.workExperience.update).toHaveBeenCalledWith({
+            where: { id: 1 },
+            data: expect.objectContaining({ position: "Senior Engineer" }),
         });
-        mocks.skillCreateMany.mockResolvedValue({
-            count: 1,
+        expect(transactionClient.workExperience.deleteMany).not.toHaveBeenCalled();
+        expect(transactionClient.aboutMe.update).not.toHaveBeenCalled();
+    });
+
+    it("persists a reordered collection without recreating its rows", async () => {
+        const transactionClient = makeTransactionClient();
+        transactionClient.skill.findMany.mockResolvedValue([
+            { id: 1, name: "Testing", score: 5, order: 0 },
+            { id: 2, name: "TypeScript", score: 8, order: 1 },
+        ]);
+        mocks.transaction.mockImplementation(async (callback) => callback(transactionClient));
+
+        await updateSkills([
+            { id: 2, name: "TypeScript", score: 8 },
+            { id: 1, name: "Testing", score: 5 },
+        ]);
+
+        expect(transactionClient.skill.update).toHaveBeenCalledWith({
+            where: { id: 2 },
+            data: { name: "TypeScript", score: 8, order: 0 },
         });
-        mocks.stackDeleteMany.mockResolvedValue({
-            count: 0,
+        expect(transactionClient.skill.update).toHaveBeenCalledWith({
+            where: { id: 1 },
+            data: { name: "Testing", score: 5, order: 1 },
         });
-        mocks.stackCreateMany.mockResolvedValue({
-            count: 1,
-        });
-        mocks.footerDeleteMany.mockResolvedValue({
-            count: 0,
-        });
-        mocks.footerCreateMany.mockResolvedValue({
-            count: 1,
-        });
-        mocks.workExperienceDeleteMany.mockResolvedValue({
-            count: 0,
-        });
-        mocks.aboutMeDeleteMany.mockResolvedValue({
-            count: 0,
-        });
-        mocks.aboutMeCreate.mockResolvedValue({
-            id: 1,
-        });
-        mocks.transformAboutMe.mockReturnValue(aboutMe);
+        expect(transactionClient.skill.create).not.toHaveBeenCalled();
+        expect(transactionClient.skill.deleteMany).not.toHaveBeenCalled();
     });
 
     it.each([
-        [
-            "skills",
-            () =>
-                updateSkills([
-                    {
-                        id: 1,
-                        name: "Testing",
-                        score: 9,
-                    },
-                ]),
-            mocks.skillDeleteMany,
-        ],
-        [
-            "stack",
-            () =>
-                updateStack([
-                    {
-                        id: 1,
-                        name: "Vitest",
-                    },
-                ]),
-            mocks.stackDeleteMany,
-        ],
-        [
-            "footer",
-            () =>
-                updateFooter([
-                    {
-                        id: 1,
-                        text: "GitHub",
-                        icon: "/github.svg",
-                        link: "https://github.com",
-                    },
-                ]),
-            mocks.footerDeleteMany,
-        ],
-        ["about", () => updateAboutMe(aboutMe), mocks.workExperienceDeleteMany],
-    ])(
-        "waits for authorization before changing %s",
-        async (_name, runAction, firstMutation) => {
-            const auth = deferred<{
-                user: {
-                    id: string;
-                    role: string;
-                };
-            }>();
-
-            mocks.requireAdmin.mockReturnValue(auth.promise);
-
-            const actionPromise = runAction();
-
-            await Promise.resolve();
-            await Promise.resolve();
-
-            expect(firstMutation).not.toHaveBeenCalled();
-
-            auth.resolve({
-                user: {
-                    id: "admin",
-                    role: "ADMIN",
-                },
-            });
-
-            await actionPromise;
-
-            expect(firstMutation).toHaveBeenCalled();
-        },
-    );
-
-    it.each([
-        [
-            () =>
-                updateSkills([
-                    {
-                        id: 1,
-                        name: "Testing",
-                        score: 9,
-                    },
-                ]),
-        ],
-        [
-            () =>
-                updateStack([
-                    {
-                        id: 1,
-                        name: "Vitest",
-                    },
-                ]),
-        ],
-        [
-            () =>
-                updateFooter([
-                    {
-                        id: 1,
-                        text: "GitHub",
-                        icon: "/github.svg",
-                        link: "https://github.com",
-                    },
-                ]),
-        ],
+        [() => updateSkills([{ id: 1, name: "Testing", score: 9 }])],
+        [() => updateStack([{ id: 1, name: "Vitest" }])],
+        [() => updateFooter([{ id: 1, text: "GitHub", icon: "/github.svg" }])],
         [() => updateAboutMe(aboutMe)],
-    ])("uses a database transaction for replacement", async (runAction) => {
-        mocks.requireAdmin.mockResolvedValue({
-            user: {
-                id: "admin",
-                role: "ADMIN",
-            },
-        });
+    ])("uses a database transaction", async (runAction) => {
+        const transactionClient = makeTransactionClient();
+        mocks.transaction.mockImplementation(async (callback) => callback(transactionClient));
 
         await runAction();
 

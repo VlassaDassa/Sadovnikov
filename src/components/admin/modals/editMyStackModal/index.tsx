@@ -87,12 +87,10 @@ const StackItem: React.FC<StackItemProps> = ({
     return (
         <div
             ref={setNodeRef}
-            {...attributes}
-            {...listeners}
             style={style}
             className={`${styles.stackItem} modalElementBg`}
         >
-            <DragHandler variant="big" />
+            <DragHandler variant="big" {...attributes} {...listeners} />
 
             <Input
                 name={stackItem.name}

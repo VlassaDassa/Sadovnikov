@@ -152,14 +152,12 @@ const SkillItem: React.FC<SkillItemProps> = ({
     return (
         <div
             ref={setNodeRef}
-            {...attributes}
-            {...listeners}
             style={style}
             className={`${styles.skill} modalElementBg`}
         >
             <div className={styles.firstLineWrapper}>
                 <div className={styles.inputWrapper}>
-                    <DragHandler variant="big" />
+                    <DragHandler variant="big" {...attributes} {...listeners} />
 
                     <Input
                         name={skill.name}

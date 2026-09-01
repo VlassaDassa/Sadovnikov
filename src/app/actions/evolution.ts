@@ -211,28 +211,62 @@ export async function publishEvolution(
                 throw new Error("Project not found");
             }
 
-            await transaction.commit.deleteMany({
+            const currentCommits = await transaction.commit.findMany({
                 where: {
                     projectId: validProjectId,
                 },
+                orderBy: {
+                    order: "asc",
+                },
             });
 
-            await transaction.commit.createMany({
-                data: draft.map((item, index) => ({
-                    projectId: validProjectId,
+            const removedIds = currentCommits
+                .slice(draft.length)
+                .map((commit) => commit.id);
 
+            if (removedIds.length > 0) {
+                await transaction.commit.deleteMany({
+                    where: {
+                        projectId: validProjectId,
+                        id: { in: removedIds },
+                    },
+                });
+            }
+
+            for (const [index, item] of draft.entries()) {
+                const data = {
                     name: item.name,
                     nameRu: item.nameRu,
-
                     date: item.date,
                     dateRu: item.dateRu,
-
                     text: item.text,
                     textRu: item.textRu,
-
                     order: index,
-                })),
-            });
+                };
+                const currentCommit = currentCommits[index];
+
+                if (!currentCommit) {
+                    await transaction.commit.create({
+                        data: {
+                            projectId: validProjectId,
+                            ...data,
+                        },
+                    });
+                } else if (
+                    currentCommit.name !== data.name ||
+                    currentCommit.nameRu !== data.nameRu ||
+                    currentCommit.date !== data.date ||
+                    currentCommit.dateRu !== data.dateRu ||
+                    currentCommit.text !== data.text ||
+                    currentCommit.textRu !== data.textRu ||
+                    currentCommit.order !== data.order
+                ) {
+                    await transaction.commit.update({
+                        where: { id: currentCommit.id },
+                        data,
+                    });
+                }
+            }
 
             await transaction.project.update({
                 where: {
