@@ -129,11 +129,17 @@ model Skill {
   id    Int    @id @default(autoincrement())
   name  String
   score Int    @default(0)
+  order Int    @default(0)
+
+  @@index([order])
 }
 
 model Stack {
   id   Int    @id @default(autoincrement())
   name String @unique
+  order Int    @default(0)
+
+  @@index([order])
 }
 
 model FooterItem {
@@ -141,6 +147,9 @@ model FooterItem {
   text String
   link String?
   icon String
+  order Int     @default(0)
+
+  @@index([order])
 }
 
 model AboutMe {
@@ -177,6 +186,9 @@ model WorkExperience {
 
   description   String
   descriptionRu String?
+  order         Int     @default(0)
+
+  @@index([aboutMeId, order])
 }
 
 model User {

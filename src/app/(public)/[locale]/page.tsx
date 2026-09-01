@@ -96,14 +96,16 @@ const Main = async ({ params }: MainPageProps) => {
 
         const rawAboutMe = await prisma.aboutMe.findFirst({
             include: {
-                workExperience: true
+                workExperience: {
+                    orderBy: { order: 'asc' },
+                }
             }
         })
 
         projects = rawProjects.map((proj) => transformProject(proj));
         aboutMe = rawAboutMe ? transformAboutMe(rawAboutMe, locale) : null;
-        skills = await prisma.skill.findMany();
-        stack = await prisma.stack.findMany();
+        skills = await prisma.skill.findMany({ orderBy: { order: 'asc' } });
+        stack = await prisma.stack.findMany({ orderBy: { order: 'asc' } });
     } catch (error) {
         const errorMessage = error instanceof Error ? error.message : 'Unknown error';
         return <ErrorPage error={errorMessage} />

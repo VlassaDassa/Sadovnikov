@@ -85,6 +85,10 @@ const uiSlice = createSlice({
             state.isSelectPeriodModalOpen = !state.isSelectPeriodModalOpen
         },
 
+        openSelectPeriodModal: (state) => {
+            state.isSelectPeriodModalOpen = true
+        },
+
         toggleEditProjectStackModal: (state) => {
             state.isEditProjectStackModalOpen = !state.isEditProjectStackModalOpen
         },
@@ -136,6 +140,7 @@ export const {
         toggleEditFooterModal,
         toggleEditMyStackModal,
         toggleSelectPeriodModal,
+        openSelectPeriodModal,
         toggleEditProjectStackModal,
         toggleEvolutionReviewModal,
         

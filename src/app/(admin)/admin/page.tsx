@@ -40,9 +40,9 @@ const Admin: React.FC = async () => {
         analyticsResult,
         rawRecentProjects,
     ] = await Promise.all([
-        prisma.skill.findMany(),
-        prisma.stack.findMany(),
-        prisma.footerItem.findMany(),
+        prisma.skill.findMany({ orderBy: { order: "asc" } }),
+        prisma.stack.findMany({ orderBy: { order: "asc" } }),
+        prisma.footerItem.findMany({ orderBy: { order: "asc" } }),
         getAnalyticsDashboardSafe(30),
         prisma.project.findMany({
             include: {

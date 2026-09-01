@@ -97,15 +97,20 @@ const ModalWrapperInner = <T extends SortableItem>(
             return;
         }
 
-        const oldIndex = items.findIndex((item) => item.id === active.id);
+        setItems((currentItems) => {
+            const oldIndex = currentItems.findIndex(
+                (item) => item.id === active.id,
+            );
+            const newIndex = currentItems.findIndex(
+                (item) => item.id === over.id,
+            );
 
-        const newIndex = items.findIndex((item) => item.id === over.id);
+            if (oldIndex === -1 || newIndex === -1) {
+                return currentItems;
+            }
 
-        if (oldIndex === -1 || newIndex === -1) {
-            return;
-        }
-
-        setItems(arrayMove(items, oldIndex, newIndex));
+            return arrayMove(currentItems, oldIndex, newIndex);
+        });
     };
 
     let content = (

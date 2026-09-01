@@ -252,7 +252,7 @@ describe("evolution actions", () => {
     });
 
     describe("publishEvolution", () => {
-        it("replaces commits in a transaction", async () => {
+        it("updates existing commits and creates only new milestones", async () => {
             const transaction = {
                 project: {
                     findUnique: vi.fn().mockResolvedValue({
@@ -263,12 +263,24 @@ describe("evolution actions", () => {
                     }),
                 },
                 commit: {
+                    findMany: vi.fn().mockResolvedValue([
+                        {
+                            id: 10,
+                            projectId: 1,
+                            name: "Old milestone",
+                            nameRu: "Old milestone",
+                            date: "Old date",
+                            dateRu: "Old date",
+                            text: "Old milestone text",
+                            textRu: "Old milestone text",
+                            order: 0,
+                        },
+                    ]),
                     deleteMany: vi.fn().mockResolvedValue({
                         count: 1,
                     }),
-                    createMany: vi.fn().mockResolvedValue({
-                        count: 2,
-                    }),
+                    create: vi.fn().mockResolvedValue({ id: 11 }),
+                    update: vi.fn().mockResolvedValue({ id: 10 }),
                 },
             };
 
@@ -285,24 +297,23 @@ describe("evolution actions", () => {
                 },
             });
 
-            expect(transaction.commit.deleteMany).toHaveBeenCalledWith({
-                where: {
-                    projectId: 1,
+            expect(transaction.commit.deleteMany).not.toHaveBeenCalled();
+
+            expect(transaction.commit.update).toHaveBeenCalledWith({
+                where: { id: 10 },
+                data: {
+                    name: "Initial release",
+                    nameRu: "Initial release ru",
+                    date: "January 2026",
+                    dateRu: "January 2026 ru",
+                    text: "A sufficiently long milestone text.",
+                    textRu: "A sufficiently long milestone text ru.",
+                    order: 0,
                 },
             });
 
-            expect(transaction.commit.createMany).toHaveBeenCalledWith({
+            expect(transaction.commit.create).toHaveBeenCalledWith({
                 data: [
-                    {
-                        projectId: 1,
-                        name: "Initial release",
-                        nameRu: "Initial release ru",
-                        date: "January 2026",
-                        dateRu: "January 2026 ru",
-                        text: "A sufficiently long milestone text.",
-                        textRu: "A sufficiently long milestone text ru.",
-                        order: 0,
-                    },
                     {
                         projectId: 1,
                         name: "Second release",
@@ -313,7 +324,7 @@ describe("evolution actions", () => {
                         textRu: "Another sufficiently long milestone text ru.",
                         order: 1,
                     },
-                ],
+                ][0],
             });
 
             expect(transaction.project.update).toHaveBeenCalledWith({
@@ -337,12 +348,10 @@ describe("evolution actions", () => {
                     update: vi.fn(),
                 },
                 commit: {
-                    deleteMany: vi.fn().mockResolvedValue({
-                        count: 1,
-                    }),
-                    createMany: vi
-                        .fn()
-                        .mockRejectedValue(new Error("create failed")),
+                    findMany: vi.fn().mockResolvedValue([]),
+                    deleteMany: vi.fn(),
+                    create: vi.fn().mockRejectedValue(new Error("create failed")),
+                    update: vi.fn(),
                 },
             };
 
@@ -367,8 +376,10 @@ describe("evolution actions", () => {
                     update: vi.fn(),
                 },
                 commit: {
+                    findMany: vi.fn(),
                     deleteMany: vi.fn(),
-                    createMany: vi.fn(),
+                    create: vi.fn(),
+                    update: vi.fn(),
                 },
             };
 
