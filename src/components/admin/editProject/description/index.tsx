@@ -69,10 +69,10 @@ const Description: React.FC<EditProjectProps> = ({ project, setData }) => {
                                     iconPosition='noIcon'
                                     additionalClass={styles.texarea}
                                     adminLabel='withoutLabel'
-                                    maxLen={300}
+                                    maxLen={1000}
                                     variant='admin'
                                     counter={true}
-                                    maxCounter={300}
+                                    maxCounter={1000}
                                     onChange={(e) => handleChangeDescription(item.id, e.target.value)}
                                 />
 
@@ -84,10 +84,10 @@ const Description: React.FC<EditProjectProps> = ({ project, setData }) => {
                                     iconPosition='noIcon'
                                     additionalClass={styles.texarea}
                                     adminLabel='withoutLabel'
-                                    maxLen={300}
+                                    maxLen={1000}
                                     variant='admin'
                                     counter={true}
-                                    maxCounter={300}
+                                    maxCounter={1000}
                                     onChange={(e) => handleChangeDescription(item.id, e.target.value, true)}
                                 />
                             </div>
