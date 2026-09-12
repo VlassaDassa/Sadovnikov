@@ -443,7 +443,7 @@ const EvolutionReviewModal: React.FC<
                     label:
                         'English description',
                     min: 10,
-                    max: 300,
+                    max: 1000,
                 },
                 {
                     value:
@@ -451,7 +451,7 @@ const EvolutionReviewModal: React.FC<
                     label:
                         'Russian description',
                     min: 10,
-                    max: 300,
+                    max: 1000,
                 },
             ]
 
