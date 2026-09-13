@@ -7,6 +7,7 @@ import React, {
     useState,
 } from 'react';
 import { createPortal } from 'react-dom';
+import { useTranslations } from 'next-intl';
 import type { Swiper as SwiperType } from 'swiper';
 import { Keyboard, Zoom } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -14,8 +15,9 @@ import 'swiper/css';
 import 'swiper/css/zoom';
 
 import AdaptiveImage from '@/components/shared/AdaptiveImage';
-import PaginationSlider from '@/components/shared/paginationSlider';
 import Button from '@/components/shared/button/Button';
+import Icon from '@/components/shared/icons/Icon';
+import { cssVars } from '@/styles/cssVariables';
 
 import type { IImages } from '@/interfaces/general';
 
@@ -30,6 +32,7 @@ const MAX_ZOOM = 4;
 const ZOOM_STEP = 0.5;
 
 const Slider: React.FC<SliderProps> = ({ images }) => {
+    const t = useTranslations('ProjectGallery');
     const sortedImages = useMemo(() => {
         return [...images].sort((a, b) => {
             if (a.main && !b.main) return -1;
@@ -80,13 +83,13 @@ const Slider: React.FC<SliderProps> = ({ images }) => {
     };
 
     const handlePrevSlide = () => {
-        if (!swiperInstance || swiperInstance.isBeginning) return;
+        if (!swiperInstance) return;
 
         swiperInstance.slidePrev();
     };
 
     const handleNextSlide = () => {
-        if (!swiperInstance || swiperInstance.isEnd) return;
+        if (!swiperInstance) return;
 
         swiperInstance.slideNext();
     };
@@ -209,12 +212,13 @@ const Slider: React.FC<SliderProps> = ({ images }) => {
                 <Swiper
                     slidesPerView={1}
                     spaceBetween={30}
+                    speed={700}
+                    className={styles.swiper}
                     onSwiper={(swiper) => {
                         setSwiperInstance(swiper);
                         updateSliderState(swiper);
                     }}
                     onSlideChange={updateSliderState}
-                    className={styles.swiper}
                 >
                     {sortedImages.map((item, index) => (
                         <SwiperSlide key={item.id}>
@@ -222,11 +226,11 @@ const Slider: React.FC<SliderProps> = ({ images }) => {
                                 type="button"
                                 className={styles.previewButton}
                                 onClick={() => openLightbox(index)}
-                                aria-label={`Open project image ${index + 1}`}
+                                aria-label={`${t('Open')} ${index + 1}`}
                             >
                                 <AdaptiveImage
                                     src={item.image}
-                                    alt={`Project image ${index + 1}`}
+                                    alt={`${t('Image')} ${index + 1}`}
                                     loading={
                                         index === 0
                                             ? 'eager'
@@ -241,51 +245,24 @@ const Slider: React.FC<SliderProps> = ({ images }) => {
                         </SwiperSlide>
                     ))}
 
-                    {hasNavigation && (
-                        <PaginationSlider
-                            className={styles.pagination}
-                            totalCountItems={sortedImages.length}
-                            curIndex={curIndex}
-                        />
-                    )}
                 </Swiper>
 
+                {sortedImages.length === 0 && <div className={styles.emptyGallery}>{t('Empty')}</div>}
                 {hasNavigation && (
-                    <>
-                        <div
-                            className={`${styles.sliderButtonWrapper} ${styles.sliderButtonWrapperLeft}`}
-                        >
-                            <Button
-                                behavior={
-                                    isBeginning
-                                        ? 'disabled'
-                                        : 'default'
-                                }
-                                iconPosition="only"
-                                variant="dark"
-                                additionalClass={`${styles.sliderButton} ${styles.sliderButtonLeft}`}
-                                onClick={handlePrevSlide}
-                                icon="arrow"
-                            />
+                    <div className={styles.galleryControls}>
+                        <span className={styles.counter} aria-live="polite">
+                            <strong>{String(curIndex).padStart(2, '0')}</strong>
+                            <span>/</span>{String(sortedImages.length).padStart(2, '0')}
+                        </span>
+                        <div className={styles.galleryArrows}>
+                            <button type="button" className={`${styles.galleryArrow} ${styles.sliderButtonLeft}`} onClick={handlePrevSlide} disabled={isBeginning} aria-label={t('Previous')}>
+                                <Icon name="arrow" size={20} strokeColor={cssVars.white} />
+                            </button>
+                            <button type="button" className={`${styles.galleryArrow} ${styles.sliderButtonRight}`} onClick={handleNextSlide} disabled={isEnd} aria-label={t('Next')}>
+                                <Icon name="arrow" size={20} strokeColor={cssVars.white} />
+                            </button>
                         </div>
-
-                        <div
-                            className={`${styles.sliderButtonWrapper} ${styles.sliderButtonWrapperRight}`}
-                        >
-                            <Button
-                                behavior={
-                                    isEnd
-                                        ? 'disabled'
-                                        : 'default'
-                                }
-                                iconPosition="only"
-                                variant="dark"
-                                additionalClass={`${styles.sliderButton} ${styles.sliderButtonRight}`}
-                                onClick={handleNextSlide}
-                                icon="arrow"
-                            />
-                        </div>
-                    </>
+                    </div>
                 )}
             </div>
 
@@ -454,4 +431,4 @@ const Slider: React.FC<SliderProps> = ({ images }) => {
     );
 };
 
-export default Slider; 
+export default Slider;

@@ -1,190 +1,102 @@
-@use './../../../../styles/tokens/colors' as *;
-@use './../../../../styles/tokens/effects' as *;
-@use './../../../../styles/tokens/typography' as *;
-
-
+@use '../../../../styles/tokens/project' as p;
+@use '../../../../styles/tokens/typography' as *;
+@use '../../../../styles/tokens/colors' as *;
 
 .keyFeatures {
-    display: flex;
-    flex-direction: column;
-    margin-top: 60px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: p.$space-md;
+    margin-top: p.$section-gap;
 }
-
-.title {
-    @extend .heading-24-ubuntu-bold;
-    @extend .whiteText;
-
-    margin-bottom: 20px;
-
-    @media (min-width: 768px) {
-        font-size: 36px;
-    }
-
-    @media (min-width: 1280px) {
-        font-size: 40px;
-    }
-}
-
-
+.title { @include p.title; margin: 0; }
+.slider { width: 100%; min-width: 0; }
+.slider :global(.swiper-wrapper) { transition-timing-function: cubic-bezier(.22, .61, .36, 1); }
+.slide { height: auto; }
 .feature {
-    display: flex;
+    @include p.panel;
+    position: relative;
+    display: block;
     align-items: center;
-    
-    padding: 15px;
-
-    margin-bottom: 0px;
-    cursor: pointer;
-
-    @extend .shadow-splash;
-    border-radius: 15px;
-    background-color: $neutral_900;   
-    
-    @media (min-width: 768px) {
-        justify-content: space-around;
-        max-width: 600px;
-
-        margin: 0 auto;
-        gap: 30px;
-
-        padding: 15px 25px;
-    }
-
-    @media (min-width: 1280px) {
-        max-width: 1000px;
-        width: calc(100% - 50px);
-    }
+    overflow: hidden;
+    min-height: clamp(340px, 34vw, 470px);
+    box-sizing: border-box;
 }
-
 .featureWrapper {
+    position: relative;
+    z-index: 2;
     display: flex;
-    flex-direction: column;
-    gap: 20px;
-
-
-    @media (min-width: 768px) {
-        width: 305px;
-    }
-
-    @media (min-width: 1280px) {
-        width: 400px;
-    }
-}
-
-.featureHeader {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-
-.featureIconWrapper {
-    background-color: $brand_900;
-    
-    width: 60px;
-    height: 60px;
-
-    display: flex;
-    align-items: center;
     justify-content: center;
-
-    border-radius: 10px;
+    min-height: clamp(340px, 34vw, 470px);
+    max-width: 54%;
+    padding: p.$padding;
+    box-sizing: border-box;
+    flex-direction: column;
+    gap: p.$space-md;
 }
-
-.projectWrapPhoto {
-    height: 40px;
-    width: 40px;
-}
-
-.featureTitle {
-    @extend .heading-20-ubuntu-bold;
-    @extend .whiteText;
-
-    @media (min-width: 1280px) {
-        font-size: 24px;
-    }
-}
-
-
-.featureText {
-    @extend .body-16-ubuntu-bold;
-    @extend .line-height-1_5x;
-
-    color: $neutral_400;
-
-    @media (min-width: 1280px) {
-        font-size: 20px;
-    }
-}
-
-.slider {
-    margin-right: unset !important;
-    margin-left: unset !important;
-}
-
-
-.featurePhoto {
-    object-fit: cover;
-
+.featureHeader { display: grid; justify-items: start; gap: p.$space-md; }
+.featureIconWrapper { @include p.icon-tile; }
+.featureIconWrapper .projectWrapPhoto { width: 32px; height: 32px; }
+.featureTitle { @include p.title; font-size: clamp($text-24, 3vw, $text-36); margin: 0; }
+.featureText { @include p.body; font-size: $text-16; white-space: pre-line; }
+.photoWrapper {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
     width: 100%;
     height: 100%;
-
-    border-radius: 15px;
+    mask-image: linear-gradient(to right, transparent 0%, rgba($black, .08) 14%, rgba($black, .26) 32%, rgba($black, .58) 54%, rgba($black, .86) 76%, $black 94%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba($black, .08) 14%, rgba($black, .26) 32%, rgba($black, .58) 54%, rgba($black, .86) 76%, $black 94%);
 }
-
-
-.photoWrapper {
-    height: 252px;
-    width: 309px;
-    padding: 20px 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    overflow: hidden;
-
-    display: none;
-
-    @media (min-width: 768px) {
-        display: block;
-    }  
+.feature::before {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(to right, rgba($black, .72) 0%, rgba($black, .45) 38%, rgba($black, .12) 72%, transparent 100%);
+    content: '';
+    pointer-events: none;
 }
-
-
-
-.sliderControls {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-
-    @media (min-width: 1280px) {
-        margin-top: 20px;
-    }
-}
-
+.photoWrapper .featurePhotoWrapper { width: 100%; height: 100%; }
+.featurePhoto { width: 100%; height: 100%; object-fit: cover; object-position: center right; }
+.sliderControls { display: flex; align-items: center; justify-content: flex-end; gap: p.$space-xs; }
+.counter { margin-right: p.$space-sm; color: p.$muted; font: $regular $text-14 $font-ubuntu; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.counter strong { color: p.$accent; font-weight: $medium; }
 .sliderButton {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
     padding: 0;
+    border: 1px solid p.$border;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    svg { transform: rotate(90deg); }
+    &:hover:not(:disabled) { border-color: p.$accent; background: rgba($brand_600, 0.08); }
+    &:disabled { opacity: 0.3; cursor: default; }
+    &:focus-visible { outline: 2px solid p.$accent; outline-offset: 3px; }
+}
+.sliderButtonRight svg { transform: rotate(-90deg); }
 
-    @media (min-width: 1280px) {
-        display: flex;
-    }
+@media (min-width: 768px) {
+    .keyFeatures { grid-template-columns: minmax(0, 1fr) auto; align-items: center; }
+    .keyFeaturesNone { grid-template-columns: none; align-items: center; }
+    .slider { grid-column: 1 / -1; grid-row: 2; }
+    .sliderControls { grid-column: 2; grid-row: 1; }
+    .feature { height: clamp(340px, 31vw, 448px); min-height: 0; }
+    .featureWrapper { height: 100%; min-height: 0; padding-right: p.$space-sm; }
 }
 
-.sliderButton {
-    svg {
-        transform: rotate(90deg) !important;
+@media (max-width: 767px) {
+    .featureWrapper {
+        max-width: none;
+        min-height: clamp(380px, 100vw, 520px);
+    }
+    .feature::before {
+        background: rgba($black, .46);
+    }
+    .photoWrapper {
+        mask-image: none;
+        -webkit-mask-image: none;
+        filter: brightness(.58) saturate(.88);
     }
 }
-
-.sliderButtonRight {
-    svg {
-        transform: rotate(-90deg) !important;
-    }
-}
-

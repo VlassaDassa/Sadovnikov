@@ -1,194 +1,102 @@
-@use './../../../../styles/tokens/colors' as *;
-@use './../../../../styles/tokens/effects' as *;
-@use './../../../../styles/tokens/typography' as *;
+@use '../../../../styles/tokens/project' as p;
+@use '../../../../styles/tokens/typography' as *;
+@use '../../../../styles/tokens/colors' as *;
 
-
-
+.projectLink { display: block; color: inherit; }
 .projectItem {
-    background-color: $neutral_900;
-    aspect-ratio: 16 / 9;
-    height: 300px;
-    width: 265px;
-
-    overflow: hidden;
-
-    @extend .radius-12;
-    @extend .shadow-xl;
-
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    overflow: hidden;
-
-    .projectName {
-        transition: color 0.2s ease;
-    }
-    
-    .projectStackItem {
-        transition: background-color 0.2s ease, transform 0.2s ease;
-    }
-
-
-    @media (min-width: 400px) {
-        height: 300px;
-        width: 300px;
-    }
-
-    @media (min-width: 450px) {
-        width: 100%;
-        height: 330px;
-    }
-
-    @media (min-width: 600px) {
-        height: 440px;
-    }
-
-    @media (min-width: 690px) {
-        height: 480px;
-    }
-
-    @media (min-width: 768px) {
-        height: 650px;
-    }
-
-    @media (min-width: 900px) {
-        height: 700px;
-    }
-
-    @media (min-width: 1000px) {
-        height: 800px;
-    }
-
-    @media (min-width: 1190px) {
-        height: 860px;
-    }
-
-    @media (min-width: 1280px) {
-        position: absolute;
-
-        aspect-ratio: none; 
-        width: 500px; 
-        height: 530px; 
-
-        cursor: pointer;
-
-        &:hover .projectStackItem {
-            background-color: $brand_600;
-            transform: translateY(-2px);
-        }
-
-        &:hover {
-            transform: translateY(-8px);
-        }
-
-        &:hover .projectName {
-            color: $brand_600;
-        }
-    }
-}
-
-
-.projectImg {
-    aspect-ratio: 16/9;
-
-    object-fit: cover;
-    object-position: left;
-
-    width: 100%;
-
-    @extend .radius-12;
-}
-
-
-.projectCategory {
     position: absolute;
-    
-    background-color: $neutral_900;
-    
-    top: 10px;
-    right: 10px;
-    
-    padding: 5px 20px;
-    
-    @extend .body-14-ubuntu-bold;
-    @extend .whiteText;
-    @extend .radius-6;
-    @extend .glass;
+    width: min(680px, 86vw);
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border: 1px solid p.$border;
+    border-radius: p.$radius;
+    background: $neutral_1000;
+    box-shadow: 0 20px 50px rgba($black, .28), 0 0 20px rgba($brand_600, .04);
+    transition: transform .68s cubic-bezier(.22, .61, .36, 1), box-shadow .78s cubic-bezier(.22, .61, .36, 1);
+    cursor: pointer;
+    &:hover, &:focus-within { transform: translateY(-8px); box-shadow: 0 26px 65px rgba($black, .34), 0 0 28px rgba($brand_600, .13); }
 }
+.projectImg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform .8s cubic-bezier(.22, .61, .36, 1), filter .8s cubic-bezier(.22, .61, .36, 1); }
+.projectShade { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to bottom, rgba($black, 0) 0%, rgba($black, .03) 34%, rgba($black, .62) 74%, rgba($black, .95) 100%); }
+.projectShade::after { position: absolute; inset: 0; background: linear-gradient(to top, rgba($black, .72) 0%, rgba($black, .3) 34%, rgba($black, 0) 76%); content: ''; opacity: 0; transform: scaleY(.62); transform-origin: bottom; transition: opacity .8s cubic-bezier(.22, .61, .36, 1), transform .85s cubic-bezier(.22, .61, .36, 1); }
+.noPreview { @include p.body; display: grid; place-items: center; width: 100%; height: 100%; background: p.$surface; text-align: center; }
+.projectContentContainer { position: absolute; inset: auto 0 0; display: grid; gap: p.$space-md; padding: clamp(18px, 3vw, 34px); transition: transform .7s cubic-bezier(.22, .61, .36, 1); }
+.projectText { min-width: 0; }
+.projectName { margin: 0; color: $white; font: $bold clamp($text-24, 3vw, $text-40) / $leading-tight $font-ubuntu; overflow-wrap: anywhere; }
+.projectDescription { margin-top: p.$space-xs; color: $neutral_200; font-family: $font-ubuntu; font-size: $text-16; font-weight: $regular; line-height: $leading-normal; max-width: 48ch; overflow-wrap: anywhere; }
+.projectFooter { display: flex; align-items: end; justify-content: space-between; gap: p.$space-md; }
+.projectStack { display: flex; flex-wrap: wrap; gap: 6px; min-width: 0; }
+.projectStackItem { padding: 6px 10px; border: 1px solid rgba($white, .18); border-radius: 6px; background: rgba($neutral_950, .72); color: $neutral_100; font: $regular $text-14 $font-ubuntu; white-space: nowrap; }
+.explore { display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0; padding: 12px 16px; border-radius: 8px; background: $neutral_100; color: $neutral_1000; font: $medium $text-16 $font-ubuntu; white-space: nowrap; }
+.explore span { font-size: 22px; line-height: 1; }
+.projectItem:hover .projectImg, .projectItem:focus-within .projectImg { transform: scale(1.035); filter: saturate(1.06) contrast(1.03); }
+.projectItem:hover .projectShade::after, .projectItem:focus-within .projectShade::after { opacity: 1; transform: scaleY(1); }
+.projectItem:hover .projectContentContainer, .projectItem:focus-within .projectContentContainer { transform: translateY(-5px); }
+@media (min-width: 768px) and (max-width: 1279px) {
+    .projectItem { position: relative; top: auto !important; left: auto !important; width: 100%; }
+}
+@media (min-width: 1280px) { .projectItem { margin-left: 10px; } }
+@media (prefers-reduced-motion: reduce) { .projectItem, .projectImg, .projectShade::after, .projectContentContainer { transition: none; } }
 
-
-.projectContentContainer {
-    padding: 15px;
-
+// Slider cards use a readable stacked layout on compact screens. Canvas cards
+// intentionally keep the original overlay treatment.
+.projectItemSlider {
+    position: relative;
     display: flex;
     flex-direction: column;
-    row-gap: 10px;
-
-    @media (min-width: 600px)  {
-        row-gap: 20px;
-    }
+    width: 100%;
+    min-height: 0;
+    aspect-ratio: auto;
+    box-shadow: none;
+    transition: none;
 }
 
-.projectText {
-    display: flex;
-    flex-direction: column;
-    row-gap: 5px;   
-
-    @media (min-width: 600px)  {
-        row-gap: 10px;
-    }
+.projectItemSlider:hover,
+.projectItemSlider:focus-within {
+    transform: none;
+    box-shadow: none;
 }
 
-
-.projectName {
-    @extend .body-16-ubuntu-bold;
-    @extend .whiteText;
-
-    @media (min-width: 600px)  {
-        font-size: 20px;
-    }
-    
-    @media (min-width: 768px) {
-        font-size: 24px;
-    }
+.projectItemSlider .projectImg {
+    position: relative;
+    inset: auto;
+    display: block;
+    flex: 0 0 auto;
+    width: 100%;
+    height: clamp(190px, 56.25vw, 480px);
+    object-fit: cover;
 }
 
+.projectItemSlider .projectShade { display: none; }
 
-.projectDescription {
-    @extend .body-16-ubuntu-regular;
-    @extend .lightText;
-
-    @media (min-width: 600px)  {
-        font-size: 20px;
-    }
+.projectItemSlider .projectContentContainer {
+    position: relative;
+    inset: auto;
+    display: grid;
+    gap: p.$space-sm;
+    padding: clamp(18px, 3vw, 30px);
+    background: linear-gradient(135deg, rgba($neutral_900, .96), rgba($neutral_1000, .98));
+    transform: none;
 }
 
+.projectItemSlider .projectDescription { max-width: none; }
+.projectItemSlider .projectFooter { align-items: flex-start; flex-wrap: wrap; }
+.projectItemSlider .explore { margin-left: auto; }
+.projectItemSlider:hover .projectImg,
+.projectItemSlider:focus-within .projectImg {
+    transform: none;
+    filter: none;
+}
+.projectItemSlider:hover .projectContentContainer,
+.projectItemSlider:focus-within .projectContentContainer { transform: none; }
 
-.projectStack { 
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
+.projectItemSlider .noPreview {
+    flex: 0 0 auto;
+    min-height: clamp(190px, 56.25vw, 480px);
 }
 
-
-.projectStackItem {
-    background-color: $brand_900;
-    
-    @extend .body-14-ubuntu-regular;
-    @extend .radius-4;
-    @extend .whiteText;
-
-    display: inline-block;
-
-    padding: 5px;
-
-    @media (min-width: 600px)  {
-        font-size: 20px;
-        padding: 10px;
-    }
-
-     @media (min-width: 768px)  {
-        padding: 20px;
-        border-radius: 10px;
-
-        font-weight: $bold;
-    }
+@media (max-width: 599px) {
+    .projectItemSlider .projectFooter { flex-direction: column; gap: p.$space-sm; }
+    .projectItemSlider .explore { margin-left: 0; }
+    .projectItemSlider .projectStackItem { padding: 5px 8px; font-size: 13px; }
 }

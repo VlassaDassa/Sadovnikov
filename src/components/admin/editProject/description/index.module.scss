@@ -1,64 +1,86 @@
 @use './../../../../styles/tokens/colors' as *;
 @use './../../../../styles/tokens/typography' as *;
 
-
-
-.section {
-    margin-top: 40px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+.section { display: flex; flex-direction: column; gap: 20px; margin-top: 40px; min-width: 0; }
+.editorList.editorList { box-sizing: border-box; width: 100%; min-width: 0; padding: 20px; }
+.descriptionPicker {
+    display: flex; align-items: center; flex-wrap: wrap; gap: 12px;
+    color: $neutral_400; font: $semi_bold 15px / 1.4 $font-ubuntu;
+    select { width: min(360px, 100%); min-width: 0; }
 }
-
-.itemWrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
+.descriptionPicker select, .presetSelect {
+    appearance: none; min-height: 44px; padding: 10px 44px 10px 16px;
+    border: 1px solid rgba($white, .16); border-radius: 9px; outline: 0;
+    background: $neutral_900 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m4 6 4 4 4-4' fill='none' stroke='%23c9c5d2' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 15px center / 16px;
+    color: $white; font: $regular 15px / 1.4 $font-ubuntu;
+    transition: border-color .2s ease, box-shadow .2s ease;
+    &:focus-visible { border-color: $brand_500; box-shadow: 0 0 0 3px rgba($brand_500, .15); }
+    &:disabled { opacity: .5; }
 }
-
-.item {
-    display: flex;
-    flex-direction: column;
-    gap: 20px; 
-
-    @media (min-width: 500px) {
-        gap: 15px;
-    }
+.editorCard { position: relative; z-index: 2; min-width: 0; overflow: hidden; border: 1px solid rgba($white, .14); border-radius: 14px; background: rgba($neutral_950, .96); }
+.editorHeader { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 18px; padding: 22px 24px; border-bottom: 1px solid rgba($white, .1); }
+.editorHeading { display: flex; align-items: center; min-width: 0; gap: 13px; }
+.iconWrapper { display: inline-flex; flex: 0 0 auto; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 10px; background: $brand_900; }
+.itemTitle { margin: 0; overflow-wrap: anywhere; color: $white; font: $bold 21px / 1.3 $font-ubuntu; }
+.itemHint, .previewHeader span, .status, .uploadHint { color: $neutral_500; font: $regular 14px / 1.5 $font-ubuntu; }
+.itemHint { margin: 5px 0 0; }
+.uploadHint { flex-basis: 100%; color: $brand_300; }
+.languageSwitch { display: inline-flex; flex: 0 0 auto; padding: 3px; border: 1px solid rgba($white, .14); border-radius: 9px; background: rgba($black, .2); }
+.languageButton, .modeTab, .sourceTab, .toolbarButton, .uploadButton {
+    border: 0; color: $neutral_400; cursor: pointer; font-family: $font-ubuntu;
+    transition: color .2s ease, background .2s ease, box-shadow .2s ease;
+    &:disabled { cursor: default; opacity: .42; }
+    &:focus-visible { outline: 2px solid $brand_400; outline-offset: 2px; }
 }
-
-.headerWrapper {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.languageButton { min-height: 36px; padding: 7px 13px; border-radius: 6px; background: transparent; font-size: 14px; font-weight: $semi_bold; }
+.languageButton.active { background: $brand_900; color: $white; }
+.modeTabs, .sourceTabs { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 4px; }
+.modeTabs { padding: 4px; border: 1px solid rgba($white, .09); border-radius: 10px; background: rgba($black, .18); }
+.modeTab, .sourceTab { min-height: 36px; padding: 0 14px; border-radius: 7px; background: transparent; font-size: 15px; font-weight: $semi_bold; }
+.modeTab.active, .sourceTab.active { background: rgba($brand_600, .2); color: $white; box-shadow: inset 0 0 0 1px rgba($brand_500, .22); }
+.modeTab:hover:not(:disabled), .sourceTab:hover:not(:disabled), .languageButton:hover:not(:disabled) { color: $white; background: rgba($brand_600, .16); }
+.editorToolbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding: 12px 16px; border-bottom: 1px solid rgba($white, .1); background: rgba($black, .16); }
+.presetControls, .imageControls { display: flex; align-items: center; gap: 8px; min-width: 0; flex-wrap: wrap; }
+.presetSelect { width: 168px; }
+.toolbarButton, .uploadButton { box-sizing: border-box; min-height: 42px; border: 1px solid rgba($white, .15); border-radius: 8px; background: $neutral_900; color: $neutral_200; font: $regular 15px / 1.4 $font-ubuntu; }
+.toolbarButton, .uploadButton {
+    display: inline-flex; align-items: center; justify-content: center; padding: 8px 13px;
+    &:hover:not(:disabled) { border-color: $brand_600; background: rgba($brand_600, .13); color: $white; }
 }
-
-.iconWrapper {
-    background-color: $brand_900;
-    border-radius: 5px;
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 5px;
+.uploadButton { white-space: nowrap; }
+.pasteHint { color: $neutral_500; font: $regular 13px / 1.4 $font-ubuntu; }
+.fileInput { display: none; }
+.workspace { min-width: 0; animation: reveal .25s ease both; }
+.status { margin: 0; padding: 10px 16px; color: $brand_300; }
+.previewPane { display: flex; min-width: 0; flex-direction: column; border-top: 1px solid rgba($white, .12); }
+.previewHeader {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    min-height: 56px; padding: 12px 20px; border: 0; border-bottom: 1px solid rgba($white, .1);
+    background: rgba($black, .14); cursor: pointer; text-align: left;
+    strong { color: $white; font: $semi_bold 18px / 1.3 $font-ubuntu; }
+    &:hover { background: rgba($brand_600, .08); }
+    &:focus-visible { outline: 2px solid $brand_400; outline-offset: -2px; }
 }
-
-
-.itemTitle {
-    @extend .heading-20-ubuntu-bold;
-    color: $neutral_400;
-
-    @media (min-width: 1280px) {
-        font-size: 24px;
-    }
+.previewFrame { display: block; width: 100%; height: 390px; border: 0; background: $neutral_1000; animation: reveal .3s ease both; }
+@keyframes reveal { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 700px) {
+    .editorList.editorList { padding: 10px; }
+    .editorHeader { padding: 18px 16px; }
+    .editorToolbar { padding: 12px; }
+    .imageControls { width: 100%; }
+    .descriptionPicker select { flex: 1; }
 }
-
-.texarea {
-    @extend .line-height-1_5x;
-    min-height: 200px;
+@media (max-width: 440px) {
+    .editorList.editorList { padding: 0; border: 0; background: transparent; }
+    .descriptionPicker { gap: 10px; }
+    .descriptionPicker label { flex-basis: 100%; }
+    .descriptionPicker select { width: 0; }
+    .editorHeader { padding: 16px 12px; }
+    .itemHint { font-size: 13px; }
+    .imageControls .uploadButton { width: 100%; }
+    .previewHeader { padding: 12px 16px; }
+    .previewHeader span { font-size: 13px; }
 }
-
-.inputsGroup {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
+@media (prefers-reduced-motion: reduce) {
+    .section *, .section *::before, .section *::after { animation: none !important; transition: none !important; }
 }

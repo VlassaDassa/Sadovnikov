@@ -1,116 +1,216 @@
 @use './../../../../styles/tokens/colors' as *;
 @use './../../../../styles/tokens/typography' as *;
-
+@use './../../../../styles/tokens/project' as project;
 
 .aboutMe {
-    margin-top: 80px;
-
-    @media (min-width: 768px) {
-        margin-top: 120px;
-        margin-bottom: 200px;
-    }
-
-    @media (min-width: 1000px) {
-        margin-top: 200px;
-    }
-
-    @media (min-width: 1280px) {
-        margin-top: 0px;
-        margin-bottom: 300px;
-    }
-}
-
-
-.aboutMeData,
-.workExperienceWrapper, 
-.workExperienceItem,
-.shortBio {
-    display: flex;
-    flex-direction: column;
-}
-
-.aboutMeData {
-    margin-top: 30px;
-    margin-bottom: 40px;
-
-    row-gap: 5px;
-
-    @media (min-width: 1280px) {
-        display: none;
-    }
-}
-
-.text, .description, .textTitle {
-    @extend .body-16-ubuntu-bold;
-    @extend .lightText;
-    @extend .line-height-1_5x;
-}
-
-.description {
-    @extend .whiteText;
-}
-
-.textTitle {
-    @extend .whiteText;
-    font-size: 20px;
-}
-
-@media (min-width: 768px) {
-    .text, .description {
-        font-size: 20px;
-    }
-
-    .textTitle {
-        font-size: 24px;
-    }
-}
-
-
-@media (min-width: 1280px) {
-    .text, .description {
-        font-size: 24px;
-    }
-
-    .textTitle {
-        font-size: 32px;
-    }
-}
-
-
-.workExperience {
-    margin-bottom: 50px;
-}
-
-
-.workExperienceWrapper {
-    margin-top: 10px;
- 
-    row-gap: 40px;
-}
-
-
-.workExperienceItem,
-.shortBio {
-    row-gap: 10px;
-}
-
-.workExperienceItemTitle {
-    color: $neutral_500;
+    margin-block: project.$section-gap;
+    font-family: $font-ubuntu;
 }
 
 .aboutMeTitle {
+    margin-bottom: clamp(32px, 4vw, 48px);
     @extend .heading-24-ubuntu-bold;
     @extend .whiteText;
+    text-transform: uppercase;
+    text-align: center;
+    @media (min-width: 768px) { font-size: $text-32; }
+    @media (min-width: 1280px) { font-size: $text-40; }
+}
 
-    @media (min-width: 768px) {
-        font-size: 32px;
+// The stack artwork is positioned visually on smaller screens, so give the
+// following section enough flow space to keep the two sections separated.
+@media (max-width: 1279px) {
+    .aboutMe { margin-top: clamp(104px, 11vw, 148px); }
+}
+
+.born {
+    display: flex;
+    gap: 5px;
+}
+
+.introduction {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    align-items: start;
+    gap: clamp(28px, 5vw, 72px);
+}
+
+.biography { min-width: 0; }
+
+.bioHeading {
+    @include project.title;
+    max-width: 21ch;
+    font-size: clamp($text-24, 3.15vw, $text-40);
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+}
+
+.bioBody {
+    @include project.body;
+    display: grid;
+    gap: project.$space-md;
+    max-width: 62ch;
+    font-size: clamp($text-16, 1.6vw, $text-20);
+    white-space: pre-line;
+    p { margin: 0; }
+}
+
+.specialties {
+    display: flex;
+    flex-wrap: wrap;
+    gap: project.$space-sm;
+    margin: project.$space-md 0 0;
+    padding: 0;
+    list-style: none;
+    li {
+        display: flex;
+        align-items: center;
+        gap: project.$space-sm;
+        padding: 10px 15px;
+        border: 1px solid project.$border;
+        border-radius: project.$space-sm;
+        color: project.$muted;
+        font-size: $text-16;
     }
+    img { object-fit: contain; }
+}
 
-    @media (min-width: 1280px) {
-        font-size: 40px;
+.facts {
+    @include project.panel;
+    margin: 0;
+    padding: 4px project.$space-md;
+}
 
-        margin-bottom: 80px;
+.fact {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr);
+    align-items: start;
+    gap: 18px;
+    padding-block: project.$space-md;
+    & + & { border-top: 1px solid project.$border; }
+    dt {
+        margin-bottom: 6px;
+        color: $neutral_400;
+        font-size: $text-14;
+        line-height: $leading-normal;
+    }
+    dd {
+        margin: 0;
+        color: $neutral_100;
+        font-size: clamp($text-16, 1.6vw, $text-20);
+        font-weight: $medium;
+        line-height: $leading-normal;
+        overflow-wrap: anywhere;
+        span { color: project.$accent; }
+    }
+}
+.birthValue { color: $white; font-weight: $bold; }
+
+.factIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: project.$space-sm;
+    background: rgba($neutral_400, 0.08);
+    color: project.$accent;
+    svg { width: 26px; height: 26px; }
+}
+
+.workExperience { margin-top: clamp(36px, 5vw, 64px); }
+
+.experienceHeading {
+    color: $white;
+    font-size: clamp($text-24, 2.5vw, $text-32);
+    font-weight: $bold;
+    line-height: $leading-tight;
+    margin-bottom: project.$space-md;
+}
+
+.experienceList { display: grid; gap: 18px; }
+
+.experienceCard {
+    @include project.panel;
+    padding: clamp(20px, 2.5vw, 32px);
+}
+
+.experienceHeader {
+    display: grid;
+    grid-template-columns: 12px minmax(0, 1fr) auto;
+    align-items: baseline;
+    column-gap: 18px;
+    row-gap: 8px;
+}
+
+.experienceMarker {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: project.$accent;
+}
+
+.experienceRole {
+    min-width: 0;
+    h4 {
+        color: $white;
+        font-size: clamp($text-16, 1.9vw, $text-24);
+        font-weight: $bold;
+        line-height: $leading-tight;
+        overflow-wrap: anywhere;
+    }
+    p {
+        margin-top: 6px;
+        color: $neutral_400;
+        font-size: $text-16;
+        line-height: $leading-normal;
     }
 }
 
+.experiencePeriod {
+    color: $neutral_400;
+    font-size: $text-14;
+    line-height: $leading-normal;
+    text-align: right;
+}
 
+.experienceDetails,
+.experienceDescription {
+    @include project.body;
+    margin: 20px 0 0;
+    padding-top: 20px;
+    border-top: 1px solid project.$border;
+    font-size: clamp($text-16, 1.55vw, $text-20);
+}
+
+.experienceDetails {
+    display: grid;
+    gap: 8px;
+    padding-left: 30px;
+    li { padding-left: 3px; }
+    li::marker { color: project.$accent; font-size: 0.8em; }
+}
+
+.experienceDescription { white-space: pre-line; }
+
+@media (max-width: 899px) {
+    .introduction { grid-template-columns: 1fr; gap: 28px; }
+    .bioHeading { max-width: 28ch; }
+    .facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 20px; }
+    .fact { grid-template-columns: 1fr; padding: 0 18px; gap: 12px; }
+    .fact:first-child { padding-left: 0; }
+    .fact:last-child { padding-right: 0; }
+    .fact + .fact { border-top: 0; border-left: 1px solid project.$border; }
+    .experienceHeader { grid-template-columns: 10px minmax(0, 1fr); }
+    .experiencePeriod { grid-column: 2; text-align: left; }
+}
+
+@media (max-width: 539px) {
+    .facts { grid-template-columns: 1fr; padding: 0 20px; }
+    .fact { grid-template-columns: 44px minmax(0, 1fr); padding: 20px 0; gap: 16px; }
+    .fact + .fact { border-left: 0; border-top: 1px solid project.$border; }
+    .factIcon { width: 44px; height: 44px; }
+    .experienceHeader { column-gap: 12px; }
+    .experienceDetails { padding-left: 21px; }
+}

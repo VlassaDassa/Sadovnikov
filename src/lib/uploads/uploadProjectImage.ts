@@ -2,10 +2,12 @@ export type ClientUploadCategory =
     | 'gallery'
     | 'feature-photo'
     | 'feature-icon'
+    | 'description-image'
 
 interface UploadProjectImageInput {
     file: File
     projectId: number
+    signal?: AbortSignal
     category:
         ClientUploadCategory
 }
@@ -22,6 +24,7 @@ export async function uploadProjectImage({
     file,
     projectId,
     category,
+    signal,
 }: UploadProjectImageInput):
     Promise<UploadProjectImageResult> {
     const formData =
@@ -48,6 +51,7 @@ export async function uploadProjectImage({
             {
                 method: 'POST',
                 body: formData,
+                signal,
             },
         )
 

@@ -1,3 +1,4 @@
+@use '../../../styles/tokens/project' as p;
 @use './../../../styles/tokens/colors' as *;
 @use './../../../styles/tokens/effects' as *;
 @use './../../../styles/tokens/typography' as *;
@@ -47,4 +48,15 @@
     margin-top: 5px;
 
     margin-bottom: 10px;
+}
+.detail {
+    @include p.panel;
+    background: p.$floating-background;
+    box-sizing: border-box;
+    padding: p.$space-md;
+    width: min(400px, calc(100vw - 32px));
+    max-width: calc(100vw - 32px);
+    box-shadow: 0 16px 48px rgba($black, 0.4);
+    .title { @include p.title; font-size: $text-24; margin-bottom: p.$space-sm; padding-bottom: p.$space-sm; border-bottom: 1px solid p.$border; }
+    .text { @include p.body; font-size: $text-16; white-space: pre-line; }
 }

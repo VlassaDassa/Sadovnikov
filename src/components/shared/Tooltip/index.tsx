@@ -12,7 +12,7 @@ interface TooltipProps {
 
 const Tooltip: React.FC<TooltipProps> = ({ text, title, date, type='lvl1' }) => {
     return (
-        <div className={`${styles.tooltip} tooltip`}>
+        <div className={`${styles.tooltip} ${type === 'lvl2' ? styles.detail : ''} tooltip`}>
             {
                 type !== 'lvl1' ? 
                     <h4 className={styles.title}>{title}</h4>

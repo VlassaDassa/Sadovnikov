@@ -1,4 +1,4 @@
-export const uploadCategories = ['gallery', 'feature-photo', 'feature-icon']
+export const uploadCategories = ['gallery', 'feature-photo', 'feature-icon', 'description-image'] as const
 
 export type UploadCategory = typeof uploadCategories[number]
 

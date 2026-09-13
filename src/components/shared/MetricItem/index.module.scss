@@ -1,3 +1,4 @@
+@use '../../../styles/tokens/project' as p;
 @use './../../../styles/tokens/colors' as *;
 @use './../../../styles/tokens/typography' as *;
 @use './../../../styles/tokens/effects' as *;
@@ -76,4 +77,27 @@
         width: 100%;
         gap: 20px;
     } 
+}
+// Project cards keep the shared score calculations and dashboard layout intact.
+.projectMetric {
+    @include p.panel;
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    align-items: start;
+    width: auto;
+    min-width: 0;
+    gap: p.$space-sm 16px;
+    padding: p.$space-md;
+    &:last-child { border-bottom: 1px solid p.$border; }
+    .iconWrapper { @include p.icon-tile; width: 44px; height: 44px; }
+    .iconWrapper svg { width: 26px; height: 26px; }
+    .contentWrapper { min-width: 0; width: auto; display: flex; flex-direction: column; align-items: stretch; gap: 20px; }
+    .textWrapper { gap: p.$space-xs; }
+    .metricTitle { font-size: $text-20; line-height: $leading-tight; }
+    .metricText { @include p.body; font-size: $text-14; line-height: $leading-normal; }
+    .value { width: 100%; min-width: 0; }
+}
+@media (max-width: 479px) {
+    .projectMetric { padding: 20px; gap: p.$space-sm; }
+    .projectMetric .metricTitle { font-size: $text-16; }
 }

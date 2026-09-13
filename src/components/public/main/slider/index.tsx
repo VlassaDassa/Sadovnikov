@@ -27,17 +27,18 @@ const Slider: React.FC<SliderProps> = ({ projects }) => {
     const [curIndex, setCurIndex] = useState<number>(1)
     const totalCountItems = projects.length
     const breakpoint = useSelector((state: RootState) => state.breakpoint.value)
+    const windowWidth = useSelector((state: RootState) => state.breakpoint.windowWidth)
     const t = useTranslations('Portfolio');
+    const compactLayout = breakpoint === 'mobile' || (windowWidth > 0 && windowWidth < 900)
 
     return (
         <Swiper
-            spaceBetween={-20}
-            slidesPerView={
-                breakpoint === 'tablet' ? 'auto' : 1.5
-            } 
+            spaceBetween={compactLayout ? 0 : -20}
+            slidesPerView={compactLayout ? 1 : (breakpoint === 'tablet' ? 'auto' : 1.5)}
+            autoHeight={true}
             centeredSlides={true}
             className={style.slider}
-            effect={'coverflow'}
+            effect={compactLayout ? 'slide' : 'coverflow'}
             grabCursor={true}
             coverflowEffect={{
                 rotate: 50,
@@ -46,10 +47,9 @@ const Slider: React.FC<SliderProps> = ({ projects }) => {
                 modifier: 1,
                 slideShadows: true,
             }}
-            style={{ overflow: 'visible' }} 
+            style={{ overflow: compactLayout ? 'hidden' : 'visible' }}
             speed={700} 
-            
-            onRealIndexChange={(swiper) => setCurIndex(swiper.activeIndex + 1)}
+            onRealIndexChange={(swiper) => setCurIndex(swiper.realIndex + 1)}
             pagination={true}
             modules={[EffectCoverflow, Pagination]}
         >
@@ -59,7 +59,7 @@ const Slider: React.FC<SliderProps> = ({ projects }) => {
                 :
                     projects.map(project => (
                         <SwiperSlide key={project.id} className={style.sliderItem}>
-                            <ProjectItem project={project} />
+                            <ProjectItem project={project} layout="slider" />
                         </SwiperSlide>
                     ))
             }

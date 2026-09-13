@@ -8,10 +8,12 @@ interface ProgressBarProps {
     type: 'time' | 'score' | 'source',
     max: number | string,
     current: number | string,
+    className?: string,
+    variant?: 'default' | 'project',
 }
 
 
-const ProgressBar: React.FC<ProgressBarProps> = ({type, max, current}) => {
+const ProgressBar: React.FC<ProgressBarProps> = ({type, max, current, className, variant = 'default'}) => {
     const maxParse = typeof max === 'string' 
     ? parseFloat(max) || 0 
     : max
@@ -39,7 +41,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({type, max, current}) => {
     
 
     return (
-        <div className={styles.progressBar}>
+        <div className={`${styles.progressBar} ${variant === 'project' ? styles.project : ''} ${className || ''}`}>
             {titleContent}
             <div className={itemClass}>
                 <div className={styles.progressBarItemFill} style={{ width: `${percentage}%` }}></div>

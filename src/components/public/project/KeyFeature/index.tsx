@@ -6,10 +6,10 @@ import type { Swiper as SwiperType } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 
-import PaginationSlider from '@/components/shared/paginationSlider';
 import AdaptiveImage from '@/components/shared/AdaptiveImage';
 import EmptySection from '@/components/shared/EmptySection';
-import Button from '@/components/shared/button/Button';
+import Icon from '@/components/shared/icons/Icon';
+import { cssVars } from '@/styles/cssVariables';
 
 import type { IFeatureItem } from '@/interfaces/general';
 
@@ -49,7 +49,7 @@ const KeyFeatures: React.FC<KeyFeaturesProps> = ({ data }) => {
     };
 
     return (
-        <section className={`${styles.keyFeatures} container`}>
+        <section className={`${renderCondition ? `${styles.keyFeaturesNone} ${styles.keyFeatures}` : styles.keyFeatures} container`}>
             <h2 className={`${styles.title} sectionTitle`}>
                 {t('Title')}
             </h2>
@@ -61,6 +61,7 @@ const KeyFeatures: React.FC<KeyFeaturesProps> = ({ data }) => {
                     <Swiper
                         slidesPerView={1}
                         spaceBetween={30}
+                        speed={750}
                         onSwiper={(swiper) => {
                             setSwiperInstance(swiper);
                             updateSliderState(swiper);
@@ -119,28 +120,15 @@ const KeyFeatures: React.FC<KeyFeaturesProps> = ({ data }) => {
                     </Swiper>
 
                     <div className={styles.sliderControls}>
-                        <Button 
-                           behavior={isBeginning ? 'disabled' : 'default'}
-                           iconPosition='only'
-                           variant='dark'
-                           additionalClass={styles.sliderButton}
-                           onClick={handlePrevSlide}
-                           icon='arrow'
-                        />
-
-                        <PaginationSlider
-                            totalCountItems={data.length}
-                            curIndex={curIndex}
-                        />
-
-                        <Button 
-                           behavior={isEnd ? 'disabled' : 'default'}
-                           iconPosition='only'
-                           variant='dark'
-                           additionalClass={`${styles.sliderButton} ${styles.sliderButtonRight}`}
-                           onClick={handleNextSlide}
-                           icon='arrow'
-                        />
+                        <span className={styles.counter} aria-live="polite">
+                            <strong>{String(curIndex).padStart(2, '0')}</strong> / {String(data.length).padStart(2, '0')}
+                        </span>
+                        <button type="button" className={styles.sliderButton} disabled={isBeginning} onClick={handlePrevSlide} aria-label={t('Previous')}>
+                            <Icon name="arrow" size={20} strokeColor={cssVars.white} />
+                        </button>
+                        <button type="button" className={`${styles.sliderButton} ${styles.sliderButtonRight}`} disabled={isEnd} onClick={handleNextSlide} aria-label={t('Next')}>
+                            <Icon name="arrow" size={20} strokeColor={cssVars.white} />
+                        </button>
                     </div>
                 </>
             )}

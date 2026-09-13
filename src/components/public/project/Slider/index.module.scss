@@ -1,107 +1,50 @@
-@use './../../../../styles/tokens/colors' as *;
-@use './../../../../styles/tokens/effects' as *;
-@use './../../../../styles/tokens/typography' as *;
+@use '../../../../styles/tokens/project' as p;
+@use '../../../../styles/tokens/colors' as *;
+@use '../../../../styles/tokens/effects' as *;
+@use '../../../../styles/tokens/typography' as *;
 
-
-
-.photoContainer {
-    position: relative;
-
-    @media (min-width: 1280px) {
-        width: 50%;
-    }
-}
-
+.photoContainer { width: 100%; min-width: 0; }
+.swiper { border-radius: p.$radius-sm; overflow: hidden; }
+.swiper :global(.swiper-wrapper) { transition-timing-function: cubic-bezier(.22, .61, .36, 1); }
 .projectWrapPhoto {
     position: relative;
     width: 100%;
+    height: auto;
     aspect-ratio: 16 / 9;
-    border-radius: 20px;
     overflow: hidden;
-    cursor: pointer;
-
-    &::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        border-radius: 20px;
-        box-shadow: inset 0 0 22.9px 13px rgba(0, 0, 0, 0.51);
-        pointer-events: none;
-        z-index: 2;
-    }
+    border-radius: p.$radius-sm;
+    background: rgba($neutral_1000, 0.25);
 }
-
-.projectPhoto {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.sliderButtonWrapper {
-    position: absolute;
-    top: 50%;
-    z-index: 5;
-    transform: translateY(-50%);
-    display: none;
-    
-    @media (min-width: 1280px) {
-        display: block;
-    }
-}
-
-.sliderButtonWrapperLeft {
-    left: 16px;
-}
-
-.sliderButtonWrapperRight {
-    right: 16px;
-}
-
-.sliderButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    padding: 0;
-}
-
-.sliderButtonLeft {
-    svg {
-        transform: rotate(90deg) !important;
-    }
-}
-
-.sliderButtonRight {
-    svg {
-        transform: rotate(-90deg) !important;
-    }
-}
-
-.pagination {
-    @media (min-width: 1280px) {
-        display: none;
-    }
-}
-
-.btnOpenLeft {
-    left: 40px;
-}
-
-.btnOpenRight {
-    right: 40px;
-}
-
-.previewButton {
-    display: block;
-    width: 100%;
-    padding: 0;
-
-    border: 0;
+.projectPhoto { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.previewButton { display: block; width: 100%; padding: 0; border: 0; background: transparent; cursor: zoom-in; }
+.previewButton:focus-visible { outline: 2px solid p.$accent; outline-offset: -3px; border-radius: p.$radius-sm; }
+.galleryControls { display: flex; align-items: center; justify-content: space-between; gap: p.$space-sm; padding-top: p.$space-sm; }
+.counter { display: flex; gap: p.$space-xs; font: $regular $text-14 $font-ubuntu; color: $neutral_400; font-variant-numeric: tabular-nums; }
+.counter strong { color: $white; font-weight: $medium; }
+.galleryArrows { display: flex; gap: p.$space-xs; }
+.galleryArrow {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 36px;
+    border: 1px solid p.$border;
+    border-radius: p.$radius-sm;
     background: transparent;
+    cursor: pointer;
+    &:hover:not(:disabled) { border-color: p.$accent; background: rgba($brand_600, 0.08); }
+    &:disabled { opacity: 0.3; cursor: default; }
+    &:focus-visible { outline: 2px solid p.$accent; outline-offset: 3px; }
 }
+.emptyGallery { @include p.body; aspect-ratio: 16 / 9; display: grid; place-items: center; text-align: center; }
+.sliderButtonWrapper { position: absolute; top: 50%; z-index: 5; transform: translateY(-50%); display: none; }
+.sliderButtonWrapperLeft { left: 16px; }
+.sliderButtonWrapperRight { right: 16px; }
+.sliderButton { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0; }
+.sliderButtonLeft svg { transform: rotate(90deg); }
+.sliderButtonRight svg { transform: rotate(-90deg); }
+.btnOpenLeft { left: 40px; }
+.btnOpenRight { right: 40px; }
+@media (min-width: 1280px) { .sliderButtonWrapper { display: block; } }
 
 .lightbox {
     position: fixed;

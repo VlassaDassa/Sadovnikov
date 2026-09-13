@@ -32,6 +32,9 @@
     "PlaceOfBirth": "Place of birth:",
     "Location": "Location:",
     "Education": "Education:",
+    "BasedIn": "Based in",
+    "Born": "Born",
+    "Technologies": "Technologies",
     "DecorBtnLong": "MY LONG STORY, VERY VERY LONG, IF YOU INTERESTED",
     "DecorBtn": "MY LONG STORY, IF YOU INTERESTED",
     "Empty": "Data about me not found"
@@ -43,7 +46,10 @@
 
   "Portfolio": {
     "Title": "PORTFOLIO",
-    "Empty": "PROJECTS NOT FOUND"
+    "Empty": "PROJECTS NOT FOUND",
+    "Technologies": "Technologies",
+    "Explore": "Explore",
+    "NoPreview": "Preview coming soon"
   },
 
   "Canvas": {
@@ -77,11 +83,18 @@
   },
 
   "Evolution": {
+    "Previous": "Previous milestone",
+    "Next": "Next milestone",
+    "Navigate": "Go to milestone",
+    "Hint": "Explore the project timeline",
+    "Carousel": "Project milestones",
     "Title": "EVOLUTION",
     "Empty": "No commits"
   },
 
   "KeyFeatures": {
+    "Previous": "Previous feature",
+    "Next": "Next feature",
     "Title": "KEY FEATURES",
     "Empty": "Key features not found"
   },
@@ -99,7 +112,9 @@
 
   "ProjectDescription": {
     "Title": "DESCRIPTION",
-    "NoContent": "Content not found..."
+    "NoContent": "Content not found...",
+    "Previous": "Previous chapter",
+    "Next": "Next chapter"
   },
 
   "Metrics": {
@@ -124,10 +139,18 @@
     "DefaultDescription": "Frontend developer portfolio featuring modern web applications, technologies and development experience.",
     "HomeTitle": "Vlad Sadovnikov - Frontend Developer",
     "HomeDescription": "Frontend developer portfolio with selected web projects, technology stack, skills and development experience."
+  },
+  "ProjectPreview": {
+      "Start": "Started",
+      "Duration": "Duration",
+      "Team": "Team",
+      "Gallery": "Project gallery"
+  },
+  "ProjectGallery": {
+      "Image": "Project image",
+      "Open": "Open image",
+      "Previous": "Previous image",
+      "Next": "Next image",
+      "Empty": "Images coming soon"
   }
-
-
-
-
- 
 }

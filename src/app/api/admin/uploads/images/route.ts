@@ -4,6 +4,7 @@ import { z } from "zod";
 import prisma from "@/lib/prisma";
 import { requireAdmin } from "@/lib/auth/admin";
 import { saveProjectImage } from "@/lib/uploads/saveProjectImage";
+import { uploadCategories } from "@/lib/uploads/types";
 
 
 
@@ -11,7 +12,7 @@ export const runtime = 'nodejs'
 
 const uploadsFieldSchema = z.object({
     projectId: z.coerce.number().int().positive(),
-    category: z.enum(['gallery', 'feature-photo', 'feature-icon'])
+    category: z.enum(uploadCategories)
 }) 
 
 function getErrorStatus(error: unknown): number {
@@ -26,6 +27,8 @@ function getErrorStatus(error: unknown): number {
         case 'INVALID_GALLERY_RATIO':
         case 'INVALID_FEATURE_PHOTO_RATIO':
         case 'ANIMATED_IMAGES_NOT_ALLOWED':
+        case 'UNSUPPORTED_IMAGE_TYPE':
+        case 'INVALID_IMAGE_DATA':
             return 400
         default: return 500
     }

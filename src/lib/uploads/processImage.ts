@@ -134,6 +134,12 @@ export async function processImage(
         )
     }
 
+    if (category === 'description-image' && ![
+        'image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/avif',
+    ].includes(declaredMimeType)) {
+        throw new Error('UNSUPPORTED_IMAGE_TYPE')
+    }
+
     const metadata =
         await sharp(
             sourceBuffer,
@@ -141,7 +147,16 @@ export async function processImage(
                 limitInputPixels:
                     40_000_000,
             },
-        ).metadata()
+        ).metadata().catch((error: unknown) => {
+            if (category === 'description-image') throw new Error('INVALID_IMAGE_DATA')
+            throw error
+        })
+
+    if (category === 'description-image' && ![
+        'jpeg', 'png', 'webp', 'gif', 'avif', 'heif',
+    ].includes(metadata.format ?? '')) {
+        throw new Error('UNSUPPORTED_IMAGE_TYPE')
+    }
 
     if (
         !metadata.width ||
@@ -189,11 +204,11 @@ export async function processImage(
                 sharp.kernel.lanczos3,
         })
         .webp({
-            quality: 96,
+            quality: category === 'description-image' ? 86 : 96,
             alphaQuality: 100,
             smartSubsample: true,
             smartDeblock: true,
-            effort: 6,
+            effort: category === 'description-image' ? 3 : 6,
             preset: 'picture',
         })
         .toBuffer({

@@ -1,109 +1,79 @@
 import React from 'react';
-import { useTranslations } from 'next-intl';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
-import Button from '@/components/shared/button/Button';
 import Icon from '@/components/shared/icons/Icon';
 import Slider from '../Slider';
-
 import type { IProjectPreviewData } from '@/interfaces/general';
 import { displayDate } from '@/lib/dates';
-
-import styles from './index.module.scss';
 import { cssVars } from '@/styles/cssVariables';
-
+import styles from './index.module.scss';
 
 interface ProjectPreviewProps {
-    data: IProjectPreviewData
+    data: IProjectPreviewData;
 }
 
-
 const ProjectPreview: React.FC<ProjectPreviewProps> = ({ data }) => {
-    const t = useTranslations('TeamType');
-    const locale = useLocale() === 'en' ? 'en' : 'ru'
-
-    const teamTypeIcon = ( data.teamType === 'solo' ? 'person' : data.teamType === 'duo' ? 'twoPerson' : 'manyPerson' )
-    const localeTeamType = t(data.teamType)
+    const t = useTranslations('ProjectPreview');
+    const team = useTranslations('TeamType');
+    const locale = useLocale() === 'en' ? 'en' : 'ru';
+    const teamIcon = data.teamType === 'solo' ? 'person' : data.teamType === 'duo' ? 'twoPerson' : 'manyPerson';
+    const metadata = [
+        { label: t('Start'), value: displayDate(data.date, true, locale), icon: 'calendar' },
+        { label: t('Duration'), value: data.developmentTime, icon: 'time' },
+        { label: t('Team'), value: team(data.teamType), icon: teamIcon },
+    ];
 
     return (
         <section className={`${styles.projectPreview} container`}>
-
-            <div className={styles.textContent}>
-                <div className={styles.metadata}>
-                    <div className={styles.metadataItem}>
-                        <Icon 
-                            name={'calendar'}
-                            strokeColor={cssVars.brand_600}
-                            fillColor='none'
-                            size={20}
-                            />
-                        <p className={styles.metadataText}>{displayDate(data.date, true, locale)}</p>
-                    </div>
-                    
-                    <span className={styles.divider} />
-
-                    <div className={styles.metadataItem}>
-                        <Icon
-                            name={'time'}
-                            strokeColor={cssVars.brand_600}
-                            fillColor='none'
-                            size={20} 
-                            />
-                        <p className={styles.metadataText}>{data.developmentTime}</p>
-                    </div>
-
-                    <span className={styles.divider} />
-
-                    <div className={styles.metadataItem}>
-                        <Icon 
-                            name={teamTypeIcon}
-                            strokeColor={cssVars.brand_600}
-                            fillColor={cssVars.brand_600}
-                            size={20}
-                        />
-                        <p className={styles.metadataText}>{localeTeamType}</p>
-                    </div>
+            <div className={styles.overview}>
+                <div className={styles.preview} aria-label={t('Gallery')}>
+                    <Slider images={data.images} />
                 </div>
 
-                <div className={styles.textWrapper}>
-                    <div className={styles.siteNameWrapper}>
+                <div className={styles.summary}>
+                    <div className={styles.heading}>
+                        <p className={styles.category}>{data.category}</p>
                         <h1 className={styles.name}>{data.name}</h1>
-                        <h2 className={styles.subname}>{data.category}</h2>
                     </div>
-
-                    <p className={styles.shortDescription}>
-                        {data.previewDescription}
-                    </p>
-                </div>
-                
-                <div className={styles.btnWrapper}>
-                    <a href={data.gitHubLink || undefined} target="_blank" rel="noopener noreferrer">
-                        <Button
-                            behavior={data.gitHubLink ? 'default' : 'disabled'}
-                            iconPosition='leftIcon'
-                            variant='dark'
-                            text={'GitHub'}
-                            icon={'github'}
-                        />
-                    </a>
-                    
-                    <a href={data.demoLink || undefined} target="_blank" rel="noopener noreferrer">
-                        <Button
-                            behavior={data.demoLink ? 'default' : 'disabled'}
-                            iconPosition='leftIcon'
-                            variant='primary'
-                            text={'Live Demo'}
-                            icon={'internet'}
-                        />
-                    </a>
-                    
+                    <p className={styles.description}>{data.previewDescription}</p>
+                    <div className={styles.actions}>
+                        <a
+                            className={`${styles.action} ${styles.primary}`}
+                            href={data.demoLink || undefined}
+                            aria-disabled={!data.demoLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <Icon name="internet" size={20} strokeColor={cssVars.white} />
+                            Live Demo
+                        </a>
+                        <a
+                            className={styles.action}
+                            href={data.gitHubLink || undefined}
+                            aria-disabled={!data.gitHubLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <Icon name="github" size={20} strokeColor={cssVars.white} />
+                            GitHub
+                        </a>
+                    </div>
                 </div>
             </div>
-            
-            <Slider images={data.images} />
+
+            <dl className={styles.metadata}>
+                {metadata.map((item) => (
+                    <div className={styles.metadataItem} key={item.label}>
+                        <Icon name={item.icon} size={22} strokeColor={cssVars.brand_600} fillColor="none" />
+                        <div className={styles.metadataContent}>
+                            <dt>{item.label}</dt>
+                            <dd>{item.value}</dd>
+                        </div>
+                    </div>
+                ))}
+            </dl>
         </section>
-    )
-}
+    );
+};
 
 export default ProjectPreview;
-

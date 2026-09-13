@@ -37,3 +37,10 @@
 .progressSource {
     width: 100px;
 }
+
+.project {
+    width: 100%;
+    min-width: 0;
+    .progressBarItem { width: 100%; }
+    .title { font-size: clamp(1.375rem, 2vw, 1.75rem); line-height: 1.25; }
+}

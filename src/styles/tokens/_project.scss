@@ -1,0 +1,56 @@
+@use './colors' as *;
+@use './typography' as *;
+
+// Shared semantic tokens for project surfaces, including portalled tooltips.
+$surface: $neutral_1000;
+$surface-raised: $neutral_950;
+$panel-background: linear-gradient(135deg, rgba($neutral_900, 0.24), rgba($white, 0.025));
+$floating-background: linear-gradient(125deg, rgba($brand_600, 0.035), transparent 65%), $surface;
+$border: rgba($brand_300, 0.18);
+$accent: $brand_600;
+$muted: $neutral_300;
+$radius: 16px;
+$radius-sm: 10px;
+$space-xs: 8px;
+$space-sm: 12px;
+$space-md: 24px;
+$space-lg: 40px;
+$section-gap: clamp(56px, 7vw, 96px);
+$padding: clamp(20px, 3vw, 40px);
+
+@mixin panel {
+    background: $panel-background;
+    border: 1px solid $border;
+    border-radius: $radius;
+}
+
+@mixin title {
+    font-family: $font-ubuntu;
+    font-size: clamp($text-32, 4vw, $text-48);
+    font-weight: $bold;
+    line-height: $leading-tight;
+    color: $white;
+    text-align: left;
+    margin-bottom: $space-md;
+}
+
+@mixin body {
+    font-family: $font-ubuntu;
+    font-size: clamp($text-16, 1.7vw, $text-20);
+    font-weight: $regular;
+    line-height: $leading-relaxed;
+    color: $muted;
+    overflow-wrap: anywhere;
+}
+
+@mixin icon-tile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    border: 1px solid $border;
+    border-radius: $space-sm;
+    background: linear-gradient(135deg, rgba($brand_700, 0.32), rgba($brand_900, 0.22));
+}

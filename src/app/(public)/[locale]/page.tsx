@@ -17,6 +17,7 @@ import type { AppLocale } from '@/i18n/routing';
 import prisma from '@/lib/prisma';
 import { getAbsoluteUrl, getLanguageAlternates, getOpenGraphLocale, siteConfig } from '@/lib/seo/site';
 import { IProject, Skill, Stack } from '@/interfaces/general';
+import type { AboutMe as AboutMeData } from '@/interfaces/general';
 
 
 
@@ -75,7 +76,7 @@ export async function generateMetadata({ params }: MainPageProps): Promise<Metad
 
 const Main = async ({ params }: MainPageProps) => {
     let projects: IProject[] = [];
-    let aboutMe: AboutMe | null = null;
+    let aboutMe: AboutMeData | null = null;
     let skills: Skill[] = [];
     let stack: Stack[] = [];
     
