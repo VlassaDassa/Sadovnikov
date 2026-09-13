@@ -1,120 +1,41 @@
-@use './../../../../styles/tokens/colors' as *;
-@use './../../../../styles/tokens/effects' as *;
-@use './../../../../styles/tokens/typography' as *;
+@use '../../../../styles/tokens/project' as p;
+@use '../../../../styles/tokens/typography' as *;
+@use '../../../../styles/tokens/colors' as *;
 
-
-
-.evolution {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    gap: 20px;
-
-    margin-top: 40px;
-}
-
-.evolWrapper {
-    background-color: $neutral_900;
-    width: calc(100% - 60px);
-    padding: 30px 25px;
-    border-radius: 20px;
-
-    border: 1px solid $neutral_800;
-    height: 510px;
-
-
-    @extend .shadow-lg;
-
-    @media (min-width: 450px) {
-        width: 330px;
-    }
-
-    @media (min-width: 1280px) {
-        height: 420px;
-    }
-}
-
-
-.evolWrapper {
-    overflow-y: scroll;
-
-    &::-webkit-scrollbar {
-        width: 0;
-        background: transparent;
-        display: none;
-    }
-    
-    scrollbar-width: none;
-    
-    -ms-overflow-style: none;
-}
-
-
-.title {
-    @extend .heading-24-ubuntu-bold;
-    @extend .whiteText;
-
-    @media (min-width: 768px) {
-        font-size: 36px;
-    }
-
-    @media (min-width: 1280px) {
-        font-size: 40px;
-    }
-}
-
-
-.timeline {
-    border-left: 2px dashed $brand_600;
-
-    padding: 30px 0;
-}
-
-.commitItem {
-    display: flex;
-    align-items: center;
-    column-gap: 10px;
-    
-    margin-left: -10px;
-
-    margin-bottom: 100px;
-
-    cursor: pointer;
-
-    &:last-child {
-        margin-bottom: 0;
-    }
-
-    @media (min-width: 1280px) {
-        &:hover {
-            .node {
-                background-color: $brand_600;
-            }
-
-            .commitText {
-                color: $white;
-            }
-        }
-    }
-}
-
-.commitText {
-    @extend .body-16-ubuntu-bold;
-    @extend .line-height-1_5x;
-    
-    color: $neutral_400;
-
-    transition: all 0.3s ease-in-out;
-}
-
-.node {
-    @extend .radius-full;
-    @extend .shadow-brand;
-    background-color: $brand_900;
-
-    width: 20px;
-    height: 20px;
-
-    transition: all 0.3s ease-in-out;
-}
+.evolution { min-width: 0; margin-top: p.$section-gap; }
+.header { display: flex; align-items: end; justify-content: space-between; gap: p.$space-md; margin-bottom: p.$space-md; }
+.title { @include p.title; margin: 0; }
+.hint { @include p.body; margin-top: p.$space-xs; font-size: $text-14; color: $brand_300; }
+.controls { display: flex; align-items: center; gap: p.$space-xs; flex-shrink: 0; }
+.counter { display: flex; gap: p.$space-xs; margin-right: p.$space-sm; color: p.$muted; font: $regular $text-14 $font-ubuntu; font-variant-numeric: tabular-nums; }
+.counter strong { color: p.$accent; font-weight: $medium; }
+.arrow { display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 1px solid p.$border; border-radius: 50%; color: $white; background: transparent; cursor: pointer; }
+.arrow:hover:not(:disabled) { background: rgba($brand_600, 0.12); border-color: p.$accent; }
+.arrow:disabled { opacity: .3; cursor: default; }
+.arrow:focus-visible { outline: 2px solid p.$accent; outline-offset: 3px; }
+.arrow svg { transform: rotate(90deg); }
+.arrowNext svg { transform: rotate(-90deg); }
+.timeline { min-width: 0; overflow: hidden; border-radius: p.$radius; }
+.slider { overflow: visible; }
+.slider :global(.swiper-wrapper) { transition-timing-function: cubic-bezier(.22, .61, .36, 1); }
+.slide { width: min(430px, 82vw); height: auto; }
+.commit { display: flex; flex-direction: column; gap: p.$space-sm; height: 100%; opacity: .55; transform: scale(.94); transition: opacity .3s ease, transform .3s ease; }
+.commit.active { opacity: 1; transform: scale(1); }
+.milestone { display: flex; align-items: center; gap: p.$space-sm; color: p.$muted; }
+.node { width: 10px; height: 10px; border-radius: 50%; background: p.$accent; box-shadow: 0 0 16px rgba($brand_600, .65); }
+.commitDate { @include p.body; font-size: $text-14; color: $brand_300; }
+.commitItem { @include p.panel; flex: 1; padding: clamp(20px, 3vw, 32px); }
+.cardHeader { display: flex; align-items: center; gap: p.$space-sm; color: p.$accent; margin-bottom: p.$space-md; }
+.step { font: $medium $text-14 $font-ubuntu; font-variant-numeric: tabular-nums; }
+.cardLine { width: 36px; height: 1px; background: p.$border; }
+.commitText { @include p.title; margin: 0 0 p.$space-sm; font-size: clamp($text-20, 2.5vw, $text-24); }
+.commitBody { @include p.body; font-size: $text-16; white-space: pre-line; }
+.progress { display: flex; gap: p.$space-sm; overflow-x: auto; padding: p.$space-md 2px 4px; scrollbar-width: thin; scrollbar-color: p.$border transparent; }
+.progressStep { display: grid; place-items: center; flex: 0 0 36px; height: 28px; border: 1px solid p.$border; border-radius: 999px; color: p.$muted; background: transparent; font: $medium $text-14 $font-ubuntu; cursor: pointer; }
+.progressStep:hover, .progressStep:focus-visible { border-color: p.$accent; color: $white; }
+.progressStep.currentStep { color: $white; background: p.$accent; border-color: p.$accent; box-shadow: 0 0 14px rgba($brand_600, .42); }
+.progressStep.pastStep { color: p.$accent; }
+.progressStep:focus-visible { outline: 2px solid p.$accent; outline-offset: 3px; }
+.single .commit { opacity: 1; transform: none; }
+@media (max-width: 560px) { .header { align-items: start; flex-direction: column; } .controls { align-self: end; } .hint { max-width: 30ch; } }
+@media (prefers-reduced-motion: reduce) { .commit { transition: none; } }

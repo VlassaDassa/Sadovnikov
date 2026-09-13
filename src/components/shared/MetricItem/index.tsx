@@ -17,6 +17,7 @@ interface MetricItemProps {
     max: number | string,
     className?: string,
     contentWrapperClass?: string,
+    variant?: 'default' | 'project',
 }
 
 const MetricItem: React.FC<MetricItemProps> = ({
@@ -27,10 +28,11 @@ const MetricItem: React.FC<MetricItemProps> = ({
         current, 
         max, 
         className, 
-        contentWrapperClass 
+        contentWrapperClass,
+        variant = 'default',
     }) => {
     return (
-        <div className={`${styles.metricItem} ${className}`}>
+        <div className={`${styles.metricItem} ${variant === 'project' ? styles.projectMetric : ''} ${className || ''}`}>
             <div className={styles.iconWrapper}>
                 <Icon 
                     name={icon}
@@ -49,6 +51,7 @@ const MetricItem: React.FC<MetricItemProps> = ({
                     type={type} 
                     current={current}
                     max={max}
+                    variant={variant}
                 />
             </div>
         </div>

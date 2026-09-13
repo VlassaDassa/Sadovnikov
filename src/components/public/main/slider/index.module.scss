@@ -5,7 +5,9 @@
 
 
 .slider {
-    margin-top: 40px;
+    width: calc(100% - 32px);
+    max-width: 1041px;
+    margin: 40px auto 0;
 }
 
 .swiper-slide-active {
@@ -20,6 +22,14 @@
     @media (min-width: 768px) {
         width: calc(100% - 60px) !important;
     }
+}
+
+@media (max-width: 899px) {
+    .sliderItem { width: 100% !important; }
+}
+
+@media (min-width: 768px) {
+    .slider { width: calc(100% - 64px); }
 }
 
 .notFound {

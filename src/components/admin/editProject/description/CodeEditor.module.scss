@@ -1,0 +1,12 @@
+@use '../../../../styles/tokens/colors' as *;
+@use '../../../../styles/tokens/typography' as *;
+.editor { min-height: 430px; background: #0d0d10; }
+.editor :global(.cm-editor) { min-height: 430px; outline: 0; }
+.editor :global(.cm-editor.cm-focused) { box-shadow: inset 3px 0 rgba($brand_600, .55); }
+@media (max-width: 600px) {
+    .editor, .editor :global(.cm-editor) { min-height: 320px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .editor * { transition: none !important; }
+}
+

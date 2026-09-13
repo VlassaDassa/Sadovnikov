@@ -18,6 +18,7 @@ export function getCategoryDirectory(category: UploadCategory): string {
         case 'gallery': return 'gallery'
         case 'feature-photo': return path.join('features', 'photos')
         case 'feature-icon': return path.join('features', 'icons')
+        case 'description-image': return 'description'
         default: throw new Error(`Unknown upload category: ${category}`)
     }
 }

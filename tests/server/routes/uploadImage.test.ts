@@ -142,13 +142,13 @@ describe("POST image upload", () => {
         expect(mocks.saveProjectImage).not.toHaveBeenCalled();
     });
 
-    it("returns 201 for a valid upload", async () => {
+    it.each(['gallery', 'description-image'])("returns 201 for a valid %s upload", async (category) => {
         const file = makeFile();
 
         const response = await POST(
             makeRequest({
                 projectId: "1",
-                category: "gallery",
+                category,
                 file,
             }),
         );
@@ -165,7 +165,7 @@ describe("POST image upload", () => {
 
         expect(mocks.saveProjectImage).toHaveBeenCalledWith({
             projectId: 1,
-            category: "gallery",
+            category,
             file: expect.any(File),
         });
 
@@ -187,6 +187,8 @@ describe("POST image upload", () => {
         ["INVALID_GALLERY_RATIO", 400],
         ["INVALID_FEATURE_PHOTO_RATIO", 400],
         ["ANIMATED_IMAGES_NOT_ALLOWED", 400],
+        ["UNSUPPORTED_IMAGE_TYPE", 400],
+        ["INVALID_IMAGE_DATA", 400],
         ["unexpected", 500],
     ])("maps %s to status %s", async (message, status) => {
         mocks.saveProjectImage.mockRejectedValue(new Error(message));

@@ -35,6 +35,10 @@ import {
         [
             'feature-icon',
             path.join('features', 'icons')
+        ],
+        [
+            'description-image',
+            'description'
         ]
     ] as const)(
         'maps %s to a directory',

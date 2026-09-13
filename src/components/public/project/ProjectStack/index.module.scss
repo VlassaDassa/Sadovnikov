@@ -1,3 +1,4 @@
+@use '../../../../styles/tokens/project' as p;
 @use './../../../../styles/tokens/colors' as *;
 @use './../../../../styles/tokens/effects' as *;
 @use './../../../../styles/tokens/typography' as *;
@@ -153,3 +154,5 @@
         backface-visibility: hidden;
     }
 }
+.projectStack { margin-top: p.$section-gap; }
+.title { @include p.title; }

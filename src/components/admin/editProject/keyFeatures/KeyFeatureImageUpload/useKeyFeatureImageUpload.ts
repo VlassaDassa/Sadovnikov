@@ -37,9 +37,9 @@ export const useKeyFeatureImageUpload = (
             img.onload = () => {
                 const ratio = img.naturalWidth / img.naturalHeight;
                 const isValid = ratio >= 1.1 && ratio <= 1.4;
-                resolve({ 
-                    valid: isValid, 
-                    error: isValid ? undefined : 'Photo must be 11:9 (309x252)' 
+                resolve({
+                    valid: isValid,
+                    error: isValid ? undefined : 'Photo must be 11:9 (309x252)'
                 });
             };
             img.onerror = () => {
