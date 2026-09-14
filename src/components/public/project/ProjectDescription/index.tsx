@@ -132,7 +132,7 @@ const ProjectDescription: React.FC<ProjectDescriptionProps> = ({ data }) => {
                                 role="tablist"
                                 aria-labelledby={`${id}-heading`}
                             >
-                                {data.sort((a, b) => a.order - b.order).map((item, index) => (
+                                {data.sort((a, b) => a.order && b.order ? a.order - b.order : 0).map((item, index) => (
                                     <button
                                         key={item.id}
                                         ref={element => { tabs.current[index] = element; }}
