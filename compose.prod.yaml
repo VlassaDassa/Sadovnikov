@@ -23,6 +23,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args: 
+        NEXT_PUBLIC_SHOW_DEV_NOTICE: ${NEXT_PUBLIC_SHOW_DEV_NOTICE}
 
     restart: unless-stopped
 
