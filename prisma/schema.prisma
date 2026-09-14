@@ -85,6 +85,10 @@ model DescriptionBlock {
 
   content   String
   contentRu String?
+
+  order Int @default(autoincrement())
+
+  @@index([order])
 }
 
 model Metric {

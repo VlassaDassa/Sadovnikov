@@ -163,6 +163,7 @@ export function transformProject(project: PrismaProject, locale: AppLocale='en')
                 desc.title,
                 desc.titleRu
             ),
+            order: desc.order,
 
             icon: desc.icon,
 
@@ -268,7 +269,9 @@ export function transformRawProject(project: PrismaProject): IProject {
             icon: desc.icon,
 
             content: desc.content,
-            contentRu: desc.contentRu || ''
+            contentRu: desc.contentRu || '',
+
+            order: desc.order
         })),
 
 

@@ -41,6 +41,8 @@ const getServerSnapshot = (): boolean => {
     return true;
 };
 
+const SHOW_DEV_NOTICE = process.env.NEXT_PUBLIC_SHOW_DEV_NOTICE === 'false';
+
 const DevelopmentNotice = () => {
     const t = useTranslations("DevelopmentNotice");
 
@@ -56,7 +58,9 @@ const DevelopmentNotice = () => {
         window.dispatchEvent(new Event(STORAGE_EVENT));
     };
 
-    if (isDismissed) {
+    
+
+    if (isDismissed || SHOW_DEV_NOTICE) {
         return null;
     }
 

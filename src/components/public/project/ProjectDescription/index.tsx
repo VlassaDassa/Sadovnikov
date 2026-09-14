@@ -107,6 +107,7 @@ const ProjectDescription: React.FC<ProjectDescriptionProps> = ({ data }) => {
         selectTab(nextIndex, true);
     };
 
+
     return (
         <section className={`${styles.description} container`} aria-labelledby={`${id}-heading`}>
             <h2 id={`${id}-heading`} className={`${styles.title} sectionTitle`}>{t('Title')}</h2>
@@ -131,7 +132,7 @@ const ProjectDescription: React.FC<ProjectDescriptionProps> = ({ data }) => {
                                 role="tablist"
                                 aria-labelledby={`${id}-heading`}
                             >
-                                {data.map((item, index) => (
+                                {data.sort((a, b) => a.order - b.order).map((item, index) => (
                                     <button
                                         key={item.id}
                                         ref={element => { tabs.current[index] = element; }}

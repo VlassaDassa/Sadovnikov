@@ -9,7 +9,6 @@ import 'swiper/css';
 
 import EmptySection from '@/components/shared/EmptySection';
 import Icon from '@/components/shared/icons/Icon';
-import { useTooltip } from '@/hooks/useTooltip';
 import type { ICommit } from '@/interfaces/general';
 import { capitalize } from '@/lib/textFormat';
 
@@ -26,15 +25,6 @@ const formatStep = (index: number) => String(index + 1).padStart(2, '0');
 const Commit: React.FC<CommitProps> = ({ item, index, active }) => {
     const locale = useLocale() === 'en' ? 'en' : 'ru';
     const date = capitalize(locale === 'ru' ? item.dateRu || '' : item.date);
-    const tooltipRef = useTooltip<HTMLDivElement>({
-        text: item.text,
-        title: item.name,
-        date,
-        type: 'lvl3',
-        placement: 'bottom',
-        fakeWidth: 400,
-        delay: 400,
-    });
 
     return (
         <article className={`${styles.commit} ${active ? styles.active : ''}`}>
@@ -43,7 +33,7 @@ const Commit: React.FC<CommitProps> = ({ item, index, active }) => {
                 <p className={styles.commitDate}>{date}</p>
             </div>
 
-            <div ref={tooltipRef} className={styles.commitItem}>
+            <div className={styles.commitItem}>
                 <div className={styles.cardHeader} aria-hidden="true">
                     <span className={styles.step}>{formatStep(index)}</span>
                     <span className={styles.cardLine} />

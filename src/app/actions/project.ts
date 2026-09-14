@@ -255,7 +255,7 @@ async function syncDescriptions(
             where: { projectId, id: { in: removedIds } },
         });
     }
-
+    
     for (const description of next) {
         const previous = currentById.get(description.id);
         const data = {
@@ -268,7 +268,7 @@ async function syncDescriptions(
 
         if (!previous) {
             await tx.descriptionBlock.create({
-                data: { id: getCreateId(description.id), projectId, ...data },
+                data: { id: getCreateId(description.id), projectId, ...data, order: 1 },
             });
         } else if (
             previous.title !== data.title ||
