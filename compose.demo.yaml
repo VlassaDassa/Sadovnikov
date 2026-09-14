@@ -1,16 +1,13 @@
-name: portfolio
+name: sadovnikov-demo
 
 services:
   db:
-    image: postgres:18-bookworm
+    image: postgres:17-bookworm
     restart: unless-stopped
-
     env_file:
-      - .env.production
-
+      - .env.demo
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-
+      - demo_postgres_data:/var/lib/postgresql/data
     healthcheck:
       test:
         - CMD-SHELL
@@ -23,25 +20,16 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      args: 
-        NEXT_PUBLIC_SHOW_DEV_NOTICE: ${NEXT_PUBLIC_SHOW_DEV_NOTICE}
-
     restart: unless-stopped
-
     env_file:
-      - .env.production
-
+      - .env.demo
     depends_on:
       db:
         condition: service_healthy
-
     ports:
-      - "127.0.0.1:3001:3000"
-
+      - "127.0.0.1:3002:3000"
     volumes:
-      - type: bind
-        source: /srv/uploads/portfolio
-        target: /app/uploads
+      - /srv/portfolio-demo/uploads:/app/public/uploads
 
 volumes:
-  postgres_data:
+  demo_postgres_data:
