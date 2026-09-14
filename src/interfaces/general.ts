@@ -46,6 +46,8 @@ export interface IProjectDescription {
 
     content: string;
     contentRu?: string;
+
+    order?: number;
 }
 
 export interface IMetrics {
