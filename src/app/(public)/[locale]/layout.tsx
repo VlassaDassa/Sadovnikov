@@ -8,6 +8,7 @@ import { notFound } from 'next/navigation';
 import { DynImportLayout } from '@/components/shared/DynImportLayout';
 import Header from '@/components/public/general/header';
 import DevelopmentNotice from '@/components/public/general/developmentNotice';
+import DemoNotice from '@/components/public/general/demoNotice';
 import FooterWrapper from '@/components/public/general/footer/footerWrapper';
 import GlobalLoader from '@/components/shared/GlobalLoader';
 import NoiseBackground from '@/components/shared/NoizeBg';
@@ -165,6 +166,7 @@ export default async function LocaleLayout({
 
                         <FooterWrapper />
                         <DevelopmentNotice />
+                        <DemoNotice />
                     </Providers>
                 </NextIntlClientProvider>
 
