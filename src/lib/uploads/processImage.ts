@@ -1,4 +1,4 @@
-import 'server-only'
+// import 'server-only'
 
 import sharp from 'sharp'
 import { sanitizeSvg } from './sanitizeSvg'
