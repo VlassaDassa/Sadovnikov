@@ -9,7 +9,7 @@
 [![Security](https://img.shields.io/github/actions/workflow/status/VlassaDassa/Sadovnikov/security.yml?branch=main&label=SECURITY&style=for-the-badge)](https://github.com/VlassaDassa/Sadovnikov/actions)
 [![Last commit](https://img.shields.io/github/last-commit/VlassaDassa/Sadovnikov?style=for-the-badge)](https://github.com/VlassaDassa/Sadovnikov/commits/main)
 
-**[Сайт](https://vlassadassa.ru) · [Figma](https://www.figma.com/design/qYYGvs1TraAVy6K7T8sjwO/Portfolio?node-id=0-1&t=b81OmKJ2Bm4Dhv0R-1) · [Архитектурные заметки](./docs/ARCHITECTURE_NOTES.md)**
+**[Сайт](https://vlassadassa.ru) · [Figma](https://www.figma.com/design/qYYGvs1TraAVy6K7T8sjwO/Portfolio?node-id=0-1&t=b81OmKJ2Bm4Dhv0R-1) · [Архитектурные заметки](./docs/ARCHITECTURE_NOTES_RU.md)**
 
 ---
 
